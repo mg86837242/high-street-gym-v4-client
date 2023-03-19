@@ -214,7 +214,6 @@ function DemoLogins() {
       <button
         onClick={() =>
           handleLogin('demoadmin@gmail.com', 'abcd1234')
-            // ??? Navigate to `/profile` here will fail (see browser console), looks like it's still using the previous unauthorized `router` instance i/o the intended `routerAdmin` instance, thus, missing the `/profile` path => setter not finalized until this `onClick` is done?????, i.e., `setRouterContextValue` runs after the below `navigate`?????
             .then(() => navigate('/'))
             .catch(() => navigate('/login'))
         }
