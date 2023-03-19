@@ -7,11 +7,13 @@ export default async function fetchJSON(url, method, body) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
+        credentials: 'include',
       };
       break;
     case 'get':
       requestOptions = {
         method: 'GET',
+        credentials: 'include',
       };
       break;
     case 'patch':
@@ -19,16 +21,19 @@ export default async function fetchJSON(url, method, body) {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
+        credentials: 'include',
       };
       break;
     case 'delete':
       requestOptions = {
         method: 'DELETE',
+        credentials: 'include',
       };
       break;
     default:
       requestOptions = {
         method: 'GET',
+        credentials: 'include',
       };
   }
 

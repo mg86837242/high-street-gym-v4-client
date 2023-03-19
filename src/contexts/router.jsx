@@ -9,7 +9,7 @@ import Bookings from '../pages/Bookings';
 import bookingsRoutes from './routes/bookingsRoutes';
 import Login from '../pages/Login';
 import Signup from '../pages/Signup';
-import signupAction from './actions/logins.js';
+import signupAction from './actions/signupAction';
 import NoFoundView from '../components/NoFoundView';
 
 // NB Error: `[vite] hmr invalidate /src/pages/BookingList.jsx Could not Fast Refresh. Learn more at

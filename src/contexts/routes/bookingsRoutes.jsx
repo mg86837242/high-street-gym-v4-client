@@ -6,6 +6,7 @@ import fetchJSON from '../../utils/fetchJSON';
 import ErrorInfo from '../../components/ErrorInfo';
 import BookingListIndex from '../../components/Bookings/BookingListIndex';
 import BookingList from '../../components/Bookings/BookingList';
+import bookingListAction from '../loaders/bookingListAction';
 import BookingDetails from '../../components/Bookings/BookingDetails';
 import BookingDetailsIndex from '../../components/Bookings/BookingDetailsIndex';
 import BookingEdit from '../../components/Bookings/BookingEdit';
@@ -17,18 +18,7 @@ const bookingsRoutes = [
     path: ':date',
     Component: BookingList,
     ErrorBoundary: ErrorInfo,
-    async loader({ params }) {
-      const response = await fetch(`${API_URL}/bookings/by-date/${params.date}`, { credentials: 'include' });
-      // Special error handling to let 404 pass
-      if (response?.status !== 200 && response?.status !== 404) {
-        const json = await response.json();
-        const message = `${json.status} ${
-          typeof json.message === 'string' ? json.message : json.message.map((issue) => issue.message).join('; ')
-        }`;
-        throw new Response(message);
-      }
-      return response;
-    },
+    action: bookingListAction,
     handle: {
       // The shape of arguments passed into the below `crumb` method, which returns a render function, will affect the
       //  shape of arguments passed into the `map()` method when calling `useMatches` and defining `crumbs`; also the
@@ -54,10 +44,6 @@ const bookingsRoutes = [
         path: 'id/:id',
         Component: BookingDetails,
         ErrorBoundary: ErrorInfo,
-        // #region un-foldable
-        // Loader would still work if it's just a sync function w/o means to unpack the promise returned from
-        //  the `fetchRes` utility, this might attribute to React Router (action on the other hand wouldn't)
-        // #endregion
         async loader({ params }) {
           const response = await fetchRes(`${API_URL}/bookings/by-id/${params.id}`);
           return response;
@@ -133,7 +119,7 @@ const bookingsRoutes = [
     Component: BookingNew,
     ErrorBoundary: ErrorInfo,
     async loader() {
-      const response = await fetchRes(`${API_URL}/bookings/options`);
+      const response = await fetchRes(`${API_URL}/bookings/options-only`);
       return response;
     },
     async action({ request }) {

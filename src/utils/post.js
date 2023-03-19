@@ -1,4 +1,4 @@
-// Use case: POST req within `<AuthProvider>` and `useAuth` custom Hook
+// Use case: POST req within `<AuthProvider>`
 export default async function post(url, body) {
   const requestOptions = {
     method: 'POST',

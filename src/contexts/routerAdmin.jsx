@@ -9,7 +9,7 @@ import Activities from '../pages/Activities';
 import Admin from '../pages/Admin';
 import Login from '../pages/Login';
 import Signup from '../pages/Signup';
-import signupAction from './actions/logins.js';
+import signupAction from './actions/signupAction';
 import Profile from '../pages/Profile';
 import NoFoundView from '../components/NoFoundView';
 
