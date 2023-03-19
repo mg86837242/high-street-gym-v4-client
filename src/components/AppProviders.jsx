@@ -31,7 +31,7 @@ export default function AppProviders() {
   //  case `authenticatedUser` state/context is missing
   useEffect(() => {
     if (authenticatedUser) {
-      console.log('💥 Effect runs - user state present');
+      console.log('🔃 Effect runs - user state present, exit');
       return;
     }
     let ignore = false;
@@ -40,7 +40,7 @@ export default function AppProviders() {
       fetchJSON(`${API_URL}/users/by-key/${accessKey}`)
         .then((json) => {
           if (!ignore) {
-            console.log('💥 Effect runs - user state synchronized');
+            console.log('🔃 Effect runs - user state synchronized');
             setAuthenticatedUser(json.user);
             switch (json?.user?.role) {
               case 'Member':
@@ -58,11 +58,11 @@ export default function AppProviders() {
           }
         })
         .catch(() => {
-          console.log('💥 Effect runs - synchronization fetch failed');
+          console.log('🔃 Effect runs - synchronization fetch failed');
           router.navigate('/');
         });
     } else {
-      console.log('💥 Effect runs - key removed or missing from local storage');
+      console.log('🔃 Effect runs - key removed or missing from local storage');
       router.navigate('/');
     }
     return () => {
