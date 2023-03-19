@@ -1,19 +1,15 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import AuthContext from '../contexts/AuthContext';
 import router from '../contexts/router';
-import routerMember from '../contexts/routerMember';
-import routerTrainer from '../contexts/routerTrainer';
-import routerAdmin from '../contexts/routerAdmin';
 import { RouterProvider } from 'react-router-dom';
 import { API_URL } from '../data/constants.js';
-import fetchJSON from '../utils/fetchJSON.js';
 import post from '../utils/post.js';
 
-// NB POST req w/ event-specific logic doesn't need `useEffect`, see: https://react.dev/learn/you-might-not-need-an-effect#sending-a-post-request
 // NB For using `navigate` outside of `<RouterProvider>`, see:
 // -- https://stackoverflow.com/questions/69871987/react-router-v6-navigate-outside-of-components
 // -- https://github.com/remix-run/react-router/issues/9422#issuecomment-1301182219
 // -- Peek `createBrowserRouter` => `RemixRouter` => `Router` interface's `navigate` method
+// NB POST req w/ event-specific logic doesn't need `useEffect`, see: https://react.dev/learn/you-might-not-need-an-effect#sending-a-post-request
 // NB Interactions within `localStorage` within login/logout event handlers do not require `useEffect`, see:
 //  https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers
 // NB The 3 fetches within login/logout event handlers can't be cleaned up by utility b/c possible returned messages
@@ -25,7 +21,6 @@ import post from '../utils/post.js';
 //  synchronizing the Supabase db with the MySQL db
 export default function AppProviders() {
   const [authenticatedUser, setAuthenticatedUser] = useState(null);
-  const [routerContextValue, setRouterContextValue] = useState(router);
 
   // This `useEffect`'s job is to synchronize with API by using the access key stored in the `localStorage` as a ref in
   //  case `authenticatedUser` state/context is missing
@@ -36,38 +31,26 @@ export default function AppProviders() {
     }
     let ignore = false;
     const accessKey = localStorage.getItem('accessKey');
-    if (accessKey) {
-      fetchJSON(`${API_URL}/users/by-key/${accessKey}`)
-        .then((json) => {
-          if (!ignore) {
-            console.log('🔃 Effect runs - user state synchronizing');
-            setAuthenticatedUser(json.user);
-            switch (json?.user?.role) {
-              case 'Member':
-                setRouterContextValue(routerMember);
-                break;
-              case 'Trainer':
-                setRouterContextValue(routerTrainer);
-                break;
-              case 'Admin':
-                setRouterContextValue(routerAdmin);
-                break;
-              default:
-                setRouterContextValue(router);
-            }
-          }
-        })
-        .catch(() => {
-          console.log('🔃 Effect runs - synchronization fetch failed');
-          router.navigate('/');
-        });
-    } else {
-      console.log('🔃 Effect runs - key removed or missing from local storage');
+    if (!accessKey) {
+      console.log('🔃 Effect runs - key removed or missing from local storage, exit');
+      router.navigate('/');
+      return;
     }
+    fetch(`${API_URL}/users/by-key/${accessKey}`, { credentials: 'include' })
+      .then((json) => {
+        if (!ignore) {
+          console.log('🔃 Effect runs - user state synchronizing');
+          setAuthenticatedUser(json.user);
+        }
+      })
+      .catch(() => {
+        console.log('🔃 Effect runs - synchronization fetch failed');
+        router.navigate('/');
+      });
     return () => {
       ignore = true;
     };
-  }, [authenticatedUser, routerContextValue]);
+  }, [authenticatedUser]);
 
   const handleLogin = useCallback(
     async (email, password) => {
@@ -89,19 +72,6 @@ export default function AppProviders() {
             return typeof userJSON.message === 'string' ? userJSON.message : 'Invalid request to server';
           }
           setAuthenticatedUser(userJSON.user);
-          switch (userJSON?.user?.role) {
-            case 'Member':
-              setRouterContextValue(routerMember);
-              break;
-            case 'Trainer':
-              setRouterContextValue(routerTrainer);
-              break;
-            case 'Admin':
-              setRouterContextValue(routerAdmin);
-              break;
-            default:
-              setRouterContextValue(router);
-          }
           // PS After this second setter, console log `authenticatedUser` outputs `null`, which is what's set in the
           //  first setter, this is b/c React batches state updates, see: https://stackoverflow.com/questions/33613728/what-happens-when-using-this-setstate-multiple-times-in-react-component
           return loginJSON.message;
@@ -128,7 +98,6 @@ export default function AppProviders() {
           return (message = typeof json.message === 'string' ? json.message : 'Invalid request to server');
         }
         setAuthenticatedUser(null);
-        setRouterContextValue(router);
         return json.message;
       }
       return 'No authenticated user recognized';
@@ -150,7 +119,7 @@ export default function AppProviders() {
 
   return (
     <AuthContext.Provider value={authContextValue}>
-      <RouterProvider router={routerContextValue} />
+      <RouterProvider router={router} />
     </AuthContext.Provider>
   );
 }

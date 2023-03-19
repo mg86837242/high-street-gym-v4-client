@@ -6,7 +6,6 @@ import fetchJSON from '../../utils/fetchJSON';
 import ErrorInfo from '../../components/ErrorInfo';
 import BookingListIndex from '../../components/Bookings/BookingListIndex';
 import BookingList from '../../components/Bookings/BookingList';
-import bookingListAction from '../loaders/bookingListAction';
 import BookingDetails from '../../components/Bookings/BookingDetails';
 import BookingDetailsIndex from '../../components/Bookings/BookingDetailsIndex';
 import BookingEdit from '../../components/Bookings/BookingEdit';
@@ -18,7 +17,18 @@ const bookingsRoutes = [
     path: ':date',
     Component: BookingList,
     ErrorBoundary: ErrorInfo,
-    action: bookingListAction,
+    async loader({ params }) {
+      const response = await fetch(`${API_URL}/bookings/by-date/${params.date}`, { credentials: 'include' });
+      // Special error handling to let 404 pass
+      if (response?.status !== 200 && response?.status !== 404) {
+        const json = await response.json();
+        const message = `${json.status} ${
+          typeof json.message === 'string' ? json.message : json.message.map((issue) => issue.message).join('; ')
+        }`;
+        throw new Response(message);
+      }
+      return response;
+    },
     handle: {
       // The shape of arguments passed into the below `crumb` method, which returns a render function, will affect the
       //  shape of arguments passed into the `map()` method when calling `useMatches` and defining `crumbs`; also the
@@ -29,10 +39,7 @@ const bookingsRoutes = [
         //  would render 'Error' text although 404 won't trigger an error in the loader (per the programmer's design);
         //  alternatively, in the API endpoint, don't throw 404 when the `bookings` array is empty
         return data?.bookings ? (
-          <Link to={`/bookings/${params.date}`}>
-            No. of Bookings on {params.date.slice(8, 10)}
-            {getOrdinal(params.date.slice(8, 10))} {monthNames[Number(params.date.slice(5, 7))]}: {data.bookings.length}
-          </Link>
+          <Link to={`/bookings/${params.date}`}>No. of Bookings: {data.bookings.length}</Link>
         ) : (
           'Error'
         );
