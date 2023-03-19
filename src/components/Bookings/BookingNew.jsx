@@ -1,5 +1,5 @@
 import { useLoaderData, Form, useNavigate } from 'react-router-dom';
-import { tomorrowStr, threeWeeksLaterStr } from '../../utils/mapDates';
+import { tomorrowStr, threeWeeksLaterStr } from '../../data/keyDates';
 
 export default function BookingNew() {
   const { members, trainers, activities } = useLoaderData();

@@ -2,7 +2,8 @@ import { useState, useMemo } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSquareCaretLeft, faSquareCaretRight } from '@fortawesome/free-solid-svg-icons';
-import { today, monthNames, dayNames } from '../../utils/mapDates';
+import { today } from '../../data/keyDates';
+import { monthNames, dayNames } from '../../utils/mapDates';
 
 export default function Calendar() {
   // NB The following 2 states are just snapshots of date when this component is rendered, i.e., can be updated by
