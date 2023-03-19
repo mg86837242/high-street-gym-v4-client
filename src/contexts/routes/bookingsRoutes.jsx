@@ -18,7 +18,7 @@ const bookingsRoutes = [
     Component: BookingList,
     ErrorBoundary: ErrorInfo,
     async loader({ params }) {
-      const response = await fetch(`${API_URL}/bookings/by-date/${params.date}`);
+      const response = await fetch(`${API_URL}/bookings/by-date/${params.date}`, { credentials: 'include' });
       // Special error handling to let 404 pass
       if (response?.status !== 200 && response?.status !== 404) {
         const json = await response.json();

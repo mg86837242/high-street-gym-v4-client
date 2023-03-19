@@ -4,6 +4,7 @@ export default async function post(url, body) {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
+    credentials: 'include',
   };
 
   const response = await fetch(url, requestOptions);

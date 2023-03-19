@@ -40,7 +40,7 @@ export default function AppProviders() {
       fetchJSON(`${API_URL}/users/by-key/${accessKey}`)
         .then((json) => {
           if (!ignore) {
-            console.log('🔃 Effect runs - user state synchronized');
+            console.log('🔃 Effect runs - user state synchronizing');
             setAuthenticatedUser(json.user);
             switch (json?.user?.role) {
               case 'Member':
@@ -63,7 +63,6 @@ export default function AppProviders() {
         });
     } else {
       console.log('🔃 Effect runs - key removed or missing from local storage');
-      router.navigate('/');
     }
     return () => {
       ignore = true;
@@ -84,7 +83,7 @@ export default function AppProviders() {
           // Set key in `localStorage` – persistent storage in case page is reloaded
           localStorage.setItem('accessKey', loginJSON.accessKey);
           // Fetch GET /users/by-key/:accessKey to attempt to get an obj called `user`
-          const userRes = await fetch(`${API_URL}/users/by-key/${loginJSON.accessKey}`);
+          const userRes = await fetch(`${API_URL}/users/by-key/${loginJSON.accessKey}`, { credentials: 'include' });
           const userJSON = await userRes.json();
           if (!userRes.ok) {
             return typeof userJSON.message === 'string' ? userJSON.message : 'Invalid request to server';
