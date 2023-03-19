@@ -12,7 +12,7 @@
     "lint": "eslint . --quiet",
     "lint-w": "eslint ."
   },
-  "author": "",
+  "author": "BY",
   "license": "ISC",
   "dependencies": {
     "@fontsource/inter": "^4.5.15",
