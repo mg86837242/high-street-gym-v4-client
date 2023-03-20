@@ -1,4 +1,4 @@
-// Use case: POST req within `<AuthProvider>`
+// Use case: GET req within `<AuthProvider>`
 export default async function get(url) {
   const requestOptions = {
     method: 'GET',

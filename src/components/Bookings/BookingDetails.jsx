@@ -1,7 +1,7 @@
 import { useLoaderData, Form } from 'react-router-dom';
 import { monthNames, getOrdinal } from '../../utils/mapDates';
 
-export default function BookingDetails() {
+export function Component() {
   const {
     booking: {
       id,
@@ -109,3 +109,5 @@ export default function BookingDetails() {
     </div>
   );
 }
+
+Component.displayName = 'BookingDetails';

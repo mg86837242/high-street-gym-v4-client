@@ -1,7 +1,7 @@
 import { useLoaderData, Form, useNavigate } from 'react-router-dom';
 import { tomorrowStr, threeWeeksLaterStr } from '../../data/keyDates';
 
-export default function BookingEdit() {
+export function Component() {
   const { booking, members, trainers, activities } = useLoaderData();
   const navigate = useNavigate();
 
@@ -113,3 +113,5 @@ export default function BookingEdit() {
     </div>
   );
 }
+
+Component.displayName = 'BookingEdit';

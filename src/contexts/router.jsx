@@ -2,7 +2,7 @@ import { createBrowserRouter, Link } from 'react-router-dom';
 import Home from '../pages/Home';
 import ErrorInfo from '../components/ErrorInfo';
 import PageLayout from '../pages/PageLayout';
-import bookingsRoutes from '../routes/bookingsRoutes';
+import bookingsRoutes from './bookingsRoutes';
 
 const router = createBrowserRouter([
   {
@@ -45,17 +45,16 @@ const router = createBrowserRouter([
   },
   {
     path: '/signup',
-    // ??? MUST be named export for both `loader` and `Component` files, o/w dynamic import won't work, speculated to be issues related to resolver
     lazy: () => import('../pages/Signup'),
+    ErrorBoundary: ErrorInfo,
     async loader() {
-      let { default: loader } = await import('../routes/signup-loader');
-      return loader();
+      let { getAllLoginEmails } = await import('../services/logins');
+      return getAllLoginEmails();
     },
     async action({ request }) {
-      let { default: action } = await import('../routes/signup-action');
-      return action({ request });
+      let { signupMembers } = await import('../services/members');
+      return signupMembers({ request });
     },
-    ErrorBoundary: ErrorInfo,
   },
   {
     path: '/profile',

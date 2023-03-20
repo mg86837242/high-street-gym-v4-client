@@ -1,4 +1,4 @@
-// Use case: (1) fetch within loader and action, (2) `useEffect` in `<AuthProvider>`
+// Use case: fetch within loader and action
 export default async function fetchJSON(url, method, body) {
   let requestOptions;
   switch (method) {

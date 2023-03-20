@@ -214,7 +214,6 @@ function NavBarRight() {
           </button>
         </>
       ) : (
-        // ??? These buttons flash on the screen before the user context is ready
         <>
           <Link
             to='login'
