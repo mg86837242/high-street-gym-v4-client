@@ -16,36 +16,54 @@ const router = createBrowserRouter([
     children: [
       {
         path: 'blogs',
-        lazy: () => import('../pages/Blogs'),
+        async lazy() {
+          let { default: Component } = await import('../pages/Blogs');
+          return { Component };
+        },
         ErrorBoundary: ErrorInfo,
       },
       {
         path: 'bookings',
-        lazy: () => import('../pages/Bookings'),
+        async lazy() {
+          let { default: Component } = await import('../pages/Bookings');
+          return { Component };
+        },
         ErrorBoundary: ErrorInfo,
         handle: { crumb: () => <Link to='/bookings'>Calendar</Link> },
         children: [...bookingsRoutes],
       },
       {
         path: 'activities',
-        lazy: () => import('../pages/Activities'),
+        async lazy() {
+          let { default: Component } = await import('../pages/Activities');
+          return { Component };
+        },
         ErrorBoundary: ErrorInfo,
       },
       {
         path: 'admin',
-        lazy: () => import('../pages/Admin'),
+        async lazy() {
+          let { default: Component } = await import('../pages/Admin');
+          return { Component };
+        },
         ErrorBoundary: ErrorInfo,
       },
     ],
   },
   {
     path: 'login',
-    lazy: () => import('../pages/Login'),
+    async lazy() {
+      let { default: Component } = await import('../pages/Login');
+      return { Component };
+    },
     ErrorBoundary: ErrorInfo,
   },
   {
     path: '/signup',
-    lazy: () => import('../pages/Signup'),
+    async lazy() {
+      let { default: Component } = await import('../pages/Signup');
+      return { Component };
+    },
     ErrorBoundary: ErrorInfo,
     async loader() {
       let { getAllLoginEmails } = await import('../services/logins');
@@ -58,7 +76,10 @@ const router = createBrowserRouter([
   },
   {
     path: '/profile',
-    lazy: () => import('../pages/Profile'),
+    async lazy() {
+      let { default: Component } = await import('../pages/Profile');
+      return { Component };
+    },
     ErrorBoundary: ErrorInfo,
   },
 ]);

@@ -10,28 +10,28 @@ export default function AppProviders() {
   const [authenticatedUser, setAuthenticatedUser] = useState(null);
 
   // This `useEffect`'s job is to synchronize with API by using an access key stored in the `localStorage` as a ref in
-  //  case `authenticatedUser` state/context is missing after page reload, switching tab, etc.
+  //  case `authenticatedUser` state/context is missing after page reload, opening a new tab, etc.
   useEffect(() => {
     let ignore = false;
     if (authenticatedUser) {
-      // console.log('🔃 Effect runs - user state present, exit');
+      console.log('🔃 Effect runs - user state present, exit');
       return;
     }
     const accessKey = localStorage.getItem('accessKey');
     if (!accessKey) {
-      // console.log('🔃 Effect runs - key removed or missing from local storage, exit');
+      console.log('🔃 Effect runs - key removed or missing from local storage, exit');
       router.navigate('/');
       return;
     }
     get(`${API_URL}/users/by-key/${accessKey}`)
       .then((json) => {
         if (!ignore) {
-          // console.log('🔃 Effect runs - user state synchronizing');
           setAuthenticatedUser(json.user);
+          console.log('🔃 Effect runs - user state synchronized');
         }
       })
       .catch(() => {
-        // console.log('🔃 Effect runs - synchronization fetch failed');
+        console.log('🔃 Effect runs - synchronization fetch failed');
         router.navigate('/');
       });
     return () => {
@@ -97,11 +97,10 @@ export default function AppProviders() {
   const authContextValue = useMemo(
     () => ({
       authenticatedUser,
-      setAuthenticatedUser,
       handleLogin,
       handleLogout,
     }),
-    [authenticatedUser, setAuthenticatedUser, handleLogin, handleLogout]
+    [authenticatedUser, handleLogin, handleLogout]
   );
 
   return (

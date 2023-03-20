@@ -22,10 +22,7 @@ function Greetings() {
   return (
     <div className='flex flex-col gap-10'>
       <p className='text-2xl font-extrabold leading-6 focus:outline-none text-primary-content'>
-        Greetings,{' '}
-        <span className='text-primary'>
-          {authenticatedUser?.firstName} {authenticatedUser?.lastName}!
-        </span>
+        Greetings, <span className='text-primary'>{authenticatedUser?.username}!</span>
       </p>
       <p className='text-2xl font-extrabold leading-6 focus:outline-none text-primary-content'>
         You have logged in as {authenticatedUser?.role === 'Admin' ? 'an' : 'a'}{' '}

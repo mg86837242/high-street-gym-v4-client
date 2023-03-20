@@ -1,7 +1,7 @@
 import { useLoaderData, Form, useNavigate } from 'react-router-dom';
 import { tomorrowStr, threeWeeksLaterStr } from '../../data/keyDates';
 
-export function Component() {
+export default function Component() {
   const { members, trainers, activities } = useLoaderData();
   const navigate = useNavigate();
 

@@ -2,11 +2,12 @@ import { useMemo } from 'react';
 import { useLoaderData, NavLink, Outlet } from 'react-router-dom';
 import { monthNames, getOrdinal } from '../../utils/mapDates';
 
-export function Component() {
+export default function Component() {
   const { bookings } = useLoaderData();
   const bookingList = useMemo(
     () =>
       bookings.length ? (
+        // FIX This booking list component should take 2/3 of the right screen should the user is not logged in
         <ul
           id='booking-list-wrapper'
           className='grid content-start w-full gap-5 justify-items-center col-[1_/_2] row-[2_/_3] lg:col-[2_/_3] lg:row-[1_/_2]'

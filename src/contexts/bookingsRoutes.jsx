@@ -7,7 +7,10 @@ const bookingsRoutes = [
   { index: true, Component: BookingListIndex },
   {
     path: ':date',
-    lazy: () => import('../components/Bookings/BookingList'),
+    async lazy() {
+      let { default: Component } = await import('../components/Bookings/BookingList');
+      return { Component };
+    },
     ErrorBoundary: ErrorInfo,
     async loader({ params }) {
       let { getBookingsByDate } = await import('../services/bookings');
@@ -33,7 +36,10 @@ const bookingsRoutes = [
       { index: true, Component: BookingDetailsIndex },
       {
         path: 'id/:id',
-        lazy: () => import('../components/Bookings/BookingDetails'),
+        async lazy() {
+          let { default: Component } = await import('../components/Bookings/BookingDetails');
+          return { Component };
+        },
         ErrorBoundary: ErrorInfo,
         async loader({ params }) {
           let { getBookingById } = await import('../services/bookings');
@@ -50,7 +56,10 @@ const bookingsRoutes = [
       },
       {
         path: 'id/:id/edit',
-        lazy: () => import('../components/Bookings/BookingEdit'),
+        async lazy() {
+          let { default: Component } = await import('../components/Bookings/BookingEdit');
+          return { Component };
+        },
         ErrorBoundary: ErrorInfo,
         async loader({ params }) {
           let { getBookingAndOptionsById } = await import('../services/bookings');
@@ -81,7 +90,10 @@ const bookingsRoutes = [
   },
   {
     path: 'new',
-    lazy: () => import('../components/Bookings/BookingNew'),
+    async lazy() {
+      let { default: Component } = await import('../components/Bookings/BookingNew');
+      return { Component };
+    },
     ErrorBoundary: ErrorInfo,
     async loader() {
       let { getAllBookingOptions } = await import('../services/bookings');
