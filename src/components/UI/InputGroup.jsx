@@ -17,7 +17,7 @@ export default function InputGroup({ name, type, issue, defaultValue, isRequired
         name={name}
         id={id}
         type={type}
-        placeholder={`Enter your ${id.replace('-', ' ').toLowerCase()} here`}
+        placeholder={`Enter your ${name.replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase()} here`}
         defaultValue={defaultValue}
         className='w-full h-10 text-white input input-bordered input-primary 3xl:h-12'
       />

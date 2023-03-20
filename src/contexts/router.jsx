@@ -2,8 +2,7 @@ import { createBrowserRouter, Link } from 'react-router-dom';
 import Home from '../pages/Home';
 import ErrorInfo from '../components/ErrorInfo';
 import PageLayout from '../pages/PageLayout';
-import bookingsRoutes from '../routes/bookings';
-import signupAction from '../actions/signup';
+import bookingsRoutes from '../routes/bookingsRoutes';
 
 const router = createBrowserRouter([
   {
@@ -17,48 +16,51 @@ const router = createBrowserRouter([
     children: [
       {
         path: 'blogs',
-        ErrorBoundary: ErrorInfo,
         lazy: () => import('../pages/Blogs'),
+        ErrorBoundary: ErrorInfo,
       },
       {
         path: 'bookings',
-        ErrorBoundary: ErrorInfo,
         lazy: () => import('../pages/Bookings'),
+        ErrorBoundary: ErrorInfo,
         handle: { crumb: () => <Link to='/bookings'>Calendar</Link> },
         children: [...bookingsRoutes],
       },
       {
         path: 'activities',
-        ErrorBoundary: ErrorInfo,
         lazy: () => import('../pages/Activities'),
+        ErrorBoundary: ErrorInfo,
       },
       {
         path: 'admin',
-        ErrorBoundary: ErrorInfo,
         lazy: () => import('../pages/Admin'),
+        ErrorBoundary: ErrorInfo,
       },
     ],
   },
   {
     path: 'login',
-    ErrorBoundary: ErrorInfo,
     lazy: () => import('../pages/Login'),
+    ErrorBoundary: ErrorInfo,
   },
   {
     path: '/signup',
-    ErrorBoundary: ErrorInfo,
     // ??? MUST be named export for both `loader` and `Component` files, o/w dynamic import won't work, speculated to be issues related to resolver
+    lazy: () => import('../pages/Signup'),
     async loader() {
-      let { loader } = await import('../loaders/signup');
+      let { default: loader } = await import('../routes/signup-loader');
       return loader();
     },
-    lazy: () => import('../pages/Signup'),
-    action: signupAction,
+    async action({ request }) {
+      let { default: action } = await import('../routes/signup-action');
+      return action({ request });
+    },
+    ErrorBoundary: ErrorInfo,
   },
   {
     path: '/profile',
-    ErrorBoundary: ErrorInfo,
     lazy: () => import('../pages/Profile'),
+    ErrorBoundary: ErrorInfo,
   },
 ]);
 

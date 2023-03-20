@@ -15,7 +15,7 @@ const bookingsRoutes = [
     path: ':date',
     ErrorBoundary: ErrorInfo,
     async loader({ params }) {
-      let { loader } = await import('../loaders/bookingList');
+      let { default: loader } = await import('./bookingList-loader');
       return loader({ params });
     },
     lazy: () => import('../components/Bookings/BookingList'),
