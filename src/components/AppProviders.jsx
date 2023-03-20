@@ -9,8 +9,8 @@ import post from '../utils/post';
 export default function AppProviders() {
   const [authenticatedUser, setAuthenticatedUser] = useState(null);
 
-  // This `useEffect`'s job is to synchronize with API by using the access key stored in the `localStorage` as a ref in
-  //  case `authenticatedUser` state/context is missing
+  // This `useEffect`'s job is to synchronize with API by using an access key stored in the `localStorage` as a ref in
+  //  case `authenticatedUser` state/context is missing after page reload, switching tab, etc.
   useEffect(() => {
     let ignore = false;
     if (authenticatedUser) {

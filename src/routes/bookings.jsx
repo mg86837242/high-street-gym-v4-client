@@ -4,7 +4,6 @@ import fetchRes from '../utils/fetchRes';
 import fetchJSON from '../utils/fetchJSON';
 import ErrorInfo from '../components/ErrorInfo';
 import BookingListIndex from '../components/Bookings/BookingListIndex';
-import BookingList from '../components/Bookings/BookingList';
 import BookingDetails from '../components/Bookings/BookingDetails';
 import BookingDetailsIndex from '../components/Bookings/BookingDetailsIndex';
 import BookingEdit from '../components/Bookings/BookingEdit';
@@ -14,20 +13,12 @@ const bookingsRoutes = [
   { index: true, Component: BookingListIndex },
   {
     path: ':date',
-    Component: BookingList,
     ErrorBoundary: ErrorInfo,
     async loader({ params }) {
-      const response = await fetch(`${API_URL}/bookings/by-date/${params.date}`, { credentials: 'include' });
-      // Special error handling to let 404 pass
-      if (response?.status !== 200 && response?.status !== 404) {
-        const json = await response.json();
-        const message = `${json.status} ${
-          typeof json.message === 'string' ? json.message : json.message.map((issue) => issue.message).join('; ')
-        }`;
-        throw new Response(message);
-      }
-      return response;
+      let { loader } = await import('../loaders/bookingList');
+      return loader({ params });
     },
+    lazy: () => import('../components/Bookings/BookingList'),
     handle: {
       // The shape of arguments passed into the below `crumb` method, which returns a render function, will affect the
       //  shape of arguments passed into the `map()` method when calling `useMatches` and defining `crumbs`; also the
@@ -48,6 +39,7 @@ const bookingsRoutes = [
       { index: true, Component: BookingDetailsIndex },
       {
         path: 'id/:id',
+        // HACK 1
         Component: BookingDetails,
         ErrorBoundary: ErrorInfo,
         async loader({ params }) {
@@ -65,6 +57,7 @@ const bookingsRoutes = [
       },
       {
         path: 'id/:id/edit',
+        // HACK 2
         Component: BookingEdit,
         ErrorBoundary: ErrorInfo,
         async loader({ params }) {
@@ -111,6 +104,7 @@ const bookingsRoutes = [
         },
       },
       {
+        // HACK 3
         path: 'id/:id/destroy',
         ErrorBoundary: ErrorInfo,
         async action({ params }) {
@@ -121,6 +115,7 @@ const bookingsRoutes = [
     ],
   },
   {
+    // HACK 4
     path: 'new',
     Component: BookingNew,
     ErrorBoundary: ErrorInfo,

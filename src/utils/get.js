@@ -5,6 +5,6 @@ export default async function get(url) {
     credentials: 'include',
   };
 
-  const response = await fetch(url);
+  const response = await fetch(url, requestOptions);
   return response;
 }

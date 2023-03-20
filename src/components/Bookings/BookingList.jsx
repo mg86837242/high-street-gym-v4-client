@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useLoaderData, NavLink, Outlet } from 'react-router-dom';
 import { monthNames, getOrdinal } from '../../utils/mapDates';
 
-export default function BookingList() {
+export function Component() {
   const { bookings } = useLoaderData();
   const bookingList = useMemo(
     () =>
@@ -79,3 +79,5 @@ export default function BookingList() {
     </>
   );
 }
+
+Component.displayName = 'BookingList';
