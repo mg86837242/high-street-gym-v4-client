@@ -2,49 +2,36 @@ import { useState, useEffect, useCallback, useMemo } from 'react';
 import AuthContext from '../contexts/AuthContext';
 import router from '../contexts/router';
 import { RouterProvider } from 'react-router-dom';
-import { API_URL } from '../data/constants.js';
-import post from '../utils/post.js';
+import { API_URL } from '../data/constants';
+import get from '../utils/get';
+import post from '../utils/post';
 
-// NB For using `navigate` outside of `<RouterProvider>`, see:
-// -- https://stackoverflow.com/questions/69871987/react-router-v6-navigate-outside-of-components
-// -- https://github.com/remix-run/react-router/issues/9422#issuecomment-1301182219
-// -- Peek `createBrowserRouter` => `RemixRouter` => `Router` interface's `navigate` method
-// NB POST req w/ event-specific logic doesn't need `useEffect`, see: https://react.dev/learn/you-might-not-need-an-effect#sending-a-post-request
-// NB Interactions within `localStorage` within login/logout event handlers do not require `useEffect`, see:
-//  https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers
-// NB The 3 fetches within login/logout event handlers can't be cleaned up by utility b/c possible returned messages
-//  are (1) POST /login !response.ok json.message, (2) POST /login response.ok json, (3) GET /users !response.ok
-//  message, (4) POST /login response.ok json.message, (5) POST /logout !response.ok json.message, (6) POST /logout
-//  response.ok json.message – too inconsistent to be consolidated
-// TODO (1) Integrate Supabase; (2) when receiving the `user` obj from the Supabase db, a fetch request will be
-//  made to perform CRUD operations with `Members` or `Trainers` or `Admins` table within the backend db, i.e.,
-//  synchronizing the Supabase db with the MySQL db
 export default function AppProviders() {
   const [authenticatedUser, setAuthenticatedUser] = useState(null);
 
   // This `useEffect`'s job is to synchronize with API by using the access key stored in the `localStorage` as a ref in
   //  case `authenticatedUser` state/context is missing
   useEffect(() => {
+    let ignore = false;
     if (authenticatedUser) {
-      console.log('🔃 Effect runs - user state present, exit');
+      // console.log('🔃 Effect runs - user state present, exit');
       return;
     }
-    let ignore = false;
     const accessKey = localStorage.getItem('accessKey');
     if (!accessKey) {
-      console.log('🔃 Effect runs - key removed or missing from local storage, exit');
+      // console.log('🔃 Effect runs - key removed or missing from local storage, exit');
       router.navigate('/');
       return;
     }
-    fetch(`${API_URL}/users/by-key/${accessKey}`, { credentials: 'include' })
+    get(`${API_URL}/users/by-key/${accessKey}`)
       .then((json) => {
         if (!ignore) {
-          console.log('🔃 Effect runs - user state synchronizing');
+          // console.log('🔃 Effect runs - user state synchronizing');
           setAuthenticatedUser(json.user);
         }
       })
       .catch(() => {
-        console.log('🔃 Effect runs - synchronization fetch failed');
+        // console.log('🔃 Effect runs - synchronization fetch failed');
         router.navigate('/');
       });
     return () => {
@@ -66,7 +53,7 @@ export default function AppProviders() {
           // Set key in `localStorage` – persistent storage in case page is reloaded
           localStorage.setItem('accessKey', loginJSON.accessKey);
           // Fetch GET /users/by-key/:accessKey to attempt to get an obj called `user`
-          const userRes = await fetch(`${API_URL}/users/by-key/${loginJSON.accessKey}`, { credentials: 'include' });
+          const userRes = await get(`${API_URL}/users/by-key/${loginJSON.accessKey}`);
           const userJSON = await userRes.json();
           if (!userRes.ok) {
             return typeof userJSON.message === 'string' ? userJSON.message : 'Invalid request to server';
@@ -136,3 +123,18 @@ export default function AppProviders() {
 //  this project, but could still be useful in the future
 // -- https://codesandbox.io/s/react-usecontext-rydy5?file=/src/context/defaults.js: How to modularize files related to
 //  context (source: Google "use context example codesandbox")
+
+// NB For using `navigate` outside of `<RouterProvider>`, see:
+// -- https://stackoverflow.com/questions/69871987/react-router-v6-navigate-outside-of-components
+// -- https://github.com/remix-run/react-router/issues/9422#issuecomment-1301182219
+// -- Peek `createBrowserRouter` => `RemixRouter` => `Router` interface's `navigate` method
+// NB POST req w/ event-specific logic doesn't need `useEffect`, see: https://react.dev/learn/you-might-not-need-an-effect#sending-a-post-request
+// NB Interactions within `localStorage` within login/logout event handlers do not require `useEffect`, see:
+//  https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers
+// NB The 3 fetches within login/logout event handlers can't be cleaned up by utility b/c possible returned messages
+//  are (1) POST /login !response.ok json.message, (2) POST /login response.ok json, (3) GET /users !response.ok
+//  message, (4) POST /login response.ok json.message, (5) POST /logout !response.ok json.message, (6) POST /logout
+//  response.ok json.message – too inconsistent to be consolidated
+// TODO (1) Integrate Supabase; (2) when receiving the `user` obj from the Supabase db, a fetch request will be
+//  made to perform CRUD operations with `Members` or `Trainers` or `Admins` table within the backend db, i.e.,
+//  synchronizing the Supabase db with the MySQL db

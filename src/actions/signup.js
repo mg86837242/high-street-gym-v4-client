@@ -1,8 +1,8 @@
 import { redirect } from 'react-router-dom';
-import { API_URL } from '../../data/constants';
-import { emailSchema, passwordSchema, usernameSchema } from '../../data/schemas/logins';
-import { firstNameSchema, lastNameSchema, phoneSchema, ageSchema, genderSchema } from '../../data/schemas/members';
-import post from '../../utils/post';
+import { API_URL } from '../data/constants';
+import { emailSchema, passwordSchema, usernameSchema } from '../data/schemas/logins';
+import { firstNameSchema, lastNameSchema, phoneSchema, ageSchema, genderSchema } from '../data/schemas/members';
+import post from '../utils/post';
 
 export default async function action({ request }) {
   const formData = await request.formData();

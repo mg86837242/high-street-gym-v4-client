@@ -1,15 +1,14 @@
 import { Link, redirect } from 'react-router-dom';
-import { API_URL } from '../../data/constants';
-import { monthNames, getOrdinal } from '../../utils/mapDates';
-import fetchRes from '../../utils/fetchRes';
-import fetchJSON from '../../utils/fetchJSON';
-import ErrorInfo from '../../components/ErrorInfo';
-import BookingListIndex from '../../components/Bookings/BookingListIndex';
-import BookingList from '../../components/Bookings/BookingList';
-import BookingDetails from '../../components/Bookings/BookingDetails';
-import BookingDetailsIndex from '../../components/Bookings/BookingDetailsIndex';
-import BookingEdit from '../../components/Bookings/BookingEdit';
-import BookingNew from '../../components/Bookings/BookingNew';
+import { API_URL } from '../data/constants';
+import fetchRes from '../utils/fetchRes';
+import fetchJSON from '../utils/fetchJSON';
+import ErrorInfo from '../components/ErrorInfo';
+import BookingListIndex from '../components/Bookings/BookingListIndex';
+import BookingList from '../components/Bookings/BookingList';
+import BookingDetails from '../components/Bookings/BookingDetails';
+import BookingDetailsIndex from '../components/Bookings/BookingDetailsIndex';
+import BookingEdit from '../components/Bookings/BookingEdit';
+import BookingNew from '../components/Bookings/BookingNew';
 
 const bookingsRoutes = [
   { index: true, Component: BookingListIndex },

@@ -1,7 +1,7 @@
 import MainWrapper from '../components/MainWrapper';
 import UnderConstruction from '../components/UnderConstruction';
 
-export default function Activities() {
+export function Component() {
   return (
     <MainWrapper gap={'gap-16'} mt={'mt-16'} mb={'mb-20'}>
       <UnderConstruction
@@ -13,3 +13,5 @@ export default function Activities() {
     </MainWrapper>
   );
 }
+
+Component.displayName = 'Activities';

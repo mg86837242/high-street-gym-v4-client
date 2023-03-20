@@ -2,7 +2,7 @@ import Canvas from '../components/AuthForm/Canvas';
 import NavBarMinimal from '../components/NavBarMinimal';
 import LoginPanel from '../components/AuthForm/LoginPanel';
 
-export default function Login() {
+export function Component() {
   return (
     <Canvas>
       <NavBarMinimal />
@@ -10,3 +10,5 @@ export default function Login() {
     </Canvas>
   );
 }
+
+Component.displayName = 'Login';
