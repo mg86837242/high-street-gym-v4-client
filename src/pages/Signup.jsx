@@ -3,7 +3,7 @@ import Canvas from '../components/AuthForm/Canvas';
 import NavBarMinimal from '../components/NavBarMinimal';
 import SignupPanel from '../components/AuthForm/SignupPanel';
 
-export default function Component() {
+export default function Signup() {
   const { emails } = useLoaderData();
 
   return (
@@ -13,5 +13,3 @@ export default function Component() {
     </Canvas>
   );
 }
-
-Component.displayName = 'Signup';

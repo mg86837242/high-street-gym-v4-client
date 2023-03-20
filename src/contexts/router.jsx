@@ -17,16 +17,16 @@ const router = createBrowserRouter([
       {
         path: 'blogs',
         async lazy() {
-          let { default: Component } = await import('../pages/Blogs');
-          return { Component };
+          let { default: Blogs } = await import('../pages/Blogs');
+          return { Component: Blogs };
         },
         ErrorBoundary: ErrorInfo,
       },
       {
         path: 'bookings',
         async lazy() {
-          let { default: Component } = await import('../pages/Bookings');
-          return { Component };
+          let { default: Bookings } = await import('../pages/Bookings');
+          return { Component: Bookings };
         },
         ErrorBoundary: ErrorInfo,
         handle: { crumb: () => <Link to='/bookings'>Calendar</Link> },
@@ -35,16 +35,16 @@ const router = createBrowserRouter([
       {
         path: 'activities',
         async lazy() {
-          let { default: Component } = await import('../pages/Activities');
-          return { Component };
+          let { default: Activities } = await import('../pages/Activities');
+          return { Component: Activities };
         },
         ErrorBoundary: ErrorInfo,
       },
       {
         path: 'admin',
         async lazy() {
-          let { default: Component } = await import('../pages/Admin');
-          return { Component };
+          let { default: Admin } = await import('../pages/Admin');
+          return { Component: Admin };
         },
         ErrorBoundary: ErrorInfo,
       },
@@ -53,16 +53,16 @@ const router = createBrowserRouter([
   {
     path: 'login',
     async lazy() {
-      let { default: Component } = await import('../pages/Login');
-      return { Component };
+      let { default: Login } = await import('../pages/Login');
+      return { Component: Login };
     },
     ErrorBoundary: ErrorInfo,
   },
   {
     path: '/signup',
     async lazy() {
-      let { default: Component } = await import('../pages/Signup');
-      return { Component };
+      let { default: Signup } = await import('../pages/Signup');
+      return { Component: Signup };
     },
     ErrorBoundary: ErrorInfo,
     async loader() {
@@ -77,8 +77,8 @@ const router = createBrowserRouter([
   {
     path: '/profile',
     async lazy() {
-      let { default: Component } = await import('../pages/Profile');
-      return { Component };
+      let { default: Profile } = await import('../pages/Profile');
+      return { Component: Profile };
     },
     ErrorBoundary: ErrorInfo,
   },

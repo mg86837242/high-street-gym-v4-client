@@ -5,7 +5,7 @@ import ContentGrid from '../components/ContentGrid';
 import Calendar from '../components/Bookings/Calendar';
 import Loading from '../components/Loading';
 
-export default function Component() {
+export default function Bookings() {
   return (
     <>
       <MainWrapper gap={'gap-1'} mt={'mt-5'} mb={'mb-20'}>
@@ -26,5 +26,3 @@ export default function Component() {
     </>
   );
 }
-
-Component.displayName = 'Bookings';

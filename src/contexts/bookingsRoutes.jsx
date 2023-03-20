@@ -8,8 +8,8 @@ const bookingsRoutes = [
   {
     path: ':date',
     async lazy() {
-      let { default: Component } = await import('../components/Bookings/BookingList');
-      return { Component };
+      let { default: BookingList } = await import('../components/Bookings/BookingList');
+      return { Component: BookingList };
     },
     ErrorBoundary: ErrorInfo,
     async loader({ params }) {
@@ -37,8 +37,8 @@ const bookingsRoutes = [
       {
         path: 'id/:id',
         async lazy() {
-          let { default: Component } = await import('../components/Bookings/BookingDetails');
-          return { Component };
+          let { default: BookingDetails } = await import('../components/Bookings/BookingDetails');
+          return { Component: BookingDetails };
         },
         ErrorBoundary: ErrorInfo,
         async loader({ params }) {
@@ -57,8 +57,8 @@ const bookingsRoutes = [
       {
         path: 'id/:id/edit',
         async lazy() {
-          let { default: Component } = await import('../components/Bookings/BookingEdit');
-          return { Component };
+          let { default: BookingEdit } = await import('../components/Bookings/BookingEdit');
+          return { Component: BookingEdit };
         },
         ErrorBoundary: ErrorInfo,
         async loader({ params }) {
@@ -91,8 +91,8 @@ const bookingsRoutes = [
   {
     path: 'new',
     async lazy() {
-      let { default: Component } = await import('../components/Bookings/BookingNew');
-      return { Component };
+      let { default: BookingNew } = await import('../components/Bookings/BookingNew');
+      return { Component: BookingNew };
     },
     ErrorBoundary: ErrorInfo,
     async loader() {
