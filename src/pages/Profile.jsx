@@ -1,12 +1,10 @@
-import Canvas from '../components/AuthForm/Canvas';
-import NavBarMinimal from '../components/NavBarMinimal';
+import MainWrapper from '../components/MainWrapper';
 import ProfilePanel from '../components/ProfilePanel';
 
 export default function Profile() {
   return (
-    <Canvas>
-      <NavBarMinimal />
+    <MainWrapper gap={'gap-16'} mt={''} mb={''}>
       <ProfilePanel />
-    </Canvas>
+    </MainWrapper>
   );
 }

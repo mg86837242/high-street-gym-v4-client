@@ -48,6 +48,14 @@ const router = createBrowserRouter([
         },
         ErrorBoundary: ErrorInfo,
       },
+      {
+        path: '/profile',
+        async lazy() {
+          let { default: Profile } = await import('../pages/Profile');
+          return { Component: Profile };
+        },
+        ErrorBoundary: ErrorInfo,
+      },
     ],
   },
   {
@@ -73,14 +81,6 @@ const router = createBrowserRouter([
       let { signupMembers } = await import('../services/members');
       return signupMembers({ request });
     },
-  },
-  {
-    path: '/profile',
-    async lazy() {
-      let { default: Profile } = await import('../pages/Profile');
-      return { Component: Profile };
-    },
-    ErrorBoundary: ErrorInfo,
   },
 ]);
 
