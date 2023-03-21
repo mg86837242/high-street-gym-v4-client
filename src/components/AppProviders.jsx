@@ -28,7 +28,8 @@ export default function AppProviders() {
       .then((json) => {
         if (!ignore) {
           console.log('🔃 Effect runs - user state synchronized');
-          console.log(`🟢 [${new Date().toLocaleTimeString()}] fetched json for syncing: ${json}`);
+          console.log(`🟢 [${new Date().toLocaleTimeString()}] fetched json for syncing:`);
+          console.log(json);
           setAuthenticatedUser(json.user);
         }
       })
