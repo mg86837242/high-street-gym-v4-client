@@ -23,8 +23,8 @@ export default function AppProviders() {
       return;
     }
     let ignore = false;
-    fetch(`${API_URL}/users/by-key/${accessKey}`, { credentials: 'include' })
-      .then((res) => res.json())
+    get(`${API_URL}/users/by-key/${accessKey}`)
+      .then((response) => response.json())
       .then((json) => {
         if (!ignore) {
           console.log('🔃 Effect runs - user state synchronized');

@@ -1,4 +1,4 @@
-// Use case: fetch and error handling within loader and action
+// Use case: fetch and error handling in loader and action
 export default async function fetchRes(url, method, body) {
   let requestOptions;
   switch (method) {

@@ -1,4 +1,4 @@
-// Use case: GET req with customized error handling
+// Use case: GET req with customized error handling, esp.  in `<AppProviders>`
 export default async function get(url) {
   const requestOptions = {
     method: 'GET',
