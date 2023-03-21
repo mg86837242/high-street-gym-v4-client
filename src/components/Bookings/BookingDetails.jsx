@@ -39,47 +39,47 @@ export default function BookingDetails() {
       >
         <h1 className='text-center text-secondary max-3xl:mb-0'>Booking Details</h1>
         <div className='grid grid-cols-[minmax(1rem,_2fr)_minmax(2rem,_3fr)] text-sm 3xl:text:base'>
-          <p className='px-1 bg-base-100 py-[0.125rem] 3xl:py-1'>Booking ID: </p>
-          <p className='px-1 bg-base-100 py-[0.125rem] 3xl:py-1'>{id}</p>
-          <p className='px-1 py-[0.125rem] 3xl:py-1'>Date:</p>
-          <p className='px-1 py-[0.125rem] 3xl:py-1'>
+          <p className='px-1 bg-base-100 py-0.5 3xl:py-1'>Booking ID: </p>
+          <p className='px-1 bg-base-100 py-0.5 3xl:py-1'>{id}</p>
+          <p className='px-1 py-0.5 3xl:py-1'>Date:</p>
+          <p className='px-1 py-0.5 3xl:py-1'>
             {dateTime.slice(8, 9) === '0' ? dateTime.slice(9, 10) : dateTime.slice(8, 10)}
             {getOrdinal(dateTime.slice(8, 10))} {monthNames[Number(dateTime.slice(5, 7))]} {dateTime.slice(0, 4)}
           </p>
-          <p className='px-1 bg-base-100 py-[0.125rem] 3xl:py-1'>Time:</p>
-          <p className='px-1 bg-base-100 py-[0.125rem] 3xl:py-1'>{dateTime.slice(-8)}</p>
-          <p className='px-1 py-[0.125rem] 3xl:py-1'>Activity:</p>
-          <p className='px-1 py-[0.125rem] 3xl:py-1'>{activityName}</p>
-          <p className='px-1 bg-base-100 py-[0.125rem] 3xl:py-1'>Category:</p>
-          <p className='px-1 bg-base-100 py-[0.125rem] 3xl:py-1'>{category}</p>
-          <p className='px-1 py-[0.125rem] 3xl:py-1'>Description:</p>
-          <p className='px-1 py-[0.125rem] 3xl:py-1'>{description}</p>
-          <p className='px-1 bg-base-100 py-[0.125rem] 3xl:py-1'>Intensity Level:</p>
-          <p className='px-1 bg-base-100 py-[0.125rem] 3xl:py-1'>{intensityLevel}</p>
-          <p className='px-1 py-[0.125rem] 3xl:py-1'>Requirement:</p>
-          <p className='px-1 py-[0.125rem] 3xl:py-1'>{requirementOne}</p>
-          <p className='px-1 py-[0.125rem] 3xl:py-1'></p>
-          <p className='px-1 py-[0.125rem] 3xl:py-1'>{requirementTwo}</p>
-          <p className='px-1 bg-base-100 py-[0.125rem] 3xl:py-1'>Duration:</p>
-          <p className='px-1 bg-base-100 py-[0.125rem] 3xl:py-1'>{durationMinutes} minutes</p>
-          <p className='px-1 py-[0.125rem] 3xl:py-1'>Price:</p>
-          <p className='px-1 py-[0.125rem] 3xl:py-1'>$ {price}</p>
-          <p className='px-1 bg-base-100 py-[0.125rem] 3xl:py-1'>Member:</p>
-          <p className='px-1 bg-base-100 py-[0.125rem] 3xl:py-1'>
+          <p className='px-1 bg-base-100 py-0.5 3xl:py-1'>Time:</p>
+          <p className='px-1 bg-base-100 py-0.5 3xl:py-1'>{dateTime.slice(-8)}</p>
+          <p className='px-1 py-0.5 3xl:py-1'>Activity:</p>
+          <p className='px-1 py-0.5 3xl:py-1'>{activityName}</p>
+          <p className='px-1 bg-base-100 py-0.5 3xl:py-1'>Category:</p>
+          <p className='px-1 bg-base-100 py-0.5 3xl:py-1'>{category}</p>
+          <p className='px-1 py-0.5 3xl:py-1'>Description:</p>
+          <p className='px-1 py-0.5 3xl:py-1'>{description}</p>
+          <p className='px-1 bg-base-100 py-0.5 3xl:py-1'>Intensity Level:</p>
+          <p className='px-1 bg-base-100 py-0.5 3xl:py-1'>{intensityLevel}</p>
+          <p className='px-1 py-0.5 3xl:py-1'>Requirement:</p>
+          <p className='px-1 py-0.5 3xl:py-1'>{requirementOne}</p>
+          <p className='px-1 py-0.5 3xl:py-1'></p>
+          <p className='px-1 py-0.5 3xl:py-1'>{requirementTwo}</p>
+          <p className='px-1 bg-base-100 py-0.5 3xl:py-1'>Duration:</p>
+          <p className='px-1 bg-base-100 py-0.5 3xl:py-1'>{durationMinutes} minutes</p>
+          <p className='px-1 py-0.5 3xl:py-1'>Price:</p>
+          <p className='px-1 py-0.5 3xl:py-1'>$ {price}</p>
+          <p className='px-1 bg-base-100 py-0.5 3xl:py-1'>Member:</p>
+          <p className='px-1 bg-base-100 py-0.5 3xl:py-1'>
             {memberFirstName} {memberLastName}
           </p>
-          <p className='px-1 py-[0.125rem] 3xl:py-1'>Phone:</p>
-          <p className='px-1 py-[0.125rem] 3xl:py-1'>{memberPhone}</p>
-          <p className='px-1 bg-base-100 py-[0.125rem] 3xl:py-1'>Email:</p>
-          <p className='px-1 bg-base-100 py-[0.125rem] 3xl:py-1'>{memberEmail}</p>
-          <p className='px-1 py-[0.125rem] 3xl:py-1'>Trainer:</p>
-          <p className='px-1 py-[0.125rem] 3xl:py-1'>
+          <p className='px-1 py-0.5 3xl:py-1'>Phone:</p>
+          <p className='px-1 py-0.5 3xl:py-1'>{memberPhone}</p>
+          <p className='px-1 bg-base-100 py-0.5 3xl:py-1'>Email:</p>
+          <p className='px-1 bg-base-100 py-0.5 3xl:py-1'>{memberEmail}</p>
+          <p className='px-1 py-0.5 3xl:py-1'>Trainer:</p>
+          <p className='px-1 py-0.5 3xl:py-1'>
             {trainerFirstName} {trainerLastName}
           </p>
-          <p className='px-1 bg-base-100 py-[0.125rem] 3xl:py-1'>Phone:</p>
-          <p className='px-1 bg-base-100 py-[0.125rem] 3xl:py-1'>{trainerPhone}</p>
-          <p className='px-1 py-[0.125rem] 3xl:py-1'>Email:</p>
-          <p className='px-1 py-[0.125rem] 3xl:py-1'>{trainerEmail}</p>
+          <p className='px-1 bg-base-100 py-0.5 3xl:py-1'>Phone:</p>
+          <p className='px-1 bg-base-100 py-0.5 3xl:py-1'>{trainerPhone}</p>
+          <p className='px-1 py-0.5 3xl:py-1'>Email:</p>
+          <p className='px-1 py-0.5 3xl:py-1'>{trainerEmail}</p>
         </div>
         <div className='flex justify-between gap-5 text-center'>
           <Form action='edit'>

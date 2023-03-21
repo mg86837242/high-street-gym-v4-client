@@ -202,7 +202,7 @@ function DemoLogins() {
       <button
         onClick={() =>
           handleLogin('demomember@gmail.com', 'abcd1234')
-            .then(() => navigate('/login'))
+            .then(() => navigate('/'))
             .catch(() => navigate('/login'))
         }
         className={`flex-shrink normal-case shadow btn btn-outline btn-success btn-sm text-primary-content shadow-black/50`}
@@ -212,7 +212,7 @@ function DemoLogins() {
       <button
         onClick={() =>
           handleLogin('demotrainer@gmail.com', 'abcd1234')
-            .then(() => navigate('/login'))
+            .then(() => navigate('/'))
             .catch(() => navigate('/login'))
         }
         className={`flex-shrink normal-case shadow btn btn-outline btn-warning btn-sm text-primary-content shadow-black/50`}
@@ -222,7 +222,7 @@ function DemoLogins() {
       <button
         onClick={() =>
           handleLogin('demoadmin@gmail.com', 'abcd1234')
-            .then(() => navigate('/login'))
+            .then(() => navigate('/'))
             .catch(() => navigate('/login'))
         }
         className={`flex-shrink normal-case shadow btn btn-outline btn-error btn-sm text-primary-content shadow-black/50`}

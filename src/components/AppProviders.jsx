@@ -12,7 +12,6 @@ export default function AppProviders() {
   // This `useEffect`'s job is to synchronize with API by using an access key stored in the `localStorage` as a ref in
   //  case `authenticatedUser` state/context is missing after page reload, opening a new tab, etc.
   useEffect(() => {
-    let ignore = false;
     if (authenticatedUser) {
       console.log('🔃 Effect runs - user state present, exit');
       return;
@@ -23,11 +22,12 @@ export default function AppProviders() {
       router.navigate('/');
       return;
     }
+    let ignore = false;
     get(`${API_URL}/users/by-key/${accessKey}`)
       .then((json) => {
         if (!ignore) {
-          setAuthenticatedUser(json.user);
           console.log('🔃 Effect runs - user state synchronized');
+          setAuthenticatedUser(json.user);
         }
       })
       .catch(() => {
