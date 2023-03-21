@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import MainWrapper from '../components/MainWrapper';
 import Breadcrumbs from '../components/Breadcrumbs';
-import ContentGrid from '../components/ContentGrid';
+import ContentGrid from '../components/Bookings/ContentGrid';
 import Calendar from '../components/Bookings/Calendar';
 import Loading from '../components/Loading';
 
@@ -10,10 +10,7 @@ export default function Bookings() {
     <>
       <MainWrapper gap={'gap-1'} mt={'mt-5'} mb={'mb-20'}>
         <Breadcrumbs />
-        <ContentGrid
-          id={'bookings-content-wrapper'}
-          grid={'grid-cols-1 grid-row-3 lg:grid-cols-3 lg:grid-row-1 gap-10 lg:gap-2 w-full'}
-        >
+        <ContentGrid id={'bookings-content-wrapper'}>
           <Calendar />
           <Outlet />
           <Loading

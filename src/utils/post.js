@@ -1,4 +1,4 @@
-// Use case: POST req within `<AuthProvider>`
+// Use case: POST req with customized error handling
 export default async function post(url, body) {
   const requestOptions = {
     method: 'POST',

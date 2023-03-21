@@ -2,6 +2,7 @@ import { redirect } from 'react-router-dom';
 import { API_URL } from '../data/constants';
 import fetchRes from '../utils/fetchRes';
 import fetchJSON from '../utils/fetchJSON';
+import get from '../utils/get';
 
 export async function getAllBookings() {
   const response = await fetchRes(`${API_URL}/bookings`, 'get');
@@ -14,7 +15,7 @@ export async function getAllBookingOptions() {
 }
 
 export async function getBookingsByDate({ params }) {
-  const response = await fetch(`${API_URL}/bookings/by-date/${params.date}`, { credentials: 'include' });
+  const response = await get(`${API_URL}/bookings/by-date/${params.date}`);
   // Special error handling to let 404 pass
   if (response?.status !== 200 && response?.status !== 404) {
     const json = await response.json();
