@@ -40,7 +40,7 @@ function SignupForm({ emails }) {
   const statusText = navigation.state === 'submitting' ? 'Signing up...' : 'Signup';
 
   return (
-    <Form method='post' className='grid w-full grid-cols-1 md:grid-cols-2 gap-x-5' noValidate>
+    <Form method='post' noValidate className='grid w-full grid-cols-1 md:grid-cols-2 gap-x-5'>
       <InputGroupEmail issue={issues?.email} defaultValue='demomember@gmail.com' emails={emails} />
       <InputGroupPass issue={issues?.password} defaultValue='abcd1234' />
       <InputGroup name='username' type='text' issue={issues?.username} defaultValue='demomember' />

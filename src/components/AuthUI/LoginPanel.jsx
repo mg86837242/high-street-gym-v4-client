@@ -175,6 +175,7 @@ function LoginForm() {
           onChange={(e) => setPassword(e.target.value)}
           className='w-full text-white input input-bordered input-primary'
         />
+        {/* NB `type=`button'`, which implies no default behavior, is a must have in order for this button to work */}
         <button type='button' onClick={handleToggle} className='absolute right-0 mt-10 mr-3 cursor-pointer'>
           <FontAwesomeIcon icon={icon} className='w-4 h-4' />
         </button>

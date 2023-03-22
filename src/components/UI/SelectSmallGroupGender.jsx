@@ -5,13 +5,8 @@ export default function SelectSmallGroupGender({ issue, isRequired }) {
         <span className='text-white label-text'>Gender:</span>
         {isRequired === false || <span className='text-gray-500 label-text-alt'>Required</span>}
       </label>
-      <select
-        name='gender'
-        id='gender'
-        defaultValue=''
-        className='min-h-0 text-base font-normal select select-primary select-sm'
-      >
-        {/* NB If this option is disabled and its value (empty string) is used as defaultValue, the select's value will be null in the formData, i.e. DON'T disable this option */}
+      <select name='gender' id='gender' defaultValue='' className='min-h-0 font-normal select select-primary select-sm'>
+        {/* NB If this option is disabled and its value (empty string) is used as `defaultValue`, the `<select>`'s value will be null in the formData, i.e. DON'T disable this option if its value is used as `defaultValue`*/}
         <option value=''>-- Choose Gender --</option>
         <option value='Female'>Female</option>
         <option value='Male'>Male</option>
