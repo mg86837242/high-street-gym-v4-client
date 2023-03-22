@@ -1,4 +1,4 @@
-import Canvas from './AuthForm/Canvas';
+import Canvas from './AuthUI/Canvas';
 import NavBarMinimal from './NavBarMinimal';
 
 export default function NoFoundView() {

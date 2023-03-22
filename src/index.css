@@ -11,7 +11,7 @@
 /* NB 1.5 Tailwind has alreayd provided out-of-the-box base styles, see: https://tailwindcss.com/docs/preflight, in which `box-sizing: border-box` is claimed to be made default, see: https://tailwindcss.com/docs/box-sizing#including-borders-and-padding */
 /* 1.6 The following base style enables a colored border to help with styling the box model & flex & grid & etc. */
 #profile-panel-wrapper * {
-  @apply border-[1px] border-fuchsia-500/60;
+  @apply border-[1px] border-rose-500/50;
 }
 
 html {
@@ -55,8 +55,7 @@ p {
 
 /* 2.1 Customize daisyUI components, see: https://github.com/saadeghi/daisyui/discussions/893 */
 @layer components {
-  /* This is just an example, will likely to be tree-shaked during build, `text-transform` is already removed in */
-  /* <Button> component(s) */
+  /* PS `text-transform` is already removed in button components in the `UI` folder */
   .btn {
     text-transform: none;
   }

@@ -244,7 +244,7 @@ function Greetings() {
       </p>
       <p className='text-2xl font-extrabold leading-6 focus:outline-none text-primary-content'>
         You have logged in as {authenticatedUser?.role === 'Admin' ? 'an' : 'a'}{' '}
-        <span className='text-primary'>{authenticatedUser.role}!</span>
+        <span className='text-primary'>{authenticatedUser?.role && authenticatedUser.role}!</span>
       </p>
       <div className='flex flex-col gap-5'>
         <LinkButton1Full to={'/'}>Visit Home</LinkButton1Full>

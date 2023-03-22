@@ -198,7 +198,7 @@ function NavBarRight() {
       {authenticatedUser ? (
         <>
           <Link
-            to='profile'
+            to='profile/account'
             className='normal-case shadow btn bg-gradient-to-r from-secondary to-primary shadow-black/50 text-primary-content'
           >
             Profile

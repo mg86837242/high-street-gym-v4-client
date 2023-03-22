@@ -1,5 +1,5 @@
 import MainWrapper from '../components/MainWrapper';
-import ProfilePanel from '../components/ProfilePanel';
+import { ProfilePanel } from '../components/AuthUI/ProfilePanel';
 
 export default function Profile() {
   return (
