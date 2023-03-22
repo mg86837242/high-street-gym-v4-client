@@ -1,11 +1,10 @@
 import { useContext } from 'react';
 import AuthContext from '../../contexts/AuthContext';
-import { Outlet, NavLink } from 'react-router-dom';
+import { Outlet, NavLink, Navigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 
 export function ProfilePanel() {
-  // FIX Container xl ???
   return (
     <div id='profile-panel-wrapper' className='flex flex-col w-full h-full px-4 py-6 md:flex-row max-w-7xl'>
       <LeftSidePanel />
@@ -27,7 +26,7 @@ function LeftSidePanel() {
         </div>
         <div className='flex flex-col items-end'>
           <p className='text-lg'>Greetings,</p>
-          <p className='text-lg'>{authenticatedUser?.username && authenticatedUser.username}</p>
+          <p className='text-lg text-primary'>{authenticatedUser?.username && authenticatedUser.username}</p>
         </div>
       </div>
       <nav>
@@ -36,7 +35,7 @@ function LeftSidePanel() {
             <NavLink
               to='account'
               className={({ isActive }) =>
-                `btn btn-sm btn-ghost w-full h-full font-normal px-2 py-1.5 flex justify-start items-center gap-2 ${
+                `flex items-center justify-start w-full h-full gap-2 px-2 font-normal btn btn-sm btn-ghost py-1.5 ${
                   isActive && 'btn-active'
                 }`
               }
@@ -51,7 +50,7 @@ function LeftSidePanel() {
             <NavLink
               to='blog'
               className={({ isActive }) =>
-                `btn btn-sm btn-ghost w-full h-full font-normal px-2 py-1.5 flex justify-start items-center gap-2 ${
+                `flex items-center justify-start w-full h-full gap-2 px-2 font-normal btn btn-sm btn-ghost py-1.5 ${
                   isActive && 'btn-active'
                 }`
               }
@@ -68,19 +67,23 @@ function LeftSidePanel() {
   );
 }
 
-export function ProfileAccountPanel() {
+export function ProfileEditIndex() {
+  return <Navigate to='account' replace />;
+}
+
+export function ProfileEditAccount() {
   return (
     <div className='flex-grow px-4 py-6'>
-      <h1>I'm profile account panel</h1>
-      <img src='https://picsum.photos/500/300?random=1' />
+      <h1 className='font-sans text-3xl text-primary-content'>Edit My Account</h1>
+      {/* FIX Put edit form here, using input group (sm) */}
     </div>
   );
 }
 
-export function ProfileBlogPanel() {
+export function ProfileEditBlog() {
   return (
     <div className='flex-grow px-4 py-6'>
-      <h1>I'm profile blog panel</h1>
+      <h1 className='font-sans text-3xl text-primary-content'>Edit My Blog</h1>
       <img src='https://picsum.photos/500/300?random=2' />
     </div>
   );
