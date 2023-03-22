@@ -1,7 +1,6 @@
 import { useContext, useState, useEffect } from 'react';
 import AuthContext from '../contexts/AuthContext';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import ThemeSwitch from './ThemeSwitch';
 
 // This component has the duality of different appearances and behaviors based on the `isHome` props
 export default function NavBar({ isHome }) {
@@ -194,7 +193,7 @@ function NavBarRight() {
 
   return (
     <div id='nav-right-wrapper' className='flex items-center gap-5 navbar-end'>
-      <ThemeSwitch />
+      {/* <ThemeSwitch /> */}
       {authenticatedUser ? (
         <>
           <Link

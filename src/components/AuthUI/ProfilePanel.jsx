@@ -7,6 +7,7 @@ import InputSmallGroupEmail from '../UI/InputSmallGroupEmail';
 import InputSmallGroupPass from '../UI/InputSmallGroupPass';
 import InputSmallGroup from '../UI/InputSmallGroup';
 import SelectSmallGroupGender from '../UI/SelectSmallGroupGender';
+import SelectSmallGroupCountry from '../UI/SelectSmallGroupCountry';
 
 export function ProfilePanel() {
   return (
@@ -92,6 +93,7 @@ export function ProfileEditAccount() {
             <InputSmallGroup name='firstName' type='text' issue={issues?.firstName} defaultValue='Demo' />
             <InputSmallGroup name='lastName' type='text' issue={issues?.lastName} defaultValue='Admin' />
             <InputSmallGroup name='phone' type='tel' issue={issues?.phone} defaultValue='0123456789' />
+            {/* TODO 3 Profile account route for admin */}
           </>
         ) : authenticatedUser?.role === 'Trainer' ? (
           <>
@@ -101,7 +103,7 @@ export function ProfileEditAccount() {
             <InputSmallGroup name='firstName' type='text' issue={issues?.firstName} defaultValue='Demo' />
             <InputSmallGroup name='lastName' type='text' issue={issues?.lastName} defaultValue='Trainer' />
             <InputSmallGroup name='phone' type='tel' issue={issues?.phone} defaultValue='0123456789' />
-            {/* FIX 2 Profile account route for trainer */}
+            {/* TODO 2 Profile account route for trainer */}
           </>
         ) : (
           <>
@@ -112,13 +114,21 @@ export function ProfileEditAccount() {
             <InputSmallGroup name='lastName' type='text' issue={issues?.lastName} defaultValue='Member' />
             <InputSmallGroup name='phone' type='tel' issue={issues?.phone} defaultValue='0123456789' />
             <InputSmallGroup name='age' type='number' issue={issues?.age} isRequired={false} />
-            <SelectSmallGroupGender issue={issues?.gender} isRequired={false} />
-            {/* FIX 3 Profile account route for admin */}
+            <SelectSmallGroupGender issue={issues?.gender} defaultValue='' isRequired={false} />
           </>
         )}
       </Form>
       <div className='divider'></div>
       <h1 className='font-sans text-3xl text-primary-content'>Edit My Address</h1>
+      {/* TODO 1 Profile account page for member => (0) demo accounts' addresses need to be qld addresses, (1) customized API to update address based on memberId (hidden input), (2) 2 buttons with name attr in order to handle 2 forms with 1 action */}
+      <Form method='post' noValidate className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'>
+        <InputSmallGroup name='lineOne' type='text' issue={issues?.lineOne} defaultValue='123 Some St' />
+        <InputSmallGroup name='lineTwo' type='text' issue={issues?.lineTwo} defaultValue='' />
+        <InputSmallGroup name='suburb' type='text' issue={issues?.suburb} defaultValue='Brisbane City' />
+        <InputSmallGroup name='postcode' type='text' issue={issues?.postcode} defaultValue='4000' />
+        <InputSmallGroup name='state' type='text' issue={issues?.state} defaultValue='QLD' />
+        <SelectSmallGroupCountry issue={issues?.country} defaultValue='Australia' />
+      </Form>
     </div>
   );
 }
@@ -131,5 +141,3 @@ export function ProfileEditBlog() {
     </div>
   );
 }
-
-// FIX 1 Profile account page for member => (1) form to only update address && customized API, (3) 1 action to handle 2 forms
