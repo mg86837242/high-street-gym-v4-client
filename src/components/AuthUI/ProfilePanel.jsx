@@ -103,6 +103,7 @@ export function ProfileEditAccount() {
             <InputSmallGroup name='firstName' type='text' issue={issues?.firstName} defaultValue='Demo' />
             <InputSmallGroup name='lastName' type='text' issue={issues?.lastName} defaultValue='Trainer' />
             <InputSmallGroup name='phone' type='tel' issue={issues?.phone} defaultValue='0123456789' />
+            {/* FIX 2 Profile account route for trainer */}
           </>
         ) : (
           <>
@@ -112,6 +113,7 @@ export function ProfileEditAccount() {
             <InputSmallGroup name='firstName' type='text' issue={issues?.firstName} defaultValue='Demo' />
             <InputSmallGroup name='lastName' type='text' issue={issues?.lastName} defaultValue='Member' />
             <InputSmallGroup name='phone' type='tel' issue={issues?.phone} defaultValue='0123456789' />
+            {/* FIX 3 Profile account route for admin */}
           </>
         )}
       </Form>
@@ -131,5 +133,3 @@ export function ProfileEditBlog() {
 }
 
 // FIX 1 Profile account page for member => (1) form to only update address && customized API, (3) 1 action to handle 2 forms
-// FIX 2 Profile account page for trainer
-// FIX 3 Profile account page for admin
