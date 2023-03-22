@@ -1,8 +1,8 @@
-import { useState } from 'react';
 import { Link, Form, useActionData, useNavigation } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
+import InputGroupEmail from '../UI/InputGroupEmail';
+import InputGroupPass from '../UI/InputGroupPass';
 import InputGroup from '../UI/InputGroup';
+import SelectGroupGender from '../UI/SelectGroupGender';
 import Button1Full from '../UI/Button1Full';
 
 export default function SignupPanel({ emails }) {
@@ -53,105 +53,5 @@ function SignupForm({ emails }) {
         <Button1Full>{statusText}</Button1Full>
       </div>
     </Form>
-  );
-}
-
-function InputGroupEmail({ issue, emails, defaultValue, isRequired }) {
-  const [input, setInput] = useState(defaultValue);
-  const isDuplicate = emails.find((e) => input === e.email);
-
-  return (
-    <div id='email-input-group' className='w-full form-control'>
-      <label htmlFor='email' className='py-1 3xl:py-2 label'>
-        <span className='text-white label-text'>Email:</span>
-        {isRequired === false || <span className='text-gray-500 label-text-alt'>Required</span>}
-      </label>
-      <input
-        name='email'
-        id='email'
-        type='text'
-        placeholder='Enter your email here'
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        className='w-full h-10 text-white input input-bordered input-primary 3xl:h-12'
-      />
-      <label htmlFor='email' className='py-1 3xl:py-2label'>
-        {isDuplicate ? (
-          <span className='text-rose-500 label-text-alt'>Email has already been used</span>
-        ) : issue ? (
-          <span className='text-rose-500 label-text-alt'>{issue}</span>
-        ) : (
-          <span className='text-gray-500 label-text-alt'>Validation information will appear here</span>
-        )}
-      </label>
-    </div>
-  );
-}
-
-function InputGroupPass({ issue, defaultValue }) {
-  const [inputType, setInputType] = useState('password');
-  const [icon, setIcon] = useState(faEyeSlash);
-
-  function handleToggle(e) {
-    e.stopPropagation();
-    setInputType(inputType === 'password' ? 'text' : 'password');
-    setIcon(icon === faEyeSlash ? faEye : faEyeSlash);
-  }
-
-  return (
-    <div id='password-group' className='relative w-full form-control'>
-      <label htmlFor='password' className='py-1 3xl:py-2 label'>
-        <span className='text-white label-text'>Password:</span>
-        <span className='text-gray-500 label-text-alt'>Required</span>
-      </label>
-      <input
-        name='password'
-        id='password'
-        type={inputType}
-        placeholder='Enter your password here'
-        defaultValue={defaultValue}
-        className='w-full h-10 text-white input input-bordered input-primary 3xl:h-12'
-      />
-      <button type='button' onClick={handleToggle} className='absolute right-0 mr-3 cursor-pointer mt-9 3xl:mt-12'>
-        <FontAwesomeIcon icon={icon} className='w-4 h-4' />
-      </button>
-      <label htmlFor='password' className='py-1 label'>
-        {issue ? (
-          <span className='text-rose-500 label-text-alt'>{issue}</span>
-        ) : (
-          <span className='text-gray-500 label-text-alt'>Validation information will appear here</span>
-        )}
-      </label>
-    </div>
-  );
-}
-
-function SelectGroupGender({ issue, isRequired }) {
-  return (
-    <div id='gender-select-group' className='w-full form-control'>
-      <label htmlFor='gender' className='py-1 3xl:py-2 label'>
-        <span className='text-white label-text'>Gender:</span>
-        {isRequired === false || <span className='text-gray-500 label-text-alt'>Required</span>}
-      </label>
-      <select
-        name='gender'
-        id='gender'
-        defaultValue=''
-        className='h-10 min-h-0 text-base font-normal select select-primary 3xl:h-12'
-      >
-        {/* NB If this option is disabled and its value (empty string) is used as defaultValue, the select's value will be null in the formData, i.e. DON'T disable this option */}
-        <option value=''>-- Choose Gender --</option>
-        <option value='Female'>Female</option>
-        <option value='Male'>Male</option>
-        <option value='Prefer not to say'>Prefer not to say</option>
-      </select>
-      <label htmlFor='gender' className='py-1 3xl:py-2 label'>
-        {issue ? (
-          <span className='text-rose-500 label-text-alt'>{issue}</span>
-        ) : (
-          <span className='text-gray-500 label-text-alt'>Validation information will appear here</span>
-        )}
-      </label>
-    </div>
   );
 }

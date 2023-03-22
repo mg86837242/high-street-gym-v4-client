@@ -3,9 +3,9 @@ import AuthContext from '../../contexts/AuthContext';
 import { Outlet, NavLink, Navigate, useLoaderData, useActionData, Form } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faPenToSquare } from '@fortawesome/free-regular-svg-icons';
-import InputSmallGroup from '../UI/InputSmallGroup';
 import InputSmallGroupEmail from '../UI/InputSmallGroupEmail';
 import InputSmallGroupPass from '../UI/InputSmallGroupPass';
+import InputSmallGroup from '../UI/InputSmallGroup';
 import SelectSmallGroupGender from '../UI/SelectSmallGroupGender';
 
 export function ProfilePanel() {
@@ -92,8 +92,6 @@ export function ProfileEditAccount() {
             <InputSmallGroup name='firstName' type='text' issue={issues?.firstName} defaultValue='Demo' />
             <InputSmallGroup name='lastName' type='text' issue={issues?.lastName} defaultValue='Admin' />
             <InputSmallGroup name='phone' type='tel' issue={issues?.phone} defaultValue='0123456789' />
-            <InputSmallGroup name='age' type='number' issue={issues?.age} isRequired={false} />
-            <SelectSmallGroupGender issue={issues?.gender} isRequired={false} />
           </>
         ) : authenticatedUser?.role === 'Trainer' ? (
           <>
@@ -113,6 +111,8 @@ export function ProfileEditAccount() {
             <InputSmallGroup name='firstName' type='text' issue={issues?.firstName} defaultValue='Demo' />
             <InputSmallGroup name='lastName' type='text' issue={issues?.lastName} defaultValue='Member' />
             <InputSmallGroup name='phone' type='tel' issue={issues?.phone} defaultValue='0123456789' />
+            <InputSmallGroup name='age' type='number' issue={issues?.age} isRequired={false} />
+            <SelectSmallGroupGender issue={issues?.gender} isRequired={false} />
             {/* FIX 3 Profile account route for admin */}
           </>
         )}
