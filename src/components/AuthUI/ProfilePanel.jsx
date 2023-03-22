@@ -83,7 +83,7 @@ export function ProfileEditAccount() {
   return (
     <div className='flex-grow px-4 py-6'>
       <h1 className='font-sans text-3xl text-primary-content'>Edit My Account</h1>
-      <Form method='post' noValidate className='grid w-full grid-cols-1 md:grid-cols-2 gap-x-5'>
+      <Form method='post' noValidate className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'>
         {authenticatedUser?.role === 'Admin' ? (
           <>
             <InputSmallGroupEmail issue={issues?.email} defaultValue='demoadmin@gmail.com' emails={emails} />
