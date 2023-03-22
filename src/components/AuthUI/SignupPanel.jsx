@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, Form, useActionData, useLoaderData, useNavigation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
 import InputGroup from '../UI/InputGroup';
 import Button1Full from '../UI/Button1Full';
 
