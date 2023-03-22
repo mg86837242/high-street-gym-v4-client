@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, Form, useActionData, useLoaderData, useNavigation } from 'react-router-dom';
+import { Link, Form, useActionData, useNavigation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
 import InputGroup from '../UI/InputGroup';
