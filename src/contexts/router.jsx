@@ -3,7 +3,7 @@ import Home from '../pages/Home';
 import ErrorInfo from '../components/ErrorInfo';
 import PageLayout from '../pages/PageLayout';
 import bookingsRoutes from './bookingsRoutes';
-import { ProfileEditIndex } from '../components/AuthUI/ProfilePanel';
+import profileRoutes from './profileRoutes';
 
 const router = createBrowserRouter([
   {
@@ -56,29 +56,7 @@ const router = createBrowserRouter([
           return { Component: Profile };
         },
         ErrorBoundary: ErrorInfo,
-        children: [
-          { index: true, Component: ProfileEditIndex },
-          {
-            path: 'account',
-            async lazy() {
-              let { ProfileEditAccount } = await import('../components/AuthUI/ProfilePanel');
-              return { Component: ProfileEditAccount };
-            },
-            async loader() {
-              let { getAllLoginEmails } = await import('../services/logins');
-              return getAllLoginEmails();
-            },
-            ErrorBoundary: ErrorInfo,
-          },
-          {
-            path: 'blog',
-            async lazy() {
-              let { ProfileEditBlog } = await import('../components/AuthUI/ProfilePanel');
-              return { Component: ProfileEditBlog };
-            },
-            ErrorBoundary: ErrorInfo,
-          },
-        ],
+        children: [...profileRoutes],
       },
     ],
   },
