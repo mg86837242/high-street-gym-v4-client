@@ -3,7 +3,7 @@ import AuthContext from '../contexts/AuthContext';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import ThemeSwitch from './ThemeSwitch';
 
-// This component has the duality of looking and behavior based on the `isHome` props
+// This component has the duality of different appearances and behaviors based on the `isHome` props
 export default function NavBar({ isHome }) {
   const [navBgClass, setNavBgClass] = useState('flex justify-center fixed top-0 bg-transparent w-full z-20');
 
