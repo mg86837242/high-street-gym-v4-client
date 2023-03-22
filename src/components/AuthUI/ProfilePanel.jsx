@@ -76,6 +76,7 @@ export function ProfileEditIndex() {
 }
 
 export function ProfileEditAccount() {
+  const { authenticatedUser } = useContext(AuthContext);
   const { emails } = useLoaderData();
   const issues = useActionData();
 
@@ -83,14 +84,36 @@ export function ProfileEditAccount() {
     <div className='flex-grow px-4 py-6'>
       <h1 className='font-sans text-3xl text-primary-content'>Edit My Account</h1>
       <Form method='post' noValidate className='grid w-full grid-cols-1 md:grid-cols-2 gap-x-5'>
-        <InputSmallGroupEmail issue={issues?.email} defaultValue='demoadmin@gmail.com' emails={emails} />
-        <InputSmallGroupPass issue={issues?.password} defaultValue='abcd1234' />
-        <InputSmallGroup name='username' type='text' issue={issues?.username} defaultValue='demomember' />
-        <InputSmallGroup name='firstName' type='text' issue={issues?.firstName} defaultValue='Demo' />
-        <InputSmallGroup name='lastName' type='text' issue={issues?.lastName} defaultValue='Member' />
-        <InputSmallGroup name='phone' type='tel' issue={issues?.phone} defaultValue='0123456789' />
-        <InputSmallGroup name='age' type='number' issue={issues?.age} isRequired={false} />
-        <SelectSmallGroupGender issue={issues?.gender} isRequired={false} />
+        {authenticatedUser?.role === 'Admin' ? (
+          <>
+            <InputSmallGroupEmail issue={issues?.email} defaultValue='demoadmin@gmail.com' emails={emails} />
+            <InputSmallGroupPass issue={issues?.password} defaultValue='abcd1234' />
+            <InputSmallGroup name='username' type='text' issue={issues?.username} defaultValue='demoadmin' />
+            <InputSmallGroup name='firstName' type='text' issue={issues?.firstName} defaultValue='Demo' />
+            <InputSmallGroup name='lastName' type='text' issue={issues?.lastName} defaultValue='Admin' />
+            <InputSmallGroup name='phone' type='tel' issue={issues?.phone} defaultValue='0123456789' />
+            <InputSmallGroup name='age' type='number' issue={issues?.age} isRequired={false} />
+            <SelectSmallGroupGender issue={issues?.gender} isRequired={false} />
+          </>
+        ) : authenticatedUser?.role === 'Trainer' ? (
+          <>
+            <InputSmallGroupEmail issue={issues?.email} defaultValue='demotrainer@gmail.com' emails={emails} />
+            <InputSmallGroupPass issue={issues?.password} defaultValue='abcd1234' />
+            <InputSmallGroup name='username' type='text' issue={issues?.username} defaultValue='demotrainer' />
+            <InputSmallGroup name='firstName' type='text' issue={issues?.firstName} defaultValue='Demo' />
+            <InputSmallGroup name='lastName' type='text' issue={issues?.lastName} defaultValue='Trainer' />
+            <InputSmallGroup name='phone' type='tel' issue={issues?.phone} defaultValue='0123456789' />
+          </>
+        ) : (
+          <>
+            <InputSmallGroupEmail issue={issues?.email} defaultValue='demomember@gmail.com' emails={emails} />
+            <InputSmallGroupPass issue={issues?.password} defaultValue='abcd1234' />
+            <InputSmallGroup name='username' type='text' issue={issues?.username} defaultValue='demomember' />
+            <InputSmallGroup name='firstName' type='text' issue={issues?.firstName} defaultValue='Demo' />
+            <InputSmallGroup name='lastName' type='text' issue={issues?.lastName} defaultValue='Member' />
+            <InputSmallGroup name='phone' type='tel' issue={issues?.phone} defaultValue='0123456789' />
+          </>
+        )}
       </Form>
       <div className='divider'></div>
       <h1 className='font-sans text-3xl text-primary-content'>Edit My Address</h1>
@@ -107,7 +130,6 @@ export function ProfileEditBlog() {
   );
 }
 
-// FIX 0 RBAC Conditional rendering for profile account page
 // FIX 1 Profile account page for member => (1) form to only update address && customized API, (3) 1 action to handle 2 forms
 // FIX 2 Profile account page for trainer
 // FIX 3 Profile account page for admin
