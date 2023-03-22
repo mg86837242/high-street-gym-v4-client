@@ -39,7 +39,3 @@ export default function InputSmallGroupPass({ issue, defaultValue }) {
     </div>
   );
 }
-
-// FIX 1 Profile page for member => (1) 2 column for screen larger than 1536px (2xl), (2) form to only update address, which involves action to handle 2 forms
-// FIX 2 Profile page for trainer
-// FIX 3 Profile page for admin

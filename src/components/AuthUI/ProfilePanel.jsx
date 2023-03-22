@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import AuthContext from '../../contexts/AuthContext';
-import { Outlet, NavLink, Navigate, useActionData, useLoaderData } from 'react-router-dom';
+import { Outlet, NavLink, Navigate, useActionData, useLoaderData, Form } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 import InputSmallGroup from '../UI/InputSmallGroup';
@@ -76,21 +76,24 @@ export function ProfileEditIndex() {
 }
 
 export function ProfileEditAccount() {
-  // const { emails } = useLoaderData();
-  const emails = [];
+  const { emails } = useLoaderData();
   const issues = useActionData();
 
   return (
     <div className='flex-grow px-4 py-6'>
       <h1 className='font-sans text-3xl text-primary-content'>Edit My Account</h1>
-      <InputSmallGroupEmail issue={issues?.email} defaultValue='demomember@gmail.com' emails={emails} />
-      <InputSmallGroupPass issue={issues?.password} defaultValue='abcd1234' />
-      <InputSmallGroup name='username' type='text' issue={issues?.username} defaultValue='demomember' />
-      <InputSmallGroup name='firstName' type='text' issue={issues?.firstName} defaultValue='Demo' />
-      <InputSmallGroup name='lastName' type='text' issue={issues?.lastName} defaultValue='Member' />
-      <InputSmallGroup name='phone' type='tel' issue={issues?.phone} defaultValue='0123456789' />
-      <InputSmallGroup name='age' type='number' issue={issues?.age} isRequired={false} />
-      <SelectSmallGroupGender issue={issues?.gender} isRequired={false} />
+      <Form method='post' noValidate>
+        <InputSmallGroupEmail issue={issues?.email} defaultValue='demoadmin@gmail.com' emails={emails} />
+        <InputSmallGroupPass issue={issues?.password} defaultValue='abcd1234' />
+        <InputSmallGroup name='username' type='text' issue={issues?.username} defaultValue='demomember' />
+        <InputSmallGroup name='firstName' type='text' issue={issues?.firstName} defaultValue='Demo' />
+        <InputSmallGroup name='lastName' type='text' issue={issues?.lastName} defaultValue='Member' />
+        <InputSmallGroup name='phone' type='tel' issue={issues?.phone} defaultValue='0123456789' />
+        <InputSmallGroup name='age' type='number' issue={issues?.age} isRequired={false} />
+        <SelectSmallGroupGender issue={issues?.gender} isRequired={false} />
+      </Form>
+      <div className='divider'></div>
+      <h1 className='font-sans text-3xl text-primary-content'>Edit My Address</h1>
     </div>
   );
 }
@@ -103,3 +106,7 @@ export function ProfileEditBlog() {
     </div>
   );
 }
+
+// FIX 1 Profile account page for member => (1) form grid and gap with ref to signup panel && 2 column for screen larger than 1536px (2xl), (2) form to only update address, (3) 1 action to handle 2 forms
+// FIX 2 Profile account page for trainer
+// FIX 3 Profile account page for admin

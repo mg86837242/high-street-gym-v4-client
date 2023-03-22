@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import AuthContext from '../../contexts/AuthContext';
 
 export default function InputSmallGroupEmail({ issue, emails, defaultValue, isRequired }) {
+  const { authenticatedUser } = useContext(AuthContext);
   const [input, setInput] = useState(defaultValue);
-  const isDuplicate = emails.find((e) => input === e.email);
+  const isDuplicate = input !== authenticatedUser?.email && emails.find((e) => input === e.email);
 
   return (
     <div id='email-input-group' className='w-full form-control'>
@@ -19,7 +21,7 @@ export default function InputSmallGroupEmail({ issue, emails, defaultValue, isRe
         onChange={(e) => setInput(e.target.value)}
         className='w-full text-white input input-bordered input-primary input-sm'
       />
-      <label htmlFor='email' className='py-1 3xl:py-2label'>
+      <label htmlFor='email' className='py-1 3xl:py-2 label'>
         {isDuplicate ? (
           <span className='text-rose-500 label-text-alt'>Email has already been used</span>
         ) : issue ? (
