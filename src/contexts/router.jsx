@@ -1,13 +1,13 @@
-import { createBrowserRouter, Link } from 'react-router-dom';
-import Home from '../pages/Home';
-import ErrorInfo from '../components/ErrorInfo';
-import PageLayout from '../pages/PageLayout';
-import bookingsRoutes from './bookingsRoutes';
-import profileRoutes from './profileRoutes';
+import { createBrowserRouter, Link } from "react-router-dom";
+import Home from "../pages/Home";
+import ErrorInfo from "../components/ErrorInfo";
+import PageLayout from "../pages/PageLayout";
+import bookingsRoutes from "./bookingsRoutes";
+import profileRoutes from "./profileRoutes";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     Component: Home,
     ErrorBoundary: ErrorInfo,
   },
@@ -16,43 +16,43 @@ const router = createBrowserRouter([
     ErrorBoundary: ErrorInfo,
     children: [
       {
-        path: 'blogs',
+        path: "blogs",
         async lazy() {
-          let { default: Blogs } = await import('../pages/Blogs');
+          let { default: Blogs } = await import("../pages/Blogs");
           return { Component: Blogs };
         },
         ErrorBoundary: ErrorInfo,
       },
       {
-        path: 'bookings',
+        path: "bookings",
         async lazy() {
-          let { default: Bookings } = await import('../pages/Bookings');
+          let { default: Bookings } = await import("../pages/Bookings");
           return { Component: Bookings };
         },
         ErrorBoundary: ErrorInfo,
-        handle: { crumb: () => <Link to='/bookings'>Calendar</Link> },
+        handle: { crumb: () => <Link to="/bookings">Calendar</Link> },
         children: [...bookingsRoutes],
       },
       {
-        path: 'activities',
+        path: "activities",
         async lazy() {
-          let { default: Activities } = await import('../pages/Activities');
+          let { default: Activities } = await import("../pages/Activities");
           return { Component: Activities };
         },
         ErrorBoundary: ErrorInfo,
       },
       {
-        path: 'admin',
+        path: "admin",
         async lazy() {
-          let { default: Admin } = await import('../pages/Admin');
+          let { default: Admin } = await import("../pages/Admin");
           return { Component: Admin };
         },
         ErrorBoundary: ErrorInfo,
       },
       {
-        path: 'profile',
+        path: "profile",
         async lazy() {
-          let { default: Profile } = await import('../pages/Profile');
+          let { default: Profile } = await import("../pages/Profile");
           return { Component: Profile };
         },
         ErrorBoundary: ErrorInfo,
@@ -61,26 +61,26 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: '/login',
+    path: "/login",
     async lazy() {
-      let { default: Login } = await import('../pages/Login');
+      let { default: Login } = await import("../pages/Login");
       return { Component: Login };
     },
     ErrorBoundary: ErrorInfo,
   },
   {
-    path: '/signup',
+    path: "/signup",
     async lazy() {
-      let { default: Signup } = await import('../pages/Signup');
+      let { default: Signup } = await import("../pages/Signup");
       return { Component: Signup };
     },
     ErrorBoundary: ErrorInfo,
     async loader() {
-      let { default: getAllLoginEmails } = await import('../services/logins');
+      let { default: getAllLoginEmails } = await import("../services/logins");
       return getAllLoginEmails();
     },
     async action({ request }) {
-      let { signupMembers } = await import('../services/members');
+      let { signupMembers } = await import("../services/members");
       return signupMembers({ request });
     },
   },

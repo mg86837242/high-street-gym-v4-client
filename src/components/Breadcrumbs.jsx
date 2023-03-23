@@ -1,4 +1,4 @@
-import { useMatches } from 'react-router-dom';
+import { useMatches } from "react-router-dom";
 
 export default function Breadcrumbs() {
   let matches = useMatches();
@@ -12,7 +12,7 @@ export default function Breadcrumbs() {
   // .map((match) => match.handle.crumb(match.params, match.data));
 
   return (
-    <div className='text-sm breadcrumbs'>
+    <div className="text-sm breadcrumbs">
       <ul>
         {crumbs.map((crumb, i) => (
           <li key={i}>{crumb}</li>

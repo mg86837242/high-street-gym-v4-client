@@ -1,14 +1,7 @@
-import { redirect } from 'react-router-dom';
-import { API_URL } from '../data/constants';
-import {
-  lineOneSchema,
-  lineTwoSchema,
-  suburbSchema,
-  postcodeSchema,
-  stateSchema,
-  countrySchema,
-} from '../data/schemas/addresses';
-import patch from '../utils/patch';
+import { redirect } from "react-router-dom";
+import { API_URL } from "../data/constants";
+import { lineOneSchema, lineTwoSchema, suburbSchema, postcodeSchema, stateSchema, countrySchema } from "../data/schemas/addresses";
+import patch from "../utils/patch";
 
 export async function updateAddressByMemberId(memberIdAndUpdates) {
   const { memberId, ...updates } = memberIdAndUpdates;
@@ -39,11 +32,11 @@ export async function updateAddressByMemberId(memberIdAndUpdates) {
   const response = await patch(`${API_URL}/address/by-member-id/${memberId}`, updates);
   // Special error handling to let 409 pass to NOT trigger error boundary, since `useActionData` already handled validation
   if (response.status === 409) {
-    return redirect('/profile/account');
+    return redirect("/profile/account");
   }
   if (response.status !== 200) {
     const json = await response.json();
-    const message = `${json.status} ${typeof json.message === 'string' ? json.message : json.message[0].message}`;
+    const message = `${json.status} ${typeof json.message === "string" ? json.message : json.message[0].message}`;
     throw new Response(message);
   }
   return response;

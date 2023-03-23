@@ -1,9 +1,9 @@
-import { useState, useMemo } from 'react';
-import { Link, NavLink } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSquareCaretLeft, faSquareCaretRight } from '@fortawesome/free-solid-svg-icons';
-import { today } from '../../data/keyDates';
-import { monthNames, dayNames } from '../../utils/mapDates';
+import { useState, useMemo } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSquareCaretLeft, faSquareCaretRight } from "@fortawesome/free-solid-svg-icons";
+import { today } from "../../data/keyDates";
+import { monthNames, dayNames } from "../../utils/mapDates";
 
 export default function Calendar() {
   // NB The following 2 states are just snapshots of date when this component is rendered, i.e., can be updated by
@@ -17,47 +17,43 @@ export default function Calendar() {
       [...Array(7)].map((_, i) =>
         i < 1 ? (
           <div
-            id='calendar-header-row'
+            id="calendar-header-row"
             key={`r${i}`}
-            className='grid grid-cols-7 gap-2 px-2 pt-2 rounded-t-lg 3xl:gap-4 2xl:px-4 3xl:px-6 3xl:pt-4 text-primary-content bg-primary'
+            className="grid grid-cols-7 gap-2 px-2 pt-2 rounded-t-lg 3xl:gap-4 2xl:px-4 3xl:px-6 3xl:pt-4 text-primary-content bg-primary"
           >
             {[...Array(7)].map((_, j) => (
               <div
-                id='calendar-header-cell'
+                id="calendar-header-cell"
                 key={j}
-                className='grid min-h-0 leading-none place-items-center w-11 h-11 3xl:w-12 3xl:h-12 sm:text-base'
+                className="grid min-h-0 leading-none place-items-center w-11 h-11 3xl:w-12 3xl:h-12 sm:text-base"
               >
                 {dayNames[j]}
               </div>
             ))}
           </div>
         ) : (
-          <div
-            id='calendar-row'
-            key={`r${i}`}
-            className={`grid grid-cols-7 gap-2 px-2 3xl:gap-4 2xl:px-4 3xl:px-6 ${i > 5 && 'pb-2 3xl:pb-4'}`}
-          >
+          <div id="calendar-row" key={`r${i}`} className={`grid grid-cols-7 gap-2 px-2 3xl:gap-4 2xl:px-4 3xl:px-6 ${i > 5 && "pb-2 3xl:pb-4"}`}>
             {[...Array(7)].map((_, j) => {
               const dayOnCal = i * 7 + j - 6 - monthStartDay;
               return dayOnCal > 0 && dayOnCal <= daysInMonth ? (
                 <NavLink
-                  to={`${year}-${month < 10 ? '0' + month : month}-${dayOnCal < 10 ? '0' + dayOnCal : dayOnCal}`}
-                  id='calendar-cell'
+                  to={`${year}-${month < 10 ? "0" + month : month}-${dayOnCal < 10 ? "0" + dayOnCal : dayOnCal}`}
+                  id="calendar-cell"
                   tabIndex={0}
                   key={i * 10 + j}
                   className={({ isActive, isPending }) =>
                     `grid place-items-center w-11 h-11 3xl:w-12 3xl:h-12 min-h-0 sm:text-base leading-none btn btn-circle ${
-                      isActive && 'btn-primary'
-                    } ${isPending && 'loading'}`
+                      isActive && "btn-primary"
+                    } ${isPending && "loading"}`
                   }
                 >
                   {dayOnCal}
                 </NavLink>
               ) : (
                 <div
-                  id='calendar-cell-no-date'
+                  id="calendar-cell-no-date"
                   key={i * 10 + j}
-                  className='grid min-h-0 leading-none place-items-center w-11 h-11 xl:w-12 xl:h-12 sm:text-base'
+                  className="grid min-h-0 leading-none place-items-center w-11 h-11 xl:w-12 xl:h-12 sm:text-base"
                 ></div>
               );
             })}
@@ -69,10 +65,10 @@ export default function Calendar() {
 
   return (
     <div
-      id='calendar-wrapper'
-      className='grid content-start w-full gap-3 justify-items-center 3xl:gap-6 col-[1_/_2] row-[1_/_2] lg:min-h-[80vh] lg:sticky lg:top-28'
+      id="calendar-wrapper"
+      className="grid content-start w-full gap-3 justify-items-center 3xl:gap-6 col-[1_/_2] row-[1_/_2] lg:min-h-[80vh] lg:sticky lg:top-28"
     >
-      <div id='calendar-nav' className='flex items-center gap-10 px-3 rounded-lg lg:gap-20 bg-base-300 py-[.125rem]'>
+      <div id="calendar-nav" className="flex items-center gap-10 px-3 rounded-lg lg:gap-20 bg-base-300 py-[.125rem]">
         <button
           tabIndex={0}
           onClick={() => {
@@ -81,11 +77,11 @@ export default function Calendar() {
             month === 1 ? (setYear((year) => year - 1), setMonth(12)) : setMonth((month) => month - 1);
           }}
         >
-          <FontAwesomeIcon icon={faSquareCaretLeft} className='text-2xl cursor-pointer md:text-3xl' />
+          <FontAwesomeIcon icon={faSquareCaretLeft} className="text-2xl cursor-pointer md:text-3xl" />
         </button>
-        <div id='selected-yy-mm-wrapper' className='flex flex-col items-center gap-2 sm:text-lg 3xl:text-2xl'>
-          <p id='selected-yy'>{year}</p>
-          <p id='selected-mm'>{monthNames[month]}</p>
+        <div id="selected-yy-mm-wrapper" className="flex flex-col items-center gap-2 sm:text-lg 3xl:text-2xl">
+          <p id="selected-yy">{year}</p>
+          <p id="selected-mm">{monthNames[month]}</p>
         </div>
         <button
           tabIndex={0}
@@ -93,15 +89,15 @@ export default function Calendar() {
             month === 12 ? (setYear((year) => year + 1), setMonth(1)) : setMonth((month) => month + 1);
           }}
         >
-          <FontAwesomeIcon icon={faSquareCaretRight} className='text-2xl cursor-pointer md:text-3xl' />
+          <FontAwesomeIcon icon={faSquareCaretRight} className="text-2xl cursor-pointer md:text-3xl" />
         </button>
       </div>
       <div
-        id='calendar-content'
-        role='table'
-        aria-label='Dynamic calendar containing booking information'
-        aria-colcount='7'
-        className='flex flex-col gap-2 rounded-lg 3xl:gap-4 bg-base-300'
+        id="calendar-content"
+        role="table"
+        aria-label="Dynamic calendar containing booking information"
+        aria-colcount="7"
+        className="flex flex-col gap-2 rounded-lg 3xl:gap-4 bg-base-300"
       >
         {calendarCells}
       </div>
@@ -112,8 +108,8 @@ export default function Calendar() {
 
 function CreateNew() {
   return (
-    <section className='flex justify-center gap-5 text-center'>
-      <Link to='new' className='w-48 min-h-0 normal-case shadow btn btn-primary text-primary-content shadow-black/50'>
+    <section className="flex justify-center gap-5 text-center">
+      <Link to="new" className="w-48 min-h-0 normal-case shadow btn btn-primary text-primary-content shadow-black/50">
         Create New Booking
       </Link>
     </section>

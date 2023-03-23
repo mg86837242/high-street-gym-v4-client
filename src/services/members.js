@@ -1,9 +1,9 @@
-import { redirect } from 'react-router-dom';
-import { API_URL } from '../data/constants';
-import { emailSchema, passwordSchema, usernameSchema } from '../data/schemas/logins';
-import { firstNameSchema, lastNameSchema, phoneSchema, ageSchema, genderSchema } from '../data/schemas/members';
-import post from '../utils/post';
-import patch from '../utils/patch';
+import { redirect } from "react-router-dom";
+import { API_URL } from "../data/constants";
+import { emailSchema, passwordSchema, usernameSchema } from "../data/schemas/logins";
+import { firstNameSchema, lastNameSchema, phoneSchema, ageSchema, genderSchema } from "../data/schemas/members";
+import post from "../utils/post";
+import patch from "../utils/patch";
 
 export async function signupMembers({ request }) {
   const formData = await request.formData();
@@ -51,20 +51,22 @@ export async function signupMembers({ request }) {
   const response = await post(`${API_URL}/members/signup`, creations);
   // Special error handling to let 409 pass to NOT trigger error boundary, since `useActionData` already handled validation
   if (response.status === 409) {
-    return redirect('/signup');
+    return redirect("/signup");
   }
   if (response.status !== 200) {
     const json = await response.json();
-    const message = `${json.status} ${typeof json.message === 'string' ? json.message : json.message[0].message}`;
+    const message = `${json.status} ${typeof json.message === "string" ? json.message : json.message[0].message}`;
     throw new Response(message);
   }
-  return redirect('/login');
+  return redirect("/login");
 }
 
 export async function updateMemberById(idAndUpdates) {
   let { id, ...updates } = idAndUpdates;
   let { email, password, firstName, lastName, username, phone, age, gender } = updates;
   // #region validation and type conversion
+  // ??? Pros & Cons: controlled components (e.g., react-hook-form) vs. HTML form "name"s and `formData` API
+  // ??? What problems did ppl encounter when using react-hook-form? Why some ppl say controlled components cover more use cases?
   const messages = {};
   if (!emailSchema.safeParse(email).success) {
     messages.email = emailSchema.safeParse(email).error.issues[0].message;
@@ -101,11 +103,11 @@ export async function updateMemberById(idAndUpdates) {
   const response = await patch(`${API_URL}/members/${id}`, updates);
   // Special error handling to let 409 pass to NOT trigger error boundary, since `useActionData` already handled validation
   if (response.status === 409) {
-    return redirect('/profile/account');
+    return redirect("/profile/account");
   }
   if (response.status !== 200) {
     const json = await response.json();
-    const message = `${json.status} ${typeof json.message === 'string' ? json.message : json.message[0].message}`;
+    const message = `${json.status} ${typeof json.message === "string" ? json.message : json.message[0].message}`;
     throw new Response(message);
   }
   return response;
