@@ -8,7 +8,7 @@ export default function SelectSmallGroupGender({ issue, defaultValue, isRequired
       <select
         name='gender'
         id='gender'
-        // FIX Make default value work, currently print "Male", but not reflected in the option
+        // FIX Make default value work, currently print "Male", but not reflected in the default selected option
         defaultValue={defaultValue}
         className='min-h-0 font-normal select select-primary select-sm'
       >

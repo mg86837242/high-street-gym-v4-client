@@ -27,7 +27,7 @@ function LeftSidePanel() {
     <div id='profile-sidebar-wrapper' className='flex flex-col gap-5 py-6 pr-6 w-[18.5rem]'>
       <div className='flex items-center justify-between gap-5'>
         <div className='avatar'>
-          <div className='rounded-full w-14'>
+          <div className='w-14 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2'>
             <img src='https://picsum.photos/200/200?random=1&grayscale' />
           </div>
         </div>
@@ -81,7 +81,7 @@ export function ProfileEditIndex() {
 export function ProfileEditAccount() {
   const { authenticatedUser } = useContext(AuthContext);
   const { emails } = useLoaderData();
-  // TODO Form validation issues in action and validation info message
+  // TODO Form validation in action and input label, currently no validation messages
   const issues = useActionData() || {};
   let defaultValues = {};
   switch (authenticatedUser?.role) {
@@ -98,7 +98,9 @@ export function ProfileEditAccount() {
       defaultValues = {};
   }
 
-  /* TODO 1 Profile account page for member => (1) customized API to update address based on memberId (hidden input), (2) 2 buttons with name attr in order to handle 2 forms with 1 action */
+  // [ ] 1.0 Profile account page for member => (1) customized API to update address based on memberId (hidden input), (2) 2 buttons with name attr in order to handle 2 forms with 1 action
+  // [ ] 2.0 Conditional input fields for trainers and admins (API => query => fetch)
+  // [ ] 3.0 "Filter My Bookings" button for member and trainer && cond rendering edit button only for their own bookings
 
   return (
     <div className='flex-grow px-4 py-6'>
@@ -118,12 +120,9 @@ export function ProfileEditAccount() {
         <InputSmallGroup name='phone' type='tel' issue={issues?.phone} defaultValue={defaultValues?.phone} />
         {/* (2) Conditional input fields: */}
         {authenticatedUser?.role === 'Admin' ? (
-          <>
-            {/* TODO 3 Profile account route for admin *?/}
-            {/* TODO 4 "My Bookings" button for member and trainer && cond rendering edit button only for their own bookings */}
-          </>
+          <></>
         ) : authenticatedUser?.role === 'Trainer' ? (
-          <>{/* TODO 2 Profile account route for trainer */}</>
+          <></>
         ) : authenticatedUser?.role === 'Member' ? (
           <>
             <InputSmallGroup
@@ -137,8 +136,11 @@ export function ProfileEditAccount() {
           </>
         ) : (
           // <LoadingGlobal />
-          <h1>TESTING LOADING</h1>
+          <h1>Loading...</h1>
         )}
+        <button type='submit' className='btn btn-primary btn-sm mt-5'>
+          Save
+        </button>
       </Form>
       <div className='divider'></div>
       <h1 className='font-sans text-3xl text-primary-content'>Edit My Address</h1>
@@ -149,6 +151,9 @@ export function ProfileEditAccount() {
         <InputSmallGroup name='postcode' type='text' issue={issues?.postcode} defaultValue='4000' />
         <InputSmallGroup name='state' type='text' issue={issues?.state} defaultValue='QLD' />
         <SelectSmallGroupCountry issue={issues?.country} defaultValue='Australia' />
+        <button type='submit' className='btn btn-primary btn-sm mt-5'>
+          Save
+        </button>
       </Form>
     </div>
   );
