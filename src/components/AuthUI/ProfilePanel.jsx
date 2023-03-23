@@ -2,7 +2,6 @@ import { useContext } from 'react';
 import AuthContext from '../../contexts/AuthContext';
 import { Outlet, NavLink, Navigate, useLoaderData, useActionData, Form } from 'react-router-dom';
 import useDefaultValues from '../../hooks/useDefaultValues';
-import { API_URL } from '../../data/constants';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 import InputSmallGroupEmail from '../UI/InputSmallGroupEmail';
@@ -83,20 +82,7 @@ export function ProfileEditAccount() {
   const { emails } = useLoaderData();
   // TODO Form validation in action and input label, currently no validation messages
   const issues = useActionData() || {};
-  let defaultValues = {};
-  switch (authenticatedUser?.role) {
-    // case 'Admin':
-    //   defaultValues = useData(`${API_URL}/admins/admin-with-details-by-id/${authenticatedUser.adminId}`);
-    //   break;
-    // case 'Trainer':
-    //   defaultValues = useData(`${API_URL}/trainers/trainer-with-details-by-id/${authenticatedUser.trainerId}`);
-    //   break;
-    case 'Member':
-      defaultValues = useDefaultValues(`${API_URL}/members/member-with-details-by-id/${authenticatedUser.memberId}`);
-      break;
-    default:
-      defaultValues = {};
-  }
+  const defaultValues = useDefaultValues();
 
   // [ ] 1.0 Profile account page for member => (1) customized API to update address based on memberId (hidden input), (2) 2 buttons with name attr in order to handle 2 forms with 1 action
   // [ ] 2.0 Conditional input fields for trainers and admins (API => query => fetch)

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 export default function SelectSmallGroupGender({ issue, defaultValue, isRequired }) {
-  const [latestDefault, setLatestDefault] = useState('');
+  const [latestDefault, setLatestDefault] = useState(defaultValue);
 
   useEffect(() => {
     let ignore = false;
@@ -13,8 +13,8 @@ export default function SelectSmallGroupGender({ issue, defaultValue, isRequired
     };
   }, [defaultValue]);
 
-  // console.log(`🟢 [${new Date().toLocaleTimeString()}] latestDefault: ${latestDefault}`);
-  // ??? Default value doesn't work as intended, currently print "Male", but not reflected in the default selected option (also print `defaultValues` fires 4 times in `ProfilePanel` component)
+  console.log(`🟢 [${new Date().toLocaleTimeString()}] latestDefault: ${latestDefault}`);
+  // ??? Default value doesn't work as intended, currently print `Male` for the latest, but not reflected in the default selected option (also print `defaultValues` fires 4 times in `ProfilePanel` component)
 
   return (
     <div id='gender-select-group' className='w-full form-control'>
