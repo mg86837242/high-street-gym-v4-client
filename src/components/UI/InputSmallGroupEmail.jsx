@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState } from 'react';
 import AuthContext from '../../contexts/AuthContext';
 
 export default function InputSmallGroupEmail({ issue, emails, defaultValue, isRequired }) {

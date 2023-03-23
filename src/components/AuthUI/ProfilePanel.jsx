@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import AuthContext from '../../contexts/AuthContext';
 import { Outlet, NavLink, Navigate, useLoaderData, useActionData, Form } from 'react-router-dom';
 import useDefaultValues from '../../hooks/useDefaultValues';
@@ -79,12 +79,32 @@ export function ProfileEditIndex() {
 
 export function ProfileEditAccount() {
   const { authenticatedUser } = useContext(AuthContext);
+  const [statusText, setStatusText] = useState('');
+  const [issues, setIssues] = useState({});
   const { emails } = useLoaderData();
   // TODO Form validation in action and input label, currently no validation messages
-  const issues = useActionData() || {};
+  const actionData = useActionData(null);
   const defaultValues = useDefaultValues();
 
-  // [ ] 1.0 Profile account page for member => (1) update member and login tables, (2) customized API to update address based on memberId (hidden input)
+  useEffect(() => {
+    let ignore = false;
+    if (actionData?.status === 200) {
+      (async () => {
+        setStatusText(`✅ ${actionData.message}`);
+        await new Promise((res) => setTimeout(res, 5_000));
+        setStatusText('');
+      })();
+    }
+    return () => {
+      ignore = true;
+    };
+  }, [actionData]);
+
+  // if (actionData?.status === 200) {
+  //   setStatusText(actionData.message);
+  // }
+
+  // [ ] 1.0 Profile account page for member => customized API to update address based on memberId (hidden input)
   // [ ] 2.0 Conditional input fields for trainers and admins (API & query => useDefaultValues)
   // [ ] 3.0 "Filter My Bookings" button for member and trainer && cond rendering edit button only for their own bookings
 
@@ -123,9 +143,10 @@ export function ProfileEditAccount() {
             />
             <SelectSmallGroupGender issue={issues?.gender} defaultValue={defaultValues?.gender} isRequired={false} />
             <input type='hidden' name='id' value={authenticatedUser.memberId} />
-            <button type='submit' name='_action' value='updateMemberById' className='btn btn-primary btn-sm mt-5'>
+            <button type='submit' name='_action' value='updateMemberById' className='btn btn-primary btn-sm mt-4'>
               Save
             </button>
+            <p className='text-success self-center mt-4'>{statusText}</p>
           </>
         ) : (
           <></>

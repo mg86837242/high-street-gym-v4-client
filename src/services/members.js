@@ -11,6 +11,7 @@ export async function getAllMembers() {
 
 export async function signupMembers({ request }) {
   const formData = await request.formData();
+  // #region validation and type conversion
   const email = formData.get('email');
   const password = formData.get('password');
   const username = formData.get('username');
@@ -48,22 +49,22 @@ export async function signupMembers({ request }) {
   if (Object.keys(messages).length) {
     return messages;
   }
-
   const creations = Object.fromEntries(formData);
-  // NB Coerce these inputs' values from empty string to null, so (1) the backend and frontend can share a same
+  // NB Convert these inputs' values from empty string to null, so (1) the backend and frontend can share a same
   //  zod schema – using `nullable()`, (2) it reflects that these attributes are nullable in DB; for whether to
   //  use NULL or undefined as the falsy value in the SQL query => "recommend only setting variables to null",
   //  see: https://stackoverflow.com/questions/5076944/what-is-the-difference-between-null-and-undefined-in-javascript/5076989#5076989
   creations.age = parseInt(age, 10) || null;
   creations.gender ||= null;
+  // #endregion
 
   const response = await post(`${API_URL}/members/signup`, creations);
-  // Special error handling to let 409 pass, `<ErrorInfo>` element will not show
+  // Special error handling to let 409 pass, paving the way for `useActionData` to handle client-side validation
   if (response.status === 409) {
     return redirect('/signup');
   }
   if (response.status !== 200) {
-    const json = response.json();
+    const json = await response.json();
     const message = `${json.status} ${typeof json.message === 'string' ? json.message : json.message[0].message}`;
     throw new Response(message);
   }
@@ -72,16 +73,18 @@ export async function signupMembers({ request }) {
 
 export async function updateMemberById(idAndUpdates) {
   const { id, ...updates } = idAndUpdates;
+  updates.age = parseInt(updates.age, 10) || null;
+  updates.gender ||= null;
+
   const response = await patch(`${API_URL}/members/${id}`, updates);
-  // Special error handling to let 409 pass
+  // Special error handling to let 409 pass, paving the way for `useActionData` to handle client-side validation
   if (response.status === 409) {
     return redirect('/profile/account');
   }
   if (response.status !== 200) {
-    const json = response.json();
-    // [ ] Debug zod error message array && error 500 in API
+    const json = await response.json();
     const message = `${json.status} ${typeof json.message === 'string' ? json.message : json.message[0].message}`;
     throw new Response(message);
   }
-  return redirect('/profile/account');
+  return response;
 }
