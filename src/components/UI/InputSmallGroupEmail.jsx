@@ -6,16 +6,6 @@ export default function InputSmallGroupEmail({ issue, emails, defaultValue, isRe
   const [input, setInput] = useState(defaultValue);
   const isDuplicate = input !== authenticatedUser?.email && emails.find((e) => input === e.email);
 
-  useEffect(() => {
-    let ignore = false;
-    if (!ignore) {
-      setInput(defaultValue);
-    }
-    return () => {
-      ignore = true;
-    };
-  }, [defaultValue]);
-
   return (
     <div id='email-input-group' className='w-full form-control'>
       <label htmlFor='email' className='py-1 3xl:py-2 label'>

@@ -8,11 +8,6 @@ export default function SelectGroupGender({ issue, isRequired }) {
       <select
         name='gender'
         id='gender'
-        // NB No update/effect will occur here, so use `<select defaultValue>` for uncontrolled select box would
-        //  suffice, see:
-        // -- https://react.dev/reference/react-dom/components/select#reference
-        // -- https://react.dev/reference/react-dom/components/select#controlling-a-select-box-with-a-state-variable
-        // -- https://www.geeksforgeeks.org/what-are-controlled-components-in-reactjs/
         defaultValue=''
         className='h-10 min-h-0 text-base font-normal select select-primary 3xl:h-12'
       >

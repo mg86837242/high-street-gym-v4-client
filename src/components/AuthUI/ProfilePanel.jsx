@@ -88,7 +88,10 @@ export function ProfileEditAccount() {
   // [ ] 2.0 Conditional input fields for trainers and admins (API & query => useDefaultValues)
   // [ ] 3.0 "Filter My Bookings" button for member and trainer && cond rendering edit button only for their own bookings
 
-  return (
+  // NB Need to check if `defaultValues` is truthy, o/w `undefined` will be passed as the `defaultValue` prop for
+  //  following inputs before `defaultValues` is populated by the custom Hook, and `useEffect` will be needed to
+  //  subscribe to the change of `defaultValues` from `undefined` to something
+  return defaultValues ? (
     <div className='flex-grow px-4 py-6'>
       <h1 className='font-sans text-3xl text-primary-content'>Edit My Account</h1>
       <Form method='post' noValidate className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'>
@@ -143,6 +146,8 @@ export function ProfileEditAccount() {
         </button>
       </Form>
     </div>
+  ) : (
+    <></>
   );
 }
 

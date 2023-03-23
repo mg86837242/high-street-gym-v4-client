@@ -79,7 +79,7 @@ export async function updateMemberById(values) {
   }
   if (response.status !== 200) {
     const json = response.json();
-    // FIX Debug zod error message && error 500 in API
+    // [ ] Debug zod error message array && error 500 in API
     const message = `${json.status} ${typeof json.message === 'string' ? json.message : json.message[0].message}`;
     throw new Response(message);
   }
