@@ -22,5 +22,8 @@ export default function useDefaultValues() {
       };
     }
   }, [authenticatedUser]);
+  // PS printing `defaultValues` fires 4 times: (1) no `user` state/context, (2) no `user` state/context strict mode,
+  //  (3) populated `user` state/context, (4) populated `user` state/context strict mode
+  // console.log(`🟢 [${new Date().toLocaleTimeString()}] defaultValues: `, defaultValues);
   return defaultValues;
 }
