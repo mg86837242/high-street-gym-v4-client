@@ -82,12 +82,9 @@ export function ProfileEditAccount() {
   const [statusText, setStatusText] = useState('');
   const [issues, setIssues] = useState({});
   const { emails } = useLoaderData();
-  // TODO Form validation in action and input label, currently no validation messages
   const actionData = useActionData(null);
   const defaultValues = useDefaultValues();
-  console.log('🟢');
-  console.log(actionData);
-  console.log('🟢');
+
   useEffect(() => {
     let ignore = false;
     if (actionData?.status === 200) {
@@ -108,7 +105,7 @@ export function ProfileEditAccount() {
     };
   }, [actionData]);
 
-  // [ ] 1.0 Profile account page for member => customized API to update address based on memberId (hidden input)
+  // [x] 1.0 Profile account page for member => customized API to update address based on memberId (hidden input)
   // [ ] 2.0 Conditional input fields for trainers and admins (API & query => useDefaultValues)
   // [ ] 3.0 "Filter My Bookings" button for member and trainer && cond rendering edit button only for their own bookings
 

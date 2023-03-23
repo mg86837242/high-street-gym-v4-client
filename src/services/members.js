@@ -5,10 +5,6 @@ import { firstNameSchema, lastNameSchema, phoneSchema, ageSchema, genderSchema }
 import post from '../utils/post';
 import patch from '../utils/patch';
 
-export async function getAllMembers() {
-  return null;
-}
-
 export async function signupMembers({ request }) {
   const formData = await request.formData();
   let { email, password, username, firstName, lastName, phone, age, gender } = Object.fromEntries(formData);
@@ -53,7 +49,7 @@ export async function signupMembers({ request }) {
 
   const creations = { email, password, username, firstName, lastName, phone, age, gender };
   const response = await post(`${API_URL}/members/signup`, creations);
-  // Special error handling to let 409 pass, paving the way for `useActionData` to handle client-side validation
+  // Special error handling to let 409 pass to NOT trigger error boundary, since `useActionData` already handled validation
   if (response.status === 409) {
     return redirect('/signup');
   }
@@ -103,7 +99,7 @@ export async function updateMemberById(idAndUpdates) {
 
   updates = { email, password, username, firstName, lastName, phone, age, gender };
   const response = await patch(`${API_URL}/members/${id}`, updates);
-  // Special error handling to let 409 pass, paving the way for `useActionData` to handle client-side validation
+  // Special error handling to let 409 pass to NOT trigger error boundary, since `useActionData` already handled validation
   if (response.status === 409) {
     return redirect('/profile/account');
   }

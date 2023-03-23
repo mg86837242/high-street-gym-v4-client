@@ -76,7 +76,7 @@ const router = createBrowserRouter([
     },
     ErrorBoundary: ErrorInfo,
     async loader() {
-      let { getAllLoginEmails } = await import('../services/logins');
+      let { default: getAllLoginEmails } = await import('../services/logins');
       return getAllLoginEmails();
     },
     async action({ request }) {

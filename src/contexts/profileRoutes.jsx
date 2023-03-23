@@ -15,7 +15,7 @@ const profileRoutes = [
       return { Component: ProfileEditAccount };
     },
     async loader() {
-      let { getAllLoginEmails } = await import('../services/logins');
+      let { default: getAllLoginEmails } = await import('../services/logins');
       return getAllLoginEmails();
     },
     async action({ request }) {
@@ -25,6 +25,10 @@ const profileRoutes = [
       if (_action === 'updateMemberById') {
         let { updateMemberById } = await import('../services/members');
         return updateMemberById(values);
+      }
+      if (_action === 'updateAddressByMemberId') {
+        let { updateAddressByMemberId } = await import('../services/address');
+        return updateAddressByMemberId(values);
       }
     },
     ErrorBoundary: ErrorInfo,
