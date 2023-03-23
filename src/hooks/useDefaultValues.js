@@ -1,6 +1,6 @@
-import { useContext, useState, useEffect } from "react";
-import AuthContext from "../contexts/AuthContext";
-import { API_URL } from "../data/constants";
+import { useContext, useState, useEffect } from 'react';
+import AuthContext from '../contexts/AuthContext';
+import { API_URL } from '../data/constants';
 
 export default function useDefaultValues() {
   const { authenticatedUser } = useContext(AuthContext);
@@ -8,9 +8,9 @@ export default function useDefaultValues() {
   useEffect(() => {
     if (authenticatedUser) {
       let ignore = false;
-      if (authenticatedUser.role === "Member") {
+      if (authenticatedUser.role === 'Member') {
         fetch(`${API_URL}/members/member-with-all-details-by-id/${authenticatedUser.memberId}`, {
-          credentials: "include",
+          credentials: 'include',
         })
           .then((response) => response.json())
           .then((json) => {

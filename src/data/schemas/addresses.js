@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const lineOneSchema = z.string().max(45).nullable();
 export const lineTwo = z.string().max(45).nullable();

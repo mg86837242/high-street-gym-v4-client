@@ -2,45 +2,45 @@
 export default async function fetchJSON(url, method, body) {
   let requestOptions;
   switch (method) {
-    case "post":
+    case 'post':
       requestOptions = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
-        credentials: "include",
+        credentials: 'include',
       };
       break;
-    case "get":
+    case 'get':
       requestOptions = {
-        method: "GET",
-        credentials: "include",
+        method: 'GET',
+        credentials: 'include',
       };
       break;
-    case "patch":
+    case 'patch':
       requestOptions = {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
-        credentials: "include",
+        credentials: 'include',
       };
       break;
-    case "delete":
+    case 'delete':
       requestOptions = {
-        method: "DELETE",
-        credentials: "include",
+        method: 'DELETE',
+        credentials: 'include',
       };
       break;
     default:
       requestOptions = {
-        method: "GET",
-        credentials: "include",
+        method: 'GET',
+        credentials: 'include',
       };
   }
 
   const response = await fetch(url, requestOptions);
   const json = await response.json();
   if (!response?.ok) {
-    const message = `${json.status} ${typeof json.message === "string" ? json.message : json.message.map((issue) => issue.message).join("; ")}`;
+    const message = `${json.status} ${typeof json.message === 'string' ? json.message : json.message.map((issue) => issue.message).join('; ')}`;
     throw new Response(message);
   }
 

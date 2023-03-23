@@ -2,38 +2,38 @@
 export default async function fetchRes(url, method, body) {
   let requestOptions;
   switch (method) {
-    case "post":
+    case 'post':
       requestOptions = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
-        credentials: "include",
+        credentials: 'include',
       };
       break;
-    case "get":
+    case 'get':
       requestOptions = {
-        method: "GET",
-        credentials: "include",
+        method: 'GET',
+        credentials: 'include',
       };
       break;
-    case "patch":
+    case 'patch':
       requestOptions = {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
-        credentials: "include",
+        credentials: 'include',
       };
       break;
-    case "delete":
+    case 'delete':
       requestOptions = {
-        method: "DELETE",
-        credentials: "include",
+        method: 'DELETE',
+        credentials: 'include',
       };
       break;
     default:
       requestOptions = {
-        method: "GET",
-        credentials: "include",
+        method: 'GET',
+        credentials: 'include',
       };
   }
 
@@ -60,7 +60,7 @@ export default async function fetchRes(url, method, body) {
   // #endregion
   if (!response?.ok) {
     const json = await response.json();
-    const message = `${json.status} ${typeof json.message === "string" ? json.message : json.message.map((issue) => issue.message).join("; ")}`;
+    const message = `${json.status} ${typeof json.message === 'string' ? json.message : json.message.map((issue) => issue.message).join('; ')}`;
     throw new Response(message);
   }
   // NB (1) "React Router will automatically call `response.json()` (within the loader) so components don't need to

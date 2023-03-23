@@ -1,10 +1,10 @@
-import { useState, useEffect, useCallback, useMemo } from "react";
-import AuthContext from "../contexts/AuthContext";
-import router from "../contexts/router";
-import { RouterProvider } from "react-router-dom";
-import { API_URL } from "../data/constants";
-import get from "../utils/get";
-import post from "../utils/post";
+import { useState, useEffect, useCallback, useMemo } from 'react';
+import AuthContext from '../contexts/AuthContext';
+import router from '../contexts/router';
+import { RouterProvider } from 'react-router-dom';
+import { API_URL } from '../data/constants';
+import get from '../utils/get';
+import post from '../utils/post';
 
 export default function AppProviders() {
   const [authenticatedUser, setAuthenticatedUser] = useState(null);
@@ -13,13 +13,13 @@ export default function AppProviders() {
   //  case `authenticatedUser` state/context is missing after page reload, opening a new tab, etc.
   useEffect(() => {
     if (authenticatedUser) {
-      console.log("🔃 Effect runs - user state present, exit");
+      console.log('🔃 Effect runs - user state present, exit');
       return;
     }
-    const accessKey = localStorage.getItem("accessKey");
+    const accessKey = localStorage.getItem('accessKey');
     if (!accessKey) {
-      console.log("🔃 Effect runs - key removed or missing from local storage, exit");
-      router.navigate("/");
+      console.log('🔃 Effect runs - key removed or missing from local storage, exit');
+      router.navigate('/');
       return;
     }
     let ignore = false;
@@ -27,13 +27,13 @@ export default function AppProviders() {
       .then((response) => response.json())
       .then((json) => {
         if (!ignore) {
-          console.log("🔃 Effect runs - user state synchronized");
+          console.log('🔃 Effect runs - user state synchronized');
           setAuthenticatedUser(json.user);
         }
       })
       .catch(() => {
-        console.log("🔃 Effect runs - synchronization fetch failed");
-        router.navigate("/");
+        console.log('🔃 Effect runs - synchronization fetch failed');
+        router.navigate('/');
       });
     return () => {
       ignore = true;
@@ -48,26 +48,26 @@ export default function AppProviders() {
         const loginRes = await post(`${API_URL}/login`, { email, password });
         const loginJSON = await loginRes.json();
         if (!loginRes.ok) {
-          return typeof loginJSON.message === "string" ? loginJSON.message : "Invalid request to server";
+          return typeof loginJSON.message === 'string' ? loginJSON.message : 'Invalid request to server';
         }
         try {
           // Set key in `localStorage` – persistent storage in case page is reloaded
-          localStorage.setItem("accessKey", loginJSON.accessKey);
+          localStorage.setItem('accessKey', loginJSON.accessKey);
           // Fetch GET /users/by-key/:accessKey to attempt to get an obj called `user`
           const userRes = await get(`${API_URL}/users/by-key/${loginJSON.accessKey}`);
           const userJSON = await userRes.json();
           if (!userRes.ok) {
-            return typeof userJSON.message === "string" ? userJSON.message : "Invalid request to server";
+            return typeof userJSON.message === 'string' ? userJSON.message : 'Invalid request to server';
           }
           setAuthenticatedUser(userJSON.user);
           // PS After this second setter, console log `authenticatedUser` outputs `null`, which is what's set in the
           //  first setter, this is b/c React batches state updates, see: https://stackoverflow.com/questions/33613728/what-happens-when-using-this-setstate-multiple-times-in-react-component
           return loginJSON.message;
         } catch (error) {
-          return "Server failed to load user";
+          return 'Server failed to load user';
         }
       } catch (error) {
-        return "Server failed to login";
+        return 'Server failed to login';
       }
     },
     [authenticatedUser]
@@ -76,22 +76,22 @@ export default function AppProviders() {
   const handleLogout = useCallback(async () => {
     try {
       // Remove key from `localStorage`
-      localStorage.removeItem("accessKey");
+      localStorage.removeItem('accessKey');
       if (authenticatedUser) {
         // Fetch POST /logout to attempt to remove `accessKey` from its login row
         const { accessKey } = authenticatedUser;
         const response = await post(`${API_URL}/logout`, { accessKey });
         const json = await response.json();
         if (!response.ok) {
-          return (message = typeof json.message === "string" ? json.message : "Invalid request to server");
+          return (message = typeof json.message === 'string' ? json.message : 'Invalid request to server');
         }
         setAuthenticatedUser(null);
         return json.message;
       }
-      return "No authenticated user recognized";
+      return 'No authenticated user recognized';
     } catch (error) {
       setAuthenticatedUser(null);
-      return "Server failed to logout";
+      return 'Server failed to logout';
     }
   }, [authenticatedUser]);
 

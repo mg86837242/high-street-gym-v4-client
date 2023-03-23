@@ -1,10 +1,10 @@
 // Use case: POST req with highly-specialized error handling, esp. in `<AppProviders>`
 export default async function post(url, body) {
   const requestOptions = {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
-    credentials: "include",
+    credentials: 'include',
   };
 
   const response = await fetch(url, requestOptions);

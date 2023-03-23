@@ -1,19 +1,19 @@
-import { Link } from "react-router-dom";
-import ErrorInfo from "../components/ErrorInfo";
-import BookingListIndex from "../components/Bookings/BookingListIndex";
-import BookingDetailsIndex from "../components/Bookings/BookingDetailsIndex";
+import { Link } from 'react-router-dom';
+import ErrorInfo from '../components/ErrorInfo';
+import BookingListIndex from '../components/Bookings/BookingListIndex';
+import BookingDetailsIndex from '../components/Bookings/BookingDetailsIndex';
 
 const bookingsRoutes = [
   { index: true, Component: BookingListIndex },
   {
-    path: ":date",
+    path: ':date',
     async lazy() {
-      let { default: BookingList } = await import("../components/Bookings/BookingList");
+      let { default: BookingList } = await import('../components/Bookings/BookingList');
       return { Component: BookingList };
     },
     ErrorBoundary: ErrorInfo,
     async loader({ params }) {
-      let { getBookingsByDate } = await import("../services/bookings");
+      let { getBookingsByDate } = await import('../services/bookings');
       return getBookingsByDate({ params });
     },
     handle: {
@@ -25,72 +25,72 @@ const bookingsRoutes = [
         // `bookings` (i.e., the length is 0), o/w `data?.bookings` wouldn't exist and the following render function
         //  would render 'Error' text although 404 won't trigger an error in the loader (per the programmer's design);
         //  alternatively, in the API endpoint, don't throw 404 when the `bookings` array is empty
-        return data?.bookings ? <Link to={`/bookings/${params.date}`}>No. of Bookings: {data.bookings.length}</Link> : "Error";
+        return data?.bookings ? <Link to={`/bookings/${params.date}`}>No. of Bookings: {data.bookings.length}</Link> : 'Error';
       },
     },
     children: [
       { index: true, Component: BookingDetailsIndex },
       {
-        path: "id/:id",
+        path: 'id/:id',
         async lazy() {
-          let { default: BookingDetails } = await import("../components/Bookings/BookingDetails");
+          let { default: BookingDetails } = await import('../components/Bookings/BookingDetails');
           return { Component: BookingDetails };
         },
         ErrorBoundary: ErrorInfo,
         async loader({ params }) {
-          let { getBookingById } = await import("../services/bookings");
+          let { getBookingById } = await import('../services/bookings');
           return getBookingById({ params });
         },
         handle: {
-          crumb: (params, data) => (data?.booking ? <Link to={`/bookings/${params.date}/id/${params.id}`}>Booking ID: {params.id}</Link> : "Error"),
+          crumb: (params, data) => (data?.booking ? <Link to={`/bookings/${params.date}/id/${params.id}`}>Booking ID: {params.id}</Link> : 'Error'),
         },
       },
       {
-        path: "id/:id/edit",
+        path: 'id/:id/edit',
         async lazy() {
-          let { default: BookingEdit } = await import("../components/Bookings/BookingEdit");
+          let { default: BookingEdit } = await import('../components/Bookings/BookingEdit');
           return { Component: BookingEdit };
         },
         ErrorBoundary: ErrorInfo,
         async loader({ params }) {
-          let { getBookingAndOptionsById } = await import("../services/bookings");
+          let { getBookingAndOptionsById } = await import('../services/bookings');
           return getBookingAndOptionsById({ params });
         },
         async action({ params, request }) {
-          let { updateBookingById } = await import("../services/bookings");
+          let { updateBookingById } = await import('../services/bookings');
           return updateBookingById({ params, request });
         },
         handle: {
           crumb: (params, data) =>
-            data?.booking ? <Link to={`/bookings/${params.date}/id/${params.id}/edit`}>Booking ID: {params.id}</Link> : "Error",
+            data?.booking ? <Link to={`/bookings/${params.date}/id/${params.id}/edit`}>Booking ID: {params.id}</Link> : 'Error',
         },
       },
       {
-        path: "id/:id/destroy",
+        path: 'id/:id/destroy',
         ErrorBoundary: ErrorInfo,
         async action({ params }) {
-          let { deleteBookingById } = await import("../services/bookings");
+          let { deleteBookingById } = await import('../services/bookings');
           return deleteBookingById({ params });
         },
       },
     ],
   },
   {
-    path: "new",
+    path: 'new',
     async lazy() {
-      let { default: BookingNew } = await import("../components/Bookings/BookingNew");
+      let { default: BookingNew } = await import('../components/Bookings/BookingNew');
       return { Component: BookingNew };
     },
     ErrorBoundary: ErrorInfo,
     async loader() {
-      let { getAllBookingOptions } = await import("../services/bookings");
+      let { getAllBookingOptions } = await import('../services/bookings');
       return getAllBookingOptions();
     },
     async action({ request }) {
-      let { createBooking } = await import("../services/bookings");
+      let { createBooking } = await import('../services/bookings');
       return createBooking({ request });
     },
-    handle: { crumb: () => <Link to="/bookings/new">New Booking</Link> },
+    handle: { crumb: () => <Link to='/bookings/new'>New Booking</Link> },
   },
 ];
 

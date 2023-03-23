@@ -1,5 +1,5 @@
-import Canvas from "./AuthUI/Canvas";
-import NavBarMinimal from "./NavBarMinimal";
+import Canvas from './AuthUI/Canvas';
+import NavBarMinimal from './NavBarMinimal';
 
 export default function NoFoundView() {
   return (
