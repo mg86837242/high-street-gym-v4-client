@@ -15,7 +15,9 @@ export default function SelectSmallGroupCountry({ issue, defaultValue, isRequire
         defaultValue={defaultValue}
         className='min-h-0 font-normal select select-primary select-sm'
       >
-        <option value=''>-- Choose Country --</option>
+        <option value='' disabled>
+          -- Choose Country --
+        </option>
         {countries.map((c, i) => (
           <option value={c.name} key={i}>
             {c.name}
