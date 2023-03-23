@@ -1,6 +1,6 @@
 import { useNavigation } from 'react-router-dom';
 
-export default function Loading({ display }) {
+export default function LoadingGlobal({ display }) {
   const navigation = useNavigation();
 
   return (

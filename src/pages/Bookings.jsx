@@ -3,7 +3,7 @@ import MainWrapper from '../components/MainWrapper';
 import Breadcrumbs from '../components/Breadcrumbs';
 import ContentGrid from '../components/Bookings/ContentGrid';
 import Calendar from '../components/Bookings/Calendar';
-import Loading from '../components/Loading';
+import LoadingGlobal from '../components/LoadingGlobal';
 
 export default function Bookings() {
   return (
@@ -13,7 +13,7 @@ export default function Bookings() {
         <ContentGrid id={'bookings-content-wrapper'}>
           <Calendar />
           <Outlet />
-          <Loading
+          <LoadingGlobal
             display={
               'flex justify-center items-start col-[1_/_2] row-[1_/_4] lg:col-[1_/_4] lg:row-[1_/_2] w-full h-full sticky'
             }

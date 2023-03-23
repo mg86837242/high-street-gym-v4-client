@@ -1,6 +1,8 @@
 import { useContext } from 'react';
 import AuthContext from '../../contexts/AuthContext';
 import { Outlet, NavLink, Navigate, useLoaderData, useActionData, Form } from 'react-router-dom';
+import useData from '../../hooks/useFetchData';
+import { API_URL } from '../../data/constants';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 import InputSmallGroupEmail from '../UI/InputSmallGroupEmail';
@@ -79,7 +81,27 @@ export function ProfileEditIndex() {
 export function ProfileEditAccount() {
   const { authenticatedUser } = useContext(AuthContext);
   const { emails } = useLoaderData();
-  const issues = useActionData();
+  const issues = useActionData() || {};
+  let defaultValues = {};
+  switch (authenticatedUser?.role) {
+    case 'Admin':
+      defaultValues = useData(`${API_URL}/admins/admin-with-logins-and-addresses-by-id/${authenticatedUser.adminId}`);
+      break;
+    case 'Trainer':
+      defaultValues = useData(
+        `${API_URL}/trainers/trainer-with-logins-and-addresses-by-id/${authenticatedUser.trainerId}`
+      );
+      break;
+    case 'Member':
+      defaultValues = useData(
+        `${API_URL}/members/member-with-logins-and-addresses-by-id/${authenticatedUser.memberId}`
+      );
+      break;
+    default:
+      defaultValues = {};
+  }
+
+  /* TODO 1 Profile account page for member => (1) custom Hook to fetch current user's form data as default value (endpoint with joined query), (2) customized API to update address based on memberId (hidden input), (3) 2 buttons with name attr in order to handle 2 forms with 1 action */
 
   return (
     <div className='flex-grow px-4 py-6'>
@@ -94,6 +116,7 @@ export function ProfileEditAccount() {
             <InputSmallGroup name='lastName' type='text' issue={issues?.lastName} defaultValue='Admin' />
             <InputSmallGroup name='phone' type='tel' issue={issues?.phone} defaultValue='0123456789' />
             {/* TODO 3 Profile account route for admin */}
+            {/* TODO 4 "My Bookings" button for member and trainer && cond rendering edit button only for their own bookings */}
           </>
         ) : authenticatedUser?.role === 'Trainer' ? (
           <>
@@ -105,7 +128,7 @@ export function ProfileEditAccount() {
             <InputSmallGroup name='phone' type='tel' issue={issues?.phone} defaultValue='0123456789' />
             {/* TODO 2 Profile account route for trainer */}
           </>
-        ) : (
+        ) : authenticatedUser?.role === 'Member' ? (
           <>
             <InputSmallGroupEmail issue={issues?.email} defaultValue='demomember@gmail.com' emails={emails} />
             <InputSmallGroupPass issue={issues?.password} defaultValue='abcd1234' />
@@ -116,11 +139,13 @@ export function ProfileEditAccount() {
             <InputSmallGroup name='age' type='number' issue={issues?.age} isRequired={false} />
             <SelectSmallGroupGender issue={issues?.gender} defaultValue='' isRequired={false} />
           </>
+        ) : (
+          // <LoadingGlobal />
+          <h1>TESTING LOADING</h1>
         )}
       </Form>
       <div className='divider'></div>
       <h1 className='font-sans text-3xl text-primary-content'>Edit My Address</h1>
-      {/* TODO 1 Profile account page for member => (0) demo accounts' addresses need to be qld addresses, (1) customized API to update address based on memberId (hidden input), (2) 2 buttons with name attr in order to handle 2 forms with 1 action */}
       <Form method='post' noValidate className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'>
         <InputSmallGroup name='lineOne' type='text' issue={issues?.lineOne} defaultValue='123 Some St' />
         <InputSmallGroup name='lineTwo' type='text' issue={issues?.lineTwo} defaultValue='' />
