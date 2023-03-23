@@ -85,24 +85,28 @@ export function ProfileEditAccount() {
   // TODO Form validation in action and input label, currently no validation messages
   const actionData = useActionData(null);
   const defaultValues = useDefaultValues();
-
+  console.log('🟢');
+  console.log(actionData);
+  console.log('🟢');
   useEffect(() => {
     let ignore = false;
     if (actionData?.status === 200) {
       (async () => {
         setStatusText(`✅ ${actionData.message}`);
+        setIssues({});
         await new Promise((res) => setTimeout(res, 5_000));
         setStatusText('');
       })();
+    } else {
+      setIssues(actionData);
     }
+    // else {
+    //   setIssues(actionData)
+    // }
     return () => {
       ignore = true;
     };
   }, [actionData]);
-
-  // if (actionData?.status === 200) {
-  //   setStatusText(actionData.message);
-  // }
 
   // [ ] 1.0 Profile account page for member => customized API to update address based on memberId (hidden input)
   // [ ] 2.0 Conditional input fields for trainers and admins (API & query => useDefaultValues)
@@ -136,7 +140,7 @@ export function ProfileEditAccount() {
           <>
             <InputSmallGroup
               name='age'
-              type='number'
+              type='text'
               issue={issues?.age}
               defaultValue={defaultValues?.age}
               isRequired={false}

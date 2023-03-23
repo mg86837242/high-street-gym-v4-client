@@ -47,7 +47,7 @@ function SignupForm({ emails }) {
       <InputGroup name='firstName' type='text' issue={issues?.firstName} defaultValue='Demo' />
       <InputGroup name='lastName' type='text' issue={issues?.lastName} defaultValue='Member' />
       <InputGroup name='phone' type='tel' issue={issues?.phone} defaultValue='0123456789' />
-      <InputGroup name='age' type='number' issue={issues?.age} isRequired={false} />
+      <InputGroup name='age' type='text' issue={issues?.age} isRequired={false} />
       <SelectGroupGender issue={issues?.gender} isRequired={false} />
       <div className='col-span-1 pt-4 md:col-span-2'>
         <Button1Full>{statusText}</Button1Full>

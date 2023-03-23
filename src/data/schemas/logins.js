@@ -8,7 +8,7 @@ export const emailSchema = z
 export const passwordSchema = z
   .string()
   .min(8, { message: 'Password must have at least 8 character(s)' })
-  .max(30, { message: 'Password must have at most 30 character(s)' });
+  .max(100, { message: 'Password exceeds maximum character requirement' });
 export const usernameSchema = z
   .string()
   .regex(/^(?=.*[a-zA-Z]{1,})(?=.*[\d]{0,})[a-zA-Z0-9]+$/, {
