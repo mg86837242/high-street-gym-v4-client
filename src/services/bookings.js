@@ -36,7 +36,7 @@ export async function getBookingAndOptionsById({ params }) {
   // Building customized API endpoint (1) is much simpler to code loader, (2) has one less nesting layer/level
   //  to DA loader data, e.g., in `BookingEdit.jsx`, `bookingJSON:` can be rid of – easier to code component, same
   //  applies to breadcrumbs/`useMatches`.
-  const response = await fetchRes(`${API_URL}/bookings/booking-and-options-by-id/${params.id}`);
+  const response = await fetchRes(`${API_URL}/bookings/booking-with-options-by-id/${params.id}`);
   return response;
   // Alternatively, fetch multiple endpoints with `Promise.all([])`, example: https://stackoverflow.com/questions/74719956/can-i-handle-multiple-loaders-for-a-single-url-in-remix
 }
