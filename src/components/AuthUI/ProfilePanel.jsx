@@ -84,8 +84,8 @@ export function ProfileEditAccount() {
   const issues = useActionData() || {};
   const defaultValues = useDefaultValues();
 
-  // [ ] 1.0 Profile account page for member => (1) customized API to update address based on memberId (hidden input), (2) 2 buttons with name attr in order to handle 2 forms with 1 action
-  // [ ] 2.0 Conditional input fields for trainers and admins (API => query => fetch)
+  // [ ] 1.0 Profile account page for member => (1) update member and login tables, (2) customized API to update address based on memberId (hidden input)
+  // [ ] 2.0 Conditional input fields for trainers and admins (API & query => useDefaultValues)
   // [ ] 3.0 "Filter My Bookings" button for member and trainer && cond rendering edit button only for their own bookings
 
   return (
@@ -119,14 +119,14 @@ export function ProfileEditAccount() {
               isRequired={false}
             />
             <SelectSmallGroupGender issue={issues?.gender} defaultValue={defaultValues?.gender} isRequired={false} />
+            <input type='hidden' name='id' value={authenticatedUser.memberId} />
+            <button type='submit' name='_action' value='updateMemberById' className='btn btn-primary btn-sm mt-5'>
+              Save
+            </button>
           </>
         ) : (
-          // <LoadingGlobal />
-          <h1>Loading...</h1>
+          <></>
         )}
-        <button type='submit' className='btn btn-primary btn-sm mt-5'>
-          Save
-        </button>
       </Form>
       <div className='divider'></div>
       <h1 className='font-sans text-3xl text-primary-content'>Edit My Address</h1>
@@ -137,7 +137,8 @@ export function ProfileEditAccount() {
         <InputSmallGroup name='postcode' type='text' issue={issues?.postcode} defaultValue='4000' />
         <InputSmallGroup name='state' type='text' issue={issues?.state} defaultValue='QLD' />
         <SelectSmallGroupCountry issue={issues?.country} defaultValue='Australia' />
-        <button type='submit' className='btn btn-primary btn-sm mt-5'>
+        <input type='hidden' name='memberId' value={authenticatedUser.memberId} />
+        <button type='submit' name='_action' value='updateAddressByMemberId' className='btn btn-primary btn-sm mt-5'>
           Save
         </button>
       </Form>

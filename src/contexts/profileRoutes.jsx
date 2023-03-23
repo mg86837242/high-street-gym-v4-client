@@ -18,6 +18,15 @@ const profileRoutes = [
       let { getAllLoginEmails } = await import('../services/logins');
       return getAllLoginEmails();
     },
+    async action({ request }) {
+      let formData = await request.formData();
+      let { _action, ...values } = Object.fromEntries(formData);
+
+      if (_action === 'updateMemberById') {
+        let { updateMemberById } = await import('../services/members');
+        return updateMemberById(values);
+      }
+    },
     ErrorBoundary: ErrorInfo,
   },
   {

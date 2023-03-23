@@ -1,10 +1,20 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import AuthContext from '../../contexts/AuthContext';
 
 export default function InputSmallGroupEmail({ issue, emails, defaultValue, isRequired }) {
   const { authenticatedUser } = useContext(AuthContext);
   const [input, setInput] = useState(defaultValue);
   const isDuplicate = input !== authenticatedUser?.email && emails.find((e) => input === e.email);
+
+  useEffect(() => {
+    let ignore = false;
+    if (!ignore) {
+      setInput(defaultValue);
+    }
+    return () => {
+      ignore = true;
+    };
+  }, [defaultValue]);
 
   return (
     <div id='email-input-group' className='w-full form-control'>

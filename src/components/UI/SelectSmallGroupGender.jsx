@@ -12,7 +12,6 @@ export default function SelectSmallGroupGender({ issue, defaultValue, isRequired
       ignore = true;
     };
   }, [defaultValue]);
-
   // PS printing `selectedGender` fire thrice: (1) initial state in the `useState`, (2) `useEffect` sync with props
   //  passed down by parent component, with no `user` state/context, (3) `useEffect` sync with props passed down by
   //  parent component, with populated `user` state/context

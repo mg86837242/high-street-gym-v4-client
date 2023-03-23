@@ -3,6 +3,7 @@ import { API_URL } from '../data/constants';
 import { emailSchema, passwordSchema, usernameSchema } from '../data/schemas/logins';
 import { firstNameSchema, lastNameSchema, phoneSchema, ageSchema, genderSchema } from '../data/schemas/members';
 import post from '../utils/post';
+import patch from '../utils/patch';
 
 export async function getAllMembers() {
   return null;
@@ -55,17 +56,32 @@ export async function signupMembers({ request }) {
   //  see: https://stackoverflow.com/questions/5076944/what-is-the-difference-between-null-and-undefined-in-javascript/5076989#5076989
   creations.age = parseInt(age, 10) || null;
   creations.gender ||= null;
+
   const response = await post(`${API_URL}/members/signup`, creations);
-  // Special error handling to let 409 pass
+  // Special error handling to let 409 pass, `<ErrorInfo>` element will not show
   if (response.status === 409) {
     return redirect('/signup');
   }
   if (response.status !== 200) {
     const json = response.json();
-    const message = `${json.status} ${
-      typeof json.message === 'string' ? json.message : json.message.map((issue) => issue.message).join('; ')
-    }`;
+    const message = `${json.status} ${typeof json.message === 'string' ? json.message : json.message[0].message}`;
     throw new Response(message);
   }
   return redirect('/login');
+}
+
+export async function updateMemberById(values) {
+  const { id, ...updates } = values;
+  const response = await patch(`${API_URL}/members/${id}`, updates);
+  // Special error handling to let 409 pass
+  if (response.status === 409) {
+    return redirect('/profile/account');
+  }
+  if (response.status !== 200) {
+    const json = response.json();
+    // FIX Debug zod error message && error 500 in API
+    const message = `${json.status} ${typeof json.message === 'string' ? json.message : json.message[0].message}`;
+    throw new Response(message);
+  }
+  return redirect('/profile/account');
 }
