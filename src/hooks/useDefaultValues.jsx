@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export default function useData(url) {
+export default function useDefaultValues(url) {
   const [data, setData] = useState(null);
   useEffect(() => {
     if (url) {
@@ -9,7 +9,7 @@ export default function useData(url) {
         .then((response) => response.json())
         .then((json) => {
           if (!ignore) {
-            setData(json);
+            setData(json.defaultValues);
           }
         });
       return () => {

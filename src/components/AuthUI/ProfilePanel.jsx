@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import AuthContext from '../../contexts/AuthContext';
 import { Outlet, NavLink, Navigate, useLoaderData, useActionData, Form } from 'react-router-dom';
-import useData from '../../hooks/useFetchData';
+import useDefaultValues from '../../hooks/useDefaultValues';
 import { API_URL } from '../../data/constants';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faPenToSquare } from '@fortawesome/free-regular-svg-icons';
@@ -81,63 +81,59 @@ export function ProfileEditIndex() {
 export function ProfileEditAccount() {
   const { authenticatedUser } = useContext(AuthContext);
   const { emails } = useLoaderData();
+  // TODO Form validation issues in action and validation info message
   const issues = useActionData() || {};
   let defaultValues = {};
   switch (authenticatedUser?.role) {
-    case 'Admin':
-      defaultValues = useData(`${API_URL}/admins/admin-with-logins-and-addresses-by-id/${authenticatedUser.adminId}`);
-      break;
-    case 'Trainer':
-      defaultValues = useData(
-        `${API_URL}/trainers/trainer-with-logins-and-addresses-by-id/${authenticatedUser.trainerId}`
-      );
-      break;
+    // case 'Admin':
+    //   defaultValues = useData(`${API_URL}/admins/admin-with-details-by-id/${authenticatedUser.adminId}`);
+    //   break;
+    // case 'Trainer':
+    //   defaultValues = useData(`${API_URL}/trainers/trainer-with-details-by-id/${authenticatedUser.trainerId}`);
+    //   break;
     case 'Member':
-      defaultValues = useData(
-        `${API_URL}/members/member-with-logins-and-addresses-by-id/${authenticatedUser.memberId}`
-      );
+      defaultValues = useDefaultValues(`${API_URL}/members/member-with-details-by-id/${authenticatedUser.memberId}`);
       break;
     default:
       defaultValues = {};
   }
 
-  /* TODO 1 Profile account page for member => (1) custom Hook to fetch current user's form data as default value (endpoint with joined query), (2) customized API to update address based on memberId (hidden input), (3) 2 buttons with name attr in order to handle 2 forms with 1 action */
+  /* TODO 1 Profile account page for member => (1) customized API to update address based on memberId (hidden input), (2) 2 buttons with name attr in order to handle 2 forms with 1 action */
 
   return (
     <div className='flex-grow px-4 py-6'>
       <h1 className='font-sans text-3xl text-primary-content'>Edit My Account</h1>
       <Form method='post' noValidate className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'>
+        {/* (1) Shared input fields: */}
+        <InputSmallGroupEmail issue={issues?.email} defaultValue={defaultValues?.email} emails={emails} />
+        <InputSmallGroupPass issue={issues?.password} defaultValue={defaultValues?.password} />
+        <InputSmallGroup name='username' type='text' issue={issues?.username} defaultValue={defaultValues?.username} />
+        <InputSmallGroup
+          name='firstName'
+          type='text'
+          issue={issues?.firstName}
+          defaultValue={defaultValues?.firstName}
+        />
+        <InputSmallGroup name='lastName' type='text' issue={issues?.lastName} defaultValue={defaultValues?.lastName} />
+        <InputSmallGroup name='phone' type='tel' issue={issues?.phone} defaultValue={defaultValues?.phone} />
+        {/* (2) Conditional input fields: */}
         {authenticatedUser?.role === 'Admin' ? (
           <>
-            <InputSmallGroupEmail issue={issues?.email} defaultValue='demoadmin@gmail.com' emails={emails} />
-            <InputSmallGroupPass issue={issues?.password} defaultValue='abcd1234' />
-            <InputSmallGroup name='username' type='text' issue={issues?.username} defaultValue='demoadmin' />
-            <InputSmallGroup name='firstName' type='text' issue={issues?.firstName} defaultValue='Demo' />
-            <InputSmallGroup name='lastName' type='text' issue={issues?.lastName} defaultValue='Admin' />
-            <InputSmallGroup name='phone' type='tel' issue={issues?.phone} defaultValue='0123456789' />
-            {/* TODO 3 Profile account route for admin */}
+            {/* TODO 3 Profile account route for admin *?/}
             {/* TODO 4 "My Bookings" button for member and trainer && cond rendering edit button only for their own bookings */}
           </>
         ) : authenticatedUser?.role === 'Trainer' ? (
-          <>
-            <InputSmallGroupEmail issue={issues?.email} defaultValue='demotrainer@gmail.com' emails={emails} />
-            <InputSmallGroupPass issue={issues?.password} defaultValue='abcd1234' />
-            <InputSmallGroup name='username' type='text' issue={issues?.username} defaultValue='demotrainer' />
-            <InputSmallGroup name='firstName' type='text' issue={issues?.firstName} defaultValue='Demo' />
-            <InputSmallGroup name='lastName' type='text' issue={issues?.lastName} defaultValue='Trainer' />
-            <InputSmallGroup name='phone' type='tel' issue={issues?.phone} defaultValue='0123456789' />
-            {/* TODO 2 Profile account route for trainer */}
-          </>
+          <>{/* TODO 2 Profile account route for trainer */}</>
         ) : authenticatedUser?.role === 'Member' ? (
           <>
-            <InputSmallGroupEmail issue={issues?.email} defaultValue='demomember@gmail.com' emails={emails} />
-            <InputSmallGroupPass issue={issues?.password} defaultValue='abcd1234' />
-            <InputSmallGroup name='username' type='text' issue={issues?.username} defaultValue='demomember' />
-            <InputSmallGroup name='firstName' type='text' issue={issues?.firstName} defaultValue='Demo' />
-            <InputSmallGroup name='lastName' type='text' issue={issues?.lastName} defaultValue='Member' />
-            <InputSmallGroup name='phone' type='tel' issue={issues?.phone} defaultValue='0123456789' />
-            <InputSmallGroup name='age' type='number' issue={issues?.age} isRequired={false} />
-            <SelectSmallGroupGender issue={issues?.gender} defaultValue='' isRequired={false} />
+            <InputSmallGroup
+              name='age'
+              type='number'
+              issue={issues?.age}
+              defaultValue={defaultValues?.age}
+              isRequired={false}
+            />
+            <SelectSmallGroupGender issue={issues?.gender} defaultValue={defaultValues?.gender} isRequired={false} />
           </>
         ) : (
           // <LoadingGlobal />
