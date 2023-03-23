@@ -40,7 +40,9 @@ export default async function fetchJSON(url, method, body) {
   const response = await fetch(url, requestOptions);
   const json = await response.json();
   if (!response?.ok) {
-    const message = `${json.status} ${typeof json.message === 'string' ? json.message : json.message.map((issue) => issue.message).join('; ')}`;
+    const message = `${json.status} ${
+      typeof json.message === 'string' ? json.message : json.message.map((issue) => issue.message).join('; ')
+    }`;
     throw new Response(message);
   }
 

@@ -41,7 +41,9 @@ function LeftSidePanel() {
             <NavLink
               to='account'
               className={({ isActive }) =>
-                `flex items-center justify-start w-full h-full gap-2 px-2 font-normal btn btn-sm btn-ghost py-1.5 ${isActive && 'btn-active'}`
+                `flex items-center justify-start w-full h-full gap-2 px-2 font-normal btn btn-sm btn-ghost py-1.5 ${
+                  isActive && 'btn-active'
+                }`
               }
             >
               <span>
@@ -54,7 +56,9 @@ function LeftSidePanel() {
             <NavLink
               to='blog'
               className={({ isActive }) =>
-                `flex items-center justify-start w-full h-full gap-2 px-2 font-normal btn btn-sm btn-ghost py-1.5 ${isActive && 'btn-active'}`
+                `flex items-center justify-start w-full h-full gap-2 px-2 font-normal btn btn-sm btn-ghost py-1.5 ${
+                  isActive && 'btn-active'
+                }`
               }
             >
               <span>
@@ -75,7 +79,8 @@ export function ProfileEditIndex() {
 
 export function ProfileEditAccount() {
   const { authenticatedUser } = useContext(AuthContext);
-  const [statusText, setStatusText] = useState('');
+  const [topStatusText, setTopStatusText] = useState('');
+  const [botStatusText, setBotStatusText] = useState('');
   const [issues, setIssues] = useState({});
   const { emails } = useLoaderData();
   const actionData = useActionData(null);
@@ -85,12 +90,23 @@ export function ProfileEditAccount() {
     let ignore = false;
     if (!ignore) {
       if (actionData?.status === 200) {
-        (async () => {
-          setStatusText(`✅ ${actionData.message}`);
-          setIssues({});
-          await new Promise((res) => setTimeout(res, 5_000));
-          setStatusText('');
-        })();
+        if (actionData._action === 'updateMemberById') {
+          (async () => {
+            setTopStatusText(`✅ ${actionData.message}`);
+            setIssues({});
+            // ??? Is cleanup needed here, this entire Effect fires too many times, print `actionData` to see
+            await new Promise((res) => setTimeout(res, 5_000));
+            setTopStatusText('');
+          })();
+        }
+        if (actionData._action === 'updateAddressByMemberId') {
+          (async () => {
+            setBotStatusText(`✅ ${actionData.message}`);
+            setIssues({});
+            await new Promise((res) => setTimeout(res, 5_000));
+            setBotStatusText('');
+          })();
+        }
       } else {
         setIssues(actionData);
       }
@@ -100,10 +116,9 @@ export function ProfileEditAccount() {
     };
   }, [actionData]);
 
-  // [x] 1.0 Form validation
-  // [x] 2.0 Profile account page for member: customized API to update address based on memberId (hidden input)
-  // [ ] 3.0 Conditional input fields for trainers and admins: components && dynamic import service in route && API and raw query
-  // [ ] 4.0 "Filter My Bookings" button for member and trainer && cond rendering edit button only for their own bookings
+  // [x] test update to another existing address
+  // [ ] 1.0 Conditional input fields for trainers and admins: components && dynamic import service in route && API and raw query
+  // [ ] 2.0 "Filter My Bookings" button for member and trainer && cond rendering edit button only for their own bookings
 
   // NB Need to check if `defaultValues` is truthy, o/w `undefined` will be passed as the `defaultValue` prop for
   //  following inputs before `defaultValues` is populated by the custom Hook, and `useEffect` will be needed to
@@ -116,7 +131,12 @@ export function ProfileEditAccount() {
         <InputSmallGroupEmail issue={issues?.email} defaultValue={defaultValues?.email} emails={emails} />
         <InputSmallGroupPass issue={issues?.password} defaultValue={defaultValues?.password} />
         <InputSmallGroup name='username' type='text' issue={issues?.username} defaultValue={defaultValues?.username} />
-        <InputSmallGroup name='firstName' type='text' issue={issues?.firstName} defaultValue={defaultValues?.firstName} />
+        <InputSmallGroup
+          name='firstName'
+          type='text'
+          issue={issues?.firstName}
+          defaultValue={defaultValues?.firstName}
+        />
         <InputSmallGroup name='lastName' type='text' issue={issues?.lastName} defaultValue={defaultValues?.lastName} />
         <InputSmallGroup name='phone' type='tel' issue={issues?.phone} defaultValue={defaultValues?.phone} />
         {/* (2) Conditional input fields: */}
@@ -126,13 +146,19 @@ export function ProfileEditAccount() {
           <></>
         ) : authenticatedUser?.role === 'Member' ? (
           <>
-            <InputSmallGroup name='age' type='text' issue={issues?.age} defaultValue={defaultValues?.age} isRequired={false} />
+            <InputSmallGroup
+              name='age'
+              type='text'
+              issue={issues?.age}
+              defaultValue={defaultValues?.age}
+              isRequired={false}
+            />
             <SelectSmallGroupGender issue={issues?.gender} defaultValue={defaultValues?.gender} isRequired={false} />
             <input type='hidden' name='id' value={authenticatedUser.memberId} />
             <button type='submit' name='_action' value='updateMemberById' className='btn btn-primary btn-sm mt-4'>
               Save
             </button>
-            <p className='text-success self-center mt-4'>{statusText}</p>
+            <p className='text-success self-center mt-4'>{topStatusText}</p>
           </>
         ) : (
           <></>
@@ -151,6 +177,7 @@ export function ProfileEditAccount() {
         <button type='submit' name='_action' value='updateAddressByMemberId' className='btn btn-primary btn-sm mt-5'>
           Save
         </button>
+        <p className='text-success self-center mt-4'>{botStatusText}</p>
       </Form>
     </div>
   ) : (

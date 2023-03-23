@@ -25,7 +25,11 @@ const bookingsRoutes = [
         // `bookings` (i.e., the length is 0), o/w `data?.bookings` wouldn't exist and the following render function
         //  would render 'Error' text although 404 won't trigger an error in the loader (per the programmer's design);
         //  alternatively, in the API endpoint, don't throw 404 when the `bookings` array is empty
-        return data?.bookings ? <Link to={`/bookings/${params.date}`}>No. of Bookings: {data.bookings.length}</Link> : 'Error';
+        return data?.bookings ? (
+          <Link to={`/bookings/${params.date}`}>No. of Bookings: {data.bookings.length}</Link>
+        ) : (
+          'Error'
+        );
       },
     },
     children: [
@@ -42,7 +46,12 @@ const bookingsRoutes = [
           return getBookingById({ params });
         },
         handle: {
-          crumb: (params, data) => (data?.booking ? <Link to={`/bookings/${params.date}/id/${params.id}`}>Booking ID: {params.id}</Link> : 'Error'),
+          crumb: (params, data) =>
+            data?.booking ? (
+              <Link to={`/bookings/${params.date}/id/${params.id}`}>Booking ID: {params.id}</Link>
+            ) : (
+              'Error'
+            ),
         },
       },
       {
@@ -62,7 +71,11 @@ const bookingsRoutes = [
         },
         handle: {
           crumb: (params, data) =>
-            data?.booking ? <Link to={`/bookings/${params.date}/id/${params.id}/edit`}>Booking ID: {params.id}</Link> : 'Error',
+            data?.booking ? (
+              <Link to={`/bookings/${params.date}/id/${params.id}/edit`}>Booking ID: {params.id}</Link>
+            ) : (
+              'Error'
+            ),
         },
       },
       {

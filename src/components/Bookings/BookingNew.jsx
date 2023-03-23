@@ -19,7 +19,12 @@ export default function BookingNew() {
         <Form method='post' className='flex flex-col gap-5'>
           <label className='input-group grid grid-cols-1 xl:grid-cols-[minmax(1rem,_1fr)_minmax(3rem,_3fr)]'>
             <span className='p-0'>Activity:</span>
-            <select name='activityId' defaultValue={activities[0]} required className='select select-bordered select-sm text-base font-normal'>
+            <select
+              name='activityId'
+              defaultValue={activities[0]}
+              required
+              className='select select-bordered select-sm text-base font-normal'
+            >
               <option disabled>-- Choose Activity --</option>
               {activities.map((a, i) => {
                 return (
@@ -44,7 +49,12 @@ export default function BookingNew() {
           </label>
           <label className='input-group grid grid-cols-1 xl:grid-cols-[minmax(1rem,_1fr)_minmax(3rem,_3fr)]'>
             <span className='p-0'>Time:</span>
-            <select name='time' defaultValue={`08:00:00`} required className='select select-bordered select-sm text-base font-normal'>
+            <select
+              name='time'
+              defaultValue={`08:00:00`}
+              required
+              className='select select-bordered select-sm text-base font-normal'
+            >
               <option disabled>-- Choose Booking Time --</option>
               {[...Array(10)].map((_, i) => (
                 <option value={i < 2 ? `0${8 + i}:00:00` : `${8 + i}:00:00`} key={i}>
@@ -55,7 +65,12 @@ export default function BookingNew() {
           </label>
           <label className='input-group grid grid-cols-1 xl:grid-cols-[minmax(1rem,_1fr)_minmax(3rem,_3fr)]'>
             <span className='p-0'>Member:</span>
-            <select name='memberId' defaultValue={members[0]} required className='select select-bordered select-sm text-base font-normal'>
+            <select
+              name='memberId'
+              defaultValue={members[0]}
+              required
+              className='select select-bordered select-sm text-base font-normal'
+            >
               <option disabled>-- Choose Member --</option>
               {members.map((m, i) => (
                 <option value={m.id} key={i}>
@@ -66,7 +81,12 @@ export default function BookingNew() {
           </label>
           <label className='input-group grid grid-cols-1 xl:grid-cols-[minmax(1rem,_1fr)_minmax(3rem,_3fr)]'>
             <span className='p-0'>Trainer:</span>
-            <select name='trainerId' defaultValue={trainers[0]} required className='select select-bordered select-sm text-base font-normal'>
+            <select
+              name='trainerId'
+              defaultValue={trainers[0]}
+              required
+              className='select select-bordered select-sm text-base font-normal'
+            >
               <option disabled>-- Choose Trainer --</option>
               {trainers.map((t, i) => (
                 <option value={t.id} key={i}>

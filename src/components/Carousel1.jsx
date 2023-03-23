@@ -20,7 +20,11 @@ export default function Carousel1() {
         {carouselItems.map(
           ({ activityName }, i) =>
             i > 3 && (
-              <button key={i} onClick={() => scrollToIndex(i - 4)} className='btn btn-secondary normal-case shadow shadow-black/50'>
+              <button
+                key={i}
+                onClick={() => scrollToIndex(i - 4)}
+                className='btn btn-secondary normal-case shadow shadow-black/50'
+              >
                 {activityName.replace('-', ' ')}
               </button>
             )
@@ -41,8 +45,8 @@ export default function Carousel1() {
                   <div className='col-span-2 lg:col-span-1 text-center whitespace-normal p-4 lg:p-6'>
                     <h2 className='mb-6'>{`${activityName.replace('-', ' ')} Activities`}</h2>
                     <p>
-                      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatem est cupiditate suscipit non ipsa voluptatibus error culpa
-                      debitis quaerat. Incidunt?
+                      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatem est cupiditate suscipit non
+                      ipsa voluptatibus error culpa debitis quaerat. Incidunt?
                     </p>
                   </div>
                 </div>

@@ -1,18 +1,22 @@
 const carouselItems = [
   {
-    imageUrl: 'https://images.pexels.com/photos/4056723/pexels-photo-4056723.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    imageUrl:
+      'https://images.pexels.com/photos/4056723/pexels-photo-4056723.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     activityName: 'Yoga',
   },
   {
-    imageUrl: 'https://images.pexels.com/photos/3984353/pexels-photo-3984353.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    imageUrl:
+      'https://images.pexels.com/photos/3984353/pexels-photo-3984353.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     activityName: 'Pilates',
   },
   {
-    imageUrl: 'https://images.pexels.com/photos/6392828/pexels-photo-6392828.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    imageUrl:
+      'https://images.pexels.com/photos/6392828/pexels-photo-6392828.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     activityName: 'Abs',
   },
   {
-    imageUrl: 'https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    imageUrl:
+      'https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     activityName: 'HIIT',
   },
   {
@@ -26,7 +30,8 @@ const carouselItems = [
     activityName: 'Boxing',
   },
   {
-    imageUrl: 'https://images.pexels.com/photos/8436587/pexels-photo-8436587.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    imageUrl:
+      'https://images.pexels.com/photos/8436587/pexels-photo-8436587.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     activityName: 'Zumba',
   },
 ];

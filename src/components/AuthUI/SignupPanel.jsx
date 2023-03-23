@@ -23,7 +23,10 @@ function Directions() {
       <p className='text-3xl font-extrabold focus:outline-none text-primary-content'>Sign up form</p>
       <p className='text-sm font-medium leading-none focus:outline-none text-primary-content'>
         Already have account?{' '}
-        <Link to='/login' className={`text-sm font-medium leading-none underline cursor-pointer link link-primary focus:outline-none`}>
+        <Link
+          to='/login'
+          className={`text-sm font-medium leading-none underline cursor-pointer link link-primary focus:outline-none`}
+        >
           Log in here
         </Link>
       </p>

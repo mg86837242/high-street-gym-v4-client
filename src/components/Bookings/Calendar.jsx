@@ -32,7 +32,11 @@ export default function Calendar() {
             ))}
           </div>
         ) : (
-          <div id='calendar-row' key={`r${i}`} className={`grid grid-cols-7 gap-2 px-2 3xl:gap-4 2xl:px-4 3xl:px-6 ${i > 5 && 'pb-2 3xl:pb-4'}`}>
+          <div
+            id='calendar-row'
+            key={`r${i}`}
+            className={`grid grid-cols-7 gap-2 px-2 3xl:gap-4 2xl:px-4 3xl:px-6 ${i > 5 && 'pb-2 3xl:pb-4'}`}
+          >
             {[...Array(7)].map((_, j) => {
               const dayOnCal = i * 7 + j - 6 - monthStartDay;
               return dayOnCal > 0 && dayOnCal <= daysInMonth ? (

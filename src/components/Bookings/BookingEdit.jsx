@@ -46,7 +46,12 @@ export default function BookingEdit() {
           </label>
           <label className='input-group grid grid-cols-1 xl:grid-cols-[minmax(1rem,_1fr)_minmax(3rem,_3fr)]'>
             <span className='p-0'>Time:</span>
-            <select name='time' defaultValue={booking.dateTime.slice(-8)} required className='text-base font-normal select select-bordered select-sm'>
+            <select
+              name='time'
+              defaultValue={booking.dateTime.slice(-8)}
+              required
+              className='text-base font-normal select select-bordered select-sm'
+            >
               <option disabled>-- Choose Booking Time --</option>
               {[...Array(10)].map((_, i) => (
                 <option value={i < 2 ? `0${8 + i}:00:00` : `${8 + i}:00:00`} key={i}>

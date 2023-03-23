@@ -3,9 +3,9 @@ export const today = new Date();
 // TODO Make `tomorrow` only allows weekdays & date picker's range only allows weekdays (google "input type date only weekdays site:stackoverflow.com"
 const tomorrow = new Date(today);
 tomorrow.setDate(tomorrow.getDate() + 1);
-export const tomorrowStr = `${tomorrow.getFullYear()}-${tomorrow.getMonth() < 9 ? `0${tomorrow.getMonth() + 1}` : tomorrow.getMonth() + 1}-${
-  tomorrow.getDate() < 10 ? `0${tomorrow.getDate()}` : tomorrow.getDate()
-}`;
+export const tomorrowStr = `${tomorrow.getFullYear()}-${
+  tomorrow.getMonth() < 9 ? `0${tomorrow.getMonth() + 1}` : tomorrow.getMonth() + 1
+}-${tomorrow.getDate() < 10 ? `0${tomorrow.getDate()}` : tomorrow.getDate()}`;
 
 const threeWeeksLater = new Date(today);
 threeWeeksLater.setDate(threeWeeksLater.getDate() + 21);

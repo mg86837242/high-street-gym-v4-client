@@ -27,13 +27,19 @@ export default function Carousel2() {
             <div className='col-span-2 lg:col-span-1 text-center p-4 lg:p-6'>
               <h2 className='mb-6'>{`${activityName.replace('-', ' ')} Activities`}</h2>
               <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatem est cupiditate suscipit non ipsa voluptatibus error culpa debitis
-                quaerat. Incidunt?
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatem est cupiditate suscipit non ipsa
+                voluptatibus error culpa debitis quaerat. Incidunt?
               </p>
             </div>
           </div>
-          <div id={`slide-${i + 1}-nav-buttons`} className='absolute flex justify-between -translate-y-1/2 left-5 right-5 top-1/2'>
-            <button onClick={() => scrollToIndex(i - 1 < 0 ? carouselItems.length - 1 : i - 1)} className='btn btn-circle'>
+          <div
+            id={`slide-${i + 1}-nav-buttons`}
+            className='absolute flex justify-between -translate-y-1/2 left-5 right-5 top-1/2'
+          >
+            <button
+              onClick={() => scrollToIndex(i - 1 < 0 ? carouselItems.length - 1 : i - 1)}
+              className='btn btn-circle'
+            >
               ❮
             </button>
             <button onClick={() => scrollToIndex(i + 2 > carouselItems.length ? 0 : i + 1)} className='btn btn-circle'>

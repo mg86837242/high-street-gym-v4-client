@@ -12,8 +12,9 @@ export default function Hero1({ children }) {
           High Street Gym
         </h1>
         <p className='col-start-2 col-end-10 md:col-end-7 xl:col-end-6 row-[4_/_6] justify-self-start self-start bg-[#191d24]/50 p-1 text-primary-content animate pop delay-1'>
-          Lorem ipsum dolor sit, amet consectetur akipisicing elit. Inventore labore delectus quisquam id sed voluptate perspiciatis illum
-          exercitationem facilis esse odit, dignissimos recusandae velit dolores sint sit a eveniet officiis.
+          Lorem ipsum dolor sit, amet consectetur akipisicing elit. Inventore labore delectus quisquam id sed voluptate
+          perspiciatis illum exercitationem facilis esse odit, dignissimos recusandae velit dolores sint sit a eveniet
+          officiis.
         </p>
       </div>
     </div>

@@ -1,12 +1,20 @@
 import { redirect } from 'react-router-dom';
 import { API_URL } from '../data/constants';
-import { lineOneSchema, lineTwoSchema, suburbSchema, postcodeSchema, stateSchema, countrySchema } from '../data/schemas/addresses';
+import {
+  lineOneSchema,
+  lineTwoSchema,
+  suburbSchema,
+  postcodeSchema,
+  stateSchema,
+  countrySchema,
+} from '../data/schemas/addresses';
 import patch from '../utils/patch';
 
 export async function updateAddressByMemberId(memberIdAndUpdates) {
-  const { memberId, ...updates } = memberIdAndUpdates;
-  const { lineOne, lineTwo, suburb, postcode, state, country } = updates;
+  let { memberId, ...updates } = memberIdAndUpdates;
+  let { lineOne, lineTwo, suburb, postcode, state, country } = updates;
   // #region validation and type conversion
+  const messages = {};
   if (!lineOneSchema.safeParse(lineOne).success) {
     messages.lineOne = lineOneSchema.safeParse(lineOne).error.issues[0].message;
   }
@@ -28,8 +36,11 @@ export async function updateAddressByMemberId(memberIdAndUpdates) {
   if (Object.keys(messages).length) {
     return messages;
   }
+  lineTwo ||= null;
   // #endregion
-  const response = await patch(`${API_URL}/address/by-member-id/${memberId}`, updates);
+
+  updates = { lineOne, lineTwo, suburb, postcode, state, country };
+  const response = await patch(`${API_URL}/addresses/by-memberid/${memberId}`, updates);
   // Special error handling to let 409 pass to NOT trigger error boundary, since `useActionData` already handled validation
   if (response.status === 409) {
     return redirect('/profile/account');
@@ -39,7 +50,8 @@ export async function updateAddressByMemberId(memberIdAndUpdates) {
     const message = `${json.status} ${typeof json.message === 'string' ? json.message : json.message[0].message}`;
     throw new Response(message);
   }
-  return response;
+  const json = await response.json();
+  return { ...json, _action: 'updateAddressByMemberId' };
 }
 
 export async function updateAddressByTrainerId(values) {

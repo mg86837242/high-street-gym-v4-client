@@ -19,7 +19,9 @@ export async function getBookingsByDate({ params }) {
   // Special error handling to let 404 pass
   if (response?.status !== 200 && response?.status !== 404) {
     const json = await response.json();
-    const message = `${json.status} ${typeof json.message === 'string' ? json.message : json.message.map((issue) => issue.message).join('; ')}`;
+    const message = `${json.status} ${
+      typeof json.message === 'string' ? json.message : json.message.map((issue) => issue.message).join('; ')
+    }`;
     throw new Response(message);
   }
   return response;

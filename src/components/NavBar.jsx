@@ -37,19 +37,35 @@ function NavBarLeft() {
     <div id='nav-left-wrapper' className='navbar-start'>
       <div id='nav-left-dropdown-wrapper' className='dropdown'>
         <label id='nav-left-hamburger' tabIndex={0} className='px-1 btn btn-ghost lg:hidden'>
-          <svg xmlns='http://www.w3.org/2000/svg' className='h-9 w-9' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            className='h-9 w-9'
+            fill='none'
+            viewBox='0 0 24 24'
+            stroke='currentColor'
+          >
             <path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M4 6h16M4 12h8m-8 6h16' />
           </svg>
         </label>
         {/* FIX Reflect final page design & RBAC in the mobile menu (i.e., align with the center navbar menu) */}
-        <ul id='nav-left-dropdown-menu' tabIndex={0} className='p-2 mt-3 shadow menu menu-compact dropdown-content bg-neutral rounded-box w-52'>
+        <ul
+          id='nav-left-dropdown-menu'
+          tabIndex={0}
+          className='p-2 mt-3 shadow menu menu-compact dropdown-content bg-neutral rounded-box w-52'
+        >
           <li id='nav-left-dropdown-menu-item'>
             <Link to='/'>Home</Link>
           </li>
           <li id='nav-left-dropdown-menu-item' tabIndex={0}>
             <Link to='blogs' className='justify-between'>
               Blogs
-              <svg className='fill-current' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'>
+              <svg
+                className='fill-current'
+                xmlns='http://www.w3.org/2000/svg'
+                width='24'
+                height='24'
+                viewBox='0 0 24 24'
+              >
                 <path d='M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z' />
               </svg>
             </Link>
@@ -80,7 +96,11 @@ function NavBarLeft() {
           </li>
         </ul>
       </div>
-      <Link to='/' id='nav-left-logo' className='hidden px-4 text-3xl text-primary font-logo lg:text-4xl lg:px-1 md:flex'>
+      <Link
+        to='/'
+        id='nav-left-logo'
+        className='hidden px-4 text-3xl text-primary font-logo lg:text-4xl lg:px-1 md:flex'
+      >
         HS GYM
       </Link>
     </div>
@@ -133,7 +153,10 @@ function NavBarCenter() {
 function NavBarCenterButton({ children, to, text, hasDropdown }) {
   return (
     <li id='nav-center-menu-button'>
-      <NavLink to={to} className={({ isActive }) => `${isActive && 'btn-active underline underline-offset-8 decoration-2'}`}>
+      <NavLink
+        to={to}
+        className={({ isActive }) => `${isActive && 'btn-active underline underline-offset-8 decoration-2'}`}
+      >
         {text}
         {hasDropdown && (
           <svg className='fill-current' xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24'>
@@ -191,10 +214,16 @@ function NavBarRight() {
         </>
       ) : (
         <>
-          <Link to='login' className='normal-case shadow btn bg-gradient-to-r from-secondary to-primary shadow-black/50 text-primary-content'>
+          <Link
+            to='login'
+            className='normal-case shadow btn bg-gradient-to-r from-secondary to-primary shadow-black/50 text-primary-content'
+          >
             Login
           </Link>
-          <Link to='signup' className='normal-case shadow btn bg-gradient-to-r from-secondary to-primary shadow-black/50 text-primary-content'>
+          <Link
+            to='signup'
+            className='normal-case shadow btn bg-gradient-to-r from-secondary to-primary shadow-black/50 text-primary-content'
+          >
             Signup
           </Link>
         </>

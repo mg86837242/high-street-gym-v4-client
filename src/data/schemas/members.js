@@ -3,12 +3,16 @@ import { z } from 'zod';
 export const firstNameSchema = z
   .string()
   .min(1, { message: 'Name must have at least 1 character(s)' })
-  .regex(/^[a-zA-Z]+$/, { message: 'Name only accepts English letters at the moment' })
+  .regex(/^[a-zA-Z]+$/, {
+    message: 'Name only accepts English letters at the moment',
+  })
   .max(45);
 export const lastNameSchema = z
   .string()
   .min(1, { message: 'Name must have at least 1 character(s)' })
-  .regex(/^[a-zA-Z]+$/, { message: 'Name only accepts English letters at the moment' })
+  .regex(/^[a-zA-Z]+$/, {
+    message: 'Name only accepts English letters at the moment',
+  })
   .max(45);
 export const phoneSchema = z
   .string()

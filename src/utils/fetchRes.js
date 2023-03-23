@@ -60,7 +60,9 @@ export default async function fetchRes(url, method, body) {
   // #endregion
   if (!response?.ok) {
     const json = await response.json();
-    const message = `${json.status} ${typeof json.message === 'string' ? json.message : json.message.map((issue) => issue.message).join('; ')}`;
+    const message = `${json.status} ${
+      typeof json.message === 'string' ? json.message : json.message.map((issue) => issue.message).join('; ')
+    }`;
     throw new Response(message);
   }
   // NB (1) "React Router will automatically call `response.json()` (within the loader) so components don't need to

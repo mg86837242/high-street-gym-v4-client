@@ -47,7 +47,16 @@ export async function signupMembers({ request }) {
   gender = gender || null;
   // #endregion
 
-  const creations = { email, password, username, firstName, lastName, phone, age, gender };
+  const creations = {
+    email,
+    password,
+    username,
+    firstName,
+    lastName,
+    phone,
+    age,
+    gender,
+  };
   const response = await post(`${API_URL}/members/signup`, creations);
   // Special error handling to let 409 pass to NOT trigger error boundary, since `useActionData` already handled validation
   if (response.status === 409) {
@@ -65,8 +74,6 @@ export async function updateMemberById(idAndUpdates) {
   let { id, ...updates } = idAndUpdates;
   let { email, password, firstName, lastName, username, phone, age, gender } = updates;
   // #region validation and type conversion
-  // ??? Pros & Cons: controlled components (e.g., react-hook-form) vs. HTML form "name"s and `formData` API
-  // ??? What problems did ppl encounter when using react-hook-form? Why some ppl say controlled components cover more use cases?
   const messages = {};
   if (!emailSchema.safeParse(email).success) {
     messages.email = emailSchema.safeParse(email).error.issues[0].message;
@@ -110,5 +117,6 @@ export async function updateMemberById(idAndUpdates) {
     const message = `${json.status} ${typeof json.message === 'string' ? json.message : json.message[0].message}`;
     throw new Response(message);
   }
-  return response;
+  const json = await response.json();
+  return { ...json, _action: 'updateMemberById' };
 }

@@ -9,7 +9,12 @@ export default function SelectSmallGroupCountry({ issue, defaultValue, isRequire
         <span className='text-white label-text'>Country:</span>
         {isRequired === false || <span className='text-gray-500 label-text-alt'>Required</span>}
       </label>
-      <select name='country' id='country' defaultValue={defaultValue} className='min-h-0 font-normal select select-primary select-sm'>
+      <select
+        name='country'
+        id='country'
+        defaultValue={defaultValue}
+        className='min-h-0 font-normal select select-primary select-sm'
+      >
         <option value='' disabled>
           -- Choose Country --
         </option>

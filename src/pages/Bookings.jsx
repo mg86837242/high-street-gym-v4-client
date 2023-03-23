@@ -13,7 +13,11 @@ export default function Bookings() {
         <ContentGrid id={'bookings-content-wrapper'}>
           <Calendar />
           <Outlet />
-          <LoadingGlobal display={'flex justify-center items-start col-[1_/_2] row-[1_/_4] lg:col-[1_/_4] lg:row-[1_/_2] w-full h-full sticky'} />
+          <LoadingGlobal
+            display={
+              'flex justify-center items-start col-[1_/_2] row-[1_/_4] lg:col-[1_/_4] lg:row-[1_/_2] w-full h-full sticky'
+            }
+          />
         </ContentGrid>
       </MainWrapper>
     </>
