@@ -70,8 +70,8 @@ export async function signupMembers({ request }) {
   return redirect('/login');
 }
 
-export async function updateMemberById(values) {
-  const { id, ...updates } = values;
+export async function updateMemberById(idAndUpdates) {
+  const { id, ...updates } = idAndUpdates;
   const response = await patch(`${API_URL}/members/${id}`, updates);
   // Special error handling to let 409 pass
   if (response.status === 409) {

@@ -17,6 +17,7 @@ export default function InputSmallGroupEmail({ issue, emails, defaultValue, isRe
         id='email'
         type='text'
         placeholder='Enter your email here'
+        // NB The following 2 props imply this is a controlled input, see: https://react.dev/reference/react-dom/components/input#reference
         value={input}
         onChange={(e) => setInput(e.target.value)}
         className='w-full text-white input input-bordered input-primary input-sm'
