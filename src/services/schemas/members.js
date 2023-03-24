@@ -27,7 +27,3 @@ export const ageSchema = z
   .max(3, { message: 'Age must have at most 3 number(s)' })
   .nullable();
 export const genderSchema = z.enum(['Female', 'Male', 'Prefer not to say', '']).nullable();
-
-// PS Based on tests, `optional()` won't let null pass, but will let undefined and empty string pass;
-//  `nullable()` won't let undefined pass, but will let null and empty string pass;
-//  when `enum()` is involved, both won't accept empty string unless specified within `enum()`

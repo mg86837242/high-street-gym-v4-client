@@ -31,7 +31,6 @@ const profileRoutes = [
         return updateAddressByAdminId(values);
       }
       if (_action === 'updateTrainerById') {
-        // FIX Function and API missing for this one
         let { default: updateTrainerById } = await import('../services/trainers');
         return updateTrainerById(values);
       }

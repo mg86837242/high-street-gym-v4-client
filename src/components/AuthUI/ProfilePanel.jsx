@@ -104,7 +104,6 @@ export function ProfileEditAccount() {
           (async () => {
             setIssues({});
             setTopStatusText(`✅ ${actionData.message}`);
-            // ??? Is cleanup needed for this `setTimeout`
             await new Promise((res) => setTimeout(res, 5_000));
             setTopStatusText('');
           })();
@@ -159,7 +158,6 @@ export function ProfileEditAccount() {
   }, [actionData]);
 
   // FIX "Filter My Bookings" button for member and trainer && cond rendering edit button only for their own bookings
-
   // NB Need to check if `defaultValues` is truthy, o/w `undefined` will be passed as the `defaultValue` prop for
   //  following inputs before `defaultValues` is populated by the custom Hook, and `useEffect` will be needed to
   //  subscribe to the change of `defaultValues` from `undefined` to something

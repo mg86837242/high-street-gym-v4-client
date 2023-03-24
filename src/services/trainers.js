@@ -2,11 +2,14 @@ import { redirect } from 'react-router-dom';
 import { API_URL } from '../data/constants';
 import { emailSchema, passwordSchema, usernameSchema } from './schemas/logins';
 import { firstNameSchema, lastNameSchema, phoneSchema } from './schemas/members';
+import { descriptionSchema, specialtySchema, certificateSchema, imageUrlSchema } from './schemas/trainers';
 import patch from '../utils/patch';
 
+// FIX API and query missing for this one; also, api schema ?
 export default async function updateTrainerById(values) {
   const { id, ...updates } = values;
-  const { email, password, firstName, lastName, username, phone } = updates;
+  const { email, password, firstName, lastName, username, phone, description, specialty, certificate, imageUrl } =
+    updates;
   // #region validation and type conversion
   const messages = {};
   if (!emailSchema.safeParse(email).success) {
@@ -26,6 +29,18 @@ export default async function updateTrainerById(values) {
   }
   if (!phoneSchema.safeParse(phone).success) {
     messages.phone = phoneSchema.safeParse(phone).error.issues[0].message;
+  }
+  if (!descriptionSchema.safeParse(description).success) {
+    messages.description = descriptionSchema.safeParse(description).error.issues[0].message;
+  }
+  if (!specialtySchema.safeParse(specialty).success) {
+    messages.specialty = specialtySchema.safeParse(specialty).error.issues[0].message;
+  }
+  if (!certificateSchema.safeParse(certificate).success) {
+    messages.certificate = certificateSchema.safeParse(certificate).error.issues[0].message;
+  }
+  if (!imageUrlSchema.safeParse(imageUrl).success) {
+    messages.imageUrl = imageUrlSchema.safeParse(imageUrl).error.issues[0].message;
   }
   if (Object.keys(messages).length) {
     return messages;
