@@ -101,15 +101,14 @@ export async function updateMemberById(values) {
 
   updates = { email, password, username, firstName, lastName, phone, age, gender };
   const response = await patch(`${API_URL}/members/${id}`, updates);
+  const json = await response.json();
   // Special error handling to let 409 pass to NOT trigger error boundary, since `useActionData` already handled validation
   if (response.status === 409) {
     return redirect('/profile/account');
   }
   if (response.status !== 200) {
-    const json = await response.json();
     const message = `${json.status} ${typeof json.message === 'string' ? json.message : json.message[0].message}`;
     throw new Response(message);
   }
-  const json = await response.json();
   return { ...json, _action: 'updateMemberById' };
 }
