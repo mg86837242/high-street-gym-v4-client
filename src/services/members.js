@@ -28,8 +28,9 @@ export async function signupMembers({ request }) {
   if (!phoneSchema.safeParse(phone).success) {
     messages.phone = phoneSchema.safeParse(phone).error.issues[0].message;
   }
-  // NB Age input with `type="number"` will convert invalid input value to empty string, causing this zod schema to not
-  /// work since empty string will pass `nullable` test, i.e., age input type should be of `type="text"`
+  // NB Age input with `type="number"` will convert invalid input (such as letters) value to empty string, which will
+  ///  be let pass by zod's `nullable()` rather than caught by `regex(/^\d*$/)`, i.e., age input type should be of
+  //  `type="text"`
   if (!ageSchema.safeParse(age).success) {
     messages.age = ageSchema.safeParse(age).error.issues[0].message;
   }
@@ -42,21 +43,13 @@ export async function signupMembers({ request }) {
   // NB Convert these inputs' values from empty string to null, so (1) the backend and frontend can share a same
   //  zod schema – using `nullable()`, (2) it reflects that these attributes are nullable in DB; for whether to
   //  use NULL or undefined as the falsy value in the SQL query => "recommend only setting variables to null",
-  //  see: https://stackoverflow.com/questions/5076944/what-is-the-difference-between-null-and-undefined-in-javascript/5076989#5076989
+  //  see: https://stackoverflow.com/questions/5076944/what-is-the-difference-between-null-and-undefined-in-javascript/5076989#5076989,
+  // (3) there is an only 1 exceiption, which is addr's `lineTwo`
   age = parseInt(age, 10) || null;
   gender = gender || null;
   // #endregion
 
-  const creations = {
-    email,
-    password,
-    username,
-    firstName,
-    lastName,
-    phone,
-    age,
-    gender,
-  };
+  const creations = { email, password, username, firstName, lastName, phone, age, gender };
   const response = await post(`${API_URL}/members/signup`, creations);
   // Special error handling to let 409 pass to NOT trigger error boundary, since `useActionData` already handled validation
   if (response.status === 409) {
