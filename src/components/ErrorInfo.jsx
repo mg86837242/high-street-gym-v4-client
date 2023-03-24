@@ -11,7 +11,7 @@ export default function ErrorInfo() {
   return navigation.state === 'loading' ? (
     <></>
   ) : isRouteErrorResponse(error) && error?.data ? (
-    <div className='flex flex-col items-center justify-center gap-6 mt-16'>
+    <div className='flex flex-col items-center justify-center w-full h-full gap-6'>
       <div className='flex flex-col items-center'>
         <h1>Oops!</h1>
         <BoxIcon className='w-32 h-32 lg:h-52 lg:w-52' />
@@ -21,7 +21,7 @@ export default function ErrorInfo() {
       <Button1 onClick={() => navigate(-1)}>Go Back</Button1>
     </div>
   ) : (
-    <div className='flex flex-col items-center justify-center gap-6 mt-16'>
+    <div className='flex flex-col items-center justify-center w-full h-full gap-6'>
       <div className='flex flex-col items-center'>
         <h1>Oops!</h1>
         <BoxIcon className='w-32 h-32 lg:h-52 lg:w-52' />
