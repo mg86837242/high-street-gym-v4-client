@@ -8,7 +8,7 @@ export default function useDefaultValues() {
   const [defaultValues, setDefaultValues] = useState(null);
   useEffect(() => {
     if (!authenticatedUser) {
-      return;
+      return undefined;
     }
     let ignore = false;
     switch (authenticatedUser.role) {
@@ -40,7 +40,7 @@ export default function useDefaultValues() {
           });
         break;
       default:
-        return;
+        break;
     }
     return () => {
       ignore = true;

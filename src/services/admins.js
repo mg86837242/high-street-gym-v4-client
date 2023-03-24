@@ -7,7 +7,7 @@ import patch from '../utils/patch';
 export default async function updateAdminById(values) {
   const { id, ...updates } = values;
   const { email, password, firstName, lastName, username, phone } = updates;
-  // #region validation and type conversion
+  // #region validation
   const messages = {};
   if (!emailSchema.safeParse(email).success) {
     messages.email = emailSchema.safeParse(email).error.issues[0].message;

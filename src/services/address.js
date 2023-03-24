@@ -10,9 +10,9 @@ import {
 import fetchJSON from '../utils/fetchJSON';
 
 export async function updateAddressByAdminId(values) {
-  let { adminId, ...updates } = values;
-  let { lineOne, lineTwo, suburb, postcode, state, country } = updates;
-  // #region validation and type conversion
+  const { adminId, ...updates } = values;
+  const { lineOne, lineTwo, suburb, postcode, state, country } = updates;
+  // #region validation
   const messages = {};
   if (!lineOneSchema.safeParse(lineOne).success) {
     messages.lineOne = lineOneSchema.safeParse(lineOne).error.issues[0].message;
@@ -37,18 +37,17 @@ export async function updateAddressByAdminId(values) {
   }
   // NB Even if `lineTwo` is null, `WHERE lineTwo = null` returns false i/o true and `getAddressesByDetails` in the
   //  model won't return any duplicate row, thus the conversion => Solution: convert falsy `lineTwo` to empty string
-  lineTwo ||= '';
   // #endregion
+  updates.lineTwo ||= '';
 
-  updates = { lineOne, lineTwo, suburb, postcode, state, country };
   const json = await fetchJSON(`${API_URL}/addresses/by-adminid/${adminId}`, 'patch', updates);
   return { ...json, _action: 'updateAddressByAdminId' };
 }
 
 export async function updateAddressByTrainerId(values) {
-  let { trainerId, ...updates } = values;
-  let { lineOne, lineTwo, suburb, postcode, state, country } = updates;
-  // #region validation and type conversion
+  const { trainerId, ...updates } = values;
+  const { lineOne, lineTwo, suburb, postcode, state, country } = updates;
+  // #region validation
   const messages = {};
   if (!lineOneSchema.safeParse(lineOne).success) {
     messages.lineOne = lineOneSchema.safeParse(lineOne).error.issues[0].message;
@@ -71,18 +70,17 @@ export async function updateAddressByTrainerId(values) {
   if (Object.keys(messages).length) {
     return messages;
   }
-  lineTwo ||= '';
   // #endregion
+  updates.lineTwo ||= '';
 
-  updates = { lineOne, lineTwo, suburb, postcode, state, country };
   const json = await fetchJSON(`${API_URL}/addresses/by-trainerid/${trainerId}`, 'patch', updates);
   return { ...json, _action: 'updateAddressByTrainerId' };
 }
 
 export async function updateAddressByMemberId(values) {
-  let { memberId, ...updates } = values;
-  let { lineOne, lineTwo, suburb, postcode, state, country } = updates;
-  // #region validation and type conversion
+  const { memberId, ...updates } = values;
+  const { lineOne, lineTwo, suburb, postcode, state, country } = updates;
+  // #region validation
   const messages = {};
   if (!lineOneSchema.safeParse(lineOne).success) {
     messages.lineOne = lineOneSchema.safeParse(lineOne).error.issues[0].message;
@@ -105,10 +103,9 @@ export async function updateAddressByMemberId(values) {
   if (Object.keys(messages).length) {
     return messages;
   }
-  lineTwo ||= '';
   // #endregion
+  updates.lineTwo ||= '';
 
-  updates = { lineOne, lineTwo, suburb, postcode, state, country };
   const json = await fetchJSON(`${API_URL}/addresses/by-memberid/${memberId}`, 'patch', updates);
   return { ...json, _action: 'updateAddressByMemberId' };
 }

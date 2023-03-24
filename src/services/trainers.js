@@ -6,10 +6,10 @@ import { descriptionSchema, specialtySchema, certificateSchema, imageUrlSchema }
 import patch from '../utils/patch';
 
 export default async function updateTrainerById(values) {
-  let { id, ...updates } = values;
-  let { email, password, firstName, lastName, username, phone, description, specialty, certificate, imageUrl } =
+  const { id, ...updates } = values;
+  const { email, password, firstName, lastName, username, phone, description, specialty, certificate, imageUrl } =
     updates;
-  // #region validation and type conversion
+  // #region validation
   const messages = {};
   if (!emailSchema.safeParse(email).success) {
     messages.email = emailSchema.safeParse(email).error.issues[0].message;
@@ -44,13 +44,12 @@ export default async function updateTrainerById(values) {
   if (Object.keys(messages).length) {
     return messages;
   }
-  description ||= null;
-  specialty ||= null;
-  certificate ||= null;
-  imageUrl ||= null;
   // #endregion
+  updates.description ||= null;
+  updates.specialty ||= null;
+  updates.certificate ||= null;
+  updates.imageUrl ||= null;
 
-  updates = { email, password, firstName, lastName, username, phone, description, specialty, certificate, imageUrl };
   const response = await patch(`${API_URL}/trainers/${id}`, updates);
   const json = await response.json();
   // Special error handling to let 409 pass to NOT trigger error boundary, since `useActionData` already handled validation

@@ -7,8 +7,9 @@ import patch from '../utils/patch';
 
 export async function signupMembers({ request }) {
   const formData = await request.formData();
-  let { email, password, username, firstName, lastName, phone, age, gender } = Object.fromEntries(formData);
-  // #region validation and type conversion
+  const creations = Object.fromEntries(formData);
+  const { email, password, username, firstName, lastName, phone, age, gender } = creations;
+  // #region validation
   const messages = {};
   if (!emailSchema.safeParse(email).success) {
     messages.email = emailSchema.safeParse(email).error.issues[0].message;
@@ -44,12 +45,11 @@ export async function signupMembers({ request }) {
   //  zod schema – using `nullable()`, (2) it reflects that these attributes are nullable in DB; for whether to
   //  use NULL or undefined as the falsy value in the SQL query => "recommend only setting variables to null",
   //  see: https://stackoverflow.com/questions/5076944/what-is-the-difference-between-null-and-undefined-in-javascript/5076989#5076989,
-  // (3) there is an only 1 exceiption, which is addr's `lineTwo`
-  age = parseInt(age, 10) || null;
-  gender = gender || null;
+  // (3) there is an only 1 exception, which is `lineTwo` in `Addresses` table
   // #endregion
+  creations.age = parseInt(age, 10) || null;
+  creations.gender = gender || null;
 
-  const creations = { email, password, username, firstName, lastName, phone, age, gender };
   const response = await post(`${API_URL}/members/signup`, creations);
   // Special error handling to let 409 pass to NOT trigger error boundary, since `useActionData` already handled validation
   if (response.status === 409) {
@@ -64,9 +64,9 @@ export async function signupMembers({ request }) {
 }
 
 export async function updateMemberById(values) {
-  let { id, ...updates } = values;
-  let { email, password, firstName, lastName, username, phone, age, gender } = updates;
-  // #region validation and type conversion
+  const { id, ...updates } = values;
+  const { email, password, firstName, lastName, username, phone, age, gender } = updates;
+  // #region validation
   const messages = {};
   if (!emailSchema.safeParse(email).success) {
     messages.email = emailSchema.safeParse(email).error.issues[0].message;
@@ -95,11 +95,10 @@ export async function updateMemberById(values) {
   if (Object.keys(messages).length) {
     return messages;
   }
-  age = parseInt(age, 10) || null;
-  gender ||= null;
   // #endregion
+  updates.age = parseInt(age, 10) || null;
+  updates.gender ||= null;
 
-  updates = { email, password, username, firstName, lastName, phone, age, gender };
   const response = await patch(`${API_URL}/members/${id}`, updates);
   const json = await response.json();
   // Special error handling to let 409 pass to NOT trigger error boundary, since `useActionData` already handled validation
