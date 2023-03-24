@@ -1,7 +1,7 @@
 import { redirect } from 'react-router-dom';
 import { API_URL } from '../data/constants';
-import { emailSchema, passwordSchema, usernameSchema } from '../data/schemas/logins';
-import { firstNameSchema, lastNameSchema, phoneSchema, ageSchema, genderSchema } from '../data/schemas/members';
+import { emailSchema, passwordSchema, usernameSchema } from './schemas/logins';
+import { firstNameSchema, lastNameSchema, phoneSchema, ageSchema, genderSchema } from './schemas/members';
 import post from '../utils/post';
 import patch from '../utils/patch';
 

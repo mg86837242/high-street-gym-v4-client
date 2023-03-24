@@ -7,7 +7,7 @@ import {
   postcodeSchema,
   stateSchema,
   countrySchema,
-} from '../data/schemas/addresses';
+} from './schemas/addresses';
 import patch from '../utils/patch';
 
 export async function updateAddressByMemberId(memberIdAndUpdates) {
