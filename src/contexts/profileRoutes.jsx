@@ -11,7 +11,7 @@ const profileRoutes = [
   {
     path: 'account',
     async lazy() {
-      let { ProfileEditAccount } = await import('../components/AuthUI/ProfilePanel');
+      let { default: ProfileEditAccount } = await import('../components/AuthUI/ProfileEditAccount');
       return { Component: ProfileEditAccount };
     },
     async loader() {
