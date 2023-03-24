@@ -11,9 +11,10 @@ export default function useDefaultValues() {
       return undefined;
     }
     let ignore = false;
-    switch (authenticatedUser.role) {
+    const { role, adminId, trainerId, memberId } = authenticatedUser;
+    switch (role) {
       case 'Admin':
-        get(`${API_URL}/admins/admin-with-all-details-by-id/${authenticatedUser.adminId}`)
+        get(`${API_URL}/admins/admin-with-all-details-by-id/${adminId}`)
           .then((response) => response.json())
           .then((json) => {
             if (!ignore) {
@@ -22,7 +23,7 @@ export default function useDefaultValues() {
           });
         break;
       case 'Trainer':
-        get(`${API_URL}/trainers/trainer-with-all-details-by-id/${authenticatedUser.trainerId}`)
+        get(`${API_URL}/trainers/trainer-with-all-details-by-id/${trainerId}`)
           .then((response) => response.json())
           .then((json) => {
             if (!ignore) {
@@ -31,7 +32,7 @@ export default function useDefaultValues() {
           });
         break;
       case 'Member':
-        get(`${API_URL}/members/member-with-all-details-by-id/${authenticatedUser.memberId}`)
+        get(`${API_URL}/members/member-with-all-details-by-id/${memberId}`)
           .then((response) => response.json())
           .then((json) => {
             if (!ignore) {
