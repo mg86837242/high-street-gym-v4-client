@@ -8,6 +8,8 @@ export default function ProfileErrorInfo() {
   const navigate = useNavigate();
   // console.error(error); // only for debugging
 
+  // Refresh page i/o go back, so as to cope with the session loss after encountering server errors (e.g. 400),
+  //  also see: https://stackoverflow.com/questions/73048879/how-do-i-reload-my-page-in-remix-run-on-a-button-click-in-an-error-boundary-comp
   function handleClick() {
     navigate('', { replace: true });
   }
