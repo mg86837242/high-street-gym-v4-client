@@ -22,14 +22,6 @@ const profileRoutes = [
       let formData = await request.formData();
       let { _action, ...values } = Object.fromEntries(formData);
 
-      if (_action === 'updateMemberById') {
-        let { updateMemberById } = await import('../services/members');
-        return updateMemberById(values);
-      }
-      if (_action === 'updateAddressByMemberId') {
-        let { updateAddressByMemberId } = await import('../services/address');
-        return updateAddressByMemberId(values);
-      }
       if (_action === 'updateAdminById') {
         let { default: updateAdminById } = await import('../services/admins');
         return updateAdminById(values);
@@ -37,6 +29,23 @@ const profileRoutes = [
       if (_action === 'updateAddressByAdminId') {
         let { updateAddressByAdminId } = await import('../services/address');
         return updateAddressByAdminId(values);
+      }
+      if (_action === 'updateTrainerById') {
+        // FIX Function and API missing for this one
+        let { default: updateTrainerById } = await import('../services/trainers');
+        return updateTrainerById(values);
+      }
+      if (_action === 'updateAddressByTrainerId') {
+        let { updateAddressByTrainerId } = await import('../services/address');
+        return updateAddressByTrainerId(values);
+      }
+      if (_action === 'updateMemberById') {
+        let { updateMemberById } = await import('../services/members');
+        return updateMemberById(values);
+      }
+      if (_action === 'updateAddressByMemberId') {
+        let { updateAddressByMemberId } = await import('../services/address');
+        return updateAddressByMemberId(values);
       }
       return;
     },

@@ -21,6 +21,15 @@ export default function useDefaultValues() {
             }
           });
         break;
+      case 'Trainer':
+        get(`${API_URL}/trainers/trainer-with-all-details-by-id/${authenticatedUser.trainerId}`)
+          .then((response) => response.json())
+          .then((json) => {
+            if (!ignore) {
+              setDefaultValues(json.defaultValues);
+            }
+          });
+        break;
       case 'Member':
         get(`${API_URL}/members/member-with-all-details-by-id/${authenticatedUser.memberId}`)
           .then((response) => response.json())

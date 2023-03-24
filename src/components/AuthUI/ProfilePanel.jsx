@@ -158,8 +158,7 @@ export function ProfileEditAccount() {
     };
   }, [actionData]);
 
-  // [ ] 1.0 For trainers: input components and useDefaultValues && dynamic import service in route's action && API and sql query
-  // [ ] 2.0 "Filter My Bookings" button for member and trainer && cond rendering edit button only for their own bookings
+  // FIX "Filter My Bookings" button for member and trainer && cond rendering edit button only for their own bookings
 
   // NB Need to check if `defaultValues` is truthy, o/w `undefined` will be passed as the `defaultValue` prop for
   //  following inputs before `defaultValues` is populated by the custom Hook, and `useEffect` will be needed to
@@ -191,6 +190,34 @@ export function ProfileEditAccount() {
           </>
         ) : authenticatedUser?.role === 'Trainer' ? (
           <>
+            <InputSmallGroup
+              name='description'
+              type='text'
+              issue={issues?.description}
+              defaultValue={defaultValues?.description}
+              isRequired={false}
+            />{' '}
+            <InputSmallGroup
+              name='specialty'
+              type='text'
+              issue={issues?.specialty}
+              defaultValue={defaultValues?.specialty}
+              isRequired={false}
+            />{' '}
+            <InputSmallGroup
+              name='certificate'
+              type='text'
+              issue={issues?.certificate}
+              defaultValue={defaultValues?.certificate}
+              isRequired={false}
+            />{' '}
+            <InputSmallGroup
+              name='imageUrl'
+              type='text'
+              issue={issues?.imageUrl}
+              defaultValue={defaultValues?.imageUrl}
+              isRequired={false}
+            />
             <input type='hidden' name='id' value={authenticatedUser.trainerId} />
             <button type='submit' name='_action' value='updateTrainerById' className='btn btn-primary btn-sm mt-4'>
               Save
@@ -233,7 +260,7 @@ export function ProfileEditAccount() {
         <InputSmallGroup name='postcode' type='text' issue={issues?.postcode} defaultValue={defaultValues?.postcode} />
         <InputSmallGroup name='state' type='text' issue={issues?.state} defaultValue={defaultValues?.state} />
         <SelectSmallGroupCountry issue={issues?.country} defaultValue={defaultValues?.country} />
-        {/* (2) Conditional input fields and buttons: */}
+        {/* (2) Conditional buttons: */}
         {authenticatedUser?.role === 'Admin' ? (
           <>
             <input type='hidden' name='adminId' value={authenticatedUser.adminId} />
