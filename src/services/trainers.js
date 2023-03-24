@@ -5,10 +5,9 @@ import { firstNameSchema, lastNameSchema, phoneSchema } from './schemas/members'
 import { descriptionSchema, specialtySchema, certificateSchema, imageUrlSchema } from './schemas/trainers';
 import patch from '../utils/patch';
 
-// FIX API and query missing for this one; also, api schema ?
 export default async function updateTrainerById(values) {
-  const { id, ...updates } = values;
-  const { email, password, firstName, lastName, username, phone, description, specialty, certificate, imageUrl } =
+  let { id, ...updates } = values;
+  let { email, password, firstName, lastName, username, phone, description, specialty, certificate, imageUrl } =
     updates;
   // #region validation and type conversion
   const messages = {};
@@ -45,8 +44,13 @@ export default async function updateTrainerById(values) {
   if (Object.keys(messages).length) {
     return messages;
   }
+  description ||= null;
+  specialty ||= null;
+  certificate ||= null;
+  imageUrl ||= null;
   // #endregion
 
+  updates = { email, password, firstName, lastName, username, phone, description, specialty, certificate, imageUrl };
   const response = await patch(`${API_URL}/trainers/${id}`, updates);
   const json = await response.json();
   // Special error handling to let 409 pass to NOT trigger error boundary, since `useActionData` already handled validation
