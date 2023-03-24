@@ -63,8 +63,8 @@ export async function signupMembers({ request }) {
   return redirect('/login');
 }
 
-export async function updateMemberById(idAndUpdates) {
-  let { id, ...updates } = idAndUpdates;
+export async function updateMemberById(values) {
+  let { id, ...updates } = values;
   let { email, password, firstName, lastName, username, phone, age, gender } = updates;
   // #region validation and type conversion
   const messages = {};

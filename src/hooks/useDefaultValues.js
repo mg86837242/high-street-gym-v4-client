@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect } from 'react';
 import AuthContext from '../contexts/AuthContext';
 import { API_URL } from '../data/constants';
+import get from '../utils/get';
 
 export default function useDefaultValues() {
   const { authenticatedUser } = useContext(AuthContext);
@@ -12,9 +13,7 @@ export default function useDefaultValues() {
     let ignore = false;
     switch (authenticatedUser.role) {
       case 'Admin':
-        fetch(`${API_URL}/admins/admin-with-all-details-by-id/${authenticatedUser.adminId}`, {
-          credentials: 'include',
-        })
+        get(`${API_URL}/admins/admin-with-all-details-by-id/${authenticatedUser.adminId}`)
           .then((response) => response.json())
           .then((json) => {
             if (!ignore) {
@@ -23,9 +22,7 @@ export default function useDefaultValues() {
           });
         break;
       case 'Member':
-        fetch(`${API_URL}/members/member-with-all-details-by-id/${authenticatedUser.memberId}`, {
-          credentials: 'include',
-        })
+        get(`${API_URL}/members/member-with-all-details-by-id/${authenticatedUser.memberId}`)
           .then((response) => response.json())
           .then((json) => {
             if (!ignore) {

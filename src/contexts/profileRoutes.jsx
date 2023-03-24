@@ -30,6 +30,15 @@ const profileRoutes = [
         let { updateAddressByMemberId } = await import('../services/address');
         return updateAddressByMemberId(values);
       }
+      if (_action === 'updateAdminById') {
+        let { default: updateAdminById } = await import('../services/admins');
+        return updateAdminById(values);
+      }
+      if (_action === 'updateAddressByAdminId') {
+        let { updateAddressByAdminId } = await import('../services/address');
+        return updateAddressByAdminId(values);
+      }
+      return;
     },
     ErrorBoundary: ErrorInfo,
   },
