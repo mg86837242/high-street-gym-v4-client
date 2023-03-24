@@ -117,6 +117,22 @@ export function ProfileEditAccount() {
             setBotStatusText('');
           })();
         }
+        if (actionData._action === 'updateTrainerById') {
+          (async () => {
+            setIssues({});
+            setTopStatusText(`✅ ${actionData.message}`);
+            await new Promise((res) => setTimeout(res, 5_000));
+            setTopStatusText('');
+          })();
+        }
+        if (actionData._action === 'updateAddressByTrainerId') {
+          (async () => {
+            setIssues({});
+            setBotStatusText(`✅ ${actionData.message}`);
+            await new Promise((res) => setTimeout(res, 5_000));
+            setBotStatusText('');
+          })();
+        }
         if (actionData._action === 'updateMemberById') {
           (async () => {
             setIssues({});
@@ -142,7 +158,7 @@ export function ProfileEditAccount() {
     };
   }, [actionData]);
 
-  // [ ] 1.0 For trainers: input components and useDefaultValues && dynamic import service in route's action && Effect && API and sql query
+  // [ ] 1.0 For trainers: input components and useDefaultValues && dynamic import service in route's action && API and sql query
   // [ ] 2.0 "Filter My Bookings" button for member and trainer && cond rendering edit button only for their own bookings
 
   // NB Need to check if `defaultValues` is truthy, o/w `undefined` will be passed as the `defaultValue` prop for
