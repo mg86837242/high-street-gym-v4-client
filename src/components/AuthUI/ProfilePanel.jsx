@@ -102,8 +102,8 @@ export function ProfileEditAccount() {
       if (actionData?.status === 200) {
         if (actionData._action === 'updateAdminById') {
           (async () => {
-            setTopStatusText(`✅ ${actionData.message}`);
             setIssues({});
+            setTopStatusText(`✅ ${actionData.message}`);
             // ??? Is cleanup needed for this `setTimeout`
             await new Promise((res) => setTimeout(res, 5_000));
             setTopStatusText('');
@@ -111,24 +111,24 @@ export function ProfileEditAccount() {
         }
         if (actionData._action === 'updateAddressByAdminId') {
           (async () => {
-            setBotStatusText(`✅ ${actionData.message}`);
             setIssues({});
+            setBotStatusText(`✅ ${actionData.message}`);
             await new Promise((res) => setTimeout(res, 5_000));
             setBotStatusText('');
           })();
         }
         if (actionData._action === 'updateMemberById') {
           (async () => {
-            setTopStatusText(`✅ ${actionData.message}`);
             setIssues({});
+            setTopStatusText(`✅ ${actionData.message}`);
             await new Promise((res) => setTimeout(res, 5_000));
             setTopStatusText('');
           })();
         }
         if (actionData._action === 'updateAddressByMemberId') {
           (async () => {
-            setBotStatusText(`✅ ${actionData.message}`);
             setIssues({});
+            setBotStatusText(`✅ ${actionData.message}`);
             await new Promise((res) => setTimeout(res, 5_000));
             setBotStatusText('');
           })();
@@ -142,7 +142,7 @@ export function ProfileEditAccount() {
     };
   }, [actionData]);
 
-  // [ ] 1.0 Conditional ... trainers and admins: input components and useDefaultValues && dynamic import service in route's action && API and sql query
+  // [ ] 1.0 For trainers: input components and useDefaultValues && dynamic import service in route's action && API and sql query
   // [ ] 2.0 "Filter My Bookings" button for member and trainer && cond rendering edit button only for their own bookings
 
   // NB Need to check if `defaultValues` is truthy, o/w `undefined` will be passed as the `defaultValue` prop for
