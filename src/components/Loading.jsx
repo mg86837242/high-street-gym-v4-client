@@ -1,10 +1,12 @@
 import { useNavigation } from 'react-router-dom';
 
-export default function LoadingGlobal({ display }) {
+export default function LoadingGlobal({ className }) {
   const navigation = useNavigation();
 
   return (
-    <div className={navigation.state === 'loading' ? display : 'hidden'}>
+    <div
+      className={navigation.state === 'submitting' ? className : navigation.state === 'loading' ? className : 'hidden'}
+    >
       <div className='loading-spinner sticky top-[45vh]'>
         <div id='square1'></div>
         <div id='square2'></div>
