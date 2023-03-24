@@ -30,6 +30,7 @@ const profileRoutes = [
         let { updateAddressByMemberId } = await import('../services/address');
         return updateAddressByMemberId(values);
       }
+      return 1;
     },
     ErrorBoundary: ErrorInfo,
   },

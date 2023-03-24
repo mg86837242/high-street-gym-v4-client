@@ -12,7 +12,10 @@ import SelectSmallGroupCountry from '../UI/SelectSmallGroupCountry';
 
 export function ProfilePanel() {
   return (
-    <div id='profile-panel-wrapper' className='flex flex-col w-full h-full px-4 py-6 md:flex-row max-w-7xl'>
+    <div
+      id='profile-panel-wrapper'
+      className='flex flex-col w-full h-full px-4 py-6 md:flex-row max-w-7xl min-h-[calc(100vh-7.5rem)]'
+    >
       <LeftSidePanel />
       <Outlet />
     </div>
@@ -85,6 +88,7 @@ export function ProfileEditAccount() {
   const { emails } = useLoaderData();
   const actionData = useActionData(null);
   const defaultValues = useDefaultValues();
+  console.log(actionData);
 
   useEffect(() => {
     let ignore = false;
@@ -116,9 +120,7 @@ export function ProfileEditAccount() {
     };
   }, [actionData]);
 
-  // [x] test update to another existing address && maybe ealry return for same address row
-  //  OG demo member addr: 195 Leacroft Road Burbank 4156
-  // [ ] 1.0 Conditional input fields for trainers and admins: input components && dynamic import service in route && API and raw query
+  // [ ] 1.0 Conditional ... trainers and admins: input components && dynamic import service in route && API and raw query
   // [ ] 2.0 "Filter My Bookings" button for member and trainer && cond rendering edit button only for their own bookings
 
   // NB Need to check if `defaultValues` is truthy, o/w `undefined` will be passed as the `defaultValue` prop for
