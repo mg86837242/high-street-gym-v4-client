@@ -2,6 +2,7 @@ import { createBrowserRouter, Link } from 'react-router-dom';
 import Home from '../pages/Home';
 import ErrorInfo from '../components/ErrorInfo';
 import PageLayout from '../pages/PageLayout';
+import Login from '../pages/Login';
 import bookingsRoutes from './bookingsRoutes';
 import profileRoutes from './profileRoutes';
 
@@ -62,10 +63,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/login',
-    async lazy() {
-      let { default: Login } = await import('../pages/Login');
-      return { Component: Login };
-    },
+    Component: Login,
     ErrorBoundary: ErrorInfo,
   },
   {

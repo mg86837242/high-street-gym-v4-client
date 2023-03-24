@@ -11,7 +11,7 @@ export default function useDefaultValues() {
     }
     let ignore = false;
     switch (authenticatedUser.role) {
-      case 'Admin ':
+      case 'Admin':
         fetch(`${API_URL}/admins/admin-with-all-details-by-id/${authenticatedUser.adminId}`, {
           credentials: 'include',
         })
