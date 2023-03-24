@@ -116,8 +116,9 @@ export function ProfileEditAccount() {
     };
   }, [actionData]);
 
-  // [x] test update to another existing address
-  // [ ] 1.0 Conditional input fields for trainers and admins: components && dynamic import service in route && API and raw query
+  // [x] test update to another existing address && maybe ealry return for same address row
+  //  OG demo member addr: 195 Leacroft Road Burbank 4156
+  // [ ] 1.0 Conditional input fields for trainers and admins: input components && dynamic import service in route && API and raw query
   // [ ] 2.0 "Filter My Bookings" button for member and trainer && cond rendering edit button only for their own bookings
 
   // NB Need to check if `defaultValues` is truthy, o/w `undefined` will be passed as the `defaultValue` prop for
@@ -168,7 +169,13 @@ export function ProfileEditAccount() {
       <h1 className='font-sans text-3xl text-primary-content'>Edit My Address</h1>
       <Form method='post' noValidate className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'>
         <InputSmallGroup name='lineOne' type='text' issue={issues?.lineOne} defaultValue={defaultValues?.lineOne} />
-        <InputSmallGroup name='lineTwo' type='text' issue={issues?.lineTwo} defaultValue={defaultValues?.lineTwo} />
+        <InputSmallGroup
+          name='lineTwo'
+          type='text'
+          issue={issues?.lineTwo}
+          defaultValue={defaultValues?.lineTwo}
+          isRequired={false}
+        />
         <InputSmallGroup name='suburb' type='text' issue={issues?.suburb} defaultValue={defaultValues?.suburb} />
         <InputSmallGroup name='postcode' type='text' issue={issues?.postcode} defaultValue={defaultValues?.postcode} />
         <InputSmallGroup name='state' type='text' issue={issues?.state} defaultValue={defaultValues?.state} />

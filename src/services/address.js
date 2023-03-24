@@ -36,7 +36,9 @@ export async function updateAddressByMemberId(memberIdAndUpdates) {
   if (Object.keys(messages).length) {
     return messages;
   }
-  lineTwo ||= null;
+  // NB Even if `lineTwo` is null, `WHERE lineTwo = null` returns false i/o true and `getAddressesByDetails` in the
+  //  model won't return any duplicate row, thus the conversion => Solution: convert falsy `lineTwo` to empty string
+  lineTwo ||= '';
   // #endregion
 
   updates = { lineOne, lineTwo, suburb, postcode, state, country };
