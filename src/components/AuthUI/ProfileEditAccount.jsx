@@ -22,8 +22,7 @@ export default function ProfileEditAccount() {
       return;
       // PS Logging `actionData` fires 4 times, (1 & 2) when `defaultValues` are not populated, rendering no elements,
       //  (3 & 4) when `defaultValues` are populated, rendering respective forms; however (5 & 6) if Effect doesn't
-      //  have this short-circuit, Effect will goes into `setIssues(actionData)` block and causes `actionData` to
-      //  fire twice again
+      //  have this short-circuit, Effect will goes into `else` block and causes `actionData` to fire twice again
     }
     let ignore = false;
     if (!ignore) {
@@ -85,7 +84,6 @@ export default function ProfileEditAccount() {
     };
   }, [actionData]);
 
-  // FIX "Filter My Bookings" button for member and trainer && cond rendering edit button only for their own bookings
   // NB Need to check if `defaultValues` is truthy, o/w `undefined` will be passed as the `defaultValue` prop for
   //  following inputs before `defaultValues` is populated by the custom Hook, and `useEffect` will be needed to
   //  subscribe to the change of `defaultValues` from `undefined` to something

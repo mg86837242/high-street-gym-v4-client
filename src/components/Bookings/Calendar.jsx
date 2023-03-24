@@ -74,10 +74,10 @@ export default function Calendar() {
     >
       <div id='calendar-nav' className='flex items-center gap-10 px-3 rounded-lg lg:gap-20 bg-base-300 py-[.125rem]'>
         <button
+          // NB Bug: random texts get selected/highlighted => b/c the `<FontAwesomeIcon>` is a text element =>
+          //  Solution: wrap up the `<FontAwesomeIcon>` within a button element
           tabIndex={0}
           onClick={() => {
-            // NB Bug: random texts get selected/highlighted => b/c the `<FontAwsomeIcon>` is a text element => Solution: wrap up
-            //  the `<FontAwesomeIcon>` within a button element
             month === 1 ? (setYear((year) => year - 1), setMonth(12)) : setMonth((month) => month - 1);
           }}
         >
@@ -105,12 +105,12 @@ export default function Calendar() {
       >
         {calendarCells}
       </div>
-      <CreateNew />
+      <CreateNewBooking />
     </div>
   );
 }
 
-function CreateNew() {
+function CreateNewBooking() {
   return (
     <section className='flex justify-center gap-5 text-center'>
       <Link to='new' className='w-48 min-h-0 normal-case shadow btn btn-primary text-primary-content shadow-black/50'>
