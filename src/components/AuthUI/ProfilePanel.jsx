@@ -86,11 +86,17 @@ export function ProfileEditAccount() {
   const [botStatusText, setBotStatusText] = useState('');
   const [issues, setIssues] = useState({});
   const { emails } = useLoaderData();
-  const actionData = useActionData(null);
   const defaultValues = useDefaultValues();
-  console.log(actionData);
+  const actionData = useActionData(null);
 
   useEffect(() => {
+    if (!actionData) {
+      return;
+      // PS Logging `actionData` fires 4 times, (1 & 2) when `defaultValues` are not populated, rendering no elements,
+      //  (3 & 4) when `defaultValues` are populated, rendering respective forms; however (5 & 6) if Effect doesn't
+      //  have this short-circuit, Effect will goes into `setIssues(actionData)` block and causes `actionData` to
+      //  fire twice again
+    }
     let ignore = false;
     if (!ignore) {
       if (actionData?.status === 200) {
@@ -120,7 +126,7 @@ export function ProfileEditAccount() {
     };
   }, [actionData]);
 
-  // [ ] 1.0 Conditional ... trainers and admins: input components && dynamic import service in route && API and raw query
+  // [ ] 1.0 Conditional ... trainers and admins: input components and useDefaultValues && dynamic import service in route && API and sql query
   // [ ] 2.0 "Filter My Bookings" button for member and trainer && cond rendering edit button only for their own bookings
 
   // NB Need to check if `defaultValues` is truthy, o/w `undefined` will be passed as the `defaultValue` prop for
@@ -144,7 +150,13 @@ export function ProfileEditAccount() {
         <InputSmallGroup name='phone' type='tel' issue={issues?.phone} defaultValue={defaultValues?.phone} />
         {/* (2) Conditional input fields: */}
         {authenticatedUser?.role === 'Admin' ? (
-          <></>
+          <>
+            <input type='hidden' name='id' value={authenticatedUser.adminId} />
+            <button type='submit' name='_action' value='updateAdminById' className='btn btn-primary btn-sm mt-4'>
+              Save
+            </button>
+            <p className='text-success self-center mt-4'>{topStatusText}</p>
+          </>
         ) : authenticatedUser?.role === 'Trainer' ? (
           <></>
         ) : authenticatedUser?.role === 'Member' ? (
@@ -182,11 +194,32 @@ export function ProfileEditAccount() {
         <InputSmallGroup name='postcode' type='text' issue={issues?.postcode} defaultValue={defaultValues?.postcode} />
         <InputSmallGroup name='state' type='text' issue={issues?.state} defaultValue={defaultValues?.state} />
         <SelectSmallGroupCountry issue={issues?.country} defaultValue={defaultValues?.country} />
-        <input type='hidden' name='memberId' value={authenticatedUser.memberId} />
-        <button type='submit' name='_action' value='updateAddressByMemberId' className='btn btn-primary btn-sm mt-5'>
-          Save
-        </button>
-        <p className='text-success self-center mt-4'>{botStatusText}</p>
+        {authenticatedUser?.role === 'Admin' ? (
+          <>
+            <input type='hidden' name='adminId' value={authenticatedUser.adminId} />
+            <button type='submit' name='_action' value='updateAddressByAdminId' className='btn btn-primary btn-sm mt-5'>
+              Save
+            </button>
+            <p className='text-success self-center mt-4'>{botStatusText}</p>
+          </>
+        ) : authenticatedUser?.role === 'Trainer' ? (
+          <></>
+        ) : authenticatedUser?.role === 'Member' ? (
+          <>
+            <input type='hidden' name='memberId' value={authenticatedUser.memberId} />
+            <button
+              type='submit'
+              name='_action'
+              value='updateAddressByMemberId'
+              className='btn btn-primary btn-sm mt-5'
+            >
+              Save
+            </button>
+            <p className='text-success self-center mt-4'>{botStatusText}</p>
+          </>
+        ) : (
+          <></>
+        )}
       </Form>
     </div>
   ) : (
