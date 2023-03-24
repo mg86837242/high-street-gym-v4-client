@@ -142,7 +142,7 @@ export function ProfileEditAccount() {
     };
   }, [actionData]);
 
-  // [ ] 1.0 For trainers: input components and useDefaultValues && dynamic import service in route's action && API and sql query
+  // [ ] 1.0 For trainers: input components and useDefaultValues && dynamic import service in route's action && Effect && API and sql query
   // [ ] 2.0 "Filter My Bookings" button for member and trainer && cond rendering edit button only for their own bookings
 
   // NB Need to check if `defaultValues` is truthy, o/w `undefined` will be passed as the `defaultValue` prop for
@@ -164,7 +164,7 @@ export function ProfileEditAccount() {
         />
         <InputSmallGroup name='lastName' type='text' issue={issues?.lastName} defaultValue={defaultValues?.lastName} />
         <InputSmallGroup name='phone' type='tel' issue={issues?.phone} defaultValue={defaultValues?.phone} />
-        {/* (2) Conditional input fields: */}
+        {/* (2) Conditional input fields and buttons: */}
         {authenticatedUser?.role === 'Admin' ? (
           <>
             <input type='hidden' name='id' value={authenticatedUser.adminId} />
@@ -174,7 +174,13 @@ export function ProfileEditAccount() {
             <p className='text-success self-center mt-4'>{topStatusText}</p>
           </>
         ) : authenticatedUser?.role === 'Trainer' ? (
-          <></>
+          <>
+            <input type='hidden' name='id' value={authenticatedUser.trainerId} />
+            <button type='submit' name='_action' value='updateTrainerById' className='btn btn-primary btn-sm mt-4'>
+              Save
+            </button>
+            <p className='text-success self-center mt-4'>{topStatusText}</p>
+          </>
         ) : authenticatedUser?.role === 'Member' ? (
           <>
             <InputSmallGroup
@@ -198,6 +204,7 @@ export function ProfileEditAccount() {
       <div className='divider'></div>
       <h1 className='font-sans text-3xl text-primary-content'>Edit My Address</h1>
       <Form method='post' noValidate className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'>
+        {/* (1) Shared input fields: */}
         <InputSmallGroup name='lineOne' type='text' issue={issues?.lineOne} defaultValue={defaultValues?.lineOne} />
         <InputSmallGroup
           name='lineTwo'
@@ -210,6 +217,7 @@ export function ProfileEditAccount() {
         <InputSmallGroup name='postcode' type='text' issue={issues?.postcode} defaultValue={defaultValues?.postcode} />
         <InputSmallGroup name='state' type='text' issue={issues?.state} defaultValue={defaultValues?.state} />
         <SelectSmallGroupCountry issue={issues?.country} defaultValue={defaultValues?.country} />
+        {/* (2) Conditional input fields and buttons: */}
         {authenticatedUser?.role === 'Admin' ? (
           <>
             <input type='hidden' name='adminId' value={authenticatedUser.adminId} />
@@ -219,7 +227,18 @@ export function ProfileEditAccount() {
             <p className='text-success self-center mt-4'>{botStatusText}</p>
           </>
         ) : authenticatedUser?.role === 'Trainer' ? (
-          <></>
+          <>
+            <input type='hidden' name='trainerId' value={authenticatedUser.trainerId} />
+            <button
+              type='submit'
+              name='_action'
+              value='updateAddressByTrainerId'
+              className='btn btn-primary btn-sm mt-5'
+            >
+              Save
+            </button>
+            <p className='text-success self-center mt-4'>{botStatusText}</p>
+          </>
         ) : authenticatedUser?.role === 'Member' ? (
           <>
             <input type='hidden' name='memberId' value={authenticatedUser.memberId} />
