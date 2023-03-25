@@ -1,4 +1,5 @@
-import { useState, useMemo } from 'react';
+import { useContext, useState, useMemo } from 'react';
+import AuthContext from '../../contexts/AuthContext';
 import { Link, NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSquareCaretLeft, faSquareCaretRight } from '@fortawesome/free-solid-svg-icons';
@@ -68,10 +69,7 @@ export default function Calendar() {
   );
 
   return (
-    <div
-      id='calendar-wrapper'
-      className='grid justify-items-center content-start w-full lg:w-fit gap-3 3xl:gap-6 col-[1_/_2] row-[1_/_2] lg:min-h-[80vh] lg:sticky lg:top-28 lg:justify-self-end'
-    >
+    <CalendarWrapper>
       <div id='calendar-nav' className='flex items-center gap-10 px-3 rounded-lg lg:gap-20 bg-base-300 py-[.25rem]'>
         <button
           // NB Bug: random texts get selected/highlighted => b/c the `<FontAwesomeIcon>` is a text element =>
@@ -110,6 +108,26 @@ export default function Calendar() {
         {calendarCells}
       </div>
       <CreateNewBooking />
+    </CalendarWrapper>
+  );
+}
+
+function CalendarWrapper({ children }) {
+  const { authenticatedUser } = useContext(AuthContext);
+
+  return authenticatedUser ? (
+    <div
+      id='calendar-wrapper'
+      className='grid justify-items-center content-start w-full lg:w-fit gap-3 3xl:gap-6 col-[1_/_2] row-[1_/_2] lg:min-h-[80vh] lg:sticky lg:top-28 lg:justify-self-end'
+    >
+      {children}
+    </div>
+  ) : (
+    <div
+      id='calendar-wrapper'
+      className='grid justify-items-center content-start w-full lg:w-fit gap-3 3xl:gap-6 col-[1_/_2] row-[1_/_2] lg:min-h-[80vh] lg:sticky lg:top-28 lg:justify-self-center'
+    >
+      {children}
     </div>
   );
 }
