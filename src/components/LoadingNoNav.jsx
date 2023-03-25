@@ -1,4 +1,4 @@
-export default function Loading() {
+export default function LoadingNoNav() {
   return (
     <div className={'fixed top-0 bottom-0 left-0 right-0'}>
       <div className='loading-spinner absolute top-1/2 left-1/2 mt-[-43px] ml-[-58px]'>
