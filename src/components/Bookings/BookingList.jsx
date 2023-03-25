@@ -61,49 +61,65 @@ export default function BookingList() {
 
   if (authenticatedUser) {
     if (bookings.length) {
-      return (
-        <>
-          <ul
-            id='booking-list-wrapper'
-            className='grid w-full gap-4 justify-items-center col-[1_/_2] row-[2_/_3] lg:col-[2_/_3] lg:row-[1_/_2]'
-          >
-            {bookingList}
-          </ul>
-          <Outlet />
-        </>
-      );
+      return <BookingListAuthedView bookingList={bookingList} />;
     } else {
-      return (
-        <>
-          <div
-            id='empty-list-wrapper'
-            className='grid w-full place-items-center col-[1_/_2] row-[2_/_3] lg:col-[2_/_3] lg:row-[1_/_2] lg:min-h-[80vh] lg:sticky lg:top-28'
-          >
-            <p className='text-lg'>😢 No booking found on this date.</p>
-          </div>
-          <Outlet />
-        </>
-      );
+      return <NoBookingAuthedView />;
     }
   } else {
     if (bookings.length) {
-      return (
-        <ul
-          id='booking-list-wrapper'
-          className='grid w-full gap-4 justify-items-center md:grid-cols-2 2xl:grid-cols-3 col-[1_/_2] row-[2_/_4] lg:col-[2_/_4] lg:row-[1_/_2]'
-        >
-          {bookingList}
-        </ul>
-      );
+      return <BookingListGuestView bookingList={bookingList} />;
     } else {
-      return (
-        <div
-          id='empty-list-wrapper'
-          className='grid w-full place-items-center col-[1_/_2] row-[2_/_4] lg:col-[2_/_4] lg:row-[1_/_2] lg:min-h-[80vh] lg:sticky lg:top-28'
-        >
-          <p className='text-lg'>😢 No booking found on this date.</p>
-        </div>
-      );
+      return <NoBookingGuestView />;
     }
   }
+}
+
+function BookingListAuthedView({ bookingList }) {
+  return (
+    <>
+      <ul
+        id='booking-list-wrapper'
+        className='grid justify-items-center content-start w-full gap-4 col-[1_/_2] row-[2_/_3] lg:col-[2_/_3] lg:row-[1_/_2]'
+      >
+        {bookingList}
+      </ul>
+      <Outlet />
+    </>
+  );
+}
+
+function NoBookingAuthedView() {
+  return (
+    <>
+      <div
+        id='empty-list-wrapper'
+        className='grid w-full place-items-center col-[1_/_2] row-[2_/_3] lg:col-[2_/_3] lg:row-[1_/_2] lg:min-h-[80vh] lg:sticky lg:top-28'
+      >
+        <p className='text-lg'>😢 No booking found on this date.</p>
+      </div>
+      <Outlet />
+    </>
+  );
+}
+
+function BookingListGuestView({ bookingList }) {
+  return (
+    <ul
+      id='booking-list-wrapper'
+      className='grid justify-items-center content-start w-full gap-4 md:grid-cols-2 2xl:grid-cols-3 col-[1_/_2] row-[2_/_4] lg:col-[2_/_4] lg:row-[1_/_2]'
+    >
+      {bookingList}
+    </ul>
+  );
+}
+
+function NoBookingGuestView() {
+  return (
+    <div
+      id='empty-list-wrapper'
+      className='grid w-full place-items-center col-[1_/_2] row-[2_/_4] lg:col-[2_/_4] lg:row-[1_/_2] lg:min-h-[80vh] lg:sticky lg:top-28'
+    >
+      <p className='text-lg'>😢 No booking found on this date.</p>
+    </div>
+  );
 }

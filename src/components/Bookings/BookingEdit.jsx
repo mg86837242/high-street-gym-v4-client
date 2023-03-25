@@ -8,7 +8,7 @@ export default function BookingEdit() {
   return (
     <div
       id='booking-edit-wrapper'
-      className='grid content-start w-full justify-items-center col-[1_/_2] row-[3_/_4] lg:col-[3_/_4] lg:row-[1_/_2] lg:min-h-[80vh] lg:sticky lg:top-28'
+      className='grid content-start w-full lg:w-fit justify-items-center col-[1_/_2] row-[3_/_4] lg:col-[3_/_4] lg:row-[1_/_2] lg:min-h-[80vh] lg:sticky lg:top-28 lg:justify-self-start'
     >
       <div
         id='booking-edit-form-wrapper'

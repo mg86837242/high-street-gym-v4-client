@@ -70,7 +70,7 @@ export default function Calendar() {
   return (
     <div
       id='calendar-wrapper'
-      className='grid content-start w-full gap-3 justify-items-center 3xl:gap-6 col-[1_/_2] row-[1_/_2] lg:min-h-[80vh] lg:sticky lg:top-28'
+      className='grid justify-items-center content-start w-full lg:w-fit gap-3 3xl:gap-6 col-[1_/_2] row-[1_/_2] lg:min-h-[80vh] lg:sticky lg:top-28 lg:justify-self-end'
     >
       <div id='calendar-nav' className='flex items-center gap-10 px-3 rounded-lg lg:gap-20 bg-base-300 py-[.125rem]'>
         <button
