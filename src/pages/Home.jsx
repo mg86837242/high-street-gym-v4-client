@@ -1,4 +1,4 @@
-import Hero1 from '../components/Hero1';
+import Hero from '../components/Hero1';
 import NavBar from '../components/NavBar';
 import MainWrapper from '../components/MainWrapper';
 import Feature1 from '../components/Feature1';
@@ -9,9 +9,9 @@ import Footer from '../components/Footer';
 export default function Home() {
   return (
     <>
-      <Hero1>
+      <Hero>
         <NavBar isHome={true} />
-      </Hero1>
+      </Hero>
       <MainWrapper gap={'gap-16'} mt={'mt-16'} mb={'mb-20'}>
         <Feature1>
           <Carousel1 />

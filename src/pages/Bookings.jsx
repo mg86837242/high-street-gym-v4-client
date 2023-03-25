@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom';
 import MainWrapper from '../components/MainWrapper';
 import Breadcrumbs from '../components/Breadcrumbs';
 import Calendar from '../components/Bookings/Calendar';
-import Loading from '../components/Loading';
+import Spinner1 from '../components/Spinner1';
 
 export default function Bookings() {
   return (
@@ -16,7 +16,7 @@ export default function Bookings() {
           <Calendar />
           <Outlet />
         </div>
-        <Loading display={`fixed top-0 bottom-0 left-0 right-0`} />
+        <Spinner1 />
       </MainWrapper>
     </>
   );

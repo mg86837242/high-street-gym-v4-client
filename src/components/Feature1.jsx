@@ -1,4 +1,4 @@
-export default function Feature1({ children }) {
+export default function Feature({ children }) {
   return (
     <div id='feature-1-wrapper' className='grid place-items-center gap-10 w-full'>
       <h1 className='text-secondary text-center w-full lg:w-4/5'>

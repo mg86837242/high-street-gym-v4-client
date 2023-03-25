@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import carouselItems from '../data/carouselItems';
 
-export default function Carousel2() {
+export default function Carousel() {
   const listRef = useRef(null);
 
   function scrollToIndex(index) {

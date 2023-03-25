@@ -1,4 +1,4 @@
-export default function Hero1({ children }) {
+export default function Hero({ children }) {
   return (
     <div id='hero-1-wrapper' className='grid grid-rows-1 grid-cols-1'>
       <img
