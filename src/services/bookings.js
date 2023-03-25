@@ -24,6 +24,7 @@ export async function getBookingsByDate({ params }) {
     }`;
     throw new Response(message);
   }
+  await new Promise((r) => setTimeout(r, 1_000));
   return response;
 }
 
