@@ -5,16 +5,18 @@ import { monthNames, getOrdinal } from '../../utils/mapDates';
 // TODO Dup booking: same member can't book at the same time, even the trainer is available
 
 export default function BookingList() {
-  const { authenticatedUser } = useContext(AuthContext);
+  const {
+    authenticatedUser: { role, memberId },
+  } = useContext(AuthContext);
   const { bookings } = useLoaderData();
 
-  if (authenticatedUser.role === 'Member') {
+  if (role === 'Member') {
     if (bookings.length) {
-      return <BookingListMemberView bookings={bookings} user={authenticatedUser} />;
+      return <BookingListMemberView bookings={bookings} userMemberId={memberId} />;
     } else {
       return <NoBookingAuthedView />;
     }
-  } else if (authenticatedUser.role === 'Trainer' || 'Admin') {
+  } else if (role === 'Trainer' || 'Admin') {
     if (bookings.length) {
       return <BookingListAdminView bookings={bookings} />;
     } else {
@@ -29,7 +31,7 @@ export default function BookingList() {
   }
 }
 
-function BookingListMemberView({ bookings, user }) {
+function BookingListMemberView({ bookings, userMemberId }) {
   // TODO (1) my booking list view (dropdown), with all list having the link to details, (2) my booking list view (dropdown) for trainer, but not for admin
   const bookingList = useMemo(
     () =>
@@ -48,7 +50,7 @@ function BookingListMemberView({ bookings, user }) {
           },
           i
         ) => {
-          return user.memberId === memberId ? (
+          return userMemberId === memberId ? (
             <li id='booking-list-card' key={i} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
               <NavLink
                 to={`id/${id}`}
@@ -110,7 +112,7 @@ function BookingListMemberView({ bookings, user }) {
           );
         }
       ),
-    [bookings, user]
+    [bookings, userMemberId]
   );
 
   return (
