@@ -14,31 +14,32 @@ export default function useDefaultValues() {
     const { role, adminId, trainerId, memberId } = authenticatedUser;
     switch (role) {
       case 'Admin':
-        get(`${API_URL}/admins/admin-with-all-details-by-id/${adminId}`)
-          .then((response) => response.json())
-          .then((json) => {
-            if (!ignore) {
-              setDefaultValues(json.defaultValues);
-            }
-          });
+        (async () => {
+          const response = await get(`${API_URL}/admins/admin-with-all-details-by-id/${adminId}`);
+          const json = await response.json();
+          await new Promise((r) => setTimeout(r, 10_000));
+          if (!ignore) {
+            setDefaultValues(json.defaultValues);
+          }
+        })();
         break;
       case 'Trainer':
-        get(`${API_URL}/trainers/trainer-with-all-details-by-id/${trainerId}`)
-          .then((response) => response.json())
-          .then((json) => {
-            if (!ignore) {
-              setDefaultValues(json.defaultValues);
-            }
-          });
+        (async () => {
+          const response = await get(`${API_URL}/trainers/trainer-with-all-details-by-id/${trainerId}`);
+          const json = await response.json();
+          if (!ignore) {
+            setDefaultValues(json.defaultValues);
+          }
+        })();
         break;
       case 'Member':
-        get(`${API_URL}/members/member-with-all-details-by-id/${memberId}`)
-          .then((response) => response.json())
-          .then((json) => {
-            if (!ignore) {
-              setDefaultValues(json.defaultValues);
-            }
-          });
+        (async () => {
+          const response = await get(`${API_URL}/members/member-with-all-details-by-id/${memberId}`);
+          const json = await response.json();
+          if (!ignore) {
+            setDefaultValues(json.defaultValues);
+          }
+        })();
         break;
       default:
         break;
