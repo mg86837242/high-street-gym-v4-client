@@ -1,4 +1,4 @@
-import Spinner from './Spinner1';
+import Loading from './Loading';
 
 export default function MainWrapper({ children, gap, mt, mb }) {
   return (
@@ -7,7 +7,7 @@ export default function MainWrapper({ children, gap, mt, mb }) {
       className={`flex flex-col place-items-center w-full ${gap} ${mt} ${mb} min-h-[80vh]`}
     >
       {children}
-      <Spinner />
+      <Loading />
     </main>
   );
 }

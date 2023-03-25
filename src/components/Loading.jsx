@@ -1,6 +1,6 @@
 import { useNavigation } from 'react-router-dom';
 
-export default function Spinner() {
+export default function Loading() {
   const navigation = useNavigation();
 
   return (
