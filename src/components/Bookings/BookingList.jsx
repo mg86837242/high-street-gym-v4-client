@@ -2,7 +2,6 @@ import { useContext, useMemo } from 'react';
 import AuthContext from '../../contexts/AuthContext';
 import { useLoaderData, NavLink, Outlet } from 'react-router-dom';
 import { monthNames, getOrdinal } from '../../utils/mapDates';
-// TODO Cond rendering edit button and delete button for members, only allowing editing/deleting their own bookings
 // TODO Dup booking: same member can't book at the same time, even the trainer is available
 
 export default function BookingList() {
@@ -25,6 +24,7 @@ export default function BookingList() {
 }
 
 function BookingListAuthedView({ bookings, user }) {
+  // TODO (1) if user.memberId same, link to details, (2) if user.memberId not the same, no link to details, (3) my booking list view (dropdown), with all list having the link to details
   const bookingList = useMemo(
     () =>
       bookings.map(

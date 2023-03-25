@@ -72,7 +72,7 @@ export default function Calendar() {
       id='calendar-wrapper'
       className='grid justify-items-center content-start w-full lg:w-fit gap-3 3xl:gap-6 col-[1_/_2] row-[1_/_2] lg:min-h-[80vh] lg:sticky lg:top-28 lg:justify-self-end'
     >
-      <div id='calendar-nav' className='flex items-center gap-10 px-3 rounded-lg lg:gap-20 bg-base-300 py-[.125rem]'>
+      <div id='calendar-nav' className='flex items-center gap-10 px-3 rounded-lg lg:gap-20 bg-base-300 py-[.25rem]'>
         <button
           // NB Bug: random texts get selected/highlighted => b/c the `<FontAwesomeIcon>` is a text element =>
           //  Solution: wrap up the `<FontAwesomeIcon>` within a button element
@@ -83,9 +83,13 @@ export default function Calendar() {
         >
           <FontAwesomeIcon icon={faSquareCaretLeft} className='text-2xl cursor-pointer md:text-3xl' />
         </button>
-        <div id='selected-yy-mm-wrapper' className='flex flex-col items-center gap-2 sm:text-lg 3xl:text-2xl'>
-          <p id='selected-yy'>{year}</p>
-          <p id='selected-mm'>{monthNames[month]}</p>
+        <div id='selected-yy-mm-wrapper' className='flex flex-col items-center'>
+          <p id='selected-yy' className='sm:text-lg'>
+            {year}
+          </p>
+          <p id='selected-mm' className='sm:text-lg'>
+            {monthNames[month]}
+          </p>
         </div>
         <button
           tabIndex={0}
