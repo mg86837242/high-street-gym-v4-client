@@ -17,8 +17,8 @@ export default function useDefaultValues() {
         (async () => {
           const response = await get(`${API_URL}/admins/admin-with-all-details-by-id/${adminId}`);
           const json = await response.json();
-          await new Promise((r) => setTimeout(r, 10_000));
           if (!ignore) {
+            await new Promise((r) => setTimeout(r, 1_500));
             setDefaultValues(json.defaultValues);
           }
         })();
@@ -28,6 +28,7 @@ export default function useDefaultValues() {
           const response = await get(`${API_URL}/trainers/trainer-with-all-details-by-id/${trainerId}`);
           const json = await response.json();
           if (!ignore) {
+            await new Promise((r) => setTimeout(r, 1_500));
             setDefaultValues(json.defaultValues);
           }
         })();
@@ -37,6 +38,7 @@ export default function useDefaultValues() {
           const response = await get(`${API_URL}/members/member-with-all-details-by-id/${memberId}`);
           const json = await response.json();
           if (!ignore) {
+            await new Promise((r) => setTimeout(r, 1_500));
             setDefaultValues(json.defaultValues);
           }
         })();

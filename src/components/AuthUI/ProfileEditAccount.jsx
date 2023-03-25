@@ -2,6 +2,7 @@ import { useContext, useState, useEffect } from 'react';
 import AuthContext from '../../contexts/AuthContext';
 import { useLoaderData, useActionData, Form } from 'react-router-dom';
 import useDefaultValues from '../../hooks/useDefaultValues';
+import LoadingNoNav from '../LoadingNoNav';
 import InputSmallGroupEmail from '../UI/InputSmallGroupEmail';
 import InputSmallGroupPass from '../UI/InputSmallGroupPass';
 import InputSmallGroup from '../UI/InputSmallGroup';
@@ -31,7 +32,7 @@ export default function ProfileEditAccount() {
           (async () => {
             setIssues({});
             setTopStatusText(`✅ ${actionData.message}`);
-            await new Promise((res) => setTimeout(res, 5_000));
+            await new Promise((r) => setTimeout(r, 5_000));
             setTopStatusText('');
           })();
         }
@@ -39,7 +40,7 @@ export default function ProfileEditAccount() {
           (async () => {
             setIssues({});
             setBotStatusText(`✅ ${actionData.message}`);
-            await new Promise((res) => setTimeout(res, 5_000));
+            await new Promise((r) => setTimeout(r, 5_000));
             setBotStatusText('');
           })();
         }
@@ -47,7 +48,7 @@ export default function ProfileEditAccount() {
           (async () => {
             setIssues({});
             setTopStatusText(`✅ ${actionData.message}`);
-            await new Promise((res) => setTimeout(res, 5_000));
+            await new Promise((r) => setTimeout(r, 5_000));
             setTopStatusText('');
           })();
         }
@@ -55,7 +56,7 @@ export default function ProfileEditAccount() {
           (async () => {
             setIssues({});
             setBotStatusText(`✅ ${actionData.message}`);
-            await new Promise((res) => setTimeout(res, 5_000));
+            await new Promise((r) => setTimeout(r, 5_000));
             setBotStatusText('');
           })();
         }
@@ -63,7 +64,7 @@ export default function ProfileEditAccount() {
           (async () => {
             setIssues({});
             setTopStatusText(`✅ ${actionData.message}`);
-            await new Promise((res) => setTimeout(res, 5_000));
+            await new Promise((r) => setTimeout(r, 5_000));
             setTopStatusText('');
           })();
         }
@@ -71,7 +72,7 @@ export default function ProfileEditAccount() {
           (async () => {
             setIssues({});
             setBotStatusText(`✅ ${actionData.message}`);
-            await new Promise((res) => setTimeout(res, 5_000));
+            await new Promise((r) => setTimeout(r, 5_000));
             setBotStatusText('');
           })();
         }
@@ -225,6 +226,6 @@ export default function ProfileEditAccount() {
       </Form>
     </div>
   ) : (
-    <></>
+    <LoadingNoNav />
   );
 }
