@@ -10,9 +10,9 @@
 /*  see: https://tailwindcss.com/docs/adding-custom-styles#using-css-and-layer */
 /* NB 1.5 Tailwind has alreayd provided out-of-the-box base styles, see: https://tailwindcss.com/docs/preflight, in which `box-sizing: border-box` is claimed to be made default, see: https://tailwindcss.com/docs/box-sizing#including-borders-and-padding */
 /* 1.6 The following base style enables a colored border to help with styling the box model & flex & grid & etc. */
-#main-element-wrapper * {
+/* #main-element-wrapper * {
   @apply border-[1px] border-rose-500/50;
-}
+} */
 
 html {
   @apply font-sans font-normal leading-normal m-0 p-0;
@@ -23,11 +23,11 @@ html {
 }
 
 body {
-  @apply grid grid-cols-1 justify-items-center min-w-[20rem] min-h-screen m-0 p-0;
+  @apply flex place-items-center min-w-[20rem] min-h-screen m-0 p-0;
 }
 
 #root {
-  @apply w-full m-0 p-0;
+  @apply w-full h-full m-0 p-0;
 }
 
 h1 {
@@ -125,16 +125,12 @@ p {
     padding: 0px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 10px;
-    margin-bottom: 30px;
     position: relative;
   }
 
   .loading-spinner div {
     @apply bg-secondary;
     display: inline-block;
-    /*background: var(--text-color);*/
-    /*box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);*/
     border: none;
     border-radius: 2px;
     width: var(--square);
