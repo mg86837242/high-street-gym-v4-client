@@ -15,7 +15,9 @@ export default function BookingNew() {
         className='flex flex-col gap-5 bg-base-300 rounded-lg w-[22rem] xl:w-[30rem] px-4 xl:px-6 pt-2 3xl:pt-4 pb-4'
       >
         <h1 className='text-secondary text-center'>New Booking</h1>
-        <p>Note: If the specified trainer is not available at the specified time, the booking will get denied.</p>
+        <p>
+          Note: If the specified member or trainer is not available at the specified time, the booking will get denied.
+        </p>
         <Form method='post' className='flex flex-col gap-5'>
           <label className='input-group grid grid-cols-1 xl:grid-cols-[minmax(1rem,_1fr)_minmax(3rem,_3fr)]'>
             <span className='p-0'>Activity:</span>

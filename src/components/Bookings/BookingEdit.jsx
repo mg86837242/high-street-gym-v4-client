@@ -15,7 +15,9 @@ export default function BookingEdit() {
         className='flex flex-col w-full gap-5 px-4 py-4 rounded-lg bg-base-300 max-w-[22rem] lg:max-w-[30rem] xl:px-6'
       >
         <h1 className='text-center text-secondary'>Edit Booking</h1>
-        <p>Note: If the specified trainer is not available at the specified time, the booking will get denied.</p>
+        <p>
+          Note: If the specified member or trainer is not available at the specified time, the booking will get denied.
+        </p>
         <Form method='post' className='flex flex-col gap-5'>
           <label className='input-group grid grid-cols-1 xl:grid-cols-[minmax(1rem,_1fr)_minmax(3rem,_3fr)]'>
             <span className='p-0'>Activity:</span>
