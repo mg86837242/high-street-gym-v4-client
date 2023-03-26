@@ -9,6 +9,3 @@ export default function Canvas({ children }) {
     </div>
   );
 }
-
-// References:
-// -- https://tailwindcomponents.com/component/free-tailwind-css-sign-in-component
