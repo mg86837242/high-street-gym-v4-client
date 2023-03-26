@@ -32,7 +32,7 @@ export default function BookingList() {
 }
 
 function BookingListMemberView({ bookings, userMemberId }) {
-  // TODO (1) no booking prompt if nothing in myBookingList, (2) my booking list view (dropdown) for trainer, but not for admin
+  // TODO (1) no booking prompt if nothing in myBookingList
   const [selectedValue, setSelectedValue] = useState('all-booking-list');
   const allBookingList = useMemo(
     () =>
@@ -115,8 +115,9 @@ function BookingListMemberView({ bookings, userMemberId }) {
       ),
     [bookings, userMemberId]
   );
-  const myBookingList = useMemo(
-    () =>
+  const myBookingList = useMemo(() => {
+    const hasMyBooking = bookings.find(({ memberId }) => memberId === userMemberId);
+    return hasMyBooking ? (
       bookings.map(
         (
           {
@@ -132,7 +133,7 @@ function BookingListMemberView({ bookings, userMemberId }) {
           },
           i
         ) =>
-          userMemberId === memberId && (
+          memberId === userMemberId && (
             <li id='booking-list-card' key={i} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
               <NavLink
                 to={`id/${id}`}
@@ -166,12 +167,11 @@ function BookingListMemberView({ bookings, userMemberId }) {
               </NavLink>
             </li>
           )
-      ),
-    [bookings, userMemberId]
-  );
-  console.log('🟢');
-  console.log(myBookingList);
-  console.log('🟢');
+      )
+    ) : (
+      <p className='text-lg text-center'>No booking found</p>
+    );
+  }, [bookings, userMemberId]);
 
   return (
     <>
