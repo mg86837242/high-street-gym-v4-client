@@ -7,6 +7,7 @@ import { today } from '../../data/keyDates';
 import { monthNames, dayNames } from '../../utils/mapDates';
 
 export default function Calendar() {
+  const { authenticatedUser } = useContext(AuthContext);
   // NB The following 2 states are just snapshots of date when this component is rendered, i.e., can be updated by
   //  setter, however, won't update according to the real time unless with `useEffect`
   const [year, setYear] = useState(today.getFullYear());
@@ -107,7 +108,7 @@ export default function Calendar() {
       >
         {calendarCells}
       </div>
-      <CreateNewBooking />
+      {authenticatedUser && <CreateNewBooking />}
     </CalendarWrapper>
   );
 }

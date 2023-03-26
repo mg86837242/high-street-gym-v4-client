@@ -2,7 +2,6 @@ import { useContext, useMemo, useState } from 'react';
 import AuthContext from '../../contexts/AuthContext';
 import { useLoaderData, NavLink, Outlet } from 'react-router-dom';
 import { monthNames, getOrdinal } from '../../utils/mapDates';
-// FIX Dup booking: same member can't book at the same time, even the trainer is available
 
 export default function BookingList() {
   const { authenticatedUser } = useContext(AuthContext);
