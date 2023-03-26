@@ -5,6 +5,7 @@ export default function BookingNew() {
   const { members, trainers, activities } = useLoaderData();
   const navigate = useNavigate();
 
+  // FIX Auto select current member/trainer in the `new booking`, `edit booking` and `update booking` panel
   return (
     <div
       id='booking-new-wrapper'

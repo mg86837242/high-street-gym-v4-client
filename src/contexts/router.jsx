@@ -1,6 +1,6 @@
 import { createBrowserRouter, Link } from 'react-router-dom';
 import Home from '../pages/Home';
-import ErrorInfo from '../components/ErrorInfo';
+import ErrorInfoBack from '../components/ErrorInfoBack';
 import PageLayout from '../pages/PageLayout';
 import Login from '../pages/Login';
 import bookingsRoutes from './bookingsRoutes';
@@ -10,11 +10,11 @@ const router = createBrowserRouter([
   {
     path: '/',
     Component: Home,
-    ErrorBoundary: ErrorInfo,
+    ErrorBoundary: ErrorInfoBack,
   },
   {
     Component: PageLayout,
-    ErrorBoundary: ErrorInfo,
+    ErrorBoundary: ErrorInfoBack,
     children: [
       {
         path: 'blogs',
@@ -22,7 +22,7 @@ const router = createBrowserRouter([
           let { default: Blogs } = await import('../pages/Blogs');
           return { Component: Blogs };
         },
-        ErrorBoundary: ErrorInfo,
+        ErrorBoundary: ErrorInfoBack,
       },
       {
         path: 'bookings',
@@ -30,7 +30,7 @@ const router = createBrowserRouter([
           let { default: Bookings } = await import('../pages/Bookings');
           return { Component: Bookings };
         },
-        ErrorBoundary: ErrorInfo,
+        ErrorBoundary: ErrorInfoBack,
         handle: { crumb: () => <Link to='/bookings'>Calendar</Link> },
         children: [...bookingsRoutes],
       },
@@ -40,7 +40,7 @@ const router = createBrowserRouter([
           let { default: Activities } = await import('../pages/Activities');
           return { Component: Activities };
         },
-        ErrorBoundary: ErrorInfo,
+        ErrorBoundary: ErrorInfoBack,
       },
       {
         path: 'admin',
@@ -48,7 +48,7 @@ const router = createBrowserRouter([
           let { default: Admin } = await import('../pages/Admin');
           return { Component: Admin };
         },
-        ErrorBoundary: ErrorInfo,
+        ErrorBoundary: ErrorInfoBack,
       },
       {
         path: 'profile',
@@ -56,7 +56,7 @@ const router = createBrowserRouter([
           let { default: Profile } = await import('../pages/Profile');
           return { Component: Profile };
         },
-        ErrorBoundary: ErrorInfo,
+        ErrorBoundary: ErrorInfoBack,
         children: [...profileRoutes],
       },
     ],
@@ -64,7 +64,7 @@ const router = createBrowserRouter([
   {
     path: '/login',
     Component: Login,
-    ErrorBoundary: ErrorInfo,
+    ErrorBoundary: ErrorInfoBack,
   },
   {
     path: '/signup',
@@ -72,7 +72,7 @@ const router = createBrowserRouter([
       let { default: Signup } = await import('../pages/Signup');
       return { Component: Signup };
     },
-    ErrorBoundary: ErrorInfo,
+    ErrorBoundary: ErrorInfoBack,
     async loader() {
       let { default: getAllLoginEmails } = await import('../services/logins');
       return getAllLoginEmails();

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import ErrorInfo from '../components/ErrorInfo';
+import ErrorInfoBack from '../components/ErrorInfoBack';
 import BookingListIndex from '../components/Bookings/BookingListIndex';
 import BookingDetailsIndex from '../components/Bookings/BookingDetailsIndex';
 
@@ -11,7 +11,7 @@ const bookingsRoutes = [
       let { default: BookingList } = await import('../components/Bookings/BookingList');
       return { Component: BookingList };
     },
-    ErrorBoundary: ErrorInfo,
+    ErrorBoundary: ErrorInfoBack,
     async loader({ params }) {
       let { getBookingsByDate } = await import('../services/bookings');
       return getBookingsByDate({ params });
@@ -40,7 +40,7 @@ const bookingsRoutes = [
           let { default: BookingDetails } = await import('../components/Bookings/BookingDetails');
           return { Component: BookingDetails };
         },
-        ErrorBoundary: ErrorInfo,
+        ErrorBoundary: ErrorInfoBack,
         async loader({ params }) {
           let { getBookingById } = await import('../services/bookings');
           return getBookingById({ params });
@@ -60,7 +60,7 @@ const bookingsRoutes = [
           let { default: BookingEdit } = await import('../components/Bookings/BookingEdit');
           return { Component: BookingEdit };
         },
-        ErrorBoundary: ErrorInfo,
+        ErrorBoundary: ErrorInfoBack,
         async loader({ params }) {
           let { getBookingAndOptionsById } = await import('../services/bookings');
           return getBookingAndOptionsById({ params });
@@ -80,7 +80,7 @@ const bookingsRoutes = [
       },
       {
         path: 'id/:id/destroy',
-        ErrorBoundary: ErrorInfo,
+        ErrorBoundary: ErrorInfoBack,
         async action({ params }) {
           let { deleteBookingById } = await import('../services/bookings');
           return deleteBookingById({ params });
@@ -94,7 +94,7 @@ const bookingsRoutes = [
       let { default: BookingNew } = await import('../components/Bookings/BookingNew');
       return { Component: BookingNew };
     },
-    ErrorBoundary: ErrorInfo,
+    ErrorBoundary: ErrorInfoBack,
     async loader() {
       let { getAllBookingOptions } = await import('../services/bookings');
       return getAllBookingOptions();

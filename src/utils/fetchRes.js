@@ -49,10 +49,10 @@ export default async function fetchRes(url, method, body) {
   // NB No `catch` block nor `catch()` method has been used during handling fetch errors b/c React Router's
   //  `errorElement` will catch those errors, see `errorElement`'s spec
   // PS3 The most ideal way of handling fetch errors is to `throw new Response()`, then use the `error.data` to render
-  //  the thrown response, which complies with React Router's specs – the `error` obj returned from the `useRouteError`
-  //  Hook has a special shape (that can be observed by console logging) b/c the thrown response is tucked into a
-  //  constructor called `ErrorResponse` (see: https://reactrouter.com/en/main/utils/is-route-error-response, which also
-  //  explains why this is the most ideal way)
+  //  the caught response, which complies with React Router's specs – the `error` obj returned from the `useRouteError`
+  //  Hook has a special shape (that can be observed by console logging) b/c the thrown response is unwrapped(tucked)
+  //  into a constructor called `ErrorResponse` (see: https://reactrouter.com/en/main/utils/is-route-error-response,
+  //  which also explains why this is the most ideal way)
   // PS4 Alternatively, `throw new Error(<whatever>)`, then use `error.<whatever>` to render the thrown error, e.g.,
   //  `error.message`
   // TODO `AbortController` for fetch with cancel button UI in individual component (currently conflict w/ global
