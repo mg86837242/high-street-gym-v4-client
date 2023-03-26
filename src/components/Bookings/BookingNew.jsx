@@ -1,4 +1,4 @@
-import { useContext, useState, useMemo } from 'react';
+import { useContext } from 'react';
 import AuthContext from '../../contexts/AuthContext';
 import { useLoaderData, Form, useNavigate } from 'react-router-dom';
 import { tomorrowStr, threeWeeksLaterStr } from '../../data/keyDates';
@@ -23,7 +23,7 @@ export default function BookingNew() {
         </p>
         <Form method='post' className='flex flex-col gap-5'>
           <label
-            id='activity-input-group'
+            id='activity-select-group'
             className='input-group grid grid-cols-1 xl:grid-cols-[minmax(1rem,_1fr)_minmax(3rem,_3fr)]'
           >
             <span className='p-0'>Activity:</span>
@@ -44,7 +44,7 @@ export default function BookingNew() {
             </select>
           </label>
           <label
-            id='date-input-group'
+            id='date-select-group'
             className='input-group grid grid-cols-1 xl:grid-cols-[minmax(1rem,_1fr)_minmax(3rem,_3fr)]'
           >
             <span className='p-0'>Date:</span>
@@ -59,7 +59,7 @@ export default function BookingNew() {
             />
           </label>
           <label
-            id='time-input-group'
+            id='time-select-group'
             className='input-group grid grid-cols-1 xl:grid-cols-[minmax(1rem,_1fr)_minmax(3rem,_3fr)]'
           >
             <span className='p-0'>Time:</span>
@@ -79,7 +79,7 @@ export default function BookingNew() {
           </label>
           {authenticatedUser?.memberId ? (
             <label
-              id='member-input-group'
+              id='member-select-group'
               className='input-group grid grid-cols-1 xl:grid-cols-[minmax(1rem,_1fr)_minmax(3rem,_3fr)]'
             >
               <span className='p-0'>Member:</span>
@@ -101,7 +101,7 @@ export default function BookingNew() {
             </label>
           ) : (
             <label
-              id='member-input-group'
+              id='member-select-group'
               className='input-group grid grid-cols-1 xl:grid-cols-[minmax(1rem,_1fr)_minmax(3rem,_3fr)]'
             >
               <span className='p-0'>Member:</span>
@@ -121,7 +121,10 @@ export default function BookingNew() {
             </label>
           )}
           {authenticatedUser?.trainerId ? (
-            <label className='input-group grid grid-cols-1 xl:grid-cols-[minmax(1rem,_1fr)_minmax(3rem,_3fr)]'>
+            <label
+              id='trainer-select-group'
+              className='input-group grid grid-cols-1 xl:grid-cols-[minmax(1rem,_1fr)_minmax(3rem,_3fr)]'
+            >
               <span className='p-0'>Trainer:</span>
               <select
                 name='trainerId'
@@ -140,7 +143,10 @@ export default function BookingNew() {
               </select>
             </label>
           ) : (
-            <label className='input-group grid grid-cols-1 xl:grid-cols-[minmax(1rem,_1fr)_minmax(3rem,_3fr)]'>
+            <label
+              id='trainer-select-group'
+              className='input-group grid grid-cols-1 xl:grid-cols-[minmax(1rem,_1fr)_minmax(3rem,_3fr)]'
+            >
               <span className='p-0'>Trainer:</span>
               <select
                 name='trainerId'

@@ -55,7 +55,6 @@ const bookingsRoutes = [
         },
       },
       {
-        // FIX Auto select (and disable the corresponding option) for current member/trainer in the `edit booking`
         path: 'id/:id/edit',
         async lazy() {
           let { default: BookingEdit } = await import('../components/Bookings/BookingEdit');
