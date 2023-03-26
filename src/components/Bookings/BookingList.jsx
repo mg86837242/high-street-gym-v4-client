@@ -29,7 +29,7 @@ export default function BookingList() {
 }
 
 function BookingListMemberView({ bookings, userMemberId }) {
-  const [selectedValue, setSelectedValue] = useState('all-booking-list');
+  const [sort, setSort] = useState('all-booking-list');
   const allBookingList = useMemo(
     () =>
       bookings?.length ? (
@@ -186,14 +186,14 @@ function BookingListMemberView({ bookings, userMemberId }) {
         className='flex flex-col items-center gap-5 w-full col-[1_/_2] row-[2_/_3] lg:col-[2_/_3] lg:row-[1_/_2]'
       >
         <select
-          value={selectedValue}
-          onChange={(e) => setSelectedValue(e.target.value)}
+          value={sort}
+          onChange={(e) => setSort(e.target.value)}
           className='select select-primary select-sm w-full max-w-xs'
         >
           <option value='all-booking-list'>All bookings</option>
           <option value='my-booking-list'>My bookings</option>
         </select>
-        {selectedValue === 'all-booking-list' ? allBookingList : myBookingList}
+        {sort === 'all-booking-list' ? allBookingList : myBookingList}
       </div>
       <Outlet />
     </>
@@ -201,7 +201,7 @@ function BookingListMemberView({ bookings, userMemberId }) {
 }
 
 function BookingListTrainerView({ bookings, userTrainerId }) {
-  const [selectedValue, setSelectedValue] = useState('all-booking-list');
+  const [sort, setSort] = useState('all-booking-list');
   const allBookingList = useMemo(
     () =>
       bookings?.length ? (
@@ -358,14 +358,14 @@ function BookingListTrainerView({ bookings, userTrainerId }) {
         className='flex flex-col items-center gap-5 w-full col-[1_/_2] row-[2_/_3] lg:col-[2_/_3] lg:row-[1_/_2]'
       >
         <select
-          value={selectedValue}
-          onChange={(e) => setSelectedValue(e.target.value)}
+          value={sort}
+          onChange={(e) => setSort(e.target.value)}
           className='select select-primary select-sm w-full max-w-xs'
         >
           <option value='all-booking-list'>All bookings</option>
           <option value='my-booking-list'>My bookings</option>
         </select>
-        {selectedValue === 'all-booking-list' ? allBookingList : myBookingList}
+        {sort === 'all-booking-list' ? allBookingList : myBookingList}
       </div>
       <Outlet />
     </>

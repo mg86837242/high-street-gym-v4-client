@@ -19,6 +19,7 @@ export default function ProfileEditAccount() {
   const actionData = useActionData(null);
 
   useEffect(() => {
+    // ??? How to cleanup this Effect. `actionData` is an external source, I assume, console log to see how it changes
     if (!actionData) {
       return;
       // PS Logging `actionData` fires 4 times, (1 & 2) when `defaultValues` are not populated, rendering no elements,
@@ -102,8 +103,7 @@ export default function ProfileEditAccount() {
   }, [actionData]);
 
   // NB Need to check if `defaultValues` is truthy, o/w `undefined` will be passed as the `defaultValue` prop for
-  //  following inputs before `defaultValues` is populated by the custom Hook, and `useEffect` will be needed to
-  //  subscribe to the change of `defaultValues` from `undefined` to something
+  //  following inputs before `defaultValues` is populated by the custom Hook, which requires controlled input/select
   return defaultValues ? (
     <div className='flex-grow px-4 py-6'>
       <h1 className='font-sans text-3xl text-primary-content'>Edit My Account</h1>
@@ -243,6 +243,6 @@ export default function ProfileEditAccount() {
     </div>
   ) : (
     <LoadingNoNav />
-    // ??? Skeleton doesn't work here
+    // ??? [Not that important] Skeleton doesn't work here
   );
 }

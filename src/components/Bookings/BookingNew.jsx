@@ -1,11 +1,13 @@
+import { useContext, useState, useMemo } from 'react';
+import AuthContext from '../../contexts/AuthContext';
 import { useLoaderData, Form, useNavigate } from 'react-router-dom';
 import { tomorrowStr, threeWeeksLaterStr } from '../../data/keyDates';
 
 export default function BookingNew() {
+  const { authenticatedUser } = useContext(AuthContext);
   const { members, trainers, activities } = useLoaderData();
   const navigate = useNavigate();
 
-  // FIX Auto select (and disable the corresponding option) for current member/trainer in the `new booking`, `edit booking` and `update booking` panel
   return (
     <div
       id='booking-new-wrapper'
@@ -13,19 +15,21 @@ export default function BookingNew() {
     >
       <div
         id='booking-new-form-wrapper'
-        // className='flex flex-col gap-5 bg-base-300 rounded-lg w-[22rem] xl:w-[30rem] px-4 xl:px-6 pt-2 3xl:pt-4 pb-4'
-        className='flex flex-col gap-5 bg-base-100 rounded-lg w-[22rem] xl:w-[30rem] px-4 xl:px-6 pt-2 3xl:pt-4 pb-4'
+        className='flex flex-col gap-5 bg-base-300 rounded-lg w-[22rem] xl:w-[30rem] px-4 xl:px-6 pt-2 3xl:pt-4 pb-4'
       >
         <h1 className='text-secondary text-center'>New Booking</h1>
         <p>
           Note: If the specified member or trainer is not available at the specified time, the booking will get denied.
         </p>
         <Form method='post' className='flex flex-col gap-5'>
-          <label className='input-group grid grid-cols-1 xl:grid-cols-[minmax(1rem,_1fr)_minmax(3rem,_3fr)]'>
+          <label
+            id='activity-input-group'
+            className='input-group grid grid-cols-1 xl:grid-cols-[minmax(1rem,_1fr)_minmax(3rem,_3fr)]'
+          >
             <span className='p-0'>Activity:</span>
             <select
               name='activityId'
-              defaultValue={activities[0]}
+              defaultValue={'-- Choose Activity --'}
               required
               className='select select-bordered select-sm text-base font-normal'
             >
@@ -39,7 +43,10 @@ export default function BookingNew() {
               })}
             </select>
           </label>
-          <label className='input-group grid grid-cols-1 xl:grid-cols-[minmax(1rem,_1fr)_minmax(3rem,_3fr)]'>
+          <label
+            id='date-input-group'
+            className='input-group grid grid-cols-1 xl:grid-cols-[minmax(1rem,_1fr)_minmax(3rem,_3fr)]'
+          >
             <span className='p-0'>Date:</span>
             <input
               type='date'
@@ -51,11 +58,14 @@ export default function BookingNew() {
               className='input input-bordered input-sm text-base'
             />
           </label>
-          <label className='input-group grid grid-cols-1 xl:grid-cols-[minmax(1rem,_1fr)_minmax(3rem,_3fr)]'>
+          <label
+            id='time-input-group'
+            className='input-group grid grid-cols-1 xl:grid-cols-[minmax(1rem,_1fr)_minmax(3rem,_3fr)]'
+          >
             <span className='p-0'>Time:</span>
             <select
               name='time'
-              defaultValue={`08:00:00`}
+              defaultValue={`-- Choose Booking Time --`}
               required
               className='select select-bordered select-sm text-base font-normal'
             >
@@ -67,38 +77,86 @@ export default function BookingNew() {
               ))}
             </select>
           </label>
-          <label className='input-group grid grid-cols-1 xl:grid-cols-[minmax(1rem,_1fr)_minmax(3rem,_3fr)]'>
-            <span className='p-0'>Member:</span>
-            <select
-              name='memberId'
-              defaultValue={members[0]}
-              required
-              className='select select-bordered select-sm text-base font-normal'
+          {authenticatedUser?.memberId ? (
+            <label
+              id='member-input-group'
+              className='input-group grid grid-cols-1 xl:grid-cols-[minmax(1rem,_1fr)_minmax(3rem,_3fr)]'
             >
-              <option disabled>-- Choose Member --</option>
-              {members.map((m, i) => (
-                <option value={m.id} key={i}>
-                  {m.firstName} {m.lastName}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label className='input-group grid grid-cols-1 xl:grid-cols-[minmax(1rem,_1fr)_minmax(3rem,_3fr)]'>
-            <span className='p-0'>Trainer:</span>
-            <select
-              name='trainerId'
-              defaultValue={trainers[0]}
-              required
-              className='select select-bordered select-sm text-base font-normal'
+              <span className='p-0'>Member:</span>
+              <select
+                name='memberId'
+                defaultValue={authenticatedUser.memberId}
+                required
+                className='select select-bordered select-sm text-base font-normal'
+              >
+                <option disabled>-- Choose Member --</option>
+                {members
+                  .filter((m) => m.id === authenticatedUser.memberId)
+                  .map((m, i) => (
+                    <option value={m.id} key={i}>
+                      {m.firstName} {m.lastName}
+                    </option>
+                  ))}
+              </select>
+            </label>
+          ) : (
+            <label
+              id='member-input-group'
+              className='input-group grid grid-cols-1 xl:grid-cols-[minmax(1rem,_1fr)_minmax(3rem,_3fr)]'
             >
-              <option disabled>-- Choose Trainer --</option>
-              {trainers.map((t, i) => (
-                <option value={t.id} key={i}>
-                  {t.firstName} {t.lastName}
-                </option>
-              ))}
-            </select>
-          </label>
+              <span className='p-0'>Member:</span>
+              <select
+                name='memberId'
+                defaultValue={'-- Choose Member --'}
+                required
+                className='select select-bordered select-sm text-base font-normal'
+              >
+                <option disabled>-- Choose Member --</option>
+                {members.map((m, i) => (
+                  <option value={m.id} key={i}>
+                    {m.firstName} {m.lastName}
+                  </option>
+                ))}
+              </select>
+            </label>
+          )}
+          {authenticatedUser?.trainerId ? (
+            <label className='input-group grid grid-cols-1 xl:grid-cols-[minmax(1rem,_1fr)_minmax(3rem,_3fr)]'>
+              <span className='p-0'>Trainer:</span>
+              <select
+                name='trainerId'
+                defaultValue={authenticatedUser.trainerId}
+                required
+                className='select select-bordered select-sm text-base font-normal'
+              >
+                <option disabled>-- Choose Trainer --</option>
+                {trainers
+                  .filter((t) => t.id === authenticatedUser.trainerId)
+                  .map((t, i) => (
+                    <option value={t.id} key={i}>
+                      {t.firstName} {t.lastName}
+                    </option>
+                  ))}
+              </select>
+            </label>
+          ) : (
+            <label className='input-group grid grid-cols-1 xl:grid-cols-[minmax(1rem,_1fr)_minmax(3rem,_3fr)]'>
+              <span className='p-0'>Trainer:</span>
+              <select
+                name='trainerId'
+                defaultValue={'-- Choose Trainer --'}
+                required
+                className='select select-bordered select-sm text-base font-normal'
+              >
+                <option disabled>-- Choose Trainer --</option>
+                {trainers.map((t, i) => (
+                  <option value={t.id} key={i}>
+                    {t.firstName} {t.lastName}
+                  </option>
+                ))}
+              </select>
+            </label>
+          )}
           <div className='flex justify-between gap-5 text-center'>
             <button
               type='submit'
