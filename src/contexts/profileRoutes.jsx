@@ -26,7 +26,7 @@ const profileRoutes = [
       let { _action, ...values } = Object.fromEntries(formData);
 
       if (_action === 'updateAdminById') {
-        let { default: updateAdminById } = await import('../services/admins');
+        let { updateAdminById } = await import('../services/admins');
         return updateAdminById(values);
       }
       if (_action === 'updateAddressByAdminId') {
@@ -34,7 +34,7 @@ const profileRoutes = [
         return updateAddressByAdminId(values);
       }
       if (_action === 'updateTrainerById') {
-        let { default: updateTrainerById } = await import('../services/trainers');
+        let { updateTrainerById } = await import('../services/trainers');
         return updateTrainerById(values);
       }
       if (_action === 'updateAddressByTrainerId') {

@@ -1,7 +1,8 @@
 import { useContext, useState, useEffect } from 'react';
 import AuthContext from '../contexts/AuthContext';
-import { API_URL } from '../data/constants';
-import get from '../utils/get';
+import { getAdminWithAllDetailsById } from '../services/admins';
+import { getTrainerWithAllDetailsById } from '../services/trainers';
+import { getMemberWithAllDetailsById } from '../services/members';
 
 export default function useDefaultValues() {
   const { authenticatedUser } = useContext(AuthContext);
@@ -15,18 +16,16 @@ export default function useDefaultValues() {
     switch (role) {
       case 'Admin':
         (async () => {
-          const response = await get(`${API_URL}/admins/admin-with-all-details-by-id/${adminId}`);
-          const json = await response.json();
+          const json = await getAdminWithAllDetailsById(adminId);
           if (!ignore) {
-            await new Promise((r) => setTimeout(r, 5_000));
+            // await new Promise((r) => setTimeout(r, 5_000));
             setDefaultValues(json.defaultValues);
           }
         })();
         break;
       case 'Trainer':
         (async () => {
-          const response = await get(`${API_URL}/trainers/trainer-with-all-details-by-id/${trainerId}`);
-          const json = await response.json();
+          const json = await getTrainerWithAllDetailsById(trainerId);
           if (!ignore) {
             setDefaultValues(json.defaultValues);
           }
@@ -34,8 +33,7 @@ export default function useDefaultValues() {
         break;
       case 'Member':
         (async () => {
-          const response = await get(`${API_URL}/members/member-with-all-details-by-id/${memberId}`);
-          const json = await response.json();
+          const json = await getMemberWithAllDetailsById(memberId);
           if (!ignore) {
             setDefaultValues(json.defaultValues);
           }

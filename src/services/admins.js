@@ -2,9 +2,15 @@ import { redirect } from 'react-router-dom';
 import { API_URL } from '../data/constants';
 import { emailSchema, passwordSchema, usernameSchema } from './schemas/logins';
 import { firstNameSchema, lastNameSchema, phoneSchema } from './schemas/members';
+import fetchJSON from '../utils/fetchJSON';
 import patch from '../utils/patch';
 
-export default async function updateAdminById(values) {
+export async function getAdminWithAllDetailsById(adminId) {
+  const json = await fetchJSON(`${API_URL}/admins/admin-with-all-details-by-id/${adminId}`);
+  return json;
+}
+
+export async function updateAdminById(values) {
   const { id, ...updates } = values;
   const { email, password, firstName, lastName, username, phone } = updates;
   // #region validation
