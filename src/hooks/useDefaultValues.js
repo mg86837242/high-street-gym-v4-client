@@ -18,6 +18,7 @@ export default function useDefaultValues() {
           const response = await get(`${API_URL}/admins/admin-with-all-details-by-id/${adminId}`);
           const json = await response.json();
           if (!ignore) {
+            await new Promise((r) => setTimeout(r, 10_000));
             setDefaultValues(json.defaultValues);
           }
         })();

@@ -1,6 +1,5 @@
 import { redirect } from 'react-router-dom';
 import { API_URL } from '../data/constants';
-import fakeDelay from '../data/fakeCache';
 import fetchRes from '../utils/fetchRes';
 import fetchJSON from '../utils/fetchJSON';
 import get from '../utils/get';
@@ -25,7 +24,6 @@ export async function getBookingsByDate({ params }) {
     }`;
     throw new Response(message);
   }
-  await fakeDelay(`${params.date}`);
   return response;
 }
 
