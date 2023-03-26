@@ -1,5 +1,4 @@
 import ErrorInfo from '../components/ErrorInfo';
-// import ProfileErrorInfo from '../components/AuthUI/ProfileErrorInfo';
 
 const profileRoutes = [
   {
@@ -16,7 +15,6 @@ const profileRoutes = [
       return { Component: ProfileEditAccount };
     },
     ErrorBoundary: ErrorInfo,
-    // ErrorBoundary: ProfileErrorInfo,
     async loader() {
       let { default: getAllLoginEmails } = await import('../services/logins');
       return getAllLoginEmails();

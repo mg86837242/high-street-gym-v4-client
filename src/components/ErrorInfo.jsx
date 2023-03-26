@@ -8,6 +8,12 @@ export default function ErrorInfo() {
   const navigate = useNavigate();
   // console.error(error); // only for debugging
 
+  // Refresh page i/o go back, so as to cope with the session loss after encountering server errors (e.g. 400),
+  //  also see: https://stackoverflow.com/questions/73048879/how-do-i-reload-my-page-in-remix-run-on-a-button-click-in-an-error-boundary-comp
+  function handleClick() {
+    navigate('', { replace: true });
+  }
+
   return navigation.state === 'loading' ? (
     <></>
   ) : isRouteErrorResponse(error) && error?.data ? (
@@ -18,7 +24,7 @@ export default function ErrorInfo() {
         <h1 className='text-center text-rose-500'>{error.data.match(/\d+/)}</h1>
         <p className='text-center text-rose-500'>{error.data.match(/(?<=\d+\s).*/) || error.data}</p>
       </div>
-      <Button1 onClick={() => navigate(-1)}>Go Back</Button1>
+      <Button1 onClick={handleClick}>Go Back</Button1>
     </div>
   ) : (
     <div className='flex flex-col items-center justify-center w-full h-full gap-6'>
@@ -28,7 +34,7 @@ export default function ErrorInfo() {
         <p className='text-center text-rose-500'>Sorry, an unexpected error has occurred.</p>
         <p className='text-center text-rose-500'>{error.statusText || error.message}</p>
       </div>
-      <Button1 onClick={() => navigate(-1)}>Go Back</Button1>
+      <Button1 onClick={handleClick}>Go Back</Button1>
     </div>
   );
 }
