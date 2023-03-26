@@ -1,8 +1,8 @@
 import { Link, Form, useActionData, useNavigation } from 'react-router-dom';
-import InputGroupEmail from '../UI/InputGroupEmail';
-import InputGroupPass from '../UI/InputGroupPass';
-import InputGroup from '../UI/InputGroup';
-import SelectGroupGender from '../UI/SelectGroupGender';
+import InputGroupEmail from '../FormControl/InputGroupEmail';
+import InputGroupPass from '../FormControl/InputGroupPass';
+import InputGroup from '../FormControl/InputGroup';
+import SelectGroupGender from '../FormControl/SelectGroupGender';
 import Button1Full from '../UI/Button1Full';
 
 export default function SignupPanel({ emails }) {

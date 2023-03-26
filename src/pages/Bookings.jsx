@@ -6,7 +6,7 @@ import Calendar from '../components/Bookings/Calendar';
 export default function Bookings() {
   return (
     <>
-      <MainWrapper gap={'gap-1'} mt={'mt-5'} mb={'mb-20'}>
+      <MainWrapper gap={'gap-3'} mt={'mt-5'} mb={'mb-20'}>
         <Breadcrumbs />
         <div
           id='bookings-content-wrapper'

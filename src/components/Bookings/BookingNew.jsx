@@ -5,7 +5,7 @@ export default function BookingNew() {
   const { members, trainers, activities } = useLoaderData();
   const navigate = useNavigate();
 
-  // FIX Auto select current member/trainer in the `new booking`, `edit booking` and `update booking` panel
+  // FIX Auto select (and disable the corresponding option) for current member/trainer in the `new booking`, `edit booking` and `update booking` panel
   return (
     <div
       id='booking-new-wrapper'
@@ -13,7 +13,8 @@ export default function BookingNew() {
     >
       <div
         id='booking-new-form-wrapper'
-        className='flex flex-col gap-5 bg-base-300 rounded-lg w-[22rem] xl:w-[30rem] px-4 xl:px-6 pt-2 3xl:pt-4 pb-4'
+        // className='flex flex-col gap-5 bg-base-300 rounded-lg w-[22rem] xl:w-[30rem] px-4 xl:px-6 pt-2 3xl:pt-4 pb-4'
+        className='flex flex-col gap-5 bg-base-100 rounded-lg w-[22rem] xl:w-[30rem] px-4 xl:px-6 pt-2 3xl:pt-4 pb-4'
       >
         <h1 className='text-secondary text-center'>New Booking</h1>
         <p>
@@ -99,7 +100,6 @@ export default function BookingNew() {
             </select>
           </label>
           <div className='flex justify-between gap-5 text-center'>
-            {/* These `<button>`s are already wrapped within a `<Form>` */}
             <button
               type='submit'
               className='btn btn-secondary text-primary-content normal-case shadow shadow-black/50 min-h-0 w-36 lg:w-[6.5rem] xl:w-36 h-10'
