@@ -26,57 +26,73 @@ export default function ProfileEditAccount() {
       //  have this short-circuit, Effect will goes into `else` block and causes `actionData` to fire twice again
     }
     let ignore = false;
-    if (!ignore) {
-      if (actionData?.status === 200) {
-        if (actionData._action === 'updateAdminById') {
+    if (actionData?.status === 200) {
+      switch (actionData._action) {
+        case 'updateAdminById':
           (async () => {
-            setIssues({});
-            setTopStatusText(`✅ ${actionData.message}`);
-            await new Promise((r) => setTimeout(r, 5_000));
-            setTopStatusText('');
+            if (!ignore) {
+              setIssues({});
+              setTopStatusText(`✅ ${actionData.message}`);
+              await new Promise((r) => setTimeout(r, 5_000));
+              setTopStatusText('');
+            }
           })();
-        }
-        if (actionData._action === 'updateAddressByAdminId') {
+          break;
+        case 'updateAddressByAdminId':
           (async () => {
-            setIssues({});
-            setBotStatusText(`✅ ${actionData.message}`);
-            await new Promise((r) => setTimeout(r, 5_000));
-            setBotStatusText('');
+            if (!ignore) {
+              setIssues({});
+              setBotStatusText(`✅ ${actionData.message}`);
+              await new Promise((r) => setTimeout(r, 5_000));
+              setBotStatusText('');
+            }
           })();
-        }
-        if (actionData._action === 'updateTrainerById') {
+          break;
+        case 'updateTrainerById':
           (async () => {
-            setIssues({});
-            setTopStatusText(`✅ ${actionData.message}`);
-            await new Promise((r) => setTimeout(r, 5_000));
-            setTopStatusText('');
+            if (!ignore) {
+              setIssues({});
+              setTopStatusText(`✅ ${actionData.message}`);
+              await new Promise((r) => setTimeout(r, 5_000));
+              setTopStatusText('');
+            }
           })();
-        }
-        if (actionData._action === 'updateAddressByTrainerId') {
+          break;
+        case 'updateAddressByTrainerId':
           (async () => {
-            setIssues({});
-            setBotStatusText(`✅ ${actionData.message}`);
-            await new Promise((r) => setTimeout(r, 5_000));
-            setBotStatusText('');
+            if (!ignore) {
+              setIssues({});
+              setBotStatusText(`✅ ${actionData.message}`);
+              await new Promise((r) => setTimeout(r, 5_000));
+              setBotStatusText('');
+            }
           })();
-        }
-        if (actionData._action === 'updateMemberById') {
+          break;
+        case 'updateMemberById':
           (async () => {
-            setIssues({});
-            setTopStatusText(`✅ ${actionData.message}`);
-            await new Promise((r) => setTimeout(r, 5_000));
-            setTopStatusText('');
+            if (!ignore) {
+              setIssues({});
+              setTopStatusText(`✅ ${actionData.message}`);
+              await new Promise((r) => setTimeout(r, 5_000));
+              setTopStatusText('');
+            }
           })();
-        }
-        if (actionData._action === 'updateAddressByMemberId') {
+          break;
+        case 'updateAddressByMemberId':
           (async () => {
-            setIssues({});
-            setBotStatusText(`✅ ${actionData.message}`);
-            await new Promise((r) => setTimeout(r, 5_000));
-            setBotStatusText('');
+            if (!ignore) {
+              setIssues({});
+              setBotStatusText(`✅ ${actionData.message}`);
+              await new Promise((r) => setTimeout(r, 5_000));
+              setBotStatusText('');
+            }
           })();
-        }
-      } else {
+          break;
+        default:
+          break;
+      }
+    } else {
+      if (!ignore) {
         setIssues(actionData);
       }
     }
