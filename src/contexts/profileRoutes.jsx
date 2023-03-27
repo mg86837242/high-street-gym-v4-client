@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import AuthContext from './AuthContext';
 import ErrorInfoBack from '../components/ErrorInfoBack';
 import ErrorInfoRefresh from '../components/ErrorInfoRefresh';
 

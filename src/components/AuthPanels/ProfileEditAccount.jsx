@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from 'react';
 import AuthContext from '../../contexts/AuthContext';
 import { useLoaderData, useActionData, Form } from 'react-router-dom';
-import useDefaultValues from '../../hooks/useDefaultValues';
+import useDefaultValues from '../../hooks/[debug]useDefaultValues';
 import LoadingNoNav from '../LoadingNoNav';
 import InputGroupSmallEmail from '../FormControl/InputGroupSmallEmail';
 import InputGroupSmallPass from '../FormControl/InputGroupSmallPass';
@@ -19,12 +19,11 @@ export default function ProfileEditAccount() {
   const actionData = useActionData(null);
 
   useEffect(() => {
-    // ??? How to cleanup this Effect. `actionData` is an external source, I assume, console log to see how it changes
     if (!actionData) {
       return;
       // PS Logging `actionData` fires 4 times, (1 & 2) when `defaultValues` are not populated, rendering no elements,
-      //  (3 & 4) when `defaultValues` are populated, rendering respective forms; however (5 & 6) if Effect doesn't
-      //  have this short-circuit, Effect will goes into `else` block and causes `actionData` to fire twice again
+      //  (3 & 4) when `defaultValues` are populated, rendering respective forms; (NB however, if this Effect doesn't
+      //  have this short-circuit, Effect will goes into `else` block and causes `actionData` to fire twice again)
     }
     let ignore = false;
     if (actionData?.status === 200) {
@@ -34,8 +33,8 @@ export default function ProfileEditAccount() {
             if (!ignore) {
               setIssues({});
               setTopStatusText(`✅ ${actionData.message}`);
-              await new Promise((r) => setTimeout(r, 5_000));
-              setTopStatusText('');
+              // await new Promise((r) => setTimeout(r, 5_000));
+              // setTopStatusText('');
             }
           })();
           break;
@@ -98,6 +97,9 @@ export default function ProfileEditAccount() {
       }
     }
     return () => {
+      setIssues({});
+      setBotStatusText('');
+      setBotStatusText('');
       ignore = true;
     };
   }, [actionData]);
