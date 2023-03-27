@@ -35,8 +35,8 @@ export async function updateAddressByAdminId(values) {
   if (Object.keys(messages).length) {
     return messages;
   }
-  // NB Even if `lineTwo` is null, `WHERE lineTwo = null` returns false i/o true and `getAddressesByDetails` in the
-  //  model won't return any duplicate row, thus the conversion => Solution: convert falsy `lineTwo` to empty string
+  // NB Even if `lineTwo` is null, `WHERE lineTwo = null` returns false i/o true in which case `getAddressesByDetails`
+  //  in the model won't identify a duplicate row, thus the conversion of falsy `lineTwo` to empty string
   // #endregion
   updates.lineTwo ||= '';
 

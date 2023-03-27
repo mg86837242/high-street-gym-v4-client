@@ -73,7 +73,7 @@ function NavBarLeft() {
               <li className='menu-title'>
                 <span>Category</span>
               </li>
-              {/* TODO How to use arrow keys to navigate between these submenu buttons, extending to <NavBarHome> center menu, <NavBar> mobile and center menu */}
+              {/* TODO How to use arrow keys to navigate between these submenu buttons, extending to <NavBarCenter> submenu */}
               <li>
                 <Link to=''>Item 1</Link>
               </li>
@@ -172,7 +172,7 @@ function NavBarCenterButton({ children, to, text, hasDropdown }) {
 function NavBarCenterDropdownCategory({ text }) {
   return (
     <li className='menu-title'>
-      <span>{text}</span>
+      <span className='text-sm'>{text}</span>
     </li>
   );
 }
