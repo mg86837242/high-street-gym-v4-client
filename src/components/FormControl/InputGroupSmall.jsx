@@ -1,4 +1,4 @@
-export default function InputGroupSmall({ name, type, issue, defaultValue, isRequired }) {
+export default function InputGroupSmall({ name, type, issue, initialValue, isRequired }) {
   const id = name.replace(/([a-z])([A-Z])/g, '$1-$2');
 
   return (
@@ -18,7 +18,7 @@ export default function InputGroupSmall({ name, type, issue, defaultValue, isReq
         id={id}
         type={type}
         placeholder={`Enter your ${name.replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase()} here`}
-        defaultValue={defaultValue}
+        defaultValue={initialValue}
         className='w-full text-white input input-bordered input-primary input-sm'
       />
       <label htmlFor={id} className='py-1 3xl:py-2 label'>

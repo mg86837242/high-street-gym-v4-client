@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-export default function InputGroupEmail({ issue, emails, defaultValue, isRequired }) {
-  const [input, setInput] = useState(defaultValue);
+export default function InputGroupEmail({ issue, emails, initialValue, isRequired }) {
+  const [input, setInput] = useState(initialValue);
   const isDuplicate = emails.find((e) => input === e.email);
 
   return (

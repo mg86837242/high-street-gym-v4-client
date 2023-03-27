@@ -1,6 +1,6 @@
 import * as data from '../../data/countries.json';
 
-export default function SelectGroupSmallCountry({ issue, defaultValue, isRequired }) {
+export default function SelectGroupSmallCountry({ issue, initialValue, isRequired }) {
   const countries = data.default;
 
   return (
@@ -12,7 +12,7 @@ export default function SelectGroupSmallCountry({ issue, defaultValue, isRequire
       <select
         name='country'
         id='country'
-        defaultValue={defaultValue}
+        defaultValue={initialValue}
         className='min-h-0 font-normal select select-primary select-sm'
       >
         <option value='' disabled>

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEyeSlash, faEye } from '@fortawesome/free-regular-svg-icons';
 
-export default function InputGroupSmallPass({ issue, defaultValue }) {
+export default function InputGroupSmallPass({ issue, initialValue }) {
   const [inputType, setInputType] = useState('password');
   const [icon, setIcon] = useState(faEyeSlash);
 
@@ -23,7 +23,7 @@ export default function InputGroupSmallPass({ issue, defaultValue }) {
         id='password'
         type={inputType}
         placeholder='Enter your password here'
-        defaultValue={defaultValue}
+        defaultValue={initialValue}
         className='w-full text-white input input-bordered input-primary input-sm'
       />
       <button type='button' onClick={handleToggle} className='absolute right-0 mr-3 cursor-pointer mt-8 3xl:mt-10'>

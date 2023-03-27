@@ -29,7 +29,7 @@ export default function BookingNew() {
             <span className='p-0'>Activity:</span>
             <select
               name='activityId'
-              defaultValue={'-- Choose Activity --'}
+              initialValue={'-- Choose Activity --'}
               required
               className='select select-bordered select-sm text-base font-normal'
             >
@@ -51,7 +51,7 @@ export default function BookingNew() {
             <input
               type='date'
               name='date'
-              defaultValue={tomorrowStr}
+              initialValue={tomorrowStr}
               min={tomorrowStr}
               max={threeWeeksLaterStr}
               required
@@ -65,7 +65,7 @@ export default function BookingNew() {
             <span className='p-0'>Time:</span>
             <select
               name='time'
-              defaultValue={`-- Choose Booking Time --`}
+              initialValue={`-- Choose Booking Time --`}
               required
               className='select select-bordered select-sm text-base font-normal'
             >
@@ -85,7 +85,7 @@ export default function BookingNew() {
               <span className='p-0'>Member:</span>
               <select
                 name='memberId'
-                defaultValue={authenticatedUser.memberId}
+                initialValue={authenticatedUser.memberId}
                 required
                 className='select select-bordered select-sm text-base font-normal'
               >
@@ -107,7 +107,7 @@ export default function BookingNew() {
               <span className='p-0'>Member:</span>
               <select
                 name='memberId'
-                defaultValue={'-- Choose Member --'}
+                initialValue={'-- Choose Member --'}
                 required
                 className='select select-bordered select-sm text-base font-normal'
               >
@@ -128,7 +128,7 @@ export default function BookingNew() {
               <span className='p-0'>Trainer:</span>
               <select
                 name='trainerId'
-                defaultValue={authenticatedUser.trainerId}
+                initialValue={authenticatedUser.trainerId}
                 required
                 className='select select-bordered select-sm text-base font-normal'
               >
@@ -150,7 +150,7 @@ export default function BookingNew() {
               <span className='p-0'>Trainer:</span>
               <select
                 name='trainerId'
-                defaultValue={'-- Choose Trainer --'}
+                initialValue={'-- Choose Trainer --'}
                 required
                 className='select select-bordered select-sm text-base font-normal'
               >

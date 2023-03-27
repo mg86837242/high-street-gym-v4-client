@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
 
-export default function InputGroupPass({ issue, defaultValue }) {
+export default function InputGroupPass({ issue, initialValue }) {
   const [inputType, setInputType] = useState('password');
   const [icon, setIcon] = useState(faEyeSlash);
 
@@ -23,7 +23,7 @@ export default function InputGroupPass({ issue, defaultValue }) {
         id='password'
         type={inputType}
         placeholder='Enter your password here'
-        defaultValue={defaultValue}
+        defaultValue={initialValue}
         className='w-full h-10 text-white input input-bordered input-primary 3xl:h-12'
       />
       <button type='button' onClick={handleToggle} className='absolute right-0 mr-3 cursor-pointer mt-9 3xl:mt-12'>

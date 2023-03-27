@@ -41,12 +41,12 @@ function SignupForm({ emails }) {
 
   return (
     <Form method='post' noValidate className='grid w-full grid-cols-1 md:grid-cols-2 gap-x-5'>
-      <InputGroupEmail issue={issues?.email} defaultValue='demomember@gmail.com' emails={emails} />
-      <InputGroupPass issue={issues?.password} defaultValue='abcd1234' />
-      <InputGroup name='username' type='text' issue={issues?.username} defaultValue='demomember' />
-      <InputGroup name='firstName' type='text' issue={issues?.firstName} defaultValue='Demo' />
-      <InputGroup name='lastName' type='text' issue={issues?.lastName} defaultValue='Member' />
-      <InputGroup name='phone' type='tel' issue={issues?.phone} defaultValue='0123456789' />
+      <InputGroupEmail issue={issues?.email} initialValue='demomember@gmail.com' emails={emails} />
+      <InputGroupPass issue={issues?.password} initialValue='abcd1234' />
+      <InputGroup name='username' type='text' issue={issues?.username} initialValue='demomember' />
+      <InputGroup name='firstName' type='text' issue={issues?.firstName} initialValue='Demo' />
+      <InputGroup name='lastName' type='text' issue={issues?.lastName} initialValue='Member' />
+      <InputGroup name='phone' type='tel' issue={issues?.phone} initialValue='0123456789' />
       <InputGroup name='age' type='text' issue={issues?.age} isRequired={false} />
       <SelectGroupGender issue={issues?.gender} isRequired={false} />
       <div className='col-span-1 pt-4 md:col-span-2'>
