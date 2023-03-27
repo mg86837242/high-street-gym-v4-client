@@ -18,7 +18,6 @@ export default function ProfileEditAccount() {
   const { emails } = useLoaderData();
   const actionData = useActionData();
 
-  // Why is this Effect fires 8 times after submitting form (for example to update admin by id) => Theory: (1) revalidation causes the user context (the dependency) and subsequently the default values to update, causing this Effect to run twice, (2) the Effect syncing with `actionData` for revalidation purposes causes this Effect to run twice, proved by disabling that Effect, (3) updating this source code or idling for some time before tab-switching to browser will cause Effect to run 4 times, (4) bear in mind that I'm using controlled input for managing the initial value for email, but uncontrolled for managing the input values other inputs/selects, elements are halted to render before `initialValues` loaded, o/w controlled inputs can't be updated due to the fact that they can only be updated thru setter, not subscribing to the change of `initialValues`
   useEffect(() => {
     if (!authenticatedUser) {
       return undefined;
@@ -63,96 +62,89 @@ export default function ProfileEditAccount() {
         break;
     }
     return () => controller?.abort();
+    // PS Console logging `initialValues` after this Effect in the component (1) fires 4 times after the initial page
+    //  load b/c of: https://dmitripavlutin.com/react-useeffect-explanation/, (2) fires additional 2 times after POST
+    //  req, i.e., submitting form like 'updateAdminById') b/c the dependency `authenticatedUser` is updated after the
+    //  POST req (`action`'s revalidation is irrelevant here, it only revalidates the loader data), (3) fires
+    //  additional 2 times b/c the `actionData` Effect triggers the component to re-render, another 2 times b/c of the
+    //  `setTimeout` in the `actionData` Effect (these another 2 times are always 2 times after multiple POST req b/c
+    //  cleanup is provided)
+    // ??? In animal app, user edit page, `console.log(formData)` fires 6 times after POST req
   }, [authenticatedUser]);
 
-  // useEffect(() => {
-  //   if (!actionData) {
-  //     return;
-  //     // PS Logging `actionData` fires 4 times, (1 & 2) when `initialValues` are not populated, rendering no elements,
-  //     //  (3 & 4) when `initialValues` are populated, rendering respective forms; (NB however, if this Effect doesn't
-  //     //  have this short-circuit, Effect will goes into `else` block and causes `actionData` to fire twice again)
-  //   }
-  //   let ignore = false;
-  //   if (actionData?.status === 200) {
-  //     switch (actionData._action) {
-  //       case 'updateAdminById':
-  //         (async () => {
-  //           if (!ignore) {
-  //             setIssues({});
-  //             setTopStatusText(`✅ ${actionData.message}`);
-  //             // await new Promise((r) => setTimeout(r, 5_000));
-  //             // setTopStatusText('');
-  //           }
-  //         })();
-  //         break;
-  //       case 'updateAddressByAdminId':
-  //         (async () => {
-  //           if (!ignore) {
-  //             setIssues({});
-  //             setBotStatusText(`✅ ${actionData.message}`);
-  //             await new Promise((r) => setTimeout(r, 5_000));
-  //             setBotStatusText('');
-  //           }
-  //         })();
-  //         break;
-  //       case 'updateTrainerById':
-  //         (async () => {
-  //           if (!ignore) {
-  //             setIssues({});
-  //             setTopStatusText(`✅ ${actionData.message}`);
-  //             await new Promise((r) => setTimeout(r, 5_000));
-  //             setTopStatusText('');
-  //           }
-  //         })();
-  //         break;
-  //       case 'updateAddressByTrainerId':
-  //         (async () => {
-  //           if (!ignore) {
-  //             setIssues({});
-  //             setBotStatusText(`✅ ${actionData.message}`);
-  //             await new Promise((r) => setTimeout(r, 5_000));
-  //             setBotStatusText('');
-  //           }
-  //         })();
-  //         break;
-  //       case 'updateMemberById':
-  //         (async () => {
-  //           if (!ignore) {
-  //             setIssues({});
-  //             setTopStatusText(`✅ ${actionData.message}`);
-  //             await new Promise((r) => setTimeout(r, 5_000));
-  //             setTopStatusText('');
-  //           }
-  //         })();
-  //         break;
-  //       case 'updateAddressByMemberId':
-  //         (async () => {
-  //           if (!ignore) {
-  //             setIssues({});
-  //             setBotStatusText(`✅ ${actionData.message}`);
-  //             await new Promise((r) => setTimeout(r, 5_000));
-  //             setBotStatusText('');
-  //           }
-  //         })();
-  //         break;
-  //       default:
-  //         break;
-  //     }
-  //   } else {
-  //     if (!ignore) {
-  //       setIssues(actionData);
-  //     }
-  //   }
-  //   return () => {
-  //     setIssues({});
-  //     setTopStatusText('');
-  //     setBotStatusText('');
-  //     ignore = true;
-  //   };
-  // }, [actionData]);
+  useEffect(() => {
+    if (!actionData) {
+      return;
+      // PS NB however, if this Effect doesn't have this short-circuit, Effect will goes into `else` block and causes
+      //  `actionData` to fire twice again)
+    }
+    if (actionData?.status === 200) {
+      switch (actionData._action) {
+        case 'updateAdminById':
+          (async () => {
+            setIssues({});
+            setTopStatusText(`✅ ${actionData.message}`);
+            await new Promise((r) => setTimeout(r, 5_000));
+            setTopStatusText('');
+          })();
+          break;
+        case 'updateAddressByAdminId':
+          (async () => {
+            setIssues({});
+            setBotStatusText(`✅ ${actionData.message}`);
+            await new Promise((r) => setTimeout(r, 5_000));
+            setBotStatusText('');
+          })();
+          break;
+        case 'updateTrainerById':
+          (async () => {
+            setIssues({});
+            setTopStatusText(`✅ ${actionData.message}`);
+            await new Promise((r) => setTimeout(r, 5_000));
+            setTopStatusText('');
+          })();
+          break;
+        case 'updateAddressByTrainerId':
+          (async () => {
+            setIssues({});
+            setBotStatusText(`✅ ${actionData.message}`);
+            await new Promise((r) => setTimeout(r, 5_000));
+            setBotStatusText('');
+          })();
+          break;
+        case 'updateMemberById':
+          (async () => {
+            setIssues({});
+            setTopStatusText(`✅ ${actionData.message}`);
+            await new Promise((r) => setTimeout(r, 5_000));
+            setTopStatusText('');
+          })();
+          break;
+        case 'updateAddressByMemberId':
+          (async () => {
+            setIssues({});
+            setBotStatusText(`✅ ${actionData.message}`);
+            await new Promise((r) => setTimeout(r, 5_000));
+            setBotStatusText('');
+          })();
+          break;
+        default:
+          break;
+      }
+    } else {
+      setIssues(actionData);
+    }
+    console.log(`🔵 [${new Date().toLocaleTimeString()}] : Action data Effect runs`);
+    return () => {
+      setIssues({});
+      setTopStatusText('');
+      setBotStatusText('');
+    };
+  }, [actionData]);
 
-  // NB Need to check if `initialValues` is truthy, o/w `undefined` will be passed as the `initialValue` prop for
-  //  following inputs before `initialValues` is populated, which requires controlled input/select
+  // NB Need to halt the rendering by checking if `initialValues` is truthy, o/w `undefined` will be passed as the
+  //  `initialValue` props before `initialValues` is populated, which would require controlled `<input>/<select>`
+  //  to keep in sync with the update of `initialValues`
   return initialValues ? (
     <div className='flex-grow px-4 py-6'>
       <h1 className='font-sans text-3xl text-primary-content'>Edit My Account</h1>
