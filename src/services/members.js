@@ -2,14 +2,8 @@ import { redirect } from 'react-router-dom';
 import { API_URL } from '../data/constants';
 import { emailSchema, passwordSchema, usernameSchema } from './schemas/logins';
 import { firstNameSchema, lastNameSchema, phoneSchema, ageSchema, genderSchema } from './schemas/members';
-import fetchJSON from '../utils/fetchJSON';
 import post from '../utils/post';
 import patch from '../utils/patch';
-
-export async function getMemberWithAllDetailsById(memberId) {
-  const json = await fetchJSON(`${API_URL}/members/member-with-all-details-by-id/${memberId}`);
-  return json;
-}
 
 export async function signupMembers({ request }) {
   const formData = await request.formData();

@@ -1,7 +1,6 @@
 import { useContext, useState, useEffect } from 'react';
 import AuthContext from '../../contexts/AuthContext';
 import { useLoaderData, useActionData, Form } from 'react-router-dom';
-import { API_URL } from '../../data/constants';
 import SpinnerNoNav from '../SpinnerNoNav';
 import InputGroupSmallEmail from '../FormControl/InputGroupSmallEmail';
 import InputGroupSmallPass from '../FormControl/InputGroupSmallPass';
@@ -11,71 +10,17 @@ import SelectGroupSmallCountry from '../FormControl/SelectGroupSmallCountry';
 
 export default function ProfileEditAccount() {
   const { authenticatedUser } = useContext(AuthContext);
-  const [initialValues, setInitialValues] = useState(null);
   const [topStatusText, setTopStatusText] = useState('');
   const [botStatusText, setBotStatusText] = useState('');
   const [issues, setIssues] = useState({});
-  const { emails } = useLoaderData();
+  const { emails, user: initialValues } = useLoaderData();
   const actionData = useActionData();
 
-  useEffect(() => {
-    if (!authenticatedUser) {
-      return undefined;
-    }
-    let controller = new AbortController();
-    const { role, adminId, trainerId, memberId } = authenticatedUser;
-    switch (role) {
-      case 'Admin':
-        (async () => {
-          const response = await fetch(`${API_URL}/admins/admin-with-all-details-by-id/${adminId}`, {
-            credentials: 'include',
-            signal: controller.signal,
-          });
-          const json = await response.json();
-          setInitialValues(json.initialValues);
-          controller = null;
-        })();
-        break;
-      case 'Trainer':
-        (async () => {
-          const response = await fetch(`${API_URL}/trainers/trainer-with-all-details-by-id/${trainerId}`, {
-            credentials: 'include',
-            signal: controller.signal,
-          });
-          const json = await response.json();
-          setInitialValues(json.initialValues);
-          controller = null;
-        })();
-        break;
-      case 'Member':
-        (async () => {
-          const response = await fetch(`${API_URL}/members/member-with-all-details-by-id/${memberId}`, {
-            credentials: 'include',
-            signal: controller.signal,
-          });
-          const json = await response.json();
-          setInitialValues(json.initialValues);
-          controller = null;
-        })();
-        break;
-      default:
-        break;
-    }
-    return () => controller?.abort();
-    // PS Console logging `initialValues` after this Effect in the component (1) fires 4 times after the initial page
-    //  load b/c of: https://dmitripavlutin.com/react-useeffect-explanation/, (2) fires additional 2 times after POST
-    //  req, i.e., submitting form like 'updateAdminById') b/c the dependency `authenticatedUser` is updated after the
-    //  POST req (`action`'s revalidation is irrelevant here, it only revalidates the loader data), (3) fires
-    //  additional 2 times b/c the `actionData` Effect triggers the component to re-render, another 2 times b/c of the
-    //  `setTimeout` in the `actionData` Effect (these another 2 times are always 2 times after multiple POST req b/c
-    //  cleanup is provided)
-    // ??? In animal app, user edit page, `console.log(formData)` fires 6 times after POST req
-  }, [authenticatedUser]);
-
+  // ??? In animal app, user edit page, `console.log(formData)` fires 4 times after initial mount & fires 6 times after POST req
   useEffect(() => {
     if (!actionData) {
       return;
-      // PS NB however, if this Effect doesn't have this short-circuit, Effect will goes into `else` block and causes
+      // PS If this Effect doesn't have this short-circuit, Effect will goes into `else` block and causes
       //  `actionData` to fire twice again)
     }
     if (actionData?.status === 200) {
@@ -134,7 +79,6 @@ export default function ProfileEditAccount() {
     } else {
       setIssues(actionData);
     }
-    console.log(`🔵 [${new Date().toLocaleTimeString()}] : Action data Effect runs`);
     return () => {
       setIssues({});
       setTopStatusText('');
@@ -142,9 +86,9 @@ export default function ProfileEditAccount() {
     };
   }, [actionData]);
 
-  // NB Need to halt the rendering by checking if `initialValues` is truthy, o/w `undefined` will be passed as the
-  //  `initialValue` props before `initialValues` is populated, which would require controlled `<input>/<select>`
-  //  to keep in sync with the update of `initialValues`
+  // NB Need to halt the rendering by checking if `initialValues` is truthy before `initialValues` is populated, o/w
+  //  `undefined` will be passed as the `initialValue` props, which would require to think about how to let controlled
+  //  `<input>/<select>` keep in sync with the update of `initialValues`
   return initialValues ? (
     <div className='flex-grow px-4 py-6'>
       <h1 className='font-sans text-3xl text-primary-content'>Edit My Account</h1>

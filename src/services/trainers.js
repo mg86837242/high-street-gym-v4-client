@@ -3,13 +3,7 @@ import { API_URL } from '../data/constants';
 import { emailSchema, passwordSchema, usernameSchema } from './schemas/logins';
 import { firstNameSchema, lastNameSchema, phoneSchema } from './schemas/members';
 import { descriptionSchema, specialtySchema, certificateSchema, imageUrlSchema } from './schemas/trainers';
-import fetchJSON from '../utils/fetchJSON';
 import patch from '../utils/patch';
-
-export async function getTrainerWithAllDetailsById(trainerId) {
-  const json = await fetchJSON(`${API_URL}/trainers/trainer-with-all-details-by-id/${trainerId}`);
-  return json;
-}
 
 export async function updateTrainerById(values) {
   const { id, ...updates } = values;

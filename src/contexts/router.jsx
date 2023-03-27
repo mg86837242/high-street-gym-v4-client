@@ -74,8 +74,8 @@ const router = createBrowserRouter([
     },
     ErrorBoundary: ErrorInfoBack,
     async loader() {
-      let { default: getAllLoginEmails } = await import('../services/logins');
-      return getAllLoginEmails();
+      let { getAllEmails } = await import('../services/logins');
+      return getAllEmails();
     },
     async action({ request }) {
       let { signupMembers } = await import('../services/members');

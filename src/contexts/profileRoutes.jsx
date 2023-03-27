@@ -1,5 +1,3 @@
-import { useContext } from 'react';
-import AuthContext from './AuthContext';
 import ErrorInfoBack from '../components/ErrorInfoBack';
 import ErrorInfoRefresh from '../components/ErrorInfoRefresh';
 
@@ -19,15 +17,15 @@ const profileRoutes = [
     },
     ErrorBoundary: ErrorInfoRefresh,
     async loader() {
-      let { default: getAllLoginEmails } = await import('../services/logins');
-      return getAllLoginEmails();
+      let { getUserWithAllDetailsAndAllEmails } = await import('../services/logins');
+      return getUserWithAllDetailsAndAllEmails();
     },
     async action({ request }) {
       let formData = await request.formData();
       let { _action, ...values } = Object.fromEntries(formData);
 
       if (_action === 'updateAdminById') {
-        let { updateAdminById } = await import('../services/admins');
+        let { default: updateAdminById } = await import('../services/admins');
         return updateAdminById(values);
       }
       if (_action === 'updateAddressByAdminId') {
