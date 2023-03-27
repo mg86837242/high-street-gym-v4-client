@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from 'react';
 import AuthContext from '../../contexts/AuthContext';
 import { useLoaderData, useActionData, Form } from 'react-router-dom';
-import SpinnerNoNav from '../SpinnerNoNav';
+import SpinnerNotNav from '../SpinnerNotNav';
 import InputGroupSmallEmail from '../FormControl/InputGroupSmallEmail';
 import InputGroupSmallPass from '../FormControl/InputGroupSmallPass';
 import InputGroupSmall from '../FormControl/InputGroupSmall';
@@ -227,7 +227,7 @@ export default function ProfileEditAccount() {
       </Form>
     </div>
   ) : (
-    <SpinnerNoNav />
+    <SpinnerNotNav />
     // ??? [Not that important] Skeleton doesn't work here
   );
 }
