@@ -3,8 +3,8 @@ import AuthContext from '../../contexts/AuthContext';
 
 export default function InputGroupSmallEmail({ issue, emails, defaultValue, isRequired }) {
   const { authenticatedUser } = useContext(AuthContext);
-  const [input, setInput] = useState(defaultValue);
-  const isDuplicate = input !== authenticatedUser?.email && emails.find((e) => input === e.email);
+  const [value, setValue] = useState(defaultValue);
+  const isDuplicate = value !== authenticatedUser?.email && emails.find((e) => value === e.email);
 
   return (
     <div id='email-input-group' className='w-full form-control'>
@@ -18,8 +18,8 @@ export default function InputGroupSmallEmail({ issue, emails, defaultValue, isRe
         type='text'
         placeholder='Enter your email here'
         // NB The following 2 props imply this is a controlled input, see: https://react.dev/reference/react-dom/components/input#reference
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
         className='w-full text-white input input-bordered input-primary input-sm'
       />
       <label htmlFor='email' className='py-1 3xl:py-2 label'>

@@ -1,8 +1,8 @@
 import { useContext, useState, useEffect } from 'react';
 import AuthContext from '../../contexts/AuthContext';
 import { useLoaderData, useActionData, Form } from 'react-router-dom';
-import useDefaultValues from '../../hooks/[debug]useDefaultValues';
-import LoadingNoNav from '../LoadingNoNav';
+import { API_URL } from '../../data/constants';
+import SpinnerNoNav from '../SpinnerNoNav';
 import InputGroupSmallEmail from '../FormControl/InputGroupSmallEmail';
 import InputGroupSmallPass from '../FormControl/InputGroupSmallPass';
 import InputGroupSmall from '../FormControl/InputGroupSmall';
@@ -11,101 +11,147 @@ import SelectGroupSmallCountry from '../FormControl/SelectGroupSmallCountry';
 
 export default function ProfileEditAccount() {
   const { authenticatedUser } = useContext(AuthContext);
+  const [defaultValues, setDefaultValues] = useState(null);
   const [topStatusText, setTopStatusText] = useState('');
   const [botStatusText, setBotStatusText] = useState('');
   const [issues, setIssues] = useState({});
   const { emails } = useLoaderData();
-  const defaultValues = useDefaultValues();
-  const actionData = useActionData(null);
+  const actionData = useActionData();
 
   useEffect(() => {
-    if (!actionData) {
-      return;
-      // PS Logging `actionData` fires 4 times, (1 & 2) when `defaultValues` are not populated, rendering no elements,
-      //  (3 & 4) when `defaultValues` are populated, rendering respective forms; (NB however, if this Effect doesn't
-      //  have this short-circuit, Effect will goes into `else` block and causes `actionData` to fire twice again)
+    if (!authenticatedUser) {
+      return undefined;
     }
-    let ignore = false;
-    if (actionData?.status === 200) {
-      switch (actionData._action) {
-        case 'updateAdminById':
-          (async () => {
-            if (!ignore) {
-              setIssues({});
-              setTopStatusText(`✅ ${actionData.message}`);
-              // await new Promise((r) => setTimeout(r, 5_000));
-              // setTopStatusText('');
-            }
-          })();
-          break;
-        case 'updateAddressByAdminId':
-          (async () => {
-            if (!ignore) {
-              setIssues({});
-              setBotStatusText(`✅ ${actionData.message}`);
-              await new Promise((r) => setTimeout(r, 5_000));
-              setBotStatusText('');
-            }
-          })();
-          break;
-        case 'updateTrainerById':
-          (async () => {
-            if (!ignore) {
-              setIssues({});
-              setTopStatusText(`✅ ${actionData.message}`);
-              await new Promise((r) => setTimeout(r, 5_000));
-              setTopStatusText('');
-            }
-          })();
-          break;
-        case 'updateAddressByTrainerId':
-          (async () => {
-            if (!ignore) {
-              setIssues({});
-              setBotStatusText(`✅ ${actionData.message}`);
-              await new Promise((r) => setTimeout(r, 5_000));
-              setBotStatusText('');
-            }
-          })();
-          break;
-        case 'updateMemberById':
-          (async () => {
-            if (!ignore) {
-              setIssues({});
-              setTopStatusText(`✅ ${actionData.message}`);
-              await new Promise((r) => setTimeout(r, 5_000));
-              setTopStatusText('');
-            }
-          })();
-          break;
-        case 'updateAddressByMemberId':
-          (async () => {
-            if (!ignore) {
-              setIssues({});
-              setBotStatusText(`✅ ${actionData.message}`);
-              await new Promise((r) => setTimeout(r, 5_000));
-              setBotStatusText('');
-            }
-          })();
-          break;
-        default:
-          break;
-      }
-    } else {
-      if (!ignore) {
-        setIssues(actionData);
-      }
+    let controller = new AbortController();
+    const { role, adminId, trainerId, memberId } = authenticatedUser;
+    switch (role) {
+      case 'Admin':
+        (async () => {
+          const response = await fetch(`${API_URL}/admins/admin-with-all-details-by-id/${adminId}`, {
+            credentials: 'include',
+            signal: controller.signal,
+          });
+          const json = await response.json();
+          setDefaultValues(json.defaultValues);
+          controller = null;
+        })();
+        break;
+      case 'Trainer':
+        (async () => {
+          const response = await fetch(`${API_URL}/trainers/trainer-with-all-details-by-id/${trainerId}`, {
+            credentials: 'include',
+            signal: controller.signal,
+          });
+          const json = await response.json();
+          setDefaultValues(json.defaultValues);
+          controller = null;
+        })();
+        break;
+      case 'Member':
+        (async () => {
+          const response = await fetch(`${API_URL}/members/member-with-all-details-by-id/${memberId}`, {
+            credentials: 'include',
+            signal: controller.signal,
+          });
+          const json = await response.json();
+          setDefaultValues(json.defaultValues);
+          controller = null;
+        })();
+        break;
+      default:
+        break;
     }
-    return () => {
-      setIssues({});
-      setBotStatusText('');
-      setBotStatusText('');
-      ignore = true;
-    };
-  }, [actionData]);
+    return () => controller?.abort();
+  }, [authenticatedUser]);
+
+  // useEffect(() => {
+  //   if (!actionData) {
+  //     return;
+  //     // PS Logging `actionData` fires 4 times, (1 & 2) when `defaultValues` are not populated, rendering no elements,
+  //     //  (3 & 4) when `defaultValues` are populated, rendering respective forms; (NB however, if this Effect doesn't
+  //     //  have this short-circuit, Effect will goes into `else` block and causes `actionData` to fire twice again)
+  //   }
+  //   let ignore = false;
+  //   if (actionData?.status === 200) {
+  //     switch (actionData._action) {
+  //       case 'updateAdminById':
+  //         (async () => {
+  //           if (!ignore) {
+  //             setIssues({});
+  //             setTopStatusText(`✅ ${actionData.message}`);
+  //             // await new Promise((r) => setTimeout(r, 5_000));
+  //             // setTopStatusText('');
+  //           }
+  //         })();
+  //         break;
+  //       case 'updateAddressByAdminId':
+  //         (async () => {
+  //           if (!ignore) {
+  //             setIssues({});
+  //             setBotStatusText(`✅ ${actionData.message}`);
+  //             await new Promise((r) => setTimeout(r, 5_000));
+  //             setBotStatusText('');
+  //           }
+  //         })();
+  //         break;
+  //       case 'updateTrainerById':
+  //         (async () => {
+  //           if (!ignore) {
+  //             setIssues({});
+  //             setTopStatusText(`✅ ${actionData.message}`);
+  //             await new Promise((r) => setTimeout(r, 5_000));
+  //             setTopStatusText('');
+  //           }
+  //         })();
+  //         break;
+  //       case 'updateAddressByTrainerId':
+  //         (async () => {
+  //           if (!ignore) {
+  //             setIssues({});
+  //             setBotStatusText(`✅ ${actionData.message}`);
+  //             await new Promise((r) => setTimeout(r, 5_000));
+  //             setBotStatusText('');
+  //           }
+  //         })();
+  //         break;
+  //       case 'updateMemberById':
+  //         (async () => {
+  //           if (!ignore) {
+  //             setIssues({});
+  //             setTopStatusText(`✅ ${actionData.message}`);
+  //             await new Promise((r) => setTimeout(r, 5_000));
+  //             setTopStatusText('');
+  //           }
+  //         })();
+  //         break;
+  //       case 'updateAddressByMemberId':
+  //         (async () => {
+  //           if (!ignore) {
+  //             setIssues({});
+  //             setBotStatusText(`✅ ${actionData.message}`);
+  //             await new Promise((r) => setTimeout(r, 5_000));
+  //             setBotStatusText('');
+  //           }
+  //         })();
+  //         break;
+  //       default:
+  //         break;
+  //     }
+  //   } else {
+  //     if (!ignore) {
+  //       setIssues(actionData);
+  //     }
+  //   }
+  //   return () => {
+  //     setIssues({});
+  //     setTopStatusText('');
+  //     setBotStatusText('');
+  //     ignore = true;
+  //   };
+  // }, [actionData]);
 
   // NB Need to check if `defaultValues` is truthy, o/w `undefined` will be passed as the `defaultValue` prop for
-  //  following inputs before `defaultValues` is populated by the custom Hook, which requires controlled input/select
+  //  following inputs before `defaultValues` is populated, which requires controlled input/select
   return defaultValues ? (
     <div className='flex-grow px-4 py-6'>
       <h1 className='font-sans text-3xl text-primary-content'>Edit My Account</h1>
@@ -244,7 +290,7 @@ export default function ProfileEditAccount() {
       </Form>
     </div>
   ) : (
-    <LoadingNoNav />
+    <SpinnerNoNav />
     // ??? [Not that important] Skeleton doesn't work here
   );
 }
