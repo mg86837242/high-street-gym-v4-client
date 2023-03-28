@@ -96,7 +96,7 @@ export function AdminMngBlogs() {
 export function AdminMngActivities() {
   const { activities } = useLoaderData();
 
-  // TODO (1) edit buttons and form, (2) delete buttons by using RRD action. (3) new button that jump to edit
+  // TODO (1) edit button's <Form> action => edit route, loader and form, (2) delete buttons by using RRD action. (3) new button that jump to edit
   return (
     <div className='flex flex-col gap-0 overflow-x-auto'>
       <div className='w-full px-4 py-6 overflow-x-auto'>
@@ -134,8 +134,31 @@ export function AdminMngActivities() {
 
 export function AdminEditActivity() {
   return (
-    <div className='grid place-items-center'>
-      <h1>Edit form will appear here</h1>
+    <div className='flex flex-col place-items-center px-4 py-6'>
+      <div className='form-control'>
+        <label className='input-group input-group-sm'>
+          <span>SM</span>
+          <input type='text' placeholder='Type here' className='input input-bordered input-sm' />
+        </label>
+      </div>
+      <div className='form-control'>
+        <label className='input-group input-group-sm'>
+          <span>SM</span>
+          <input type='text' placeholder='Type here' className='input input-bordered input-sm' />
+        </label>
+      </div>
+      <div className='form-control'>
+        <label className='input-group input-group-sm'>
+          <span>SM</span>
+          <input type='text' placeholder='Type here' className='input input-bordered input-sm' />
+        </label>
+      </div>
+      <div className='form-control'>
+        <label className='input-group input-group-sm'>
+          <span>SM</span>
+          <input type='text' placeholder='Type here' className='input input-bordered input-sm' />
+        </label>
+      </div>
     </div>
   );
 }
