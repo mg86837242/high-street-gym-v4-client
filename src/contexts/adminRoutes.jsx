@@ -9,19 +9,19 @@ const adminRoutes = [
     },
   },
   {
+    path: 'blogs',
+    async lazy() {
+      let { AdminEditBlogs } = await import('../components/Panels/AdminPanel');
+      return { Component: AdminEditBlogs };
+    },
+  },
+  {
     path: 'activities',
     async lazy() {
       let { default: AdminEditActivities } = await import('../components/Panels/AdminEditActivities');
       return { Component: AdminEditActivities };
     },
     ErrorBoundary: ErrorInfoBack,
-  },
-  {
-    path: 'blogs',
-    async lazy() {
-      let { AdminEditBlogs } = await import('../components/Panels/AdminPanel');
-      return { Component: AdminEditBlogs };
-    },
   },
 ];
 
