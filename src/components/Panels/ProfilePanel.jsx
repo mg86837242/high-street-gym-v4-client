@@ -3,6 +3,7 @@ import AuthContext from '../../contexts/AuthContext';
 import { Outlet, NavLink, Navigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faPenToSquare } from '@fortawesome/free-regular-svg-icons';
+import UnderConstruction from '../UnderConstruction';
 
 export function ProfilePanel() {
   return (
@@ -61,7 +62,7 @@ function LeftSidePanel() {
               <span>
                 <FontAwesomeIcon icon={faPenToSquare} className='w-4 h-4' />
               </span>
-              <span className='flex items-center justify-start text-sm'>Edit My Blogs</span>
+              <span className='flex items-center justify-start text-sm'>Edit My Blog Posts</span>
             </NavLink>
           </li>
         </ul>
@@ -70,15 +71,17 @@ function LeftSidePanel() {
   );
 }
 
-export function ProfileEditIndex() {
+export function ProfileIndex() {
   return <Navigate to='account' replace />;
 }
 
 export function ProfileEditBlog() {
   return (
-    <div className='flex-grow px-4 py-6'>
-      <h1 className='font-sans text-3xl text-primary-content'>Edit My Blog</h1>
-      <img src='https://picsum.photos/500/300?random=2' />
-    </div>
+    <UnderConstruction
+      pageName={'profil edit blog'}
+      imageUrl={
+        'https://images.pexels.com/photos/1145434/pexels-photo-1145434.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+      }
+    />
   );
 }

@@ -1,15 +1,10 @@
 import MainWrapper from '../components/MainWrapper';
-import UnderConstruction from '../components/UnderConstruction';
+import { AdminPanel } from '../components/Panels/AdminPanel';
 
 export default function Admin() {
   return (
-    <MainWrapper gap={'gap-16'} mt={'mt-16'} mb={'mb-20'}>
-      <UnderConstruction
-        pageName={'admin'}
-        imageUrl={
-          'https://images.pexels.com/photos/1145434/pexels-photo-1145434.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-        }
-      />
+    <MainWrapper gap={'gap-16'} mt={''} mb={''}>
+      <AdminPanel />
     </MainWrapper>
   );
 }

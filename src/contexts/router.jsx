@@ -5,6 +5,7 @@ import PageLayout from '../pages/PageLayout';
 import Login from '../pages/Login';
 import bookingsRoutes from './bookingsRoutes';
 import profileRoutes from './profileRoutes';
+import adminRoutes from './adminRoutes';
 
 const router = createBrowserRouter([
   {
@@ -35,12 +36,13 @@ const router = createBrowserRouter([
         children: [...bookingsRoutes],
       },
       {
-        path: 'activities',
+        path: 'profile',
         async lazy() {
-          let { default: Activities } = await import('../pages/Activities');
-          return { Component: Activities };
+          let { default: Profile } = await import('../pages/Profile');
+          return { Component: Profile };
         },
         ErrorBoundary: ErrorInfoBack,
+        children: [...profileRoutes],
       },
       {
         path: 'admin',
@@ -49,15 +51,7 @@ const router = createBrowserRouter([
           return { Component: Admin };
         },
         ErrorBoundary: ErrorInfoBack,
-      },
-      {
-        path: 'profile',
-        async lazy() {
-          let { default: Profile } = await import('../pages/Profile');
-          return { Component: Profile };
-        },
-        ErrorBoundary: ErrorInfoBack,
-        children: [...profileRoutes],
+        children: [...adminRoutes],
       },
     ],
   },

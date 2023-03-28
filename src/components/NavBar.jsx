@@ -121,8 +121,8 @@ function NavBarCenter() {
             <NavBarCenterButton to={'admin'} text={'Admin'} hasDropdown={true}>
               <ul id='nav-center-button-submenu' className='w-56 p-2 menu bg-neutral rounded-box'>
                 <NavBarCenterDropdownCategory text={'Manage Records'} />
-                <NavBarCenterDropdownButton to={'admin'} text={'Manage Members'} />
-                <NavBarCenterDropdownButton to={'admin'} text={'Manage Activities'} />
+                <NavBarCenterDropdownButton to={'admin/blogs'} text={'Manage Blogs'} />
+                <NavBarCenterDropdownButton to={'admin/activities'} text={'Manage Activities'} />
               </ul>
             </NavBarCenterButton>
           </>
@@ -131,10 +131,10 @@ function NavBarCenter() {
             <NavBarCenterButton to={'/'} text={'Home'} />
             <NavBarCenterButton to={'blogs'} text={'Blogs'} />
             <NavBarCenterButton to={'bookings'} text={'Bookings'} />
-            <NavBarCenterButton to={'activities'} text={'Activities'} hasDropdown={true}>
+            <NavBarCenterButton to={'admin'} text={'Admin'} hasDropdown={true}>
               <ul id='nav-center-button-submenu' className='w-56 p-2 menu bg-neutral rounded-box'>
-                <NavBarCenterDropdownCategory text={'Manage Activities'} />
-                <NavBarCenterDropdownButton to={'activities'} text={'Manage Activities'} />
+                <NavBarCenterDropdownCategory text={'Manage Records'} />
+                <NavBarCenterDropdownButton to={'admin/activities'} text={'Manage Activities'} />
               </ul>
             </NavBarCenterButton>
           </>
