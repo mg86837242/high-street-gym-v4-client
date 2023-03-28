@@ -7,6 +7,6 @@ export async function getAllActivities() {
 }
 
 export async function getActivityById({ params }) {
-  const response = await fetchRes(`${API_URL}/activities/id/${params.id}}`);
+  const response = await fetchRes(`${API_URL}/activities/id/${params.id}`);
   return response;
 }

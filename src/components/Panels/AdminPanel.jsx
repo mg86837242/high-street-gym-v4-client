@@ -134,102 +134,105 @@ export function AdminMngActivities() {
 }
 
 export function AdminEditActivity() {
+  const { activity } = useLoaderData();
+  console.log(activity);
+
   return (
-    <div className='grid place-items-center grid-cols-3 px-4 py-6'>
-      <div className='form-control w-full max-w-xs'>
+    <div className='grid grid-cols-2 px-4 py-6 place-items-center xl:grid-cols-3 gap-x-2'>
+      <div className='w-full max-w-xs form-control'>
         <label className='label'>
           <span className='label-text'>Name:</span>
           <span className='label-text-alt'>Top Right label</span>
         </label>
-        <input type='text' placeholder='Type here' className='input input-bordered input-sm w-full max-w-xs' />
+        <input type='text' placeholder='Type here' className='w-full max-w-xs input input-bordered input-sm' />
         <label className='label'>
           <span className='label-text-alt'>Bottom Left label</span>
           <span className='label-text-alt'>Bottom Right label</span>
         </label>
       </div>
-      <div className='form-control w-full max-w-xs'>
+      <div className='w-full max-w-xs form-control'>
         <label className='label'>
           <span className='label-text'>Category:</span>
           <span className='label-text-alt'>Top Right label</span>
         </label>
-        <input type='text' placeholder='Type here' className='input input-bordered input-sm w-full max-w-xs' />
+        <input type='text' placeholder='Type here' className='w-full max-w-xs input input-bordered input-sm' />
         <label className='label'>
           <span className='label-text-alt'>Bottom Left label</span>
           <span className='label-text-alt'>Bottom Right label</span>
         </label>
       </div>
-      <div className='form-control w-full max-w-xs'>
+      <div className='w-full max-w-xs form-control'>
         <label className='label'>
           <span className='label-text'>Description:</span>
           <span className='label-text-alt'>Top Right label</span>
         </label>
-        <input type='text' placeholder='Type here' className='input input-bordered input-sm w-full max-w-xs' />
+        <input type='text' placeholder='Type here' className='w-full max-w-xs input input-bordered input-sm' />
         <label className='label'>
           <span className='label-text-alt'>Bottom Left label</span>
           <span className='label-text-alt'>Bottom Right label</span>
         </label>
       </div>
-      <div className='form-control w-full max-w-xs'>
+      <div className='w-full max-w-xs form-control'>
         <label className='label'>
           <span className='label-text'>Intensity Level:</span>
           <span className='label-text-alt'>Top Right label</span>
         </label>
-        <input type='text' placeholder='Type here' className='input input-bordered input-sm w-full max-w-xs' />
+        <input type='text' placeholder='Type here' className='w-full max-w-xs input input-bordered input-sm' />
         <label className='label'>
           <span className='label-text-alt'>Bottom Left label</span>
           <span className='label-text-alt'>Bottom Right label</span>
         </label>
       </div>
-      <div className='form-control w-full max-w-xs'>
+      <div className='w-full max-w-xs form-control'>
         <label className='label'>
           <span className='label-text'>Max allowed:</span>
           <span className='label-text-alt'>Top Right label</span>
         </label>
-        <input type='text' placeholder='Type here' className='input input-bordered input-sm w-full max-w-xs' />
+        <input type='text' placeholder='Type here' className='w-full max-w-xs input input-bordered input-sm' />
         <label className='label'>
           <span className='label-text-alt'>Bottom Left label</span>
           <span className='label-text-alt'>Bottom Right label</span>
         </label>
       </div>
-      <div className='form-control w-full max-w-xs'>
+      <div className='w-full max-w-xs form-control'>
         <label className='label'>
           <span className='label-text'>Requirement 1:</span>
           <span className='label-text-alt'>Top Right label</span>
         </label>
-        <input type='text' placeholder='Type here' className='input input-bordered input-sm w-full max-w-xs' />
+        <input type='text' placeholder='Type here' className='w-full max-w-xs input input-bordered input-sm' />
         <label className='label'>
           <span className='label-text-alt'>Bottom Left label</span>
           <span className='label-text-alt'>Bottom Right label</span>
         </label>
       </div>
-      <div className='form-control w-full max-w-xs'>
+      <div className='w-full max-w-xs form-control'>
         <label className='label'>
           <span className='label-text'>Requirement 2:</span>
           <span className='label-text-alt'>Top Right label</span>
         </label>
-        <input type='text' placeholder='Type here' className='input input-bordered input-sm w-full max-w-xs' />
+        <input type='text' placeholder='Type here' className='w-full max-w-xs input input-bordered input-sm' />
         <label className='label'>
           <span className='label-text-alt'>Bottom Left label</span>
           <span className='label-text-alt'>Bottom Right label</span>
         </label>
       </div>
-      <div className='form-control w-full max-w-xs'>
+      <div className='w-full max-w-xs form-control'>
         <label className='label'>
           <span className='label-text'>Duration:</span>
           <span className='label-text-alt'>Top Right label</span>
         </label>
-        <input type='text' placeholder='Type here' className='input input-bordered input-sm w-full max-w-xs' />
+        <input type='text' placeholder='Type here' className='w-full max-w-xs input input-bordered input-sm' />
         <label className='label'>
           <span className='label-text-alt'>Bottom Left label</span>
           <span className='label-text-alt'>Bottom Right label</span>
         </label>
       </div>
-      <div className='form-control w-full max-w-xs'>
+      <div className='w-full max-w-xs form-control'>
         <label className='label'>
           <span className='label-text'>Price:</span>
           <span className='label-text-alt'>Top Right label</span>
         </label>
-        <input type='text' placeholder='Type here' className='input input-bordered input-sm w-full max-w-xs' />
+        <input type='text' placeholder='Type here' className='w-full max-w-xs input input-bordered input-sm' />
         <label className='label'>
           <span className='label-text-alt'>Bottom Left label</span>
           <span className='label-text-alt'>Bottom Right label</span>

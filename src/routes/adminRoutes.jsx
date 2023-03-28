@@ -1,4 +1,5 @@
 import ErrorInfoRefresh from '../components/ErrorInfoRefresh';
+import ErrorInfoBack from '../components/ErrorInfoBack';
 
 const adminRoutes = [
   {
@@ -34,6 +35,7 @@ const adminRoutes = [
           let { AdminEditActivity } = await import('../components/Panels/AdminPanel');
           return { Component: AdminEditActivity };
         },
+        ErrorBoundary: ErrorInfoRefresh,
         async loader({ params }) {
           let { getActivityById } = await import('../services/activities');
           return getActivityById({ params }) || null;
