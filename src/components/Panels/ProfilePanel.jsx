@@ -9,7 +9,7 @@ export function ProfilePanel() {
   return (
     <div
       id='profile-panel-wrapper'
-      className='flex flex-col w-full h-full px-4 py-6 md:flex-row max-w-7xl min-h-[calc(100vh-7.5rem)]'
+      className='flex flex-col w-full h-full px-4 py-6 md:flex-row max-w-screen-2xl min-h-[calc(100vh-7.5rem)]'
     >
       <LeftSidePanel />
       <Outlet />

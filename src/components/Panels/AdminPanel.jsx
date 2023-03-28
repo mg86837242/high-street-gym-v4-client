@@ -98,7 +98,7 @@ export function AdminMngActivities() {
 
   // TODO (1) edit buttons and form, (2) delete buttons by using RRD action. (3) new button that jump to edit
   return (
-    <div className='flex flex-col gap-5 overflow-x-auto'>
+    <div className='flex flex-col gap-0 overflow-x-auto'>
       <div className='w-full px-4 py-6 overflow-x-auto'>
         <table className='table w-full table-compact'>
           <thead>
