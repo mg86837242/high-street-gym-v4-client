@@ -40,13 +40,13 @@ export default function Calendar() {
             className={`grid grid-cols-7 gap-2 px-2 3xl:gap-4 2xl:px-4 3xl:px-6 ${i > 5 && 'pb-2 3xl:pb-4'}`}
           >
             {[...Array(7)].map((_, j) => {
-              const dayOnCal = i * 7 + j - 6 - monthStartDay;
+              const dayOnCal = 7 * i + j - 6 - monthStartDay;
               return dayOnCal > 0 && dayOnCal <= daysInMonth ? (
                 <NavLink
                   to={`${year}-${month < 10 ? '0' + month : month}-${dayOnCal < 10 ? '0' + dayOnCal : dayOnCal}`}
                   id='calendar-cell'
                   tabIndex={0}
-                  key={i * 10 + j}
+                  key={10 * i + j}
                   className={({ isActive, isPending }) =>
                     `grid place-items-center w-11 h-11 3xl:w-12 3xl:h-12 min-h-0 sm:text-base leading-none btn btn-circle ${
                       isActive && 'btn-primary'
@@ -58,7 +58,7 @@ export default function Calendar() {
               ) : (
                 <div
                   id='calendar-cell-no-date'
-                  key={i * 10 + j}
+                  key={10 * i + j}
                   className='grid min-h-0 leading-none place-items-center w-11 h-11 xl:w-12 xl:h-12 sm:text-base'
                 ></div>
               );

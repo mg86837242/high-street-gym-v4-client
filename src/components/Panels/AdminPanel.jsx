@@ -97,35 +97,26 @@ export function AdminEditActivities() {
   const { activities } = useLoaderData();
 
   return (
-    <div className='w-full overflow-x-auto'>
+    <div className='overflow-x-auto w-full px-4 py-6'>
       <table className='table table-compact w-full'>
-        {/* head */}
         <thead>
           <tr>
-            <th></th>
-            <th>Name</th>
-            <th>Job</th>
-            <th>Edit Button</th>
-            <th>Delete Button</th>
+            {Object.keys(activities[0]).map((key, j) => (
+              <th key={j}>{key.replace(/([a-z])([A-Z])/g, '$1 $2')}</th>
+            ))}
+            <th>Edit</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody>
-          {/* row 1 */}
-          <tr className='hover'>
-            <th>1</th>
-            <td>Cy Ganderton</td>
-            <td>Quality Control Specialist</td>
-            <td>Edit</td>
-            <td>Delete</td>
-          </tr>
-          {/* row 2 */}
-          <tr className='hover'>
-            <th>2</th>
-            <td>Hart Hagerty</td>
-            <td>Desktop Support Technician</td>
-            <td>Edit</td>
-            <td>Delete</td>
-          </tr>
+          {activities.map((a, i) => (
+            <tr key={`r${i}`} className='hover'>
+              <th>{a.id}</th>
+              {Object.values(a).map((val, j) => j > 0 && <td key={10 * (i + 1) + j}>{val}</td>)}
+              <td>Edit</td>
+              <td>Delete</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
