@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import AuthContext from '../../contexts/AuthContext';
-import { Outlet, NavLink, Navigate } from 'react-router-dom';
+import { Outlet, NavLink, Navigate, useLoaderData } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 import { faPersonRunning } from '@fortawesome/free-solid-svg-icons';
@@ -22,7 +22,7 @@ function LeftSidePanel() {
   const { authenticatedUser } = useContext(AuthContext);
 
   return (
-    <div id='admin-sidebar-wrapper' className='flex flex-col flex-shrink-0 gap-5 py-6 pr-6 w-[18.5rem]'>
+    <div id='admin-sidebar-wrapper' className='flex flex-col gap-5 py-6 pr-6 w-[18.5rem] flex-shrink-0'>
       <div className='flex items-center justify-between gap-5'>
         <div className='avatar'>
           <div className='w-14 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2'>
@@ -79,7 +79,13 @@ function LeftSidePanel() {
 export function AdminIndex() {
   const { authenticatedUser } = useContext(AuthContext);
 
-  return authenticatedUser?.role === 'Admin' ? <Navigate to='blogs' replace /> : <Navigate to='activities' replace />;
+  return authenticatedUser?.role === 'Admin' ? (
+    <Navigate to='blogs' replace />
+  ) : authenticatedUser?.role === 'Trainer' ? (
+    <Navigate to='activities' replace />
+  ) : (
+    <Navigate to='/' replace />
+  );
 }
 
 export function AdminEditBlogs() {
@@ -88,5 +94,48 @@ export function AdminEditBlogs() {
 }
 
 export function AdminEditActivities() {
-  return <UnderConstruction pageName={'admin edit activities'} />;
+  const { activities } = useLoaderData();
+
+  return (
+    <div className='overflow-x-auto'>
+      <table className='table w-full'>
+        {/* head */}
+        <thead>
+          <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Job</th>
+            <th>Edit Button</th>
+            <th>Delete Button</th>
+          </tr>
+        </thead>
+        <tbody>
+          {/* row 1 */}
+          <tr className='hover'>
+            <th>1</th>
+            <td>Cy Ganderton</td>
+            <td>Quality Control Specialist</td>
+            <td>Edit</td>
+            <td>Delete</td>
+          </tr>
+          {/* row 2 */}
+          <tr className='hover'>
+            <th>2</th>
+            <td>Hart Hagerty</td>
+            <td>Desktop Support Technician</td>
+            <td>Edit</td>
+            <td>Delete</td>
+          </tr>
+          {/* row 3 */}
+          <tr className='hover'>
+            <th>3</th>
+            <td>Brice Swyre</td>
+            <td>Tax Accountant</td>
+            <td>Edit</td>
+            <td>Delete</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  );
 }

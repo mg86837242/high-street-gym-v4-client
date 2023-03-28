@@ -74,7 +74,9 @@ function LeftSidePanel() {
 }
 
 export function ProfileIndex() {
-  return <Navigate to='account' replace />;
+  const { authenticatedUser } = useContext(AuthContext);
+
+  return authenticatedUser?.role ? <Navigate to='account' replace /> : <Navigate to='/' replace />;
 }
 
 export function ProfileEditBlog() {
