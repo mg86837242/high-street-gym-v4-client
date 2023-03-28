@@ -22,7 +22,7 @@ function LeftSidePanel() {
   const { authenticatedUser } = useContext(AuthContext);
 
   return (
-    <div id='admin-sidebar-wrapper' className='flex flex-col gap-5 py-6 pr-6 w-[18.5rem]'>
+    <div id='admin-sidebar-wrapper' className='flex flex-col flex-shrink-0 gap-5 py-6 pr-6 w-[18.5rem]'>
       <div className='flex items-center justify-between gap-5'>
         <div className='avatar'>
           <div className='w-14 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2'>
@@ -30,16 +30,12 @@ function LeftSidePanel() {
           </div>
         </div>
         <div className='flex flex-col items-end'>
-          <p className='text-lg'>Greetings,</p>
-          <p className='text-lg text-primary'>{authenticatedUser?.username && authenticatedUser.username}</p>
+          <p className='text-lg'>Admin Panel</p>
+          <p className='text-base'>
+            Role: <span className='text-primary'>{authenticatedUser?.role && authenticatedUser.role}</span>
+          </p>
         </div>
       </div>
-      <p className='text-right'>
-        You have logged in as{' '}
-        <span className='text-secondary'>
-          {authenticatedUser?.role ? authenticatedUser.role.toLowerCase() : 'unknown role'}
-        </span>
-      </p>
       <nav>
         <ul className='flex flex-col'>
           {authenticatedUser?.role === 'Admin' && (
@@ -88,6 +84,9 @@ export function AdminIndex() {
 
 export function AdminEditBlogs() {
   // FIX Use `loginId` as the FK in `Blogs` table i/o `memberId`
-
   return <UnderConstruction pageName={'admin edit blogs'} />;
+}
+
+export function AdminEditActivities() {
+  return <UnderConstruction pageName={'admin edit activities'} />;
 }

@@ -18,7 +18,7 @@ const adminRoutes = [
   {
     path: 'activities',
     async lazy() {
-      let { default: AdminEditActivities } = await import('../components/Panels/AdminEditActivities');
+      let { AdminEditActivities } = await import('../components/Panels/AdminPanel');
       return { Component: AdminEditActivities };
     },
     ErrorBoundary: ErrorInfoBack,

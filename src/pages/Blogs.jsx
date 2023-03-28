@@ -1,5 +1,6 @@
 import MainWrapper from '../components/MainWrapper';
 import UnderConstruction from '../components/UnderConstruction';
+
 export default function Blogs() {
   return (
     <MainWrapper gap={'gap-16'} mt={'mt-16'} mb={'mb-20'}>
