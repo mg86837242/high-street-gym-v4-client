@@ -26,7 +26,7 @@ export default function AppProviders() {
       .then((response) => response.json())
       .then((json) => {
         if (!ignore) {
-          console.log('🔃 Effect runs - user state synchronized');
+          console.log('🔃 Effect runs - user state synchronizing');
           setAuthenticatedUser(json.user);
         }
       })

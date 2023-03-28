@@ -52,7 +52,7 @@ export async function updateTrainerById(values) {
 
   const response = await patch(`${API_URL}/trainers/${id}`, updates);
   const json = await response.json();
-  // Special error handling to let 409 pass to NOT trigger error boundary, since `useActionData` already handled validation
+  // Special error handling to let 409 pass to NOT trigger error boundary, since it's already handled in component
   if (response.status === 409) {
     return redirect('/profile/account');
   }
