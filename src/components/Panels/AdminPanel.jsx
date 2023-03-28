@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import AuthContext from '../../contexts/AuthContext';
-import { Outlet, NavLink, Navigate, useLoaderData } from 'react-router-dom';
+import { Outlet, NavLink, Navigate, useLoaderData, Form } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 import { faPersonRunning } from '@fortawesome/free-solid-svg-icons';
@@ -10,7 +10,7 @@ export function AdminPanel() {
   return (
     <div
       id='admin-panel-wrapper'
-      className='flex flex-col w-full h-full px-4 py-6 md:flex-row max-w-7xl min-h-[calc(100vh-7.5rem)]'
+      className='flex flex-col w-full h-full px-4 py-6 md:flex-row max-w-screen-2xl min-h-[calc(100vh-7.5rem)]'
     >
       <LeftSidePanel />
       <Outlet />
@@ -25,7 +25,7 @@ function LeftSidePanel() {
     <div id='admin-sidebar-wrapper' className='flex flex-col gap-5 py-6 pr-6 min-w-[18.5rem]'>
       <div className='flex items-center justify-between gap-5'>
         <div className='avatar'>
-          <div className='w-14 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2'>
+          <div className='rounded-full w-14 ring ring-primary ring-offset-base-100 ring-offset-2'>
             <img src='https://picsum.photos/200/200?random=1&grayscale' />
           </div>
         </div>
@@ -88,37 +88,54 @@ export function AdminIndex() {
   );
 }
 
-export function AdminEditBlogs() {
+export function AdminMngBlogs() {
   // FIX Use `loginId` as the FK in `Blogs` table i/o `memberId`
   return <UnderConstruction pageName={'admin edit blogs'} />;
 }
 
-export function AdminEditActivities() {
+export function AdminMngActivities() {
   const { activities } = useLoaderData();
 
+  // TODO (1) edit buttons and form, (2) delete buttons by using RRD action. (3) new button that jump to edit
   return (
-    <div className='overflow-x-auto w-full px-4 py-6'>
-      <table className='table table-compact w-full'>
-        <thead>
-          <tr>
-            {Object.keys(activities[0]).map((key, j) => (
-              <th key={j}>{key.replace(/([a-z])([A-Z])/g, '$1 $2')}</th>
-            ))}
-            <th>Edit</th>
-            <th>Delete</th>
-          </tr>
-        </thead>
-        <tbody>
-          {activities.map((a, i) => (
-            <tr key={`r${i}`} className='hover'>
-              <th>{a.id}</th>
-              {Object.values(a).map((val, j) => j > 0 && <td key={10 * (i + 1) + j}>{val}</td>)}
-              <td>Edit</td>
-              <td>Delete</td>
+    <div className='flex flex-col gap-5 overflow-x-auto'>
+      <div className='w-full px-4 py-6 overflow-x-auto'>
+        <table className='table w-full table-compact'>
+          <thead>
+            <tr>
+              {Object.keys(activities[0]).map((key, j) => (
+                <th key={j}>{key.replace(/([a-z])([A-Z])/g, '$1 $2')}</th>
+              ))}
+              <th>Edit</th>
+              <th>Delete</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {activities.map((a, i) => (
+              <tr key={`r${i}`} className='hover'>
+                {Object.values(a).map((val, j) => (j < 1 ? <th>{a.id}</th> : <td key={10 * i + j}>{val}</td>))}
+                <td>
+                  <Form action={`id/${a.id}/edit`}>
+                    <button className='normal-case shadow btn btn-outline btn-secondary btn-xs text-primary-content shadow-black/50'>
+                      Edit
+                    </button>
+                  </Form>
+                </td>
+                <td>Delete</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <Outlet />
+    </div>
+  );
+}
+
+export function AdminEditActivity() {
+  return (
+    <div className='grid place-items-center'>
+      <h1>Edit form will appear here</h1>
     </div>
   );
 }

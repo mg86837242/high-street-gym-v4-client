@@ -11,22 +11,35 @@ const adminRoutes = [
   {
     path: 'blogs',
     async lazy() {
-      let { AdminEditBlogs } = await import('../components/Panels/AdminPanel');
-      return { Component: AdminEditBlogs };
+      let { AdminMngBlogs } = await import('../components/Panels/AdminPanel');
+      return { Component: AdminMngBlogs };
     },
     ErrorBoundary: ErrorInfoRefresh,
   },
   {
     path: 'activities',
     async lazy() {
-      let { AdminEditActivities } = await import('../components/Panels/AdminPanel');
-      return { Component: AdminEditActivities };
+      let { AdminMngActivities } = await import('../components/Panels/AdminPanel');
+      return { Component: AdminMngActivities };
     },
     ErrorBoundary: ErrorInfoRefresh,
     async loader() {
       let { getAllActivities } = await import('../services/activities.js');
       return getAllActivities();
     },
+    children: [
+      {
+        path: 'id/:id/edit',
+        async lazy() {
+          let { AdminEditActivity } = await import('../components/Panels/AdminPanel');
+          return { Component: AdminEditActivity };
+        },
+        async loader({ params }) {
+          // Service function getActivityById({params})
+          return null;
+        },
+      },
+    ],
   },
 ];
 
