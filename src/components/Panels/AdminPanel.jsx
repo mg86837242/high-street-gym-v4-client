@@ -87,12 +87,7 @@ export function AdminIndex() {
 }
 
 export function AdminEditBlogs() {
-  return (
-    <UnderConstruction
-      pageName={'admin edit blogs'}
-      imageUrl={
-        'https://images.pexels.com/photos/1145434/pexels-photo-1145434.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-      }
-    />
-  );
+  // FIX Use `loginId` as the FK in `Blogs` table i/o `memberId`
+
+  return <UnderConstruction pageName={'admin edit blogs'} />;
 }

@@ -76,12 +76,5 @@ export function ProfileIndex() {
 }
 
 export function ProfileEditBlog() {
-  return (
-    <UnderConstruction
-      pageName={'profil edit blog'}
-      imageUrl={
-        'https://images.pexels.com/photos/1145434/pexels-photo-1145434.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-      }
-    />
-  );
+  return <UnderConstruction pageName={'profile edit blog'} />;
 }

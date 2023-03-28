@@ -33,6 +33,8 @@ export default function NavBar({ isHome }) {
 }
 
 function NavBarLeft() {
+  const { authenticatedUser } = useContext(AuthContext);
+
   return (
     <div id='nav-left-wrapper' className='navbar-start'>
       <div id='nav-left-dropdown-wrapper' className='dropdown'>
@@ -47,53 +49,39 @@ function NavBarLeft() {
             <path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M4 6h16M4 12h8m-8 6h16' />
           </svg>
         </label>
-        {/* FIX Reflect final page design & RBAC in the mobile menu (i.e., align with the center navbar menu) */}
         <ul
           id='nav-left-dropdown-menu'
           tabIndex={0}
           className='p-2 mt-3 shadow menu menu-compact dropdown-content bg-neutral rounded-box w-52'
         >
-          <li id='nav-left-dropdown-menu-item'>
-            <Link to='/'>Home</Link>
-          </li>
-          <li id='nav-left-dropdown-menu-item' tabIndex={0}>
-            <Link to='blogs' className='justify-between'>
-              Blogs
-              <svg
-                className='fill-current'
-                xmlns='http://www.w3.org/2000/svg'
-                width='24'
-                height='24'
-                viewBox='0 0 24 24'
-              >
-                <path d='M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z' />
-              </svg>
-            </Link>
-            <ul id='nav-center-button-submenu' className='w-56 p-2 ml-1 menu bg-neutral rounded-box'>
-              <li className='menu-title'>
-                <span>Category</span>
-              </li>
-              {/* TODO How to use arrow keys to navigate between these submenu buttons, extending to <NavBarCenter> submenu */}
-              <li>
-                <Link to=''>Item 1</Link>
-              </li>
-              <li>
-                <Link to=''>Item 2</Link>
-              </li>
-              <li className='menu-title'>
-                <span>Category</span>
-              </li>
-              <li>
-                <Link to=''>Item 1</Link>
-              </li>
-              <li>
-                <Link to=''>Item 2</Link>
-              </li>
-            </ul>
-          </li>
-          <li id='nav-left-dropdown-menu-item'>
-            <Link to='bookings'>Bookings</Link>
-          </li>
+          {authenticatedUser?.role === 'Admin' ? (
+            <>
+              <NavLeftButton to={'/'} text={'Home'} />
+              <NavLeftButton to={'blogs'} text={'Blogs'} />
+              <NavLeftButton to={'bookings'} text={'Bookings'} />
+              <NavLeftButton to={'admin'} text={'Admin'} hasDropdown={true}>
+                <NavLeftDropdownCategory text={'Manage Records'} />
+                <NavLeftDropdownButton to={'admin/blogs'} text={'Manage Blogs'} />
+                <NavLeftDropdownButton to={'admin/activities'} text={'Manage Activities'} />
+              </NavLeftButton>
+            </>
+          ) : authenticatedUser?.role === 'Trainer' ? (
+            <>
+              <NavLeftButton to={'/'} text={'Home'} />
+              <NavLeftButton to={'blogs'} text={'Blogs'} />
+              <NavLeftButton to={'bookings'} text={'Bookings'} />
+              <NavLeftButton to={'admin'} text={'Manage'} hasDropdown={true}>
+                <NavLeftDropdownCategory text={'Manage Records'} />
+                <NavLeftDropdownButton to={'admin/activities'} text={'Manage Activities'} />
+              </NavLeftButton>
+            </>
+          ) : (
+            <>
+              <NavLeftButton to={'/'} text={'Home'} />
+              <NavLeftButton to={'blogs'} text={'Blogs'} />
+              <NavLeftButton to={'bookings'} text={'Bookings'} />
+            </>
+          )}
         </ul>
       </div>
       <Link
@@ -107,6 +95,45 @@ function NavBarLeft() {
   );
 }
 
+function NavLeftButton({ children, to, text, hasDropdown }) {
+  return (
+    <li id='nav-left-button' tabIndex={0}>
+      <Link to={to} className='justify-between'>
+        {text}
+        {hasDropdown && (
+          <svg className='fill-current' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'>
+            <path d='M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z' />
+          </svg>
+        )}
+      </Link>
+      {hasDropdown && (
+        <ul id='nav-center-button-submenu' className='w-56 p-2 ml-1 menu bg-neutral rounded-box'>
+          {/* TODO How to use arrow keys to navigate between these submenu buttons, extending to <NavBarCenter> submenu */}
+          {children}
+        </ul>
+      )}
+    </li>
+  );
+}
+
+function NavLeftDropdownCategory({ text }) {
+  return (
+    <li className='menu-title'>
+      <span className='text-sm'>{text}</span>
+    </li>
+  );
+}
+
+function NavLeftDropdownButton({ to, text }) {
+  return (
+    <li>
+      <Link to={to} className='text-sm'>
+        {text}
+      </Link>
+    </li>
+  );
+}
+
 function NavBarCenter() {
   const { authenticatedUser } = useContext(AuthContext);
 
@@ -115,34 +142,30 @@ function NavBarCenter() {
       <ul id='nav-center-menu' className='gap-2 px-1 menu menu-horizontal text-primary-content'>
         {authenticatedUser?.role === 'Admin' ? (
           <>
-            <NavBarCenterButton to={'/'} text={'Home'} />
-            <NavBarCenterButton to={'blogs'} text={'Blogs'} />
-            <NavBarCenterButton to={'bookings'} text={'Bookings'} />
-            <NavBarCenterButton to={'admin'} text={'Admin'} hasDropdown={true}>
-              <ul id='nav-center-button-submenu' className='w-56 p-2 menu bg-neutral rounded-box'>
-                <NavBarCenterDropdownCategory text={'Manage Records'} />
-                <NavBarCenterDropdownButton to={'admin/blogs'} text={'Manage Blogs'} />
-                <NavBarCenterDropdownButton to={'admin/activities'} text={'Manage Activities'} />
-              </ul>
-            </NavBarCenterButton>
+            <NavCenterButton to={'/'} text={'Home'} />
+            <NavCenterButton to={'blogs'} text={'Blogs'} />
+            <NavCenterButton to={'bookings'} text={'Bookings'} />
+            <NavCenterButton to={'admin'} text={'Admin'} hasDropdown={true}>
+              <NavCenterDropdownCategory text={'Manage Records'} />
+              <NavCenterDropdownButton to={'admin/blogs'} text={'Manage Blogs'} />
+              <NavCenterDropdownButton to={'admin/activities'} text={'Manage Activities'} />
+            </NavCenterButton>
           </>
         ) : authenticatedUser?.role === 'Trainer' ? (
           <>
-            <NavBarCenterButton to={'/'} text={'Home'} />
-            <NavBarCenterButton to={'blogs'} text={'Blogs'} />
-            <NavBarCenterButton to={'bookings'} text={'Bookings'} />
-            <NavBarCenterButton to={'admin'} text={'Admin'} hasDropdown={true}>
-              <ul id='nav-center-button-submenu' className='w-56 p-2 menu bg-neutral rounded-box'>
-                <NavBarCenterDropdownCategory text={'Manage Records'} />
-                <NavBarCenterDropdownButton to={'admin/activities'} text={'Manage Activities'} />
-              </ul>
-            </NavBarCenterButton>
+            <NavCenterButton to={'/'} text={'Home'} />
+            <NavCenterButton to={'blogs'} text={'Blogs'} />
+            <NavCenterButton to={'bookings'} text={'Bookings'} />
+            <NavCenterButton to={'admin'} text={'Manage'} hasDropdown={true}>
+              <NavCenterDropdownCategory text={'Manage Records'} />
+              <NavCenterDropdownButton to={'admin/activities'} text={'Manage Activities'} />
+            </NavCenterButton>
           </>
         ) : (
           <>
-            <NavBarCenterButton to={'/'} text={'Home'} />
-            <NavBarCenterButton to={'blogs'} text={'Blogs'} />
-            <NavBarCenterButton to={'bookings'} text={'Bookings'} />
+            <NavCenterButton to={'/'} text={'Home'} />
+            <NavCenterButton to={'blogs'} text={'Blogs'} />
+            <NavCenterButton to={'bookings'} text={'Bookings'} />
           </>
         )}
       </ul>
@@ -150,9 +173,9 @@ function NavBarCenter() {
   );
 }
 
-function NavBarCenterButton({ children, to, text, hasDropdown }) {
+function NavCenterButton({ children, to, text, hasDropdown }) {
   return (
-    <li id='nav-center-menu-button'>
+    <li>
       <NavLink
         to={to}
         className={({ isActive }) => `${isActive && 'btn-active underline underline-offset-8 decoration-2'}`}
@@ -164,12 +187,16 @@ function NavBarCenterButton({ children, to, text, hasDropdown }) {
           </svg>
         )}
       </NavLink>
-      {children}
+      {hasDropdown && (
+        <ul id='nav-center-button-submenu' className='w-56 p-2 menu bg-neutral rounded-box'>
+          {children}
+        </ul>
+      )}
     </li>
   );
 }
 
-function NavBarCenterDropdownCategory({ text }) {
+function NavCenterDropdownCategory({ text }) {
   return (
     <li className='menu-title'>
       <span className='text-sm'>{text}</span>
@@ -177,7 +204,7 @@ function NavBarCenterDropdownCategory({ text }) {
   );
 }
 
-function NavBarCenterDropdownButton({ to, text }) {
+function NavCenterDropdownButton({ to, text }) {
   return (
     <li>
       <Link to={to} className='text-sm'>

@@ -6,7 +6,7 @@ export default function Blogs() {
       <UnderConstruction
         pageName={'blogs'}
         imageUrl={
-          'https://images.pexels.com/photos/1145434/pexels-photo-1145434.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+          'https://images.unsplash.com/photo-1503387837-b154d5074bd2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1331&q=80'
         }
       />
     </MainWrapper>
