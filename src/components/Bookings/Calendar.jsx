@@ -70,7 +70,7 @@ export default function Calendar() {
   );
 
   return (
-    <CalendarWrapper>
+    <CalendarWrapper authenticatedUser={authenticatedUser}>
       <div id='calendar-nav' className='flex items-center gap-10 px-3 rounded-lg lg:gap-20 bg-base-300 py-[.25rem]'>
         <button
           // NB Bug: random texts get selected/highlighted => b/c the `<FontAwesomeIcon>` is a text element =>
@@ -113,9 +113,7 @@ export default function Calendar() {
   );
 }
 
-function CalendarWrapper({ children }) {
-  const { authenticatedUser } = useContext(AuthContext);
-
+function CalendarWrapper({ children, authenticatedUser }) {
   return authenticatedUser ? (
     <div
       id='calendar-wrapper'
@@ -144,27 +142,33 @@ function CreateNewBooking() {
 }
 
 // References for JS dates:
-// -- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#examples: (1) `Date()` constructor, (2) instance methods for local time, namely 'getFullYear()`, `getMonth()`, `getDay()`, `getDate()`, etc.
-// -- https://stackoverflow.com/questions/33184096/date-new-date-date-valueof-vs-date-now: `new Date()` vs `Date.now()` as of 2019
-// -- https://www.w3resource.com/javascript-exercises/javascript-date-exercise-3.php: How to get the number of days in a specific month in JavaScript
+// -- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#examples: (1) `Date()`
+//  constructor, (2) instance methods for local time, namely 'getFullYear()`, `getMonth()`, `getDay()`, `getDate()`,
+//  etc.
+// -- https://stackoverflow.com/questions/33184096/date-new-date-date-valueof-vs-date-now: `new Date()` vs `Date.now()`
+//  as of 2019
+// -- https://www.w3resource.com/javascript-exercises/javascript-date-exercise-3.php: How to get the number of days in
+//  a specific month in JavaScript
 // -- https://www.mysqltutorial.org/mysql-datetime/: A Complete Guide To MySQL DATETIME Data Type
 // -- https://medium.com/create-a-clocking-in-system-on-react/create-a-react-app-displaying-the-current-date-and-time-using-hooks-21d946971556:
-//   Create a React App Displaying the Current Date and Time Using Hooks | by Yousef Ahmed | Create a Clocking in System in React | Medium (source:
-//   google search "useEffect and date")
+//   Create a React App Displaying the Current Date and Time Using Hooks | by Yousef Ahmed | Create a Clocking in
+//   System in React | Medium (source: google search "useEffect and date")
 
 // References for styling:
-// -- https://fontawesome.com/docs/web/use-with/react/add-icons#add-individual-icons-explicitly: Font Awesome with React – minimalist setup
-// -- https://stackoverflow.com/questions/23116591/how-to-include-a-font-awesome-icon-in-reacts-render/48905370#48905370: Example of minimalist setup
+// -- https://fontawesome.com/docs/web/use-with/react/add-icons#add-individual-icons-explicitly: Font Awesome with
+//  React – minimalist setup
+// -- https://stackoverflow.com/questions/23116591/how-to-include-a-font-awesome-icon-in-reacts-render/48905370#48905370:
+//  Example of minimalist setup
 
 // References for a11y:
-// -- https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/table_role#best_practices: "A relevant use case for the ARIA table role is
-//  when CSS's display property overrides the native semantics of a table, such as by display: grid. In this case, you can use the ARIA table roles to
-//  re-add the semantics." => In this case, native semantics of `<div>` is overridden
+// -- https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/table_role#best_practices: "A relevant use
+//  case for the ARIA table role is when CSS's display property overrides the native semantics of a table, such as by
+//  display: grid. In this case, you can use the ARIA table roles to re-add the semantics." => In this case, native
+//  semantics of `<div>` is overridden
 // -- https://www.tpgi.com/short-note-on-what-css-display-properties-do-to-table-semantics/
-// -- https://stackoverflow.com/questions/21715162/when-should-i-use-a-button-button-or-a-link-a-in-html: <a> vs <button>
-// -- https://old.reddit.com/r/reactjs/comments/wl5wao/what_is_better_for_whole_div_as_link_in_react/: <Link> (aka <a>) vs `useNavigate`,
-//  accessibility-wise, detailed reasons of why <a> is preferred
-// -- https://old.reddit.com/r/reactjs/comments/vq2hb6/which_is_better_to_use_link_or_usenavigate/: worst case of not using <a> is getting an ADA
-//  lawsuit
-// -- https://stackoverflow.com/questions/71781348/difference-between-link-and-usenavigate-from-react-router-dom: <Link> vs `useNavigate` concerning
-//  Declarative vs Imperative Programming
+// -- https://stackoverflow.com/questions/21715162/when-should-i-use-a-button-button-or-a-link-a-in-html: <a> vs
+//  <button>
+// -- https://old.reddit.com/r/reactjs/comments/wl5wao/what_is_better_for_whole_div_as_link_in_react/: <Link> (aka <a>)
+//  vs `useNavigate`, accessibility-wise, detailed reasons of why <a> is preferred
+// -- https://stackoverflow.com/questions/71781348/difference-between-link-and-usenavigate-from-react-router-dom:
+//  <Link> vs `useNavigate` concerning Declarative vs Imperative Programming
