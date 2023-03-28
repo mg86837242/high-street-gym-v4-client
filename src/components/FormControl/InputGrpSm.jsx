@@ -1,4 +1,4 @@
-export default function InputGroupSmall({ name, type, issue, initialValue, isRequired }) {
+export default function InputGrpSm({ name, type, issue, initialValue, isRequired }) {
   const id = name.replace(/([a-z])([A-Z])/g, '$1-$2');
 
   return (

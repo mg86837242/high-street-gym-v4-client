@@ -21,7 +21,7 @@ function LeftSidePanel() {
   const { authenticatedUser } = useContext(AuthContext);
 
   return (
-    <div id='profile-sidebar-wrapper' className='flex flex-col flex-shrink-0 gap-5 py-6 pr-6 w-[18.5rem]'>
+    <div id='profile-sidebar-wrapper' className='flex flex-col gap-5 py-6 pr-6 min-w-[18.5rem]'>
       <div className='flex items-center justify-between gap-5'>
         <div className='avatar'>
           <div className='w-14 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2'>

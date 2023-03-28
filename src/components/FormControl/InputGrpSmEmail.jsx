@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import AuthContext from '../../contexts/AuthContext';
 
-export default function InputGroupSmallEmail({ issue, emails, initialValue, isRequired }) {
+export default function InputGrpSmEmail({ issue, emails, initialValue, isRequired }) {
   const { authenticatedUser } = useContext(AuthContext);
   const [value, setValue] = useState(initialValue);
   const isDuplicate = value !== authenticatedUser?.email && emails.find((e) => value === e.email);

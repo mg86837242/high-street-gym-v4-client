@@ -22,7 +22,7 @@ function LeftSidePanel() {
   const { authenticatedUser } = useContext(AuthContext);
 
   return (
-    <div id='admin-sidebar-wrapper' className='flex flex-col gap-5 py-6 pr-6 w-[18.5rem] flex-shrink-0'>
+    <div id='admin-sidebar-wrapper' className='flex flex-col gap-5 py-6 pr-6 min-w-[18.5rem]'>
       <div className='flex items-center justify-between gap-5'>
         <div className='avatar'>
           <div className='w-14 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2'>
@@ -97,8 +97,8 @@ export function AdminEditActivities() {
   const { activities } = useLoaderData();
 
   return (
-    <div className='overflow-x-auto'>
-      <table className='table w-full'>
+    <div className='w-full overflow-x-auto'>
+      <table className='table table-compact w-full'>
         {/* head */}
         <thead>
           <tr>
@@ -123,14 +123,6 @@ export function AdminEditActivities() {
             <th>2</th>
             <td>Hart Hagerty</td>
             <td>Desktop Support Technician</td>
-            <td>Edit</td>
-            <td>Delete</td>
-          </tr>
-          {/* row 3 */}
-          <tr className='hover'>
-            <th>3</th>
-            <td>Brice Swyre</td>
-            <td>Tax Accountant</td>
             <td>Edit</td>
             <td>Delete</td>
           </tr>

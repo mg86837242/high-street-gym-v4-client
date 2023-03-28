@@ -1,4 +1,4 @@
-export default function SelectGroupSmallGender({ issue, initialValue, isRequired }) {
+export default function SelectGrpSmGender({ issue, initialValue, isRequired }) {
   return (
     <div id='gender-select-group' className='w-full form-control'>
       <label htmlFor='gender' className='py-1 3xl:py-2 label'>

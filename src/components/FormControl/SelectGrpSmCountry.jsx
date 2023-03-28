@@ -1,6 +1,6 @@
 import * as data from '../../data/countries.json';
 
-export default function SelectGroupSmallCountry({ issue, initialValue, isRequired }) {
+export default function SelectGrpSmCountry({ issue, initialValue, isRequired }) {
   const countries = data.default;
 
   return (

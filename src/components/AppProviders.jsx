@@ -22,18 +22,19 @@ export default function AppProviders() {
       return;
     }
     let ignore = false;
-    get(`${API_URL}/users/by-key/${accessKey}`)
-      .then((response) => response.json())
-      .then((json) => {
+    (async () => {
+      try {
+        const response = await get(`${API_URL}/users/by-key/${accessKey}`);
+        const json = await response.json();
         if (!ignore) {
           console.log('🔃 Effect runs - user state synchronizing');
           setAuthenticatedUser(json.user);
         }
-      })
-      .catch(() => {
+      } catch (error) {
         console.log('🔃 Effect runs - synchronization fetch failed');
         router.navigate('/');
-      });
+      }
+    })();
     return () => {
       ignore = true;
     };

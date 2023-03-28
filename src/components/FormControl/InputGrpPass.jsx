@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
 
-export default function InputGroupPass({ issue, initialValue }) {
+export default function InputGrpPass({ issue, initialValue }) {
   const [inputType, setInputType] = useState('password');
   const [icon, setIcon] = useState(faEyeSlash);
 

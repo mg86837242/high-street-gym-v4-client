@@ -1,8 +1,8 @@
 import { Link, Form, useActionData, useNavigation } from 'react-router-dom';
-import InputGroupEmail from '../FormControl/InputGroupEmail';
-import InputGroupPass from '../FormControl/InputGroupPass';
-import InputGroup from '../FormControl/InputGroup';
-import SelectGroupGender from '../FormControl/SelectGroupGender';
+import InputGrpEmail from '../FormControl/InputGrpEmail';
+import InputGrpPass from '../FormControl/InputGrpPass';
+import InputGrp from '../FormControl/InputGrp';
+import SelectGrpGender from '../FormControl/SelectGrpGender';
 import Button1Full from '../UI/Button1Full';
 
 export default function SignupPanel({ emails }) {
@@ -41,14 +41,14 @@ function SignupForm({ emails }) {
 
   return (
     <Form method='post' noValidate className='grid w-full grid-cols-1 md:grid-cols-2 gap-x-5'>
-      <InputGroupEmail issue={issues?.email} initialValue='demomember@gmail.com' emails={emails} />
-      <InputGroupPass issue={issues?.password} initialValue='abcd1234' />
-      <InputGroup name='username' type='text' issue={issues?.username} initialValue='demomember' />
-      <InputGroup name='firstName' type='text' issue={issues?.firstName} initialValue='Demo' />
-      <InputGroup name='lastName' type='text' issue={issues?.lastName} initialValue='Member' />
-      <InputGroup name='phone' type='tel' issue={issues?.phone} initialValue='0123456789' />
-      <InputGroup name='age' type='text' issue={issues?.age} isRequired={false} />
-      <SelectGroupGender issue={issues?.gender} isRequired={false} />
+      <InputGrpEmail issue={issues?.email} initialValue='demomember@gmail.com' emails={emails} />
+      <InputGrpPass issue={issues?.password} initialValue='abcd1234' />
+      <InputGrp name='username' type='text' issue={issues?.username} initialValue='demomember' />
+      <InputGrp name='firstName' type='text' issue={issues?.firstName} initialValue='Demo' />
+      <InputGrp name='lastName' type='text' issue={issues?.lastName} initialValue='Member' />
+      <InputGrp name='phone' type='tel' issue={issues?.phone} initialValue='0123456789' />
+      <InputGrp name='age' type='text' issue={issues?.age} isRequired={false} />
+      <SelectGrpGender issue={issues?.gender} isRequired={false} />
       <div className='col-span-1 pt-4 md:col-span-2'>
         <Button1Full>{statusText}</Button1Full>
       </div>

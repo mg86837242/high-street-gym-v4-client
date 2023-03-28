@@ -2,11 +2,11 @@ import { useContext, useState, useEffect } from 'react';
 import AuthContext from '../../contexts/AuthContext';
 import { useLoaderData, useActionData, Form } from 'react-router-dom';
 import SpinnerNotNav from '../SpinnerNotNav';
-import InputGroupSmallEmail from '../FormControl/InputGroupSmallEmail';
-import InputGroupSmallPass from '../FormControl/InputGroupSmallPass';
-import InputGroupSmall from '../FormControl/InputGroupSmall';
-import SelectGroupSmallGender from '../FormControl/SelectGroupSmallGender';
-import SelectGroupSmallCountry from '../FormControl/SelectGroupSmallCountry';
+import InputGrpSmEmail from '../FormControl/InputGrpSmEmail';
+import InputGrpSmPass from '../FormControl/InputGrpSmPass';
+import InputGrpSm from '../FormControl/InputGrpSm';
+import SelectGrpSmGender from '../FormControl/SelectGrpSmGender';
+import SelectGrpSmCountry from '../FormControl/SelectGrpSmCountry';
 
 export default function ProfileEditAccount() {
   const { authenticatedUser } = useContext(AuthContext);
@@ -94,17 +94,12 @@ export default function ProfileEditAccount() {
       <h1 className='font-sans text-3xl text-primary-content'>Edit My Account</h1>
       <Form method='post' noValidate className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'>
         {/* (1) Shared input fields: */}
-        <InputGroupSmallEmail issue={issues?.email} initialValue={initialValues?.email} emails={emails} />
-        <InputGroupSmallPass issue={issues?.password} initialValue={initialValues?.password} />
-        <InputGroupSmall name='username' type='text' issue={issues?.username} initialValue={initialValues?.username} />
-        <InputGroupSmall
-          name='firstName'
-          type='text'
-          issue={issues?.firstName}
-          initialValue={initialValues?.firstName}
-        />
-        <InputGroupSmall name='lastName' type='text' issue={issues?.lastName} initialValue={initialValues?.lastName} />
-        <InputGroupSmall name='phone' type='tel' issue={issues?.phone} initialValue={initialValues?.phone} />
+        <InputGrpSmEmail issue={issues?.email} initialValue={initialValues?.email} emails={emails} />
+        <InputGrpSmPass issue={issues?.password} initialValue={initialValues?.password} />
+        <InputGrpSm name='username' type='text' issue={issues?.username} initialValue={initialValues?.username} />
+        <InputGrpSm name='firstName' type='text' issue={issues?.firstName} initialValue={initialValues?.firstName} />
+        <InputGrpSm name='lastName' type='text' issue={issues?.lastName} initialValue={initialValues?.lastName} />
+        <InputGrpSm name='phone' type='tel' issue={issues?.phone} initialValue={initialValues?.phone} />
         {/* (2) Conditional input fields and buttons: */}
         {authenticatedUser?.role === 'Admin' ? (
           <>
@@ -116,28 +111,28 @@ export default function ProfileEditAccount() {
           </>
         ) : authenticatedUser?.role === 'Trainer' ? (
           <>
-            <InputGroupSmall
+            <InputGrpSm
               name='description'
               type='text'
               issue={issues?.description}
               initialValue={initialValues?.description}
               isRequired={false}
             />{' '}
-            <InputGroupSmall
+            <InputGrpSm
               name='specialty'
               type='text'
               issue={issues?.specialty}
               initialValue={initialValues?.specialty}
               isRequired={false}
             />{' '}
-            <InputGroupSmall
+            <InputGrpSm
               name='certificate'
               type='text'
               issue={issues?.certificate}
               initialValue={initialValues?.certificate}
               isRequired={false}
             />{' '}
-            <InputGroupSmall
+            <InputGrpSm
               name='imageUrl'
               type='text'
               issue={issues?.imageUrl}
@@ -152,14 +147,14 @@ export default function ProfileEditAccount() {
           </>
         ) : authenticatedUser?.role === 'Member' ? (
           <>
-            <InputGroupSmall
+            <InputGrpSm
               name='age'
               type='text'
               issue={issues?.age}
               initialValue={initialValues?.age}
               isRequired={false}
             />
-            <SelectGroupSmallGender issue={issues?.gender} initialValue={initialValues?.gender} isRequired={false} />
+            <SelectGrpSmGender issue={issues?.gender} initialValue={initialValues?.gender} isRequired={false} />
             <input type='hidden' name='id' value={authenticatedUser.memberId} />
             <button type='submit' name='_action' value='updateMemberById' className='btn btn-primary btn-sm mt-4'>
               Save
@@ -174,18 +169,18 @@ export default function ProfileEditAccount() {
       <h1 className='font-sans text-3xl text-primary-content'>Edit My Address</h1>
       <Form method='post' noValidate className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'>
         {/* (1) Shared input fields: */}
-        <InputGroupSmall name='lineOne' type='text' issue={issues?.lineOne} initialValue={initialValues?.lineOne} />
-        <InputGroupSmall
+        <InputGrpSm name='lineOne' type='text' issue={issues?.lineOne} initialValue={initialValues?.lineOne} />
+        <InputGrpSm
           name='lineTwo'
           type='text'
           issue={issues?.lineTwo}
           initialValue={initialValues?.lineTwo}
           isRequired={false}
         />
-        <InputGroupSmall name='suburb' type='text' issue={issues?.suburb} initialValue={initialValues?.suburb} />
-        <InputGroupSmall name='postcode' type='text' issue={issues?.postcode} initialValue={initialValues?.postcode} />
-        <InputGroupSmall name='state' type='text' issue={issues?.state} initialValue={initialValues?.state} />
-        <SelectGroupSmallCountry issue={issues?.country} initialValue={initialValues?.country} />
+        <InputGrpSm name='suburb' type='text' issue={issues?.suburb} initialValue={initialValues?.suburb} />
+        <InputGrpSm name='postcode' type='text' issue={issues?.postcode} initialValue={initialValues?.postcode} />
+        <InputGrpSm name='state' type='text' issue={issues?.state} initialValue={initialValues?.state} />
+        <SelectGrpSmCountry issue={issues?.country} initialValue={initialValues?.country} />
         {/* (2) Conditional buttons: */}
         {authenticatedUser?.role === 'Admin' ? (
           <>
