@@ -5,6 +5,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 import { faPersonRunning } from '@fortawesome/free-solid-svg-icons';
 import UnderConstruction from '../UnderConstruction';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
 
 export function AdminPanel() {
   return (
@@ -96,7 +99,7 @@ export function AdminMngBlogs() {
 export function AdminMngActivities() {
   const { activities } = useLoaderData();
 
-  // TODO (1) edit button's <Form> action => edit route, loader and form, (2) delete buttons by using RRD action. (3) new button that jump to edit
+  // TODO (1) edit testing rhf, (2) delete buttons by using RRD action. (3) new button that jump to edit
   return (
     <div className='flex flex-col gap-0 overflow-x-auto'>
       <div className='w-full px-4 py-6 overflow-x-auto'>
@@ -133,7 +136,82 @@ export function AdminMngActivities() {
   );
 }
 
+const activitySchema = z.object({
+  name: z.string().max(45),
+  category: z.string().max(45),
+  description: z.string().max(45),
+  intensityLevel: z.string().max(45),
+  maxPeopleAllowed: z.string().max(45),
+  requirementOne: z.string().max(45),
+  requirementTwo: z.string().max(45),
+  durationMinutes: z.string().max(45),
+  price: z.number().max(100),
+});
+
 export function AdminEditActivity() {
+  const { activity } = useLoaderData();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(activitySchema),
+  });
+
+  return (
+    <div className='grid px-4 py-6 place-items-center'>
+      <form onSubmit={handleSubmit((_formData) => console.log(_formData))} noValidate className='flex flex-col gap-3'>
+        <div>
+          <label>Name:</label>
+          <input {...register('name')} />
+          {errors.name?.message && <p>{errors.name?.message}</p>}
+        </div>
+        <div>
+          <label>Category:</label>
+          <input {...register('category')} />
+          {errors.category?.message && <p>{errors.category?.message}</p>}
+        </div>
+        <div>
+          <label>Description:</label>
+          <input {...register('description')} />
+          {errors.description?.message && <p>{errors.description?.message}</p>}
+        </div>
+        <div>
+          <label>Intensity Level:</label>
+          <input {...register('intensityLevel')} />
+          {errors.intensityLevel?.message && <p>{errors.intensityLevel?.message}</p>}
+        </div>
+        <div>
+          <label>Max People Allowed:</label>
+          <input {...register('maxPeopleAllowed')} />
+          {errors.maxPeopleAllowed?.message && <p>{errors.maxPeopleAllowed?.message}</p>}
+        </div>
+        <div>
+          <label>Requriement 1:</label>
+          <input {...register('requirementOne')} />
+          {errors.requirementOne?.message && <p>{errors.requirementOne?.message}</p>}
+        </div>
+        <div>
+          <label>Requriement 2:</label>
+          <input {...register('requirementTwo')} />
+          {errors.requirementTwo?.message && <p>{errors.requirementTwo?.message}</p>}
+        </div>
+        <div>
+          <label>Duration (minutes):</label>
+          <input {...register('durationMinutes')} />
+          {errors.durationMinutes?.message && <p>{errors.durationMinutes?.message}</p>}
+        </div>
+        <div>
+          <label>Price:</label>
+          <input {...register('price', { valueAsNumber: true })} />
+          {errors.price?.message && <p>{errors.price?.message}</p>}
+        </div>
+        <button type='submit'>Save</button>
+      </form>
+    </div>
+  );
+}
+export function AdminEditActivityBackup() {
   const { activity } = useLoaderData();
   console.log(activity);
   const [formData, setFormData] = useState(
