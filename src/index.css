@@ -51,11 +51,18 @@ p {
     font-family: Arial;
 } */
 
-/* 2.1 Customize daisyUI components, see: https://github.com/saadeghi/daisyui/discussions/893 */
+/* 2.1 Customize or override daisyUI components, see: https://github.com/saadeghi/daisyui/discussions/893 */
 @layer components {
   /* PS `text-transform` is already removed in button components in the `UI` folder */
   .btn {
     text-transform: none;
+  }
+
+  .table th:first-child {
+    position: static;
+    position: -webkit-static;
+    left: auto;
+    z-index: 0;
   }
 }
 
