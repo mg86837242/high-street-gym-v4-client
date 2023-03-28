@@ -2,9 +2,7 @@ import { useState, useEffect, useCallback, useMemo } from 'react';
 import AuthContext from '../contexts/AuthContext';
 import router from '../routes/router';
 import { RouterProvider } from 'react-router-dom';
-import { API_URL } from '../data/constants';
-import get from '../utils/get';
-import post from '../utils/post';
+import { getUserByKey, login, logout } from '../services/logins';
 
 export default function AppProviders() {
   const [authenticatedUser, setAuthenticatedUser] = useState(null);
@@ -24,8 +22,7 @@ export default function AppProviders() {
     let ignore = false;
     (async () => {
       try {
-        const response = await get(`${API_URL}/users/by-key/${accessKey}`);
-        const json = await response.json();
+        const json = await getUserByKey(accessKey);
         if (!ignore) {
           console.log('🔃 Effect runs - user state synchronizing');
           setAuthenticatedUser(json.user);
@@ -45,18 +42,16 @@ export default function AppProviders() {
       setAuthenticatedUser(null);
       try {
         // Fetch POST /login to attempt to get `accessKey` from the API's json response
-        const loginRes = await post(`${API_URL}/login`, { email, password });
-        const loginJSON = await loginRes.json();
-        if (!loginRes.ok) {
+        const loginJSON = await login(email, password);
+        if (loginJSON.status !== 200) {
           return typeof loginJSON.message === 'string' ? loginJSON.message : 'Invalid request to server';
         }
         try {
           // Set key in `localStorage` – persistent storage in case page is reloaded
           localStorage.setItem('accessKey', loginJSON.accessKey);
           // Fetch GET /users/by-key/:accessKey to attempt to get an obj called `user`
-          const userRes = await get(`${API_URL}/users/by-key/${loginJSON.accessKey}`);
-          const userJSON = await userRes.json();
-          if (!userRes.ok) {
+          const userJSON = await getUserByKey(loginJSON.access);
+          if (userJSON.status !== 200) {
             return typeof userJSON.message === 'string' ? userJSON.message : 'Invalid request to server';
           }
           setAuthenticatedUser(userJSON.user);
@@ -80,9 +75,8 @@ export default function AppProviders() {
       if (authenticatedUser) {
         // Fetch POST /logout to attempt to remove `accessKey` from its login row
         const { accessKey } = authenticatedUser;
-        const response = await post(`${API_URL}/logout`, { accessKey });
-        const json = await response.json();
-        if (!response.ok) {
+        const json = await logout(accessKey);
+        if (json.status !== 200) {
           return (message = typeof json.message === 'string' ? json.message : 'Invalid request to server');
         }
         setAuthenticatedUser(null);

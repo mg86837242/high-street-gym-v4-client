@@ -40,7 +40,7 @@ export async function updateAddressByAdminId(values) {
   // #endregion
   updates.lineTwo ||= '';
 
-  const json = await fetchJSON(`${API_URL}/addresses/by-adminid/${adminId}`, 'patch', updates);
+  const json = await fetchJSON(`${API_URL}/addresses/adminid/${adminId}`, 'patch', updates);
   return { ...json, _action: 'updateAddressByAdminId' };
 }
 
@@ -73,7 +73,7 @@ export async function updateAddressByTrainerId(values) {
   // #endregion
   updates.lineTwo ||= '';
 
-  const json = await fetchJSON(`${API_URL}/addresses/by-trainerid/${trainerId}`, 'patch', updates);
+  const json = await fetchJSON(`${API_URL}/addresses/trainerid/${trainerId}`, 'patch', updates);
   return { ...json, _action: 'updateAddressByTrainerId' };
 }
 
@@ -106,6 +106,6 @@ export async function updateAddressByMemberId(values) {
   // #endregion
   updates.lineTwo ||= '';
 
-  const json = await fetchJSON(`${API_URL}/addresses/by-memberid/${memberId}`, 'patch', updates);
+  const json = await fetchJSON(`${API_URL}/addresses/memberid/${memberId}`, 'patch', updates);
   return { ...json, _action: 'updateAddressByMemberId' };
 }
