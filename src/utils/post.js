@@ -1,4 +1,4 @@
-// Use case: POST req with highly-specialized error handling, esp. in `<AppProviders>`
+// Use case: POST req with highly-specialized error handling
 export default async function post(url, body) {
   const requestOptions = {
     method: 'POST',

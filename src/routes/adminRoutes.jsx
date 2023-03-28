@@ -24,7 +24,7 @@ const adminRoutes = [
     },
     ErrorBoundary: ErrorInfoRefresh,
     async loader() {
-      let { getAllActivities } = await import('../services/activities.js');
+      let { getAllActivities } = await import('../services/activities');
       return getAllActivities();
     },
     children: [
@@ -35,8 +35,8 @@ const adminRoutes = [
           return { Component: AdminEditActivity };
         },
         async loader({ params }) {
-          // Service function getActivityById({params})
-          return null;
+          let { getActivityById } = await import('../services/activities');
+          return getActivityById({ params }) || null;
         },
       },
     ],
