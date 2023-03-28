@@ -145,7 +145,7 @@ const activitySchema = z.object({
   requirementOne: z.string().max(45),
   requirementTwo: z.string().max(45),
   durationMinutes: z.string().max(45),
-  price: z.number().max(100),
+  price: z.string().max(45),
 });
 
 export function AdminEditActivity() {
@@ -211,7 +211,8 @@ export function AdminEditActivity() {
     </div>
   );
 }
-export function AdminEditActivityBackup() {
+
+export function AdminEditActivityNoRHF() {
   const { activity } = useLoaderData();
   console.log(activity);
   const [formData, setFormData] = useState(
@@ -232,150 +233,152 @@ export function AdminEditActivityBackup() {
 
   return (
     <div className='grid grid-cols-2 px-4 py-6 place-items-center xl:grid-cols-3 gap-x-2'>
-      <div className='w-full max-w-xs form-control'>
-        <label className='label'>
-          <span className='label-text'>Name:</span>
-          <span className='label-text-alt'>Top Right label</span>
-        </label>
-        <input
-          type='text'
-          placeholder='Type here'
-          value={formData.name}
-          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          className='w-full max-w-xs input input-bordered input-sm'
-        />
-        <label className='label'>
-          <span className='label-text-alt'>Bottom Left label</span>
-        </label>
-      </div>
-      <div className='w-full max-w-xs form-control'>
-        <label className='label'>
-          <span className='label-text'>Category:</span>
-          <span className='label-text-alt'>Top Right label</span>
-        </label>
-        <input
-          type='text'
-          placeholder='Type here'
-          value={formData.category}
-          onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-          className='w-full max-w-xs input input-bordered input-sm'
-        />
-        <label className='label'>
-          <span className='label-text-alt'>Bottom Left label</span>
-        </label>
-      </div>
-      <div className='w-full max-w-xs form-control'>
-        <label className='label'>
-          <span className='label-text'>Description:</span>
-          <span className='label-text-alt'>Top Right label</span>
-        </label>
-        <input
-          type='text'
-          placeholder='Type here'
-          value={formData.description}
-          onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-          className='w-full max-w-xs input input-bordered input-sm'
-        />
-        <label className='label'>
-          <span className='label-text-alt'>Bottom Left label</span>
-        </label>
-      </div>
-      <div className='w-full max-w-xs form-control'>
-        <label className='label'>
-          <span className='label-text'>IntensityLevel:</span>
-          <span className='label-text-alt'>Top Right label</span>
-        </label>
-        <input
-          type='text'
-          placeholder='Type here'
-          value={formData.intensityLevel}
-          onChange={(e) => setFormData({ ...formData, intensityLevel: e.target.value })}
-          className='w-full max-w-xs input input-bordered input-sm'
-        />
-        <label className='label'>
-          <span className='label-text-alt'>Bottom Left label</span>
-        </label>
-      </div>
-      <div className='w-full max-w-xs form-control'>
-        <label className='label'>
-          <span className='label-text'>MaxPeopleAllowed:</span>
-          <span className='label-text-alt'>Top Right label</span>
-        </label>
-        <input
-          type='text'
-          placeholder='Type here'
-          value={formData.maxPeopleAllowed}
-          onChange={(e) => setFormData({ ...formData, maxPeopleAllowed: e.target.value })}
-          className='w-full max-w-xs input input-bordered input-sm'
-        />
-        <label className='label'>
-          <span className='label-text-alt'>Bottom Left label</span>
-        </label>
-      </div>
-      <div className='w-full max-w-xs form-control'>
-        <label className='label'>
-          <span className='label-text'>RequirementOne:</span>
-          <span className='label-text-alt'>Top Right label</span>
-        </label>
-        <input
-          type='text'
-          placeholder='Type here'
-          value={formData.requirementOne}
-          onChange={(e) => setFormData({ ...formData, requirementOne: e.target.value })}
-          className='w-full max-w-xs input input-bordered input-sm'
-        />
-        <label className='label'>
-          <span className='label-text-alt'>Bottom Left label</span>
-        </label>
-      </div>
-      <div className='w-full max-w-xs form-control'>
-        <label className='label'>
-          <span className='label-text'>RequirementTwo:</span>
-          <span className='label-text-alt'>Top Right label</span>
-        </label>
-        <input
-          type='text'
-          placeholder='Type here'
-          value={formData.requirementTwo}
-          onChange={(e) => setFormData({ ...formData, requirementTwo: e.target.value })}
-          className='w-full max-w-xs input input-bordered input-sm'
-        />
-        <label className='label'>
-          <span className='label-text-alt'>Bottom Left label</span>
-        </label>
-      </div>
-      <div className='w-full max-w-xs form-control'>
-        <label className='label'>
-          <span className='label-text'>DurationMinutes:</span>
-          <span className='label-text-alt'>Top Right label</span>
-        </label>
-        <input
-          type='text'
-          placeholder='Type here'
-          value={formData.durationMinutes}
-          onChange={(e) => setFormData({ ...formData, durationMinutes: e.target.value })}
-          className='w-full max-w-xs input input-bordered input-sm'
-        />
-        <label className='label'>
-          <span className='label-text-alt'>Bottom Left label</span>
-        </label>
-      </div>
-      <div className='w-full max-w-xs form-control'>
-        <label className='label'>
-          <span className='label-text'>Price:</span>
-          <span className='label-text-alt'>Top Right label</span>
-        </label>
-        <input
-          type='text'
-          placeholder='Type here'
-          value={formData.price}
-          onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-          className='w-full max-w-xs input input-bordered input-sm'
-        />
-        <label className='label'>
-          <span className='label-text-alt'>Bottom Left label</span>
-        </label>
-      </div>
+      <form onSubmit={() => console.log(formData)}>
+        <div className='w-full max-w-xs form-control'>
+          <label className='label'>
+            <span className='label-text'>Name:</span>
+            <span className='label-text-alt'>Top Right label</span>
+          </label>
+          <input
+            type='text'
+            placeholder='Type here'
+            value={formData.name}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            className='w-full max-w-xs input input-bordered input-sm'
+          />
+          <label className='label'>
+            <span className='label-text-alt'>Bottom Left label</span>
+          </label>
+        </div>
+        <div className='w-full max-w-xs form-control'>
+          <label className='label'>
+            <span className='label-text'>Category:</span>
+            <span className='label-text-alt'>Top Right label</span>
+          </label>
+          <input
+            type='text'
+            placeholder='Type here'
+            value={formData.category}
+            onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+            className='w-full max-w-xs input input-bordered input-sm'
+          />
+          <label className='label'>
+            <span className='label-text-alt'>Bottom Left label</span>
+          </label>
+        </div>
+        <div className='w-full max-w-xs form-control'>
+          <label className='label'>
+            <span className='label-text'>Description:</span>
+            <span className='label-text-alt'>Top Right label</span>
+          </label>
+          <input
+            type='text'
+            placeholder='Type here'
+            value={formData.description}
+            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+            className='w-full max-w-xs input input-bordered input-sm'
+          />
+          <label className='label'>
+            <span className='label-text-alt'>Bottom Left label</span>
+          </label>
+        </div>
+        <div className='w-full max-w-xs form-control'>
+          <label className='label'>
+            <span className='label-text'>IntensityLevel:</span>
+            <span className='label-text-alt'>Top Right label</span>
+          </label>
+          <input
+            type='text'
+            placeholder='Type here'
+            value={formData.intensityLevel}
+            onChange={(e) => setFormData({ ...formData, intensityLevel: e.target.value })}
+            className='w-full max-w-xs input input-bordered input-sm'
+          />
+          <label className='label'>
+            <span className='label-text-alt'>Bottom Left label</span>
+          </label>
+        </div>
+        <div className='w-full max-w-xs form-control'>
+          <label className='label'>
+            <span className='label-text'>MaxPeopleAllowed:</span>
+            <span className='label-text-alt'>Top Right label</span>
+          </label>
+          <input
+            type='text'
+            placeholder='Type here'
+            value={formData.maxPeopleAllowed}
+            onChange={(e) => setFormData({ ...formData, maxPeopleAllowed: e.target.value })}
+            className='w-full max-w-xs input input-bordered input-sm'
+          />
+          <label className='label'>
+            <span className='label-text-alt'>Bottom Left label</span>
+          </label>
+        </div>
+        <div className='w-full max-w-xs form-control'>
+          <label className='label'>
+            <span className='label-text'>RequirementOne:</span>
+            <span className='label-text-alt'>Top Right label</span>
+          </label>
+          <input
+            type='text'
+            placeholder='Type here'
+            value={formData.requirementOne}
+            onChange={(e) => setFormData({ ...formData, requirementOne: e.target.value })}
+            className='w-full max-w-xs input input-bordered input-sm'
+          />
+          <label className='label'>
+            <span className='label-text-alt'>Bottom Left label</span>
+          </label>
+        </div>
+        <div className='w-full max-w-xs form-control'>
+          <label className='label'>
+            <span className='label-text'>RequirementTwo:</span>
+            <span className='label-text-alt'>Top Right label</span>
+          </label>
+          <input
+            type='text'
+            placeholder='Type here'
+            value={formData.requirementTwo}
+            onChange={(e) => setFormData({ ...formData, requirementTwo: e.target.value })}
+            className='w-full max-w-xs input input-bordered input-sm'
+          />
+          <label className='label'>
+            <span className='label-text-alt'>Bottom Left label</span>
+          </label>
+        </div>
+        <div className='w-full max-w-xs form-control'>
+          <label className='label'>
+            <span className='label-text'>DurationMinutes:</span>
+            <span className='label-text-alt'>Top Right label</span>
+          </label>
+          <input
+            type='text'
+            placeholder='Type here'
+            value={formData.durationMinutes}
+            onChange={(e) => setFormData({ ...formData, durationMinutes: e.target.value })}
+            className='w-full max-w-xs input input-bordered input-sm'
+          />
+          <label className='label'>
+            <span className='label-text-alt'>Bottom Left label</span>
+          </label>
+        </div>
+        <div className='w-full max-w-xs form-control'>
+          <label className='label'>
+            <span className='label-text'>Price:</span>
+            <span className='label-text-alt'>Top Right label</span>
+          </label>
+          <input
+            type='text'
+            placeholder='Type here'
+            value={formData.price}
+            onChange={(e) => setFormData({ ...formData, price: e.target.value })}
+            className='w-full max-w-xs input input-bordered input-sm'
+          />
+          <label className='label'>
+            <span className='label-text-alt'>Bottom Left label</span>
+          </label>
+        </div>
+      </form>
     </div>
   );
 }
