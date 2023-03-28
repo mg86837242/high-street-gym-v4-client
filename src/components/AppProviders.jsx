@@ -50,7 +50,7 @@ export default function AppProviders() {
           // Set key in `localStorage` – persistent storage in case page is reloaded
           localStorage.setItem('accessKey', loginJSON.accessKey);
           // Fetch GET /users/by-key/:accessKey to attempt to get an obj called `user`
-          const userJSON = await getUserByKey(loginJSON.access);
+          const userJSON = await getUserByKey(loginJSON.accessKey);
           if (userJSON.status !== 200) {
             return typeof userJSON.message === 'string' ? userJSON.message : 'Invalid request to server';
           }
