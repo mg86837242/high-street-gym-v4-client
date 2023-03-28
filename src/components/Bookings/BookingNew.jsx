@@ -11,13 +11,13 @@ export default function BookingNew() {
   return (
     <div
       id='booking-new-wrapper'
-      className='grid justify-items-center content-start col-[1_/_2] row-[2_/_3] lg:col-[2_/_3] lg:row-[1_/_2] w-full lg:min-h-[80vh] lg:sticky lg:top-28'
+      className='grid content-start w-full justify-items-center col-[1_/_2] row-[2_/_3] lg:col-[2_/_3] lg:row-[1_/_2] lg:min-h-[80vh] lg:sticky lg:top-28'
     >
       <div
         id='booking-new-form-wrapper'
-        className='flex flex-col gap-5 bg-base-300 rounded-lg w-[22rem] xl:w-[30rem] px-4 xl:px-6 pt-2 3xl:pt-4 pb-4'
+        className='flex flex-col gap-5 px-4 pt-2 pb-4 rounded-lg bg-base-300 w-[22rem] xl:w-[30rem] xl:px-6 3xl:pt-4'
       >
-        <h1 className='text-secondary text-center'>New Booking</h1>
+        <h1 className='text-center text-secondary'>New Booking</h1>
         <p>
           Note: If the specified member or trainer is not available at the specified time, the booking will get denied.
         </p>
@@ -31,7 +31,7 @@ export default function BookingNew() {
               name='activityId'
               initialValue={'-- Choose Activity --'}
               required
-              className='select select-bordered select-sm text-base font-normal'
+              className='text-base font-normal select select-bordered select-sm'
             >
               <option disabled>-- Choose Activity --</option>
               {activities.map((a, i) => {
@@ -55,7 +55,7 @@ export default function BookingNew() {
               min={tomorrowStr}
               max={threeWeeksLaterStr}
               required
-              className='input input-bordered input-sm text-base'
+              className='text-base input input-bordered input-sm'
             />
           </label>
           <label
@@ -67,7 +67,7 @@ export default function BookingNew() {
               name='time'
               initialValue={`-- Choose Booking Time --`}
               required
-              className='select select-bordered select-sm text-base font-normal'
+              className='text-base font-normal select select-bordered select-sm'
             >
               <option disabled>-- Choose Booking Time --</option>
               {[...Array(10)].map((_, i) => (
@@ -87,7 +87,7 @@ export default function BookingNew() {
                 name='memberId'
                 initialValue={authenticatedUser.memberId}
                 required
-                className='select select-bordered select-sm text-base font-normal'
+                className='text-base font-normal select select-bordered select-sm'
               >
                 <option disabled>-- Choose Member --</option>
                 {members
@@ -109,7 +109,7 @@ export default function BookingNew() {
                 name='memberId'
                 initialValue={'-- Choose Member --'}
                 required
-                className='select select-bordered select-sm text-base font-normal'
+                className='text-base font-normal select select-bordered select-sm'
               >
                 <option disabled>-- Choose Member --</option>
                 {members.map((m, i) => (
@@ -130,7 +130,7 @@ export default function BookingNew() {
                 name='trainerId'
                 initialValue={authenticatedUser.trainerId}
                 required
-                className='select select-bordered select-sm text-base font-normal'
+                className='text-base font-normal select select-bordered select-sm'
               >
                 <option disabled>-- Choose Trainer --</option>
                 {trainers
@@ -152,7 +152,7 @@ export default function BookingNew() {
                 name='trainerId'
                 initialValue={'-- Choose Trainer --'}
                 required
-                className='select select-bordered select-sm text-base font-normal'
+                className='text-base font-normal select select-bordered select-sm'
               >
                 <option disabled>-- Choose Trainer --</option>
                 {trainers.map((t, i) => (
@@ -166,7 +166,7 @@ export default function BookingNew() {
           <div className='flex justify-between gap-5 text-center'>
             <button
               type='submit'
-              className='btn btn-secondary text-primary-content normal-case shadow shadow-black/50 min-h-0 w-36 lg:w-[6.5rem] xl:w-36 h-10'
+              className='h-10 min-h-0 normal-case shadow btn btn-secondary text-primary-content shadow-black/50 w-36 lg:w-[6.5rem] xl:w-36'
             >
               Submit
             </button>
@@ -175,7 +175,7 @@ export default function BookingNew() {
               onClick={() => {
                 navigate(-1);
               }}
-              className='btn glass bg-base-100 text-accent-content normal-case shadow shadow-black/50 min-h-0 w-36 lg:w-[6.5rem] xl:w-36 h-10'
+              className='h-10 min-h-0 normal-case shadow btn glass bg-base-100 text-accent-content shadow-black/50 w-36 lg:w-[6.5rem] xl:w-36'
             >
               Cancel
             </button>
