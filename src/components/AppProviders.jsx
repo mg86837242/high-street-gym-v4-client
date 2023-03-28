@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import AuthContext from '../contexts/AuthContext';
-import router from '../contexts/router';
+import router from '../routes/router';
 import { RouterProvider } from 'react-router-dom';
 import { API_URL } from '../data/constants';
 import get from '../utils/get';

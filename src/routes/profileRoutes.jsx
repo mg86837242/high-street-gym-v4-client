@@ -1,4 +1,3 @@
-import ErrorInfoBack from '../components/ErrorInfoBack';
 import ErrorInfoRefresh from '../components/ErrorInfoRefresh';
 
 const profileRoutes = [
@@ -57,7 +56,7 @@ const profileRoutes = [
       let { ProfileEditBlog } = await import('../components/Panels/ProfilePanel');
       return { Component: ProfileEditBlog };
     },
-    ErrorBoundary: ErrorInfoBack,
+    ErrorBoundary: ErrorInfoRefresh,
   },
 ];
 

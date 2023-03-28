@@ -1,4 +1,4 @@
-import ErrorInfoBack from '../components/ErrorInfoBack';
+import ErrorInfoRefresh from '../components/ErrorInfoRefresh';
 
 const adminRoutes = [
   {
@@ -14,6 +14,7 @@ const adminRoutes = [
       let { AdminEditBlogs } = await import('../components/Panels/AdminPanel');
       return { Component: AdminEditBlogs };
     },
+    ErrorBoundary: ErrorInfoRefresh,
   },
   {
     path: 'activities',
@@ -21,7 +22,11 @@ const adminRoutes = [
       let { AdminEditActivities } = await import('../components/Panels/AdminPanel');
       return { Component: AdminEditActivities };
     },
-    ErrorBoundary: ErrorInfoBack,
+    ErrorBoundary: ErrorInfoRefresh,
+    async loader() {
+      let { getAllActivities } = await import('../services/activities.js');
+      return getAllActivities();
+    },
   },
 ];
 
