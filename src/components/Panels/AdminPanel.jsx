@@ -55,7 +55,7 @@ function LeftSidePanel() {
                 <span>
                   <FontAwesomeIcon icon={faPenToSquare} className='w-4 h-4' />
                 </span>
-                <span className='flex items-center justify-start text-sm'>Edit Blog Posts</span>
+                <span className='flex items-center justify-start text-sm'>Manage Blog Posts</span>
               </NavLink>
             </li>
           )}
@@ -71,7 +71,7 @@ function LeftSidePanel() {
               <span>
                 <FontAwesomeIcon icon={faPersonRunning} className='w-4 h-4' />
               </span>
-              <span className='flex items-center justify-start text-sm'>Edit Activities</span>
+              <span className='flex items-center justify-start text-sm'>Manage Activities</span>
             </NavLink>
           </li>
         </ul>
