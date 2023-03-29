@@ -136,13 +136,13 @@ export function AdminMngActivities() {
 }
 
 const activitySchema = z.object({
-  name: z.string().max(45),
+  name: z.string().max(4),
   category: z.string().max(45),
   description: z.string().max(45),
   intensityLevel: z.string().max(45),
   maxPeopleAllowed: z.string().max(45),
-  requirementOne: z.string().max(45),
-  requirementTwo: z.string().max(45),
+  requirementOne: z.string().max(255),
+  requirementTwo: z.string().max(255),
   durationMinutes: z.string().max(45),
   price: z.string().max(45),
 });
@@ -167,7 +167,7 @@ export function AdminEditActivity() {
     reset(activity);
   }, [reset, activity]);
 
-  // TODO (1) extract the form control group + submit handler, (2) delete buttons by using RRD action. (3) new button that jump to edit
+  // TODO (1) each input's width disallow shrink, submit handler, (2) delete buttons by using RRD action. (3) new button that jump to edit
   return (
     <div className='grid px-4 py-6 place-items-center'>
       <form
@@ -175,16 +175,40 @@ export function AdminEditActivity() {
         noValidate
         className='grid grid-cols-2 lg:grid-cols-3 gap-x-5'
       >
-        <InputGrpSmall labelName='Name' issue={errors.name?.message}>
-          <input {...register('name')} />
-        </InputGrpSmall>
+        <InputGrpSm labelName='Activity Name' issue={errors.name?.message}>
+          <input {...register('name')} className='w-full max-w-xs input input-bordered input-sm' />
+        </InputGrpSm>
+        <InputGrpSm labelName='Category' issue={errors.category?.message}>
+          <input {...register('category')} className='w-full max-w-xs input input-bordered input-sm' />
+        </InputGrpSm>
+        <InputGrpSm labelName='Description' issue={errors.description?.message}>
+          <input {...register('description')} className='w-full max-w-xs input input-bordered input-sm' />
+        </InputGrpSm>
+        <InputGrpSm labelName='Intensity Level' issue={errors.intensityLevel?.message}>
+          <input {...register('intensityLevel')} className='w-full max-w-xs input input-bordered input-sm' />
+        </InputGrpSm>
+        <InputGrpSm labelName='Max People Allowed' issue={errors.maxPeopleAllowed?.message}>
+          <input {...register('maxPeopleAllowed')} className='w-full max-w-xs input input-bordered input-sm' />
+        </InputGrpSm>
+        <InputGrpSm labelName='Requirement 1' issue={errors.requirementOne?.message}>
+          <input {...register('requirementOne')} className='w-full max-w-xs input input-bordered input-sm' />
+        </InputGrpSm>
+        <InputGrpSm labelName='Requirement 2' issue={errors.requirementTwo?.message}>
+          <input {...register('requirementTwo')} className='w-full max-w-xs input input-bordered input-sm' />
+        </InputGrpSm>
+        <InputGrpSm labelName='Duration (minutes)' issue={errors.durationMinutes?.message}>
+          <input {...register('durationMinutes')} className='w-full max-w-xs input input-bordered input-sm' />
+        </InputGrpSm>
+        <InputGrpSm labelName='Price' issue={errors.price?.message}>
+          <input {...register('price')} className='w-full max-w-xs input input-bordered input-sm' />
+        </InputGrpSm>
         <button type='submit'>Save</button>
       </form>
     </div>
   );
 }
 
-function InputGrpSmall({ children, labelName, issue, isRequired }) {
+function InputGrpSm({ children, labelName, issue, isRequired }) {
   return (
     <div className='w-full max-w-xs form-control'>
       <label className='py-1 3xl:py-2 label'>
@@ -205,21 +229,7 @@ function InputGrpSmall({ children, labelName, issue, isRequired }) {
 
 export function AdminEditActivityNoRHF() {
   const { activity } = useLoaderData();
-  const [formData, setFormData] = useState(
-    activity
-    // {
-    //   id: '',
-    //   name: '',
-    //   category: '',
-    //   description: '',
-    //   intensityLevel: '',
-    //   maxPeopleAllowed: '',
-    //   requirementOne: '',
-    //   requirementTwo: '',
-    //   durationMinutes: '',
-    //   price: '',
-    // }
-  );
+  const [formData, setFormData] = useState(activity);
 
   return (
     <div className='grid px-4 py-6 place-items-center'>
