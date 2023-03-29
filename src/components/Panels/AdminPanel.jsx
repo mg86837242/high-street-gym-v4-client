@@ -13,7 +13,7 @@ export function AdminPanel() {
   return (
     <div
       id='admin-panel-wrapper'
-      className='flex flex-col w-full h-full px-4 py-6 md:flex-row max-w-screen-2xl min-h-[calc(100vh-7.5rem)]'
+      className='flex flex-col w-full h-full px-4 py-6 lg:flex-row max-w-screen-2xl min-h-[calc(100vh-7.5rem)]'
     >
       <LeftSidePanel />
       <Outlet />
@@ -167,39 +167,39 @@ export function AdminEditActivity() {
     reset(activity);
   }, [reset, activity]);
 
-  // TODO (1) each input's width disallow shrink, submit handler, (2) delete buttons by using RRD action. (3) new button that jump to edit
+  // TODO (1) submit handler, (2) delete buttons by using RRD action. (3) new button that jump to edit
   return (
     <div className='grid px-4 py-6 place-items-center'>
       <form
         onSubmit={handleSubmit((_formData) => console.log(_formData))}
         noValidate
-        className='grid grid-cols-2 lg:grid-cols-3 gap-x-5'
+        className='grid w-full grid-cols-2 lg:grid-cols-3 gap-x-5'
       >
-        <InputGrpSm labelName='Activity Name' issue={errors.name?.message}>
+        <InputGrpSm labelText='Activity Name' issue={errors.name?.message}>
           <input {...register('name')} className='w-full max-w-xs input input-bordered input-sm' />
         </InputGrpSm>
-        <InputGrpSm labelName='Category' issue={errors.category?.message}>
+        <InputGrpSm labelText='Category' issue={errors.category?.message}>
           <input {...register('category')} className='w-full max-w-xs input input-bordered input-sm' />
         </InputGrpSm>
-        <InputGrpSm labelName='Description' issue={errors.description?.message}>
+        <InputGrpSm labelText='Description' issue={errors.description?.message}>
           <input {...register('description')} className='w-full max-w-xs input input-bordered input-sm' />
         </InputGrpSm>
-        <InputGrpSm labelName='Intensity Level' issue={errors.intensityLevel?.message}>
+        <InputGrpSm labelText='Intensity Level' issue={errors.intensityLevel?.message}>
           <input {...register('intensityLevel')} className='w-full max-w-xs input input-bordered input-sm' />
         </InputGrpSm>
-        <InputGrpSm labelName='Max People Allowed' issue={errors.maxPeopleAllowed?.message}>
+        <InputGrpSm labelText='Max People Allowed' issue={errors.maxPeopleAllowed?.message}>
           <input {...register('maxPeopleAllowed')} className='w-full max-w-xs input input-bordered input-sm' />
         </InputGrpSm>
-        <InputGrpSm labelName='Requirement 1' issue={errors.requirementOne?.message}>
+        <InputGrpSm labelText='Requirement 1' issue={errors.requirementOne?.message}>
           <input {...register('requirementOne')} className='w-full max-w-xs input input-bordered input-sm' />
         </InputGrpSm>
-        <InputGrpSm labelName='Requirement 2' issue={errors.requirementTwo?.message}>
+        <InputGrpSm labelText='Requirement 2' issue={errors.requirementTwo?.message}>
           <input {...register('requirementTwo')} className='w-full max-w-xs input input-bordered input-sm' />
         </InputGrpSm>
-        <InputGrpSm labelName='Duration (minutes)' issue={errors.durationMinutes?.message}>
+        <InputGrpSm labelText='Duration (minutes)' issue={errors.durationMinutes?.message}>
           <input {...register('durationMinutes')} className='w-full max-w-xs input input-bordered input-sm' />
         </InputGrpSm>
-        <InputGrpSm labelName='Price' issue={errors.price?.message}>
+        <InputGrpSm labelText='Price' issue={errors.price?.message}>
           <input {...register('price')} className='w-full max-w-xs input input-bordered input-sm' />
         </InputGrpSm>
         <button type='submit'>Save</button>
@@ -208,11 +208,11 @@ export function AdminEditActivity() {
   );
 }
 
-function InputGrpSm({ children, labelName, issue, isRequired }) {
+function InputGrpSm({ children, labelText, issue, isRequired }) {
   return (
     <div className='w-full max-w-xs form-control'>
       <label className='py-1 3xl:py-2 label'>
-        <span className='label-text'>{labelName}:</span>
+        <span className='label-text'>{labelText}:</span>
         {isRequired === false || <span className='label-text-alt'>Required</span>}
       </label>
       {children}
@@ -223,165 +223,6 @@ function InputGrpSm({ children, labelName, issue, isRequired }) {
           <span className='label-text-alt'>Validation info will appear here</span>
         )}
       </label>
-    </div>
-  );
-}
-
-export function AdminEditActivityNoRHF() {
-  const { activity } = useLoaderData();
-  const [formData, setFormData] = useState(activity);
-
-  return (
-    <div className='grid px-4 py-6 place-items-center'>
-      <form
-        onSubmit={() => console.log(formData)}
-        className='grid grid-cols-2 place-items-center xl:grid-cols-3 gap-x-2'
-      >
-        <div className='w-full max-w-xs form-control'>
-          <label className='label'>
-            <span className='label-text'>Name:</span>
-            <span className='label-text-alt'>Top Right label</span>
-          </label>
-          <input
-            type='text'
-            placeholder='Type here'
-            value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            className='w-full max-w-xs input input-bordered input-sm'
-          />
-          <label className='label'>
-            <span className='label-text-alt'>Bottom Left label</span>
-          </label>
-        </div>
-        <div className='w-full max-w-xs form-control'>
-          <label className='label'>
-            <span className='label-text'>Category:</span>
-            <span className='label-text-alt'>Top Right label</span>
-          </label>
-          <input
-            type='text'
-            placeholder='Type here'
-            value={formData.category}
-            onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-            className='w-full max-w-xs input input-bordered input-sm'
-          />
-          <label className='label'>
-            <span className='label-text-alt'>Bottom Left label</span>
-          </label>
-        </div>
-        <div className='w-full max-w-xs form-control'>
-          <label className='label'>
-            <span className='label-text'>Description:</span>
-            <span className='label-text-alt'>Top Right label</span>
-          </label>
-          <input
-            type='text'
-            placeholder='Type here'
-            value={formData.description}
-            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-            className='w-full max-w-xs input input-bordered input-sm'
-          />
-          <label className='label'>
-            <span className='label-text-alt'>Bottom Left label</span>
-          </label>
-        </div>
-        <div className='w-full max-w-xs form-control'>
-          <label className='label'>
-            <span className='label-text'>IntensityLevel:</span>
-            <span className='label-text-alt'>Top Right label</span>
-          </label>
-          <input
-            type='text'
-            placeholder='Type here'
-            value={formData.intensityLevel}
-            onChange={(e) => setFormData({ ...formData, intensityLevel: e.target.value })}
-            className='w-full max-w-xs input input-bordered input-sm'
-          />
-          <label className='label'>
-            <span className='label-text-alt'>Bottom Left label</span>
-          </label>
-        </div>
-        <div className='w-full max-w-xs form-control'>
-          <label className='label'>
-            <span className='label-text'>MaxPeopleAllowed:</span>
-            <span className='label-text-alt'>Top Right label</span>
-          </label>
-          <input
-            type='text'
-            placeholder='Type here'
-            value={formData.maxPeopleAllowed}
-            onChange={(e) => setFormData({ ...formData, maxPeopleAllowed: e.target.value })}
-            className='w-full max-w-xs input input-bordered input-sm'
-          />
-          <label className='label'>
-            <span className='label-text-alt'>Bottom Left label</span>
-          </label>
-        </div>
-        <div className='w-full max-w-xs form-control'>
-          <label className='label'>
-            <span className='label-text'>RequirementOne:</span>
-            <span className='label-text-alt'>Top Right label</span>
-          </label>
-          <input
-            type='text'
-            placeholder='Type here'
-            value={formData.requirementOne}
-            onChange={(e) => setFormData({ ...formData, requirementOne: e.target.value })}
-            className='w-full max-w-xs input input-bordered input-sm'
-          />
-          <label className='label'>
-            <span className='label-text-alt'>Bottom Left label</span>
-          </label>
-        </div>
-        <div className='w-full max-w-xs form-control'>
-          <label className='label'>
-            <span className='label-text'>RequirementTwo:</span>
-            <span className='label-text-alt'>Top Right label</span>
-          </label>
-          <input
-            type='text'
-            placeholder='Type here'
-            value={formData.requirementTwo}
-            onChange={(e) => setFormData({ ...formData, requirementTwo: e.target.value })}
-            className='w-full max-w-xs input input-bordered input-sm'
-          />
-          <label className='label'>
-            <span className='label-text-alt'>Bottom Left label</span>
-          </label>
-        </div>
-        <div className='w-full max-w-xs form-control'>
-          <label className='label'>
-            <span className='label-text'>DurationMinutes:</span>
-            <span className='label-text-alt'>Top Right label</span>
-          </label>
-          <input
-            type='text'
-            placeholder='Type here'
-            value={formData.durationMinutes}
-            onChange={(e) => setFormData({ ...formData, durationMinutes: e.target.value })}
-            className='w-full max-w-xs input input-bordered input-sm'
-          />
-          <label className='label'>
-            <span className='label-text-alt'>Bottom Left label</span>
-          </label>
-        </div>
-        <div className='w-full max-w-xs form-control'>
-          <label className='label'>
-            <span className='label-text'>Price:</span>
-            <span className='label-text-alt'>Top Right label</span>
-          </label>
-          <input
-            type='text'
-            placeholder='Type here'
-            value={formData.price}
-            onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-            className='w-full max-w-xs input input-bordered input-sm'
-          />
-          <label className='label'>
-            <span className='label-text-alt'>Bottom Left label</span>
-          </label>
-        </div>
-      </form>
     </div>
   );
 }
