@@ -32,7 +32,7 @@ const profileRoutes = [
         return updateAddressByAdminId(values);
       }
       if (_action === 'updateTrainerById') {
-        let { updateTrainerById } = await import('../services/trainers');
+        let { default: updateTrainerById } = await import('../services/trainers');
         return updateTrainerById(values);
       }
       if (_action === 'updateAddressByTrainerId') {

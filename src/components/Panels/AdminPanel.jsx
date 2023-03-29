@@ -165,13 +165,13 @@ export function AdminEditActivity() {
       return activity;
     }, [activity]),
   });
-  // NB Subscribe to the change of `activity` returned by `useLoaderData`:
+  const navigate = useNavigate();
+  // NB Subscribe to the change of `activity` returned by loader:
   //  -- https://stackoverflow.com/questions/62242657/how-to-change-react-hook-form-defaultvalue-with-useeffect
   //  -- API ref: https://react-hook-form.com/api/useform/reset/
   useEffect(() => {
     reset(activity);
   }, [reset, activity]);
-  const navigate = useNavigate();
 
   // TODO (1) submit handler, (2) new button that create an empty new and auto direct to edit
   return (

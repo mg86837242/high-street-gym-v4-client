@@ -5,7 +5,7 @@ import { firstNameSchema, lastNameSchema, phoneSchema } from '../schemas/members
 import { descriptionSchema, specialtySchema, certificateSchema, imageUrlSchema } from '../schemas/trainers';
 import patch from '../utils/patch';
 
-export async function updateTrainerById(values) {
+export default async function updateTrainerById(values) {
   const { id, ...updates } = values;
   const { email, password, firstName, lastName, username, phone, description, specialty, certificate, imageUrl } =
     updates;
