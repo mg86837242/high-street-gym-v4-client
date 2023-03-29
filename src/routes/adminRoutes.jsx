@@ -35,10 +35,18 @@ const adminRoutes = [
           let { AdminEditActivity } = await import('../components/Panels/AdminPanel');
           return { Component: AdminEditActivity };
         },
-        ErrorBoundary: ErrorInfoRefresh,
+        ErrorBoundary: ErrorInfoBack,
         async loader({ params }) {
           let { getActivityById } = await import('../services/activities');
           return getActivityById({ params }) || null;
+        },
+      },
+      {
+        path: 'id/:id/destroy',
+        ErrorBoundary: ErrorInfoBack,
+        async action({ params }) {
+          let { deleteActivityById } = await import('../services/activities');
+          return deleteActivityById({ params });
         },
       },
     ],

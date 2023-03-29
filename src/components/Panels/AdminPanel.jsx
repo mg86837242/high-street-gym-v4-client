@@ -185,7 +185,7 @@ export function AdminEditActivity() {
   }, [reset, activity]);
   const navigate = useNavigate();
 
-  // TODO (1) submit handler, (2) delete buttons by using RRD action. (3) new button that create an empty new and auto direct to edit
+  // TODO (1) submit handler, (2) new button that create an empty new and auto direct to edit
   return (
     <div className='grid px-4 py-6 place-items-center'>
       <form
