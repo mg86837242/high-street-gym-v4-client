@@ -15,8 +15,8 @@ export default function ErrorInfo() {
       <div className='flex flex-col items-center'>
         <h1>Oops!</h1>
         <BoxIcon className='w-32 h-32 lg:h-52 lg:w-52' />
-        <h1 className='text-center text-rose-500'>{error.data.match(/\d+/)}</h1>
-        <p className='text-center text-rose-500'>{error.data.match(/(?<=\d+\s).*/) || error.data}</p>
+        <h1 className='text-center text-rose-500'>{error.data.match(/^\d{3}/)}</h1>
+        <p className='text-center text-rose-500'>{error.data.match(/(?<=^\d{3}\s).*/) || error.data}</p>
       </div>
       <Button1 onClick={() => navigate(-1)}>Go Back</Button1>
     </div>

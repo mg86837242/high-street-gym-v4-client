@@ -169,9 +169,7 @@ export default function BookingEdit() {
             </button>
             <button
               type='button'
-              onClick={() => {
-                navigate(-1);
-              }}
+              onClick={() => navigate(-1)}
               className='h-10 min-h-0 normal-case shadow btn glass bg-base-100 text-accent-content shadow-black/50 w-36 lg:w-[6.5rem] xl:w-36'
             >
               Cancel

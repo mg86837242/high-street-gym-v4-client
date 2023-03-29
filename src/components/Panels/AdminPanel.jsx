@@ -1,6 +1,6 @@
-import { useContext, useState, useMemo, useEffect } from 'react';
+import { useContext, useMemo, useEffect } from 'react';
 import AuthContext from '../../contexts/AuthContext';
-import { Outlet, NavLink, Navigate, useLoaderData, Form } from 'react-router-dom';
+import { Outlet, NavLink, Navigate, useLoaderData, Form, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 import { faPersonRunning } from '@fortawesome/free-solid-svg-icons';
@@ -119,12 +119,29 @@ export function AdminMngActivities() {
                 {Object.values(a).map((val, j) => j > 0 && <td key={10 * i + j}>{val}</td>)}
                 <td>
                   <Form action={`id/${a.id}/edit`}>
-                    <button className='normal-case shadow btn btn-outline btn-secondary btn-xs text-primary-content shadow-black/50'>
+                    <button className='normal-case shadow btn btn-outline btn-primary btn-xs text-primary-content shadow-black/50'>
                       Edit
                     </button>
                   </Form>
                 </td>
-                <td>Delete</td>
+                <td>
+                  <Form
+                    method='post'
+                    action={`id/${a.id}/destroy`}
+                    onSubmit={(e) => {
+                      if (!confirm('Please confirm you want to delete this activity.')) {
+                        e.preventDefault();
+                      }
+                    }}
+                  >
+                    <button
+                      type='submit'
+                      className='normal-case shadow btn btn-outline btn-xs text-accent-content shadow-black/50'
+                    >
+                      Delete
+                    </button>
+                  </Form>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -166,14 +183,15 @@ export function AdminEditActivity() {
   useEffect(() => {
     reset(activity);
   }, [reset, activity]);
+  const navigate = useNavigate();
 
-  // TODO (1) submit handler, (2) delete buttons by using RRD action. (3) new button that jump to edit
+  // TODO (1) submit handler, (2) delete buttons by using RRD action. (3) new button that create an empty new and auto direct to edit
   return (
     <div className='grid px-4 py-6 place-items-center'>
       <form
         onSubmit={handleSubmit((_formData) => console.log(_formData))}
         noValidate
-        className='grid w-full grid-cols-2 lg:grid-cols-3 gap-x-5'
+        className='grid w-full grid-cols-2 justify-items-center xl:grid-cols-3 gap-x-5'
       >
         <InputGrpSm labelText='Activity Name' issue={errors.name?.message}>
           <input {...register('name')} className='w-full max-w-xs input input-bordered input-sm' />
@@ -202,7 +220,14 @@ export function AdminEditActivity() {
         <InputGrpSm labelText='Price' issue={errors.price?.message}>
           <input {...register('price')} className='w-full max-w-xs input input-bordered input-sm' />
         </InputGrpSm>
-        <button type='submit'>Save</button>
+        <div className='flex w-full col-span-2 xl:col-span-3 mt-5 justify-end gap-10'>
+          <button type='button' onClick={() => navigate(-1)} className='btn btn-sm'>
+            Cancel
+          </button>
+          <button type='submit' className='btn btn-primary btn-sm'>
+            Save
+          </button>
+        </div>
       </form>
     </div>
   );
