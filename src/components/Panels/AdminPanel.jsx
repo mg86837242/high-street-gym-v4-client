@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useMemo, useEffect } from 'react';
 import AuthContext from '../../contexts/AuthContext';
 import { Outlet, NavLink, Navigate, useLoaderData, Form } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -99,7 +99,6 @@ export function AdminMngBlogs() {
 export function AdminMngActivities() {
   const { activities } = useLoaderData();
 
-  // TODO (1) edit testing rhf, (2) delete buttons by using RRD action. (3) new button that jump to edit
   return (
     <div className='flex flex-col gap-0 overflow-x-auto'>
       <div className='w-full px-4 py-6 overflow-x-auto'>
@@ -154,67 +153,58 @@ export function AdminEditActivity() {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: zodResolver(activitySchema),
+    defaultValues: useMemo(() => {
+      return activity;
+    }, [activity]),
   });
+  // NB Subscribe to the change of `activity` returned by `useLoaderData`:
+  //  -- https://stackoverflow.com/questions/62242657/how-to-change-react-hook-form-defaultvalue-with-useeffect
+  //  -- API ref: https://react-hook-form.com/api/useform/reset/
+  useEffect(() => {
+    reset(activity);
+  }, [reset, activity]);
 
+  // TODO (1) extract the form control group + submit handler, (2) delete buttons by using RRD action. (3) new button that jump to edit
   return (
     <div className='grid px-4 py-6 place-items-center'>
-      <form onSubmit={handleSubmit((_formData) => console.log(_formData))} noValidate className='flex flex-col gap-3'>
-        <div>
-          <label>Name:</label>
+      <form
+        onSubmit={handleSubmit((_formData) => console.log(_formData))}
+        noValidate
+        className='grid grid-cols-2 lg:grid-cols-3 gap-x-5'
+      >
+        <InputGrpSmall labelName='Name' issue={errors.name?.message}>
           <input {...register('name')} />
-          {errors.name?.message && <p>{errors.name?.message}</p>}
-        </div>
-        <div>
-          <label>Category:</label>
-          <input {...register('category')} />
-          {errors.category?.message && <p>{errors.category?.message}</p>}
-        </div>
-        <div>
-          <label>Description:</label>
-          <input {...register('description')} />
-          {errors.description?.message && <p>{errors.description?.message}</p>}
-        </div>
-        <div>
-          <label>Intensity Level:</label>
-          <input {...register('intensityLevel')} />
-          {errors.intensityLevel?.message && <p>{errors.intensityLevel?.message}</p>}
-        </div>
-        <div>
-          <label>Max People Allowed:</label>
-          <input {...register('maxPeopleAllowed')} />
-          {errors.maxPeopleAllowed?.message && <p>{errors.maxPeopleAllowed?.message}</p>}
-        </div>
-        <div>
-          <label>Requriement 1:</label>
-          <input {...register('requirementOne')} />
-          {errors.requirementOne?.message && <p>{errors.requirementOne?.message}</p>}
-        </div>
-        <div>
-          <label>Requriement 2:</label>
-          <input {...register('requirementTwo')} />
-          {errors.requirementTwo?.message && <p>{errors.requirementTwo?.message}</p>}
-        </div>
-        <div>
-          <label>Duration (minutes):</label>
-          <input {...register('durationMinutes')} />
-          {errors.durationMinutes?.message && <p>{errors.durationMinutes?.message}</p>}
-        </div>
-        <div>
-          <label>Price:</label>
-          <input {...register('price', { valueAsNumber: true })} />
-          {errors.price?.message && <p>{errors.price?.message}</p>}
-        </div>
+        </InputGrpSmall>
         <button type='submit'>Save</button>
       </form>
     </div>
   );
 }
 
+function InputGrpSmall({ children, labelName, issue, isRequired }) {
+  return (
+    <div className='w-full max-w-xs form-control'>
+      <label className='py-1 3xl:py-2 label'>
+        <span className='label-text'>{labelName}:</span>
+        {isRequired === false || <span className='label-text-alt'>Required</span>}
+      </label>
+      {children}
+      <label className='py-1 3xl:py-2 label'>
+        {issue ? (
+          <span className='text-rose-500 label-text-alt'>{issue}</span>
+        ) : (
+          <span className='label-text-alt'>Validation info will appear here</span>
+        )}
+      </label>
+    </div>
+  );
+}
+
 export function AdminEditActivityNoRHF() {
   const { activity } = useLoaderData();
-  console.log(activity);
   const [formData, setFormData] = useState(
     activity
     // {
@@ -232,8 +222,11 @@ export function AdminEditActivityNoRHF() {
   );
 
   return (
-    <div className='grid grid-cols-2 px-4 py-6 place-items-center xl:grid-cols-3 gap-x-2'>
-      <form onSubmit={() => console.log(formData)}>
+    <div className='grid px-4 py-6 place-items-center'>
+      <form
+        onSubmit={() => console.log(formData)}
+        className='grid grid-cols-2 place-items-center xl:grid-cols-3 gap-x-2'
+      >
         <div className='w-full max-w-xs form-control'>
           <label className='label'>
             <span className='label-text'>Name:</span>
