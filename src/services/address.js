@@ -6,7 +6,7 @@ import {
   postcodeSchema,
   stateSchema,
   countrySchema,
-} from './schemas/addresses';
+} from '../schemas/addresses';
 import fetchJSON from '../utils/fetchJSON';
 
 export async function updateAddressByAdminId(values) {

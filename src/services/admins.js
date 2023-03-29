@@ -1,7 +1,7 @@
 import { redirect } from 'react-router-dom';
 import { API_URL } from '../data/constants';
-import { emailSchema, passwordSchema, usernameSchema } from './schemas/logins';
-import { firstNameSchema, lastNameSchema, phoneSchema } from './schemas/members';
+import { emailSchema, passwordSchema, usernameSchema } from '../schemas/logins';
+import { firstNameSchema, lastNameSchema, phoneSchema } from '../schemas/members';
 import patch from '../utils/patch';
 
 export default async function updateAdminById(values) {
