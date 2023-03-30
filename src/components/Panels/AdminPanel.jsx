@@ -1,13 +1,13 @@
 import { useContext, useMemo, useEffect } from 'react';
 import AuthContext from '../../contexts/AuthContext';
 import { Outlet, NavLink, Navigate, useLoaderData, Form, useSubmit, useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import activitySchema from '../../schemas/activities';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 import { faPersonRunning } from '@fortawesome/free-solid-svg-icons';
 import UnderConstruction from '../UnderConstruction';
-import activitySchema from '../../schemas/activities';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
 
 export function AdminPanel() {
   return (
@@ -165,29 +165,21 @@ export function AdminEditActivity() {
       return activity;
     }, [activity]),
   });
-  const submit = useSubmit();
-  const navigate = useNavigate();
   // NB Subscribe to the change of `activity` returned by loader:
   //  -- https://stackoverflow.com/questions/62242657/how-to-change-react-hook-form-defaultvalue-with-useeffect
   //  -- API ref: https://react-hook-form.com/api/useform/reset/
   useEffect(() => {
     reset(activity);
   }, [reset, activity]);
+  const submit = useSubmit();
+  const navigate = useNavigate();
 
-  // TODO (1) new button that create an empty new and auto direct to edit, (2) search excl package json and ... lock && object to obj
+  // TODO (1) new button that create an empty new and auto direct to edit, (2) <select> for category and intensityLvel
   return (
     <div className='grid px-4 py-6 place-items-center'>
       <form
         onSubmit={handleSubmit((data) => {
-          // See: https://github.com/remix-run/remix/discussions/3680 (source: google "remix action request json")
           submit({ body: JSON.stringify(data) }, { method: 'post' });
-          // NB Alternatively, submit a `FormData` obj to the route action, however, conversion from plain obj (`data`
-          //  obj returned by React Hook Form's `handleSubmit`) to `FormData` obj is needed here, which entails the
-          //  `getFormData()` util; this method has a huge downside since `FormData` can only hold strings in most
-          //  cases, which implies extra type conversions from empty string to null in the route action in order to
-          //  bypass the db constraint (i.e., db only accepts null)
-          // const formData = getFormData(data);
-          // submit(formData, { method: 'post' });
         })}
         noValidate
         className='grid w-full grid-cols-2 justify-items-center xl:grid-cols-3 gap-x-5'
