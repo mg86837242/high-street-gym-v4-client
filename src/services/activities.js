@@ -12,6 +12,13 @@ export async function getActivityById({ params }) {
   return response;
 }
 
+export async function updateActivityById({ params, request }) {
+  const formData = await request.formData();
+  const updates = JSON.parse(formData.get('body'));
+  await fetchRes(`${API_URL}/activities/id/${params.id}`, 'patch', updates);
+  return redirect(`/admin/activities/id/${params.id}/edit`);
+}
+
 export async function deleteActivityById({ params }) {
   await fetchRes(`${API_URL}/activities/id/${params.id}`, 'delete');
   return redirect(`/admin/activities`);

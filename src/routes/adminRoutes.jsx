@@ -38,7 +38,11 @@ const adminRoutes = [
         ErrorBoundary: ErrorInfoBack,
         async loader({ params }) {
           let { getActivityById } = await import('../services/activities');
-          return getActivityById({ params }) || null;
+          return getActivityById({ params });
+        },
+        async action({ params, request }) {
+          let { updateActivityById } = await import('../services/activities');
+          return updateActivityById({ params, request });
         },
       },
       {

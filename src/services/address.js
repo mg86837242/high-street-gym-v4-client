@@ -38,6 +38,7 @@ export async function updateAddressByAdminId(values) {
   // NB Even if `lineTwo` is null, `WHERE lineTwo = null` returns false i/o true in which case `getAddressesByDetails`
   //  in the model won't identify a duplicate row, thus the conversion of falsy `lineTwo` to empty string
   // #endregion
+  // Type conversion for db constraint
   updates.lineTwo ||= '';
 
   const json = await fetchJSON(`${API_URL}/addresses/adminid/${adminId}`, 'patch', updates);
@@ -71,6 +72,7 @@ export async function updateAddressByTrainerId(values) {
     return messages;
   }
   // #endregion
+  // Type conversion for db constraint
   updates.lineTwo ||= '';
 
   const json = await fetchJSON(`${API_URL}/addresses/trainerid/${trainerId}`, 'patch', updates);
@@ -104,6 +106,7 @@ export async function updateAddressByMemberId(values) {
     return messages;
   }
   // #endregion
+  // Type conversion for db constraint
   updates.lineTwo ||= '';
 
   const json = await fetchJSON(`${API_URL}/addresses/memberid/${memberId}`, 'patch', updates);

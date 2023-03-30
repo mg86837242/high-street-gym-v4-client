@@ -1,6 +1,6 @@
 import { useContext, useMemo, useEffect } from 'react';
 import AuthContext from '../../contexts/AuthContext';
-import { Outlet, NavLink, Navigate, useLoaderData, Form, useNavigate } from 'react-router-dom';
+import { Outlet, NavLink, Navigate, useLoaderData, Form, useSubmit, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 import { faPersonRunning } from '@fortawesome/free-solid-svg-icons';
@@ -165,6 +165,7 @@ export function AdminEditActivity() {
       return activity;
     }, [activity]),
   });
+  const submit = useSubmit();
   const navigate = useNavigate();
   // NB Subscribe to the change of `activity` returned by loader:
   //  -- https://stackoverflow.com/questions/62242657/how-to-change-react-hook-form-defaultvalue-with-useeffect
@@ -173,11 +174,21 @@ export function AdminEditActivity() {
     reset(activity);
   }, [reset, activity]);
 
-  // TODO (1) submit handler, (2) new button that create an empty new and auto direct to edit
+  // TODO (1) new button that create an empty new and auto direct to edit, (2) search excl package json and ... lock && object to obj
   return (
     <div className='grid px-4 py-6 place-items-center'>
       <form
-        onSubmit={handleSubmit((_formData) => console.log(_formData))}
+        onSubmit={handleSubmit((data) => {
+          // See: https://github.com/remix-run/remix/discussions/3680 (source: google "remix action request json")
+          submit({ body: JSON.stringify(data) }, { method: 'post' });
+          // NB Alternatively, submit a `FormData` obj to the route action, however, conversion from plain obj (`data`
+          //  obj returned by React Hook Form's `handleSubmit`) to `FormData` obj is needed here, which entails the
+          //  `getFormData()` util; this method has a huge downside since `FormData` can only hold strings in most
+          //  cases, which implies extra type conversions from empty string to null in the route action in order to
+          //  bypass the db constraint (i.e., db only accepts null)
+          // const formData = getFormData(data);
+          // submit(formData, { method: 'post' });
+        })}
         noValidate
         className='grid w-full grid-cols-2 justify-items-center xl:grid-cols-3 gap-x-5'
       >
@@ -194,7 +205,11 @@ export function AdminEditActivity() {
           <input {...register('intensityLevel')} className='w-full max-w-xs input input-bordered input-sm' />
         </InputGrpSm>
         <InputGrpSm labelText='Max People Allowed' issue={errors.maxPeopleAllowed?.message}>
-          <input {...register('maxPeopleAllowed')} className='w-full max-w-xs input input-bordered input-sm' />
+          <input
+            type='number'
+            {...register('maxPeopleAllowed', { valueAsNumber: true })}
+            className='w-full max-w-xs input input-bordered input-sm'
+          />
         </InputGrpSm>
         <InputGrpSm labelText='Requirement 1' issue={errors.requirementOne?.message}>
           <input {...register('requirementOne')} className='w-full max-w-xs input input-bordered input-sm' />
@@ -203,10 +218,18 @@ export function AdminEditActivity() {
           <input {...register('requirementTwo')} className='w-full max-w-xs input input-bordered input-sm' />
         </InputGrpSm>
         <InputGrpSm labelText='Duration (minutes)' issue={errors.durationMinutes?.message}>
-          <input {...register('durationMinutes')} className='w-full max-w-xs input input-bordered input-sm' />
+          <input
+            type='number'
+            {...register('durationMinutes', { valueAsNumber: true })}
+            className='w-full max-w-xs input input-bordered input-sm'
+          />
         </InputGrpSm>
         <InputGrpSm labelText='Price' issue={errors.price?.message}>
-          <input {...register('price')} className='w-full max-w-xs input input-bordered input-sm' />
+          <input
+            type='number'
+            {...register('price', { valueAsNumber: true })}
+            className='w-full max-w-xs input input-bordered input-sm'
+          />
         </InputGrpSm>
         <div className='flex w-full col-span-2 xl:col-span-3 mt-5 justify-end gap-10'>
           <button type='button' onClick={() => navigate(-1)} className='btn btn-sm'>

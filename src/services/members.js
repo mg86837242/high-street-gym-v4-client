@@ -47,6 +47,7 @@ export async function signupMembers({ request }) {
   //  see: https://stackoverflow.com/questions/5076944/what-is-the-difference-between-null-and-undefined-in-javascript/5076989#5076989,
   // (3) there is an only 1 exception, which is `lineTwo` in `Addresses` table
   // #endregion
+  // Type conversion for db constraint
   creations.age = parseInt(age, 10) || null;
   creations.gender = gender || null;
 
@@ -96,6 +97,7 @@ export async function updateMemberById(values) {
     return messages;
   }
   // #endregion
+  // Type conversion for db constratin
   updates.age = parseInt(age, 10) || null;
   updates.gender ||= null;
 

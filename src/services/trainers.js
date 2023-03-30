@@ -45,6 +45,7 @@ export default async function updateTrainerById(values) {
     return messages;
   }
   // #endregion
+  // Type constraint for db constraint
   updates.description ||= null;
   updates.specialty ||= null;
   updates.certificate ||= null;
