@@ -162,7 +162,6 @@ export function AdminListActivities({ activities }) {
 
 export function AdminNewActivity() {
   return (
-    // TODO (1) "new" button (in the index route) that create an empty new and auto direct to edit
     <div className='flex justify-end w-full gap-10 py-6'>
       {/* <button type='button' className='btn btn-outline btn-sm'>
         To be implemented
