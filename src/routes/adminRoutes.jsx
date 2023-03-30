@@ -55,6 +55,14 @@ const adminRoutes = [
           return deleteActivityById({ params });
         },
       },
+      {
+        path: 'new',
+        ErrorBoundary: ErrorInfoBack,
+        async action() {
+          let { createActivity } = await import('../services/activities');
+          return createActivity() ?? null;
+        },
+      },
     ],
   },
 ];

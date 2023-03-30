@@ -29,7 +29,7 @@ function LeftSidePanel() {
           </div>
         </div>
         <div className='flex flex-col items-end'>
-          <p className='text-lg'>Profile Panel</p>
+          <p className='text-lg'>Your Profile</p>
           <p className='text-base'>
             Greetings, <span className='text-primary'>{authenticatedUser?.username && authenticatedUser.username}</span>
           </p>

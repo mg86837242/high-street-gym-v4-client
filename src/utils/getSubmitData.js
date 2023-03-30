@@ -21,6 +21,8 @@ export default async function getSubmitData(request) {
 // -- https://github.com/remix-run/remix/discussions/3680 (source: google "remix action request json")
 // -- https://github.com/react-hook-form/react-hook-form/issues/656#issuecomment-680674438: strip out all values with
 //  empty strings with lodash util
+// -- https://stackoverflow.com/questions/22783108/convert-js-object-to-form-data (source: google "lodash convert
+//  specific object values") => from which how to only convert values with empty strings within an obj is extrapolated
 
 // NB Alternatively, submit a `FormData` obj to the route action, which implies conversion from plain obj
 //  (`data` returned by React Hook Form's `handleSubmit`) to `FormData` obj, which entails a util like this:

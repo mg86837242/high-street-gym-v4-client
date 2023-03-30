@@ -8,7 +8,7 @@ import UnderConstruction from '../UnderConstruction';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import activitySchema from '../../schemas/activities';
-import pickBy from 'lodash.pickBy';
+import sanitize from '../../utils/sanitize';
 import FCWrapperSm from '../FormControlRHF/FCWrapperSm';
 
 export function AdminPanel() {
@@ -103,63 +103,76 @@ export function AdminMngActivities() {
 
   return (
     <div className='flex flex-col gap-0 overflow-x-auto'>
-      <div className='w-full py-6 overflow-x-auto'>
-        <table className='table w-full table-compact'>
-          <thead>
-            <tr>
-              {Object.keys(activities[0]).map((key, j) => (
-                <th key={j}>{key.replace(/([a-z])([A-Z])/g, '$1 $2')}</th>
-              ))}
-              <th>Edit</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            {activities.map((a, i) => (
-              <tr key={`r${i}`} className='hover'>
-                <th>{a.id}</th>
-                {Object.values(a).map((val, j) => j > 0 && <td key={10 * i + j}>{val}</td>)}
-                <td>
-                  <Form action={`id/${a.id}/edit`}>
-                    <button className='normal-case shadow btn btn-outline btn-primary btn-xs text-primary-content shadow-black/50'>
-                      Edit
-                    </button>
-                  </Form>
-                </td>
-                <td>
-                  <Form
-                    method='post'
-                    action={`id/${a.id}/destroy`}
-                    onSubmit={(e) => {
-                      if (!confirm('Please confirm you want to delete this activity.')) {
-                        e.preventDefault();
-                      }
-                    }}
-                  >
-                    <button
-                      type='submit'
-                      className='normal-case shadow btn btn-outline btn-xs text-accent-content shadow-black/50'
-                    >
-                      Delete
-                    </button>
-                  </Form>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <AdminListActivities activities={activities} />
       <Outlet />
+    </div>
+  );
+}
+
+export function AdminListActivities({ activities }) {
+  return (
+    <div className='w-full py-6 overflow-x-auto'>
+      <table className='table w-full table-compact'>
+        <thead>
+          <tr>
+            {Object.keys(activities[0]).map((key, j) => (
+              <th key={j}>{key.replace(/([a-z])([A-Z])/g, '$1 $2')}</th>
+            ))}
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {activities.map((a, i) => (
+            <tr key={`r${i}`} className='hover'>
+              <th>{a.id}</th>
+              {Object.values(a).map((val, j) => j > 0 && <td key={10 * i + j}>{val}</td>)}
+              <td>
+                <Form action={`id/${a.id}/edit`}>
+                  <button className='normal-case shadow btn btn-outline btn-primary btn-xs text-primary-content shadow-black/50'>
+                    Edit
+                  </button>
+                </Form>
+              </td>
+              <td>
+                <Form
+                  method='post'
+                  action={`id/${a.id}/destroy`}
+                  onSubmit={(e) => {
+                    if (!confirm('Please confirm you want to delete this activity.')) {
+                      e.preventDefault();
+                    }
+                  }}
+                >
+                  <button
+                    type='submit'
+                    className='normal-case shadow btn btn-outline btn-xs text-accent-content shadow-black/50'
+                  >
+                    Delete
+                  </button>
+                </Form>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
 
 export function AdminNewActivity() {
   return (
-    <>
-      <button>new</button>
-      <button>upload</button>
-    </>
+    // TODO (1) "new" button (in the index route) that create an empty new and auto direct to edit
+    <div className='flex justify-end w-full gap-10 py-6'>
+      {/* <button type='button' className='btn btn-outline btn-sm'>
+        To be implemented
+      </button> */}
+      <Form method='post' action='new'>
+        <button type='submit' className='btn btn-outline btn-primary btn-sm'>
+          Create New
+        </button>
+      </Form>
+    </div>
   );
 }
 
@@ -185,12 +198,11 @@ export function AdminEditActivity() {
   const submit = useSubmit();
   const navigate = useNavigate();
 
-  // TODO (1) "new" button (in the index route) that create an empty new and auto direct to edit
   return (
     <div className='grid py-6 place-items-center'>
       <form
         onSubmit={handleSubmit((data) => {
-          const sanitizedData = pickBy(data, (val) => val !== '');
+          const sanitizedData = sanitize(data);
           submit({ body: JSON.stringify(sanitizedData) }, { method: 'post' });
         })}
         noValidate
@@ -249,11 +261,11 @@ export function AdminEditActivity() {
           />
         </FCWrapperSm>
         <div className='flex justify-end w-full col-span-2 gap-10 mt-5 xl:col-span-3'>
-          <button type='button' onClick={() => navigate(-1)} className='btn btn-sm'>
-            Cancel
-          </button>
-          <button type='submit' className='btn btn-primary btn-sm'>
+          <button type='submit' className='w-20 btn btn-outline btn-primary btn-sm'>
             Save
+          </button>
+          <button type='button' onClick={() => navigate(-1)} className='w-20 btn btn-outline btn-sm'>
+            Cancel
           </button>
         </div>
       </form>
