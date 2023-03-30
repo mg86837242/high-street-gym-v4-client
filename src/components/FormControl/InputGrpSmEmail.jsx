@@ -20,7 +20,7 @@ export default function InputGrpSmEmail({ issue, emails, initialValue, isRequire
         // NB The following 2 props imply this is a controlled input, see: https://react.dev/reference/react-dom/components/input#reference
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        className='w-full text-white input input-bordered input-primary input-sm'
+        className='text-white input input-bordered input-primary input-sm'
       />
       <label htmlFor='email' className='py-1 3xl:py-2 label'>
         {isDuplicate ? (

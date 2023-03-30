@@ -3,7 +3,7 @@ import { z } from 'zod';
 // Because how React Hook Form
 const activitySchema = z.object({
   name: z.string().max(45).nullable(),
-  // PS Empty string within the `enum()` is for the `Choose Category` option
+  // Empty string within the `enum()` is for the "choose" option in case the user wants to intentionally leave it blank
   category: z.enum(['Aerobic', 'Strength', 'Aerobic & Strength', 'Flexibility', '']).nullable(),
   description: z.string().max(255).nullable(),
   intensityLevel: z.enum(['Low', 'Medium', 'High', 'Very High', 'Varies with Type', '']).nullable(),

@@ -263,7 +263,6 @@ function Greetings() {
 
 // References:
 // -- https://tailwindcomponents.com/component/free-tailwind-css-sign-in-component
-// -- https://daisyui.com/components/input/
 // -- https://css-tricks.com/the-options-for-password-revealing-inputs/: The Options for Password Revealing Inputs |
 //  CSS-Tricks - CSS-Tricks
 // -- https://codesandbox.io/s/show-hide-password-forked-pg8fue?file=/src/App.js: Code snippet to "show/hide password"
