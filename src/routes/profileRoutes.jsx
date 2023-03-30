@@ -50,14 +50,6 @@ const profileRoutes = [
       return;
     },
   },
-  {
-    path: 'blog',
-    async lazy() {
-      let { ProfileEditBlog } = await import('../components/Panels/ProfilePanel');
-      return { Component: ProfileEditBlog };
-    },
-    ErrorBoundary: ErrorInfoRefresh,
-  },
 ];
 
 export default profileRoutes;

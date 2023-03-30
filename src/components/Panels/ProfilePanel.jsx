@@ -52,9 +52,9 @@ function LeftSidePanel() {
               <span className='flex items-center justify-start text-sm'>Edit My Account</span>
             </NavLink>
           </li>
-          <li>
+          {/* <li>
             <NavLink
-              to='blog'
+              to='new feature'
               className={({ isActive }) =>
                 `flex items-center justify-start w-full h-full gap-2 px-2 font-normal btn btn-sm btn-ghost py-1.5 ${
                   isActive && 'btn-active'
@@ -64,9 +64,9 @@ function LeftSidePanel() {
               <span>
                 <FontAwesomeIcon icon={faPenToSquare} className='w-4 h-4' />
               </span>
-              <span className='flex items-center justify-start text-sm'>Edit My Blog Posts</span>
+              <span className='flex items-center justify-start text-sm'>New feature</span>
             </NavLink>
-          </li>
+          </li> */}
         </ul>
       </nav>
     </div>
@@ -79,6 +79,6 @@ export function ProfileIndex() {
   return authenticatedUser?.role ? <Navigate to='account' replace /> : <Navigate to='/' replace />;
 }
 
-export function ProfileEditBlog() {
-  return <UnderConstruction pageName={'profile edit blog'} />;
+export function ProfileNewFeature() {
+  return <UnderConstruction pageName={'profile new feature'} />;
 }

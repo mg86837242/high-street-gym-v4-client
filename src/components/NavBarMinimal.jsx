@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export default function NavBarMinimal() {
   return (
     <div id='nav-bg' className='flex justify-center w-full bg-transparent'>
-      <div id='nav-bar' className='w-full px-4 navbar 2xl:w-4/5 2xl:px-1'>
+      <div id='nav-bar' className='w-full px-4 navbar max-w-screen-2xl 2xl:px-1'>
         <NavBarLeft />
       </div>
     </div>
