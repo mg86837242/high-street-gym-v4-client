@@ -26,4 +26,4 @@ export const ageSchema = z
   .regex(/^\d*$/, { message: 'Age only accepts numbers' })
   .max(3, { message: 'Age must have at most 3 number(s)' })
   .nullable();
-export const genderSchema = z.enum(['Female', 'Male', 'Prefer not to say', '']).nullable();
+export const genderSchema = z.enum(['Female', 'Male', 'Other', '']).nullable();

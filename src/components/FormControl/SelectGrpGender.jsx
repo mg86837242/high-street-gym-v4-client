@@ -15,7 +15,7 @@ export default function SelectGrpGender({ issue, isRequired }) {
         <option value=''>-- Choose Gender --</option>
         <option value='Female'>Female</option>
         <option value='Male'>Male</option>
-        <option value='Prefer not to say'>Prefer not to say</option>
+        <option value='Other'>Other</option>
       </select>
       <label htmlFor='gender' className='py-1 3xl:py-2 label'>
         {issue ? (

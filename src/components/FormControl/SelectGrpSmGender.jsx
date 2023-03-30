@@ -13,13 +13,13 @@ export default function SelectGrpSmGender({ issue, initialValue, isRequired }) {
         //  -- https://react.dev/reference/react-dom/components/select#reference: "use `<select defaultValue>` for
         //  uncontrolled select boxes and `<select value>` for controlled select boxes."
         defaultValue={initialValue}
-        className='min-h-0 font-normal select select-primary select-sm'
+        className='font-normal select select-primary select-sm'
       >
         {/* NB If this option is disabled and its value (empty string) is used as `defaultValue`, the `<select>`'s value will be null in the `request.formData`, i.e. DON'T disable this option if its value is used as `defaultValue`*/}
         <option value=''>-- Choose Gender --</option>
         <option value='Female'>Female</option>
         <option value='Male'>Male</option>
-        <option value='Prefer not to say'>Prefer not to say</option>
+        <option value='Other'>Other</option>
       </select>
       <label htmlFor='gender' className='py-1 3xl:py-2 label'>
         {issue ? (

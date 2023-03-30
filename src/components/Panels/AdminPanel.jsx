@@ -8,7 +8,7 @@ import UnderConstruction from '../UnderConstruction';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import activitySchema from '../../schemas/activities';
-import InputGrpSm from '../FormControlRHF/InputGrpSm';
+import FCWrapperSm from '../FormControlRHF/FCWrapperSm';
 
 export function AdminPanel() {
   return (
@@ -175,56 +175,67 @@ export function AdminEditActivity() {
   const submit = useSubmit();
   const navigate = useNavigate();
 
-  // TODO (1) new button that create an empty new and auto direct to edit, (2) <select> for category and intensityLvel
+  // TODO (1) new button that create an empty new and auto direct to edit, (2) test if removing zod transform is fine
   return (
     <div className='grid py-6 place-items-center'>
       <form
-        onSubmit={handleSubmit((data) => {
-          submit({ body: JSON.stringify(data) }, { method: 'post' });
-        })}
+        onSubmit={handleSubmit((data) => submit({ body: JSON.stringify(data) }, { method: 'post' }))}
         noValidate
         className='grid w-full grid-cols-2 justify-items-center xl:grid-cols-3 gap-x-5'
       >
-        <InputGrpSm labelText='Activity Name' issue={errors.name?.message}>
-          <input {...register('name')} className='w-full max-w-xs input input-bordered input-sm' />
-        </InputGrpSm>
-        <InputGrpSm labelText='Category' issue={errors.category?.message}>
-          <input {...register('category')} className='w-full max-w-xs input input-bordered input-sm' />
-        </InputGrpSm>
-        <InputGrpSm labelText='Description' issue={errors.description?.message}>
-          <input {...register('description')} className='w-full max-w-xs input input-bordered input-sm' />
-        </InputGrpSm>
-        <InputGrpSm labelText='Intensity Level' issue={errors.intensityLevel?.message}>
-          <input {...register('intensityLevel')} className='w-full max-w-xs input input-bordered input-sm' />
-        </InputGrpSm>
-        <InputGrpSm labelText='Max People Allowed' issue={errors.maxPeopleAllowed?.message}>
+        <FCWrapperSm label='Activity Name' issue={errors.name?.message}>
+          <input {...register('name')} className='input input-bordered input-sm' />
+        </FCWrapperSm>
+        <FCWrapperSm label='Category' issue={errors.category?.message} isRequired={false}>
+          <select {...register('category')} className='font-normal select select-bordered select-sm'>
+            <option value=''>-- Choose Category --</option>
+            <option value='Aerobic'>Aerobic</option>
+            <option value='Strength'>Strength</option>
+            <option value='Aerobic & Strength'>Aerobic & Strength</option>
+            <option value='Flexibility'>Flexibility</option>
+          </select>
+        </FCWrapperSm>
+        <FCWrapperSm label='Description' issue={errors.description?.message} isRequired={false}>
+          <input {...register('description')} className='input input-bordered input-sm' />
+        </FCWrapperSm>
+        <FCWrapperSm label='Intensity Level' issue={errors.intensityLevel?.message} isRequired={false}>
+          <select {...register('intensityLevel')} className='font-normal select select-bordered select-sm'>
+            <option value=''>-- Choose Intensity Level --</option>
+            <option value='Low'>Low</option>
+            <option value='Medium'>Medium</option>
+            <option value='High'>High</option>
+            <option value='Very High'>Very High</option>
+            <option value='Varies with Type'>Varies with Type</option>
+          </select>
+        </FCWrapperSm>
+        <FCWrapperSm label='Max People Allowed' issue={errors.maxPeopleAllowed?.message} isRequired={false}>
           <input
             type='number'
             {...register('maxPeopleAllowed', { valueAsNumber: true })}
-            className='w-full max-w-xs input input-bordered input-sm'
+            className='input input-bordered input-sm'
           />
-        </InputGrpSm>
-        <InputGrpSm labelText='Requirement 1' issue={errors.requirementOne?.message}>
-          <input {...register('requirementOne')} className='w-full max-w-xs input input-bordered input-sm' />
-        </InputGrpSm>
-        <InputGrpSm labelText='Requirement 2' issue={errors.requirementTwo?.message}>
-          <input {...register('requirementTwo')} className='w-full max-w-xs input input-bordered input-sm' />
-        </InputGrpSm>
-        <InputGrpSm labelText='Duration (minutes)' issue={errors.durationMinutes?.message}>
+        </FCWrapperSm>
+        <FCWrapperSm label='Requirement 1' issue={errors.requirementOne?.message} isRequired={false}>
+          <input {...register('requirementOne')} className='input input-bordered input-sm' />
+        </FCWrapperSm>
+        <FCWrapperSm label='Requirement 2' issue={errors.requirementTwo?.message} isRequired={false}>
+          <input {...register('requirementTwo')} className='input input-bordered input-sm' />
+        </FCWrapperSm>
+        <FCWrapperSm label='Duration (minutes)' issue={errors.durationMinutes?.message}>
           <input
             type='number'
             {...register('durationMinutes', { valueAsNumber: true })}
-            className='w-full max-w-xs input input-bordered input-sm'
+            className='input input-bordered input-sm'
           />
-        </InputGrpSm>
-        <InputGrpSm labelText='Price' issue={errors.price?.message}>
+        </FCWrapperSm>
+        <FCWrapperSm label='Price' issue={errors.price?.message} isRequired={false}>
           <input
             type='number'
             {...register('price', { valueAsNumber: true })}
-            className='w-full max-w-xs input input-bordered input-sm'
+            className='input input-bordered input-sm'
           />
-        </InputGrpSm>
-        <div className='flex w-full col-span-2 xl:col-span-3 mt-5 justify-end gap-10'>
+        </FCWrapperSm>
+        <div className='flex justify-end w-full col-span-2 gap-10 mt-5 xl:col-span-3'>
           <button type='button' onClick={() => navigate(-1)} className='btn btn-sm'>
             Cancel
           </button>

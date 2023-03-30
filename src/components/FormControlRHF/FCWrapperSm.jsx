@@ -1,8 +1,8 @@
-export default function InputGrpSm({ children, labelText, issue, isRequired }) {
+export default function FCWrapperSm({ children, label, issue, isRequired }) {
   return (
     <div className='w-full max-w-xs form-control'>
       <label className='py-1 3xl:py-2 label'>
-        <span className='label-text'>{labelText}:</span>
+        <span className='label-text'>{label}:</span>
         {isRequired === false || <span className='label-text-alt'>Required</span>}
       </label>
       {children}

@@ -13,7 +13,7 @@ export default function SelectGrpSmCountry({ issue, initialValue, isRequired }) 
         name='country'
         id='country'
         defaultValue={initialValue}
-        className='min-h-0 font-normal select select-primary select-sm'
+        className='font-normal select select-primary select-sm'
       >
         <option value='' disabled>
           -- Choose Country --
