@@ -3,7 +3,7 @@ import AuthContext from '../../contexts/AuthContext';
 import { useLoaderData, Form, useNavigate } from 'react-router-dom';
 import { tomorrowStr, threeWeeksLaterStr } from '../../data/keyDates';
 
-export default function BookingEdit() {
+export default function Edit() {
   const { authenticatedUser } = useContext(AuthContext);
   const { booking, members, trainers, activities } = useLoaderData();
   const navigate = useNavigate();

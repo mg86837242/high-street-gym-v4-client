@@ -3,7 +3,7 @@ import AuthContext from '../../contexts/AuthContext';
 import { useLoaderData, NavLink, Outlet } from 'react-router-dom';
 import { monthNames, getOrdinal } from '../../utils/mapDates';
 
-export default function BookingList() {
+export default function List() {
   const { authenticatedUser } = useContext(AuthContext);
   const { bookings } = useLoaderData();
 

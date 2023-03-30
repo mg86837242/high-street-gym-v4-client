@@ -1,5 +1,6 @@
 import ErrorInfoRefresh from '../components/ErrorInfoRefresh';
 import ErrorInfoBack from '../components/ErrorInfoBack';
+import { AdminNewActivity } from '../components/Panels/AdminPanel';
 
 const adminRoutes = [
   {
@@ -29,6 +30,7 @@ const adminRoutes = [
       return getAllActivities();
     },
     children: [
+      { index: true, Component: AdminNewActivity },
       {
         path: 'id/:id/edit',
         async lazy() {

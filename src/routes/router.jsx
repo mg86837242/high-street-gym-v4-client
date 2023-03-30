@@ -90,7 +90,7 @@ export default router;
 // -- https://stackoverflow.com/questions/69868956/how-can-i-redirect-in-react-router-v6: Solution adopted to cope with
 //  the lack of index route for `/profile` – using `<Navigate>`
 
-// NB Error: `[vite] hmr invalidate /src/pages/BookingList.jsx Could not Fast Refresh. Learn more at
+// NB Error: `[vite] hmr invalidate /src/pages/Bookings/List.jsx Could not Fast Refresh. Learn more at
 //  https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports` =>
 //  Consistent components exports rule conflicts with React Router tutorial's design pattern by which the loader is
 //  declared and exported on the same page as its associated component => further dig indicates that Vite has some

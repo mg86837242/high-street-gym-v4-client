@@ -154,6 +154,15 @@ export function AdminMngActivities() {
   );
 }
 
+export function AdminNewActivity() {
+  return (
+    <>
+      <button>new</button>
+      <button>upload</button>
+    </>
+  );
+}
+
 export function AdminEditActivity() {
   const { activity } = useLoaderData();
   const {

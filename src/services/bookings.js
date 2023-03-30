@@ -34,7 +34,7 @@ export async function getBookingById({ params }) {
 
 export async function getBookingAndOptionsById({ params }) {
   // Prefer to build customized API endpoint (1) is much simpler to code loader, (2) has one less nesting layer/level
-  //  to DA loader data, e.g., in `BookingEdit.jsx`, `bookingJSON:` can be rid of – easier to code component, same
+  //  to DA loader data, e.g., in `Bookings/Edit.jsx`, `bookingJSON:` can be rid of – easier to code component, same
   //  applies to breadcrumbs/`useMatches`.
   const response = await fetchRes(`${API_URL}/bookings/booking-with-options/id/${params.id}`);
   return response;
@@ -52,9 +52,7 @@ export async function updateBookingById({ params, request }) {
   // "`<Form>` prevents(hijacks) the browser from sending the request to the server and sends it to your route
   //  `action` instead", see: https://reactrouter.com/en/main/start/tutorial#creating-contacts
   // NB "If the value is neither a `Blob` nor a `File`, the value is converted (by `Request.formData()`) to a
-  //  STRING", see: https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects =>
-  //  Observation: `{typeof a.id}` in `BookingEdit.jsx` shows 'number', while `console.log(formData)` here
-  //  shows `string`.
+  //  STRING", see: https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects
   const formData = await request.formData();
   const updates = Object.fromEntries(formData);
   await fetchRes(`${API_URL}/bookings/id/${params.id}`, 'patch', updates);

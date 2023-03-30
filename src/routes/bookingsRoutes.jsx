@@ -1,15 +1,15 @@
 import { Link } from 'react-router-dom';
 import ErrorInfoBack from '../components/ErrorInfoBack';
-import BookingListIndex from '../components/Bookings/BookingListIndex';
-import BookingDetailsIndex from '../components/Bookings/BookingDetailsIndex';
+import ListIndex from '../components/Bookings/ListIndex';
+import DetailsIndex from '../components/Bookings/DetailsIndex';
 
 const bookingsRoutes = [
-  { index: true, Component: BookingListIndex },
+  { index: true, Component: ListIndex },
   {
     path: ':date',
     async lazy() {
-      let { default: BookingList } = await import('../components/Bookings/BookingList');
-      return { Component: BookingList };
+      let { default: List } = await import('../components/Bookings/List');
+      return { Component: List };
     },
     ErrorBoundary: ErrorInfoBack,
     async loader({ params }) {
@@ -33,12 +33,12 @@ const bookingsRoutes = [
       },
     },
     children: [
-      { index: true, Component: BookingDetailsIndex },
+      { index: true, Component: DetailsIndex },
       {
         path: 'id/:id',
         async lazy() {
-          let { default: BookingDetails } = await import('../components/Bookings/BookingDetails');
-          return { Component: BookingDetails };
+          let { default: Details } = await import('../components/Bookings/Details');
+          return { Component: Details };
         },
         ErrorBoundary: ErrorInfoBack,
         async loader({ params }) {
@@ -57,8 +57,8 @@ const bookingsRoutes = [
       {
         path: 'id/:id/edit',
         async lazy() {
-          let { default: BookingEdit } = await import('../components/Bookings/BookingEdit');
-          return { Component: BookingEdit };
+          let { default: Edit } = await import('../components/Bookings/Edit');
+          return { Component: Edit };
         },
         ErrorBoundary: ErrorInfoBack,
         async loader({ params }) {
@@ -91,8 +91,8 @@ const bookingsRoutes = [
   {
     path: 'new',
     async lazy() {
-      let { default: BookingNew } = await import('../components/Bookings/BookingNew');
-      return { Component: BookingNew };
+      let { default: New } = await import('../components/Bookings/New');
+      return { Component: New };
     },
     ErrorBoundary: ErrorInfoBack,
     async loader() {

@@ -1,4 +1,4 @@
-export default function BookingDetailsIndex() {
+export default function DetailsIndex() {
   return (
     <div
       id='booking-details-wrapper'

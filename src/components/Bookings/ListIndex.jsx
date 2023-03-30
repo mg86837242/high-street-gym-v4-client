@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-export default function BookingListIndex() {
+export default function ListIndex() {
   return (
     <div
       id='booking-list-wrapper'
