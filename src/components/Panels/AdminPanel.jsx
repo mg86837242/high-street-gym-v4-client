@@ -8,6 +8,7 @@ import UnderConstruction from '../UnderConstruction';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import activitySchema from '../../schemas/activities';
+import pickBy from 'lodash.pickBy';
 import FCWrapperSm from '../FormControlRHF/FCWrapperSm';
 
 export function AdminPanel() {
@@ -175,11 +176,14 @@ export function AdminEditActivity() {
   const submit = useSubmit();
   const navigate = useNavigate();
 
-  // TODO (1) new button that create an empty new and auto direct to edit, (2) test if removing zod transform is fine
+  // TODO (1) "new" button (in the index route) that create an empty new and auto direct to edit
   return (
     <div className='grid py-6 place-items-center'>
       <form
-        onSubmit={handleSubmit((data) => submit({ body: JSON.stringify(data) }, { method: 'post' }))}
+        onSubmit={handleSubmit((data) => {
+          const sanitizedData = pickBy(data, (val) => val !== '');
+          submit({ body: JSON.stringify(sanitizedData) }, { method: 'post' });
+        })}
         noValidate
         className='grid w-full grid-cols-2 justify-items-center xl:grid-cols-3 gap-x-5'
       >

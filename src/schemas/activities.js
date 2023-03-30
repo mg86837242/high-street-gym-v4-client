@@ -3,22 +3,15 @@ import { z } from 'zod';
 // Because how React Hook Form
 const activitySchema = z.object({
   name: z.string().max(45).nullable(),
+  // PS Empty string within the `enum()` is for the `Choose Category` option
   category: z.enum(['Aerobic', 'Strength', 'Aerobic & Strength', 'Flexibility', '']).nullable(),
   description: z.string().max(255).nullable(),
   intensityLevel: z.enum(['Low', 'Medium', 'High', 'Very High', 'Varies with Type', '']).nullable(),
-  maxPeopleAllowed: z
-    .number()
-    .nonnegative()
-    .transform((val) => val.toString())
-    .nullable(),
+  maxPeopleAllowed: z.union([z.number().nonnegative().nullable(), z.nan()]),
   requirementOne: z.string().max(100).nullable(),
   requirementTwo: z.string().max(100).nullable(),
   durationMinutes: z.number().nonnegative(),
-  price: z
-    .number()
-    .nonnegative()
-    .transform((val) => val.toString())
-    .nullable(),
+  price: z.union([z.number().nonnegative().nullable(), z.nan()]),
 });
 
 export default activitySchema;
