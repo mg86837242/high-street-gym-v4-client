@@ -1,13 +1,14 @@
 import { useContext, useMemo, useEffect } from 'react';
 import AuthContext from '../../contexts/AuthContext';
 import { Outlet, NavLink, Navigate, useLoaderData, Form, useSubmit, useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import activitySchema from '../../schemas/activities';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 import { faPersonRunning } from '@fortawesome/free-solid-svg-icons';
 import UnderConstruction from '../UnderConstruction';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import activitySchema from '../../schemas/activities';
+import InputGrpSm from '../FormControlRHF/InputGrpSm';
 
 export function AdminPanel() {
   return (
@@ -101,7 +102,7 @@ export function AdminMngActivities() {
 
   return (
     <div className='flex flex-col gap-0 overflow-x-auto'>
-      <div className='w-full px-4 py-6 overflow-x-auto'>
+      <div className='w-full py-6 overflow-x-auto'>
         <table className='table w-full table-compact'>
           <thead>
             <tr>
@@ -176,7 +177,7 @@ export function AdminEditActivity() {
 
   // TODO (1) new button that create an empty new and auto direct to edit, (2) <select> for category and intensityLvel
   return (
-    <div className='grid px-4 py-6 place-items-center'>
+    <div className='grid py-6 place-items-center'>
       <form
         onSubmit={handleSubmit((data) => {
           submit({ body: JSON.stringify(data) }, { method: 'post' });
@@ -232,25 +233,6 @@ export function AdminEditActivity() {
           </button>
         </div>
       </form>
-    </div>
-  );
-}
-
-function InputGrpSm({ children, labelText, issue, isRequired }) {
-  return (
-    <div className='w-full max-w-xs form-control'>
-      <label className='py-1 3xl:py-2 label'>
-        <span className='label-text'>{labelText}:</span>
-        {isRequired === false || <span className='label-text-alt'>Required</span>}
-      </label>
-      {children}
-      <label className='py-1 3xl:py-2 label'>
-        {issue ? (
-          <span className='text-rose-500 label-text-alt'>{issue}</span>
-        ) : (
-          <span className='label-text-alt'>Validation info will appear here</span>
-        )}
-      </label>
     </div>
   );
 }
