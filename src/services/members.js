@@ -49,7 +49,7 @@ export async function signupMembers({ request }) {
   // #endregion
   // Type conversion for db constraint
   creations.age = parseInt(age, 10) || null;
-  creations.gender = gender || null;
+  creations.gender ||= null;
 
   const response = await post(`${API_URL}/members/signup`, creations);
   // Special error handling to let 409 pass to NOT trigger error boundary, since `useActionData` already handled validation

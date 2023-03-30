@@ -33,7 +33,7 @@ export async function getBookingById({ params }) {
 }
 
 export async function getBookingAndOptionsById({ params }) {
-  // Building customized API endpoint (1) is much simpler to code loader, (2) has one less nesting layer/level
+  // Prefer to build customized API endpoint (1) is much simpler to code loader, (2) has one less nesting layer/level
   //  to DA loader data, e.g., in `BookingEdit.jsx`, `bookingJSON:` can be rid of – easier to code component, same
   //  applies to breadcrumbs/`useMatches`.
   const response = await fetchRes(`${API_URL}/bookings/booking-with-options/id/${params.id}`);
