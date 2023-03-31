@@ -8,9 +8,8 @@ const adminRoutes = [
       let { AdminIndex } = await import('../components/Panels/AdminPanel');
       return { Component: AdminIndex };
     },
-    ErrorBoundary: ErrorInfoRefresh,
-    // [ ] Dynamic import ErrorBoundary, which means separate file, with component function called ErrorBoundary
-    // [ ] Tweak API & model to get username and role from login table & backend schema for activities and blogs
+    ErrorBoundary: ErrorInfoBack,
+    // [ ] Tweak model to get username and role from login table & tweak API & backend schema for activities and blogs
   },
   {
     path: 'blogs',
@@ -18,7 +17,7 @@ const adminRoutes = [
       let { AdminMngBlogs } = await import('../components/Panels/AdminMngBlogs');
       return { Component: AdminMngBlogs };
     },
-    ErrorBoundary: ErrorInfoRefresh,
+    ErrorBoundary: ErrorInfoBack,
     async loader() {
       let { getAllBlogs } = await import('../services/blogs.js');
       return getAllBlogs();
@@ -30,7 +29,7 @@ const adminRoutes = [
           let { AdminNewBlog } = await import('../components/Panels/AdminMngBlogs');
           return { Component: AdminNewBlog };
         },
-        ErrorBoundary: ErrorInfoRefresh,
+        ErrorBoundary: ErrorInfoBack,
       },
       {
         path: 'new',
@@ -46,7 +45,7 @@ const adminRoutes = [
           let { AdminEditBlog } = await import('../components/Panels/AdminMngBlogs');
           return { Component: AdminEditBlog };
         },
-        ErrorBoundary: ErrorInfoBack,
+        ErrorBoundary: ErrorInfoRefresh,
         async loader({ params }) {
           let { getBlogById } = await import('../services/blogs');
           return getBlogById({ params });
@@ -72,7 +71,7 @@ const adminRoutes = [
       let { AdminMngActivities } = await import('../components/Panels/AdminMngActivities');
       return { Component: AdminMngActivities };
     },
-    ErrorBoundary: ErrorInfoRefresh,
+    ErrorBoundary: ErrorInfoBack,
     async loader() {
       let { getAllActivities } = await import('../services/activities');
       return getAllActivities();
@@ -84,7 +83,7 @@ const adminRoutes = [
           let { AdminNewActivity } = await import('../components/Panels/AdminMngActivities');
           return { Component: AdminNewActivity };
         },
-        ErrorBoundary: ErrorInfoRefresh,
+        ErrorBoundary: ErrorInfoBack,
       },
       {
         path: 'new',
@@ -100,7 +99,7 @@ const adminRoutes = [
           let { AdminEditActivity } = await import('../components/Panels/AdminMngActivities');
           return { Component: AdminEditActivity };
         },
-        ErrorBoundary: ErrorInfoBack,
+        ErrorBoundary: ErrorInfoRefresh,
         async loader({ params }) {
           let { getActivityById } = await import('../services/activities');
           return getActivityById({ params });
