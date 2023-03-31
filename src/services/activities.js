@@ -2,7 +2,7 @@ import { redirect } from 'react-router-dom';
 import { API_URL } from '../data/constants';
 import fetchJSON from '../utils/fetchJSON';
 import fetchRes from '../utils/fetchRes';
-import getSubmitData from '../utils/getSubmitData';
+import getSubmittedData from '../utils/getSubmittedData';
 
 export async function getAllActivities() {
   const response = await fetchRes(`${API_URL}/activities`);
@@ -21,7 +21,7 @@ export async function createActivity() {
 }
 
 export async function updateActivityById({ params, request }) {
-  const updates = await getSubmitData(request);
+  const updates = await getSubmittedData(request);
   await fetchRes(`${API_URL}/activities/id/${params.id}`, 'patch', updates);
   return redirect(`/admin/activities`);
 }

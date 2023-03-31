@@ -1,6 +1,6 @@
 import { createBrowserRouter, Link, Navigate } from 'react-router-dom';
-import Home from '../pages/Home';
 import ErrorInfoBack from '../components/ErrorInfoBack';
+import Home from '../pages/Home';
 import PageLayout from '../pages/PageLayout';
 import Login from '../pages/Login';
 import bookingsRoutes from './bookingsRoutes';
@@ -78,7 +78,10 @@ const router = createBrowserRouter([
   },
   {
     path: '*',
-    element: <Navigate to='/' replace />,
+    async lazy() {
+      let { NotFoundView } = await import('../components/NotFound');
+      return { Component: NotFoundView };
+    },
   },
 ]);
 

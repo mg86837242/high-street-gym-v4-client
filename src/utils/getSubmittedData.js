@@ -1,6 +1,6 @@
 import { json } from 'react-router-dom';
 
-export default async function getSubmitData(request) {
+export default async function getSubmittedData(request) {
   const formData = await request.formData();
   // It's expecting a json, however, agnostic-ally called `rawBody`
   const rawBody = formData.get('body');
