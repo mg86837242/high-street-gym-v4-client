@@ -1,4 +1,4 @@
-import { createBrowserRouter, Link } from 'react-router-dom';
+import { createBrowserRouter, Link, Navigate } from 'react-router-dom';
 import Home from '../pages/Home';
 import ErrorInfoBack from '../components/ErrorInfoBack';
 import PageLayout from '../pages/PageLayout';
@@ -75,6 +75,10 @@ const router = createBrowserRouter([
       let { signupMembers } = await import('../services/members');
       return signupMembers({ request });
     },
+  },
+  {
+    path: '*',
+    element: <Navigate to='/' replace />,
   },
 ]);
 
