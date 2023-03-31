@@ -1,5 +1,5 @@
 import { useMemo, useEffect } from 'react';
-import { Outlet, useLoaderData, Form, useSubmit, useNavigate } from 'react-router-dom';
+import { useLoaderData, Outlet, Form, useSubmit, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import activitySchema from '../../schemas/activities';
@@ -71,9 +71,6 @@ function AdminListActivities({ activities }) {
 export function AdminNewActivity() {
   return (
     <div className='flex justify-end w-full gap-10 py-6'>
-      {/* <button type='button' className='btn btn-outline btn-sm'>
-          To be implemented
-        </button> */}
       <Form method='post' action='new'>
         <button type='submit' className='btn btn-outline btn-primary btn-sm'>
           Create New

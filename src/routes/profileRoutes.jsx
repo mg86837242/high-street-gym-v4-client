@@ -20,9 +20,10 @@ const profileRoutes = [
       return getUserWithAllDetailsAndAllEmails();
     },
     async action({ request }) {
-      let formData = await request.formData();
-      let { _action, ...values } = Object.fromEntries(formData);
+      const formData = await request.formData();
+      const { _action, ...values } = Object.fromEntries(formData);
 
+      // TODO Refactor by using switch
       if (_action === 'updateAdminById') {
         let { default: updateAdminById } = await import('../services/admins');
         return updateAdminById(values);

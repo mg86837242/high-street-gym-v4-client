@@ -4,7 +4,6 @@ import { Outlet, NavLink, Navigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 import { faPersonRunning } from '@fortawesome/free-solid-svg-icons';
-import UnderConstruction from '../UnderConstruction';
 
 export function AdminPanel() {
   return (
@@ -86,20 +85,4 @@ export function AdminIndex() {
   ) : (
     <Navigate to='/' replace />
   );
-}
-
-export function AdminMngBlogs() {
-  return <UnderConstruction pageName={'admin edit blogs'} />;
-}
-
-function AdminListBlogs({ blogs }) {
-  return null;
-}
-
-function AdminNewBlog() {
-  return null;
-}
-
-export function AdminEditBlog() {
-  return null;
 }
