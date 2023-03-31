@@ -1,6 +1,5 @@
 import { z } from 'zod';
 
-// Because how React Hook Form
 const activitySchema = z.object({
   name: z.string().max(45).nullable(),
   // Empty string within the `enum()` is for the "choose" option in case the user wants to intentionally leave it blank

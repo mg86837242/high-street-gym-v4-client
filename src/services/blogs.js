@@ -8,3 +8,25 @@ export async function getAllBlogs() {
   const response = await fetchRes(`${API_URL}/blogs`);
   return response;
 }
+
+export async function getBlogById({ params }) {
+  const response = await fetchRes(`${API_URL}/blogs/id/${params.id}`);
+  return response;
+}
+
+export async function createBlog() {
+  const creations = { title: 'New Blog', body: 'Lorem Ipsum', loginId: 1 };
+  const json = await fetchJSON(`${API_URL}/blogs`, 'post', creations);
+  return redirect(`/admin/blogs/id/${json.insertId}/edit`);
+}
+
+export async function updateBlogById({ params, request }) {
+  const updates = await getSubmittedData(request);
+  await fetchRes(`${API_URL}/blogs/id/${params.id}`, 'patch', updates);
+  return redirect(`/admin/blogs`);
+}
+
+export async function deleteBlogById({ params }) {
+  await fetchRes(`${API_URL}/blogs/id/${params.id}`, 'delete');
+  return redirect(`/admin/blogs`);
+}

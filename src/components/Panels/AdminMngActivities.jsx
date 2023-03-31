@@ -10,7 +10,7 @@ export function AdminMngActivities() {
   const { activities } = useLoaderData();
 
   return (
-    <div className='flex flex-col gap-0 overflow-x-auto'>
+    <div className='flex flex-col w-full gap-0 overflow-x-auto'>
       <AdminListActivities activities={activities} />
       <Outlet />
     </div>
@@ -19,7 +19,7 @@ export function AdminMngActivities() {
 
 function AdminListActivities({ activities }) {
   return (
-    <div className='w-full py-6 overflow-x-auto'>
+    <div className='py-6 overflow-x-auto'>
       <table className='table w-full table-compact'>
         <thead>
           <tr>
@@ -70,7 +70,7 @@ function AdminListActivities({ activities }) {
 
 export function AdminNewActivity() {
   return (
-    <div className='flex justify-end w-full gap-10 py-6'>
+    <div className='flex justify-end gap-10 py-6'>
       <Form method='post' action='new'>
         <button type='submit' className='btn btn-outline btn-primary btn-sm'>
           Create New

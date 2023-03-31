@@ -2,7 +2,7 @@ import { useRouteError, useNavigation, isRouteErrorResponse, useNavigate } from 
 import { ReactComponent as BoxIcon } from '../assets/error-box.svg';
 import Button1 from './UI/Button1';
 
-export default function ErrorInfo() {
+export default function ErrorBoundary() {
   const error = useRouteError();
   const navigation = useNavigation();
   const navigate = useNavigate();

@@ -10,6 +10,7 @@ const adminRoutes = [
     },
     ErrorBoundary: ErrorInfoRefresh,
     // [ ] Dynamic import ErrorBoundary, which means separate file, with component function called ErrorBoundary
+    // [ ] Tweak API & model to get username and role from login table & backend schema for activities and blogs
   },
   {
     path: 'blogs',

@@ -2,7 +2,7 @@ import { useMemo, useEffect } from 'react';
 import { useLoaderData, Outlet, Form, useSubmit, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-// import blogSchema from '../../schemas/blogs';
+import blogSchema from '../../schemas/blogs.js';
 import sanitize from '../../utils/sanitize';
 import FCRHFSm from '../FormControlRHF/FCRHFSm';
 
@@ -10,7 +10,7 @@ export function AdminMngBlogs() {
   const { blogs } = useLoaderData();
 
   return (
-    <div className='flex flex-col gap-0 overflow-x-auto'>
+    <div className='flex flex-col w-full gap-0 overflow-x-auto'>
       <AdminListBlogs blogs={blogs} />
       <Outlet />
     </div>
@@ -18,10 +18,8 @@ export function AdminMngBlogs() {
 }
 
 function AdminListBlogs({ blogs }) {
-  // [ ] Table full span of the parent container
-  // [ ] Tweak API to get username and role from login table
   return (
-    <div className='w-full py-6 overflow-x-auto'>
+    <div className='py-6 overflow-x-auto'>
       <table className='table w-full table-compact'>
         <thead>
           <tr>
@@ -71,9 +69,69 @@ function AdminListBlogs({ blogs }) {
 }
 
 export function AdminNewBlog() {
-  return null;
+  return (
+    <div className='flex justify-end gap-10 py-6'>
+      <Form method='post' action='new'>
+        <button type='submit' className='btn btn-outline btn-primary btn-sm'>
+          Create New
+        </button>
+      </Form>
+    </div>
+  );
 }
 
 export function AdminEditBlog() {
-  return null;
+  const { blog } = useLoaderData();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    resolver: zodResolver(blogSchema),
+    defaultValues: useMemo(() => {
+      return blog;
+    }, [blog]),
+  });
+
+  useEffect(() => {
+    reset(blog);
+  }, [reset, blog]);
+  const submit = useSubmit();
+  const navigate = useNavigate();
+
+  return (
+    <div className='grid py-6 place-items-center'>
+      <form
+        onSubmit={handleSubmit((data) => {
+          const sanitizedData = sanitize(data);
+          submit({ body: JSON.stringify(sanitizedData) }, { method: 'post' });
+        })}
+        noValidate
+        className='grid w-full grid-cols-2 justify-items-center xl:grid-cols-3 gap-x-5'
+      >
+        <FCRHFSm label='Title' issue={errors.title?.message}>
+          <input {...register('title')} className='input input-bordered input-sm' />
+        </FCRHFSm>
+        <FCRHFSm label='Body' issue={errors.body?.message}>
+          <input {...register('body')} className='input input-bordered input-sm' />
+        </FCRHFSm>
+        <FCRHFSm label='loginId' issue={errors.loginId?.message} isRequired={false}>
+          <input
+            type='number'
+            {...register('loginId', { valueAsNumber: true })}
+            className='input input-bordered input-sm'
+          />
+        </FCRHFSm>
+        <div className='flex justify-end w-full col-span-2 gap-10 mt-5 xl:col-span-3'>
+          <button type='submit' className='w-20 btn btn-outline btn-primary btn-sm'>
+            Save
+          </button>
+          <button type='button' onClick={() => navigate(-1)} className='w-20 btn btn-outline btn-sm'>
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  );
 }
