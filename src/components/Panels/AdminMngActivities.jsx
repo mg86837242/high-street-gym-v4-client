@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import activitySchema from '../../schemas/activities';
 import sanitize from '../../utils/sanitize';
-import FCWrapperSm from '../FormControlRHF/FCWrapperSm';
+import FCRHFSm from '../FormControlRHF/FCRHFSm';
 
 export function AdminMngActivities() {
   const { activities } = useLoaderData();
@@ -115,10 +115,10 @@ export function AdminEditActivity() {
         noValidate
         className='grid w-full grid-cols-2 justify-items-center xl:grid-cols-3 gap-x-5'
       >
-        <FCWrapperSm label='Activity Name' issue={errors.name?.message}>
+        <FCRHFSm label='Activity Name' issue={errors.name?.message}>
           <input {...register('name')} className='input input-bordered input-sm' />
-        </FCWrapperSm>
-        <FCWrapperSm label='Category' issue={errors.category?.message} isRequired={false}>
+        </FCRHFSm>
+        <FCRHFSm label='Category' issue={errors.category?.message} isRequired={false}>
           <select {...register('category')} className='font-normal select select-bordered select-sm'>
             <option value=''>-- Choose Category --</option>
             <option value='Aerobic'>Aerobic</option>
@@ -126,11 +126,11 @@ export function AdminEditActivity() {
             <option value='Aerobic & Strength'>Aerobic & Strength</option>
             <option value='Flexibility'>Flexibility</option>
           </select>
-        </FCWrapperSm>
-        <FCWrapperSm label='Description' issue={errors.description?.message} isRequired={false}>
+        </FCRHFSm>
+        <FCRHFSm label='Description' issue={errors.description?.message} isRequired={false}>
           <input {...register('description')} className='input input-bordered input-sm' />
-        </FCWrapperSm>
-        <FCWrapperSm label='Intensity Level' issue={errors.intensityLevel?.message} isRequired={false}>
+        </FCRHFSm>
+        <FCRHFSm label='Intensity Level' issue={errors.intensityLevel?.message} isRequired={false}>
           <select {...register('intensityLevel')} className='font-normal select select-bordered select-sm'>
             <option value=''>-- Choose Intensity Level --</option>
             <option value='Low'>Low</option>
@@ -139,34 +139,34 @@ export function AdminEditActivity() {
             <option value='Very High'>Very High</option>
             <option value='Varies with Type'>Varies with Type</option>
           </select>
-        </FCWrapperSm>
-        <FCWrapperSm label='Max People Allowed' issue={errors.maxPeopleAllowed?.message} isRequired={false}>
+        </FCRHFSm>
+        <FCRHFSm label='Max People Allowed' issue={errors.maxPeopleAllowed?.message} isRequired={false}>
           <input
             type='number'
             {...register('maxPeopleAllowed', { valueAsNumber: true })}
             className='input input-bordered input-sm'
           />
-        </FCWrapperSm>
-        <FCWrapperSm label='Requirement 1' issue={errors.requirementOne?.message} isRequired={false}>
+        </FCRHFSm>
+        <FCRHFSm label='Requirement 1' issue={errors.requirementOne?.message} isRequired={false}>
           <input {...register('requirementOne')} className='input input-bordered input-sm' />
-        </FCWrapperSm>
-        <FCWrapperSm label='Requirement 2' issue={errors.requirementTwo?.message} isRequired={false}>
+        </FCRHFSm>
+        <FCRHFSm label='Requirement 2' issue={errors.requirementTwo?.message} isRequired={false}>
           <input {...register('requirementTwo')} className='input input-bordered input-sm' />
-        </FCWrapperSm>
-        <FCWrapperSm label='Duration (minutes)' issue={errors.durationMinutes?.message}>
+        </FCRHFSm>
+        <FCRHFSm label='Duration (minutes)' issue={errors.durationMinutes?.message}>
           <input
             type='number'
             {...register('durationMinutes', { valueAsNumber: true })}
             className='input input-bordered input-sm'
           />
-        </FCWrapperSm>
-        <FCWrapperSm label='Price' issue={errors.price?.message} isRequired={false}>
+        </FCRHFSm>
+        <FCRHFSm label='Price' issue={errors.price?.message} isRequired={false}>
           <input
             type='number'
             {...register('price', { valueAsNumber: true })}
             className='input input-bordered input-sm'
           />
-        </FCWrapperSm>
+        </FCRHFSm>
         <div className='flex justify-end w-full col-span-2 gap-10 mt-5 xl:col-span-3'>
           <button type='submit' className='w-20 btn btn-outline btn-primary btn-sm'>
             Save
