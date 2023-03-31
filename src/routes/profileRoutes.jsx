@@ -1,3 +1,4 @@
+import { json } from 'react-router-dom';
 import ErrorInfoRefresh from '../components/ErrorInfoRefresh';
 
 const profileRoutes = [
@@ -23,32 +24,28 @@ const profileRoutes = [
       const formData = await request.formData();
       const { _action, ...values } = Object.fromEntries(formData);
 
-      // TODO Refactor by using switch
-      if (_action === 'updateAdminById') {
-        let { default: updateAdminById } = await import('../services/admins');
-        return updateAdminById(values);
+      switch (_action) {
+        case 'updateAdminById':
+          let { default: updateAdminById } = await import('../services/admins');
+          return updateAdminById(values);
+        case 'updateAddressByAdminId':
+          let { updateAddressByAdminId } = await import('../services/address');
+          return updateAddressByAdminId(values);
+        case 'updateTrainerById':
+          let { default: updateTrainerById } = await import('../services/trainers');
+          return updateTrainerById(values);
+        case 'updateAddressByTrainerId':
+          let { updateAddressByTrainerId } = await import('../services/address');
+          return updateAddressByTrainerId(values);
+        case 'updateMemberById':
+          let { updateMemberById } = await import('../services/members');
+          return updateMemberById(values);
+        case 'updateAddressByMemberId':
+          let { updateAddressByMemberId } = await import('../services/address');
+          return updateAddressByMemberId(values);
+        default:
+          throw json('Unknown form action', { status: 404 });
       }
-      if (_action === 'updateAddressByAdminId') {
-        let { updateAddressByAdminId } = await import('../services/address');
-        return updateAddressByAdminId(values);
-      }
-      if (_action === 'updateTrainerById') {
-        let { default: updateTrainerById } = await import('../services/trainers');
-        return updateTrainerById(values);
-      }
-      if (_action === 'updateAddressByTrainerId') {
-        let { updateAddressByTrainerId } = await import('../services/address');
-        return updateAddressByTrainerId(values);
-      }
-      if (_action === 'updateMemberById') {
-        let { updateMemberById } = await import('../services/members');
-        return updateMemberById(values);
-      }
-      if (_action === 'updateAddressByMemberId') {
-        let { updateAddressByMemberId } = await import('../services/address');
-        return updateAddressByMemberId(values);
-      }
-      return;
     },
   },
 ];

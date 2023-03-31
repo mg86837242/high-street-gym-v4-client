@@ -9,7 +9,7 @@ const adminRoutes = [
       return { Component: AdminIndex };
     },
     ErrorBoundary: ErrorInfoRefresh,
-    // TODO Dynamic import ErrorBoundary, which means separate file, with component function called ErrorBoundary
+    // [ ] Dynamic import ErrorBoundary, which means separate file, with component function called ErrorBoundary
   },
   {
     path: 'blogs',
