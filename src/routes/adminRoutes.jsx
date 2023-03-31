@@ -1,6 +1,6 @@
 import ErrorInfoRefresh from '../components/ErrorInfoRefresh';
 import ErrorInfoBack from '../components/ErrorInfoBack';
-import { AdminNewActivity } from '../components/Panels/AdminPanel';
+import { AdminNewActivity } from '../components/Panels/AdminMngActivities';
 
 const adminRoutes = [
   {
@@ -21,7 +21,7 @@ const adminRoutes = [
   {
     path: 'activities',
     async lazy() {
-      let { AdminMngActivities } = await import('../components/Panels/AdminPanel');
+      let { AdminMngActivities } = await import('../components/Panels/AdminMngActivities');
       return { Component: AdminMngActivities };
     },
     ErrorBoundary: ErrorInfoRefresh,
@@ -34,7 +34,7 @@ const adminRoutes = [
       {
         path: 'id/:id/edit',
         async lazy() {
-          let { AdminEditActivity } = await import('../components/Panels/AdminPanel');
+          let { AdminEditActivity } = await import('../components/Panels/AdminMngActivities');
           return { Component: AdminEditActivity };
         },
         ErrorBoundary: ErrorInfoBack,

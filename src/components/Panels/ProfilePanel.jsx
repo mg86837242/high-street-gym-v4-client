@@ -2,8 +2,7 @@ import { useContext } from 'react';
 import AuthContext from '../../contexts/AuthContext';
 import { Outlet, NavLink, Navigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faPenToSquare } from '@fortawesome/free-regular-svg-icons';
-import UnderConstruction from '../UnderConstruction';
+import { faUser } from '@fortawesome/free-regular-svg-icons';
 
 export function ProfilePanel() {
   return (
@@ -52,21 +51,6 @@ function LeftSidePanel() {
               <span className='flex items-center justify-start text-sm'>Edit My Account</span>
             </NavLink>
           </li>
-          {/* <li>
-            <NavLink
-              to='new feature'
-              className={({ isActive }) =>
-                `flex items-center justify-start w-full h-full gap-2 px-2 font-normal btn btn-sm btn-ghost py-1.5 ${
-                  isActive && 'btn-active'
-                }`
-              }
-            >
-              <span>
-                <FontAwesomeIcon icon={faPenToSquare} className='w-4 h-4' />
-              </span>
-              <span className='flex items-center justify-start text-sm'>New feature</span>
-            </NavLink>
-          </li> */}
         </ul>
       </nav>
     </div>
@@ -77,8 +61,4 @@ export function ProfileIndex() {
   const { authenticatedUser } = useContext(AuthContext);
 
   return authenticatedUser?.role ? <Navigate to='account' replace /> : <Navigate to='/' replace />;
-}
-
-export function ProfileNewFeature() {
-  return <UnderConstruction pageName={'profile new feature'} />;
 }
