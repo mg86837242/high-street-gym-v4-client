@@ -1,6 +1,6 @@
 export default function FCRHFSm({ children, label, issue, isRequired }) {
   return (
-    <div className='w-full max-w-xs form-control'>
+    <div className='w-full form-control'>
       <label className='py-1 3xl:py-2 label'>
         <span className='label-text'>{label}:</span>
         {isRequired === false || <span className='label-text-alt'>Required</span>}

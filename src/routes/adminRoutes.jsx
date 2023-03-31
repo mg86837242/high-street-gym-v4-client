@@ -9,7 +9,7 @@ const adminRoutes = [
       return { Component: AdminIndex };
     },
     ErrorBoundary: ErrorInfoBack,
-    // [ ] Tweak model to get username and role from login table & tweak API & backend schema for activities and blogs
+    // [ ] Backend schema for activities and blogs
   },
   {
     path: 'blogs',

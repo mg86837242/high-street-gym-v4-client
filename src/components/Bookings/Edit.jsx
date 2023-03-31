@@ -29,7 +29,7 @@ export default function Edit() {
             <span className='p-0'>Activity:</span>
             <select
               name='activityId'
-              initialValue={activities.find((a) => a.id === booking.activityId).id}
+              defaultValue={activities.find((a) => a.id === booking.activityId).id}
               required
               className='text-base font-normal select select-bordered select-sm'
             >
@@ -50,7 +50,7 @@ export default function Edit() {
               name='date'
               min={tomorrowStr}
               max={threeWeeksLaterStr}
-              initialValue={booking.dateTime.slice(0, 10)}
+              defaultValue={booking.dateTime.slice(0, 10)}
               required
               className='text-base input input-bordered input-sm'
             />
@@ -62,7 +62,7 @@ export default function Edit() {
             <span className='p-0'>Time:</span>
             <select
               name='time'
-              initialValue={booking.dateTime.slice(-8)}
+              defaultValue={booking.dateTime.slice(-8)}
               required
               className='text-base font-normal select select-bordered select-sm'
             >
@@ -82,7 +82,7 @@ export default function Edit() {
               <span className='p-0'>Member:</span>
               <select
                 name='memberId'
-                initialValue={authenticatedUser.memberId}
+                defaultValue={authenticatedUser.memberId}
                 required
                 className='text-base font-normal select select-bordered select-sm'
               >
@@ -104,7 +104,7 @@ export default function Edit() {
               <span className='p-0'>Member:</span>
               <select
                 name='memberId'
-                initialValue={members.find((m) => m.id === booking.memberId).id}
+                defaultValue={members.find((m) => m.id === booking.memberId).id}
                 required
                 className='text-base font-normal select select-bordered select-sm'
               >
@@ -125,7 +125,7 @@ export default function Edit() {
               <span className='p-0'>Trainer:</span>
               <select
                 name='trainerId'
-                initialValue={authenticatedUser.trainerId}
+                defaultValue={authenticatedUser.trainerId}
                 required
                 className='text-base font-normal select select-bordered select-sm'
               >
@@ -147,7 +147,7 @@ export default function Edit() {
               <span className='p-0'>Trainer:</span>
               <select
                 name='trainerId'
-                initialValue={trainers.find((t) => t.id === booking.trainerId).id}
+                defaultValue={trainers.find((t) => t.id === booking.trainerId).id}
                 required
                 className='text-base font-normal select select-bordered select-sm'
               >
