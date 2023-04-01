@@ -58,10 +58,10 @@ function NavBarLeft({ user }) {
               <NavLeftButton to={'/'} text={'Home'} />
               <NavLeftButton to={'blogs'} text={'Blogs'} />
               <NavLeftButton to={'bookings'} text={'Bookings'} />
-              <NavLeftButton to={'admin'} text={'Admin'} hasDropdown={true}>
+              <NavLeftButton to={'admin/activities'} text={'Admin'} hasDropdown={true}>
                 <NavLeftDropdownCategory text={'Manage Records'} />
-                <NavLeftDropdownButton to={'admin/blogs'} text={'Manage Blogs'} />
                 <NavLeftDropdownButton to={'admin/activities'} text={'Manage Activities'} />
+                <NavLeftDropdownButton to={'admin/blogs'} text={'Manage Blogs'} />
               </NavLeftButton>
             </>
           ) : user?.role === 'Trainer' ? (
@@ -69,7 +69,7 @@ function NavBarLeft({ user }) {
               <NavLeftButton to={'/'} text={'Home'} />
               <NavLeftButton to={'blogs'} text={'Blogs'} />
               <NavLeftButton to={'bookings'} text={'Bookings'} />
-              <NavLeftButton to={'admin'} text={'Manage'} hasDropdown={true}>
+              <NavLeftButton to={'admin/activities'} text={'Manage'} hasDropdown={true}>
                 <NavLeftDropdownCategory text={'Manage Records'} />
                 <NavLeftDropdownButton to={'admin/activities'} text={'Manage Activities'} />
               </NavLeftButton>
@@ -142,10 +142,10 @@ function NavBarCenter({ user }) {
             <NavCenterButton to={'/'} text={'Home'} />
             <NavCenterButton to={'blogs'} text={'Blogs'} />
             <NavCenterButton to={'bookings'} text={'Bookings'} />
-            <NavCenterButton to={'admin'} text={'Admin'} hasDropdown={true}>
+            <NavCenterButton to={'admin/activities'} text={'Admin'} hasDropdown={true}>
               <NavCenterDropdownCategory text={'Manage Records'} />
-              <NavCenterDropdownButton to={'admin/blogs'} text={'Manage Blogs'} />
               <NavCenterDropdownButton to={'admin/activities'} text={'Manage Activities'} />
+              <NavCenterDropdownButton to={'admin/blogs'} text={'Manage Blogs'} />
             </NavCenterButton>
           </>
         ) : user?.role === 'Trainer' ? (
@@ -153,7 +153,7 @@ function NavBarCenter({ user }) {
             <NavCenterButton to={'/'} text={'Home'} />
             <NavCenterButton to={'blogs'} text={'Blogs'} />
             <NavCenterButton to={'bookings'} text={'Bookings'} />
-            <NavCenterButton to={'admin'} text={'Manage'} hasDropdown={true}>
+            <NavCenterButton to={'admin/activities'} text={'Manage'} hasDropdown={true}>
               <NavCenterDropdownCategory text={'Manage Records'} />
               <NavCenterDropdownButton to={'admin/activities'} text={'Manage Activities'} />
             </NavCenterButton>

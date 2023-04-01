@@ -1,5 +1,6 @@
 import ErrorInfoRefresh from '../components/ErrorInfoRefresh';
 import ErrorInfoBack from '../components/ErrorInfoBack';
+import RequireAuth from '../components/RequireAuth';
 
 const adminRoutes = [
   {
@@ -9,61 +10,6 @@ const adminRoutes = [
       return { Component: AdminIndex };
     },
     ErrorBoundary: ErrorInfoBack,
-    // [ ] Backend schema for activities and blogs
-  },
-  {
-    path: 'blogs',
-    async lazy() {
-      let { AdminMngBlogs } = await import('../components/Panels/AdminMngBlogs');
-      return { Component: AdminMngBlogs };
-    },
-    ErrorBoundary: ErrorInfoBack,
-    async loader() {
-      let { getAllBlogs } = await import('../services/blogs.js');
-      return getAllBlogs();
-    },
-    children: [
-      {
-        index: true,
-        async lazy() {
-          let { AdminNewBlog } = await import('../components/Panels/AdminMngBlogs');
-          return { Component: AdminNewBlog };
-        },
-        ErrorBoundary: ErrorInfoBack,
-      },
-      {
-        path: 'new',
-        ErrorBoundary: ErrorInfoBack,
-        async action() {
-          let { createBlog } = await import('../services/blogs');
-          return createBlog();
-        },
-      },
-      {
-        path: 'id/:id/edit',
-        async lazy() {
-          let { AdminEditBlog } = await import('../components/Panels/AdminMngBlogs');
-          return { Component: AdminEditBlog };
-        },
-        ErrorBoundary: ErrorInfoRefresh,
-        async loader({ params }) {
-          let { getBlogById } = await import('../services/blogs');
-          return getBlogById({ params });
-        },
-        async action({ params, request }) {
-          let { updateBlogById } = await import('../services/blogs');
-          return updateBlogById({ params, request });
-        },
-      },
-      {
-        path: 'id/:id/destroy',
-        ErrorBoundary: ErrorInfoBack,
-        async action({ params }) {
-          let { deleteBlogById } = await import('../services/blogs');
-          return deleteBlogById({ params });
-        },
-      },
-    ],
   },
   {
     path: 'activities',
@@ -116,6 +62,66 @@ const adminRoutes = [
           let { deleteActivityById } = await import('../services/activities');
           return deleteActivityById({ params });
         },
+      },
+    ],
+  },
+  {
+    Component: () => <RequireAuth roles={['Admin']} />,
+    ErrorBoundary: ErrorInfoBack,
+    children: [
+      {
+        path: 'blogs',
+        async lazy() {
+          let { AdminMngBlogs } = await import('../components/Panels/AdminMngBlogs');
+          return { Component: AdminMngBlogs };
+        },
+        ErrorBoundary: ErrorInfoBack,
+        async loader() {
+          let { getAllBlogs } = await import('../services/blogs.js');
+          return getAllBlogs();
+        },
+        children: [
+          {
+            index: true,
+            async lazy() {
+              let { AdminNewBlog } = await import('../components/Panels/AdminMngBlogs');
+              return { Component: AdminNewBlog };
+            },
+            ErrorBoundary: ErrorInfoBack,
+          },
+          {
+            path: 'new',
+            ErrorBoundary: ErrorInfoBack,
+            async action() {
+              let { createBlog } = await import('../services/blogs');
+              return createBlog();
+            },
+          },
+          {
+            path: 'id/:id/edit',
+            async lazy() {
+              let { AdminEditBlog } = await import('../components/Panels/AdminMngBlogs');
+              return { Component: AdminEditBlog };
+            },
+            ErrorBoundary: ErrorInfoRefresh,
+            async loader({ params }) {
+              let { getBlogById } = await import('../services/blogs');
+              return getBlogById({ params });
+            },
+            async action({ params, request }) {
+              let { updateBlogById } = await import('../services/blogs');
+              return updateBlogById({ params, request });
+            },
+          },
+          {
+            path: 'id/:id/destroy',
+            ErrorBoundary: ErrorInfoBack,
+            async action({ params }) {
+              let { deleteBlogById } = await import('../services/blogs');
+              return deleteBlogById({ params });
+            },
+          },
+        ],
       },
     ],
   },

@@ -1,5 +1,6 @@
 import { createBrowserRouter, Link } from 'react-router-dom';
 import ErrorInfoBack from '../components/ErrorInfoBack';
+import RequireAuth from '../components/RequireAuth';
 import Home from '../pages/Home';
 import PageLayout from '../pages/PageLayout';
 import Login from '../pages/Login';
@@ -35,23 +36,47 @@ const router = createBrowserRouter([
         handle: { crumb: () => <Link to='/bookings'>Calendar</Link> },
         children: [...bookingsRoutes],
       },
+    ],
+  },
+  {
+    Component: () => <RequireAuth roles={['Admin', 'Trainer', 'Member']} />,
+    ErrorBoundary: ErrorInfoBack,
+    children: [
       {
-        path: 'profile',
-        async lazy() {
-          let { default: Profile } = await import('../pages/Profile');
-          return { Component: Profile };
-        },
+        Component: PageLayout,
         ErrorBoundary: ErrorInfoBack,
-        children: [...profileRoutes],
+        children: [
+          {
+            path: 'profile',
+            async lazy() {
+              let { default: Profile } = await import('../pages/Profile');
+              return { Component: Profile };
+            },
+            ErrorBoundary: ErrorInfoBack,
+            children: [...profileRoutes],
+          },
+        ],
       },
+    ],
+  },
+  {
+    Component: () => <RequireAuth roles={['Admin', 'Trainer']} />,
+    ErrorBoundary: ErrorInfoBack,
+    children: [
       {
-        path: 'admin',
-        async lazy() {
-          let { default: Admin } = await import('../pages/Admin');
-          return { Component: Admin };
-        },
+        Component: PageLayout,
         ErrorBoundary: ErrorInfoBack,
-        children: [...adminRoutes],
+        children: [
+          {
+            path: 'admin',
+            async lazy() {
+              let { default: Admin } = await import('../pages/Admin');
+              return { Component: Admin };
+            },
+            ErrorBoundary: ErrorInfoBack,
+            children: [...adminRoutes],
+          },
+        ],
       },
     ],
   },
@@ -79,8 +104,8 @@ const router = createBrowserRouter([
   {
     path: '*',
     async lazy() {
-      let { NotFoundView } = await import('../components/NotFound');
-      return { Component: NotFoundView };
+      let { default: NotFound } = await import('../components/NotFound');
+      return { Component: NotFound };
     },
   },
 ]);

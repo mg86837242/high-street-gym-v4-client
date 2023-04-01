@@ -37,6 +37,21 @@ function LeftSidePanel() {
       </div>
       <nav>
         <ul className='flex flex-col'>
+          <li>
+            <NavLink
+              to='activities'
+              className={({ isActive }) =>
+                `flex items-center justify-start w-full h-full gap-2 px-2 font-normal btn btn-sm btn-ghost py-1.5 ${
+                  isActive && 'btn-active'
+                }`
+              }
+            >
+              <span>
+                <FontAwesomeIcon icon={faPersonRunning} className='w-4 h-4' />
+              </span>
+              <span className='flex items-center justify-start text-sm'>Manage Activities</span>
+            </NavLink>
+          </li>
           {authenticatedUser?.role === 'Admin' && (
             <li>
               <NavLink
@@ -54,21 +69,6 @@ function LeftSidePanel() {
               </NavLink>
             </li>
           )}
-          <li>
-            <NavLink
-              to='activities'
-              className={({ isActive }) =>
-                `flex items-center justify-start w-full h-full gap-2 px-2 font-normal btn btn-sm btn-ghost py-1.5 ${
-                  isActive && 'btn-active'
-                }`
-              }
-            >
-              <span>
-                <FontAwesomeIcon icon={faPersonRunning} className='w-4 h-4' />
-              </span>
-              <span className='flex items-center justify-start text-sm'>Manage Activities</span>
-            </NavLink>
-          </li>
         </ul>
       </nav>
     </div>
@@ -76,13 +76,5 @@ function LeftSidePanel() {
 }
 
 export function AdminIndex() {
-  const { authenticatedUser } = useContext(AuthContext);
-
-  return authenticatedUser?.role === 'Admin' ? (
-    <Navigate to='blogs' replace />
-  ) : authenticatedUser?.role === 'Trainer' ? (
-    <Navigate to='activities' replace />
-  ) : (
-    <Navigate to='/' replace />
-  );
+  return <Navigate to='activities' replace />;
 }

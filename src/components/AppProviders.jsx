@@ -4,10 +4,6 @@ import router from '../routes/router';
 import { RouterProvider } from 'react-router-dom';
 import { getUserByKey, login, logout } from '../services/logins';
 
-// NB For usage of `navigate` outside of `<RouterProvider>`, see:
-// -- https://stackoverflow.com/questions/69871987/react-router-v6-navigate-outside-of-components
-// -- https://github.com/remix-run/react-router/issues/9422#issuecomment-1301182219
-// -- `createBrowserRouter` => `RemixRouter` => `Router` interface's `navigate` method
 export default function AppProviders() {
   const [authenticatedUser, setAuthenticatedUser] = useState(null);
   // This `useEffect`'s job is to synchronize with API by using an access key stored in the `localStorage` as a ref in
@@ -51,7 +47,7 @@ export default function AppProviders() {
           return typeof loginJSON.message === 'string' ? loginJSON.message : 'Invalid request to server';
         }
         try {
-          // Set key in `localStorage` – persistent storage in case page is reloaded
+          // Set key in `localStorage` – persistent storage in case page is reloaded, etc.
           localStorage.setItem('accessKey', loginJSON.accessKey);
           // Fetch GET /users/by-key/:accessKey to attempt to get an obj called `user`
           const userJSON = await getUserByKey(loginJSON.accessKey);
@@ -110,9 +106,9 @@ export default function AppProviders() {
 }
 
 // References for `useContext`:
-// -- https://react.dev/reference/react/useContext#updating-data-passed-via-context: Official recommended way
-//  of (1) how to extract multiple providers to a single component, and how to name this overarching component =>
-//  RELEVANT TO THIS PROJECT, and (2) how to create and use context
+// -- https://react.dev/reference/react/useContext#updating-data-passed-via-context: Official recommended way of (1)
+//  how to extract multiple providers to a single component => RELEVANT TO THIS PROJECT, and (2) how to create and
+//  use context
 // -- https://react.dev/reference/react/useContext#optimizing-re-renders-when-passing-objects-and-functions:
 //  Official recommended way of (1) how to provide obj and functions (custom Hook) as the context with caching
 //  techniques, (2) how to name context value => BOTH ARE RELEVANT TO THIS PROJECT
@@ -128,6 +124,10 @@ export default function AppProviders() {
 // -- https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers: Interactions within
 // `localStorage` within login/logout event handlers do not require `useEffect`
 
+// References for usage of `navigate` outside of `<RouterProvider>`:
+// -- https://stackoverflow.com/questions/69871987/react-router-v6-navigate-outside-of-components
+// -- https://github.com/remix-run/react-router/issues/9422#issuecomment-1301182219
+// -- `createBrowserRouter` => `RemixRouter` => `Router` interface's `navigate` method
 // TODO (1) Integrate Supabase; (2) when receiving the `user` obj from the Supabase db, a fetch request will be
 //  made to perform CRUD operations with `Members` or `Trainers` or `Admins` table within the backend db, i.e.,
 //  synchronizing the Supabase db with the MySQL db

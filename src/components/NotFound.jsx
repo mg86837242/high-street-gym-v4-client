@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import NavBarMinimal from './NavBarMinimal';
 
-export function NotFoundView() {
+export default function NotFound() {
   const navigate = useNavigate();
 
   return (
@@ -27,16 +27,5 @@ export function NotFoundView() {
   );
 }
 
-export function NotFoundRedirect() {
-  return <Navigate to='/' replace />;
-}
-
-// References for role-based routing in RRD 6.4+:
-// -- https://stackoverflow.com/questions/72090838/how-to-do-non-existent-routes-redirect-to-homepage-in-react-router-dom: Redirect and 404 method
-// -- https://stackoverflow.com/questions/70743498/role-based-react-router: Custom Hook and wrapper component method
-// -- https://codesandbox.io/s/5d40ro: Another alternative solution, which looks very anti-pattern, see Discord comments
-// -- https://github.com/remix-run/react-router/discussions/9564: The Official proposal of middleware feature to help
-//  pass ctx to the loader
-// -- Discord: "I would create a single route with all router, then in the loader of the routes I would check the role
-//  of the user and if it doesn’t have access I would either render a 404 (to hide the existence of the route) or
-//  redirect (if the user can know that exists but it doesn’t have access)", by Sergio
+// References:
+// -- https://stackoverflow.com/questions/72090838: Redirect and 404 method

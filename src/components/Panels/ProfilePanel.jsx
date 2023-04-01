@@ -58,7 +58,5 @@ function LeftSidePanel() {
 }
 
 export function ProfileIndex() {
-  const { authenticatedUser } = useContext(AuthContext);
-
-  return authenticatedUser?.role ? <Navigate to='account' replace /> : <Navigate to='/' replace />;
+  return <Navigate to='account' replace />;
 }
