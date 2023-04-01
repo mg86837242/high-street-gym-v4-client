@@ -1,4 +1,4 @@
-import { createBrowserRouter, Link, Navigate } from 'react-router-dom';
+import { createBrowserRouter, Link } from 'react-router-dom';
 import ErrorInfoBack from '../components/ErrorInfoBack';
 import Home from '../pages/Home';
 import PageLayout from '../pages/PageLayout';

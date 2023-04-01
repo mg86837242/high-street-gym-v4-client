@@ -223,6 +223,5 @@ export default function ProfileEditAccount() {
     </div>
   ) : (
     <SpinnerNotNav />
-    // ??? [Not that important] Skeleton doesn't work here
   );
 }
