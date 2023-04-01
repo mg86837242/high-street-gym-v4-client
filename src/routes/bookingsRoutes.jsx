@@ -13,7 +13,7 @@ const bookingsRoutes = [
     },
     ErrorBoundary: ErrorInfoBack,
     async loader({ params }) {
-      let { getBookingsByDate } = await import('../services/bookings');
+      let { getBookingsByDate } = await import('../api/bookings');
       return getBookingsByDate({ params });
     },
     handle: {
@@ -42,7 +42,7 @@ const bookingsRoutes = [
         },
         ErrorBoundary: ErrorInfoBack,
         async loader({ params }) {
-          let { getBookingById } = await import('../services/bookings');
+          let { getBookingById } = await import('../api/bookings');
           return getBookingById({ params });
         },
         handle: {
@@ -62,11 +62,11 @@ const bookingsRoutes = [
         },
         ErrorBoundary: ErrorInfoBack,
         async loader({ params }) {
-          let { getBookingAndOptionsById } = await import('../services/bookings');
+          let { getBookingAndOptionsById } = await import('../api/bookings');
           return getBookingAndOptionsById({ params });
         },
         async action({ params, request }) {
-          let { updateBookingById } = await import('../services/bookings');
+          let { updateBookingById } = await import('../api/bookings');
           return updateBookingById({ params, request });
         },
         handle: {
@@ -82,7 +82,7 @@ const bookingsRoutes = [
         path: 'id/:id/destroy',
         ErrorBoundary: ErrorInfoBack,
         async action({ params }) {
-          let { deleteBookingById } = await import('../services/bookings');
+          let { deleteBookingById } = await import('../api/bookings');
           return deleteBookingById({ params });
         },
       },
@@ -96,11 +96,11 @@ const bookingsRoutes = [
     },
     ErrorBoundary: ErrorInfoBack,
     async loader() {
-      let { getAllBookingOptions } = await import('../services/bookings');
+      let { getAllBookingOptions } = await import('../api/bookings');
       return getAllBookingOptions();
     },
     async action({ request }) {
-      let { createBooking } = await import('../services/bookings');
+      let { createBooking } = await import('../api/bookings');
       return createBooking({ request });
     },
     handle: { crumb: () => <Link to='/bookings/new'>New Booking</Link> },

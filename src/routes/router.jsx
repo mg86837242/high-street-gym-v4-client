@@ -78,11 +78,11 @@ const router = createBrowserRouter([
     },
     ErrorBoundary: ErrorInfoBack,
     async loader() {
-      let { getAllEmails } = await import('../services/logins');
+      let { getAllEmails } = await import('../api/logins');
       return getAllEmails();
     },
     async action({ request }) {
-      let { signupMembers } = await import('../services/members');
+      let { signupMembers } = await import('../api/members');
       return signupMembers({ request });
     },
   },

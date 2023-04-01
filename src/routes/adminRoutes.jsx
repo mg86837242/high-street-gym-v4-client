@@ -19,7 +19,7 @@ const adminRoutes = [
     },
     ErrorBoundary: ErrorInfoBack,
     async loader() {
-      let { getAllActivities } = await import('../services/activities');
+      let { getAllActivities } = await import('../api/activities');
       return getAllActivities();
     },
     children: [
@@ -35,7 +35,7 @@ const adminRoutes = [
         path: 'new',
         ErrorBoundary: ErrorInfoBack,
         async action() {
-          let { createActivity } = await import('../services/activities');
+          let { createActivity } = await import('../api/activities');
           return createActivity();
         },
       },
@@ -47,11 +47,11 @@ const adminRoutes = [
         },
         ErrorBoundary: ErrorInfoRefresh,
         async loader({ params }) {
-          let { getActivityById } = await import('../services/activities');
+          let { getActivityById } = await import('../api/activities');
           return getActivityById({ params });
         },
         async action({ params, request }) {
-          let { updateActivityById } = await import('../services/activities');
+          let { updateActivityById } = await import('../api/activities');
           return updateActivityById({ params, request });
         },
       },
@@ -59,7 +59,7 @@ const adminRoutes = [
         path: 'id/:id/destroy',
         ErrorBoundary: ErrorInfoBack,
         async action({ params }) {
-          let { deleteActivityById } = await import('../services/activities');
+          let { deleteActivityById } = await import('../api/activities');
           return deleteActivityById({ params });
         },
       },
@@ -76,7 +76,7 @@ const adminRoutes = [
         },
         ErrorBoundary: ErrorInfoBack,
         async loader() {
-          let { getAllBlogs } = await import('../services/blogs.js');
+          let { getAllBlogs } = await import('../api/blogs.js');
           return getAllBlogs();
         },
         children: [
@@ -92,7 +92,7 @@ const adminRoutes = [
             path: 'new',
             ErrorBoundary: ErrorInfoBack,
             async action() {
-              let { createBlog } = await import('../services/blogs');
+              let { createBlog } = await import('../api/blogs');
               return createBlog();
             },
           },
@@ -104,11 +104,11 @@ const adminRoutes = [
             },
             ErrorBoundary: ErrorInfoRefresh,
             async loader({ params }) {
-              let { getBlogById } = await import('../services/blogs');
+              let { getBlogById } = await import('../api/blogs');
               return getBlogById({ params });
             },
             async action({ params, request }) {
-              let { updateBlogById } = await import('../services/blogs');
+              let { updateBlogById } = await import('../api/blogs');
               return updateBlogById({ params, request });
             },
           },
@@ -116,7 +116,7 @@ const adminRoutes = [
             path: 'id/:id/destroy',
             ErrorBoundary: ErrorInfoBack,
             async action({ params }) {
-              let { deleteBlogById } = await import('../services/blogs');
+              let { deleteBlogById } = await import('../api/blogs');
               return deleteBlogById({ params });
             },
           },
