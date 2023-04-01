@@ -1,5 +1,5 @@
 import MainWrapper from '../components/MainWrapper';
-import { AdminPanel } from '../components/Panels/AdminPanel';
+import { AdminPanel } from '../components/Panel/AdminPanel';
 
 export default function Admin() {
   return (

@@ -1,6 +1,6 @@
-import Canvas from '../components/Panels/Canvas';
+import Canvas from '../components/Panel/Canvas';
 import NavBarMinimal from '../components/NavBarMinimal';
-import LoginPanel from '../components/Panels/LoginPanel';
+import LoginPanel from '../components/Panel/LoginPanel';
 
 export default function Login() {
   return (

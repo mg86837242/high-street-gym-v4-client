@@ -5,14 +5,14 @@ const profileRoutes = [
   {
     index: true,
     async lazy() {
-      let { ProfileIndex } = await import('../components/Panels/ProfilePanel');
+      let { ProfileIndex } = await import('../components/Panel/ProfilePanel');
       return { Component: ProfileIndex };
     },
   },
   {
     path: 'account',
     async lazy() {
-      let { default: ProfileEditAccount } = await import('../components/Panels/ProfileEditAccount');
+      let { default: ProfileEditAccount } = await import('../components/Panel/ProfileEditAccount');
       return { Component: ProfileEditAccount };
     },
     ErrorBoundary: ErrorInfoRefresh,
