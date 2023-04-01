@@ -14,7 +14,7 @@ export default function LoginPanel() {
   return (
     <div
       id='login-panel-wrapper'
-      className='flex flex-col w-full max-w-lg gap-8 px-10 pt-12 pb-8 my-auto bg-neutral rounded-xl shadow-[0_0_30px_15px_rgba(255,255,255,0.2)]'
+      className='flex flex-col w-full max-w-lg gap-8 px-10 pt-12 pb-8 my-auto bg-neutral rounded-3xl shadow-[0_0_30px_15px_rgba(255,255,255,0.2)]'
     >
       {authenticatedUser ? (
         <Greetings />

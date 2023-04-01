@@ -9,7 +9,7 @@ export default function SignupPanel({ emails }) {
   return (
     <div
       id='signup-panel-wrapper'
-      className='flex flex-col w-full max-w-lg md:max-w-2xl gap-6 px-10 pt-12 pb-8 my-auto bg-neutral rounded-xl shadow-[0_0_30px_15px_rgba(255,255,255,0.2)]'
+      className='flex flex-col w-full max-w-lg md:max-w-2xl gap-6 px-10 pt-12 pb-8 my-auto bg-neutral rounded-3xl shadow-[0_0_30px_15px_rgba(255,255,255,0.2)]'
     >
       <Directions />
       <SignupForm emails={emails} />
