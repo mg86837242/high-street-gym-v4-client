@@ -67,7 +67,6 @@ const adminRoutes = [
   },
   {
     Component: () => <RequireAuth roles={['Admin']} />,
-    ErrorBoundary: ErrorInfoBack,
     children: [
       {
         path: 'blogs',

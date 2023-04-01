@@ -16,7 +16,6 @@ const router = createBrowserRouter([
   },
   {
     Component: PageLayout,
-    ErrorBoundary: ErrorInfoBack,
     children: [
       {
         path: 'blogs',
@@ -38,7 +37,6 @@ const router = createBrowserRouter([
       },
       {
         Component: () => <RequireAuth roles={['Admin', 'Trainer', 'Member']} />,
-        ErrorBoundary: ErrorInfoBack,
         children: [
           {
             path: 'profile',
@@ -53,7 +51,6 @@ const router = createBrowserRouter([
       },
       {
         Component: () => <RequireAuth roles={['Admin', 'Trainer']} />,
-        ErrorBoundary: ErrorInfoBack,
         children: [
           {
             path: 'admin',
