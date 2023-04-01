@@ -20,11 +20,7 @@ export default function Carousel() {
         {carouselItems.map(
           ({ activityName }, i) =>
             i > 3 && (
-              <button
-                key={i}
-                onClick={() => scrollToIndex(i - 4)}
-                className='btn btn-secondary normal-case shadow shadow-black/50'
-              >
+              <button key={i} onClick={() => scrollToIndex(i - 4)} className='btn btn-secondary shadow shadow-black/50'>
                 {activityName.replace('-', ' ')}
               </button>
             )

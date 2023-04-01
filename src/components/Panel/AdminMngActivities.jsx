@@ -37,7 +37,7 @@ function AdminListActivities({ activities }) {
               {Object.values(a).map((val, j) => j > 0 && <td key={10 * i + j}>{val}</td>)}
               <td>
                 <Form action={`id/${a.id}/edit`}>
-                  <button className='normal-case shadow btn btn-outline btn-primary btn-xs text-primary-content shadow-black/50'>
+                  <button className='shadow btn btn-outline btn-primary btn-xs text-primary-content shadow-black/50'>
                     Edit
                   </button>
                 </Form>
@@ -52,10 +52,7 @@ function AdminListActivities({ activities }) {
                     }
                   }}
                 >
-                  <button
-                    type='submit'
-                    className='normal-case shadow btn btn-outline btn-xs text-accent-content shadow-black/50'
-                  >
+                  <button type='submit' className='shadow btn btn-outline btn-xs text-accent-content shadow-black/50'>
                     Delete
                   </button>
                 </Form>

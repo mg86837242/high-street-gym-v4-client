@@ -221,12 +221,12 @@ function NavBarRight({ user, handleLogout }) {
         <>
           <Link
             to='profile/account'
-            className='normal-case shadow btn bg-gradient-to-r from-secondary to-primary shadow-black/50 text-primary-content'
+            className='shadow btn bg-gradient-to-r from-secondary to-primary shadow-black/50 text-primary-content'
           >
             Profile
           </Link>
           <button
-            className='normal-case shadow btn glass bg-base-100 shadow-black/50 text-primary-content'
+            className='shadow btn glass bg-base-100 shadow-black/50 text-primary-content'
             onClick={() => {
               handleLogout();
               navigate('/');
@@ -239,13 +239,13 @@ function NavBarRight({ user, handleLogout }) {
         <>
           <Link
             to='login'
-            className='normal-case shadow btn bg-gradient-to-r from-secondary to-primary shadow-black/50 text-primary-content'
+            className='shadow btn bg-gradient-to-r from-secondary to-primary shadow-black/50 text-primary-content'
           >
             Login
           </Link>
           <Link
             to='signup'
-            className='normal-case shadow btn bg-gradient-to-r from-secondary to-primary shadow-black/50 text-primary-content'
+            className='shadow btn bg-gradient-to-r from-secondary to-primary shadow-black/50 text-primary-content'
           >
             Signup
           </Link>

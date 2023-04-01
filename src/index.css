@@ -41,7 +41,10 @@ p {
   @apply text-sm;
 }
 
-/* Basic editor styles, see: https://tiptap.dev/installation/react */
+/* 2. Tailwind Components Layer */
+@tailwind components;
+
+/* 2.2 Tiptap, see: https://tiptap.dev/installation/react */
 .ProseMirror > * + * {
   margin-top: 0.75em;
 }
@@ -96,9 +99,6 @@ p {
   margin: 2rem 0;
 }
 
-/* 2. Tailwind Components Layer */
-@tailwind components;
-
 /* 3. Tailwind Utilities Layer */
 @tailwind utilities;
 /* 3.1 Based on experimentation, theme defined in `tailwind.config.cjs` has LOWER precedence than what's defined in */
@@ -107,9 +107,8 @@ p {
     font-family: Arial;
 } */
 
-/* 2.1 Customize or override daisyUI components, see: https://github.com/saadeghi/daisyui/discussions/893 */
 @layer components {
-  /* PS `text-transform` is already removed in button components in the `UI` folder */
+  /* 2.1 Customize or override daisyUI components, see: https://github.com/saadeghi/daisyui/discussions/893 */
   .btn {
     text-transform: none;
   }
@@ -122,8 +121,8 @@ p {
   }
 }
 
-/* 2.2 CSS animations */
-@layer components {
+/* 3.1 CSS animations */
+@layer utilities {
   .animate {
     animation-duration: 0.5s;
     animation-name: animate-fade;

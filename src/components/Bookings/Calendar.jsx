@@ -134,7 +134,7 @@ function CalendarWrapper({ children, authenticatedUser }) {
 function CreateNewBooking() {
   return (
     <section className='flex justify-center gap-5 text-center'>
-      <Link to='new' className='w-48 min-h-0 normal-case shadow btn btn-primary text-primary-content shadow-black/50'>
+      <Link to='new' className='w-48 min-h-0 shadow btn btn-primary text-primary-content shadow-black/50'>
         Create New Booking
       </Link>
     </section>

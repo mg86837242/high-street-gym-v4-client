@@ -166,7 +166,7 @@ export default function New() {
           <div className='flex justify-between gap-5 text-center'>
             <button
               type='submit'
-              className='h-10 min-h-0 normal-case shadow btn btn-secondary text-primary-content shadow-black/50 w-36 lg:w-[6.5rem] xl:w-36'
+              className='h-10 min-h-0 shadow btn btn-secondary text-primary-content shadow-black/50 w-36 lg:w-[6.5rem] xl:w-36'
             >
               Submit
             </button>
@@ -175,7 +175,7 @@ export default function New() {
               onClick={() => {
                 navigate(-1);
               }}
-              className='h-10 min-h-0 normal-case shadow btn glass bg-base-100 text-accent-content shadow-black/50 w-36 lg:w-[6.5rem] xl:w-36'
+              className='h-10 min-h-0 shadow btn glass bg-base-100 text-accent-content shadow-black/50 w-36 lg:w-[6.5rem] xl:w-36'
             >
               Cancel
             </button>

@@ -46,7 +46,7 @@ function AdminListBlogs({ blogs }) {
               <td>{updatedAt}</td>
               <td>
                 <Form action={`id/${id}/edit`}>
-                  <button className='normal-case shadow btn btn-outline btn-primary btn-xs text-primary-content shadow-black/50'>
+                  <button className='shadow btn btn-outline btn-primary btn-xs text-primary-content shadow-black/50'>
                     Edit
                   </button>
                 </Form>
@@ -61,10 +61,7 @@ function AdminListBlogs({ blogs }) {
                     }
                   }}
                 >
-                  <button
-                    type='submit'
-                    className='normal-case shadow btn btn-outline btn-xs text-accent-content shadow-black/50'
-                  >
+                  <button type='submit' className='shadow btn btn-outline btn-xs text-accent-content shadow-black/50'>
                     Delete
                   </button>
                 </Form>

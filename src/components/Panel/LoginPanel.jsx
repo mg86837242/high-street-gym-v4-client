@@ -205,7 +205,7 @@ function DemoLogins() {
             .then(() => navigate('/'))
             .catch(() => navigate('/login'))
         }
-        className={`flex-shrink normal-case shadow btn btn-outline btn-success btn-sm text-primary-content shadow-black/50`}
+        className={`flex-shrink shadow btn btn-outline btn-success btn-sm text-primary-content shadow-black/50`}
       >
         Demo Member Login
       </button>
@@ -215,7 +215,7 @@ function DemoLogins() {
             .then(() => navigate('/'))
             .catch(() => navigate('/login'))
         }
-        className={`flex-shrink normal-case shadow btn btn-outline btn-warning btn-sm text-primary-content shadow-black/50`}
+        className={`flex-shrink shadow btn btn-outline btn-warning btn-sm text-primary-content shadow-black/50`}
       >
         Demo Trainer Login
       </button>
@@ -225,7 +225,7 @@ function DemoLogins() {
             .then(() => navigate('/'))
             .catch(() => navigate('/login'))
         }
-        className={`flex-shrink normal-case shadow btn btn-outline btn-error btn-sm text-primary-content shadow-black/50`}
+        className={`flex-shrink shadow btn btn-outline btn-error btn-sm text-primary-content shadow-black/50`}
       >
         Demo Admin Login
       </button>
