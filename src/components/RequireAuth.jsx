@@ -10,8 +10,6 @@ export default function RequireAuth({ roles }) {
   return canAccess ? <Outlet /> : <Navigate to='/404' state={{ from: location }} />;
 }
 
-// FIX This doesn't work if the user is not logged in at all, there must be some cond that has been written before to check if the user is logged in or not and redirect the unauthenticated user
-
 // References for role-base routing in RRD 6.4+:
 // (1) Wrapper method (emulating protected/private routes):
 // -- https://stackoverflow.com/questions/70564888: simple ver

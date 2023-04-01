@@ -36,14 +36,8 @@ const router = createBrowserRouter([
         handle: { crumb: () => <Link to='/bookings'>Calendar</Link> },
         children: [...bookingsRoutes],
       },
-    ],
-  },
-  {
-    Component: () => <RequireAuth roles={['Admin', 'Trainer', 'Member']} />,
-    ErrorBoundary: ErrorInfoBack,
-    children: [
       {
-        Component: PageLayout,
+        Component: () => <RequireAuth roles={['Admin', 'Trainer', 'Member']} />,
         ErrorBoundary: ErrorInfoBack,
         children: [
           {
@@ -57,14 +51,8 @@ const router = createBrowserRouter([
           },
         ],
       },
-    ],
-  },
-  {
-    Component: () => <RequireAuth roles={['Admin', 'Trainer']} />,
-    ErrorBoundary: ErrorInfoBack,
-    children: [
       {
-        Component: PageLayout,
+        Component: () => <RequireAuth roles={['Admin', 'Trainer']} />,
         ErrorBoundary: ErrorInfoBack,
         children: [
           {

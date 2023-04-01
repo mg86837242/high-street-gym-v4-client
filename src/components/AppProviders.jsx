@@ -16,7 +16,6 @@ export default function AppProviders() {
     const accessKey = localStorage.getItem('accessKey');
     if (!accessKey) {
       console.log('🔃 Effect runs - key removed or missing from local storage, exit');
-      router.navigate('/');
       return;
     }
     let ignore = false;
