@@ -1,5 +1,5 @@
 import { useLoaderData, Form } from 'react-router-dom';
-import { monthNames, getOrdinal } from '../../utils/mapDates';
+import { getDateNotation } from '../../utils/mapDates';
 
 export default function Details() {
   const {
@@ -42,10 +42,7 @@ export default function Details() {
           <p className='px-1 bg-base-100 py-0.5 3xl:py-1'>Booking ID: </p>
           <p className='px-1 bg-base-100 py-0.5 3xl:py-1'>{id}</p>
           <p className='px-1 py-0.5 3xl:py-1'>Date:</p>
-          <p className='px-1 py-0.5 3xl:py-1'>
-            {dateTime.slice(8, 9) === '0' ? dateTime.slice(9, 10) : dateTime.slice(8, 10)}
-            {getOrdinal(dateTime.slice(8, 10))} {monthNames[Number(dateTime.slice(5, 7))]} {dateTime.slice(0, 4)}
-          </p>
+          <p className='px-1 py-0.5 3xl:py-1'>{getDateNotation(dateTime)}</p>
           <p className='px-1 bg-base-100 py-0.5 3xl:py-1'>Time:</p>
           <p className='px-1 bg-base-100 py-0.5 3xl:py-1'>{dateTime.slice(-8)}</p>
           <p className='px-1 py-0.5 3xl:py-1'>Activity:</p>

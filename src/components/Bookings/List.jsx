@@ -1,7 +1,7 @@
 import { useContext, useMemo, useState } from 'react';
 import AuthContext from '../../contexts/AuthContext';
 import { useLoaderData, NavLink, Outlet } from 'react-router-dom';
-import { monthNames, getOrdinal } from '../../utils/mapDates';
+import { getDateNotation } from '../../utils/mapDates';
 
 export default function List() {
   const { authenticatedUser } = useContext(AuthContext);
@@ -72,11 +72,7 @@ function BookingListMemberView({ bookings, userMemberId }) {
                     <p className='p-1 bg-base-100'>Activity:</p>
                     <p className='p-1 bg-base-100'>{activityName}</p>
                     <p className='p-1'>Date:</p>
-                    <p className='p-1'>
-                      {dateTime.slice(8, 9) === '0' ? dateTime.slice(9, 10) : dateTime.slice(8, 10)}
-                      {getOrdinal(dateTime.slice(8, 10))} {monthNames[Number(dateTime.slice(5, 7))]}{' '}
-                      {dateTime.slice(0, 4)}
-                    </p>
+                    <p className='p-1'>{getDateNotation(dateTime)}</p>
                     <p className='p-1 bg-base-100'>Time:</p>
                     <p className='p-1 bg-base-100'>{dateTime.slice(-8)}</p>
                     <p className='p-1'>Duration:</p>
@@ -99,11 +95,7 @@ function BookingListMemberView({ bookings, userMemberId }) {
                     <p className='p-1 bg-base-100'>Activity:</p>
                     <p className='p-1 bg-base-100'>{activityName}</p>
                     <p className='p-1'>Date:</p>
-                    <p className='p-1'>
-                      {dateTime.slice(8, 9) === '0' ? dateTime.slice(9, 10) : dateTime.slice(8, 10)}
-                      {getOrdinal(dateTime.slice(8, 10))} {monthNames[Number(dateTime.slice(5, 7))]}{' '}
-                      {dateTime.slice(0, 4)}
-                    </p>
+                    <p className='p-1'>{getDateNotation(dateTime)}</p>
                     <p className='p-1 bg-base-100'>Time:</p>
                     <p className='p-1 bg-base-100'>{dateTime.slice(-8)}</p>
                     <p className='p-1'>Duration:</p>
@@ -160,11 +152,7 @@ function BookingListMemberView({ bookings, userMemberId }) {
                   <p className='p-1 bg-base-100'>Activity:</p>
                   <p className='p-1 bg-base-100'>{activityName}</p>
                   <p className='p-1'>Date:</p>
-                  <p className='p-1'>
-                    {dateTime.slice(8, 9) === '0' ? dateTime.slice(9, 10) : dateTime.slice(8, 10)}
-                    {getOrdinal(dateTime.slice(8, 10))} {monthNames[Number(dateTime.slice(5, 7))]}{' '}
-                    {dateTime.slice(0, 4)}
-                  </p>
+                  <p className='p-1'>{getDateNotation(dateTime)}</p>
                   <p className='p-1 bg-base-100'>Time:</p>
                   <p className='p-1 bg-base-100'>{dateTime.slice(-8)}</p>
                   <p className='p-1'>Duration:</p>
@@ -244,11 +232,7 @@ function BookingListTrainerView({ bookings, userTrainerId }) {
                     <p className='p-1 bg-base-100'>Activity:</p>
                     <p className='p-1 bg-base-100'>{activityName}</p>
                     <p className='p-1'>Date:</p>
-                    <p className='p-1'>
-                      {dateTime.slice(8, 9) === '0' ? dateTime.slice(9, 10) : dateTime.slice(8, 10)}
-                      {getOrdinal(dateTime.slice(8, 10))} {monthNames[Number(dateTime.slice(5, 7))]}{' '}
-                      {dateTime.slice(0, 4)}
-                    </p>
+                    <p className='p-1'>{getDateNotation(dateTime)}</p>
                     <p className='p-1 bg-base-100'>Time:</p>
                     <p className='p-1 bg-base-100'>{dateTime.slice(-8)}</p>
                     <p className='p-1'>Duration:</p>
@@ -271,11 +255,7 @@ function BookingListTrainerView({ bookings, userTrainerId }) {
                     <p className='p-1 bg-base-100'>Activity:</p>
                     <p className='p-1 bg-base-100'>{activityName}</p>
                     <p className='p-1'>Date:</p>
-                    <p className='p-1'>
-                      {dateTime.slice(8, 9) === '0' ? dateTime.slice(9, 10) : dateTime.slice(8, 10)}
-                      {getOrdinal(dateTime.slice(8, 10))} {monthNames[Number(dateTime.slice(5, 7))]}{' '}
-                      {dateTime.slice(0, 4)}
-                    </p>
+                    <p className='p-1'>{getDateNotation(dateTime)}</p>
                     <p className='p-1 bg-base-100'>Time:</p>
                     <p className='p-1 bg-base-100'>{dateTime.slice(-8)}</p>
                     <p className='p-1'>Duration:</p>
@@ -332,11 +312,7 @@ function BookingListTrainerView({ bookings, userTrainerId }) {
                   <p className='p-1 bg-base-100'>Activity:</p>
                   <p className='p-1 bg-base-100'>{activityName}</p>
                   <p className='p-1'>Date:</p>
-                  <p className='p-1'>
-                    {dateTime.slice(8, 9) === '0' ? dateTime.slice(9, 10) : dateTime.slice(8, 10)}
-                    {getOrdinal(dateTime.slice(8, 10))} {monthNames[Number(dateTime.slice(5, 7))]}{' '}
-                    {dateTime.slice(0, 4)}
-                  </p>
+                  <p className='p-1'>{getDateNotation(dateTime)}</p>
                   <p className='p-1 bg-base-100'>Time:</p>
                   <p className='p-1 bg-base-100'>{dateTime.slice(-8)}</p>
                   <p className='p-1'>Duration:</p>
@@ -412,10 +388,7 @@ function BookingListAdminView({ bookings }) {
                 <p className='p-1 bg-base-100'>Activity:</p>
                 <p className='p-1 bg-base-100'>{activityName}</p>
                 <p className='p-1'>Date:</p>
-                <p className='p-1'>
-                  {dateTime.slice(8, 9) === '0' ? dateTime.slice(9, 10) : dateTime.slice(8, 10)}
-                  {getOrdinal(dateTime.slice(8, 10))} {monthNames[Number(dateTime.slice(5, 7))]} {dateTime.slice(0, 4)}
-                </p>
+                <p className='p-1'>{getDateNotation(dateTime)}</p>
                 <p className='p-1 bg-base-100'>Time:</p>
                 <p className='p-1 bg-base-100'>{dateTime.slice(-8)}</p>
                 <p className='p-1'>Duration:</p>
@@ -494,10 +467,7 @@ function BookingListGuestView({ bookings }) {
                 <p className='p-1 bg-base-100'>Activity:</p>
                 <p className='p-1 bg-base-100'>{activityName}</p>
                 <p className='p-1'>Date:</p>
-                <p className='p-1'>
-                  {dateTime.slice(8, 9) === '0' ? dateTime.slice(9, 10) : dateTime.slice(8, 10)}
-                  {getOrdinal(dateTime.slice(8, 10))} {monthNames[Number(dateTime.slice(5, 7))]} {dateTime.slice(0, 4)}
-                </p>
+                <p className='p-1'>{getDateNotation(dateTime)}</p>
                 <p className='p-1 bg-base-100'>Time:</p>
                 <p className='p-1 bg-base-100'>{dateTime.slice(-8)}</p>
                 <p className='p-1'>Duration:</p>
