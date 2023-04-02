@@ -1,10 +1,14 @@
 import { Link } from 'react-router-dom';
 import ErrorInfoBack from '../components/ErrorInfoBack';
-import ListIndex from '../components/Bookings/ListIndex';
-import DetailsIndex from '../components/Bookings/DetailsIndex';
 
 const bookingsRoutes = [
-  { index: true, Component: ListIndex },
+  {
+    index: true,
+    async lazy() {
+      let { default: ListIndex } = await import('../components/Bookings/ListIndex');
+      return { Component: ListIndex };
+    },
+  },
   {
     path: ':date',
     async lazy() {
@@ -33,7 +37,13 @@ const bookingsRoutes = [
       },
     },
     children: [
-      { index: true, Component: DetailsIndex },
+      {
+        index: true,
+        async lazy() {
+          let { default: DetailsIndex } = await import('../components/Bookings/DetailsIndex');
+          return { Component: DetailsIndex };
+        },
+      },
       {
         path: 'id/:id',
         async lazy() {

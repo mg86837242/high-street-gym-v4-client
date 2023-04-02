@@ -40,15 +40,12 @@
   color: #616161;
 }
 
-@layer base {
-  .ProseMirror pre {
-    @apply bg-indigo-900
-    /* background: #0d0d0d; */
-    color: #fff;
-    font-family: 'JetBrainsMono', monospace;
-    padding: 0.75rem 1rem;
-    border-radius: 0.5rem;
-  }
+.ProseMirror pre {
+  background: #0d0d0d;
+  color: #fff;
+  font-family: 'JetBrainsMono', monospace;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
 }
 
 .ProseMirror pre code {

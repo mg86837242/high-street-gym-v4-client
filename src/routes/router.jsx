@@ -24,6 +24,20 @@ const router = createBrowserRouter([
           return { Component: Blogs };
         },
         ErrorBoundary: ErrorInfoBack,
+        children: [
+          {
+            index: true,
+            async lazy() {
+              let { default: List } = await import('../components/Blogs/List');
+              return { Component: List };
+            },
+            ErrorBoundary: ErrorInfoBack,
+            async loader() {
+              let { getAllBlogs } = await import('../api/blogs');
+              return getAllBlogs();
+            },
+          },
+        ],
       },
       {
         path: 'bookings',
