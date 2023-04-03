@@ -23,18 +23,18 @@ function AdminListActivities({ activities }) {
       <table className='table w-full table-compact'>
         <thead>
           <tr>
-            {Object.keys(activities[0]).map((key, j) => (
-              <th key={j}>{key.replace(/([a-z])([A-Z])/g, '$1 $2')}</th>
+            {Object.keys(activities[0]).map((key) => (
+              <th key={key}>{key.replace(/([a-z])([A-Z])/g, '$1 $2')}</th>
             ))}
             <th>Edit</th>
             <th>Delete</th>
           </tr>
         </thead>
         <tbody>
-          {activities.map((a, i) => (
-            <tr key={`r${i}`} className='hover'>
+          {activities.map((a) => (
+            <tr key={a.id} className='hover'>
               <th>{a.id}</th>
-              {Object.values(a).map((val, j) => j > 0 && <td key={10 * i + j}>{val}</td>)}
+              {Object.values(a).map((val, i) => i > 0 && <td key={i}>{val}</td>)}
               <td>
                 <Form action={`id/${a.id}/edit`}>
                   <button className='shadow btn btn-outline btn-primary btn-xs text-primary-content shadow-black/50'>

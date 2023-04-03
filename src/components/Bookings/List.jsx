@@ -29,28 +29,25 @@ export default function List() {
 }
 
 function BookingListMemberView({ bookings, userMemberId }) {
-  const [sort, setSort] = useState('all-booking-list');
+  const [sortBy, setSortBy] = useState('all');
   const allBookingList = useMemo(
     () =>
       bookings?.length ? (
         <ul className='grid justify-items-center content-start w-full gap-4'>
           {bookings.map(
-            (
-              {
-                id,
-                memberId,
-                memberFirstName,
-                memberLastName,
-                trainerFirstName,
-                trainerLastName,
-                activityName,
-                dateTime,
-                durationMinutes,
-              },
-              i
-            ) =>
+            ({
+              id,
+              memberId,
+              memberFirstName,
+              memberLastName,
+              trainerFirstName,
+              trainerLastName,
+              activityName,
+              dateTime,
+              durationMinutes,
+            }) =>
               userMemberId === memberId ? (
-                <li id='booking-list-card' key={i} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
+                <li id='booking-list-card' key={id} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
                   <NavLink
                     to={`id/${id}`}
                     className={({ isActive, isPending }) =>
@@ -80,7 +77,7 @@ function BookingListMemberView({ bookings, userMemberId }) {
                   </NavLink>
                 </li>
               ) : (
-                <li id='booking-list-card' key={i} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
+                <li id='booking-list-card' key={id} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
                   <NavLink to={``} className={`grid grid-cols-2 px-4 xl:px-6 py-2 cursor-auto`}>
                     <p className='p-1'>Booking ID:</p>
                     <p className='p-1'>{id}</p>
@@ -115,22 +112,19 @@ function BookingListMemberView({ bookings, userMemberId }) {
     return hasMyBooking ? (
       <ul className='grid justify-items-center content-start w-full gap-4'>
         {bookings.map(
-          (
-            {
-              id,
-              memberId,
-              memberFirstName,
-              memberLastName,
-              trainerFirstName,
-              trainerLastName,
-              activityName,
-              dateTime,
-              durationMinutes,
-            },
-            i
-          ) =>
+          ({
+            id,
+            memberId,
+            memberFirstName,
+            memberLastName,
+            trainerFirstName,
+            trainerLastName,
+            activityName,
+            dateTime,
+            durationMinutes,
+          }) =>
             memberId === userMemberId && (
-              <li id='booking-list-card' key={i} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
+              <li id='booking-list-card' key={id} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
                 <NavLink
                   to={`id/${id}`}
                   className={({ isActive, isPending }) =>
@@ -174,14 +168,14 @@ function BookingListMemberView({ bookings, userMemberId }) {
         className='flex flex-col items-center gap-5 w-full col-[1_/_2] row-[2_/_3] lg:col-[2_/_3] lg:row-[1_/_2]'
       >
         <select
-          value={sort}
-          onChange={(e) => setSort(e.target.value)}
+          value={sortBy}
+          onChange={(e) => setSortBy(e.target.value)}
           className='select select-primary select-sm w-full max-w-xs'
         >
-          <option value='all-booking-list'>All bookings</option>
-          <option value='my-booking-list'>My bookings</option>
+          <option value='all'>All bookings</option>
+          <option value='my'>My bookings</option>
         </select>
-        {sort === 'all-booking-list' ? allBookingList : myBookingList}
+        {sortBy === 'all' ? allBookingList : myBookingList}
       </div>
       <Outlet />
     </>
@@ -189,28 +183,25 @@ function BookingListMemberView({ bookings, userMemberId }) {
 }
 
 function BookingListTrainerView({ bookings, userTrainerId }) {
-  const [sort, setSort] = useState('all-booking-list');
+  const [sortBy, setSortBy] = useState('all');
   const allBookingList = useMemo(
     () =>
       bookings?.length ? (
         <ul className='grid justify-items-center content-start w-full gap-4'>
           {bookings.map(
-            (
-              {
-                id,
-                trainerId,
-                memberFirstName,
-                memberLastName,
-                trainerFirstName,
-                trainerLastName,
-                activityName,
-                dateTime,
-                durationMinutes,
-              },
-              i
-            ) =>
+            ({
+              id,
+              trainerId,
+              memberFirstName,
+              memberLastName,
+              trainerFirstName,
+              trainerLastName,
+              activityName,
+              dateTime,
+              durationMinutes,
+            }) =>
               userTrainerId === trainerId ? (
-                <li id='booking-list-card' key={i} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
+                <li id='booking-list-card' key={id} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
                   <NavLink
                     to={`id/${id}`}
                     className={({ isActive, isPending }) =>
@@ -240,7 +231,7 @@ function BookingListTrainerView({ bookings, userTrainerId }) {
                   </NavLink>
                 </li>
               ) : (
-                <li id='booking-list-card' key={i} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
+                <li id='booking-list-card' key={id} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
                   <NavLink to={``} className={`grid grid-cols-2 px-4 xl:px-6 py-2 cursor-auto`}>
                     <p className='p-1'>Booking ID:</p>
                     <p className='p-1'>{id}</p>
@@ -275,22 +266,19 @@ function BookingListTrainerView({ bookings, userTrainerId }) {
     return hasMyBooking ? (
       <ul className='grid justify-items-center content-start w-full gap-4'>
         {bookings.map(
-          (
-            {
-              id,
-              trainerId,
-              memberFirstName,
-              memberLastName,
-              trainerFirstName,
-              trainerLastName,
-              activityName,
-              dateTime,
-              durationMinutes,
-            },
-            i
-          ) =>
+          ({
+            id,
+            trainerId,
+            memberFirstName,
+            memberLastName,
+            trainerFirstName,
+            trainerLastName,
+            activityName,
+            dateTime,
+            durationMinutes,
+          }) =>
             trainerId === userTrainerId && (
-              <li id='booking-list-card' key={i} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
+              <li id='booking-list-card' key={id} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
                 <NavLink
                   to={`id/${id}`}
                   className={({ isActive, isPending }) =>
@@ -334,14 +322,14 @@ function BookingListTrainerView({ bookings, userTrainerId }) {
         className='flex flex-col items-center gap-5 w-full col-[1_/_2] row-[2_/_3] lg:col-[2_/_3] lg:row-[1_/_2]'
       >
         <select
-          value={sort}
-          onChange={(e) => setSort(e.target.value)}
+          value={sortBy}
+          onChange={(e) => setSortBy(e.target.value)}
           className='select select-primary select-sm w-full max-w-xs'
         >
-          <option value='all-booking-list'>All bookings</option>
-          <option value='my-booking-list'>My bookings</option>
+          <option value='all'>All bookings</option>
+          <option value='my'>My bookings</option>
         </select>
-        {sort === 'all-booking-list' ? allBookingList : myBookingList}
+        {sortBy === 'all' ? allBookingList : myBookingList}
       </div>
       <Outlet />
     </>
@@ -353,20 +341,17 @@ function BookingListAdminView({ bookings }) {
     () => (
       <ul className='grid justify-items-center content-start w-full gap-4'>
         {bookings.map(
-          (
-            {
-              id,
-              memberFirstName,
-              memberLastName,
-              trainerFirstName,
-              trainerLastName,
-              activityName,
-              dateTime,
-              durationMinutes,
-            },
-            i
-          ) => (
-            <li id='booking-list-card' key={i} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
+          ({
+            id,
+            memberFirstName,
+            memberLastName,
+            trainerFirstName,
+            trainerLastName,
+            activityName,
+            dateTime,
+            durationMinutes,
+          }) => (
+            <li id='booking-list-card' key={id} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
               <NavLink
                 to={`id/${id}`}
                 className={({ isActive, isPending }) =>
@@ -432,20 +417,17 @@ function BookingListGuestView({ bookings }) {
         className='grid justify-items-center content-start w-full gap-4 md:grid-cols-2 2xl:grid-cols-3 col-[1_/_2] row-[2_/_4] lg:col-[2_/_4] lg:row-[1_/_2]'
       >
         {bookings.map(
-          (
-            {
-              id,
-              memberFirstName,
-              memberLastName,
-              trainerFirstName,
-              trainerLastName,
-              activityName,
-              dateTime,
-              durationMinutes,
-            },
-            i
-          ) => (
-            <li id='booking-list-card' key={i} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
+          ({
+            id,
+            memberFirstName,
+            memberLastName,
+            trainerFirstName,
+            trainerLastName,
+            activityName,
+            dateTime,
+            durationMinutes,
+          }) => (
+            <li id='booking-list-card' key={id} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
               <NavLink
                 to={`id/${id}`}
                 className={({ isActive, isPending }) =>

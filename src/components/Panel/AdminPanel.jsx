@@ -2,8 +2,7 @@ import { useContext } from 'react';
 import AuthContext from '../../contexts/AuthContext';
 import { Outlet, NavLink, Navigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPenToSquare } from '@fortawesome/free-regular-svg-icons';
-import { faPersonRunning } from '@fortawesome/free-solid-svg-icons';
+import { faPersonRunning, faPencil } from '@fortawesome/free-solid-svg-icons';
 
 export function AdminPanel() {
   return (
@@ -63,7 +62,7 @@ function LeftSidePanel() {
                 }
               >
                 <span>
-                  <FontAwesomeIcon icon={faPenToSquare} className='w-4 h-4' />
+                  <FontAwesomeIcon icon={faPencil} className='w-4 h-4' />
                 </span>
                 <span className='flex items-center justify-start text-sm'>Manage Blog Posts</span>
               </NavLink>

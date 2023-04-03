@@ -35,8 +35,8 @@ function AdminListBlogs({ blogs }) {
           </tr>
         </thead>
         <tbody>
-          {blogs.map(({ id, title, body, username, role, createdAt, updatedAt }, i) => (
-            <tr key={`r${i}`} className='hover'>
+          {blogs.map(({ id, title, body, username, role, createdAt, updatedAt }) => (
+            <tr key={`r${id}`} className='hover'>
               <th>{id}</th>
               <td>{title}</td>
               <td className='max-w-xs truncate'>{body}</td>
