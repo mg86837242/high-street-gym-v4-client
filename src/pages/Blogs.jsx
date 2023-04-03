@@ -3,7 +3,7 @@ import Content from '../components/Blogs/Content';
 
 export default function Blogs() {
   return (
-    <MainWrapper gap={'gap-16'} mt={'mt-16'} mb={'mb-20'}>
+    <MainWrapper gap={'gap-16'} mt={'mt-4'} mb={'mb-20'}>
       <Content />
     </MainWrapper>
   );

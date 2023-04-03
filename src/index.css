@@ -88,11 +88,12 @@
   /* 1.4 Google "chrome scrollbar not taking content": https://stackoverflow.com/questions/18548465/prevent-scroll-bar-from-adding-up-to-the-width-of-page-on-chrome */
   /* NB 1.5 Tailwind has alreayd provided out-of-the-box base styles, see: https://tailwindcss.com/docs/preflight, in which `box-sizing: border-box` is claimed to be made default, see: https://tailwindcss.com/docs/box-sizing#including-borders-and-padding */
   html {
-    @apply font-sans font-normal leading-normal m-0 p-0 overflow-y-scroll;
+    @apply font-sans font-normal leading-normal m-0 p-0;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: 100%;
+    overflow-y: overlay;
   }
 
   body {
@@ -102,12 +103,6 @@
   #root {
     @apply h-full w-full;
   }
-
-  /* html,
-  body,
-  #root {
-    @apply h-full w-full;
-  } */
 
   h1 {
     @apply text-primary font-headline text-5xl leading-tight mb-2;
