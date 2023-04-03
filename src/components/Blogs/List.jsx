@@ -7,7 +7,7 @@ import Button1Sm from '../UI/Button1Sm';
 export default function List() {
   const { authenticatedUser } = useContext(AuthContext);
   const { blogs } = useLoaderData();
-  const [sortBy, setSortBy] = useState('all');
+  const [filter, setFilter] = useState('all');
   const allBlogList = useMemo(
     () =>
       blogs?.length ? (
@@ -84,8 +84,8 @@ export default function List() {
       <section className='lg:hidden'>
         <div className='py-3'>
           <select
-            value={sortBy}
-            onChange={(e) => setSortBy(e.target.value)}
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)}
             className='select select-primary select-sm w-full max-w-xs'
           >
             <option value='all'>All bookings</option>
@@ -94,13 +94,13 @@ export default function List() {
         </div>
       </section>
       <section className='lg:col-[1_/_8]'>
-        <div className='py-3'>{sortBy === 'all' ? allBlogList : myBlogList}</div>
+        <div className='py-3'>{filter === 'all' ? allBlogList : myBlogList}</div>
       </section>
       <aside className='hidden lg:block lg:col-[9_/_13]'>
         <div className='py-3'>
           <select
-            value={sortBy}
-            onChange={(e) => setSortBy(e.target.value)}
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)}
             className='select select-primary select-sm w-full max-w-xs'
           >
             <option value='all'>All bookings</option>

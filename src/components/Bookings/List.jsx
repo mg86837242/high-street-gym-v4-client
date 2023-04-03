@@ -29,7 +29,7 @@ export default function List() {
 }
 
 function BookingListMemberView({ bookings, userMemberId }) {
-  const [sortBy, setSortBy] = useState('all');
+  const [filter, setFilter] = useState('all');
   const allBookingList = useMemo(
     () =>
       bookings?.length ? (
@@ -168,14 +168,14 @@ function BookingListMemberView({ bookings, userMemberId }) {
         className='flex flex-col items-center gap-5 w-full col-[1_/_2] row-[2_/_3] lg:col-[2_/_3] lg:row-[1_/_2]'
       >
         <select
-          value={sortBy}
-          onChange={(e) => setSortBy(e.target.value)}
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
           className='select select-primary select-sm w-full max-w-xs'
         >
           <option value='all'>All bookings</option>
           <option value='my'>My bookings</option>
         </select>
-        {sortBy === 'all' ? allBookingList : myBookingList}
+        {filter === 'all' ? allBookingList : myBookingList}
       </div>
       <Outlet />
     </>
@@ -183,7 +183,7 @@ function BookingListMemberView({ bookings, userMemberId }) {
 }
 
 function BookingListTrainerView({ bookings, userTrainerId }) {
-  const [sortBy, setSortBy] = useState('all');
+  const [filter, setFilter] = useState('all');
   const allBookingList = useMemo(
     () =>
       bookings?.length ? (
@@ -322,14 +322,14 @@ function BookingListTrainerView({ bookings, userTrainerId }) {
         className='flex flex-col items-center gap-5 w-full col-[1_/_2] row-[2_/_3] lg:col-[2_/_3] lg:row-[1_/_2]'
       >
         <select
-          value={sortBy}
-          onChange={(e) => setSortBy(e.target.value)}
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
           className='select select-primary select-sm w-full max-w-xs'
         >
           <option value='all'>All bookings</option>
           <option value='my'>My bookings</option>
         </select>
-        {sortBy === 'all' ? allBookingList : myBookingList}
+        {filter === 'all' ? allBookingList : myBookingList}
       </div>
       <Outlet />
     </>
