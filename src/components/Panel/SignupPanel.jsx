@@ -3,7 +3,7 @@ import InputGrpEmail from '../FormControl/InputGrpEmail';
 import InputGrpPass from '../FormControl/InputGrpPass';
 import InputGrp from '../FormControl/InputGrp';
 import SelectGrpGender from '../FormControl/SelectGrpGender';
-import Button1Full from '../UI/Button1Full';
+import Button1 from '../UI/Button1';
 
 export default function SignupPanel({ emails }) {
   return (
@@ -50,7 +50,7 @@ function SignupForm({ emails }) {
       <InputGrp name='age' type='text' issue={issues?.age} isRequired={false} />
       <SelectGrpGender issue={issues?.gender} isRequired={false} />
       <div className='col-span-1 pt-4 md:col-span-2'>
-        <Button1Full>{statusText}</Button1Full>
+        <Button1 w={'w-full'}>{statusText}</Button1>
       </div>
     </Form>
   );

@@ -3,7 +3,7 @@ export default function Button({ children, type, onClick, w }) {
     <button
       type={type}
       onClick={onClick}
-      className={`${w} shadow btn btn-primary text-primary-content shadow-black/50`}
+      className={`${w} shadow btn btn-primary btn-sm text-primary-content shadow-black/50`}
     >
       {children}
     </button>
