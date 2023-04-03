@@ -1,10 +1,6 @@
-import { useContext, useState } from 'react';
-import AuthContext from '../../contexts/AuthContext';
-
 export default function InputGrpSmEmail({ issue, emails, initialValue, isRequired }) {
-  const { authenticatedUser } = useContext(AuthContext);
   const [value, setValue] = useState(initialValue);
-  const isDuplicate = value !== authenticatedUser?.email && emails.find((e) => value === e.email);
+  const isDuplicate = value !== initialValue && emails.find((e) => value === e.email);
 
   return (
     <div id='email-input-group' className='w-full form-control'>
