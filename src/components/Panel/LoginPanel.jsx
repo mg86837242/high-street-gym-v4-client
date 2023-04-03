@@ -187,7 +187,7 @@ function LoginForm() {
         </label>
       </div>
       <div className='pt-4'>
-        <Button1 w={'full'}>{statusText}</Button1>
+        <Button1 w={'w-full'}>{statusText}</Button1>
       </div>
     </form>
   );
@@ -255,7 +255,7 @@ function Greetings() {
             handleLogout();
             navigate('/');
           }}
-          w={'full'}
+          w={'w-full'}
         >
           Logout
         </Button4>
