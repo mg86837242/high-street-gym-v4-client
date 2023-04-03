@@ -86,7 +86,7 @@ function NavBarLeft({ user }) {
       <Link
         to='/'
         id='nav-left-logo'
-        className='hidden px-4 text-3xl text-primary font-logo lg:text-4xl lg:px-1 md:flex'
+        className='px-4 text-3xl text-primary font-logo hidden md:flex lg:text-4xl lg:px-1'
       >
         HS GYM
       </Link>
