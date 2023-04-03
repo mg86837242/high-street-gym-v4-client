@@ -4,6 +4,7 @@ import RequireAuth from '../components/RequireAuth';
 import Home from '../pages/Home';
 import PageLayout from '../pages/PageLayout';
 import Login from '../pages/Login';
+import blogsRoutes from './blogsRoutes';
 import bookingsRoutes from './bookingsRoutes';
 import profileRoutes from './profileRoutes';
 import adminRoutes from './adminRoutes';
@@ -24,20 +25,8 @@ const router = createBrowserRouter([
           return { Component: Blogs };
         },
         ErrorBoundary: ErrorInfoBack,
-        children: [
-          {
-            index: true,
-            async lazy() {
-              let { default: List } = await import('../components/Blogs/List');
-              return { Component: List };
-            },
-            ErrorBoundary: ErrorInfoBack,
-            async loader() {
-              let { getAllBlogs } = await import('../api/blogs');
-              return getAllBlogs();
-            },
-          },
-        ],
+        handle: { crumb: () => <Link to='/blogs'>All Blogs</Link> },
+        children: [...blogsRoutes],
       },
       {
         path: 'bookings',
