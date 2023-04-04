@@ -25,7 +25,11 @@ export async function createBlog({ request }) {
 export async function createBlogSimple({ request }) {
   const formData = await request.formData();
   const loginId = formData.get('loginId');
-  const creations = { title: 'New Blog', body: 'Lorem Ipsum', loginId };
+  const creations = {
+    title: 'New Blog',
+    body: '{"type":"doc","content":[{"type":"paragraph","content":[{"type":"text","text":"Example "},{"type":"text","marks":[{"type":"bold"}],"text":"Text"}]}]}',
+    loginId,
+  };
   const json = await fetchJSON(`${API_URL}/blogs`, 'post', creations);
   return redirect(`../${json.insertId}/edit`);
 }

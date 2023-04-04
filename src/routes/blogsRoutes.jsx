@@ -45,7 +45,7 @@ const blogsRoutes = [
         },
         ErrorBoundary: ErrorInfoBack,
         async action() {
-          // FIX
+          // FIX action
           return null;
         },
       },
@@ -59,10 +59,11 @@ const blogsRoutes = [
     },
     ErrorBoundary: ErrorInfoBack,
     async action({ request }) {
-      // FIX
+      // FIX action
       let { createBlog } = await import('../api/blogs');
       return createBlog({ request });
     },
+    handle: { crumb: () => <Link to='/blogs/new'>New Blog</Link> },
   },
   {
     path: ':id/destroy',
