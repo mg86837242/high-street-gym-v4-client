@@ -107,6 +107,7 @@ export default function List() {
         <div className='divider'></div>
         <Form method='post' action='new'>
           <Button2Sm type='submit' w='w-full'>
+            <input type='hidden' name='loginId' value={authenticatedUser?.id} />
             Create New
           </Button2Sm>
         </Form>
