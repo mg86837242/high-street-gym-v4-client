@@ -4,6 +4,7 @@ import fetchRes from '../utils/fetchRes';
 import fetchJSON from '../utils/fetchJSON';
 import get from '../utils/get';
 
+// TODO Tweak routing and redirect's relative path
 export async function getAllBookings() {
   const response = await fetchRes(`${API_URL}/bookings`, 'get');
   return response;

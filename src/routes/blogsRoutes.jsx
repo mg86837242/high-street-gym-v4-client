@@ -29,6 +29,22 @@ const blogsRoutes = [
       crumb: (params, data) => (data?.blog ? <Link to={`/blogs/id/${params.id}`}>Blog ID: {params.id}</Link> : 'Error'),
     },
   },
+  {
+    path: 'new',
+    ErrorBoundary: ErrorInfoBack,
+    async action({ request }) {
+      let { createBlog } = await import('../api/blogs');
+      return createBlog({ request });
+    },
+  },
+  {
+    path: ':id/destroy',
+    ErrorBoundary: ErrorInfoBack,
+    async action({ params }) {
+      let { deleteBlogById } = await import('../api/blogs');
+      return deleteBlogById({ params });
+    },
+  },
 ];
 
 export default blogsRoutes;

@@ -17,16 +17,16 @@ export async function getActivityById({ params }) {
 export async function createActivity() {
   const creations = { name: 'New Activity', durationMinutes: 45 };
   const json = await fetchJSON(`${API_URL}/activities`, 'post', creations);
-  return redirect(`/admin/activities/id/${json.insertId}/edit`);
+  return redirect(`../${json.insertId}/edit`);
 }
 
 export async function updateActivityById({ params, request }) {
   const updates = await getSubmittedData(request);
   await fetchRes(`${API_URL}/activities/id/${params.id}`, 'patch', updates);
-  return redirect(`/admin/activities`);
+  return redirect(`..`);
 }
 
 export async function deleteActivityById({ params }) {
   await fetchRes(`${API_URL}/activities/id/${params.id}`, 'delete');
-  return redirect(`/admin/activities`);
+  return redirect(`..`);
 }

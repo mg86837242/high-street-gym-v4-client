@@ -19,16 +19,16 @@ export async function createBlog({ request }) {
   const loginId = formData.get('loginId');
   const creations = { title: 'New Blog', body: 'Lorem Ipsum', loginId };
   const json = await fetchJSON(`${API_URL}/blogs`, 'post', creations);
-  return redirect(`/admin/blogs/id/${json.insertId}/edit`);
+  return redirect(`../${json.insertId}/edit`);
 }
 
 export async function updateBlogById({ params, request }) {
   const updates = await getSubmittedData(request);
   await fetchRes(`${API_URL}/blogs/id/${params.id}`, 'patch', updates);
-  return redirect(`/admin/blogs`);
+  return redirect(`..`);
 }
 
 export async function deleteBlogById({ params }) {
   await fetchRes(`${API_URL}/blogs/id/${params.id}`, 'delete');
-  return redirect(`/admin/blogs`);
+  return redirect(`..`);
 }
