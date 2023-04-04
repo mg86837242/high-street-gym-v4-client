@@ -1,10 +1,11 @@
+import { useNavigate } from 'react-router-dom';
 import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import { Color } from '@tiptap/extension-color';
 import ListItem from '@tiptap/extension-list-item';
 import TextStyle from '@tiptap/extension-text-style';
 
-export default function Editor() {
+export default function Edit() {
   const editor = useEditor({
     extensions: [
       Color.configure({ types: [TextStyle.name, ListItem.name] }),
@@ -55,29 +56,32 @@ export default function Editor() {
         </blockquote>
       `,
   });
+  const navigate = useNavigate();
 
   return (
-    <div className='flex flex-col gap-4 px-4 py-6 border border-base-content rounded-3xl'>
-      <MenuBar editor={editor} />
-      <EditorContent editor={editor} />
-      <div className='flex justify-end w-full gap-10'>
-        <button
-          type='button'
-          onClick={'// TODO Enable edit && cond render save and cancel buttons'}
-          className='w-20 btn btn-outline btn-primary btn-sm'
-        >
-          Edit
-        </button>
-        <button
-          type='submit'
-          onClick={'// TODO getJSON && useSubmit POST req to DB && cond render edit button'}
-          className='w-20 btn btn-outline btn-primary btn-sm'
-        >
-          Save
-        </button>
-        <button type='button' onClick={() => navigate(-1)} className='w-20 btn btn-outline btn-sm'>
-          Cancel
-        </button>
+    <div className='py-6'>
+      <div className='flex flex-col gap-4 px-4 py-6 border border-base-content rounded-3xl'>
+        <MenuBar editor={editor} />
+        <EditorContent editor={editor} />
+        <div className='flex justify-end w-full gap-10'>
+          <button
+            type='button'
+            onClick={'// FIX Enable edit && cond render save and cancel buttons'}
+            className='w-20 btn btn-outline btn-primary btn-sm'
+          >
+            Edit
+          </button>
+          <button
+            type='submit'
+            onClick={'// FIX getJSON && useSubmit POST req to DB && cond render edit button'}
+            className='w-20 btn btn-outline btn-primary btn-sm'
+          >
+            Save
+          </button>
+          <button type='button' onClick={() => navigate(-1)} className='w-20 btn btn-outline btn-sm'>
+            Cancel
+          </button>
+        </div>
       </div>
     </div>
   );

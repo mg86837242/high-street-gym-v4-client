@@ -28,6 +28,28 @@ const blogsRoutes = [
     handle: {
       crumb: (params, data) => (data?.blog ? <Link to={`/blogs/id/${params.id}`}>Blog ID: {params.id}</Link> : 'Error'),
     },
+    children: [
+      {
+        index: true,
+        async lazy() {
+          let { default: DetailsIndex } = await import('../components/Blogs/DetailsIndex');
+          return { Component: DetailsIndex };
+        },
+        ErrorBoundary: ErrorInfoBack,
+      },
+      {
+        path: 'edit',
+        async lazy() {
+          let { default: Edit } = await import('../components/Blogs/Edit');
+          return { Component: Edit };
+        },
+        ErrorBoundary: ErrorInfoBack,
+        async action() {
+          // FIX
+          return null;
+        },
+      },
+    ],
   },
   {
     path: 'new',
@@ -37,6 +59,7 @@ const blogsRoutes = [
     },
     ErrorBoundary: ErrorInfoBack,
     async action({ request }) {
+      // FIX
       let { createBlog } = await import('../api/blogs');
       return createBlog({ request });
     },
