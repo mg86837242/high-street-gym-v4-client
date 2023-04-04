@@ -12,7 +12,7 @@ export default function List() {
     () =>
       blogs?.length ? (
         <>
-          {blogs.map(({ id, title, body, username, createdAt, updatedAt }) => (
+          {blogs.map(({ id, title, body, createdAt, updatedAt, username }) => (
             <div key={id} className='mb-12 border border-base-content rounded-3xl'>
               <div className='flex'>
                 <div className='w-full px-4 py-2 flex-shrink'>
@@ -38,7 +38,7 @@ export default function List() {
           ))}
         </>
       ) : (
-        <p className='text-center mt-4'>No blog has been found</p>
+        <p className='text-center my-4'>No blog has been found</p>
       ),
     [blogs]
   );
@@ -47,7 +47,7 @@ export default function List() {
     return hasMyBlog ? (
       <>
         {blogs.map(
-          ({ id, title, body, username, loginId, createdAt, updatedAt }) =>
+          ({ id, title, body, loginId, createdAt, updatedAt, username }) =>
             loginId === authenticatedUser?.id && (
               <div key={id} className='mb-12 border border-base-content rounded-3xl'>
                 <div className='flex'>
@@ -75,40 +75,36 @@ export default function List() {
         )}
       </>
     ) : (
-      <p className='text-center mt-4'>No blog has been found</p>
+      <p className='text-center my-4'>No blog has been found</p>
     );
   }, [blogs, authenticatedUser]);
 
   return (
-    <div className='flex flex-col lg:grid lg:grid-cols-12'>
+    <div className='flex flex-col gap-6 lg:grid lg:grid-cols-12 lg:gap-0'>
       <section className='lg:hidden'>
-        <div className='py-3'>
-          <select
-            value={filter}
-            onChange={(e) => setFilter(e.target.value)}
-            className='select select-primary select-sm w-full max-w-xs'
-          >
-            <option value='all'>All bookings</option>
-            <option value='my'>My bookings</option>
-          </select>
-        </div>
+        <select
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
+          className='select select-primary select-sm w-full max-w-xs'
+        >
+          <option value='all'>All bookings</option>
+          <option value='my'>My bookings</option>
+        </select>
       </section>
       <section className='lg:col-[1_/_8]'>
-        <div className='py-3'>{filter === 'all' ? allBlogList : myBlogList}</div>
+        <div>{filter === 'all' ? allBlogList : myBlogList}</div>
       </section>
       <aside className='hidden lg:block lg:col-[9_/_13]'>
-        <div className='py-3'>
-          <select
-            value={filter}
-            onChange={(e) => setFilter(e.target.value)}
-            className='select select-primary select-sm w-full max-w-xs'
-          >
-            <option value='all'>All bookings</option>
-            <option value='my'>My bookings</option>
-          </select>
-          <div className='divider'></div>
-          <Button1Sm w={'w-full'}>Create New</Button1Sm>
-        </div>
+        <select
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
+          className='select select-primary select-sm w-full max-w-xs'
+        >
+          <option value='all'>All bookings</option>
+          <option value='my'>My bookings</option>
+        </select>
+        <div className='divider'></div>
+        <Button1Sm w={'w-full'}>Create New</Button1Sm>
       </aside>
     </div>
   );

@@ -1,4 +1,5 @@
-import { useMemo, useEffect } from 'react';
+import { useContext, useMemo, useEffect } from 'react';
+import AuthContext from '../../contexts/AuthContext.jsx';
 import { useLoaderData, Outlet, Form, useSubmit, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -75,9 +76,12 @@ function AdminListBlogs({ blogs }) {
 }
 
 export function AdminNewBlog() {
+  const { authenticatedUser } = useContext(AuthContext);
+
   return (
     <div className='flex justify-end gap-10 py-6'>
       <Form method='post' action='new'>
+        <input type='hidden' name='loginId' value={authenticatedUser.id} />
         <button type='submit' className='btn btn-outline btn-primary btn-sm'>
           Create New
         </button>

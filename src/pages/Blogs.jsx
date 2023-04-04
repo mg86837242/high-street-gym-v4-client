@@ -1,9 +1,11 @@
 import MainWrapper from '../components/MainWrapper';
+import Breadcrumbs from '../components/Breadcrumbs';
 import Content from '../components/Blogs/Content';
 
 export default function Blogs() {
   return (
-    <MainWrapper gap={'gap-16'} mt={'mt-4'} mb={'mb-20'}>
+    <MainWrapper gap={'gap-3'} mt={'mt-4'} mb={'mb-20'}>
+      <Breadcrumbs />
       <Content />
     </MainWrapper>
   );

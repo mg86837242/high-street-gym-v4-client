@@ -14,8 +14,10 @@ export async function getBlogById({ params }) {
   return response;
 }
 
-export async function createBlog() {
-  const creations = { title: 'New Blog', body: 'Lorem Ipsum', loginId: 1 };
+export async function createBlog({ request }) {
+  const formData = await request.formData();
+  const loginId = formData.get('loginId');
+  const creations = { title: 'New Blog', body: 'Lorem Ipsum', loginId };
   const json = await fetchJSON(`${API_URL}/blogs`, 'post', creations);
   return redirect(`/admin/blogs/id/${json.insertId}/edit`);
 }

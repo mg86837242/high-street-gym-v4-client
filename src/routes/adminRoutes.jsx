@@ -91,9 +91,9 @@ const adminRoutes = [
           {
             path: 'new',
             ErrorBoundary: ErrorInfoBack,
-            async action() {
+            async action({ request }) {
               let { createBlog } = await import('../api/blogs');
-              return createBlog();
+              return createBlog({ request });
             },
           },
           {

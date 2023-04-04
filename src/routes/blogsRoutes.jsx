@@ -25,6 +25,9 @@ const blogsRoutes = [
       let { getBlogById } = await import('../api/blogs');
       return getBlogById({ params });
     },
+    handle: {
+      crumb: (params, data) => (data?.blog ? <Link to={`/blogs/id/${params.id}`}>Blog ID: {params.id}</Link> : 'Error'),
+    },
   },
 ];
 
