@@ -49,7 +49,7 @@ function BookingListMemberView({ bookings, userMemberId }) {
               userMemberId === memberId ? (
                 <li id='booking-list-card' key={id} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
                   <NavLink
-                    to={`id/${id}`}
+                    to={`${id}`}
                     className={({ isActive, isPending }) =>
                       `grid grid-cols-2 px-4 xl:px-6 py-2 ${isActive && 'ring ring-secondary-focus rounded-lg'} ${
                         isPending && ''
@@ -126,7 +126,7 @@ function BookingListMemberView({ bookings, userMemberId }) {
             memberId === userMemberId && (
               <li id='booking-list-card' key={id} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
                 <NavLink
-                  to={`id/${id}`}
+                  to={`${id}`}
                   className={({ isActive, isPending }) =>
                     `grid grid-cols-2 px-4 xl:px-6 py-2 ${isActive && 'ring ring-secondary-focus rounded-lg'} ${
                       isPending && ''
@@ -204,7 +204,7 @@ function BookingListTrainerView({ bookings, userTrainerId }) {
               userTrainerId === trainerId ? (
                 <li id='booking-list-card' key={id} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
                   <NavLink
-                    to={`id/${id}`}
+                    to={`${id}`}
                     className={({ isActive, isPending }) =>
                       `grid grid-cols-2 px-4 xl:px-6 py-2 ${isActive && 'ring ring-secondary-focus rounded-lg'} ${
                         isPending && ''
@@ -281,7 +281,7 @@ function BookingListTrainerView({ bookings, userTrainerId }) {
             trainerId === userTrainerId && (
               <li id='booking-list-card' key={id} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
                 <NavLink
-                  to={`id/${id}`}
+                  to={`${id}`}
                   className={({ isActive, isPending }) =>
                     `grid grid-cols-2 px-4 xl:px-6 py-2 ${isActive && 'ring ring-secondary-focus rounded-lg'} ${
                       isPending && ''
@@ -355,7 +355,7 @@ function BookingListAdminView({ bookings }) {
           }) => (
             <li id='booking-list-card' key={id} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
               <NavLink
-                to={`id/${id}`}
+                to={`${id}`}
                 className={({ isActive, isPending }) =>
                   `grid grid-cols-2 px-4 xl:px-6 py-2 ${isActive && 'ring ring-secondary-focus rounded-lg'} ${
                     isPending && ''
@@ -431,7 +431,7 @@ function BookingListGuestView({ bookings }) {
           }) => (
             <li id='booking-list-card' key={id} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
               <NavLink
-                to={`id/${id}`}
+                to={`${id}`}
                 className={({ isActive, isPending }) =>
                   `grid grid-cols-2 px-4 xl:px-6 py-2 ${isActive && 'ring ring-secondary-focus rounded-lg'} ${
                     isPending && ''

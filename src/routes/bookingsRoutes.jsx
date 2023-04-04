@@ -45,7 +45,7 @@ const bookingsRoutes = [
         },
       },
       {
-        path: 'id/:id',
+        path: ':id',
         async lazy() {
           let { default: Details } = await import('../components/Bookings/Details');
           return { Component: Details };
@@ -65,7 +65,7 @@ const bookingsRoutes = [
         },
       },
       {
-        path: 'id/:id/edit',
+        path: ':id/edit',
         async lazy() {
           let { default: Edit } = await import('../components/Bookings/Edit');
           return { Component: Edit };
@@ -89,7 +89,7 @@ const bookingsRoutes = [
         },
       },
       {
-        path: 'id/:id/destroy',
+        path: ':id/destroy',
         ErrorBoundary: ErrorInfoBack,
         async action({ params }) {
           let { deleteBookingById } = await import('../api/bookings');
