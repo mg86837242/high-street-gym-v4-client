@@ -2,7 +2,7 @@
 /* Bear in mind that `!important` can be added in these layers */
 /* 1. Tailwind Base Layer */
 @tailwind base;
-/* 1.5 The following base style enables a colored border to help with styling the box model & flex & grid & etc. */
+/* The following base style enables a colored border to help with styling the box model & flex & grid & etc. */
 /* #main-element-wrapper * {
   @apply border-[1px] border-fuchsia-500/50;
 } */
@@ -10,7 +10,7 @@
 /* 2. Tailwind Components Layer */
 @tailwind components;
 
-/* 2.2 Tiptap, see: https://tiptap.dev/installation/react (NB won't work if put in the `@layer` directive) */
+/* 2.2 Tiptap, see: https://tiptap.dev/installation/react (NB will get tree-shaked if put in the `@layer` directive) */
 .ProseMirror {
   padding: 1.5rem 1rem;
   border: 1px solid hsl(var(--bc) / var(--tw-border-opacity));

@@ -67,7 +67,7 @@ function AdminListActivities({ activities }) {
 
 export function AdminNewActivity() {
   return (
-    <div className='flex justify-end gap-10 py-6'>
+    <div className='flex justify-end py-6'>
       <Form method='post' action='new'>
         <button type='submit' className='btn btn-outline btn-primary btn-sm'>
           Create New
@@ -161,7 +161,7 @@ export function AdminEditActivity() {
             className='input input-bordered input-sm'
           />
         </FCRHFSm>
-        <div className='flex justify-end w-full col-span-2 gap-10 mt-5 xl:col-span-3'>
+        <div className='flex justify-end w-full col-span-2 gap-10 py-6 xl:col-span-3'>
           <button type='submit' className='w-20 btn btn-outline btn-primary btn-sm'>
             Save
           </button>

@@ -79,7 +79,7 @@ export function AdminNewBlog() {
   const { authenticatedUser } = useContext(AuthContext);
 
   return (
-    <div className='flex justify-end gap-10 py-6'>
+    <div className='flex justify-end py-6'>
       <Form method='post' action='new'>
         <input type='hidden' name='loginId' value={authenticatedUser.id} />
         <button type='submit' className='btn btn-outline btn-primary btn-sm'>
@@ -138,7 +138,7 @@ export function AdminEditBlog() {
           />
         </FCRHFSmTextarea>
         <input type='hidden' {...register('loginId')} className='input input-bordered input-sm' />
-        <div className='flex justify-end w-full col-span-2 gap-10 mt-5 xl:col-span-3'>
+        <div className='flex justify-end w-full col-span-2 gap-10 py-6 xl:col-span-3'>
           <button type='submit' className='w-20 btn btn-outline btn-primary btn-sm'>
             Save
           </button>

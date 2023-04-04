@@ -2,7 +2,7 @@ import { useContext, useState, useMemo } from 'react';
 import AuthContext from '../../contexts/AuthContext';
 import { Link, useLoaderData } from 'react-router-dom';
 import { getDateNotation } from '../../utils/mapDates';
-import Button1Sm from '../UI/Button1Sm';
+import Button2Sm from '../UI/Button2Sm';
 
 export default function List() {
   const { authenticatedUser } = useContext(AuthContext);
@@ -105,7 +105,7 @@ export default function List() {
           <option value='my'>My bookings</option>
         </select>
         <div className='divider'></div>
-        <Button1Sm w={'w-full'}>Create New</Button1Sm>
+        <Button2Sm w={'w-full'}>Create New</Button2Sm>
       </aside>
     </div>
   );

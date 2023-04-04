@@ -4,9 +4,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { emailSchema, passwordSchema } from '../../schemas/logins';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import Button1 from '../UI/Button1';
-import Button4 from '../UI/Button4';
-import LinkButton1 from '../UI/LinkButton1';
+import Button2 from '../UI/Button2';
+import Button5 from '../UI/Button5';
+import LinkButton2 from '../UI/LinkButton2';
 
 export default function LoginPanel() {
   const { authenticatedUser } = useContext(AuthContext);
@@ -187,7 +187,7 @@ function LoginForm() {
         </label>
       </div>
       <div className='pt-4'>
-        <Button1 w={'w-full'}>{statusText}</Button1>
+        <Button2 w={'w-full'}>{statusText}</Button2>
       </div>
     </form>
   );
@@ -247,10 +247,10 @@ function Greetings() {
         <span className='text-primary'>{authenticatedUser?.role && authenticatedUser.role}!</span>
       </p>
       <div className='flex flex-col gap-5'>
-        <LinkButton1 to={'/'} w={'w-full'}>
+        <LinkButton2 to={'/'} w={'w-full'}>
           Visit Home
-        </LinkButton1>
-        <Button4
+        </LinkButton2>
+        <Button5
           onClick={() => {
             handleLogout();
             navigate('/');
@@ -258,7 +258,7 @@ function Greetings() {
           w={'w-full'}
         >
           Logout
-        </Button4>
+        </Button5>
       </div>
     </div>
   );

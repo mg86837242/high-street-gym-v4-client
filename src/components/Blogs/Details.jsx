@@ -1,6 +1,7 @@
 import { useLoaderData } from 'react-router-dom';
 import { Form } from 'react-router-dom';
-import Button1Sm from '../UI/Button1Sm';
+import Button2Sm from '../UI/Button2Sm';
+import Button5Sm from '../UI/Button5Sm';
 
 export default function Details() {
   const {
@@ -8,7 +9,7 @@ export default function Details() {
   } = useLoaderData();
 
   return (
-    <div className='flex flex-col gap-6'>
+    <div className='flex flex-col'>
       <article className='prose prose-zinc'>
         <h1>{title}</h1>
         <p>by {username}</p>
@@ -16,9 +17,9 @@ export default function Details() {
         {updatedAt && <p className='italic'>updated at: {updatedAt}</p>}
         <p>{body}</p>
       </article>
-      <div className='flex justify-between gap-5'>
+      <div className='flex justify-end gap-10 py-6'>
         <Form action='edit'>
-          <Button1Sm>Edit</Button1Sm>
+          <Button2Sm>Edit</Button2Sm>
         </Form>
         <Form
           method='post'
@@ -29,9 +30,7 @@ export default function Details() {
             }
           }}
         >
-          <button type='submit' className='shadow btn btn-sm text-accent-content shadow-black/50'>
-            Delete
-          </button>
+          <Button5Sm type='submit'>Delete</Button5Sm>
         </Form>
       </div>
     </div>

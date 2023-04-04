@@ -1,4 +1,4 @@
-export default function Button4({ children, type, onClick, w }) {
+export default function Button5({ children, type, onClick, w }) {
   return (
     <button
       type={type}
