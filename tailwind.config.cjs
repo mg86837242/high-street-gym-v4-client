@@ -15,7 +15,7 @@ module.exports = {
       },
     },
   },
-  plugins: [require('daisyui')],
+  plugins: [require('daisyui'), require('@tailwindcss/typography')],
   darkMode: ['class', '[data-theme="dark"]'],
   daisyui: {
     // Daisy UI themes – How to customize an existing theme: https://daisyui.com/docs/themes/#-7

@@ -1,4 +1,4 @@
-export default function Button({ children, type, onClick, w }) {
+export default function Button1Sm({ children, type, onClick, w }) {
   return (
     <button
       type={type}
