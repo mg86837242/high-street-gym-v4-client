@@ -187,7 +187,7 @@ function LoginForm() {
         </label>
       </div>
       <div className='pt-4'>
-        <Button2 w={'w-full'}>{statusText}</Button2>
+        <Button2 w='w-full'>{statusText}</Button2>
       </div>
     </form>
   );
@@ -247,7 +247,7 @@ function Greetings() {
         <span className='text-primary'>{authenticatedUser?.role && authenticatedUser.role}!</span>
       </p>
       <div className='flex flex-col gap-5'>
-        <LinkButton2 to={'/'} w={'w-full'}>
+        <LinkButton2 to={'/'} w='w-full'>
           Visit Home
         </LinkButton2>
         <Button5
@@ -255,7 +255,7 @@ function Greetings() {
             handleLogout();
             navigate('/');
           }}
-          w={'w-full'}
+          w='w-full'
         >
           Logout
         </Button5>

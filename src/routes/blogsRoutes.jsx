@@ -15,7 +15,7 @@ const blogsRoutes = [
     },
   },
   {
-    path: 'id/:id',
+    path: ':id',
     async lazy() {
       let { default: Details } = await import('../components/Blogs/Details');
       return { Component: Details };

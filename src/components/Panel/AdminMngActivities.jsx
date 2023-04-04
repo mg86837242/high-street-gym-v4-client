@@ -36,7 +36,7 @@ function AdminListActivities({ activities }) {
               <th>{a.id}</th>
               {Object.values(a).map((val, i) => i > 0 && <td key={i}>{val}</td>)}
               <td>
-                <Form action={`id/${a.id}/edit`}>
+                <Form action={`${a.id}/edit`}>
                   <button className='shadow btn btn-outline btn-primary btn-xs text-primary-content shadow-black/50'>
                     Edit
                   </button>
@@ -45,7 +45,7 @@ function AdminListActivities({ activities }) {
               <td>
                 <Form
                   method='post'
-                  action={`id/${a.id}/destroy`}
+                  action={`${a.id}/destroy`}
                   onSubmit={(e) => {
                     if (!confirm('Please confirm you want to delete this activity.')) {
                       e.preventDefault();

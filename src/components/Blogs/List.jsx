@@ -1,6 +1,6 @@
 import { useContext, useState, useMemo } from 'react';
 import AuthContext from '../../contexts/AuthContext';
-import { Link, useLoaderData } from 'react-router-dom';
+import { useLoaderData, Link, Form } from 'react-router-dom';
 import { getDateNotation } from '../../utils/mapDates';
 import Button2Sm from '../UI/Button2Sm';
 
@@ -17,7 +17,7 @@ export default function List() {
               <div className='flex'>
                 <div className='w-full px-4 py-2 flex-shrink'>
                   <h4 className='text-[13px] leading-4 font-medium pb-2'>{username}</h4>
-                  <Link to={`id/${id}`}>
+                  <Link to={`${id}`}>
                     <h2 className='text-primary-content md:text-[22px] md:leading-7 font-bold'>{title}</h2>
                     <h3 className='text-base leading-5 h-10 overflow-hidden text-ellipsis pt-1'>{body}</h3>
                   </Link>
@@ -26,7 +26,7 @@ export default function List() {
                     <p className='text-[13px] leading-5 italic'>Updated at: {getDateNotation(updatedAt)}</p>
                   )}
                 </div>
-                <Link to={`id/${id}`} className='w-[200px] flex-shrink-0'>
+                <Link to={`${id}`} className='w-[200px] flex-shrink-0'>
                   <img
                     src={`https://picsum.photos/200/156?random=${id}`}
                     alt='Random blog picture'
@@ -53,7 +53,7 @@ export default function List() {
                 <div className='flex'>
                   <div className='w-full px-4 py-2 flex-shrink'>
                     <h4 className='text-[13px] leading-4 font-medium pb-2'>{username}</h4>
-                    <Link to={`id/${id}`}>
+                    <Link to={`${id}`}>
                       <h2 className='text-primary-content md:text-[22px] md:leading-7 font-bold'>{title}</h2>
                       <h3 className='text-base leading-5 h-10 overflow-hidden text-ellipsis pt-1'>{body}</h3>
                     </Link>
@@ -62,7 +62,7 @@ export default function List() {
                       <p className='text-[13px] leading-5 italic'>Updated at: {getDateNotation(updatedAt)}</p>
                     )}
                   </div>
-                  <Link to={`id/${id}`} className='w-[200px] flex-shrink-0'>
+                  <Link to={`${id}`} className='w-[200px] flex-shrink-0'>
                     <img
                       src={`https://picsum.photos/200/156?random=${id}`}
                       alt='Random blog picture'
@@ -105,7 +105,11 @@ export default function List() {
           <option value='my'>My bookings</option>
         </select>
         <div className='divider'></div>
-        <Button2Sm w={'w-full'}>Create New</Button2Sm>
+        <Form method='post' action='new'>
+          <Button2Sm type='submit' w='w-full'>
+            Create New
+          </Button2Sm>
+        </Form>
       </aside>
     </div>
   );

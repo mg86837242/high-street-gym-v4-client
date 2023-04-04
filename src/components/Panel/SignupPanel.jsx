@@ -50,7 +50,7 @@ function SignupForm({ emails }) {
       <InputGrp name='age' type='text' issue={issues?.age} isRequired={false} />
       <SelectGrpGender issue={issues?.gender} isRequired={false} />
       <div className='col-span-1 pt-4 md:col-span-2'>
-        <Button2 w={'w-full'}>{statusText}</Button2>
+        <Button2 w='w-full'>{statusText}</Button2>
       </div>
     </Form>
   );

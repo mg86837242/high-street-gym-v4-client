@@ -1,5 +1,4 @@
-import { useLoaderData } from 'react-router-dom';
-import { Form } from 'react-router-dom';
+import { useLoaderData, Form } from 'react-router-dom';
 import Button2Sm from '../UI/Button2Sm';
 import Button5Sm from '../UI/Button5Sm';
 
@@ -12,9 +11,11 @@ export default function Details() {
     <div className='flex flex-col'>
       <article className='prose prose-zinc'>
         <h1>{title}</h1>
-        <p>by {username}</p>
-        <p className='italic'>created at: {createdAt}</p>
-        {updatedAt && <p className='italic'>updated at: {updatedAt}</p>}
+        <div className='flex flex-col'>
+          <span>by {username}</span>
+          <i className='text-[13px] leading-5'>created at: {createdAt}</i>
+          {updatedAt && <i className='text-[13px] leading-5'>updated at: {updatedAt}</i>}
+        </div>
         <p>{body}</p>
       </article>
       <div className='flex justify-end gap-10 py-6'>

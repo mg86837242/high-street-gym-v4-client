@@ -46,7 +46,7 @@ function AdminListBlogs({ blogs }) {
               <td>{createdAt}</td>
               <td>{updatedAt}</td>
               <td>
-                <Form action={`id/${id}/edit`}>
+                <Form action={`${id}/edit`}>
                   <button className='shadow btn btn-outline btn-primary btn-xs text-primary-content shadow-black/50'>
                     Edit
                   </button>
@@ -55,7 +55,7 @@ function AdminListBlogs({ blogs }) {
               <td>
                 <Form
                   method='post'
-                  action={`id/${id}/destroy`}
+                  action={`${id}/destroy`}
                   onSubmit={(e) => {
                     if (!confirm('Please confirm you want to delete this blog.')) {
                       e.preventDefault();

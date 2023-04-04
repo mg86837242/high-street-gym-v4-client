@@ -40,7 +40,7 @@ const adminRoutes = [
         },
       },
       {
-        path: 'id/:id/edit',
+        path: ':id/edit',
         async lazy() {
           let { AdminEditActivity } = await import('../components/Panel/AdminMngActivities');
           return { Component: AdminEditActivity };
@@ -56,7 +56,7 @@ const adminRoutes = [
         },
       },
       {
-        path: 'id/:id/destroy',
+        path: ':id/destroy',
         ErrorBoundary: ErrorInfoBack,
         async action({ params }) {
           let { deleteActivityById } = await import('../api/activities');
@@ -97,7 +97,7 @@ const adminRoutes = [
             },
           },
           {
-            path: 'id/:id/edit',
+            path: ':id/edit',
             async lazy() {
               let { AdminEditBlog } = await import('../components/Panel/AdminMngBlogs');
               return { Component: AdminEditBlog };
@@ -113,7 +113,7 @@ const adminRoutes = [
             },
           },
           {
-            path: 'id/:id/destroy',
+            path: ':id/destroy',
             ErrorBoundary: ErrorInfoBack,
             async action({ params }) {
               let { deleteBlogById } = await import('../api/blogs');
