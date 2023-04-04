@@ -170,6 +170,7 @@ function BookingListMemberView({ bookings, userMemberId }) {
         <select
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
+          aria-label='Dropdown list for filtering bookings'
           className='select select-primary select-sm w-full max-w-xs'
         >
           <option value='all'>All bookings</option>
@@ -324,6 +325,7 @@ function BookingListTrainerView({ bookings, userTrainerId }) {
         <select
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
+          aria-label='Dropdown list for filtering bookings'
           className='select select-primary select-sm w-full max-w-xs'
         >
           <option value='all'>All bookings</option>
