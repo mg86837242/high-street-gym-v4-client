@@ -1,6 +1,6 @@
 import { Form, useOutletContext } from 'react-router-dom';
 import Button2Sm from '../UI/Button2Sm';
-import Button5Sm from '../UI/Button5Sm';
+import Button1Sm from '../UI/Button1Sm';
 
 export default function DetailsIndex() {
   const [setEditable] = useOutletContext();
@@ -19,7 +19,7 @@ export default function DetailsIndex() {
           }
         }}
       >
-        <Button5Sm type='submit'>Delete</Button5Sm>
+        <Button1Sm type='submit'>Delete</Button1Sm>
       </Form>
     </div>
   );

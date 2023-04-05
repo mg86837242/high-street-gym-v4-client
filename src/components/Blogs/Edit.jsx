@@ -1,6 +1,6 @@
 import { Form, useOutletContext, useNavigate } from 'react-router-dom';
 import Button2Sm from '../UI/Button2Sm';
-import Button5Sm from '../UI/Button5Sm';
+import Button1Sm from '../UI/Button1Sm';
 
 export default function Edit() {
   const [setEditable] = useOutletContext();
@@ -18,9 +18,15 @@ export default function Edit() {
           Save
         </Button2Sm>
       </Form>
-      <Button5Sm type='button' onClick={() => navigate(-1)}>
+      <Button1Sm
+        type='button'
+        onClick={() => {
+          setEditable(false);
+          navigate(-1);
+        }}
+      >
         Cancel
-      </Button5Sm>
+      </Button1Sm>
     </div>
   );
 }
