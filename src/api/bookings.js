@@ -46,7 +46,7 @@ export async function createBooking({ request }) {
   const formData = await request.formData();
   const creations = Object.fromEntries(formData);
   const json = await fetchJSON(`${API_URL}/bookings`, 'post', creations);
-  return redirect(`/bookings/${creations.date}/id/${json.insertId}`);
+  return redirect(`/bookings/${creations.date}/${json.insertId}`);
 }
 
 export async function updateBookingById({ params, request }) {
@@ -57,7 +57,7 @@ export async function updateBookingById({ params, request }) {
   const formData = await request.formData();
   const updates = Object.fromEntries(formData);
   await fetchRes(`${API_URL}/bookings/id/${params.id}`, 'patch', updates);
-  return redirect(`/bookings/${updates.date}/id/${params.id}`);
+  return redirect(`/bookings/${updates.date}/${params.id}`);
 }
 
 export async function deleteBookingById({ params }) {

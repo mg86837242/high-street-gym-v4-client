@@ -17,8 +17,10 @@ export const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 export function getDateNotation(dateTime) {
   return dateTime
-    ? `${dateTime.slice(8, 9) === '0' ? dateTime.slice(9, 10) : dateTime.slice(8, 10)}
-  ${monthNames[Number(dateTime.slice(5, 7))]}
-  ${dateTime.slice(0, 4)}`
+    ? `
+      ${dateTime.slice(8, 9) === '0' ? dateTime.slice(9, 10) : dateTime.slice(8, 10)}
+      ${monthNames[Number(dateTime.slice(5, 7))]}
+      ${dateTime.slice(0, 4)}
+      `
     : '';
 }
