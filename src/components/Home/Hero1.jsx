@@ -1,10 +1,13 @@
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import Image from '../../assets/home-hero.webp';
+
 export default function Hero({ children }) {
   return (
     <div id='hero-1-wrapper' className='grid grid-rows-1 grid-cols-1'>
-      <img
-        src='src/assets/home-hero.webp'
+      <LazyLoadImage
+        src={Image}
         alt='Hero image showing gym facilities'
-        className='row-[1_/_2] col-[1_/_2] object-cover object-top w-full h-screen'
+        className='w-full h-screen row-[1_/_2] col-[1_/_2] object-cover object-top'
       />
       {children}
       <div id='hero-1-content-wrapper' className='grid grid-cols-10 grid-rows-6 row-[1_/_2] col-[1_/_2]'>
