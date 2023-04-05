@@ -19,7 +19,10 @@ export default function Edit() {
       >
         <h1 className='text-center text-secondary'>Edit Booking</h1>
         <p>
-          Note: If the specified member or trainer is not available at the specified time, the booking will get denied.
+          <em>
+            Note: If the specified member or trainer is not available at the specified time, the booking will get
+            denied.
+          </em>
         </p>
         <Form method='post' className='flex flex-col gap-5'>
           <label

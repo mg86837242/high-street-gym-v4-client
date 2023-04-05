@@ -1,25 +1,30 @@
-import { Form, useOutletContext, useNavigate } from 'react-router-dom';
+import { Form, useOutletContext, useSubmit, useNavigate } from 'react-router-dom';
 import { EditorContent } from '@tiptap/react';
 import Button2Sm from '../UI/Button2Sm';
 import Button1Sm from '../UI/Button1Sm';
 
 export default function Edit() {
   const [setEditable, editor] = useOutletContext();
+  const submit = useSubmit();
   const navigate = useNavigate();
 
   return (
     <>
-      <div className='flex flex-col gap-4 pt-6'>
+      <div className='pt-6'>
         <div className='py-6 border border-base-content rounded-3xl'>
           <MenuBar editor={editor} />
+          <span className='px-4 pt-2 leading-5 text-[13px]'>
+            <em>Note: Emoji characters are currently not supported.</em>
+          </span>
           <EditorContent editor={editor} />
         </div>
       </div>
-      <div className='flex justify-end gap-10 py-6 px-4'>
+      <div className='flex justify-end gap-10 px-4 py-6'>
         <Form method='post'>
           <Button2Sm
             onClick={() => {
               // FIX useSubmit `FormData` obj
+              submit('formData');
               setEditable(false);
             }}
           >
@@ -76,19 +81,6 @@ function MenuBar({ editor }) {
         >
           code
         </button>
-        <button onClick={() => editor.chain().focus().unsetAllMarks().run()} className='btn btn-outline btn-xs'>
-          clear marks
-        </button>
-        <button
-          onClick={() => editor.chain().focus().setColor('#958DF1').run()}
-          className={
-            editor.isActive('textStyle', { color: '#958DF1' })
-              ? 'btn btn-outline btn-xs btn-active'
-              : 'btn btn-outline btn-xs'
-          }
-        >
-          purple
-        </button>
         <button
           onClick={() => editor.chain().focus().setColor('#F98181').run()}
           className={
@@ -120,14 +112,14 @@ function MenuBar({ editor }) {
           yellow
         </button>
         <button
-          onClick={() => editor.chain().focus().setColor('#70CFF8').run()}
+          onClick={() => editor.chain().focus().setColor('#B9F18D').run()}
           className={
-            editor.isActive('textStyle', { color: '#70CFF8' })
+            editor.isActive('textStyle', { color: '#B9F18D' })
               ? 'btn btn-outline btn-xs btn-active'
               : 'btn btn-outline btn-xs'
           }
         >
-          blue
+          green
         </button>
         <button
           onClick={() => editor.chain().focus().setColor('#94FADB').run()}
@@ -140,20 +132,31 @@ function MenuBar({ editor }) {
           teal
         </button>
         <button
-          onClick={() => editor.chain().focus().setColor('#B9F18D').run()}
+          onClick={() => editor.chain().focus().setColor('#70CFF8').run()}
           className={
-            editor.isActive('textStyle', { color: '#B9F18D' })
+            editor.isActive('textStyle', { color: '#70CFF8' })
               ? 'btn btn-outline btn-xs btn-active'
               : 'btn btn-outline btn-xs'
           }
         >
-          green
+          blue
+        </button>
+        <button
+          onClick={() => editor.chain().focus().setColor('#958DF1').run()}
+          className={
+            editor.isActive('textStyle', { color: '#958DF1' })
+              ? 'btn btn-outline btn-xs btn-active'
+              : 'btn btn-outline btn-xs'
+          }
+        >
+          purple
         </button>
         <button onClick={() => editor.chain().focus().unsetColor().run()} className='btn btn-outline btn-xs'>
           unset color
         </button>
-      </div>
-      <div id='menu-nodes' className='flex flex-wrap gap-2 px-4'>
+        <button onClick={() => editor.chain().focus().unsetAllMarks().run()} className='btn btn-outline btn-xs'>
+          clear marks
+        </button>
         <button
           onClick={() => editor.chain().focus().setParagraph().run()}
           className={editor.isActive('paragraph') ? 'btn btn-outline btn-xs btn-active' : 'btn btn-outline btn-xs'}
@@ -221,6 +224,27 @@ function MenuBar({ editor }) {
           ordered list
         </button>
         <button
+          onClick={() => editor.chain().focus().splitListItem('listItem').run()}
+          disabled={!editor.can().splitListItem('listItem')}
+          className='btn btn-outline btn-xs'
+        >
+          split list item
+        </button>
+        <button
+          onClick={() => editor.chain().focus().sinkListItem('listItem').run()}
+          disabled={!editor.can().sinkListItem('listItem')}
+          className='btn btn-outline btn-xs'
+        >
+          sink list item
+        </button>
+        <button
+          onClick={() => editor.chain().focus().liftListItem('listItem').run()}
+          disabled={!editor.can().liftListItem('listItem')}
+          className='btn btn-outline btn-xs'
+        >
+          lift list item
+        </button>
+        <button
           onClick={() => editor.chain().focus().toggleCodeBlock().run()}
           className={editor.isActive('codeBlock') ? 'btn btn-outline btn-xs btn-active' : 'btn btn-outline btn-xs'}
         >
@@ -235,8 +259,6 @@ function MenuBar({ editor }) {
         <button onClick={() => editor.chain().focus().clearNodes().run()} className='btn btn-outline btn-xs'>
           clear nodes
         </button>
-      </div>
-      <div id='menu-misc' className='flex flex-wrap gap-2 px-4'>
         <button onClick={() => editor.chain().focus().setHorizontalRule().run()} className='btn btn-outline btn-xs'>
           horizontal rule
         </button>
@@ -261,3 +283,7 @@ function MenuBar({ editor }) {
     </div>
   );
 }
+
+// References:
+// -- https://stackoverflow.com/questions/4692774: Recommend to use `TEXT` data type for storing blog post body
+// -- https://stackoverflow.com/questions/39463134: How to store emoji in MySQL db

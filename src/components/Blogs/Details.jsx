@@ -15,7 +15,7 @@ export default function Details() {
     editable,
     editorProps: {
       attributes: {
-        class: 'min-w-full px-4 py-6 prose dark:prose-invert prose-sm sm:prose-base focus:outline-none',
+        class: 'min-w-full px-4 py-6 prose dark:prose-invert prose-sm md:prose-base lg:prose-lg focus:outline-none',
       },
     },
     extensions: [StarterKit, Color, TextStyle],
@@ -34,12 +34,12 @@ export default function Details() {
 
   return (
     <div className='flex flex-col'>
-      <article className='min-w-full'>
-        <h1 className='px-4 font-sans font-bold text-accent'>{title}</h1>
+      <article className='min-w-full prose-sm md:prose-base lg:prose-lg'>
+        <h1 className='px-4 font-bold text-accent'>{title}</h1>
         <div className='flex flex-col px-4'>
           <span>by {username}</span>
-          <i className='leading-5 text-[13px]'>created at: {createdAt}</i>
-          {updatedAt && <i className='leading-5 text-[13px]'>updated at: {updatedAt}</i>}
+          <span className='leading-5 text-[13px] italic'>created at: {createdAt}</span>
+          {updatedAt && <span className='leading-5 text-[13px] italic'>updated at: {updatedAt}</span>}
         </div>
       </article>
       <Outlet context={[setEditable, editor]} />
