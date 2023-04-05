@@ -13,9 +13,9 @@ export default function Edit() {
       <div className='pt-6'>
         <div className='py-6 border border-base-content rounded-3xl'>
           <MenuBar editor={editor} />
-          <span className='px-4 pt-2 leading-5 text-[13px]'>
+          <p className='px-4 py-2 leading-5 text-[13px] border-b-[1px] border-base-content'>
             <em>Note: Emoji characters are currently not supported.</em>
-          </span>
+          </p>
           <EditorContent editor={editor} />
         </div>
       </div>
