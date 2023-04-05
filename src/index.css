@@ -2,74 +2,13 @@
 /* Bear in mind that `!important` can be added in these layers */
 /* 1. Tailwind Base Layer */
 @tailwind base;
-/* The following base style enables a colored border to help with styling the box model & flex & grid & etc. */
+/* 1.1 The following base style enables a colored border to help with styling the box model & flex & grid & etc. */
 /* #main-element-wrapper * {
   @apply border-[1px] border-fuchsia-500/50;
 } */
 
 /* 2. Tailwind Components Layer */
 @tailwind components;
-
-/* 2.2 Tiptap, see: https://tiptap.dev/installation/react (NB will get tree-shaked if put in the `@layer` directive) */
-.ProseMirror {
-  padding: 1.5rem 1rem;
-  border: 1px solid hsl(var(--bc) / var(--tw-border-opacity));
-  border-radius: 1.5rem;
-}
-
-.ProseMirror > * + * {
-  margin-top: 0.75em;
-}
-
-.ProseMirror ul,
-.ProseMirror ol {
-  padding: 0 1rem;
-}
-
-.ProseMirror h1,
-.ProseMirror h2,
-.ProseMirror h3,
-.ProseMirror h4,
-.ProseMirror h5,
-.ProseMirror h6 {
-  line-height: 1.1;
-}
-
-.ProseMirror code {
-  background-color: rgba(97, 97, 97, 0.1);
-  color: #616161;
-}
-
-.ProseMirror pre {
-  background: #0d0d0d;
-  color: #fff;
-  font-family: 'JetBrainsMono', monospace;
-  padding: 0.75rem 1rem;
-  border-radius: 0.5rem;
-}
-
-.ProseMirror pre code {
-  color: inherit;
-  padding: 0;
-  background: none;
-  font-size: 0.8rem;
-}
-
-.ProseMirror img {
-  max-width: 100%;
-  height: auto;
-}
-
-.ProseMirror blockquote {
-  padding-left: 1rem;
-  border-left: 2px solid rgba(168, 168, 168, 0.7);
-}
-
-.ProseMirror hr {
-  border: none;
-  border-top: 2px solid rgba(13, 13, 13, 0.1);
-  margin: 2rem 0;
-}
 
 /* 3. Tailwind Utilities Layer */
 @tailwind utilities;
@@ -80,13 +19,13 @@
 } */
 
 @layer base {
-  /* 1.1 Import Vite's default CSS in the base layer, as a result, ONLY `@import` can be used here in `index.css`: */
+  /* 1.2 Import Vite's default CSS in the base layer, as a result, ONLY `@import` can be used here in `index.css`: */
   /*  -- https://stackoverflow.com/questions/69746121/using-nextjs-how-can-you-import-in-css-using-tailwind-css */
   /*  -- https://tailwindcss.com/docs/using-with-preprocessors#build-time-imports */
-  /* 1.2 However, `@import` is strongly discouraged, see: https://www.debugbear.com/blog/avoid-css-import, so just paste into the base layer */
-  /* 1.3 For <html> and <body>: https://www.freecodecamp.org/news/html-page-width-height/ */
-  /* 1.4 Google "chrome scrollbar not taking content": https://stackoverflow.com/questions/18548465/prevent-scroll-bar-from-adding-up-to-the-width-of-page-on-chrome */
-  /* NB 1.5 Tailwind has alreayd provided out-of-the-box base styles, see: https://tailwindcss.com/docs/preflight, in which `box-sizing: border-box` is claimed to be made default, see: https://tailwindcss.com/docs/box-sizing#including-borders-and-padding */
+  /* 1.3 However, `@import` is strongly discouraged, see: https://www.debugbear.com/blog/avoid-css-import, so just paste into the base layer */
+  /* 1.4 For <html> and <body>: https://www.freecodecamp.org/news/html-page-width-height/ */
+  /* 1.5 Google "chrome scrollbar not taking content": https://stackoverflow.com/questions/18548465/prevent-scroll-bar-from-adding-up-to-the-width-of-page-on-chrome */
+  /* NB 1.6 Tailwind has alreayd provided out-of-the-box base styles, see: https://tailwindcss.com/docs/preflight, in which `box-sizing: border-box` is claimed to be made default, see: https://tailwindcss.com/docs/box-sizing#including-borders-and-padding */
   html {
     @apply font-sans font-normal leading-normal m-0 p-0;
     text-rendering: optimizeLegibility;
@@ -100,7 +39,7 @@
     @apply min-h-screen;
   }
 
-  /* 1.6 Transparent scrollbar for Chrome (source: google "transparent scrollbar codepen") */
+  /* 1.7 Transparent scrollbar for Chrome (source: google "transparent scrollbar codepen") */
   body::-webkit-scrollbar {
     width: 16px;
   }
@@ -148,8 +87,8 @@
   }
 }
 
-/* 3.1 CSS animations */
 @layer utilities {
+  /* 3.2 CSS animations */
   .animate {
     animation-duration: 0.5s;
     animation-name: animate-fade;

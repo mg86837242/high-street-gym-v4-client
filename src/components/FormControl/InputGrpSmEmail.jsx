@@ -7,7 +7,7 @@ export default function InputGrpSmEmail({ issue, emails, initialValue, isRequire
   return (
     <div id='email-input-group' className='w-full form-control'>
       <label htmlFor='email' className='py-1 3xl:py-2 label'>
-        <span className='text-white label-text'>Email:</span>
+        <span className='text-accent label-text'>Email:</span>
         {isRequired === false || <span className='text-gray-500 label-text-alt'>Required</span>}
       </label>
       <input
@@ -18,7 +18,7 @@ export default function InputGrpSmEmail({ issue, emails, initialValue, isRequire
         // NB The following 2 props imply this is a controlled input, see: https://react.dev/reference/react-dom/components/input#reference
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        className='text-white input input-bordered input-primary input-sm'
+        className='text-accent input input-bordered input-primary input-sm'
       />
       <label htmlFor='email' className='py-1 3xl:py-2 label'>
         {isDuplicate ? (

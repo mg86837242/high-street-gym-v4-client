@@ -15,18 +15,18 @@ export default function List() {
           {blogs.map(({ id, title, body, createdAt, updatedAt, username }) => (
             <div key={id} className='mb-12 border border-base-content rounded-3xl'>
               <div className='flex'>
-                <div className='w-full px-4 py-2 flex-shrink'>
-                  <h4 className='text-[13px] leading-4 font-medium pb-2'>{username}</h4>
+                <div className='flex-shrink w-full px-4 py-2'>
+                  <h4 className='pb-2 font-medium leading-4 text-[13px]'>{username}</h4>
                   <Link to={`${id}`}>
-                    <h2 className='text-primary-content md:text-[22px] md:leading-7 font-bold'>{title}</h2>
-                    <h3 className='text-base leading-5 h-10 overflow-hidden text-ellipsis pt-1'>{body}</h3>
+                    <h2 className='font-bold text-accent md:text-[22px] md:leading-7'>{title}</h2>
+                    <h3 className='h-10 pt-1 overflow-hidden text-base leading-5 text-ellipsis'>{body}</h3>
                   </Link>
-                  <p className='text-[13px] leading-5 pt-2 italic'>Created at: {getDateNotation(createdAt)}</p>
+                  <p className='pt-2 italic leading-5 text-[13px]'>Created at: {getDateNotation(createdAt)}</p>
                   {updatedAt && (
-                    <p className='text-[13px] leading-5 italic'>Updated at: {getDateNotation(updatedAt)}</p>
+                    <p className='italic leading-5 text-[13px]'>Updated at: {getDateNotation(updatedAt)}</p>
                   )}
                 </div>
-                <Link to={`${id}`} className='w-[200px] flex-shrink-0'>
+                <Link to={`${id}`} className='flex-shrink-0 w-[200px]'>
                   <img
                     src={`https://picsum.photos/200/156?random=${id}`}
                     alt='Random blog picture'
@@ -38,7 +38,7 @@ export default function List() {
           ))}
         </>
       ) : (
-        <p className='text-center my-4'>No blog has been found</p>
+        <p className='my-4 text-center'>No blog has been found</p>
       ),
     [blogs]
   );
@@ -51,18 +51,18 @@ export default function List() {
             loginId === authenticatedUser?.id && (
               <div key={id} className='mb-12 border border-base-content rounded-3xl'>
                 <div className='flex'>
-                  <div className='w-full px-4 py-2 flex-shrink'>
-                    <h4 className='text-[13px] leading-4 font-medium pb-2'>{username}</h4>
+                  <div className='flex-shrink w-full px-4 py-2'>
+                    <h4 className='pb-2 font-medium leading-4 text-[13px]'>{username}</h4>
                     <Link to={`${id}`}>
-                      <h2 className='text-primary-content md:text-[22px] md:leading-7 font-bold'>{title}</h2>
-                      <h3 className='text-base leading-5 h-10 overflow-hidden text-ellipsis pt-1'>{body}</h3>
+                      <h2 className='font-bold text-primary-content md:text-[22px] md:leading-7'>{title}</h2>
+                      <h3 className='h-10 pt-1 overflow-hidden text-base leading-5 text-ellipsis'>{body}</h3>
                     </Link>
-                    <p className='text-[13px] leading-5 pt-2 italic'>Created at: {getDateNotation(createdAt)}</p>
+                    <p className='pt-2 italic leading-5 text-[13px]'>Created at: {getDateNotation(createdAt)}</p>
                     {updatedAt && (
-                      <p className='text-[13px] leading-5 italic'>Updated at: {getDateNotation(updatedAt)}</p>
+                      <p className='italic leading-5 text-[13px]'>Updated at: {getDateNotation(updatedAt)}</p>
                     )}
                   </div>
-                  <Link to={`${id}`} className='w-[200px] flex-shrink-0'>
+                  <Link to={`${id}`} className='flex-shrink-0 w-[200px]'>
                     <img
                       src={`https://picsum.photos/200/156?random=${id}`}
                       alt='Random blog picture'
@@ -75,7 +75,7 @@ export default function List() {
         )}
       </>
     ) : (
-      <p className='text-center my-4'>No blog has been found</p>
+      <p className='my-4 text-center'>No blog has been found</p>
     );
   }, [blogs, authenticatedUser]);
 
@@ -86,7 +86,7 @@ export default function List() {
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
           aria-label='Dropdown list for filtering blogs'
-          className='select select-primary select-sm w-full max-w-xs'
+          className='w-full max-w-xs select select-primary select-sm'
         >
           <option value='all'>All bookings</option>
           <option value='my'>My bookings</option>
@@ -99,7 +99,7 @@ export default function List() {
         <select
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
-          className='select select-primary select-sm w-full max-w-xs'
+          className='w-full max-w-xs select select-primary select-sm'
         >
           <option value='all'>All bookings</option>
           <option value='my'>My bookings</option>

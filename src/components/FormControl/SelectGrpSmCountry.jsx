@@ -6,7 +6,7 @@ export default function SelectGrpSmCountry({ issue, initialValue, isRequired }) 
   return (
     <div id='country-select-group' className='w-full form-control'>
       <label htmlFor='country' className='py-1 3xl:py-2 label'>
-        <span className='text-white label-text'>Country:</span>
+        <span className='text-accent label-text'>Country:</span>
         {isRequired === false || <span className='text-gray-500 label-text-alt'>Required</span>}
       </label>
       <select

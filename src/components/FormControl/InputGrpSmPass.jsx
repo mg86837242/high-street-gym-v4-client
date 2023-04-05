@@ -15,7 +15,7 @@ export default function InputGrpSmPass({ issue, initialValue }) {
   return (
     <div id='password-group' className='relative w-full form-control'>
       <label htmlFor='password' className='py-1 3xl:py-2 label'>
-        <span className='text-white label-text'>Password:</span>
+        <span className='text-accent label-text'>Password:</span>
         <span className='text-gray-500 label-text-alt'>Required</span>
       </label>
       <input
@@ -24,7 +24,7 @@ export default function InputGrpSmPass({ issue, initialValue }) {
         type={inputType}
         placeholder='Enter your password here'
         defaultValue={initialValue}
-        className='text-white input input-bordered input-primary input-sm'
+        className='text-accent input input-bordered input-primary input-sm'
       />
       <button type='button' onClick={handleToggle} className='absolute right-0 mr-3 cursor-pointer mt-8 3xl:mt-10'>
         <FontAwesomeIcon icon={icon} className='w-4 h-4' />

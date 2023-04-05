@@ -91,7 +91,7 @@ export default function ProfileEditAccount() {
   //  `<input>/<select>` keep in sync with the update of `initialValues`
   return initialValues ? (
     <div className='flex-grow px-4 py-6'>
-      <h1 className='font-sans text-3xl text-primary-content'>Edit My Account</h1>
+      <h1 className='font-sans text-3xl text-accent'>Edit My Account</h1>
       <Form method='post' noValidate className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'>
         {/* (1) Shared input fields: */}
         <InputGrpSmEmail issue={issues?.email} initialValue={initialValues?.email} emails={emails} />
@@ -166,7 +166,7 @@ export default function ProfileEditAccount() {
         )}
       </Form>
       <div className='divider'></div>
-      <h1 className='font-sans text-3xl text-primary-content'>Edit My Address</h1>
+      <h1 className='font-sans text-3xl text-accent'>Edit My Address</h1>
       <Form method='post' noValidate className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'>
         {/* (1) Shared input fields: */}
         <InputGrpSm name='lineOne' type='text' issue={issues?.lineOne} initialValue={initialValues?.lineOne} />

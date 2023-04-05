@@ -7,7 +7,7 @@ export default function InputGrpEmail({ issue, emails, initialValue, isRequired 
   return (
     <div id='email-input-group' className='w-full form-control'>
       <label htmlFor='email' className='py-1 3xl:py-2 label'>
-        <span className='text-white label-text'>Email:</span>
+        <span className='text-accent label-text'>Email:</span>
         {isRequired === false || <span className='text-gray-500 label-text-alt'>Required</span>}
       </label>
       <input
@@ -17,7 +17,7 @@ export default function InputGrpEmail({ issue, emails, initialValue, isRequired 
         placeholder='Enter your email here'
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        className='w-full h-10 text-white input input-bordered input-primary 3xl:h-12'
+        className='w-full h-10 text-accent input input-bordered input-primary 3xl:h-12'
       />
       <label htmlFor='email' className='py-1 3xl:py-2label'>
         {isDuplicate ? (

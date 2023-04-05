@@ -2,7 +2,7 @@ export default function SelectGrpGender({ issue, isRequired }) {
   return (
     <div id='gender-select-group' className='w-full form-control'>
       <label htmlFor='gender' className='py-1 3xl:py-2 label'>
-        <span className='text-white label-text'>Gender:</span>
+        <span className='text-accent label-text'>Gender:</span>
         {isRequired === false || <span className='text-gray-500 label-text-alt'>Required</span>}
       </label>
       <select

@@ -14,13 +14,17 @@ export default function Details() {
     editable,
     content: body,
     extensions: [StarterKit, Color, TextStyle],
+    editorProps: {
+      attributes: {
+        class: 'prose dark:prose-invert prose-sm sm:prose-base lg:prose-lg m-5 focus:outline-none',
+      },
+    },
   });
 
   useEffect(() => {
     if (!editor) {
       return undefined;
     }
-
     editor.setEditable(editable);
   }, [editor, editable]);
 
@@ -30,12 +34,12 @@ export default function Details() {
 
   return (
     <div className='flex flex-col gap-4'>
-      <article className='min-w-full prose prose-zinc'>
-        <h1>{title}</h1>
+      <article className='min-w-full'>
+        <h1 className='font-sans font-bold text-accent'>{title}</h1>
         <div className='flex flex-col'>
           <span>by {username}</span>
-          <i className='text-[13px] leading-5'>created at: {createdAt}</i>
-          {updatedAt && <i className='text-[13px] leading-5'>updated at: {updatedAt}</i>}
+          <i className='leading-5 text-[13px]'>created at: {createdAt}</i>
+          {updatedAt && <i className='leading-5 text-[13px]'>updated at: {updatedAt}</i>}
         </div>
         {editable ? (
           <div className='flex flex-col gap-4 px-4 py-6 border border-base-content rounded-3xl'>
