@@ -11,14 +11,14 @@ export default function Details() {
   } = useLoaderData();
   const [editable, setEditable] = useState(false);
   const editor = useEditor({
-    editable,
     content: body,
-    extensions: [StarterKit, Color, TextStyle],
+    editable,
     editorProps: {
       attributes: {
         class: 'min-w-full px-4 py-6 prose dark:prose-invert prose-sm sm:prose-base focus:outline-none',
       },
     },
+    extensions: [StarterKit, Color, TextStyle],
   });
 
   useEffect(() => {
@@ -41,17 +41,17 @@ export default function Details() {
           <i className='leading-5 text-[13px]'>created at: {createdAt}</i>
           {updatedAt && <i className='leading-5 text-[13px]'>updated at: {updatedAt}</i>}
         </div>
-        {editable ? (
-          <div className='flex flex-col gap-4 py-6'>
-            <div className='py-6 border border-base-content rounded-3xl'>
-              <MenuBar editor={editor} />
-              <EditorContent editor={editor} />
-            </div>
-          </div>
-        ) : (
-          <EditorContent editor={editor} />
-        )}
       </article>
+      {editable ? (
+        <div className='flex flex-col gap-4 pt-6'>
+          <div className='py-6 border border-base-content rounded-3xl'>
+            <MenuBar editor={editor} />
+            <EditorContent editor={editor} />
+          </div>
+        </div>
+      ) : (
+        <EditorContent editor={editor} />
+      )}
       <Outlet context={[setEditable]} />
     </div>
   );
