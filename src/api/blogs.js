@@ -27,7 +27,14 @@ export async function createBlogSimple({ request }) {
   const loginId = formData.get('loginId');
   const creations = {
     title: 'New Blog',
-    body: '{"type":"doc","content":[{"type":"paragraph","content":[{"type":"text","text":"Example "},{"type":"text","marks":[{"type":"bold"}],"text":"Text"}]}]}',
+    body: `
+    <p>
+      This text is <strong>read-only</strong>. No matter what you try, you are not able to edit something. Okay, if you click the edit button below you’ll be able to edit the text.
+    </p>
+    <p>
+      If you want to check the state, you can call <code>editor.isEditable()</code>.
+    </p>
+    `,
     loginId,
   };
   const json = await fetchJSON(`${API_URL}/blogs`, 'post', creations);
