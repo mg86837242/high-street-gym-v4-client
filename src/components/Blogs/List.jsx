@@ -1,6 +1,7 @@
 import { useContext, useState, useMemo } from 'react';
 import AuthContext from '../../context/AuthContext';
 import { useLoaderData, Link, Form } from 'react-router-dom';
+import removeTags from '../../utils/removeTags';
 import { getDateNotation } from '../../utils/mapDates';
 import Button2Sm from '../UI/Button2Sm';
 
@@ -19,7 +20,7 @@ export default function List() {
                   <h4 className='pb-2 font-medium leading-4 text-[13px]'>{username}</h4>
                   <Link to={`${id}`}>
                     <h2 className='font-bold text-accent md:text-[22px] md:leading-7'>{title}</h2>
-                    <h3 className='h-10 pt-1 overflow-hidden text-base leading-5 text-ellipsis'>{body}</h3>
+                    <h3 className='h-10 pt-1 overflow-hidden text-base leading-5 text-ellipsis'>{removeTags(body)}</h3>
                   </Link>
                   <p className='pt-2 italic leading-5 text-[13px]'>Created at: {getDateNotation(createdAt)}</p>
                   {updatedAt && (
