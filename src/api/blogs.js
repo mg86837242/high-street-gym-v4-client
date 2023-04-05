@@ -53,8 +53,6 @@ export async function createBlogSimple({ request }) {
       </p>
       <blockquote>
         Wow, that’s amazing. Good work, boy!
-        <br />
-        — Teacher
       </blockquote>
     `,
     loginId,
