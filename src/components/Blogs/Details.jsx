@@ -1,66 +1,50 @@
-import { useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { useLoaderData, Outlet } from 'react-router-dom';
-import { generateHTML } from '@tiptap/html';
-import Document from '@tiptap/extension-document';
-import Paragraph from '@tiptap/extension-paragraph';
-import Text from '@tiptap/extension-text';
-import Bold from '@tiptap/extension-bold';
-
-const json = {
-  type: 'doc',
-  content: [
-    {
-      type: 'paragraph',
-      content: [
-        {
-          type: 'text',
-          text: 'Example ',
-        },
-        {
-          type: 'text',
-          marks: [
-            {
-              type: 'bold',
-            },
-          ],
-          text: 'Text',
-        },
-      ],
-    },
-  ],
-};
+import { EditorContent, useEditor } from '@tiptap/react';
+import StarterKit from '@tiptap/starter-kit';
 
 export default function Details() {
   const {
     blog: { id, title, body, createdAt, updatedAt, username },
   } = useLoaderData();
-  const output = useMemo(
-    () =>
-      generateHTML(json, [
-        Document,
-        Paragraph,
-        Text,
-        Bold,
-        // other extensions …
-      ]),
-    [json]
-  );
+  const [editable, setEditable] = useState(false);
+  const editor = useEditor({
+    editable,
+    content: `
+        <p>
+          This text is <strong>read-only</strong>. No matter what you try, you are not able to edit something. Okay, if you click the edit button below you’ll be able to edit the text.
+        </p>
+        <p>
+          If you want to check the state, you can call <code>editor.isEditable()</code>.
+        </p>
+      `,
+    extensions: [StarterKit],
+  });
+
+  useEffect(() => {
+    if (!editor) {
+      return undefined;
+    }
+
+    editor.setEditable(editable);
+  }, [editor, editable]);
+
+  if (!editor) {
+    return null;
+  }
 
   return (
     <div className='flex flex-col gap-4'>
-      <article className='prose prose-zinc'>
+      <article className='min-w-full prose prose-zinc'>
         <h1>{title}</h1>
         <div className='flex flex-col'>
           <span>by {username}</span>
           <i className='text-[13px] leading-5'>created at: {createdAt}</i>
           {updatedAt && <i className='text-[13px] leading-5'>updated at: {updatedAt}</i>}
         </div>
-        <pre>
-          <code>{output}</code>
-        </pre>
-        <div>{output}</div>
+        <EditorContent editor={editor} />
       </article>
-      <Outlet />
+      <Outlet context={[setEditable]} />
     </div>
   );
 }

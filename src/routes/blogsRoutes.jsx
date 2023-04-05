@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, redirect } from 'react-router-dom';
 import ErrorInfoBack from '../components/ErrorInfoBack';
 
 const blogsRoutes = [
@@ -46,7 +46,8 @@ const blogsRoutes = [
         ErrorBoundary: ErrorInfoBack,
         async action() {
           // FIX action
-          return null;
+          console.log('⚒️ Action to be implemented');
+          return redirect('..');
         },
       },
     ],

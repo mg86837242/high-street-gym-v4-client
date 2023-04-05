@@ -1,12 +1,14 @@
-import { Form } from 'react-router-dom';
+import { Form, useOutletContext } from 'react-router-dom';
 import Button2Sm from '../UI/Button2Sm';
 import Button5Sm from '../UI/Button5Sm';
 
 export default function DetailsIndex() {
+  const [setEditable] = useOutletContext();
+
   return (
     <div className='flex justify-end gap-10 py-6'>
       <Form action='edit'>
-        <Button2Sm>Edit</Button2Sm>
+        <Button2Sm onClick={() => setEditable(true)}>Edit</Button2Sm>
       </Form>
       <Form
         method='post'
