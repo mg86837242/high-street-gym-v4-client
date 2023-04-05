@@ -1,5 +1,5 @@
 import { useContext, useState, useMemo } from 'react';
-import AuthContext from '../../contexts/AuthContext';
+import AuthContext from '../../context/AuthContext';
 import { useLoaderData, Link, Form } from 'react-router-dom';
 import { getDateNotation } from '../../utils/mapDates';
 import Button2Sm from '../UI/Button2Sm';

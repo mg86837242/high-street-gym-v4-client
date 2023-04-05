@@ -1,5 +1,5 @@
 import { useContext, useMemo, useState } from 'react';
-import AuthContext from '../../contexts/AuthContext';
+import AuthContext from '../../context/AuthContext';
 import { useLoaderData, NavLink, Outlet } from 'react-router-dom';
 import { getDateNotation } from '../../utils/mapDates';
 

@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import AuthContext from '../contexts/AuthContext';
+import AuthContext from '../context/AuthContext';
 import router from '../routes/router';
 import { RouterProvider } from 'react-router-dom';
 import { getUserByKey, login, logout } from '../api/logins';

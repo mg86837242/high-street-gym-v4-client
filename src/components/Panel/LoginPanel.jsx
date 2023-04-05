@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import AuthContext from '../../contexts/AuthContext';
+import AuthContext from '../../context/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { emailSchema, passwordSchema } from '../../schemas/logins';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

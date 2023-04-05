@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from 'react';
-import AuthContext from '../../contexts/AuthContext';
+import AuthContext from '../../context/AuthContext';
 import { useLoaderData, useActionData, Form } from 'react-router-dom';
 import SpinnerNoNav from '../UI/SpinnerNoNav';
 import InputGrpSmEmail from '../FormControl/InputGrpSmEmail';
