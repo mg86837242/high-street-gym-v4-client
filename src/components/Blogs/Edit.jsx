@@ -7,7 +7,7 @@ export default function Edit() {
   const navigate = useNavigate();
 
   return (
-    <div className='flex justify-end gap-10 py-6'>
+    <div className='flex justify-end gap-10 py-6 px-4'>
       <Form method='post'>
         <Button2Sm
           onClick={() => {

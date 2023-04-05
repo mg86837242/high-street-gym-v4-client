@@ -16,7 +16,7 @@ export default function Details() {
     extensions: [StarterKit, Color, TextStyle],
     editorProps: {
       attributes: {
-        class: 'prose dark:prose-invert prose-sm sm:prose-base lg:prose-lg m-5 focus:outline-none',
+        class: 'min-w-full px-4 py-6 prose dark:prose-invert prose-sm sm:prose-base focus:outline-none',
       },
     },
   });
@@ -33,18 +33,20 @@ export default function Details() {
   }
 
   return (
-    <div className='flex flex-col gap-4'>
+    <div className='flex flex-col'>
       <article className='min-w-full'>
-        <h1 className='font-sans font-bold text-accent'>{title}</h1>
-        <div className='flex flex-col'>
+        <h1 className='px-4 font-sans font-bold text-accent'>{title}</h1>
+        <div className='flex flex-col px-4'>
           <span>by {username}</span>
           <i className='leading-5 text-[13px]'>created at: {createdAt}</i>
           {updatedAt && <i className='leading-5 text-[13px]'>updated at: {updatedAt}</i>}
         </div>
         {editable ? (
-          <div className='flex flex-col gap-4 px-4 py-6 border border-base-content rounded-3xl'>
-            <MenuBar editor={editor} />
-            <EditorContent editor={editor} />
+          <div className='flex flex-col gap-4 py-6'>
+            <div className='py-6 border border-base-content rounded-3xl'>
+              <MenuBar editor={editor} />
+              <EditorContent editor={editor} />
+            </div>
           </div>
         ) : (
           <EditorContent editor={editor} />
@@ -61,7 +63,7 @@ function MenuBar({ editor }) {
   }
 
   return (
-    <div className='flex flex-wrap gap-2'>
+    <div className='flex flex-wrap gap-2 px-4'>
       <button
         onClick={() => editor.chain().focus().toggleBold().run()}
         disabled={!editor.can().chain().focus().toggleBold().run()}

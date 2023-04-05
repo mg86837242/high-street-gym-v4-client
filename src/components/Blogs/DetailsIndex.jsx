@@ -6,7 +6,7 @@ export default function DetailsIndex() {
   const [setEditable] = useOutletContext();
 
   return (
-    <div className='flex justify-end gap-10 py-6'>
+    <div className='flex justify-end gap-10 py-6 px-4'>
       <Form action='edit'>
         <Button2Sm onClick={() => setEditable(true)}>Edit</Button2Sm>
       </Form>
