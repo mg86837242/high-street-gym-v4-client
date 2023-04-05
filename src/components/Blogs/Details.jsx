@@ -28,11 +28,7 @@ export default function Details() {
     editor.setEditable(editable);
   }, [editor, editable]);
 
-  if (!editor) {
-    return null;
-  }
-
-  return (
+  return editor ? (
     <div className='flex flex-col'>
       <article className='min-w-full prose-sm md:prose-base lg:prose-lg'>
         <h1 className='px-4 font-bold text-accent'>{title}</h1>
@@ -44,11 +40,11 @@ export default function Details() {
       </article>
       <Outlet context={[setEditable, editor]} />
     </div>
-  );
+  ) : null;
 }
 
 // References:
-// -- https://tiptap.dev/guide/output: Tiptap output & necessary packages
+// -- https://tiptap.dev/guide/output: Tiptap output & necessary packages => Rendering Option 1 preferred
 // ---- https://tiptap.dev/api/extensions/starter-kit: StarterKit already included several packages
 // ---- https://www.npmjs.com/package/@tiptap/html: This one is not mentioned in the docs, but might be necessary
 // ---- https://stackoverflow.com/questions/39758136: Rendering Option 2 => Google "how to render html string in react"
