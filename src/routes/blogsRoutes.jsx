@@ -26,7 +26,7 @@ const blogsRoutes = [
       return getBlogById({ params });
     },
     handle: {
-      crumb: (params, data) => (data?.blog ? <Link to={`/blogs/id/${params.id}`}>Blog ID: {params.id}</Link> : 'Error'),
+      crumb: (params, data) => (data?.blog ? <Link to={`/blogs/${params.id}`}>Blog ID: {params.id}</Link> : 'Error'),
     },
     children: [
       {
