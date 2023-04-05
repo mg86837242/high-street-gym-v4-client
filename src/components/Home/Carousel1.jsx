@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import carouselItems from '../data/carouselItems';
+import carouselItems from '../../data/carouselItems';
 
 export default function Carousel() {
   const listRef = useRef(null);

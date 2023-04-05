@@ -1,4 +1,4 @@
-import Spinner from './Spinner';
+import Spinner from '../UI/Spinner';
 
 export default function MainWrapper({ children, gap, mt, mb }) {
   return (

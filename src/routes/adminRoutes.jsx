@@ -1,6 +1,6 @@
-import ErrorInfoRefresh from '../components/ErrorInfoRefresh';
-import ErrorInfoBack from '../components/ErrorInfoBack';
-import RequireAuth from '../components/RequireAuth';
+import ErrorInfoRefresh from '../components/UI/ErrorInfoRefresh';
+import ErrorInfoBack from '../components/UI/ErrorInfoBack';
+import RequireAuth from '../components/Layout/RequireAuth';
 
 const adminRoutes = [
   {

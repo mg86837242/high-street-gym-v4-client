@@ -10,14 +10,6 @@ export default function Details() {
   const [editable, setEditable] = useState(false);
   const editor = useEditor({
     editable,
-    // content: `
-    //   <p>
-    //     This text is <strong>read-only</strong>. No matter what you try, you are not able to edit something. Okay, if you click the edit button below you’ll be able to edit the text.
-    //   </p>
-    //   <p>
-    //     If you want to check the state, you can call <code>editor.isEditable()</code>.
-    //   </p>
-    // `,
     content: body,
     extensions: [StarterKit],
   });
@@ -54,7 +46,7 @@ export default function Details() {
 // -- https://tiptap.dev/guide/output: Tiptap output & necessary packages
 // ---- https://tiptap.dev/api/extensions/starter-kit: StarterKit already included several packages
 // ---- https://www.npmjs.com/package/@tiptap/html: This one is not mentioned in the docs, but is a must
-// -- https://stackoverflow.com/questions/39758136: Rendering Option 2 => Google "how to render html string in react"
+// ---- https://stackoverflow.com/questions/39758136: Rendering Option 2 => Google "how to render html string in react"
 // ---- https://github.com/peternewnham/react-html-parser#readme: recommended by the above SO post, pay attention to
 //  the security section, which indicates it's better than `html-react-parser`, however, still not perfect => Rendering
-//  Option 1 might be better
+//  Option 1 is better

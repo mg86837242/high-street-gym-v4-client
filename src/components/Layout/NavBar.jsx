@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from 'react';
-import AuthContext from '../contexts/AuthContext';
+import AuthContext from '../../contexts/AuthContext';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 
 // This component has the duality of different appearances and behaviors based on the `isHome` props

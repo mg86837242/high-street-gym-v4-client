@@ -1,12 +1,17 @@
 import { useRouteError, useNavigation, isRouteErrorResponse, useNavigate } from 'react-router-dom';
-import { ReactComponent as BoxIcon } from '../assets/error-box.svg';
-import Button2 from './UI/Button2';
+import { ReactComponent as BoxIcon } from '../../assets/error-box.svg';
+import Button2 from './Button2';
 
-export default function ErrorInfoBack() {
+export default function ErrorInfoRefresh() {
   const error = useRouteError();
   const navigation = useNavigation();
   const navigate = useNavigate();
   // console.error(error); // only for debugging
+
+  // Refresh page i/o go back, so as to cope with the session loss after encountering server errors (e.g. 400),
+  function handleClick() {
+    navigate('', { replace: true });
+  }
 
   return navigation.state === 'loading' ? (
     <></>
@@ -18,7 +23,7 @@ export default function ErrorInfoBack() {
         <h1 className='text-center text-rose-500'>{error.data.match(/^\d{3}/)}</h1>
         <p className='text-center text-rose-500'>{error.data.match(/(?<=^\d{3}\s).*/) || error.data}</p>
       </div>
-      <Button2 onClick={() => navigate(-1)}>Go Back</Button2>
+      <Button2 onClick={handleClick}>Go Back</Button2>
     </div>
   ) : (
     <div className='flex flex-col items-center justify-center w-full h-full max-h-[calc(100vh-7.5rem)] gap-6'>
@@ -28,7 +33,10 @@ export default function ErrorInfoBack() {
         <p className='text-center text-rose-500'>Sorry, an unexpected error has occurred.</p>
         <p className='text-center text-rose-500'>{error.statusText || error.message}</p>
       </div>
-      <Button2 onClick={() => navigate(-1)}>Go Back</Button2>
+      <Button2 onClick={handleClick}>Go Back</Button2>
     </div>
   );
 }
+
+// References:
+//  -- https://stackoverflow.com/questions/73048879/how-do-i-reload-my-page-in-remix-run-on-a-button-click-in-an-error-boundary-comp

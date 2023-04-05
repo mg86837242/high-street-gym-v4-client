@@ -1,5 +1,5 @@
 import { Link, redirect } from 'react-router-dom';
-import ErrorInfoBack from '../components/ErrorInfoBack';
+import ErrorInfoBack from '../components/UI/ErrorInfoBack';
 
 const blogsRoutes = [
   {

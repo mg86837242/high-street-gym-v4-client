@@ -1,4 +1,4 @@
-import MainWrapper from '../components/MainWrapper';
+import MainWrapper from '../components/Layout/MainWrapper';
 import { ProfilePanel } from '../components/Panel/ProfilePanel';
 
 export default function Profile() {

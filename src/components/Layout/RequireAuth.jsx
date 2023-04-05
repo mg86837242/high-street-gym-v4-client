@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import AuthContext from '../contexts/AuthContext';
+import AuthContext from '../../contexts/AuthContext';
 import { Outlet, Navigate, useLocation } from 'react-router-dom';
 
 export default function RequireAuth({ roles }) {

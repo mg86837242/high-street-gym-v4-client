@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from 'react';
 import AuthContext from '../../contexts/AuthContext';
 import { useLoaderData, useActionData, Form } from 'react-router-dom';
-import SpinnerNotNav from '../SpinnerNotNav';
+import SpinnerNoNav from '../UI/SpinnerNoNav';
 import InputGrpSmEmail from '../FormControl/InputGrpSmEmail';
 import InputGrpSmPass from '../FormControl/InputGrpSmPass';
 import InputGrpSm from '../FormControl/InputGrpSm';
@@ -222,6 +222,6 @@ export default function ProfileEditAccount() {
       </Form>
     </div>
   ) : (
-    <SpinnerNotNav />
+    <SpinnerNoNav />
   );
 }

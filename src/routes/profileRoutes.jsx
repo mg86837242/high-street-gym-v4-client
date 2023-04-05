@@ -1,5 +1,5 @@
 import { json } from 'react-router-dom';
-import ErrorInfoRefresh from '../components/ErrorInfoRefresh';
+import ErrorInfoRefresh from '../components/UI/ErrorInfoRefresh';
 
 const profileRoutes = [
   {

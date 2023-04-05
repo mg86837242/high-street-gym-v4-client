@@ -1,6 +1,6 @@
 import { useLoaderData } from 'react-router-dom';
-import Canvas from '../components/Panel/Canvas';
-import NavBarMinimal from '../components/NavBarMinimal';
+import Canvas from '../components/UI/Canvas';
+import NavBarMinimal from '../components/Layout/NavBarMinimal';
 import SignupPanel from '../components/Panel/SignupPanel';
 
 export default function Signup() {

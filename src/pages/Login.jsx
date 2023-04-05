@@ -1,5 +1,5 @@
-import Canvas from '../components/Panel/Canvas';
-import NavBarMinimal from '../components/NavBarMinimal';
+import Canvas from '../components/UI/Canvas';
+import NavBarMinimal from '../components/Layout/NavBarMinimal';
 import LoginPanel from '../components/Panel/LoginPanel';
 
 export default function Login() {

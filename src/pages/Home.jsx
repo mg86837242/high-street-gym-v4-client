@@ -1,10 +1,10 @@
-import Hero from '../components/Hero1';
-import NavBar from '../components/NavBar';
-import MainWrapper from '../components/MainWrapper';
-import Feature1 from '../components/Feature1';
-import Carousel1 from '../components/Carousel1';
-import Carousel2 from '../components/Carousel2';
-import Footer from '../components/Footer';
+import Hero from '../components/Home/Hero1';
+import NavBar from '../components/Layout/NavBar';
+import MainWrapper from '../components/Layout/MainWrapper';
+import Feature1 from '../components/Home/Feature1';
+import Carousel1 from '../components/Home/Carousel1';
+import Carousel2 from '../components/Home/Carousel2';
+import Footer from '../components/Layout/Footer';
 
 export default function Home() {
   return (
