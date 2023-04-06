@@ -8,9 +8,8 @@ import Image from '@tiptap/extension-image';
 import CharacterCount from '@tiptap/extension-character-count';
 
 export default function Details() {
-  const {
-    blog: { id, title, body, createdAt, updatedAt, username },
-  } = useLoaderData();
+  const { blog } = useLoaderData();
+  const { title, body, createdAt, updatedAt, username } = blog;
   const [editable, setEditable] = useState(false);
   const limit = 6_000;
   const editor = useEditor({
@@ -45,7 +44,7 @@ export default function Details() {
           {updatedAt && <span className='leading-5 text-[13px] italic'>updated at: {updatedAt}</span>}
         </div>
       </article>
-      <Outlet context={{ editor, limit }} />
+      <Outlet context={{ blog, limit, editor }} />
     </div>
   );
 }

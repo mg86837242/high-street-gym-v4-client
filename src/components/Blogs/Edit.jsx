@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useMemo, useEffect, useCallback } from 'react';
 import { useOutletContext, useSubmit, useNavigate } from 'react-router-dom';
 import { EditorContent } from '@tiptap/react';
 import { useForm } from 'react-hook-form';
@@ -6,49 +6,51 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import blogSchema from '../../schemas/blogs';
 import Button2Sm from '../UI/Button2Sm';
 import Button1Sm from '../UI/Button1Sm';
+import FCRHFSm from '../FormControlRHF/FCRHFSm';
 
 export default function Edit() {
-  const { editor, limit } = useOutletContext();
+  const { blog, limit, editor } = useOutletContext();
   const submit = useSubmit();
   const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: zodResolver(blogSchema),
+    defaultValues: useMemo(() => {
+      return blog;
+    }, [blog]),
   });
+
+  useEffect(() => {
+    reset(blog);
+  }, [reset, blog]);
 
   return (
     <>
       <div className='pt-6'>
         <div className='border border-base-content rounded-3xl'>
           <form
-            id='hook-form'
-            onSubmit={() => {
-              // TODO Default values and potential Effects
-              // TODO Validation as all fields are required
-              handleSubmit((data) => {
-                console.log(`🟢 [${new Date().toLocaleTimeString()}] : `, data);
-                // submit({ body: JSON.stringify(data) }, { method: 'post' });
-                // editor.setEditable(false);
-              });
-            }}
+            id='edit-blog'
+            onSubmit={handleSubmit((data) => {
+              submit({ body: JSON.stringify(data) }, { method: 'post' });
+            })}
             noValidate
             className='flex px-4 py-2 border-b-[1px] border-base-content'
           >
-            <label className='input-group input-group-sm'>
-              <span>Title: </span>
+            <FCRHFSm label='Blog Post Title' issue={errors.title?.message}>
               <input {...register('title')} className='input input-bordered input-sm' />
-            </label>
-            <label className='input-group input-group-sm'>
-              <span>Body: </span>
+            </FCRHFSm>
+            <FCRHFSm label='Blog Post Body' issue={errors.body?.message}>
               <input {...register('body')} className='input input-bordered input-sm' />
-            </label>
-            <label className='input-group input-group-sm'>
-              <span>Login ID: </span>
-              <input {...register('loginId')} className='input input-bordered input-sm' />
-            </label>
+            </FCRHFSm>
+            <input
+              type='hidden'
+              {...register('loginId', { valueAsNumber: true })}
+              className='input input-bordered input-sm'
+            />
           </form>
           <MenuBar editor={editor} />
           <EditorContent editor={editor} />
@@ -56,13 +58,15 @@ export default function Edit() {
         </div>
       </div>
       <div className='flex justify-end gap-10 px-4 py-6'>
-        <button
-          type='submit'
-          form='hook-form'
-          className={`shadow btn btn-primary btn-sm text-primary-content shadow-black/50`}
+        <Button2Sm
+          form='edit-blog'
+          onClick={() => {
+            editor.setEditable(false);
+            navigate('..');
+          }}
         >
           Save
-        </button>
+        </Button2Sm>
         <Button1Sm
           type='button'
           onClick={() => {
@@ -191,12 +195,6 @@ function MenuBar({ editor }) {
         >
           green
         </button>
-        <input
-          type='color'
-          onInput={(event) => editor.chain().focus().setColor(event.target.value).run()}
-          value={editor.getAttributes('textStyle').color}
-          className='btn btn-outline btn-xs px-2 py-1'
-        />
         <button onClick={() => editor.chain().focus().unsetColor().run()} className='btn btn-outline btn-xs'>
           unset color
         </button>

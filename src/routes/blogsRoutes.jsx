@@ -44,9 +44,9 @@ const blogsRoutes = [
           return { Component: Edit };
         },
         ErrorBoundary: ErrorInfoBack,
-        async action() {
+        async action({ params, request }) {
+          // console.log(await request.formData().get('body'));
           // FIX action
-          console.log('⚒️ Action to be implemented');
           return redirect('..');
         },
       },
