@@ -11,7 +11,7 @@ export default function Edit() {
   return (
     <>
       <div className='pt-6'>
-        <div className='py-6 border border-base-content rounded-3xl'>
+        <div className='pt-6 border border-base-content rounded-3xl'>
           <MenuBar editor={editor} />
           <EditorContent editor={editor} />
           <WordCount editor={editor} limit={limit} />
@@ -80,6 +80,16 @@ function MenuBar({ editor }) {
           code
         </button>
         <button
+          onClick={() => editor.chain().focus().setColor('#958DF1').run()}
+          className={
+            editor.isActive('textStyle', { color: '#958DF1' })
+              ? 'btn btn-outline btn-xs btn-active'
+              : 'btn btn-outline btn-xs'
+          }
+        >
+          purple
+        </button>
+        <button
           onClick={() => editor.chain().focus().setColor('#F98181').run()}
           className={
             editor.isActive('textStyle', { color: '#F98181' })
@@ -110,14 +120,14 @@ function MenuBar({ editor }) {
           yellow
         </button>
         <button
-          onClick={() => editor.chain().focus().setColor('#B9F18D').run()}
+          onClick={() => editor.chain().focus().setColor('#70CFF8').run()}
           className={
-            editor.isActive('textStyle', { color: '#B9F18D' })
+            editor.isActive('textStyle', { color: '#70CFF8' })
               ? 'btn btn-outline btn-xs btn-active'
               : 'btn btn-outline btn-xs'
           }
         >
-          green
+          blue
         </button>
         <button
           onClick={() => editor.chain().focus().setColor('#94FADB').run()}
@@ -130,25 +140,21 @@ function MenuBar({ editor }) {
           teal
         </button>
         <button
-          onClick={() => editor.chain().focus().setColor('#70CFF8').run()}
+          onClick={() => editor.chain().focus().setColor('#B9F18D').run()}
           className={
-            editor.isActive('textStyle', { color: '#70CFF8' })
+            editor.isActive('textStyle', { color: '#B9F18D' })
               ? 'btn btn-outline btn-xs btn-active'
               : 'btn btn-outline btn-xs'
           }
         >
-          blue
+          green
         </button>
-        <button
-          onClick={() => editor.chain().focus().setColor('#958DF1').run()}
-          className={
-            editor.isActive('textStyle', { color: '#958DF1' })
-              ? 'btn btn-outline btn-xs btn-active'
-              : 'btn btn-outline btn-xs'
-          }
-        >
-          purple
-        </button>
+        <input
+          type='color'
+          onInput={(event) => editor.chain().focus().setColor(event.target.value).run()}
+          value={editor.getAttributes('textStyle').color}
+          className='btn btn-outline btn-xs px-2 py-1'
+        />
         <button onClick={() => editor.chain().focus().unsetColor().run()} className='btn btn-outline btn-xs'>
           unset color
         </button>

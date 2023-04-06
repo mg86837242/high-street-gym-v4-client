@@ -1,5 +1,5 @@
 export default function removeTags(str) {
-  return str.replaceAll(/<[^>]*>/g, '').trim();
+  return str.replace(/<[^>]*>/g, '').trim();
 }
 
 // References:

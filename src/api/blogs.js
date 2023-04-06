@@ -22,7 +22,7 @@ export async function createBlog({ request }) {
   return null;
 }
 
-export async function createBlogSimple({ request }) {
+export async function createBlogSample({ request }) {
   const formData = await request.formData();
   const loginId = formData.get('loginId');
   const creations = {
