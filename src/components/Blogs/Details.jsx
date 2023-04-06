@@ -23,7 +23,13 @@ export default function Details() {
         class: 'min-w-full px-4 py-6 prose dark:prose-invert prose-sm md:prose-base lg:prose-lg focus:outline-none',
       },
     },
-    extensions: [StarterKit, Color, TextStyle, Image, CharacterCount.configure({ limit })],
+    extensions: [
+      StarterKit,
+      Color,
+      TextStyle,
+      Image.configure({ HTMLAttributes: { class: 'rounded-3xl' } }),
+      CharacterCount.configure({ limit }),
+    ],
   });
 
   useEffect(() => {
