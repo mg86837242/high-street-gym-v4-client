@@ -10,19 +10,20 @@ import FCRHFSm from '../FormControlRHF/FCRHFSm';
 
 export default function Edit() {
   const { blog, limit, setEditable, editor } = useOutletContext();
-  const submit = useSubmit();
   const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-    setValue,
   } = useForm({
     resolver: zodResolver(blogSchema),
     defaultValues: useMemo(() => {
       return blog;
     }, [blog]),
+    values: {
+      body: editor.getHTML(),
+    },
   });
 
   useEffect(() => {
@@ -33,26 +34,12 @@ export default function Edit() {
     <>
       <div className='pt-6'>
         <div className='border border-base-content rounded-3xl'>
-          <form
-            id='edit-blog'
-            onSubmit={handleSubmit((data) => {
-              console.log(data);
-              setEditable(false);
-              submit({ body: JSON.stringify(data) }, { method: 'post' });
-            })}
-            noValidate
-            className='flex px-4 py-2 border-b-[1px] border-base-content'
-          >
-            <FCRHFSm label='Title' issue={errors.title?.message}>
-              <input {...register('title')} className='input input-bordered input-sm' />
-            </FCRHFSm>
-            <input type='hidden' {...register('body')} className='input input-bordered input-sm' />
-            <input
-              type='hidden'
-              {...register('loginId', { valueAsNumber: true })}
-              className='input input-bordered input-sm'
-            />
-          </form>
+          <TitleForm
+            register={register}
+            issue={errors.title?.message}
+            handleSubmit={handleSubmit}
+            setEditable={setEditable}
+          />
           <MenuBar editor={editor} />
           <EditorContent editor={editor} />
           <WordCount editor={editor} issue={errors.body?.message} limit={limit} />
@@ -73,6 +60,32 @@ export default function Edit() {
         </Button1Sm>
       </div>
     </>
+  );
+}
+
+function TitleForm({ register, issue, handleSubmit, setEditable }) {
+  const submit = useSubmit();
+
+  return (
+    <form
+      id='edit-blog'
+      onSubmit={handleSubmit((data) => {
+        setEditable(false);
+        submit({ body: JSON.stringify(data) }, { method: 'post' });
+      })}
+      noValidate
+      className='flex flex-col px-4 py-2 border-b-[1px] border-base-content'
+    >
+      <FCRHFSm label='Title' issue={issue}>
+        <input {...register('title')} className='input input-bordered input-sm' />
+      </FCRHFSm>
+      <input type='hidden' {...register('body')} className='input input-bordered input-sm' />
+      <input
+        type='hidden'
+        {...register('loginId', { valueAsNumber: true })}
+        className='input input-bordered input-sm'
+      />
+    </form>
   );
 }
 
@@ -351,3 +364,5 @@ function WordCount({ editor, issue, limit }) {
 // References:
 // -- https://stackoverflow.com/questions/4692774: Recommend to use `TEXT` data type for storing blog post body
 // -- https://stackoverflow.com/questions/39463134: How to store emoji in MySQL db
+// -- https://react-hook-form.com/api/useform/#values: "The `values` props will react to changes and update the form
+//  values, which is useful when your form needs to be updated by external state or server data."

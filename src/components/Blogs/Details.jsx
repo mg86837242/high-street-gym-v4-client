@@ -37,13 +37,12 @@ export default function Details() {
   return (
     <div className='flex flex-col'>
       <article className='min-w-full prose-sm md:prose-base lg:prose-lg'>
-        <h1 className='px-4 font-bold text-accent'>
-          {title} {editable === true ? '(TRUE)' : '(FALSE)'}
-        </h1>
+        <h1 className='px-4 font-bold text-accent'>{title}</h1>
         <div className='flex flex-col px-4'>
           <span>by {username}</span>
-          <span className='leading-5 text-[13px] italic'>created at: {createdAt}</span>
-          {updatedAt && <span className='leading-5 text-[13px] italic'>updated at: {updatedAt}</span>}
+          <span className='leading-5 text-[13px] italic'>Created at: {createdAt}</span>
+          {updatedAt && <span className='leading-5 text-[13px] italic'>Updated at: {updatedAt}</span>}
+          <span className='leading-5 text-[13px]'>{editable === true ? '✅ Edit mode on' : '❌ Edit mode off'}</span>
         </div>
       </article>
       <Outlet context={{ blog, limit, setEditable, editor }} />
@@ -59,4 +58,4 @@ export default function Details() {
 // ---- https://github.com/peternewnham/react-html-parser#readme: recommended by the above SO post, pay attention to
 //  the security section, which indicates it's better than `html-react-parser`, however, still not perfect => Rendering
 //  Option 1 is better
-// -- https://stackoverflow.com/questions/73291625/: How to send multiple ctx in <Outlet> ctx
+// -- https://stackoverflow.com/questions/72047804/passing-multiple-state-variables-through-outlet-context
