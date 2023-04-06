@@ -45,9 +45,8 @@ const blogsRoutes = [
         },
         ErrorBoundary: ErrorInfoBack,
         async action({ params, request }) {
-          // console.log(await request.formData().get('body'));
-          // FIX action
-          return redirect('..');
+          let { updateBlogById } = await import('../api/blogs');
+          return updateBlogById({ params, request });
         },
       },
     ],
@@ -60,7 +59,7 @@ const blogsRoutes = [
     },
     ErrorBoundary: ErrorInfoBack,
     async action({ request }) {
-      // FIX action
+      // FIX (1) zod schema to disallow emoji (2) action
       let { createBlog } = await import('../api/blogs');
       return createBlog({ request });
     },

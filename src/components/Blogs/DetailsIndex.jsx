@@ -4,14 +4,14 @@ import Button2Sm from '../UI/Button2Sm';
 import Button1Sm from '../UI/Button1Sm';
 
 export default function DetailsIndex() {
-  const { editor } = useOutletContext();
+  const { setEditable, editor } = useOutletContext();
 
   return (
     <>
       <EditorContent editor={editor} />
       <div className='flex justify-end gap-10 py-6 px-4'>
         <Form action='edit'>
-          <Button2Sm onClick={() => editor.setEditable(true)}>Edit</Button2Sm>
+          <Button2Sm onClick={() => setEditable(true)}>Edit</Button2Sm>
         </Form>
         <Form
           method='post'

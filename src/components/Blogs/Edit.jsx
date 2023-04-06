@@ -9,7 +9,7 @@ import Button1Sm from '../UI/Button1Sm';
 import FCRHFSm from '../FormControlRHF/FCRHFSm';
 
 export default function Edit() {
-  const { blog, limit, editor } = useOutletContext();
+  const { blog, limit, setEditable, editor } = useOutletContext();
   const submit = useSubmit();
   const navigate = useNavigate();
   const {
@@ -17,6 +17,7 @@ export default function Edit() {
     handleSubmit,
     formState: { errors },
     reset,
+    setValue,
   } = useForm({
     resolver: zodResolver(blogSchema),
     defaultValues: useMemo(() => {
@@ -35,17 +36,17 @@ export default function Edit() {
           <form
             id='edit-blog'
             onSubmit={handleSubmit((data) => {
+              console.log(data);
+              setEditable(false);
               submit({ body: JSON.stringify(data) }, { method: 'post' });
             })}
             noValidate
             className='flex px-4 py-2 border-b-[1px] border-base-content'
           >
-            <FCRHFSm label='Blog Post Title' issue={errors.title?.message}>
+            <FCRHFSm label='Title' issue={errors.title?.message}>
               <input {...register('title')} className='input input-bordered input-sm' />
             </FCRHFSm>
-            <FCRHFSm label='Blog Post Body' issue={errors.body?.message}>
-              <input {...register('body')} className='input input-bordered input-sm' />
-            </FCRHFSm>
+            <input type='hidden' {...register('body')} className='input input-bordered input-sm' />
             <input
               type='hidden'
               {...register('loginId', { valueAsNumber: true })}
@@ -54,23 +55,17 @@ export default function Edit() {
           </form>
           <MenuBar editor={editor} />
           <EditorContent editor={editor} />
-          <WordCount editor={editor} limit={limit} />
+          <WordCount editor={editor} issue={errors.body?.message} limit={limit} />
         </div>
       </div>
       <div className='flex justify-end gap-10 px-4 py-6'>
-        <Button2Sm
-          form='edit-blog'
-          onClick={() => {
-            editor.setEditable(false);
-            navigate('..');
-          }}
-        >
+        <Button2Sm type='submit' form='edit-blog'>
           Save
         </Button2Sm>
         <Button1Sm
           type='button'
           onClick={() => {
-            editor.setEditable(false);
+            setEditable(false);
             navigate(-1);
           }}
         >
@@ -334,16 +329,21 @@ function MenuBar({ editor }) {
   );
 }
 
-function WordCount({ editor, limit }) {
+function WordCount({ editor, issue, limit }) {
   if (!editor) {
     return null;
   }
 
   return (
-    <div className='flex px-4 py-2 justify-end border-t-[1px] border-base-content'>
-      <p className='leading-5 text-[13px]'>
+    <div className='flex px-4 py-2 justify-between border-t-[1px] border-base-content'>
+      {issue ? (
+        <span className='text-rose-500 leading-5 text-[13px]'>{issue}</span>
+      ) : (
+        <span className='leading-5 text-[13px]'>Validation info will appear here</span>
+      )}
+      <span className='leading-5 text-[13px]'>
         {editor.storage.characterCount.characters()}/{limit} characters; {editor.storage.characterCount.words()} words
-      </p>
+      </span>
     </div>
   );
 }

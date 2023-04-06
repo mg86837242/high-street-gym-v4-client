@@ -114,7 +114,6 @@ export function AdminEditBlog() {
     <div className='grid py-6 place-items-center'>
       <form
         onSubmit={handleSubmit((data) => {
-          console.log('reached here');
           const sanitizedData = sanitize(data);
           submit({ body: JSON.stringify(sanitizedData) }, { method: 'post' });
         })}
