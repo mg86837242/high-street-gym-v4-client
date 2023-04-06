@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useContext, useState, useEffect } from 'react';
+import AuthContext from '../../context/AuthContext.jsx';
 import { useLoaderData, Outlet } from 'react-router-dom';
-import { useEditor } from '@tiptap/react';
+import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Color from '@tiptap/extension-color';
 import TextStyle from '@tiptap/extension-text-style';
@@ -8,8 +9,10 @@ import Image from '@tiptap/extension-image';
 import CharacterCount from '@tiptap/extension-character-count';
 
 export default function Details() {
+  const { authenticatedUser } = useContext(AuthContext);
   const { blog } = useLoaderData();
-  const { title, body, createdAt, updatedAt, username } = blog;
+  const { title, body, loginId, createdAt, updatedAt, username } = blog;
+  const canEdit = authenticatedUser?.id === loginId || authenticatedUser?.role === 'Admin';
   const [editable, setEditable] = useState(false);
   const limit = 6_000;
   const editor = useEditor({
@@ -42,10 +45,12 @@ export default function Details() {
           <span>by {username}</span>
           <span className='leading-5 text-[13px] italic'>Created at: {createdAt}</span>
           {updatedAt && <span className='leading-5 text-[13px] italic'>Updated at: {updatedAt}</span>}
-          <span className='leading-5 text-[13px]'>{editable === true ? '✅ Edit mode on' : '❌ Edit mode off'}</span>
+          {canEdit && (
+            <span className='leading-5 text-[13px]'>{editable === true ? '📝 Edit mode on' : '📖 Edit mode off'}</span>
+          )}
         </div>
       </article>
-      <Outlet context={{ blog, limit, setEditable, editor }} />
+      {canEdit ? <Outlet context={{ blog, limit, setEditable, editor }} /> : <EditorContent editor={editor} />}
     </div>
   );
 }

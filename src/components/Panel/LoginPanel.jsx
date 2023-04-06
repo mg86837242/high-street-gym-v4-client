@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import Button2 from '../UI/Button2';
 import Button5 from '../UI/Button5';
-import LinkButton2 from '../UI/LinkButton2';
+import { LinkBtn2 } from '../UI/LinkButton2';
 
 export default function LoginPanel() {
   const { authenticatedUser } = useContext(AuthContext);
@@ -247,9 +247,9 @@ function Greetings() {
         <span className='text-primary'>{authenticatedUser?.role && authenticatedUser.role}!</span>
       </p>
       <div className='flex flex-col gap-5'>
-        <LinkButton2 to={'/'} w='w-full'>
+        <LinkBtn2 to={'/'} w='w-full'>
           Visit Home
-        </LinkButton2>
+        </LinkBtn2>
         <Button5
           onClick={() => {
             handleLogout();

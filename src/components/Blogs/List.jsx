@@ -4,6 +4,7 @@ import { useLoaderData, Link, Form } from 'react-router-dom';
 import removeTags from '../../utils/removeTags';
 import { getDateNotation } from '../../utils/mapDates';
 import Button2Sm from '../UI/Button2Sm';
+import { LinkBtn2SmOutline } from '../UI/LinkButton2';
 
 export default function List() {
   const { authenticatedUser } = useContext(AuthContext);
@@ -83,34 +84,48 @@ export default function List() {
   return (
     <div className='flex flex-col gap-6 lg:grid lg:grid-cols-12 lg:gap-0'>
       <section className='lg:hidden'>
-        <select
-          value={filter}
-          onChange={(e) => setFilter(e.target.value)}
-          aria-label='Dropdown list for filtering blogs'
-          className='w-full max-w-xs select select-primary select-sm'
-        >
-          <option value='all'>All bookings</option>
-          <option value='my'>My bookings</option>
-        </select>
+        {authenticatedUser ? (
+          <select
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)}
+            aria-label='Dropdown list for filtering blogs'
+            className='w-full max-w-xs select select-primary select-sm'
+          >
+            <option value='all'>All bookings</option>
+            <option value='my'>My bookings</option>
+          </select>
+        ) : (
+          <LinkBtn2SmOutline to='/login' w='w-full'>
+            Sign up to Create Blog
+          </LinkBtn2SmOutline>
+        )}
       </section>
       <section className='lg:col-[1_/_8]'>
         <div>{filter === 'all' ? allBlogList : myBlogList}</div>
       </section>
       <aside className='hidden lg:block lg:col-[9_/_13]'>
-        <select
-          value={filter}
-          onChange={(e) => setFilter(e.target.value)}
-          className='w-full max-w-xs select select-primary select-sm'
-        >
-          <option value='all'>All bookings</option>
-          <option value='my'>My bookings</option>
-        </select>
-        <div className='divider'></div>
-        <Form action='new'>
-          <Button2Sm type='submit' w='w-full'>
-            Create New
-          </Button2Sm>
-        </Form>
+        {authenticatedUser ? (
+          <>
+            <select
+              value={filter}
+              onChange={(e) => setFilter(e.target.value)}
+              className='w-full max-w-xs select select-primary select-sm'
+            >
+              <option value='all'>All bookings</option>
+              <option value='my'>My bookings</option>
+            </select>
+            <div className='divider'></div>
+            <Form action='new'>
+              <Button2Sm type='submit' w='w-full'>
+                Create New
+              </Button2Sm>
+            </Form>
+          </>
+        ) : (
+          <LinkBtn2SmOutline to='/login' w='w-full'>
+            Log in to Create Blog
+          </LinkBtn2SmOutline>
+        )}
       </aside>
     </div>
   );

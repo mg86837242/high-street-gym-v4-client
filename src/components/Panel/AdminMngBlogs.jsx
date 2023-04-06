@@ -6,6 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import blogSchema from '../../schemas/blogs.js';
 import sanitize from '../../utils/sanitize';
 import FCRHFSm from '../FormControlRHF/FCRHFSm';
+import FCRHFSmTextarea from '../FormControlRHF/FCRHFSmTextarea';
 
 export function AdminMngBlogs() {
   const { blogs } = useLoaderData();
@@ -151,25 +152,6 @@ export function AdminEditBlog() {
           </button>
         </div>
       </form>
-    </div>
-  );
-}
-
-export default function FCRHFSmTextarea({ children, label, issue, isRequired }) {
-  return (
-    <div className='w-full form-control col-span-2 xl:col-span-3'>
-      <label className='py-1 3xl:py-2 label'>
-        <span className='label-text'>{label}:</span>
-        {isRequired === false || <span className='label-text-alt'>Required</span>}
-      </label>
-      {children}
-      <label className='py-1 3xl:py-2 label'>
-        {issue ? (
-          <span className='text-rose-500 label-text-alt'>{issue}</span>
-        ) : (
-          <span className='label-text-alt'>Validation info will appear here</span>
-        )}
-      </label>
     </div>
   );
 }
