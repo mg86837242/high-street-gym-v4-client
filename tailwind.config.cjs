@@ -13,6 +13,16 @@ module.exports = {
       screens: {
         '3xl': '1920px',
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            h1: {
+              fontFamily:
+                'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji',
+            },
+          },
+        },
+      },
     },
   },
   plugins: [require('daisyui'), require('@tailwindcss/typography')],

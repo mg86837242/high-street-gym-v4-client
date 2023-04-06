@@ -46,7 +46,7 @@ export default function Details() {
   return (
     <div className='flex flex-col'>
       <article className='min-w-full prose-sm md:prose-base lg:prose-lg'>
-        <h1 className='px-4 font-bold text-accent'>{title}</h1>
+        <h1 className='px-4 font-sans font-bold text-accent'>{title}</h1>
         <div className='flex flex-col px-4'>
           <span>by {username}</span>
           <span className='leading-5 text-[13px] italic'>Created at: {createdAt}</span>
