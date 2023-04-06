@@ -4,12 +4,14 @@ import { useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import { Color } from '@tiptap/extension-color';
 import TextStyle from '@tiptap/extension-text-style';
+import CharacterCount from '@tiptap/extension-character-count';
 
 export default function Details() {
   const {
     blog: { id, title, body, createdAt, updatedAt, username },
   } = useLoaderData();
   const [editable, setEditable] = useState(false);
+  const limit = 6_000;
   const editor = useEditor({
     content: body,
     editable,
@@ -18,7 +20,7 @@ export default function Details() {
         class: 'min-w-full px-4 py-6 prose dark:prose-invert prose-sm md:prose-base lg:prose-lg focus:outline-none',
       },
     },
-    extensions: [StarterKit, Color, TextStyle],
+    extensions: [StarterKit, Color, TextStyle, CharacterCount.configure({ limit })],
   });
 
   useEffect(() => {
@@ -28,7 +30,11 @@ export default function Details() {
     editor.setEditable(editable);
   }, [editor, editable]);
 
-  return editor ? (
+  if (!editor) {
+    return null;
+  }
+
+  return (
     <div className='flex flex-col'>
       <article className='min-w-full prose-sm md:prose-base lg:prose-lg'>
         <h1 className='px-4 font-bold text-accent'>{title}</h1>
@@ -38,9 +44,15 @@ export default function Details() {
           {updatedAt && <span className='leading-5 text-[13px] italic'>updated at: {updatedAt}</span>}
         </div>
       </article>
-      <Outlet context={[setEditable, editor]} />
+      <Outlet
+        context={{
+          editable: [editable, setEditable],
+          editor,
+          limit,
+        }}
+      />
     </div>
-  ) : null;
+  );
 }
 
 // References:
@@ -51,3 +63,4 @@ export default function Details() {
 // ---- https://github.com/peternewnham/react-html-parser#readme: recommended by the above SO post, pay attention to
 //  the security section, which indicates it's better than `html-react-parser`, however, still not perfect => Rendering
 //  Option 1 is better
+// -- https://stackoverflow.com/questions/73291625/: How to send multiple ctx in <Outlet> ctx

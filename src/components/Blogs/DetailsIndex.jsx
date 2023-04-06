@@ -4,7 +4,10 @@ import Button2Sm from '../UI/Button2Sm';
 import Button1Sm from '../UI/Button1Sm';
 
 export default function DetailsIndex() {
-  const [setEditable, editor] = useOutletContext();
+  const {
+    editable: [editable, setEditable],
+    editor,
+  } = useOutletContext();
 
   return (
     <>

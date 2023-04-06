@@ -4,8 +4,12 @@ import Button2Sm from '../UI/Button2Sm';
 import Button1Sm from '../UI/Button1Sm';
 
 export default function Edit() {
-  const [setEditable, editor] = useOutletContext();
-  const submit = useSubmit();
+  const {
+    editable: [editable, setEditable],
+    editor,
+    limit,
+  } = useOutletContext();
+  // const submit = useSubmit();
   const navigate = useNavigate();
 
   return (
@@ -13,18 +17,17 @@ export default function Edit() {
       <div className='pt-6'>
         <div className='py-6 border border-base-content rounded-3xl'>
           <MenuBar editor={editor} />
-          <p className='px-4 py-2 leading-5 text-[13px] border-b-[1px] border-base-content'>
-            <em>Note: Emoji characters are currently not supported.</em>
-          </p>
           <EditorContent editor={editor} />
+          <WordCount editor={editor} limit={limit} />
         </div>
       </div>
       <div className='flex justify-end gap-10 px-4 py-6'>
         <Form method='post'>
           <Button2Sm
             onClick={() => {
-              // FIX useSubmit `FormData` obj
-              submit('formData');
+              // FIX Word count as form control
+              // FIX Input fields for title and loginId & useSubmit FormData obj
+              // submit('formData');
               setEditable(false);
             }}
           >
@@ -51,8 +54,8 @@ function MenuBar({ editor }) {
   }
 
   return (
-    <div className='flex flex-col gap-2'>
-      <div id='menu-marks' className='flex flex-wrap gap-2 px-4'>
+    <div className='flex flex-col border-b-[1px] border-base-content'>
+      <div className='flex flex-wrap gap-2 px-4'>
         <button
           onClick={() => editor.chain().focus().toggleBold().run()}
           disabled={!editor.can().chain().focus().toggleBold().run()}
@@ -280,6 +283,23 @@ function MenuBar({ editor }) {
           redo
         </button>
       </div>
+      <p className='px-4 py-2 leading-5 text-[13px]'>
+        <em>Note: Emoji characters are currently not supported.</em>
+      </p>
+    </div>
+  );
+}
+
+function WordCount({ editor, limit }) {
+  if (!editor) {
+    return null;
+  }
+
+  return (
+    <div className='flex justify-end border-t-[1px] border-base-content'>
+      <p className='px-4 py-2 leading-5 text-[13px]'>
+        {editor.storage.characterCount.characters()}/{limit} characters; {editor.storage.characterCount.words()} words
+      </p>
     </div>
   );
 }
