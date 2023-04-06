@@ -59,7 +59,6 @@ const blogsRoutes = [
     },
     ErrorBoundary: ErrorInfoBack,
     async action({ request }) {
-      // FIX (1) zod schema to disallow emoji OR allow emoji in DB (2) new action (3) cleanup btn (grping together into 1 file for each color)
       let { createBlog } = await import('../api/blogs');
       return createBlog({ request });
     },

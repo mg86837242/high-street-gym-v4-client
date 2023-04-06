@@ -15,12 +15,6 @@ export async function getBlogById({ params }) {
 }
 
 export async function createBlog({ request }) {
-  const creations = await getSubmittedData(request);
-  await fetchJSON(`${API_URL}/blogs`, 'post', creations);
-  return redirect(`..`);
-}
-
-export async function createBlogSample({ request }) {
   const formData = await request.formData();
   const loginId = formData.get('loginId');
   const creations = {

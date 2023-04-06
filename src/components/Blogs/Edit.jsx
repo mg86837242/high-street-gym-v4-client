@@ -4,8 +4,8 @@ import { EditorContent } from '@tiptap/react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import blogSchema from '../../schemas/blogs';
-import Button2Sm from '../UI/Button2Sm';
-import Button1Sm from '../UI/Button1Sm';
+import { Btn2SmOutline } from '../UI/Btn2';
+import { Btn1SmOutline } from '../UI/Btn1';
 import FCRHFSm from '../FormControlRHF/FCRHFSm';
 
 export default function Edit() {
@@ -46,10 +46,10 @@ export default function Edit() {
         </div>
       </div>
       <div className='flex justify-end gap-10 px-4 py-6'>
-        <Button2Sm type='submit' form='edit-blog'>
+        <Btn2SmOutline type='submit' form='edit-blog'>
           Save
-        </Button2Sm>
-        <Button1Sm
+        </Btn2SmOutline>
+        <Btn1SmOutline
           type='button'
           onClick={() => {
             setEditable(false);
@@ -57,7 +57,7 @@ export default function Edit() {
           }}
         >
           Cancel
-        </Button1Sm>
+        </Btn1SmOutline>
       </div>
     </>
   );

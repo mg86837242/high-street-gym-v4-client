@@ -1,7 +1,7 @@
 import { useOutletContext, Form } from 'react-router-dom';
 import { EditorContent } from '@tiptap/react';
-import Button2Sm from '../UI/Button2Sm';
-import Button1Sm from '../UI/Button1Sm';
+import { Btn2SmOutline } from '../UI/Btn2';
+import { Btn1SmOutline } from '../UI/Btn1';
 
 export default function DetailsIndex() {
   const { setEditable, editor } = useOutletContext();
@@ -11,7 +11,7 @@ export default function DetailsIndex() {
       <EditorContent editor={editor} />
       <div className='flex justify-end gap-10 py-6 px-4'>
         <Form action='edit'>
-          <Button2Sm onClick={() => setEditable(true)}>Edit</Button2Sm>
+          <Btn2SmOutline onClick={() => setEditable(true)}>Edit</Btn2SmOutline>
         </Form>
         <Form
           method='post'
@@ -22,7 +22,7 @@ export default function DetailsIndex() {
             }
           }}
         >
-          <Button1Sm type='submit'>Delete</Button1Sm>
+          <Btn1SmOutline type='submit'>Delete</Btn1SmOutline>
         </Form>
       </div>
     </>

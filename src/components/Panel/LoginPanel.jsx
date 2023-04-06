@@ -4,9 +4,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { emailSchema, passwordSchema } from '../../schemas/logins';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import Button2 from '../UI/Button2';
-import Button5 from '../UI/Button5';
-import { LinkBtn2 } from '../UI/LinkButton2';
+import { Btn2 } from '../UI/Btn2';
+import { Btn5 } from '../UI/Btn5';
+import { LinkBtn2 } from '../UI/LinkBtn2';
 
 export default function LoginPanel() {
   const { authenticatedUser } = useContext(AuthContext);
@@ -187,7 +187,7 @@ function LoginForm() {
         </label>
       </div>
       <div className='pt-4'>
-        <Button2 w='w-full'>{statusText}</Button2>
+        <Btn2 w='w-full'>{statusText}</Btn2>
       </div>
     </form>
   );
@@ -250,7 +250,7 @@ function Greetings() {
         <LinkBtn2 to={'/'} w='w-full'>
           Visit Home
         </LinkBtn2>
-        <Button5
+        <Btn5
           onClick={() => {
             handleLogout();
             navigate('/');
@@ -258,7 +258,7 @@ function Greetings() {
           w='w-full'
         >
           Logout
-        </Button5>
+        </Btn5>
       </div>
     </div>
   );

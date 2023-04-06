@@ -1,6 +1,6 @@
 import { useRouteError, useNavigation, isRouteErrorResponse, useNavigate } from 'react-router-dom';
 import { ReactComponent as BoxIcon } from '../../assets/error-box.svg';
-import Button2 from './Button2';
+import { Btn2 } from './Btn2';
 
 export default function ErrorInfoRefresh() {
   const error = useRouteError();
@@ -23,7 +23,7 @@ export default function ErrorInfoRefresh() {
         <h1 className='text-center text-rose-500'>{error.data.match(/^\d{3}/)}</h1>
         <p className='text-center text-rose-500'>{error.data.match(/(?<=^\d{3}\s).*/) || error.data}</p>
       </div>
-      <Button2 onClick={handleClick}>Go Back</Button2>
+      <Btn2 onClick={handleClick}>Go Back</Btn2>
     </div>
   ) : (
     <div className='flex flex-col items-center justify-center w-full h-full max-h-[calc(100vh-7.5rem)] gap-6'>
@@ -33,7 +33,7 @@ export default function ErrorInfoRefresh() {
         <p className='text-center text-rose-500'>Sorry, an unexpected error has occurred.</p>
         <p className='text-center text-rose-500'>{error.statusText || error.message}</p>
       </div>
-      <Button2 onClick={handleClick}>Go Back</Button2>
+      <Btn2 onClick={handleClick}>Go Back</Btn2>
     </div>
   );
 }

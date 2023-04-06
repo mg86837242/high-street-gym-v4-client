@@ -8,9 +8,17 @@ export function LinkBtn2({ children, to, w }) {
   );
 }
 
+export function LinkBtn2Sm({ children, to, w }) {
+  return (
+    <Link to={to} className={`${w} shadow btn btn-primary btn-sm text-primary-content shadow-black/50`}>
+      {children}
+    </Link>
+  );
+}
+
 export function LinkBtn2SmOutline({ children, to, w }) {
   return (
-    <Link to={to} className={`${w} shadow btn btn-primary btn-outline btn-sm text-primary-content shadow-black/50`}>
+    <Link to={to} className={`${w} shadow btn btn-primary btn-sm btn-outline text-primary-content shadow-black/50`}>
       {children}
     </Link>
   );

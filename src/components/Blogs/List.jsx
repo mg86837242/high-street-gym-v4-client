@@ -3,8 +3,8 @@ import AuthContext from '../../context/AuthContext';
 import { useLoaderData, Link, Form } from 'react-router-dom';
 import removeTags from '../../utils/removeTags';
 import { getDateNotation } from '../../utils/mapDates';
-import Button2Sm from '../UI/Button2Sm';
-import { LinkBtn2SmOutline } from '../UI/LinkButton2';
+import { Btn2SmOutline } from '../UI/Btn2';
+import { LinkBtn2SmOutline } from '../UI/LinkBtn2';
 
 export default function List() {
   const { authenticatedUser } = useContext(AuthContext);
@@ -20,8 +20,10 @@ export default function List() {
                 <div className='flex-shrink w-full px-4 py-2'>
                   <h4 className='pb-2 font-medium leading-4 text-[13px]'>{username}</h4>
                   <Link to={`${id}`}>
-                    <h2 className='font-bold text-accent md:text-[22px] md:leading-7'>{title}</h2>
-                    <h3 className='h-10 pt-1 overflow-hidden text-base leading-5 text-ellipsis'>{removeTags(body)}</h3>
+                    <h2 className='font-bold text-accent text-base leading-5 md:text-[22px] md:leading-7'>{title}</h2>
+                    <h3 className='hidden md:block h-10 pt-1 overflow-hidden text-base leading-5 text-ellipsis'>
+                      {removeTags(body)}
+                    </h3>
                   </Link>
                   <p className='pt-2 italic leading-5 text-[13px]'>Created at: {getDateNotation(createdAt)}</p>
                   {updatedAt && (
@@ -56,8 +58,12 @@ export default function List() {
                   <div className='flex-shrink w-full px-4 py-2'>
                     <h4 className='pb-2 font-medium leading-4 text-[13px]'>{username}</h4>
                     <Link to={`${id}`}>
-                      <h2 className='font-bold text-primary-content md:text-[22px] md:leading-7'>{title}</h2>
-                      <h3 className='h-10 pt-1 overflow-hidden text-base leading-5 text-ellipsis'>{body}</h3>
+                      <h2 className='font-bold text-primary-content text-base leading-5 md:text-[22px] md:leading-7'>
+                        {title}
+                      </h2>
+                      <h3 className='hidden md:block h-10 pt-1 overflow-hidden text-base leading-5 text-ellipsis'>
+                        {removeTags(body)}
+                      </h3>
                     </Link>
                     <p className='pt-2 italic leading-5 text-[13px]'>Created at: {getDateNotation(createdAt)}</p>
                     {updatedAt && (
@@ -85,15 +91,24 @@ export default function List() {
     <div className='flex flex-col gap-6 lg:grid lg:grid-cols-12 lg:gap-0'>
       <section className='lg:hidden'>
         {authenticatedUser ? (
-          <select
-            value={filter}
-            onChange={(e) => setFilter(e.target.value)}
-            aria-label='Dropdown list for filtering blogs'
-            className='w-full max-w-xs select select-primary select-sm'
-          >
-            <option value='all'>All bookings</option>
-            <option value='my'>My bookings</option>
-          </select>
+          <>
+            <Form method='post' action='new'>
+              <input type='hidden' name='loginId' value={authenticatedUser?.id} />
+              <Btn2SmOutline type='submit' w='w-full'>
+                Create New
+              </Btn2SmOutline>
+            </Form>
+            <div className='divider'></div>
+            <select
+              value={filter}
+              onChange={(e) => setFilter(e.target.value)}
+              aria-label='Dropdown list for filtering blogs'
+              className='w-full max-w-xs select select-primary select-sm'
+            >
+              <option value='all'>All bookings</option>
+              <option value='my'>My bookings</option>
+            </select>
+          </>
         ) : (
           <LinkBtn2SmOutline to='/login' w='w-full'>
             Sign up to Create Blog
@@ -115,10 +130,11 @@ export default function List() {
               <option value='my'>My bookings</option>
             </select>
             <div className='divider'></div>
-            <Form action='new'>
-              <Button2Sm type='submit' w='w-full'>
+            <Form method='post' action='new'>
+              <input type='hidden' name='loginId' value={authenticatedUser?.id} />
+              <Btn2SmOutline type='submit' w='w-full'>
                 Create New
-              </Button2Sm>
+              </Btn2SmOutline>
             </Form>
           </>
         ) : (
