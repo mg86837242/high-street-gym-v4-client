@@ -4,6 +4,7 @@ import { useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Color from '@tiptap/extension-color';
 import TextStyle from '@tiptap/extension-text-style';
+import Image from '@tiptap/extension-image';
 import CharacterCount from '@tiptap/extension-character-count';
 
 export default function Details() {
@@ -20,7 +21,7 @@ export default function Details() {
         class: 'min-w-full px-4 py-6 prose dark:prose-invert prose-sm md:prose-base lg:prose-lg focus:outline-none',
       },
     },
-    extensions: [StarterKit, Color, TextStyle, CharacterCount.configure({ limit })],
+    extensions: [StarterKit, Color, TextStyle, Image, CharacterCount.configure({ limit })],
   });
 
   useEffect(() => {

@@ -25,6 +25,7 @@
     "@hookform/resolvers": "^3.0.1",
     "@tiptap/extension-character-count": "^2.0.2",
     "@tiptap/extension-color": "^2.0.2",
+    "@tiptap/extension-image": "^2.0.2",
     "@tiptap/extension-text-style": "^2.0.2",
     "@tiptap/pm": "^2.0.2",
     "@tiptap/react": "^2.0.2",

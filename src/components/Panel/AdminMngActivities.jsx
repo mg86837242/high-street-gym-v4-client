@@ -79,6 +79,8 @@ export function AdminNewActivity() {
 
 export function AdminEditActivity() {
   const { activity } = useLoaderData();
+  const submit = useSubmit();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -96,8 +98,6 @@ export function AdminEditActivity() {
   useEffect(() => {
     reset(activity);
   }, [reset, activity]);
-  const submit = useSubmit();
-  const navigate = useNavigate();
 
   return (
     <div className='grid py-6 place-items-center'>

@@ -1,34 +1,68 @@
-import { Form, useOutletContext, useSubmit, useNavigate } from 'react-router-dom';
+import { useCallback } from 'react';
+import { useOutletContext, useSubmit, useNavigate } from 'react-router-dom';
 import { EditorContent } from '@tiptap/react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import blogSchema from '../../schemas/blogs';
 import Button2Sm from '../UI/Button2Sm';
 import Button1Sm from '../UI/Button1Sm';
 
 export default function Edit() {
   const { editor, limit } = useOutletContext();
-  // const submit = useSubmit();
+  const submit = useSubmit();
   const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(blogSchema),
+  });
 
   return (
     <>
       <div className='pt-6'>
-        <div className='pt-6 border border-base-content rounded-3xl'>
+        <div className='border border-base-content rounded-3xl'>
+          <form
+            id='hook-form'
+            onSubmit={() => {
+              // TODO Default values and potential Effects
+              // TODO Validation as all fields are required
+              handleSubmit((data) => {
+                console.log(`🟢 [${new Date().toLocaleTimeString()}] : `, data);
+                // submit({ body: JSON.stringify(data) }, { method: 'post' });
+                // editor.setEditable(false);
+              });
+            }}
+            noValidate
+            className='flex px-4 py-2 border-b-[1px] border-base-content'
+          >
+            <label className='input-group input-group-sm'>
+              <span>Title: </span>
+              <input {...register('title')} className='input input-bordered input-sm' />
+            </label>
+            <label className='input-group input-group-sm'>
+              <span>Body: </span>
+              <input {...register('body')} className='input input-bordered input-sm' />
+            </label>
+            <label className='input-group input-group-sm'>
+              <span>Login ID: </span>
+              <input {...register('loginId')} className='input input-bordered input-sm' />
+            </label>
+          </form>
           <MenuBar editor={editor} />
           <EditorContent editor={editor} />
           <WordCount editor={editor} limit={limit} />
         </div>
       </div>
       <div className='flex justify-end gap-10 px-4 py-6'>
-        <Form method='post'>
-          <Button2Sm
-            onClick={() => {
-              // FIX Input fields for title and loginId & useSubmit FormData obj
-              // submit('formData');
-              editor.setEditable(false);
-            }}
-          >
-            Save
-          </Button2Sm>
-        </Form>
+        <button
+          type='submit'
+          form='hook-form'
+          className={`shadow btn btn-primary btn-sm text-primary-content shadow-black/50`}
+        >
+          Save
+        </button>
         <Button1Sm
           type='button'
           onClick={() => {
@@ -44,13 +78,21 @@ export default function Edit() {
 }
 
 function MenuBar({ editor }) {
+  const handleAddImage = useCallback(() => {
+    const url = window.prompt('URL');
+
+    if (url) {
+      editor.chain().focus().setImage({ src: url }).run();
+    }
+  }, [editor]);
+
   if (!editor) {
     return null;
   }
 
   return (
-    <div className='flex flex-col border-b-[1px] border-base-content'>
-      <div className='flex flex-wrap gap-2 px-4'>
+    <div className='flex flex-col gap-2 px-4 pt-4 pb-2 border-b-[1px] border-base-content'>
+      <div className='flex flex-wrap gap-2'>
         <button
           onClick={() => editor.chain().focus().toggleBold().run()}
           disabled={!editor.can().chain().focus().toggleBold().run()}
@@ -269,6 +311,9 @@ function MenuBar({ editor }) {
         <button onClick={() => editor.chain().focus().setHardBreak().run()} className='btn btn-outline btn-xs'>
           hard break
         </button>
+        <button onClick={handleAddImage} className='btn btn-outline btn-xs'>
+          set image
+        </button>
         <button
           onClick={() => editor.chain().focus().undo().run()}
           disabled={!editor.can().chain().focus().undo().run()}
@@ -284,7 +329,7 @@ function MenuBar({ editor }) {
           redo
         </button>
       </div>
-      <p className='px-4 py-2 leading-5 text-[13px]'>
+      <p className='leading-5 text-[13px]'>
         <em>Note: Emoji characters are currently not supported.</em>
       </p>
     </div>
@@ -297,8 +342,8 @@ function WordCount({ editor, limit }) {
   }
 
   return (
-    <div className='flex justify-end border-t-[1px] border-base-content'>
-      <p className='px-4 py-2 leading-5 text-[13px]'>
+    <div className='flex px-4 py-2 justify-end border-t-[1px] border-base-content'>
+      <p className='leading-5 text-[13px]'>
         {editor.storage.characterCount.characters()}/{limit} characters; {editor.storage.characterCount.words()} words
       </p>
     </div>
