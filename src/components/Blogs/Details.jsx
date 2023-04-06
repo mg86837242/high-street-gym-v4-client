@@ -27,7 +27,7 @@ export default function Details() {
       StarterKit,
       Color,
       TextStyle,
-      Image.configure({ HTMLAttributes: { class: 'rounded-3xl' } }),
+      Image.configure({ HTMLAttributes: { class: 'rounded-3xl mx-auto' } }),
       CharacterCount.configure({ limit }),
     ],
   });
