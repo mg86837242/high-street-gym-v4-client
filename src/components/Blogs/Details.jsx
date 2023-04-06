@@ -44,13 +44,7 @@ export default function Details() {
           {updatedAt && <span className='leading-5 text-[13px] italic'>updated at: {updatedAt}</span>}
         </div>
       </article>
-      <Outlet
-        context={{
-          editable: [editable, setEditable],
-          editor,
-          limit,
-        }}
-      />
+      <Outlet context={{ editor, limit }} />
     </div>
   );
 }

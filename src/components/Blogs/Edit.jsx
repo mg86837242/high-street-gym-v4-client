@@ -4,11 +4,7 @@ import Button2Sm from '../UI/Button2Sm';
 import Button1Sm from '../UI/Button1Sm';
 
 export default function Edit() {
-  const {
-    editable: [editable, setEditable],
-    editor,
-    limit,
-  } = useOutletContext();
+  const { editor, limit } = useOutletContext();
   // const submit = useSubmit();
   const navigate = useNavigate();
 
@@ -25,10 +21,9 @@ export default function Edit() {
         <Form method='post'>
           <Button2Sm
             onClick={() => {
-              // FIX Word count as form control
               // FIX Input fields for title and loginId & useSubmit FormData obj
               // submit('formData');
-              setEditable(false);
+              editor.setEditable(false);
             }}
           >
             Save
@@ -37,7 +32,7 @@ export default function Edit() {
         <Button1Sm
           type='button'
           onClick={() => {
-            setEditable(false);
+            editor.setEditable(false);
             navigate(-1);
           }}
         >
