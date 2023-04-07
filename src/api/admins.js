@@ -34,7 +34,7 @@ export default async function updateAdminById(values) {
 
   const response = await patch(`${API_URL}/admins/id/${id}`, updates);
   const json = await response.json();
-  // Special error handling to let 409 pass to NOT trigger error boundary, since it's already handled in component
+  // Special error handling to let 409 pass to NOT trigger error boundary, since it's already handled in the component
   if (response.status === 409) {
     return redirect('.');
   }

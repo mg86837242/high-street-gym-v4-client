@@ -4,7 +4,6 @@ import fetchRes from '../utils/fetchRes';
 import fetchJSON from '../utils/fetchJSON';
 import get from '../utils/get';
 
-// TODO Tweak routing and redirect's relative path
 export async function getAllBookings() {
   const response = await fetchRes(`${API_URL}/bookings`, 'get');
   return response;
@@ -46,7 +45,7 @@ export async function createBooking({ request }) {
   const formData = await request.formData();
   const creations = Object.fromEntries(formData);
   const json = await fetchJSON(`${API_URL}/bookings`, 'post', creations);
-  return redirect(`/bookings/${creations.date}/${json.insertId}`);
+  return redirect(`../${creations.date}/${json.insertId}`);
 }
 
 export async function updateBookingById({ params, request }) {
@@ -57,10 +56,10 @@ export async function updateBookingById({ params, request }) {
   const formData = await request.formData();
   const updates = Object.fromEntries(formData);
   await fetchRes(`${API_URL}/bookings/id/${params.id}`, 'patch', updates);
-  return redirect(`/bookings/${updates.date}/${params.id}`);
+  return redirect(`../${updates.date}/${params.id}`);
 }
 
 export async function deleteBookingById({ params }) {
   await fetchRes(`${API_URL}/bookings/id/${params.id}`, 'delete');
-  return redirect(`/bookings/${params.date}`);
+  return redirect(`../${params.date}`);
 }
