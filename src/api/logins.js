@@ -1,7 +1,7 @@
 import { API_URL } from '../data/constants';
-import fetchRes from '../utils/fetchRes';
-import get from '../utils/get';
-import post from '../utils/post';
+import fetchRes from '../helpers/fetchRes';
+import get from '../helpers/get';
+import post from '../helpers/post';
 
 export async function getAllEmails() {
   const response = await fetchRes(`${API_URL}/logins/all-emails`);

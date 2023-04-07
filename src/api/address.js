@@ -7,7 +7,7 @@ import {
   stateSchema,
   countrySchema,
 } from '../schemas/addresses';
-import fetchJSON from '../utils/fetchJSON';
+import fetchJSON from '../helpers/fetchJSON';
 
 export async function updateAddressByAdminId(values) {
   const { adminId, ...updates } = values;

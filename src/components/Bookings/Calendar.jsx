@@ -4,7 +4,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSquareCaretLeft, faSquareCaretRight } from '@fortawesome/free-solid-svg-icons';
 import { today } from '../../data/keyDates';
-import { monthNames, dayNames } from '../../utils/mapDates';
+import { monthNames, dayNames } from '../../helpers/mapDates';
 
 export default function Calendar() {
   const { authenticatedUser } = useContext(AuthContext);

@@ -1,8 +1,8 @@
 import { redirect } from 'react-router-dom';
 import { API_URL } from '../data/constants';
-import fetchRes from '../utils/fetchRes';
-import fetchJSON from '../utils/fetchJSON';
-import get from '../utils/get';
+import fetchRes from '../helpers/fetchRes';
+import fetchJSON from '../helpers/fetchJSON';
+import get from '../helpers/get';
 
 export async function getAllBookings() {
   const response = await fetchRes(`${API_URL}/bookings`, 'get');

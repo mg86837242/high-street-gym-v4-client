@@ -1,5 +1,5 @@
 import { useLoaderData, Form } from 'react-router-dom';
-import { getDateNotation } from '../../utils/mapDates';
+import { getDateNotation } from '../../helpers/mapDates';
 
 export default function Details() {
   const {

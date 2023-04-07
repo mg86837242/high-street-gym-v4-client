@@ -1,8 +1,8 @@
 import { useContext, useState, useMemo } from 'react';
 import AuthContext from '../../context/AuthContext';
 import { useLoaderData, Link, Form } from 'react-router-dom';
-import removeTags from '../../utils/removeTags';
-import { getDateNotation } from '../../utils/mapDates';
+import removeTags from '../../helpers/removeTags';
+import { getDateNotation } from '../../helpers/mapDates';
 import { Btn2SmOutline } from '../UI/Btn2';
 import { LinkBtn2SmOutline } from '../UI/LinkBtn2';
 

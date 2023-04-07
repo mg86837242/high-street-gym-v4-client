@@ -3,7 +3,7 @@ import { API_URL } from '../data/constants';
 import { emailSchema, passwordSchema, usernameSchema } from '../schemas/logins';
 import { firstNameSchema, lastNameSchema, phoneSchema } from '../schemas/members';
 import { descriptionSchema, specialtySchema, certificateSchema, imageUrlSchema } from '../schemas/trainers';
-import patch from '../utils/patch';
+import patch from '../helpers/patch';
 
 export default async function updateTrainerById(values) {
   const { id, ...updates } = values;

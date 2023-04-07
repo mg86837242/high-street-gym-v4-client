@@ -1,7 +1,7 @@
 import { useContext, useMemo, useState } from 'react';
 import AuthContext from '../../context/AuthContext';
 import { useLoaderData, NavLink, Outlet } from 'react-router-dom';
-import { getDateNotation } from '../../utils/mapDates';
+import { getDateNotation } from '../../helpers/mapDates';
 
 export default function List() {
   const { authenticatedUser } = useContext(AuthContext);

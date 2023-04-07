@@ -45,18 +45,22 @@ export default function Details() {
 
   return (
     <div className='flex flex-col'>
-      <article className='min-w-full prose-sm md:prose-base lg:prose-lg'>
+      <article className='min-w-full'>
         <h1 className='px-4 font-sans font-bold text-accent'>{title}</h1>
         <div className='flex flex-col px-4'>
           <span>by {username}</span>
           <span className='leading-5 text-[13px] italic'>Created at: {createdAt}</span>
           {updatedAt && <span className='leading-5 text-[13px] italic'>Updated at: {updatedAt}</span>}
           {canEdit && (
-            <span className='leading-5 text-[13px]'>{editable === true ? '📝 Edit mode on' : '📖 Edit mode off'}</span>
+            <span className='leading-5 text-[13px]'>{editable ? '📝 Edit mode on' : '📖 Edit mode off'}</span>
           )}
         </div>
       </article>
-      {canEdit ? <Outlet context={{ blog, limit, setEditable, editor }} /> : <EditorContent editor={editor} />}
+      {canEdit ? (
+        <Outlet context={{ blog, limit, editable, setEditable, editor }} />
+      ) : (
+        <EditorContent editor={editor} />
+      )}
     </div>
   );
 }

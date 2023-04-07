@@ -4,7 +4,7 @@ import { useLoaderData, Outlet, Form, useSubmit, useNavigate } from 'react-route
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import blogSchema from '../../schemas/blogs.js';
-import sanitize from '../../utils/sanitize';
+import sanitize from '../../helpers/sanitize';
 import FCRHFSm from '../FormControlRHF/FCRHFSm';
 import FCRHFSmTextarea from '../FormControlRHF/FCRHFSmTextarea';
 

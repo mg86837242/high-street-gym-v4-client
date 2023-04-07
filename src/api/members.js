@@ -2,8 +2,8 @@ import { redirect } from 'react-router-dom';
 import { API_URL } from '../data/constants';
 import { emailSchema, passwordSchema, usernameSchema } from '../schemas/logins';
 import { firstNameSchema, lastNameSchema, phoneSchema, ageSchema, genderSchema } from '../schemas/members';
-import post from '../utils/post';
-import patch from '../utils/patch';
+import post from '../helpers/post';
+import patch from '../helpers/patch';
 
 export async function signupMembers({ request }) {
   const formData = await request.formData();

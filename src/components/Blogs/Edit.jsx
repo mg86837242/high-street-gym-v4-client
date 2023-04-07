@@ -9,7 +9,7 @@ import { Btn1SmOutline } from '../UI/Btn1';
 import FCRHFSm from '../FormControlRHF/FCRHFSm';
 
 export default function Edit() {
-  const { blog, limit, setEditable, editor } = useOutletContext();
+  const { blog, limit, editable, setEditable, editor } = useOutletContext();
   const navigate = useNavigate();
   const {
     register,
@@ -31,6 +31,9 @@ export default function Edit() {
   }, [reset, blog]);
 
   useEffect(() => {
+    if (editable) {
+      return;
+    }
     setEditable(true);
   }, []);
 
@@ -101,10 +104,6 @@ function MenuBar({ editor }) {
       editor.chain().focus().setImage({ src: url }).run();
     }
   }, [editor]);
-
-  if (!editor) {
-    return null;
-  }
 
   return (
     <div className='flex flex-col gap-2 px-4 py-4 border-b-[1px] border-base-content'>
@@ -347,10 +346,6 @@ function MenuBar({ editor }) {
 }
 
 function WordCount({ editor, issue, limit }) {
-  if (!editor) {
-    return null;
-  }
-
   return (
     <div className='flex px-4 py-2 justify-between border-t-[1px] border-base-content'>
       {issue ? (
