@@ -430,14 +430,7 @@ function BookingListGuestView({ bookings }) {
             durationMinutes,
           }) => (
             <li id='booking-list-card' key={id} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
-              <NavLink
-                to={`${id}`}
-                className={({ isActive, isPending }) =>
-                  `grid grid-cols-2 px-4 xl:px-6 py-2 ${isActive && 'ring ring-secondary-focus rounded-lg'} ${
-                    isPending && ''
-                  }`
-                }
-              >
+              <div className='grid grid-cols-2 px-4 xl:px-6 py-2'>
                 <p className='p-1'>Booking ID:</p>
                 <p className='p-1'>{id}</p>
                 <p className='p-1 bg-base-100'>Member:</p>
@@ -456,7 +449,7 @@ function BookingListGuestView({ bookings }) {
                 <p className='p-1 bg-base-100'>{dateTime.slice(-8)}</p>
                 <p className='p-1'>Duration:</p>
                 <p className='p-1'>{durationMinutes} minutes</p>
-              </NavLink>
+              </div>
             </li>
           )
         )}
