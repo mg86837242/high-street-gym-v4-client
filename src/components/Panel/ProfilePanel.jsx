@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import AuthContext from '../../context/AuthContext';
 import { Outlet, NavLink, Navigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-regular-svg-icons';
+import { faUserGear } from '@fortawesome/free-solid-svg-icons';
 
 export function ProfilePanel() {
   return (
@@ -46,7 +46,7 @@ function LeftSidePanel() {
               }
             >
               <span>
-                <FontAwesomeIcon icon={faUser} className='w-4 h-4' />
+                <FontAwesomeIcon icon={faUserGear} title='decorative' className='w-4 h-4' />
               </span>
               <span className='flex items-center justify-start text-sm'>Edit My Account</span>
             </NavLink>

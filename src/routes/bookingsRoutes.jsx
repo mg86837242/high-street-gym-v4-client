@@ -28,7 +28,7 @@ const bookingsRoutes = [
       crumb: (params, data) => {
         // In the API endpoint from which the `data` is fetched, 404 is designed to return an empty array called
         // `bookings` (i.e., the length is 0), o/w `data?.bookings` wouldn't exist and the following render function
-        //  would render 'Error' text although 404 won't trigger an error in the loader (per the programmer's design);
+        //  would render 'Error' string although 404 won't trigger an error in the loader (per the programmer's design);
         //  alternatively, in the API endpoint, don't throw 404 when the `bookings` array is empty
         return data?.bookings ? (
           <Link to={`/bookings/${params.date}`}>No. of Bookings: {data.bookings.length}</Link>
