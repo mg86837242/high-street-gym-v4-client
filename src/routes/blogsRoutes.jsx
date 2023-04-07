@@ -1,5 +1,6 @@
-import { Link, redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ErrorInfoBack from '../components/UI/ErrorInfoBack';
+import RequireAuth from '../components/Layout/RequireAuth';
 
 const blogsRoutes = [
   {
@@ -52,13 +53,18 @@ const blogsRoutes = [
     ],
   },
   {
-    path: 'new',
-    ErrorBoundary: ErrorInfoBack,
-    async action({ request }) {
-      let { createBlog } = await import('../api/blogs');
-      return createBlog({ request });
-    },
-    handle: { crumb: () => <Link to='/blogs/new'>New Blog</Link> },
+    Component: () => <RequireAuth roles={['Admin', 'Trainer', 'Member']} />,
+    children: [
+      {
+        path: 'new',
+        ErrorBoundary: ErrorInfoBack,
+        async action({ request }) {
+          let { createBlog } = await import('../api/blogs');
+          return createBlog({ request });
+        },
+        handle: { crumb: () => <Link to='/blogs/new'>New Blog</Link> },
+      },
+    ],
   },
   {
     path: ':id/destroy',

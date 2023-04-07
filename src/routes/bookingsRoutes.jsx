@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import ErrorInfoBack from '../components/UI/ErrorInfoBack';
+import RequireAuth from '../components/Layout/RequireAuth';
 
 const bookingsRoutes = [
   {
@@ -99,21 +100,26 @@ const bookingsRoutes = [
     ],
   },
   {
-    path: 'new',
-    async lazy() {
-      let { default: New } = await import('../components/Bookings/New');
-      return { Component: New };
-    },
-    ErrorBoundary: ErrorInfoBack,
-    async loader() {
-      let { getAllBookingOptions } = await import('../api/bookings');
-      return getAllBookingOptions();
-    },
-    async action({ request }) {
-      let { createBooking } = await import('../api/bookings');
-      return createBooking({ request });
-    },
-    handle: { crumb: () => <Link to='/bookings/new'>New Booking</Link> },
+    Component: () => <RequireAuth roles={['Admin', 'Trainer', 'Member']} />,
+    children: [
+      {
+        path: 'new',
+        async lazy() {
+          let { default: New } = await import('../components/Bookings/New');
+          return { Component: New };
+        },
+        ErrorBoundary: ErrorInfoBack,
+        async loader() {
+          let { getAllBookingOptions } = await import('../api/bookings');
+          return getAllBookingOptions();
+        },
+        async action({ request }) {
+          let { createBooking } = await import('../api/bookings');
+          return createBooking({ request });
+        },
+        handle: { crumb: () => <Link to='/bookings/new'>New Booking</Link> },
+      },
+    ],
   },
 ];
 

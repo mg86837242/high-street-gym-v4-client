@@ -30,6 +30,10 @@ export default function Edit() {
     reset(blog);
   }, [reset, blog]);
 
+  useEffect(() => {
+    setEditable(true);
+  }, []);
+
   return (
     <>
       <div className='pt-6'>
