@@ -7,5 +7,3 @@ const blogSchema = z.object({
 });
 
 export default blogSchema;
-
-// FIX (1) zod schema to disallow emoji OR allow emoji in DB

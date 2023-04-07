@@ -103,7 +103,7 @@ function MenuBar({ editor }) {
   }
 
   return (
-    <div className='flex flex-col gap-2 px-4 pt-4 pb-2 border-b-[1px] border-base-content'>
+    <div className='flex flex-col gap-2 px-4 py-4 border-b-[1px] border-base-content'>
       <div className='flex flex-wrap gap-2'>
         <button
           onClick={() => editor.chain().focus().toggleBold().run()}
@@ -335,9 +335,9 @@ function MenuBar({ editor }) {
           redo
         </button>
       </div>
-      <p className='leading-5 text-[13px]'>
-        <em>Note: Emoji characters are currently not supported.</em>
-      </p>
+      {/* <p className='leading-5 text-[13px]'>
+        <em>Note: to be implemented.</em>
+      </p> */}
     </div>
   );
 }
