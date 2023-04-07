@@ -111,7 +111,7 @@ export default function List() {
           </>
         ) : (
           <LinkBtn2SmOutline to='/login' w='w-full'>
-            Sign up to Create Blog
+            Log in to Create Blog
           </LinkBtn2SmOutline>
         )}
       </section>

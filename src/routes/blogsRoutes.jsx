@@ -53,10 +53,6 @@ const blogsRoutes = [
   },
   {
     path: 'new',
-    async lazy() {
-      let { default: New } = await import('../components/blogs/New');
-      return { Component: New };
-    },
     ErrorBoundary: ErrorInfoBack,
     async action({ request }) {
       let { createBlog } = await import('../api/blogs');

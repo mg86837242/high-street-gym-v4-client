@@ -7,7 +7,7 @@ export default function List() {
   const { authenticatedUser } = useContext(AuthContext);
   const { bookings } = useLoaderData();
 
-  // PS DA `authenticatedUser` to `{role, memberId}` will break the code
+  // PS DA `authenticatedUser` to `{ role, memberId, trainerId }` will break the code for some reason
   switch (authenticatedUser?.role) {
     case 'Member':
       return <BookingListMemberView bookings={bookings} userMemberId={authenticatedUser?.memberId} />;
