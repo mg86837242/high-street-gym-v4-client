@@ -39,63 +39,68 @@ const bookingsRoutes = [
     },
     children: [
       {
-        index: true,
-        async lazy() {
-          let { default: DetailsIndex } = await import('../components/Bookings/DetailsIndex');
-          return { Component: DetailsIndex };
-        },
-      },
-      {
-        path: ':id',
-        async lazy() {
-          let { default: Details } = await import('../components/Bookings/Details');
-          return { Component: Details };
-        },
-        ErrorBoundary: ErrorInfoBack,
-        async loader({ params }) {
-          let { getBookingById } = await import('../api/bookings');
-          return getBookingById({ params });
-        },
-        handle: {
-          crumb: (params, data) =>
-            data?.booking ? (
-              <Link to={`/bookings/${params.date}/id/${params.id}`}>Booking ID: {params.id}</Link>
-            ) : (
-              'Error'
-            ),
-        },
-      },
-      {
-        path: ':id/edit',
-        async lazy() {
-          let { default: Edit } = await import('../components/Bookings/Edit');
-          return { Component: Edit };
-        },
-        ErrorBoundary: ErrorInfoBack,
-        async loader({ params }) {
-          let { getBookingAndOptionsById } = await import('../api/bookings');
-          return getBookingAndOptionsById({ params });
-        },
-        async action({ params, request }) {
-          let { updateBookingById } = await import('../api/bookings');
-          return updateBookingById({ params, request });
-        },
-        handle: {
-          crumb: (params, data) =>
-            data?.booking ? (
-              <Link to={`/bookings/${params.date}/id/${params.id}/edit`}>Booking ID: {params.id}</Link>
-            ) : (
-              'Error'
-            ),
-        },
-      },
-      {
-        path: ':id/destroy',
-        ErrorBoundary: ErrorInfoBack,
-        async action({ params }) {
-          let { deleteBookingById } = await import('../api/bookings');
-          return deleteBookingById({ params });
-        },
+        Component: () => <RequireAuth roles={['Admin', 'Trainer', 'Member']} />,
+        children: [
+          {
+            index: true,
+            async lazy() {
+              let { default: DetailsIndex } = await import('../components/Bookings/DetailsIndex');
+              return { Component: DetailsIndex };
+            },
+          },
+          {
+            path: ':id',
+            async lazy() {
+              let { default: Details } = await import('../components/Bookings/Details');
+              return { Component: Details };
+            },
+            ErrorBoundary: ErrorInfoBack,
+            async loader({ params }) {
+              let { getBookingById } = await import('../api/bookings');
+              return getBookingById({ params });
+            },
+            handle: {
+              crumb: (params, data) =>
+                data?.booking ? (
+                  <Link to={`/bookings/${params.date}/id/${params.id}`}>Booking ID: {params.id}</Link>
+                ) : (
+                  'Error'
+                ),
+            },
+          },
+          {
+            path: ':id/edit',
+            async lazy() {
+              let { default: Edit } = await import('../components/Bookings/Edit');
+              return { Component: Edit };
+            },
+            ErrorBoundary: ErrorInfoBack,
+            async loader({ params }) {
+              let { getBookingAndOptionsById } = await import('../api/bookings');
+              return getBookingAndOptionsById({ params });
+            },
+            async action({ params, request }) {
+              let { updateBookingById } = await import('../api/bookings');
+              return updateBookingById({ params, request });
+            },
+            handle: {
+              crumb: (params, data) =>
+                data?.booking ? (
+                  <Link to={`/bookings/${params.date}/id/${params.id}/edit`}>Booking ID: {params.id}</Link>
+                ) : (
+                  'Error'
+                ),
+            },
+          },
+          {
+            path: ':id/destroy',
+            ErrorBoundary: ErrorInfoBack,
+            async action({ params }) {
+              let { deleteBookingById } = await import('../api/bookings');
+              return deleteBookingById({ params });
+            },
+          },
+        ],
       },
     ],
   },
