@@ -56,10 +56,10 @@ export async function updateBookingById({ params, request }) {
   const formData = await request.formData();
   const updates = Object.fromEntries(formData);
   await fetchRes(`${API_URL}/bookings/id/${params.id}`, 'patch', updates);
-  return redirect(`../${updates.date}/${params.id}`);
+  return redirect(`../../${updates.date}/${params.id}`);
 }
 
 export async function deleteBookingById({ params }) {
   await fetchRes(`${API_URL}/bookings/id/${params.id}`, 'delete');
-  return redirect(`../${params.date}`);
+  return redirect(`..`);
 }

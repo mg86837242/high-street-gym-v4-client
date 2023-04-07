@@ -51,6 +51,7 @@ export default function Edit() {
             <span className='p-0'>Date:</span>
             <input
               name='date'
+              type='date'
               min={tomorrowStr}
               max={threeWeeksLaterStr}
               defaultValue={booking.dateTime.slice(0, 10)}
