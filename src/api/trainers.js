@@ -51,7 +51,7 @@ export default async function updateTrainerById(values) {
   updates.certificate ||= null;
   updates.imageUrl ||= null;
 
-  const response = await patch(`${API_URL}/trainers/id/${id}`, updates);
+  const response = await patch(`${API_URL}/trainers//${id}`, updates);
   const json = await response.json();
   // Special error handling to let 409 pass to NOT trigger error boundary, since it's already handled in the component
   if (response.status === 409) {

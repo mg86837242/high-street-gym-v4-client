@@ -101,7 +101,7 @@ export async function updateMemberById(values) {
   updates.age = parseInt(age, 10) || null;
   updates.gender ||= null;
 
-  const response = await patch(`${API_URL}/members/id/${id}`, updates);
+  const response = await patch(`${API_URL}/members/${id}`, updates);
   const json = await response.json();
   // Special error handling to let 409 pass to NOT trigger error boundary, since it's already handled the in component
   if (response.status === 409) {

@@ -15,7 +15,7 @@ export async function getAllBookingOptions() {
 }
 
 export async function getBookingsByDate({ params }) {
-  const response = await get(`${API_URL}/bookings/booking-with-details/date/${params.date}`);
+  const response = await get(`${API_URL}/bookings/bookings-with-details/${params.date}`);
   // Special error handling to let 404 pass
   if (response?.status !== 200 && response?.status !== 404) {
     const json = await response.json();
@@ -28,7 +28,7 @@ export async function getBookingsByDate({ params }) {
 }
 
 export async function getBookingById({ params }) {
-  const response = await fetchRes(`${API_URL}/bookings/booking-with-details/id/${params.id}`, 'get');
+  const response = await fetchRes(`${API_URL}/bookings/booking-with-all-details/${params.id}`, 'get');
   return response;
 }
 
@@ -36,7 +36,7 @@ export async function getBookingAndOptionsById({ params }) {
   // Prefer to build customized API endpoint (1) is much simpler to code loader, (2) has one less nesting layer/level
   //  to DA loader data, e.g., in `Bookings/Edit.jsx`, `bookingJSON:` can be rid of – easier to code component, same
   //  applies to breadcrumbs/`useMatches`.
-  const response = await fetchRes(`${API_URL}/bookings/booking-with-options/id/${params.id}`);
+  const response = await fetchRes(`${API_URL}/bookings/booking-with-options/${params.id}`);
   return response;
   // Alternatively, fetch multiple endpoints with `Promise.all([])`, example: https://stackoverflow.com/questions/74719956/can-i-handle-multiple-loaders-for-a-single-url-in-remix
 }
@@ -55,11 +55,11 @@ export async function updateBookingById({ params, request }) {
   //  STRING", see: https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects
   const formData = await request.formData();
   const updates = Object.fromEntries(formData);
-  await fetchRes(`${API_URL}/bookings/id/${params.id}`, 'patch', updates);
+  await fetchRes(`${API_URL}/bookings/${params.id}`, 'patch', updates);
   return redirect(`../../${updates.date}/${params.id}`);
 }
 
 export async function deleteBookingById({ params }) {
-  await fetchRes(`${API_URL}/bookings/id/${params.id}`, 'delete');
+  await fetchRes(`${API_URL}/bookings/${params.id}`, 'delete');
   return redirect(`..`);
 }

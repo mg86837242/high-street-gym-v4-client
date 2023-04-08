@@ -11,7 +11,7 @@ export async function getAllBlogs() {
 }
 
 export async function getBlogById({ params }) {
-  const response = await fetchRes(`${API_URL}/blogs/id/${params.id}`);
+  const response = await fetchRes(`${API_URL}/blogs/${params.id}`);
   return response;
 }
 
@@ -29,11 +29,11 @@ export async function createBlog({ request }) {
 
 export async function updateBlogById({ params, request }) {
   const updates = await getSubmittedData(request);
-  await fetchRes(`${API_URL}/blogs/id/${params.id}`, 'patch', updates);
+  await fetchRes(`${API_URL}/blogs/${params.id}`, 'patch', updates);
   return redirect(`..`);
 }
 
 export async function deleteBlogById({ params }) {
-  await fetchRes(`${API_URL}/blogs/id/${params.id}`, 'delete');
+  await fetchRes(`${API_URL}/blogs/${params.id}`, 'delete');
   return redirect(`..`);
 }

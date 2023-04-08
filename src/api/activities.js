@@ -10,7 +10,7 @@ export async function getAllActivities() {
 }
 
 export async function getActivityById({ params }) {
-  const response = await fetchRes(`${API_URL}/activities/id/${params.id}`);
+  const response = await fetchRes(`${API_URL}/activities/${params.id}`);
   return response;
 }
 
@@ -22,11 +22,11 @@ export async function createActivity() {
 
 export async function updateActivityById({ params, request }) {
   const updates = await getSubmittedData(request);
-  await fetchRes(`${API_URL}/activities/id/${params.id}`, 'patch', updates);
+  await fetchRes(`${API_URL}/activities/${params.id}`, 'patch', updates);
   return redirect(`..`);
 }
 
 export async function deleteActivityById({ params }) {
-  await fetchRes(`${API_URL}/activities/id/${params.id}`, 'delete');
+  await fetchRes(`${API_URL}/activities/${params.id}`, 'delete');
   return redirect(`..`);
 }

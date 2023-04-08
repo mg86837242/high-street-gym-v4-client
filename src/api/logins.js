@@ -4,7 +4,7 @@ import get from '../helpers/get';
 import post from '../helpers/post';
 
 export async function getAllEmails() {
-  const response = await fetchRes(`${API_URL}/logins/all-emails`);
+  const response = await fetchRes(`${API_URL}/users/all-emails`);
   return response;
 }
 
@@ -21,13 +21,13 @@ export async function getUserByKey(accessKey) {
 }
 
 export async function login(email, password) {
-  const response = await post(`${API_URL}/login`, { email, password });
+  const response = await post(`${API_URL}/users/login`, { email, password });
   const json = await response.json();
   return json;
 }
 
 export async function logout(accessKey) {
-  const response = await post(`${API_URL}/logout`, { accessKey });
+  const response = await post(`${API_URL}/users/logout`, { accessKey });
   const json = await response.json();
   return json;
 }
