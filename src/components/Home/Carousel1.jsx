@@ -14,7 +14,6 @@ export default function Carousel() {
     });
   }
 
-  // ??? Carousel not working in Chrome unless scroll along the y-axis a little bit (working fine in FireFox)
   return (
     <>
       <nav className='flex justify-center gap-10 py-2 bg-base-100 w-full'>
