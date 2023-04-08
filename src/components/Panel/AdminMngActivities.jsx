@@ -23,42 +23,70 @@ function AdminListActivities({ activities }) {
       <table className='table w-full table-compact'>
         <thead>
           <tr>
-            {Object.keys(activities[0]).map((key) => (
-              <th key={key}>{key.replace(/([a-z])([A-Z])/g, '$1 $2')}</th>
-            ))}
+            <th>id</th>
+            <th>name</th>
+            <th>category</th>
+            <th>description</th>
+            <th>intensity level</th>
+            <th>max people allowed</th>
+            <th>requirement 1</th>
+            <th>requirement 2</th>
+            <th>duration (minutes)</th>
+            <th>price</th>
             <th>Edit</th>
             <th>Delete</th>
           </tr>
         </thead>
         <tbody>
-          {activities.map((a) => (
-            <tr key={a.id} className='hover'>
-              <th>{a.id}</th>
-              {Object.values(a).map((val, i) => i > 0 && <td key={i}>{val}</td>)}
-              <td>
-                <Form action={`${a.id}/edit`}>
-                  <button className='shadow btn btn-outline btn-primary btn-xs text-primary-content shadow-black/50'>
-                    Edit
-                  </button>
-                </Form>
-              </td>
-              <td>
-                <Form
-                  method='post'
-                  action={`${a.id}/destroy`}
-                  onSubmit={(e) => {
-                    if (!confirm('Please confirm you want to delete this activity.')) {
-                      e.preventDefault();
-                    }
-                  }}
-                >
-                  <button type='submit' className='shadow btn btn-outline btn-xs text-accent-content shadow-black/50'>
-                    Delete
-                  </button>
-                </Form>
-              </td>
-            </tr>
-          ))}
+          {activities.map(
+            ({
+              id,
+              name,
+              category,
+              description,
+              intensityLevel,
+              maxPeopleAllowed,
+              requirementOne,
+              requirementTwo,
+              durationMinutes,
+              price,
+            }) => (
+              <tr key={`r${id}`} className='hover'>
+                <th>{id}</th>
+                <td>{name}</td>
+                <td>{category}</td>
+                <td>{description}</td>
+                <td>{intensityLevel}</td>
+                <td>{maxPeopleAllowed}</td>
+                <td>{requirementOne}</td>
+                <td>{requirementTwo}</td>
+                <td>{durationMinutes}</td>
+                <td>{price}</td>
+                <td>
+                  <Form action={`${id}/edit`}>
+                    <button className='shadow btn btn-outline btn-primary btn-xs text-primary-content shadow-black/50'>
+                      Edit
+                    </button>
+                  </Form>
+                </td>
+                <td>
+                  <Form
+                    method='post'
+                    action={`${id}/destroy`}
+                    onSubmit={(e) => {
+                      if (!confirm('Please confirm you want to delete this activity.')) {
+                        e.preventDefault();
+                      }
+                    }}
+                  >
+                    <button type='submit' className='shadow btn btn-outline btn-xs text-accent-content shadow-black/50'>
+                      Delete
+                    </button>
+                  </Form>
+                </td>
+              </tr>
+            )
+          )}
         </tbody>
       </table>
     </div>

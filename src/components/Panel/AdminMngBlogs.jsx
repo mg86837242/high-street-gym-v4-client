@@ -30,8 +30,8 @@ function AdminListBlogs({ blogs }) {
             <th>body</th>
             <th>username</th>
             <th>role</th>
-            <th>created At</th>
-            <th>updated At</th>
+            <th>created at</th>
+            <th>updated at</th>
             <th>Edit</th>
             <th>Delete</th>
           </tr>
