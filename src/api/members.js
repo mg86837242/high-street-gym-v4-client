@@ -66,41 +66,6 @@ export async function signupMembers({ request }) {
 
 export async function updateMemberById(values) {
   const { id, ...updates } = values;
-  const { email, password, firstName, lastName, username, phone, age, gender } = updates;
-  // #region validation
-  const messages = {};
-  if (!emailSchema.safeParse(email).success) {
-    messages.email = emailSchema.safeParse(email).error.issues[0].message;
-  }
-  if (!passwordSchema.safeParse(password).success) {
-    messages.password = passwordSchema.safeParse(password).error.issues[0].message;
-  }
-  if (!usernameSchema.safeParse(username).success) {
-    messages.username = usernameSchema.safeParse(username).error.issues[0].message;
-  }
-  if (!firstNameSchema.safeParse(firstName).success) {
-    messages.firstName = firstNameSchema.safeParse(firstName).error.issues[0].message;
-  }
-  if (!lastNameSchema.safeParse(lastName).success) {
-    messages.lastName = lastNameSchema.safeParse(lastName).error.issues[0].message;
-  }
-  if (!phoneSchema.safeParse(phone).success) {
-    messages.phone = phoneSchema.safeParse(phone).error.issues[0].message;
-  }
-  if (!ageSchema.safeParse(age).success) {
-    messages.age = ageSchema.safeParse(age).error.issues[0].message;
-  }
-  if (!genderSchema.safeParse(gender).success) {
-    messages.gender = genderSchema.safeParse(gender).error.issues[0].message;
-  }
-  if (Object.keys(messages).length) {
-    return messages;
-  }
-  // #endregion
-  // Type conversion for db constratin
-  updates.age = parseInt(age, 10) || null;
-  updates.gender ||= null;
-
   const response = await patch(`${API_URL}/members/${id}`, updates);
   const json = await response.json();
   // Special error handling to let 409 pass to NOT trigger error boundary, since it's already handled the in component
