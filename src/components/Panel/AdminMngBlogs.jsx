@@ -102,14 +102,10 @@ export function AdminEditBlog() {
     reset,
   } = useForm({
     resolver: zodResolver(blogSchema),
-    defaultValues: useMemo(() => {
-      return blog;
-    }, [blog]),
+    defaultValues: useMemo(() => blog, [blog]),
   });
 
-  useEffect(() => {
-    reset(blog);
-  }, [reset, blog]);
+  useEffect(() => reset(blog), [reset, blog]);
 
   return (
     <div className='grid py-6 place-items-center'>

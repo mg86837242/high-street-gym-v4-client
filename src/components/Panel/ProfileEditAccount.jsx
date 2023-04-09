@@ -150,12 +150,13 @@ function UpdateAdminForm({ topStatusText, user, emails, authenticatedUser }) {
     reset,
   } = useForm({
     resolver: zodResolver(adminSchema),
-    defaultValues: useMemo(() => {
-      return { ...user, id: authenticatedUser?.adminId, _action: 'updateAdminById' };
-    }, [user]),
+    defaultValues: useMemo(() => ({ ...user, id: authenticatedUser?.adminId, _action: 'updateAdminById' }), [user]),
   });
 
-  useEffect(() => reset(user), [reset, user]);
+  useEffect(
+    () => reset({ ...user, id: authenticatedUser?.adminId, _action: 'updateAdminById' }),
+    [reset, user, authenticatedUser]
+  );
 
   return (
     <form

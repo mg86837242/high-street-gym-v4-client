@@ -116,16 +116,12 @@ export function AdminEditActivity() {
     reset,
   } = useForm({
     resolver: zodResolver(activitySchema),
-    defaultValues: useMemo(() => {
-      return activity;
-    }, [activity]),
+    defaultValues: useMemo(() => activity, [activity]),
   });
   // NB Subscribe to the change of `activity` returned by loader:
   //  -- https://stackoverflow.com/questions/62242657/how-to-change-react-hook-form-defaultvalue-with-useeffect
   //  -- API ref: https://react-hook-form.com/api/useform/reset/
-  useEffect(() => {
-    reset(activity);
-  }, [reset, activity]);
+  useEffect(() => reset(activity), [reset, activity]);
 
   return (
     <div className='grid py-6 place-items-center'>
