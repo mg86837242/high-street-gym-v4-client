@@ -7,33 +7,35 @@ import blogSchema from '../../schemas/blogs';
 import { Btn2SmOutline } from '../UI/Btn2';
 import { Btn1SmOutline } from '../UI/Btn1';
 import FCRHFSm from '../FormControlRHF/FCRHFSm';
-import BoldIcon from 'remixicon-react/BoldIcon';
-import ItalicIcon from 'remixicon-react/ItalicIcon';
-import StrikethroughIcon from 'remixicon-react/StrikethroughIcon';
-import CodeViewIcon from 'remixicon-react/CodeViewIcon';
-import FormatClearIcon from 'remixicon-react/FormatClearIcon';
-import FontColorIcon from 'remixicon-react/FontColorIcon';
-import ParagraphIcon from 'remixicon-react/ParagraphIcon';
-import H1Icon from 'remixicon-react/H1Icon';
-import H2Icon from 'remixicon-react/H2Icon';
-import H3Icon from 'remixicon-react/H3Icon';
-import H4Icon from 'remixicon-react/H4Icon';
-import H5Icon from 'remixicon-react/H5Icon';
-import H6Icon from 'remixicon-react/H6Icon';
-import ListUnorderedIcon from 'remixicon-react/ListUnorderedIcon';
-import ListOrderedIcon from 'remixicon-react/ListOrderedIcon';
-import TextWrapIcon from 'remixicon-react/TextWrapIcon';
-import IndentDecreaseIcon from 'remixicon-react/IndentDecreaseIcon';
-import IndentIncreaseIcon from 'remixicon-react/IndentIncreaseIcon';
-import CodeBoxLineIcon from 'remixicon-react/CodeBoxLineIcon';
-import DoubleQuotesLIcon from 'remixicon-react/DoubleQuotesLIcon';
-import EraserLineIcon from 'remixicon-react/EraserLineIcon';
-import SeparatorIcon from 'remixicon-react/SeparatorIcon';
+import {
+  BoldIcon,
+  ItalicIcon,
+  StrikethroughIcon,
+  CodeViewIcon,
+  FormatClearIcon,
+  FontColorIcon,
+  ParagraphIcon,
+  H1Icon,
+  H2Icon,
+  H3Icon,
+  H4Icon,
+  H5Icon,
+  H6Icon,
+  ListUnorderedIcon,
+  ListOrderedIcon,
+  TextWrapIcon,
+  IndentDecreaseIcon,
+  IndentIncreaseIcon,
+  CodeBoxLineIcon,
+  DoubleQuotesLIcon,
+  EraserLineIcon,
+  SeparatorIcon,
+  ImageAddLineIcon,
+  ArrowGoBackLineIcon,
+  ArrowGoForwardLineIcon,
+} from '../../data/remixIcons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowTurnDown } from '@fortawesome/free-solid-svg-icons';
-import ImageAddLineIcon from 'remixicon-react/ImageAddLineIcon';
-import ArrowGoBackLineIcon from 'remixicon-react/ArrowGoBackLineIcon';
-import ArrowGoForwardLineIcon from 'remixicon-react/ArrowGoForwardLineIcon';
 
 export default function Edit() {
   const { blog, limit, editable, setEditable, editor } = useOutletContext();
