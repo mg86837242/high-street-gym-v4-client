@@ -140,8 +140,9 @@ export default function ProfileEditAccount() {
   );
 }
 
-// TODO validate against curr emails (possibly within RHF) && pass state for visibility && exception of sanitization for addr line 2
+// TODO pass state for visibility && exception of sanitization for addr line 2 && role specific inputs && select dropdowns
 function UpdateAdminForm({ topStatusText, user, emails, authenticatedUser }) {
+  const [duplicateEmailStatusText, setDuplicateEmailStatusText] = useState('');
   const submit = useSubmit();
   const {
     register,
@@ -150,7 +151,10 @@ function UpdateAdminForm({ topStatusText, user, emails, authenticatedUser }) {
     reset,
   } = useForm({
     resolver: zodResolver(adminSchema),
-    defaultValues: useMemo(() => ({ ...user, id: authenticatedUser?.adminId, _action: 'updateAdminById' }), [user]),
+    defaultValues: useMemo(
+      () => ({ ...user, id: authenticatedUser?.adminId, _action: 'updateAdminById' }),
+      [user, authenticatedUser]
+    ),
   });
 
   useEffect(
@@ -161,19 +165,19 @@ function UpdateAdminForm({ topStatusText, user, emails, authenticatedUser }) {
   return (
     <form
       onSubmit={handleSubmit(data => {
+        setDuplicateEmailStatusText('');
+        if (data.email !== user.email && emails.find(e => e.email === data.email)) {
+          setDuplicateEmailStatusText('Email has already been used');
+          return;
+        }
         const sanitizedData = sanitize(data);
         submit({ body: JSON.stringify(sanitizedData) }, { method: 'post' });
       })}
       noValidate
       className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'
     >
-      <FCRHFSm label='Email' issue={errors.email?.message} isRequired={false}>
-        <input
-          {...register('email', {
-            validate: val => !emails.find(e => val === e.email) || 'Email has already been used',
-          })}
-          className='input input-bordered input-sm'
-        />
+      <FCRHFSm label='Email' issue={duplicateEmailStatusText || errors.email?.message} isRequired={false}>
+        <input {...register('email')} className='input input-bordered input-sm' />
       </FCRHFSm>
       <FCRHFSm label='Password' issue={errors.password?.message} isRequired={false}>
         <input {...register('password')} className='input input-bordered input-sm' />
@@ -248,26 +252,41 @@ function UpdateAdminAddrForm({ botStatusText, user, authenticatedUser }) {
 }
 
 function UpdateTrainerForm({ topStatusText, user, emails, authenticatedUser }) {
+  const [duplicateEmailStatusText, setDuplicateEmailStatusText] = useState('');
   const submit = useSubmit();
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({ resolver: zodResolver(trainerSchema), defaultValues: useMemo(() => user, [user]) });
+  } = useForm({
+    resolver: zodResolver(trainerSchema),
+    defaultValues: useMemo(
+      () => ({ ...user, id: authenticatedUser?.trainerId, _action: 'updateTrainerById' }),
+      [user, authenticatedUser]
+    ),
+  });
 
-  useEffect(() => reset(user), [reset, user]);
+  useEffect(
+    () => reset({ ...user, id: authenticatedUser?.trainerId, _action: 'updateTrainerById' }),
+    [reset, user, authenticatedUser]
+  );
 
   return (
     <form
       onSubmit={handleSubmit(data => {
+        setDuplicateEmailStatusText('');
+        if (data.email !== user.email && emails.find(e => e.email === data.email)) {
+          setDuplicateEmailStatusText('Email has already been used');
+          return;
+        }
         const sanitizedData = sanitize(data);
         submit({ body: JSON.stringify(sanitizedData) }, { method: 'post' });
       })}
       noValidate
       className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'
     >
-      <FCRHFSm label='Email' issue={errors.email?.message} isRequired={false}>
+      <FCRHFSm label='Email' issue={duplicateEmailStatusText || errors.email?.message} isRequired={false}>
         <input {...register('email')} className='input input-bordered input-sm' />
       </FCRHFSm>
       <FCRHFSm label='Password' issue={errors.password?.message} isRequired={false}>
@@ -285,8 +304,9 @@ function UpdateTrainerForm({ topStatusText, user, emails, authenticatedUser }) {
       <FCRHFSm label='Phone' issue={errors.phone?.message} isRequired={false}>
         <input {...register('phone')} className='input input-bordered input-sm' />
       </FCRHFSm>
-      <input type='hidden' name='id' value={authenticatedUser.trainerId} />
-      <button type='submit' name='_action' value='updateAdminById' className='btn btn-primary btn-sm mt-4'>
+      <input type='hidden' {...register('id', { valueAsNumber: true })} />
+      <input type='hidden' {...register('_action')} />
+      <button type='submit' className='btn btn-primary btn-sm mt-4'>
         Save
       </button>
       <p className='text-success self-center mt-4'>{topStatusText}</p>
@@ -342,26 +362,41 @@ function UpdateTrainerAddrForm({ botStatusText, user, authenticatedUser }) {
 }
 
 function UpdateMemberForm({ topStatusText, user, emails, authenticatedUser }) {
+  const [duplicateEmailStatusText, setDuplicateEmailStatusText] = useState('');
   const submit = useSubmit();
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({ resolver: zodResolver(memberSchema), defaultValues: useMemo(() => user, [user]) });
+  } = useForm({
+    resolver: zodResolver(memberSchema),
+    defaultValues: useMemo(
+      () => ({ ...user, id: authenticatedUser?.memberId, _action: 'updateMemberById' }),
+      [user, authenticatedUser]
+    ),
+  });
 
-  useEffect(() => reset(user), [reset, user]);
+  useEffect(
+    () => reset({ ...user, id: authenticatedUser?.memberId, _action: 'updateMemberById' }),
+    [reset, user, authenticatedUser]
+  );
 
   return (
     <form
       onSubmit={handleSubmit(data => {
+        setDuplicateEmailStatusText('');
+        if (data.email !== user.email && emails.find(e => e.email === data.email)) {
+          setDuplicateEmailStatusText('Email has already been used');
+          return;
+        }
         const sanitizedData = sanitize(data);
         submit({ body: JSON.stringify(sanitizedData) }, { method: 'post' });
       })}
       noValidate
       className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'
     >
-      <FCRHFSm label='Email' issue={errors.email?.message} isRequired={false}>
+      <FCRHFSm label='Email' issue={duplicateEmailStatusText || errors.email?.message} isRequired={false}>
         <input {...register('email')} className='input input-bordered input-sm' />
       </FCRHFSm>
       <FCRHFSm label='Password' issue={errors.password?.message} isRequired={false}>
@@ -379,8 +414,9 @@ function UpdateMemberForm({ topStatusText, user, emails, authenticatedUser }) {
       <FCRHFSm label='Phone' issue={errors.phone?.message} isRequired={false}>
         <input {...register('phone')} className='input input-bordered input-sm' />
       </FCRHFSm>
-      <input type='hidden' name='id' value={authenticatedUser.memberId} />
-      <button type='submit' name='_action' value='updateAdminById' className='btn btn-primary btn-sm mt-4'>
+      <input type='hidden' {...register('id', { valueAsNumber: true })} />
+      <input type='hidden' {...register('_action')} />
+      <button type='submit' className='btn btn-primary btn-sm mt-4'>
         Save
       </button>
       <p className='text-success self-center mt-4'>{topStatusText}</p>
