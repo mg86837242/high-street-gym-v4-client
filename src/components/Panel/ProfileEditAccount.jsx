@@ -91,6 +91,7 @@ export default function ProfileEditAccount() {
         return <></>;
     }
   }
+
   function renderSwitchUpdateUserAddrForm(role) {
     switch (role) {
       case 'Admin':
