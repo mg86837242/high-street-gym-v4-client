@@ -46,7 +46,7 @@ export default function Calendar() {
                   to={`${year}-${month < 10 ? '0' + month : month}-${dayOnCal < 10 ? '0' + dayOnCal : dayOnCal}`}
                   id='calendar-cell'
                   tabIndex={0}
-                  key={10 * i + j}
+                  key={7 * i + j + 1}
                   className={({ isActive, isPending }) =>
                     `grid place-items-center w-11 h-11 3xl:w-12 3xl:h-12 min-h-0 sm:text-base leading-none btn btn-circle ${
                       isActive && 'btn-primary'
@@ -58,7 +58,7 @@ export default function Calendar() {
               ) : (
                 <div
                   id='calendar-cell-no-date'
-                  key={10 * i + j}
+                  key={7 * i + j + 1}
                   className='grid min-h-0 leading-none place-items-center w-11 h-11 xl:w-12 xl:h-12 sm:text-base'
                 ></div>
               );
