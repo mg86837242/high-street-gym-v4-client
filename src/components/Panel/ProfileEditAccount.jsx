@@ -3,6 +3,8 @@ import AuthContext from '../../context/AuthContext';
 import { useLoaderData, useActionData, useSubmit } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import sanitize from '../../helpers/sanitize';
+import FCRHFSm from '../FormControlRHF/FCRHFSm';
 
 export default function ProfileEditAccount() {
   const { authenticatedUser } = useContext(AuthContext);
@@ -107,7 +109,7 @@ export default function ProfileEditAccount() {
         </div>
       );
     default:
-      return null; //22
+      return <></>;
   }
 }
 
@@ -122,7 +124,35 @@ function UpdateAdminForm({ topStatusText, emails, user }) {
 
   useEffect(() => reset(user), [reset, user]);
 
-  return null;
+  return (
+    <form
+      onSubmit={handleSubmit((data) => {
+        const sanitizedData = sanitize(data);
+        submit({ body: JSON.stringify(sanitizedData) }, { method: 'post' });
+      })}
+      noValidate
+      className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'
+    >
+      <FCRHFSm label='Email' issue={errors.email?.message} isRequired={false}>
+        <input {...register('email')} className='input input-bordered input-sm' />
+      </FCRHFSm>
+      <FCRHFSm label='Password' issue={errors.password?.message} isRequired={false}>
+        <input {...register('password')} className='input input-bordered input-sm' />
+      </FCRHFSm>
+      <FCRHFSm label='Username' issue={errors.username?.message} isRequired={false}>
+        <input {...register('username')} className='input input-bordered input-sm' />
+      </FCRHFSm>
+      <FCRHFSm label='First Name' issue={errors.firstName?.message} isRequired={false}>
+        <input {...register('firstname')} className='input input-bordered input-sm' />
+      </FCRHFSm>
+      <FCRHFSm label='Last Name' issue={errors.lastName?.message} isRequired={false}>
+        <input {...register('last name')} className='input input-bordered input-sm' />
+      </FCRHFSm>
+      <FCRHFSm label='Phone' issue={errors.phone?.message} isRequired={false}>
+        <input {...register('phone')} className='input input-bordered input-sm' />
+      </FCRHFSm>
+    </form>
+  );
 }
 
 function UpdateAdminAddrForm({ botStatusText, user }) {
@@ -136,7 +166,16 @@ function UpdateAdminAddrForm({ botStatusText, user }) {
 
   useEffect(() => reset(user), [reset, user]);
 
-  return null;
+  return (
+    <form
+      onSubmit={handleSubmit((data) => {
+        const sanitizedData = sanitize(data);
+        submit({ body: JSON.stringify(sanitizedData) }, { method: 'post' });
+      })}
+      noValidate
+      className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'
+    ></form>
+  );
 }
 
 function UpdateTrainerForm({ topStatusText, emails, user }) {
@@ -150,7 +189,35 @@ function UpdateTrainerForm({ topStatusText, emails, user }) {
 
   useEffect(() => reset(user), [reset, user]);
 
-  return null;
+  return (
+    <form
+      onSubmit={handleSubmit((data) => {
+        const sanitizedData = sanitize(data);
+        submit({ body: JSON.stringify(sanitizedData) }, { method: 'post' });
+      })}
+      noValidate
+      className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'
+    >
+      <FCRHFSm label='Email' issue={errors.email?.message} isRequired={false}>
+        <input {...register('email')} className='input input-bordered input-sm' />
+      </FCRHFSm>
+      <FCRHFSm label='Password' issue={errors.password?.message} isRequired={false}>
+        <input {...register('password')} className='input input-bordered input-sm' />
+      </FCRHFSm>
+      <FCRHFSm label='Username' issue={errors.username?.message} isRequired={false}>
+        <input {...register('username')} className='input input-bordered input-sm' />
+      </FCRHFSm>
+      <FCRHFSm label='First Name' issue={errors.firstName?.message} isRequired={false}>
+        <input {...register('firstname')} className='input input-bordered input-sm' />
+      </FCRHFSm>
+      <FCRHFSm label='Last Name' issue={errors.lastName?.message} isRequired={false}>
+        <input {...register('last name')} className='input input-bordered input-sm' />
+      </FCRHFSm>
+      <FCRHFSm label='Phone' issue={errors.phone?.message} isRequired={false}>
+        <input {...register('phone')} className='input input-bordered input-sm' />
+      </FCRHFSm>
+    </form>
+  );
 }
 
 function UpdateTrainerAddrForm({ botStatusText, user }) {
@@ -164,7 +231,16 @@ function UpdateTrainerAddrForm({ botStatusText, user }) {
 
   useEffect(() => reset(user), [reset, user]);
 
-  return null;
+  return (
+    <form
+      onSubmit={handleSubmit((data) => {
+        const sanitizedData = sanitize(data);
+        submit({ body: JSON.stringify(sanitizedData) }, { method: 'post' });
+      })}
+      noValidate
+      className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'
+    ></form>
+  );
 }
 
 function UpdateMemberForm({ topStatusText, emails, user }) {
@@ -178,7 +254,35 @@ function UpdateMemberForm({ topStatusText, emails, user }) {
 
   useEffect(() => reset(user), [reset, user]);
 
-  return null;
+  return (
+    <form
+      onSubmit={handleSubmit((data) => {
+        const sanitizedData = sanitize(data);
+        submit({ body: JSON.stringify(sanitizedData) }, { method: 'post' });
+      })}
+      noValidate
+      className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'
+    >
+      <FCRHFSm label='Email' issue={errors.email?.message} isRequired={false}>
+        <input {...register('email')} className='input input-bordered input-sm' />
+      </FCRHFSm>
+      <FCRHFSm label='Password' issue={errors.password?.message} isRequired={false}>
+        <input {...register('password')} className='input input-bordered input-sm' />
+      </FCRHFSm>
+      <FCRHFSm label='Username' issue={errors.username?.message} isRequired={false}>
+        <input {...register('username')} className='input input-bordered input-sm' />
+      </FCRHFSm>
+      <FCRHFSm label='First Name' issue={errors.firstName?.message} isRequired={false}>
+        <input {...register('firstname')} className='input input-bordered input-sm' />
+      </FCRHFSm>
+      <FCRHFSm label='Last Name' issue={errors.lastName?.message} isRequired={false}>
+        <input {...register('last name')} className='input input-bordered input-sm' />
+      </FCRHFSm>
+      <FCRHFSm label='Phone' issue={errors.phone?.message} isRequired={false}>
+        <input {...register('phone')} className='input input-bordered input-sm' />
+      </FCRHFSm>
+    </form>
+  );
 }
 
 function UpdateMemberAddrForm({ botStatusText, user }) {
@@ -192,5 +296,14 @@ function UpdateMemberAddrForm({ botStatusText, user }) {
 
   useEffect(() => reset(user), [reset, user]);
 
-  return null;
+  return (
+    <form
+      onSubmit={handleSubmit((data) => {
+        const sanitizedData = sanitize(data);
+        submit({ body: JSON.stringify(sanitizedData) }, { method: 'post' });
+      })}
+      noValidate
+      className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'
+    ></form>
+  );
 }
