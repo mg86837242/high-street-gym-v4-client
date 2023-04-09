@@ -3,12 +3,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
 
 export default function InputGrpPass({ issue, initialValue }) {
-  const [inputType, setInputType] = useState('password');
+  const [type, setType] = useState('password');
   const [icon, setIcon] = useState(faEyeSlash);
 
   function handleToggle(e) {
     e.stopPropagation();
-    setInputType(inputType === 'password' ? 'text' : 'password');
+    setType(type === 'password' ? 'text' : 'password');
     setIcon(icon === faEyeSlash ? faEye : faEyeSlash);
   }
 
@@ -21,7 +21,7 @@ export default function InputGrpPass({ issue, initialValue }) {
       <input
         name='password'
         id='password'
-        type={inputType}
+        type={type}
         placeholder='Enter your password here'
         defaultValue={initialValue}
         className='w-full h-10 text-accent input input-bordered input-primary 3xl:h-12'

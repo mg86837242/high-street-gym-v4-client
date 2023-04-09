@@ -117,15 +117,14 @@ export function AdminEditBlog() {
         noValidate
         className='grid w-full grid-cols-2 justify-items-center xl:grid-cols-3 gap-x-5'
       >
-        <FCRHFSm label='Blog Post Title' issue={errors.title?.message}>
-          <input {...register('title')} className='input input-bordered input-sm' />
-        </FCRHFSm>
-        <FCRHFSm label='Author Username' issue={errors.username?.message} isRequired={false}>
-          <input {...register('username')} disabled className='input input-bordered input-sm' />
-        </FCRHFSm>
-        <FCRHFSm label='Author Role' issue={errors.role?.message} isRequired={false}>
-          <input {...register('role')} disabled className='input input-bordered input-sm' />
-        </FCRHFSm>
+        <FCRHFSm label='Blog Post Title' register={register('title')} issue={errors.title?.message} />
+        <FCRHFSm
+          label='Author Username'
+          register={register('username')}
+          issue={errors.username?.message}
+          isRequired={false}
+        />
+        <FCRHFSm label='Author Role' register={register('role')} issue={errors.role?.message} isRequired={false} />
         <FCRHFSmTextarea label='Blog Post Body' issue={errors.body?.message}>
           <textarea
             {...register('body')}

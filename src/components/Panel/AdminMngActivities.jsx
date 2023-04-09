@@ -3,7 +3,7 @@ import { useLoaderData, Outlet, Form, useSubmit, useNavigate } from 'react-route
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { activitySchema } from '../../schemas';
-import {convertEmptyStrToNull} from '../../helpers/sanitize';
+import { convertEmptyStrToNull } from '../../helpers/sanitize';
 import FCRHFSm from '../FormControlRHF/FCRHFSm';
 
 export function AdminMngActivities() {
@@ -133,9 +133,7 @@ export function AdminEditActivity() {
         noValidate
         className='grid w-full grid-cols-2 justify-items-center xl:grid-cols-3 gap-x-5'
       >
-        <FCRHFSm label='Activity Name' issue={errors.name?.message}>
-          <input {...register('name')} className='input input-bordered input-sm' />
-        </FCRHFSm>
+        <FCRHFSm label='Activity Name' register={register('name')} issue={errors.name?.message} />
         <FCRHFSm label='Category' issue={errors.category?.message} isRequired={false}>
           <select {...register('category')} className='font-normal select select-bordered select-sm'>
             <option value=''>-- Choose Category --</option>
@@ -145,9 +143,12 @@ export function AdminEditActivity() {
             <option value='Flexibility'>Flexibility</option>
           </select>
         </FCRHFSm>
-        <FCRHFSm label='Description' issue={errors.description?.message} isRequired={false}>
-          <input {...register('description')} className='input input-bordered input-sm' />
-        </FCRHFSm>
+        <FCRHFSm
+          label='Description'
+          register={register('description')}
+          issue={errors.description?.message}
+          isRequired={false}
+        />
         <FCRHFSm label='Intensity Level' issue={errors.intensityLevel?.message} isRequired={false}>
           <select {...register('intensityLevel')} className='font-normal select select-bordered select-sm'>
             <option value=''>-- Choose Intensity Level --</option>
@@ -158,33 +159,38 @@ export function AdminEditActivity() {
             <option value='Varies with Type'>Varies with Type</option>
           </select>
         </FCRHFSm>
-        <FCRHFSm label='Max People Allowed' issue={errors.maxPeopleAllowed?.message} isRequired={false}>
-          <input
-            type='number'
-            {...register('maxPeopleAllowed', { valueAsNumber: true })}
-            className='input input-bordered input-sm'
-          />
-        </FCRHFSm>
-        <FCRHFSm label='Requirement 1' issue={errors.requirementOne?.message} isRequired={false}>
-          <input {...register('requirementOne')} className='input input-bordered input-sm' />
-        </FCRHFSm>
-        <FCRHFSm label='Requirement 2' issue={errors.requirementTwo?.message} isRequired={false}>
-          <input {...register('requirementTwo')} className='input input-bordered input-sm' />
-        </FCRHFSm>
-        <FCRHFSm label='Duration (minutes)' issue={errors.durationMinutes?.message}>
-          <input
-            type='number'
-            {...register('durationMinutes', { valueAsNumber: true })}
-            className='input input-bordered input-sm'
-          />
-        </FCRHFSm>
-        <FCRHFSm label='Price' issue={errors.price?.message} isRequired={false}>
-          <input
-            type='number'
-            {...register('price', { valueAsNumber: true })}
-            className='input input-bordered input-sm'
-          />
-        </FCRHFSm>
+        <FCRHFSm
+          label='Max People Allowed'
+          type='number'
+          register={register('maxPeopleAllowed', { valueAsNumber: true })}
+          issue={errors.maxPeopleAllowed?.message}
+          isRequired={false}
+        />
+        <FCRHFSm
+          label='Requirement 1'
+          register={register('requirementOne')}
+          issue={errors.requirementOne?.message}
+          isRequired={false}
+        />
+        <FCRHFSm
+          label='Requirement 2'
+          register={register('requirementTwo')}
+          issue={errors.requirementTwo?.message}
+          isRequired={false}
+        />
+        <FCRHFSm
+          label='Duration (minutes)'
+          type='number'
+          register={register('durationMinutes', { valueAsNumber: true })}
+          issue={errors.durationMinutes?.message}
+        />
+        <FCRHFSm
+          label='Price'
+          type='number'
+          register={register('price', { valueAsNumber: true })}
+          issue={errors.price?.message}
+          isRequired={false}
+        />
         <div className='flex justify-end w-full col-span-2 gap-10 py-6 xl:col-span-3'>
           <button type='submit' className='w-20 btn btn-outline btn-primary btn-sm'>
             Save

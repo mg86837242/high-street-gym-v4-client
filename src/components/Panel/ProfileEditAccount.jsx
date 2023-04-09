@@ -176,22 +176,12 @@ function UpdateAdminForm({ topStatusText, authenticatedUser, user, emails }) {
       noValidate
       className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'
     >
-      <FCRHFSm label='Email' issue={duplicateEmailStatusText || errors.email?.message}>
-        <input {...register('email')} className='input input-bordered input-sm' />
-      </FCRHFSm>
-      <FCRHFSmPass label='Password' issue={errors.password?.message} register={register} />
-      <FCRHFSm label='Username' issue={errors.username?.message}>
-        <input {...register('username')} className='input input-bordered input-sm' />
-      </FCRHFSm>
-      <FCRHFSm label='First Name' issue={errors.firstName?.message}>
-        <input {...register('firstName')} className='input input-bordered input-sm' />
-      </FCRHFSm>
-      <FCRHFSm label='Last Name' issue={errors.lastName?.message}>
-        <input {...register('lastName')} className='input input-bordered input-sm' />
-      </FCRHFSm>
-      <FCRHFSm label='Phone' issue={errors.phone?.message}>
-        <input {...register('phone')} className='input input-bordered input-sm' />
-      </FCRHFSm>
+      <FCRHFSm label='Email' register={register('email')} issue={duplicateEmailStatusText || errors.email?.message} />
+      <FCRHFSmPass label='Password' register={register('password')} issue={errors.password?.message} />
+      <FCRHFSm label='Username' register={register('username')} issue={errors.username?.message} />
+      <FCRHFSm label='First Name' register={register('firstName')} issue={errors.firstName?.message} />
+      <FCRHFSm label='Last Name' register={register('lastName')} issue={errors.lastName?.message} />
+      <FCRHFSm label='Phone' register={register('phone')} issue={errors.phone?.message} />
       <input type='hidden' {...register('id', { valueAsNumber: true })} />
       <input type='hidden' {...register('_action')} />
       <button type='submit' className='btn btn-primary btn-sm mt-4'>
@@ -222,24 +212,12 @@ function UpdateAdminAddrForm({ botStatusText, authenticatedUser, user }) {
       noValidate
       className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'
     >
-      <FCRHFSm label='Line 1' issue={errors.lineOne?.message}>
-        <input {...register('lineOne')} className='input input-bordered input-sm' />
-      </FCRHFSm>
-      <FCRHFSm label='Line 2' issue={errors.lineTwo?.message} isRequired={false}>
-        <input {...register('lineTwo')} className='input input-bordered input-sm' />
-      </FCRHFSm>
-      <FCRHFSm label='Suburb' issue={errors.suburb?.message}>
-        <input {...register('suburb')} className='input input-bordered input-sm' />
-      </FCRHFSm>
-      <FCRHFSm label='Postcode' issue={errors.postcode?.message}>
-        <input {...register('postcode')} className='input input-bordered input-sm' />
-      </FCRHFSm>
-      <FCRHFSm label='State' issue={errors.state?.message}>
-        <input {...register('state')} className='input input-bordered input-sm' />
-      </FCRHFSm>
-      <FCRHFSm label='Country' issue={errors.country?.message}>
-        <input {...register('country')} className='input input-bordered input-sm' />
-      </FCRHFSm>
+      <FCRHFSm label='Line 1' register={register('lineOne')} issue={errors.lineOne?.message} />
+      <FCRHFSm label='Line 2' register={register('lineTwo')} issue={errors.lineTwo?.message} isRequired={false} />
+      <FCRHFSm label='Suburb' register={register('suburb')} issue={errors.suburb?.message} />
+      <FCRHFSm label='Postcode' register={register('postcode')} issue={errors.postcode?.message} />
+      <FCRHFSm label='State' register={register('state')} issue={errors.state?.message} />
+      <FCRHFSm label='Country' register={register('country')} issue={errors.country?.message} />
       <input type='hidden' name='adminId' value={authenticatedUser.adminId} />
       <button type='submit' name='_action' value='updateAddressByAdminId' className='btn btn-primary btn-sm mt-5'>
         Save
@@ -249,7 +227,7 @@ function UpdateAdminAddrForm({ botStatusText, authenticatedUser, user }) {
   );
 }
 
-// TODO role specific inputs (also check if it's NOT required) && select dropdowns
+// TODO role specific inputs (also check if it's NOT required & if it's number) && select dropdowns
 function UpdateTrainerForm({ topStatusText, authenticatedUser, user, emails }) {
   const [duplicateEmailStatusText, setDuplicateEmailStatusText] = useState('');
   const submit = useSubmit();
@@ -285,22 +263,12 @@ function UpdateTrainerForm({ topStatusText, authenticatedUser, user, emails }) {
       noValidate
       className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'
     >
-      <FCRHFSm label='Email' issue={duplicateEmailStatusText || errors.email?.message}>
-        <input {...register('email')} className='input input-bordered input-sm' />
-      </FCRHFSm>
-      <FCRHFSmPass label='Password' issue={errors.password?.message} register={register} />
-      <FCRHFSm label='Username' issue={errors.username?.message}>
-        <input {...register('username')} className='input input-bordered input-sm' />
-      </FCRHFSm>
-      <FCRHFSm label='First Name' issue={errors.firstName?.message}>
-        <input {...register('firstName')} className='input input-bordered input-sm' />
-      </FCRHFSm>
-      <FCRHFSm label='Last Name' issue={errors.lastName?.message}>
-        <input {...register('lastName')} className='input input-bordered input-sm' />
-      </FCRHFSm>
-      <FCRHFSm label='Phone' issue={errors.phone?.message}>
-        <input {...register('phone')} className='input input-bordered input-sm' />
-      </FCRHFSm>
+      <FCRHFSm label='Email' register={register('email')} issue={duplicateEmailStatusText || errors.email?.message} />
+      <FCRHFSmPass label='Password' register={register('password')} issue={errors.password?.message} />
+      <FCRHFSm label='Username' register={register('username')} issue={errors.username?.message} />
+      <FCRHFSm label='First Name' register={register('firstName')} issue={errors.firstName?.message} />
+      <FCRHFSm label='Last Name' register={register('lastName')} issue={errors.lastName?.message} />
+      <FCRHFSm label='Phone' register={register('phone')} issue={errors.phone?.message} />
       <input type='hidden' {...register('id', { valueAsNumber: true })} />
       <input type='hidden' {...register('_action')} />
       <button type='submit' className='btn btn-primary btn-sm mt-4'>
@@ -331,24 +299,12 @@ function UpdateTrainerAddrForm({ botStatusText, authenticatedUser, user }) {
       noValidate
       className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'
     >
-      <FCRHFSm label='Line 1' issue={errors.lineOne?.message}>
-        <input {...register('lineOne')} className='input input-bordered input-sm' />
-      </FCRHFSm>
-      <FCRHFSm label='Line 2' issue={errors.lineTwo?.message} isRequired={false}>
-        <input {...register('lineTwo')} className='input input-bordered input-sm' />
-      </FCRHFSm>
-      <FCRHFSm label='Suburb' issue={errors.suburb?.message}>
-        <input {...register('suburb')} className='input input-bordered input-sm' />
-      </FCRHFSm>
-      <FCRHFSm label='Postcode' issue={errors.postcode?.message}>
-        <input {...register('postcode')} className='input input-bordered input-sm' />
-      </FCRHFSm>
-      <FCRHFSm label='State' issue={errors.state?.message}>
-        <input {...register('state')} className='input input-bordered input-sm' />
-      </FCRHFSm>
-      <FCRHFSm label='Country' issue={errors.country?.message}>
-        <input {...register('country')} className='input input-bordered input-sm' />
-      </FCRHFSm>
+      <FCRHFSm label='Line 1' register={register('lineOne')} issue={errors.lineOne?.message} />
+      <FCRHFSm label='Line 2' register={register('lineTwo')} issue={errors.lineTwo?.message} isRequired={false} />
+      <FCRHFSm label='Suburb' register={register('suburb')} issue={errors.suburb?.message} />
+      <FCRHFSm label='Postcode' register={register('postcode')} issue={errors.postcode?.message} />
+      <FCRHFSm label='State' register={register('state')} issue={errors.state?.message} />
+      <FCRHFSm label='Country' register={register('country')} issue={errors.country?.message} />
       <input type='hidden' name='trainerId' value={authenticatedUser.trainerId} />
       <button type='submit' name='_action' value='updateAddressByTrainerId' className='btn btn-primary btn-sm mt-5'>
         Save
@@ -393,22 +349,12 @@ function UpdateMemberForm({ topStatusText, authenticatedUser, user, emails }) {
       noValidate
       className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'
     >
-      <FCRHFSm label='Email' issue={duplicateEmailStatusText || errors.email?.message}>
-        <input {...register('email')} className='input input-bordered input-sm' />
-      </FCRHFSm>
-      <FCRHFSmPass label='Password' issue={errors.password?.message} register={register} />
-      <FCRHFSm label='Username' issue={errors.username?.message}>
-        <input {...register('username')} className='input input-bordered input-sm' />
-      </FCRHFSm>
-      <FCRHFSm label='First Name' issue={errors.firstName?.message}>
-        <input {...register('firstName')} className='input input-bordered input-sm' />
-      </FCRHFSm>
-      <FCRHFSm label='Last Name' issue={errors.lastName?.message}>
-        <input {...register('lastName')} className='input input-bordered input-sm' />
-      </FCRHFSm>
-      <FCRHFSm label='Phone' issue={errors.phone?.message}>
-        <input {...register('phone')} className='input input-bordered input-sm' />
-      </FCRHFSm>
+      <FCRHFSm label='Email' register={register('email')} issue={duplicateEmailStatusText || errors.email?.message} />
+      <FCRHFSmPass label='Password' register={register('password')} issue={errors.password?.message} />
+      <FCRHFSm label='Username' register={register('username')} issue={errors.username?.message} />
+      <FCRHFSm label='First Name' register={register('firstName')} issue={errors.firstName?.message} />
+      <FCRHFSm label='Last Name' register={register('lastName')} issue={errors.lastName?.message} />
+      <FCRHFSm label='Phone' register={register('phone')} issue={errors.phone?.message} />
       <input type='hidden' {...register('id', { valueAsNumber: true })} />
       <input type='hidden' {...register('_action')} />
       <button type='submit' className='btn btn-primary btn-sm mt-4'>
@@ -439,24 +385,12 @@ function UpdateMemberAddrForm({ botStatusText, authenticatedUser, user }) {
       noValidate
       className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'
     >
-      <FCRHFSm label='Line 1' issue={errors.lineOne?.message}>
-        <input {...register('lineOne')} className='input input-bordered input-sm' />
-      </FCRHFSm>
-      <FCRHFSm label='Line 2' issue={errors.lineTwo?.message} isRequired={false}>
-        <input {...register('lineTwo')} className='input input-bordered input-sm' />
-      </FCRHFSm>
-      <FCRHFSm label='Suburb' issue={errors.suburb?.message}>
-        <input {...register('suburb')} className='input input-bordered input-sm' />
-      </FCRHFSm>
-      <FCRHFSm label='Postcode' issue={errors.postcode?.message}>
-        <input {...register('postcode')} className='input input-bordered input-sm' />
-      </FCRHFSm>
-      <FCRHFSm label='State' issue={errors.state?.message}>
-        <input {...register('state')} className='input input-bordered input-sm' />
-      </FCRHFSm>
-      <FCRHFSm label='Country' issue={errors.country?.message}>
-        <input {...register('country')} className='input input-bordered input-sm' />
-      </FCRHFSm>
+      <FCRHFSm label='Line 1' register={register('lineOne')} issue={errors.lineOne?.message} />
+      <FCRHFSm label='Line 2' register={register('lineTwo')} issue={errors.lineTwo?.message} isRequired={false} />
+      <FCRHFSm label='Suburb' register={register('suburb')} issue={errors.suburb?.message} />
+      <FCRHFSm label='Postcode' register={register('postcode')} issue={errors.postcode?.message} />
+      <FCRHFSm label='State' register={register('state')} issue={errors.state?.message} />
+      <FCRHFSm label='Country' register={register('country')} issue={errors.country?.message} />
       <input type='hidden' name='memberId' value={authenticatedUser.memberId} />
       <button type='submit' name='_action' value='updateAddressByMemberId' className='btn btn-primary btn-sm mt-5'>
         Save
