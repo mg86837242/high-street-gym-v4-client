@@ -7,7 +7,7 @@ import { adminSchema, trainerSchema, memberSchema, addressSchema } from '../../s
 import SpinnerNoNav from '../UI/SpinnerNoNav';
 import FCRHFSm from '../FormControlRHF/FCRHFSm';
 import FCRHFSmPass from '../FormControlRHF/FCRHFSmPass';
-import sanitize from '../../helpers/sanitize';
+import { convertEmptyStrToNull, convertNullToEmptyStr } from '../../helpers/sanitize';
 
 export default function ProfileEditAccount() {
   const { authenticatedUser } = useContext(AuthContext);
@@ -85,27 +85,27 @@ export default function ProfileEditAccount() {
         return (
           <UpdateAdminForm
             topStatusText={topStatusText}
+            authenticatedUser={authenticatedUser}
             user={user}
             emails={emails}
-            authenticatedUser={authenticatedUser}
           />
         );
       case 'Trainer':
         return (
           <UpdateTrainerForm
             topStatusText={topStatusText}
+            authenticatedUser={authenticatedUser}
             user={user}
             emails={emails}
-            authenticatedUser={authenticatedUser}
           />
         );
       case 'Member':
         return (
           <UpdateMemberForm
             topStatusText={topStatusText}
+            authenticatedUser={authenticatedUser}
             user={user}
             emails={emails}
-            authenticatedUser={authenticatedUser}
           />
         );
       default:
@@ -116,13 +116,13 @@ export default function ProfileEditAccount() {
   function renderSwitchUpdateUserAddrForm(role) {
     switch (role) {
       case 'Admin':
-        return <UpdateAdminAddrForm botStatusText={botStatusText} user={user} authenticatedUser={authenticatedUser} />;
+        return <UpdateAdminAddrForm botStatusText={botStatusText} authenticatedUser={authenticatedUser} user={user} />;
       case 'Trainer':
         return (
-          <UpdateTrainerAddrForm botStatusText={botStatusText} user={user} authenticatedUser={authenticatedUser} />
+          <UpdateTrainerAddrForm botStatusText={botStatusText} authenticatedUser={authenticatedUser} user={user} />
         );
       case 'Member':
-        return <UpdateMemberAddrForm botStatusText={botStatusText} user={user} authenticatedUser={authenticatedUser} />;
+        return <UpdateMemberAddrForm botStatusText={botStatusText} authenticatedUser={authenticatedUser} user={user} />;
       default:
         return <></>;
     }
@@ -141,8 +141,7 @@ export default function ProfileEditAccount() {
   );
 }
 
-// TODO exception of sanitization for addr line 2 && role specific inputs (also if it's optional) && select dropdowns
-function UpdateAdminForm({ topStatusText, user, emails, authenticatedUser }) {
+function UpdateAdminForm({ topStatusText, authenticatedUser, user, emails }) {
   const [duplicateEmailStatusText, setDuplicateEmailStatusText] = useState('');
   const submit = useSubmit();
   const {
@@ -171,7 +170,7 @@ function UpdateAdminForm({ topStatusText, user, emails, authenticatedUser }) {
           setDuplicateEmailStatusText('Email has already been used');
           return;
         }
-        const sanitizedData = sanitize(data);
+        const sanitizedData = convertEmptyStrToNull(data);
         submit({ body: JSON.stringify(sanitizedData) }, { method: 'post' });
       })}
       noValidate
@@ -203,7 +202,7 @@ function UpdateAdminForm({ topStatusText, user, emails, authenticatedUser }) {
   );
 }
 
-function UpdateAdminAddrForm({ botStatusText, user, authenticatedUser }) {
+function UpdateAdminAddrForm({ botStatusText, authenticatedUser, user }) {
   const submit = useSubmit();
   const {
     register,
@@ -217,7 +216,7 @@ function UpdateAdminAddrForm({ botStatusText, user, authenticatedUser }) {
   return (
     <form
       onSubmit={handleSubmit(data => {
-        const sanitizedData = sanitize(data);
+        const sanitizedData = convertNullToEmptyStr(data);
         submit({ body: JSON.stringify(sanitizedData) }, { method: 'post' });
       })}
       noValidate
@@ -250,7 +249,8 @@ function UpdateAdminAddrForm({ botStatusText, user, authenticatedUser }) {
   );
 }
 
-function UpdateTrainerForm({ topStatusText, user, emails, authenticatedUser }) {
+// TODO role specific inputs (also check if it's NOT required) && select dropdowns
+function UpdateTrainerForm({ topStatusText, authenticatedUser, user, emails }) {
   const [duplicateEmailStatusText, setDuplicateEmailStatusText] = useState('');
   const submit = useSubmit();
   const {
@@ -279,7 +279,7 @@ function UpdateTrainerForm({ topStatusText, user, emails, authenticatedUser }) {
           setDuplicateEmailStatusText('Email has already been used');
           return;
         }
-        const sanitizedData = sanitize(data);
+        const sanitizedData = convertEmptyStrToNull(data);
         submit({ body: JSON.stringify(sanitizedData) }, { method: 'post' });
       })}
       noValidate
@@ -311,7 +311,7 @@ function UpdateTrainerForm({ topStatusText, user, emails, authenticatedUser }) {
   );
 }
 
-function UpdateTrainerAddrForm({ botStatusText, user, authenticatedUser }) {
+function UpdateTrainerAddrForm({ botStatusText, authenticatedUser, user }) {
   const submit = useSubmit();
   const {
     register,
@@ -325,7 +325,7 @@ function UpdateTrainerAddrForm({ botStatusText, user, authenticatedUser }) {
   return (
     <form
       onSubmit={handleSubmit(data => {
-        const sanitizedData = sanitize(data);
+        const sanitizedData = convertNullToEmptyStr(data);
         submit({ body: JSON.stringify(sanitizedData) }, { method: 'post' });
       })}
       noValidate
@@ -358,7 +358,7 @@ function UpdateTrainerAddrForm({ botStatusText, user, authenticatedUser }) {
   );
 }
 
-function UpdateMemberForm({ topStatusText, user, emails, authenticatedUser }) {
+function UpdateMemberForm({ topStatusText, authenticatedUser, user, emails }) {
   const [duplicateEmailStatusText, setDuplicateEmailStatusText] = useState('');
   const submit = useSubmit();
   const {
@@ -387,7 +387,7 @@ function UpdateMemberForm({ topStatusText, user, emails, authenticatedUser }) {
           setDuplicateEmailStatusText('Email has already been used');
           return;
         }
-        const sanitizedData = sanitize(data);
+        const sanitizedData = convertEmptyStrToNull(data);
         submit({ body: JSON.stringify(sanitizedData) }, { method: 'post' });
       })}
       noValidate
@@ -419,7 +419,7 @@ function UpdateMemberForm({ topStatusText, user, emails, authenticatedUser }) {
   );
 }
 
-function UpdateMemberAddrForm({ botStatusText, user }) {
+function UpdateMemberAddrForm({ botStatusText, authenticatedUser, user }) {
   const submit = useSubmit();
   const {
     register,
@@ -433,7 +433,7 @@ function UpdateMemberAddrForm({ botStatusText, user }) {
   return (
     <form
       onSubmit={handleSubmit(data => {
-        const sanitizedData = sanitize(data);
+        const sanitizedData = convertNullToEmptyStr(data);
         submit({ body: JSON.stringify(sanitizedData) }, { method: 'post' });
       })}
       noValidate

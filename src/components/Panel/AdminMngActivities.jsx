@@ -3,7 +3,7 @@ import { useLoaderData, Outlet, Form, useSubmit, useNavigate } from 'react-route
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { activitySchema } from '../../schemas';
-import sanitize from '../../helpers/sanitize';
+import {convertEmptyStrToNull} from '../../helpers/sanitize';
 import FCRHFSm from '../FormControlRHF/FCRHFSm';
 
 export function AdminMngActivities() {
@@ -127,7 +127,7 @@ export function AdminEditActivity() {
     <div className='grid py-6 place-items-center'>
       <form
         onSubmit={handleSubmit(data => {
-          const sanitizedData = sanitize(data);
+          const sanitizedData = convertEmptyStrToNull(data);
           submit({ body: JSON.stringify(sanitizedData) }, { method: 'post' });
         })}
         noValidate
