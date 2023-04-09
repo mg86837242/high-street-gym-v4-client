@@ -12,6 +12,6 @@ export const passwordSchema = z
 export const usernameSchema = z
   .string()
   .regex(/^(?=.*[a-zA-Z]{1,})(?=.*[\d]{0,})[a-zA-Z0-9]+$/, {
-    message: 'Username only accepts letters and numbers, and must include at least 1 letter',
+    message: 'Username only accepts English letters and numbers, and must include at least 1 letter',
   })
   .max(45, { message: 'Username must have at most 45 character(s)' });

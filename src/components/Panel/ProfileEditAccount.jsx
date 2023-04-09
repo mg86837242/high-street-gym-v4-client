@@ -3,6 +3,8 @@ import AuthContext from '../../context/AuthContext';
 import { useLoaderData, useActionData, useSubmit } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import adminSchema from '../../schemas/admin';
+import { addressSchema } from '../../schemas/addresses';
 import sanitize from '../../helpers/sanitize';
 import FCRHFSm from '../FormControlRHF/FCRHFSm';
 
@@ -77,40 +79,40 @@ export default function ProfileEditAccount() {
     };
   }, [actionData]);
 
-  switch (authenticatedUser?.role) {
-    case 'Admin':
-      return (
-        <div className='flex-grow px-4 py-6'>
-          <h1 className='font-sans text-3xl text-accent'>Edit My Account</h1>
-          <UpdateAdminForm topStatusText={topStatusText} emails={emails} user={user} />
-          <div className='divider'></div>
-          <h1 className='font-sans text-3xl text-accent'>Edit My Address</h1>
-          <UpdateAdminAddrForm botStatusText={botStatusText} user={user} />
-        </div>
-      );
-    case 'Trainer':
-      return (
-        <div className='flex-grow px-4 py-6'>
-          <h1 className='font-sans text-3xl text-accent'>Edit My Account</h1>
-          <UpdateTrainerForm topStatusText={topStatusText} emails={emails} user={user} />
-          <div className='divider'></div>
-          <h1 className='font-sans text-3xl text-accent'>Edit My Address</h1>
-          <UpdateTrainerAddrForm botStatusText={botStatusText} user={user} />
-        </div>
-      );
-    case 'Member':
-      return (
-        <div className='flex-grow px-4 py-6'>
-          <h1 className='font-sans text-3xl text-accent'>Edit My Account</h1>
-          <UpdateMemberForm topStatusText={topStatusText} emails={emails} user={user} />
-          <div className='divider'></div>
-          <h1 className='font-sans text-3xl text-accent'>Edit My Address</h1>
-          <UpdateMemberAddrForm botStatusText={botStatusText} user={user} />
-        </div>
-      );
-    default:
-      return <></>;
+  function renderSwitchUpdateUserForm(role) {
+    switch (role) {
+      case 'Admin':
+        return <UpdateAdminForm topStatusText={topStatusText} emails={emails} user={user} />;
+      case 'Trainer':
+        return <UpdateTrainerForm topStatusText={topStatusText} emails={emails} user={user} />;
+      case 'Member':
+        return <UpdateMemberForm topStatusText={topStatusText} emails={emails} user={user} />;
+      default:
+        return <></>;
+    }
   }
+  function renderSwitchUpdateUserAddrForm(role) {
+    switch (role) {
+      case 'Admin':
+        return <UpdateAdminAddrForm botStatusText={botStatusText} user={user} />;
+      case 'Trainer':
+        return <UpdateTrainerAddrForm botStatusText={botStatusText} user={user} />;
+      case 'Member':
+        return <UpdateMemberAddrForm botStatusText={botStatusText} user={user} />;
+      default:
+        return <></>;
+    }
+  }
+
+  return (
+    <div className='flex-grow px-4 py-6'>
+      <h1 className='font-sans text-3xl text-accent'>Edit My Account</h1>
+      {renderSwitchUpdateUserForm(authenticatedUser?.role)}
+      <div className='divider'></div>
+      <h1 className='font-sans text-3xl text-accent'>Edit My Address</h1>
+      {renderSwitchUpdateUserAddrForm(authenticatedUser?.role)}
+    </div>
+  );
 }
 
 function UpdateAdminForm({ topStatusText, emails, user }) {
@@ -120,7 +122,7 @@ function UpdateAdminForm({ topStatusText, emails, user }) {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({ resolver: zodResolver(userSchema), defaultValues: useMemo(() => user, [user]) });
+  } = useForm({ resolver: zodResolver(adminSchema), defaultValues: useMemo(() => user, [user]) });
 
   useEffect(() => reset(user), [reset, user]);
 
@@ -143,10 +145,10 @@ function UpdateAdminForm({ topStatusText, emails, user }) {
         <input {...register('username')} className='input input-bordered input-sm' />
       </FCRHFSm>
       <FCRHFSm label='First Name' issue={errors.firstName?.message} isRequired={false}>
-        <input {...register('firstname')} className='input input-bordered input-sm' />
+        <input {...register('firstName')} className='input input-bordered input-sm' />
       </FCRHFSm>
       <FCRHFSm label='Last Name' issue={errors.lastName?.message} isRequired={false}>
-        <input {...register('last name')} className='input input-bordered input-sm' />
+        <input {...register('lastName')} className='input input-bordered input-sm' />
       </FCRHFSm>
       <FCRHFSm label='Phone' issue={errors.phone?.message} isRequired={false}>
         <input {...register('phone')} className='input input-bordered input-sm' />
@@ -162,7 +164,7 @@ function UpdateAdminAddrForm({ botStatusText, user }) {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({ resolver: zodResolver(userSchema), defaultValues: useMemo(() => user, [user]) });
+  } = useForm({ resolver: zodResolver(addressSchema), defaultValues: useMemo(() => user, [user]) });
 
   useEffect(() => reset(user), [reset, user]);
 
@@ -174,7 +176,26 @@ function UpdateAdminAddrForm({ botStatusText, user }) {
       })}
       noValidate
       className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'
-    ></form>
+    >
+      <FCRHFSm label='Line 1' issue={errors.lineOne?.message} isRequired={false}>
+        <input {...register('lineOne')} className='input input-bordered input-sm' />
+      </FCRHFSm>
+      <FCRHFSm label='Line 2' issue={errors.lineTwo?.message} isRequired={false}>
+        <input {...register('lineTwo')} className='input input-bordered input-sm' />
+      </FCRHFSm>
+      <FCRHFSm label='Suburb' issue={errors.suburb?.message} isRequired={false}>
+        <input {...register('suburb')} className='input input-bordered input-sm' />
+      </FCRHFSm>
+      <FCRHFSm label='Postcode' issue={errors.postcode?.message} isRequired={false}>
+        <input {...register('postcode')} className='input input-bordered input-sm' />
+      </FCRHFSm>
+      <FCRHFSm label='State' issue={errors.state?.message} isRequired={false}>
+        <input {...register('state')} className='input input-bordered input-sm' />
+      </FCRHFSm>
+      <FCRHFSm label='Country' issue={errors.country?.message} isRequired={false}>
+        <input {...register('country')} className='input input-bordered input-sm' />
+      </FCRHFSm>
+    </form>
   );
 }
 
@@ -208,10 +229,10 @@ function UpdateTrainerForm({ topStatusText, emails, user }) {
         <input {...register('username')} className='input input-bordered input-sm' />
       </FCRHFSm>
       <FCRHFSm label='First Name' issue={errors.firstName?.message} isRequired={false}>
-        <input {...register('firstname')} className='input input-bordered input-sm' />
+        <input {...register('firstName')} className='input input-bordered input-sm' />
       </FCRHFSm>
       <FCRHFSm label='Last Name' issue={errors.lastName?.message} isRequired={false}>
-        <input {...register('last name')} className='input input-bordered input-sm' />
+        <input {...register('lastName')} className='input input-bordered input-sm' />
       </FCRHFSm>
       <FCRHFSm label='Phone' issue={errors.phone?.message} isRequired={false}>
         <input {...register('phone')} className='input input-bordered input-sm' />
@@ -227,7 +248,7 @@ function UpdateTrainerAddrForm({ botStatusText, user }) {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({ resolver: zodResolver(userSchema), defaultValues: useMemo(() => user, [user]) });
+  } = useForm({ resolver: zodResolver(addressSchema), defaultValues: useMemo(() => user, [user]) });
 
   useEffect(() => reset(user), [reset, user]);
 
@@ -239,7 +260,26 @@ function UpdateTrainerAddrForm({ botStatusText, user }) {
       })}
       noValidate
       className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'
-    ></form>
+    >
+      <FCRHFSm label='Line 1' issue={errors.lineOne?.message} isRequired={false}>
+        <input {...register('lineOne')} className='input input-bordered input-sm' />
+      </FCRHFSm>
+      <FCRHFSm label='Line 2' issue={errors.lineTwo?.message} isRequired={false}>
+        <input {...register('lineTwo')} className='input input-bordered input-sm' />
+      </FCRHFSm>
+      <FCRHFSm label='Suburb' issue={errors.suburb?.message} isRequired={false}>
+        <input {...register('suburb')} className='input input-bordered input-sm' />
+      </FCRHFSm>
+      <FCRHFSm label='Postcode' issue={errors.postcode?.message} isRequired={false}>
+        <input {...register('postcode')} className='input input-bordered input-sm' />
+      </FCRHFSm>
+      <FCRHFSm label='State' issue={errors.state?.message} isRequired={false}>
+        <input {...register('state')} className='input input-bordered input-sm' />
+      </FCRHFSm>
+      <FCRHFSm label='Country' issue={errors.country?.message} isRequired={false}>
+        <input {...register('country')} className='input input-bordered input-sm' />
+      </FCRHFSm>
+    </form>
   );
 }
 
@@ -273,10 +313,10 @@ function UpdateMemberForm({ topStatusText, emails, user }) {
         <input {...register('username')} className='input input-bordered input-sm' />
       </FCRHFSm>
       <FCRHFSm label='First Name' issue={errors.firstName?.message} isRequired={false}>
-        <input {...register('firstname')} className='input input-bordered input-sm' />
+        <input {...register('firstName')} className='input input-bordered input-sm' />
       </FCRHFSm>
       <FCRHFSm label='Last Name' issue={errors.lastName?.message} isRequired={false}>
-        <input {...register('last name')} className='input input-bordered input-sm' />
+        <input {...register('lastName')} className='input input-bordered input-sm' />
       </FCRHFSm>
       <FCRHFSm label='Phone' issue={errors.phone?.message} isRequired={false}>
         <input {...register('phone')} className='input input-bordered input-sm' />
@@ -292,7 +332,7 @@ function UpdateMemberAddrForm({ botStatusText, user }) {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({ resolver: zodResolver(userSchema), defaultValues: useMemo(() => user, [user]) });
+  } = useForm({ resolver: zodResolver(addressSchema), defaultValues: useMemo(() => user, [user]) });
 
   useEffect(() => reset(user), [reset, user]);
 
@@ -304,6 +344,25 @@ function UpdateMemberAddrForm({ botStatusText, user }) {
       })}
       noValidate
       className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'
-    ></form>
+    >
+      <FCRHFSm label='Line 1' issue={errors.lineOne?.message} isRequired={false}>
+        <input {...register('lineOne')} className='input input-bordered input-sm' />
+      </FCRHFSm>
+      <FCRHFSm label='Line 2' issue={errors.lineTwo?.message} isRequired={false}>
+        <input {...register('lineTwo')} className='input input-bordered input-sm' />
+      </FCRHFSm>
+      <FCRHFSm label='Suburb' issue={errors.suburb?.message} isRequired={false}>
+        <input {...register('suburb')} className='input input-bordered input-sm' />
+      </FCRHFSm>
+      <FCRHFSm label='Postcode' issue={errors.postcode?.message} isRequired={false}>
+        <input {...register('postcode')} className='input input-bordered input-sm' />
+      </FCRHFSm>
+      <FCRHFSm label='State' issue={errors.state?.message} isRequired={false}>
+        <input {...register('state')} className='input input-bordered input-sm' />
+      </FCRHFSm>
+      <FCRHFSm label='Country' issue={errors.country?.message} isRequired={false}>
+        <input {...register('country')} className='input input-bordered input-sm' />
+      </FCRHFSm>
+    </form>
   );
 }
