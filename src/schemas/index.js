@@ -1,5 +1,5 @@
 export { default as activitySchema } from './activities';
-export { addressSchema } from './addresses';
+export { addressAdminSchema, addressTrainerSchema, addressMemberSchema } from './addresses';
 export { default as adminSchema } from './admin';
 export { default as blogSchema } from './blogs';
 export { memberSchema } from './members';

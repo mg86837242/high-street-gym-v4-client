@@ -3,7 +3,14 @@ import AuthContext from '../../context/AuthContext';
 import { useLoaderData, useActionData, useSubmit } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { adminSchema, trainerSchema, memberSchema, addressSchema } from '../../schemas';
+import {
+  adminSchema,
+  trainerSchema,
+  memberSchema,
+  addressAdminSchema,
+  addressTrainerSchema,
+  addressMemberSchema,
+} from '../../schemas';
 import SpinnerNoNav from '../UI/SpinnerNoNav';
 import FCRHFSm from '../FormControlRHF/FCRHFSm';
 import FCRHFSmPass from '../FormControlRHF/FCRHFSmPass';
@@ -200,7 +207,7 @@ function UpdateAdminAddrForm({ botStatusText, user, authenticatedUser }) {
     formState: { errors },
     reset,
   } = useForm({
-    resolver: zodResolver(addressSchema),
+    resolver: zodResolver(addressAdminSchema),
     defaultValues: useMemo(
       () => ({ ...user, adminId: authenticatedUser?.adminId, _action: 'updateAddressByAdminId' }),
       [user, authenticatedUser]
@@ -215,7 +222,6 @@ function UpdateAdminAddrForm({ botStatusText, user, authenticatedUser }) {
   return (
     <form
       onSubmit={handleSubmit(data => {
-        console.log(data); // BUG Not reaching here
         const sanitizedData = convertNullToEmptyStr(data);
         submit({ body: JSON.stringify(sanitizedData) }, { method: 'post' });
       })}
@@ -298,7 +304,7 @@ function UpdateTrainerAddrForm({ botStatusText, user, authenticatedUser }) {
     formState: { errors },
     reset,
   } = useForm({
-    resolver: zodResolver(addressSchema),
+    resolver: zodResolver(addressTrainerSchema),
     defaultValues: useMemo(
       () => ({ ...user, trainerId: authenticatedUser?.trainerId, _action: 'updateAddressByTrainerId' }),
       [user, authenticatedUser]
@@ -394,7 +400,7 @@ function UpdateMemberAddrForm({ botStatusText, user, authenticatedUser }) {
     formState: { errors },
     reset,
   } = useForm({
-    resolver: zodResolver(addressSchema),
+    resolver: zodResolver(addressMemberSchema),
     defaultValues: useMemo(
       () => ({ ...user, memberId: authenticatedUser?.memberId, _action: 'updateAddressByMemberId' }),
       [user, authenticatedUser]
