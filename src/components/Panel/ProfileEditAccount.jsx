@@ -85,27 +85,27 @@ export default function ProfileEditAccount() {
         return (
           <UpdateAdminForm
             topStatusText={topStatusText}
-            authenticatedUser={authenticatedUser}
             user={user}
             emails={emails}
+            authenticatedUser={authenticatedUser}
           />
         );
       case 'Trainer':
         return (
           <UpdateTrainerForm
             topStatusText={topStatusText}
-            authenticatedUser={authenticatedUser}
             user={user}
             emails={emails}
+            authenticatedUser={authenticatedUser}
           />
         );
       case 'Member':
         return (
           <UpdateMemberForm
             topStatusText={topStatusText}
-            authenticatedUser={authenticatedUser}
             user={user}
             emails={emails}
+            authenticatedUser={authenticatedUser}
           />
         );
       default:
@@ -116,13 +116,13 @@ export default function ProfileEditAccount() {
   function renderSwitchUpdateUserAddrForm(role) {
     switch (role) {
       case 'Admin':
-        return <UpdateAdminAddrForm botStatusText={botStatusText} authenticatedUser={authenticatedUser} user={user} />;
+        return <UpdateAdminAddrForm botStatusText={botStatusText} user={user} authenticatedUser={authenticatedUser} />;
       case 'Trainer':
         return (
-          <UpdateTrainerAddrForm botStatusText={botStatusText} authenticatedUser={authenticatedUser} user={user} />
+          <UpdateTrainerAddrForm botStatusText={botStatusText} user={user} authenticatedUser={authenticatedUser} />
         );
       case 'Member':
-        return <UpdateMemberAddrForm botStatusText={botStatusText} authenticatedUser={authenticatedUser} user={user} />;
+        return <UpdateMemberAddrForm botStatusText={botStatusText} user={user} authenticatedUser={authenticatedUser} />;
       default:
         return <></>;
     }
@@ -141,7 +141,7 @@ export default function ProfileEditAccount() {
   );
 }
 
-function UpdateAdminForm({ topStatusText, authenticatedUser, user, emails }) {
+function UpdateAdminForm({ topStatusText, user, emails, authenticatedUser }) {
   const [duplicateEmailStatusText, setDuplicateEmailStatusText] = useState('');
   const submit = useSubmit();
   const {
@@ -192,20 +192,30 @@ function UpdateAdminForm({ topStatusText, authenticatedUser, user, emails }) {
   );
 }
 
-function UpdateAdminAddrForm({ botStatusText, authenticatedUser, user }) {
+function UpdateAdminAddrForm({ botStatusText, user, authenticatedUser }) {
   const submit = useSubmit();
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({ resolver: zodResolver(addressSchema), defaultValues: useMemo(() => user, [user]) });
+  } = useForm({
+    resolver: zodResolver(addressSchema),
+    defaultValues: useMemo(
+      () => ({ ...user, adminId: authenticatedUser?.adminId, _action: 'updateAddressByAdminId' }),
+      [user, authenticatedUser]
+    ),
+  });
 
-  useEffect(() => reset(user), [reset, user]);
+  useEffect(
+    () => reset({ ...user, adminId: authenticatedUser?.adminId, _action: 'updateAddressByAdminId' }),
+    [reset, user, authenticatedUser]
+  );
 
   return (
     <form
       onSubmit={handleSubmit(data => {
+        console.log(data); // BUG Not reaching here
         const sanitizedData = convertNullToEmptyStr(data);
         submit({ body: JSON.stringify(sanitizedData) }, { method: 'post' });
       })}
@@ -218,8 +228,9 @@ function UpdateAdminAddrForm({ botStatusText, authenticatedUser, user }) {
       <FCRHFSm label='Postcode' register={register('postcode')} issue={errors.postcode?.message} />
       <FCRHFSm label='State' register={register('state')} issue={errors.state?.message} />
       <FCRHFSm label='Country' register={register('country')} issue={errors.country?.message} />
-      <input type='hidden' name='adminId' value={authenticatedUser.adminId} />
-      <button type='submit' name='_action' value='updateAddressByAdminId' className='btn btn-primary btn-sm mt-5'>
+      <input type='hidden' {...register('adminId', { valueAsNumber: true })} />
+      <input type='hidden' {...register('_action')} />
+      <button type='submit' className='btn btn-primary btn-sm mt-5'>
         Save
       </button>
       <p className='text-success self-center mt-4'>{botStatusText}</p>
@@ -228,7 +239,7 @@ function UpdateAdminAddrForm({ botStatusText, authenticatedUser, user }) {
 }
 
 // TODO role specific inputs (also check if it's NOT required & if it's number) && select dropdowns
-function UpdateTrainerForm({ topStatusText, authenticatedUser, user, emails }) {
+function UpdateTrainerForm({ topStatusText, user, emails, authenticatedUser }) {
   const [duplicateEmailStatusText, setDuplicateEmailStatusText] = useState('');
   const submit = useSubmit();
   const {
@@ -279,16 +290,25 @@ function UpdateTrainerForm({ topStatusText, authenticatedUser, user, emails }) {
   );
 }
 
-function UpdateTrainerAddrForm({ botStatusText, authenticatedUser, user }) {
+function UpdateTrainerAddrForm({ botStatusText, user, authenticatedUser }) {
   const submit = useSubmit();
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({ resolver: zodResolver(addressSchema), defaultValues: useMemo(() => user, [user]) });
+  } = useForm({
+    resolver: zodResolver(addressSchema),
+    defaultValues: useMemo(
+      () => ({ ...user, trainerId: authenticatedUser?.trainerId, _action: 'updateAddressByTrainerId' }),
+      [user, authenticatedUser]
+    ),
+  });
 
-  useEffect(() => reset(user), [reset, user]);
+  useEffect(
+    () => reset({ ...user, trainerId: authenticatedUser?.trainerId, _action: 'updateAddressByTrainerId' }),
+    [reset, user, authenticatedUser]
+  );
 
   return (
     <form
@@ -305,8 +325,9 @@ function UpdateTrainerAddrForm({ botStatusText, authenticatedUser, user }) {
       <FCRHFSm label='Postcode' register={register('postcode')} issue={errors.postcode?.message} />
       <FCRHFSm label='State' register={register('state')} issue={errors.state?.message} />
       <FCRHFSm label='Country' register={register('country')} issue={errors.country?.message} />
-      <input type='hidden' name='trainerId' value={authenticatedUser.trainerId} />
-      <button type='submit' name='_action' value='updateAddressByTrainerId' className='btn btn-primary btn-sm mt-5'>
+      <input type='hidden' {...register('trainerId', { valueAsNumber: true })} />
+      <input type='hidden' {...register('_action')} />
+      <button type='submit' className='btn btn-primary btn-sm mt-5'>
         Save
       </button>
       <p className='text-success self-center mt-4'>{botStatusText}</p>
@@ -314,7 +335,7 @@ function UpdateTrainerAddrForm({ botStatusText, authenticatedUser, user }) {
   );
 }
 
-function UpdateMemberForm({ topStatusText, authenticatedUser, user, emails }) {
+function UpdateMemberForm({ topStatusText, user, emails, authenticatedUser }) {
   const [duplicateEmailStatusText, setDuplicateEmailStatusText] = useState('');
   const submit = useSubmit();
   const {
@@ -365,16 +386,25 @@ function UpdateMemberForm({ topStatusText, authenticatedUser, user, emails }) {
   );
 }
 
-function UpdateMemberAddrForm({ botStatusText, authenticatedUser, user }) {
+function UpdateMemberAddrForm({ botStatusText, user, authenticatedUser }) {
   const submit = useSubmit();
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({ resolver: zodResolver(addressSchema), defaultValues: useMemo(() => user, [user]) });
+  } = useForm({
+    resolver: zodResolver(addressSchema),
+    defaultValues: useMemo(
+      () => ({ ...user, memberId: authenticatedUser?.memberId, _action: 'updateAddressByMemberId' }),
+      [user, authenticatedUser]
+    ),
+  });
 
-  useEffect(() => reset(user), [reset, user]);
+  useEffect(
+    () => reset({ ...user, memberId: authenticatedUser?.memberId, _action: 'updateAddressByMemberId' }),
+    [reset, user, authenticatedUser]
+  );
 
   return (
     <form
@@ -391,8 +421,9 @@ function UpdateMemberAddrForm({ botStatusText, authenticatedUser, user }) {
       <FCRHFSm label='Postcode' register={register('postcode')} issue={errors.postcode?.message} />
       <FCRHFSm label='State' register={register('state')} issue={errors.state?.message} />
       <FCRHFSm label='Country' register={register('country')} issue={errors.country?.message} />
-      <input type='hidden' name='memberId' value={authenticatedUser.memberId} />
-      <button type='submit' name='_action' value='updateAddressByMemberId' className='btn btn-primary btn-sm mt-5'>
+      <input type='hidden' {...register('memberId', { valueAsNumber: true })} />
+      <input type='hidden' {...register('_action')} />
+      <button type='submit' className='btn btn-primary btn-sm mt-5'>
         Save
       </button>
       <p className='text-success self-center mt-4'>{botStatusText}</p>

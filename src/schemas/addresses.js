@@ -7,6 +7,8 @@ export const addressSchema = z.object({
   postcode: z.string().max(10).nullable(),
   state: z.string().max(45).nullable(),
   country: z.string().max(45).nullable(),
+  id: z.number(),
+  _action: z.string(),
 });
 export const lineOneSchema = z.string().max(45).nullable();
 export const lineTwoSchema = z.string().max(45).nullable();

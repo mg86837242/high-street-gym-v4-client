@@ -51,7 +51,7 @@ export default function Edit() {
     values: { body: editor.getHTML() },
   });
 
-  useEffect(() => blog, [reset, blog]);
+  useEffect(() => reset(blog), [reset, blog]);
 
   useEffect(() => {
     if (editable) {

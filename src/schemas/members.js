@@ -43,6 +43,8 @@ export const memberSchema = z.object({
     .max(3, { message: 'Age must have at most 3 number(s)' })
     .nullable(),
   gender: z.enum(['Female', 'Male', 'Other', '']).nullable(),
+  id: z.number(),
+  _action: z.string(),
 });
 export const firstNameSchema = z
   .string()

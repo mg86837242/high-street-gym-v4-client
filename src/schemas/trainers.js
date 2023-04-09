@@ -41,6 +41,8 @@ export const trainerSchema = z.object({
   specialty: z.string().max(45).nullable(),
   certificate: z.string().max(45).nullable(),
   imageUrl: z.union([z.string().length(0, { message: 'Image url must be empty or a valid url' }), z.string().url()]),
+  id: z.number(),
+  _action: z.string(),
 });
 export const descriptionSchema = z.string().max(255).nullable();
 export const specialtySchema = z.string().max(45).nullable();
