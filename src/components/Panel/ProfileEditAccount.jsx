@@ -161,7 +161,6 @@ function UpdateAdminForm({ topStatusText, user, emails, authenticatedUser }) {
     <form
       onSubmit={handleSubmit(data => {
         const sanitizedData = sanitize(data);
-        console.log(sanitizedData);
         submit({ body: JSON.stringify(sanitizedData) }, { method: 'post' });
       })}
       noValidate
@@ -192,7 +191,7 @@ function UpdateAdminForm({ topStatusText, user, emails, authenticatedUser }) {
       </FCRHFSm>
       <input type='text' {...register('id', { valueAsNumber: true })} />
       <input type='text' {...register('_action')} />
-      <button type='submit' name='_action' value='updateAdminById' className='btn btn-primary btn-sm mt-4'>
+      <button type='submit' className='btn btn-primary btn-sm mt-4'>
         Save
       </button>
       <p className='text-success self-center mt-4'>{topStatusText}</p>

@@ -37,6 +37,8 @@ const adminSchema = z.object({
       message: 'Invalid phone number format',
     })
     .max(45),
+  id: z.number(),
+  _action: z.string(),
 });
 
 export default adminSchema;

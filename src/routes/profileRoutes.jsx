@@ -1,5 +1,6 @@
 import { json } from 'react-router-dom';
 import ErrorInfoRefresh from '../components/UI/ErrorInfoRefresh';
+import getSubmittedData from '../helpers/getSubmittedData';
 
 const profileRoutes = [
   {
@@ -21,8 +22,7 @@ const profileRoutes = [
       return getUserWithAllDetailsAndAllEmails();
     },
     async action({ request }) {
-      const formData = await request.formData();
-      const { _action, ...values } = formData.get('body');
+      const { _action, ...values } = await getSubmittedData(request);
 
       switch (_action) {
         case 'updateAdminById':
