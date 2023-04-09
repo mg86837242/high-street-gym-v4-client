@@ -4,9 +4,10 @@ import { useLoaderData, useActionData, useSubmit } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { adminSchema, trainerSchema, memberSchema, addressSchema } from '../../schemas';
-import sanitize from '../../helpers/sanitize';
 import SpinnerNoNav from '../UI/SpinnerNoNav';
 import FCRHFSm from '../FormControlRHF/FCRHFSm';
+import FCRHFSmPass from '../FormControlRHF/FCRHFSmPass';
+import sanitize from '../../helpers/sanitize';
 
 export default function ProfileEditAccount() {
   const { authenticatedUser } = useContext(AuthContext);
@@ -140,7 +141,7 @@ export default function ProfileEditAccount() {
   );
 }
 
-// TODO pass state for visibility && exception of sanitization for addr line 2 && role specific inputs && select dropdowns
+// TODO exception of sanitization for addr line 2 && role specific inputs (also if it's optional) && select dropdowns
 function UpdateAdminForm({ topStatusText, user, emails, authenticatedUser }) {
   const [duplicateEmailStatusText, setDuplicateEmailStatusText] = useState('');
   const submit = useSubmit();
@@ -176,22 +177,20 @@ function UpdateAdminForm({ topStatusText, user, emails, authenticatedUser }) {
       noValidate
       className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'
     >
-      <FCRHFSm label='Email' issue={duplicateEmailStatusText || errors.email?.message} isRequired={false}>
+      <FCRHFSm label='Email' issue={duplicateEmailStatusText || errors.email?.message}>
         <input {...register('email')} className='input input-bordered input-sm' />
       </FCRHFSm>
-      <FCRHFSm label='Password' issue={errors.password?.message} isRequired={false}>
-        <input {...register('password')} className='input input-bordered input-sm' />
-      </FCRHFSm>
-      <FCRHFSm label='Username' issue={errors.username?.message} isRequired={false}>
+      <FCRHFSmPass label='Password' issue={errors.password?.message} register={register} />
+      <FCRHFSm label='Username' issue={errors.username?.message}>
         <input {...register('username')} className='input input-bordered input-sm' />
       </FCRHFSm>
-      <FCRHFSm label='First Name' issue={errors.firstName?.message} isRequired={false}>
+      <FCRHFSm label='First Name' issue={errors.firstName?.message}>
         <input {...register('firstName')} className='input input-bordered input-sm' />
       </FCRHFSm>
-      <FCRHFSm label='Last Name' issue={errors.lastName?.message} isRequired={false}>
+      <FCRHFSm label='Last Name' issue={errors.lastName?.message}>
         <input {...register('lastName')} className='input input-bordered input-sm' />
       </FCRHFSm>
-      <FCRHFSm label='Phone' issue={errors.phone?.message} isRequired={false}>
+      <FCRHFSm label='Phone' issue={errors.phone?.message}>
         <input {...register('phone')} className='input input-bordered input-sm' />
       </FCRHFSm>
       <input type='hidden' {...register('id', { valueAsNumber: true })} />
@@ -224,22 +223,22 @@ function UpdateAdminAddrForm({ botStatusText, user, authenticatedUser }) {
       noValidate
       className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'
     >
-      <FCRHFSm label='Line 1' issue={errors.lineOne?.message} isRequired={false}>
+      <FCRHFSm label='Line 1' issue={errors.lineOne?.message}>
         <input {...register('lineOne')} className='input input-bordered input-sm' />
       </FCRHFSm>
       <FCRHFSm label='Line 2' issue={errors.lineTwo?.message} isRequired={false}>
         <input {...register('lineTwo')} className='input input-bordered input-sm' />
       </FCRHFSm>
-      <FCRHFSm label='Suburb' issue={errors.suburb?.message} isRequired={false}>
+      <FCRHFSm label='Suburb' issue={errors.suburb?.message}>
         <input {...register('suburb')} className='input input-bordered input-sm' />
       </FCRHFSm>
-      <FCRHFSm label='Postcode' issue={errors.postcode?.message} isRequired={false}>
+      <FCRHFSm label='Postcode' issue={errors.postcode?.message}>
         <input {...register('postcode')} className='input input-bordered input-sm' />
       </FCRHFSm>
-      <FCRHFSm label='State' issue={errors.state?.message} isRequired={false}>
+      <FCRHFSm label='State' issue={errors.state?.message}>
         <input {...register('state')} className='input input-bordered input-sm' />
       </FCRHFSm>
-      <FCRHFSm label='Country' issue={errors.country?.message} isRequired={false}>
+      <FCRHFSm label='Country' issue={errors.country?.message}>
         <input {...register('country')} className='input input-bordered input-sm' />
       </FCRHFSm>
       <input type='hidden' name='adminId' value={authenticatedUser.adminId} />
@@ -286,22 +285,20 @@ function UpdateTrainerForm({ topStatusText, user, emails, authenticatedUser }) {
       noValidate
       className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'
     >
-      <FCRHFSm label='Email' issue={duplicateEmailStatusText || errors.email?.message} isRequired={false}>
+      <FCRHFSm label='Email' issue={duplicateEmailStatusText || errors.email?.message}>
         <input {...register('email')} className='input input-bordered input-sm' />
       </FCRHFSm>
-      <FCRHFSm label='Password' issue={errors.password?.message} isRequired={false}>
-        <input {...register('password')} className='input input-bordered input-sm' />
-      </FCRHFSm>
-      <FCRHFSm label='Username' issue={errors.username?.message} isRequired={false}>
+      <FCRHFSmPass label='Password' issue={errors.password?.message} register={register} />
+      <FCRHFSm label='Username' issue={errors.username?.message}>
         <input {...register('username')} className='input input-bordered input-sm' />
       </FCRHFSm>
-      <FCRHFSm label='First Name' issue={errors.firstName?.message} isRequired={false}>
+      <FCRHFSm label='First Name' issue={errors.firstName?.message}>
         <input {...register('firstName')} className='input input-bordered input-sm' />
       </FCRHFSm>
-      <FCRHFSm label='Last Name' issue={errors.lastName?.message} isRequired={false}>
+      <FCRHFSm label='Last Name' issue={errors.lastName?.message}>
         <input {...register('lastName')} className='input input-bordered input-sm' />
       </FCRHFSm>
-      <FCRHFSm label='Phone' issue={errors.phone?.message} isRequired={false}>
+      <FCRHFSm label='Phone' issue={errors.phone?.message}>
         <input {...register('phone')} className='input input-bordered input-sm' />
       </FCRHFSm>
       <input type='hidden' {...register('id', { valueAsNumber: true })} />
@@ -334,22 +331,22 @@ function UpdateTrainerAddrForm({ botStatusText, user, authenticatedUser }) {
       noValidate
       className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'
     >
-      <FCRHFSm label='Line 1' issue={errors.lineOne?.message} isRequired={false}>
+      <FCRHFSm label='Line 1' issue={errors.lineOne?.message}>
         <input {...register('lineOne')} className='input input-bordered input-sm' />
       </FCRHFSm>
       <FCRHFSm label='Line 2' issue={errors.lineTwo?.message} isRequired={false}>
         <input {...register('lineTwo')} className='input input-bordered input-sm' />
       </FCRHFSm>
-      <FCRHFSm label='Suburb' issue={errors.suburb?.message} isRequired={false}>
+      <FCRHFSm label='Suburb' issue={errors.suburb?.message}>
         <input {...register('suburb')} className='input input-bordered input-sm' />
       </FCRHFSm>
-      <FCRHFSm label='Postcode' issue={errors.postcode?.message} isRequired={false}>
+      <FCRHFSm label='Postcode' issue={errors.postcode?.message}>
         <input {...register('postcode')} className='input input-bordered input-sm' />
       </FCRHFSm>
-      <FCRHFSm label='State' issue={errors.state?.message} isRequired={false}>
+      <FCRHFSm label='State' issue={errors.state?.message}>
         <input {...register('state')} className='input input-bordered input-sm' />
       </FCRHFSm>
-      <FCRHFSm label='Country' issue={errors.country?.message} isRequired={false}>
+      <FCRHFSm label='Country' issue={errors.country?.message}>
         <input {...register('country')} className='input input-bordered input-sm' />
       </FCRHFSm>
       <input type='hidden' name='trainerId' value={authenticatedUser.trainerId} />
@@ -396,22 +393,20 @@ function UpdateMemberForm({ topStatusText, user, emails, authenticatedUser }) {
       noValidate
       className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'
     >
-      <FCRHFSm label='Email' issue={duplicateEmailStatusText || errors.email?.message} isRequired={false}>
+      <FCRHFSm label='Email' issue={duplicateEmailStatusText || errors.email?.message}>
         <input {...register('email')} className='input input-bordered input-sm' />
       </FCRHFSm>
-      <FCRHFSm label='Password' issue={errors.password?.message} isRequired={false}>
-        <input {...register('password')} className='input input-bordered input-sm' />
-      </FCRHFSm>
-      <FCRHFSm label='Username' issue={errors.username?.message} isRequired={false}>
+      <FCRHFSmPass label='Password' issue={errors.password?.message} register={register} />
+      <FCRHFSm label='Username' issue={errors.username?.message}>
         <input {...register('username')} className='input input-bordered input-sm' />
       </FCRHFSm>
-      <FCRHFSm label='First Name' issue={errors.firstName?.message} isRequired={false}>
+      <FCRHFSm label='First Name' issue={errors.firstName?.message}>
         <input {...register('firstName')} className='input input-bordered input-sm' />
       </FCRHFSm>
-      <FCRHFSm label='Last Name' issue={errors.lastName?.message} isRequired={false}>
+      <FCRHFSm label='Last Name' issue={errors.lastName?.message}>
         <input {...register('lastName')} className='input input-bordered input-sm' />
       </FCRHFSm>
-      <FCRHFSm label='Phone' issue={errors.phone?.message} isRequired={false}>
+      <FCRHFSm label='Phone' issue={errors.phone?.message}>
         <input {...register('phone')} className='input input-bordered input-sm' />
       </FCRHFSm>
       <input type='hidden' {...register('id', { valueAsNumber: true })} />
@@ -444,22 +439,22 @@ function UpdateMemberAddrForm({ botStatusText, user }) {
       noValidate
       className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'
     >
-      <FCRHFSm label='Line 1' issue={errors.lineOne?.message} isRequired={false}>
+      <FCRHFSm label='Line 1' issue={errors.lineOne?.message}>
         <input {...register('lineOne')} className='input input-bordered input-sm' />
       </FCRHFSm>
       <FCRHFSm label='Line 2' issue={errors.lineTwo?.message} isRequired={false}>
         <input {...register('lineTwo')} className='input input-bordered input-sm' />
       </FCRHFSm>
-      <FCRHFSm label='Suburb' issue={errors.suburb?.message} isRequired={false}>
+      <FCRHFSm label='Suburb' issue={errors.suburb?.message}>
         <input {...register('suburb')} className='input input-bordered input-sm' />
       </FCRHFSm>
-      <FCRHFSm label='Postcode' issue={errors.postcode?.message} isRequired={false}>
+      <FCRHFSm label='Postcode' issue={errors.postcode?.message}>
         <input {...register('postcode')} className='input input-bordered input-sm' />
       </FCRHFSm>
-      <FCRHFSm label='State' issue={errors.state?.message} isRequired={false}>
+      <FCRHFSm label='State' issue={errors.state?.message}>
         <input {...register('state')} className='input input-bordered input-sm' />
       </FCRHFSm>
-      <FCRHFSm label='Country' issue={errors.country?.message} isRequired={false}>
+      <FCRHFSm label='Country' issue={errors.country?.message}>
         <input {...register('country')} className='input input-bordered input-sm' />
       </FCRHFSm>
       <input type='hidden' name='memberId' value={authenticatedUser.memberId} />
