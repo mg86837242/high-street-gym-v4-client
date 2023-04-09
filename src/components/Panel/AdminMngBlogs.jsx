@@ -3,7 +3,7 @@ import AuthContext from '../../context/AuthContext.jsx';
 import { useLoaderData, Outlet, Form, useSubmit, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import blogSchema from '../../schemas/blogs.js';
+import { blogSchema } from '../../schemas';
 import sanitize from '../../helpers/sanitize';
 import FCRHFSm from '../FormControlRHF/FCRHFSm';
 import FCRHFSmTextarea from '../FormControlRHF/FCRHFSmTextarea';

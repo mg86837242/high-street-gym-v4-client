@@ -3,7 +3,7 @@ import { useOutletContext, useSubmit, useNavigate } from 'react-router-dom';
 import { EditorContent } from '@tiptap/react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import blogSchema from '../../schemas/blogs';
+import { blogSchema } from '../../schemas';
 import { Btn2SmOutline } from '../UI/Btn2';
 import { Btn1SmOutline } from '../UI/Btn1';
 import FCRHFSm from '../FormControlRHF/FCRHFSm';
