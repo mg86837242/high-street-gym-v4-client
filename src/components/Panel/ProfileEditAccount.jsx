@@ -3,10 +3,7 @@ import AuthContext from '../../context/AuthContext';
 import { useLoaderData, useActionData, useSubmit } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import adminSchema from '../../schemas/admin';
-import { trainerSchema } from '../../schemas/trainers';
-import { memberSchema } from '../../schemas/members';
-import { addressSchema } from '../../schemas/addresses';
+import { adminSchema, trainerSchema, memberSchema, addressSchema } from '../../schemas';
 import sanitize from '../../helpers/sanitize';
 import SpinnerNoNav from '../UI/SpinnerNoNav';
 import FCRHFSm from '../FormControlRHF/FCRHFSm';
@@ -143,7 +140,7 @@ export default function ProfileEditAccount() {
   );
 }
 
-// TODO Controlled component for email input && validate against curr emails (possibly within RHF) && pass state for visibility && exception of sanitization for addr
+// TODO validate against curr emails (possibly within RHF) && pass state for visibility && exception of sanitization for addr
 function UpdateAdminForm({ topStatusText, user, emails, authenticatedUser }) {
   const submit = useSubmit();
   const {
