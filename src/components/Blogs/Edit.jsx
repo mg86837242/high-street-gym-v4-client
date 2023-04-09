@@ -45,17 +45,11 @@ export default function Edit() {
     reset,
   } = useForm({
     resolver: zodResolver(blogSchema),
-    defaultValues: useMemo(() => {
-      return blog;
-    }, [blog]),
-    values: {
-      body: editor.getHTML(),
-    },
+    defaultValues: useMemo(() => blog, [blog]),
+    values: { body: editor.getHTML() },
   });
 
-  useEffect(() => {
-    reset(blog);
-  }, [reset, blog]);
+  useEffect(() => blog, [reset, blog]);
 
   useEffect(() => {
     if (editable) {
