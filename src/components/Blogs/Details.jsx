@@ -42,7 +42,6 @@ export default function Details() {
   if (!editor) {
     return null;
   }
-
   return (
     <div className='flex flex-col'>
       <article className='min-w-full'>
