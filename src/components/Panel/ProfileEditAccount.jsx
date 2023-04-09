@@ -140,7 +140,7 @@ export default function ProfileEditAccount() {
   );
 }
 
-// TODO validate against curr emails (possibly within RHF) && pass state for visibility && exception of sanitization for addr
+// TODO validate against curr emails (possibly within RHF) && pass state for visibility && exception of sanitization for addr line 2
 function UpdateAdminForm({ topStatusText, user, emails, authenticatedUser }) {
   const submit = useSubmit();
   const {
@@ -189,8 +189,8 @@ function UpdateAdminForm({ topStatusText, user, emails, authenticatedUser }) {
       <FCRHFSm label='Phone' issue={errors.phone?.message} isRequired={false}>
         <input {...register('phone')} className='input input-bordered input-sm' />
       </FCRHFSm>
-      <input type='text' {...register('id', { valueAsNumber: true })} />
-      <input type='text' {...register('_action')} />
+      <input type='hidden' {...register('id', { valueAsNumber: true })} />
+      <input type='hidden' {...register('_action')} />
       <button type='submit' className='btn btn-primary btn-sm mt-4'>
         Save
       </button>
