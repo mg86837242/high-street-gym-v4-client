@@ -25,15 +25,15 @@ export default function NavBar({ isHome }) {
   return (
     <div id='nav-bg' className={isHome ? navBgClass : 'sticky top-0 z-20 flex justify-center bg-neutral/95 w-full'}>
       <div id='nav-bar' className='w-full px-4 navbar max-w-screen-2xl 2xl:px-1'>
-        <NavBarLeft user={authenticatedUser} />
-        <NavBarCenter user={authenticatedUser} />
-        <NavBarRight user={authenticatedUser} handleLogout={handleLogout} />
+        <NavBarLeft authenticatedUser={authenticatedUser} />
+        <NavBarCenter authenticatedUser={authenticatedUser} />
+        <NavBarRight authenticatedUser={authenticatedUser} handleLogout={handleLogout} />
       </div>
     </div>
   );
 }
 
-function NavBarLeft({ user }) {
+function NavBarLeft({ authenticatedUser }) {
   return (
     <div id='nav-left-wrapper' className='navbar-start'>
       <div id='nav-left-dropdown-wrapper' className='dropdown'>
@@ -53,7 +53,7 @@ function NavBarLeft({ user }) {
           tabIndex={0}
           className='p-2 mt-3 shadow menu menu-compact dropdown-content bg-neutral rounded-box w-52'
         >
-          {user?.role === 'Admin' ? (
+          {authenticatedUser?.role === 'Admin' ? (
             <>
               <NavLeftButton to={'/'} text={'Home'} />
               <NavLeftButton to={'blogs'} text={'Blogs'} />
@@ -64,7 +64,7 @@ function NavBarLeft({ user }) {
                 <NavLeftDropdownButton to={'admin/blogs'} text={'Manage Blogs'} />
               </NavLeftButton>
             </>
-          ) : user?.role === 'Trainer' ? (
+          ) : authenticatedUser?.role === 'Trainer' ? (
             <>
               <NavLeftButton to={'/'} text={'Home'} />
               <NavLeftButton to={'blogs'} text={'Blogs'} />
@@ -133,11 +133,11 @@ function NavLeftDropdownButton({ to, text }) {
   );
 }
 
-function NavBarCenter({ user }) {
+function NavBarCenter({ authenticatedUser }) {
   return (
     <nav id='nav-center-wrapper' className='hidden navbar-center lg:flex'>
       <ul id='nav-center-menu' className='gap-2 px-1 menu menu-horizontal text-primary-content'>
-        {user?.role === 'Admin' ? (
+        {authenticatedUser?.role === 'Admin' ? (
           <>
             <NavCenterButton to={'/'} text={'Home'} />
             <NavCenterButton to={'blogs'} text={'Blogs'} />
@@ -148,7 +148,7 @@ function NavBarCenter({ user }) {
               <NavCenterDropdownButton to={'admin/blogs'} text={'Manage Blogs'} />
             </NavCenterButton>
           </>
-        ) : user?.role === 'Trainer' ? (
+        ) : authenticatedUser?.role === 'Trainer' ? (
           <>
             <NavCenterButton to={'/'} text={'Home'} />
             <NavCenterButton to={'blogs'} text={'Blogs'} />
@@ -211,13 +211,13 @@ function NavCenterDropdownButton({ to, text }) {
   );
 }
 
-function NavBarRight({ user, handleLogout }) {
+function NavBarRight({ authenticatedUser, handleLogout }) {
   const navigate = useNavigate();
 
   return (
     <div id='nav-right-wrapper' className='flex items-center gap-5 navbar-end'>
       {/* <ThemeSwitch /> */}
-      {user ? (
+      {authenticatedUser ? (
         <>
           <Link
             to='profile/account'

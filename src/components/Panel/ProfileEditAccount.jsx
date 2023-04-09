@@ -4,15 +4,18 @@ import { useLoaderData, useActionData, useSubmit } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import adminSchema from '../../schemas/admin';
+import { trainerSchema } from '../../schemas/trainers';
+import { memberSchema } from '../../schemas/members';
 import { addressSchema } from '../../schemas/addresses';
 import sanitize from '../../helpers/sanitize';
+import SpinnerNoNav from '../UI/SpinnerNoNav';
 import FCRHFSm from '../FormControlRHF/FCRHFSm';
 
 export default function ProfileEditAccount() {
   const { authenticatedUser } = useContext(AuthContext);
   const [topStatusText, setTopStatusText] = useState('');
   const [botStatusText, setBotStatusText] = useState('');
-  const { emails, user } = useLoaderData();
+  const { user, emails } = useLoaderData();
   const actionData = useActionData();
 
   // ??? In animal app, user edit page, `console.log(formData)` fires 4 times after initial mount & fires 6 times after POST req
@@ -82,11 +85,32 @@ export default function ProfileEditAccount() {
   function renderSwitchUpdateUserForm(role) {
     switch (role) {
       case 'Admin':
-        return <UpdateAdminForm topStatusText={topStatusText} emails={emails} user={user} />;
+        return (
+          <UpdateAdminForm
+            topStatusText={topStatusText}
+            user={user}
+            emails={emails}
+            authenticatedUser={authenticatedUser}
+          />
+        );
       case 'Trainer':
-        return <UpdateTrainerForm topStatusText={topStatusText} emails={emails} user={user} />;
+        return (
+          <UpdateTrainerForm
+            topStatusText={topStatusText}
+            user={user}
+            emails={emails}
+            authenticatedUser={authenticatedUser}
+          />
+        );
       case 'Member':
-        return <UpdateMemberForm topStatusText={topStatusText} emails={emails} user={user} />;
+        return (
+          <UpdateMemberForm
+            topStatusText={topStatusText}
+            user={user}
+            emails={emails}
+            authenticatedUser={authenticatedUser}
+          />
+        );
       default:
         return <></>;
     }
@@ -95,17 +119,19 @@ export default function ProfileEditAccount() {
   function renderSwitchUpdateUserAddrForm(role) {
     switch (role) {
       case 'Admin':
-        return <UpdateAdminAddrForm botStatusText={botStatusText} user={user} />;
+        return <UpdateAdminAddrForm botStatusText={botStatusText} user={user} authenticatedUser={authenticatedUser} />;
       case 'Trainer':
-        return <UpdateTrainerAddrForm botStatusText={botStatusText} user={user} />;
+        return (
+          <UpdateTrainerAddrForm botStatusText={botStatusText} user={user} authenticatedUser={authenticatedUser} />
+        );
       case 'Member':
-        return <UpdateMemberAddrForm botStatusText={botStatusText} user={user} />;
+        return <UpdateMemberAddrForm botStatusText={botStatusText} user={user} authenticatedUser={authenticatedUser} />;
       default:
         return <></>;
     }
   }
 
-  return (
+  return user && emails ? (
     <div className='flex-grow px-4 py-6'>
       <h1 className='font-sans text-3xl text-accent'>Edit My Account</h1>
       {renderSwitchUpdateUserForm(authenticatedUser?.role)}
@@ -113,10 +139,12 @@ export default function ProfileEditAccount() {
       <h1 className='font-sans text-3xl text-accent'>Edit My Address</h1>
       {renderSwitchUpdateUserAddrForm(authenticatedUser?.role)}
     </div>
+  ) : (
+    <SpinnerNoNav />
   );
 }
 
-function UpdateAdminForm({ topStatusText, emails, user }) {
+function UpdateAdminForm({ topStatusText, user, emails, authenticatedUser }) {
   const submit = useSubmit();
   const {
     register,
@@ -154,11 +182,16 @@ function UpdateAdminForm({ topStatusText, emails, user }) {
       <FCRHFSm label='Phone' issue={errors.phone?.message} isRequired={false}>
         <input {...register('phone')} className='input input-bordered input-sm' />
       </FCRHFSm>
+      <input type='hidden' name='id' value={authenticatedUser.adminId} />
+      <button type='submit' name='_action' value='updateAdminById' className='btn btn-primary btn-sm mt-4'>
+        Save
+      </button>
+      <p className='text-success self-center mt-4'>{topStatusText}</p>
     </form>
   );
 }
 
-function UpdateAdminAddrForm({ botStatusText, user }) {
+function UpdateAdminAddrForm({ botStatusText, user, authenticatedUser }) {
   const submit = useSubmit();
   const {
     register,
@@ -196,18 +229,23 @@ function UpdateAdminAddrForm({ botStatusText, user }) {
       <FCRHFSm label='Country' issue={errors.country?.message} isRequired={false}>
         <input {...register('country')} className='input input-bordered input-sm' />
       </FCRHFSm>
+      <input type='hidden' name='adminId' value={authenticatedUser.adminId} />
+      <button type='submit' name='_action' value='updateAddressByAdminId' className='btn btn-primary btn-sm mt-5'>
+        Save
+      </button>
+      <p className='text-success self-center mt-4'>{botStatusText}</p>
     </form>
   );
 }
 
-function UpdateTrainerForm({ topStatusText, emails, user }) {
+function UpdateTrainerForm({ topStatusText, user, emails, authenticatedUser }) {
   const submit = useSubmit();
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({ resolver: zodResolver(userSchema), defaultValues: useMemo(() => user, [user]) });
+  } = useForm({ resolver: zodResolver(trainerSchema), defaultValues: useMemo(() => user, [user]) });
 
   useEffect(() => reset(user), [reset, user]);
 
@@ -238,11 +276,16 @@ function UpdateTrainerForm({ topStatusText, emails, user }) {
       <FCRHFSm label='Phone' issue={errors.phone?.message} isRequired={false}>
         <input {...register('phone')} className='input input-bordered input-sm' />
       </FCRHFSm>
+      <input type='hidden' name='id' value={authenticatedUser.trainerId} />
+      <button type='submit' name='_action' value='updateAdminById' className='btn btn-primary btn-sm mt-4'>
+        Save
+      </button>
+      <p className='text-success self-center mt-4'>{topStatusText}</p>
     </form>
   );
 }
 
-function UpdateTrainerAddrForm({ botStatusText, user }) {
+function UpdateTrainerAddrForm({ botStatusText, user, authenticatedUser }) {
   const submit = useSubmit();
   const {
     register,
@@ -280,11 +323,16 @@ function UpdateTrainerAddrForm({ botStatusText, user }) {
       <FCRHFSm label='Country' issue={errors.country?.message} isRequired={false}>
         <input {...register('country')} className='input input-bordered input-sm' />
       </FCRHFSm>
+      <input type='hidden' name='trainerId' value={authenticatedUser.trainerId} />
+      <button type='submit' name='_action' value='updateAddressByTrainerId' className='btn btn-primary btn-sm mt-5'>
+        Save
+      </button>
+      <p className='text-success self-center mt-4'>{botStatusText}</p>
     </form>
   );
 }
 
-function UpdateMemberForm({ topStatusText, emails, user }) {
+function UpdateMemberForm({ topStatusText, user, emails, authenticatedUser }) {
   const submit = useSubmit();
   const {
     register,
@@ -322,6 +370,11 @@ function UpdateMemberForm({ topStatusText, emails, user }) {
       <FCRHFSm label='Phone' issue={errors.phone?.message} isRequired={false}>
         <input {...register('phone')} className='input input-bordered input-sm' />
       </FCRHFSm>
+      <input type='hidden' name='id' value={authenticatedUser.memberId} />
+      <button type='submit' name='_action' value='updateAdminById' className='btn btn-primary btn-sm mt-4'>
+        Save
+      </button>
+      <p className='text-success self-center mt-4'>{topStatusText}</p>
     </form>
   );
 }
@@ -364,6 +417,11 @@ function UpdateMemberAddrForm({ botStatusText, user }) {
       <FCRHFSm label='Country' issue={errors.country?.message} isRequired={false}>
         <input {...register('country')} className='input input-bordered input-sm' />
       </FCRHFSm>
+      <input type='hidden' name='memberId' value={authenticatedUser.memberId} />
+      <button type='submit' name='_action' value='updateAddressByMemberId' className='btn btn-primary btn-sm mt-5'>
+        Save
+      </button>
+      <p className='text-success self-center mt-4'>{botStatusText}</p>
     </form>
   );
 }
