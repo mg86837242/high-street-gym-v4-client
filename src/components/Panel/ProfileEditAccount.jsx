@@ -19,7 +19,6 @@ export default function ProfileEditAccount() {
   const actionData = useActionData();
 
   // ??? In animal app, user edit page, `console.log(formData)` fires 4 times after initial mount & fires 6 times after POST req
-  // TODO Rewrite the following forms by using RHF
   useEffect(() => {
     if (!actionData) {
       return;
@@ -144,6 +143,7 @@ export default function ProfileEditAccount() {
   );
 }
 
+// TODO Controlled component for email input && validate against curr emails (possibly within RHF) && pass state for visibility && exception of sanitization for addr
 function UpdateAdminForm({ topStatusText, user, emails, authenticatedUser }) {
   const submit = useSubmit();
   const {
@@ -339,7 +339,7 @@ function UpdateMemberForm({ topStatusText, user, emails, authenticatedUser }) {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({ resolver: zodResolver(userSchema), defaultValues: useMemo(() => user, [user]) });
+  } = useForm({ resolver: zodResolver(memberSchema), defaultValues: useMemo(() => user, [user]) });
 
   useEffect(() => reset(user), [reset, user]);
 
