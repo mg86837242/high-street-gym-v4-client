@@ -77,7 +77,7 @@ export default function Calendar() {
           //  Solution: wrap up the `<FontAwesomeIcon>` within a button element
           tabIndex={0}
           onClick={() => {
-            month === 1 ? (setYear((year) => year - 1), setMonth(12)) : setMonth((month) => month - 1);
+            month === 1 ? (setYear(year => year - 1), setMonth(12)) : setMonth(month => month - 1);
           }}
         >
           <FontAwesomeIcon icon={faSquareCaretLeft} className='text-2xl cursor-pointer md:text-3xl' />
@@ -93,7 +93,7 @@ export default function Calendar() {
         <button
           tabIndex={0}
           onClick={() => {
-            month === 12 ? (setYear((year) => year + 1), setMonth(1)) : setMonth((month) => month + 1);
+            month === 12 ? (setYear(year => year + 1), setMonth(1)) : setMonth(month => month + 1);
           }}
         >
           <FontAwesomeIcon icon={faSquareCaretRight} className='text-2xl cursor-pointer md:text-3xl' />

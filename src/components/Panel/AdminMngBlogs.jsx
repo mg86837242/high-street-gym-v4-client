@@ -57,7 +57,7 @@ function AdminListBlogs({ blogs }) {
                 <Form
                   method='post'
                   action={`${id}/destroy`}
-                  onSubmit={(e) => {
+                  onSubmit={e => {
                     if (!confirm('Please confirm you want to delete this blog.')) {
                       e.preventDefault();
                     }
@@ -114,7 +114,7 @@ export function AdminEditBlog() {
   return (
     <div className='grid py-6 place-items-center'>
       <form
-        onSubmit={handleSubmit((data) => {
+        onSubmit={handleSubmit(data => {
           const sanitizedData = sanitize(data);
           submit({ body: JSON.stringify(sanitizedData) }, { method: 'post' });
         })}

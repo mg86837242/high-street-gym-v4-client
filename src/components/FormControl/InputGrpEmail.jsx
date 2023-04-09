@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 export default function InputGrpEmail({ issue, emails, initialValue, isRequired }) {
   const [input, setInput] = useState(initialValue);
-  const isDuplicate = emails.find((e) => input === e.email);
+  const isDuplicate = emails.find(e => input === e.email);
 
   return (
     <div id='email-input-group' className='w-full form-control'>
@@ -16,7 +16,7 @@ export default function InputGrpEmail({ issue, emails, initialValue, isRequired 
         type='text'
         placeholder='Enter your email here'
         value={input}
-        onChange={(e) => setInput(e.target.value)}
+        onChange={e => setInput(e.target.value)}
         className='w-full h-10 text-accent input input-bordered input-primary 3xl:h-12'
       />
       <label htmlFor='email' className='py-1 3xl:py-2label'>

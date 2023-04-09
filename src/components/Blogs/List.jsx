@@ -101,7 +101,7 @@ export default function List() {
             <div className='divider'></div>
             <select
               value={filter}
-              onChange={(e) => setFilter(e.target.value)}
+              onChange={e => setFilter(e.target.value)}
               aria-label='Dropdown list for filtering blogs'
               className='w-full max-w-xs select select-primary select-sm'
             >
@@ -123,7 +123,7 @@ export default function List() {
           <>
             <select
               value={filter}
-              onChange={(e) => setFilter(e.target.value)}
+              onChange={e => setFilter(e.target.value)}
               className='w-full max-w-xs select select-primary select-sm'
             >
               <option value='all'>All bookings</option>

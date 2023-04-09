@@ -32,7 +32,7 @@ export default function Edit() {
             <span className='p-0'>Activity:</span>
             <select
               name='activityId'
-              defaultValue={activities.find((a) => a.id === booking.activityId).id}
+              defaultValue={activities.find(a => a.id === booking.activityId).id}
               required
               className='text-base font-normal select select-bordered select-sm'
             >
@@ -92,7 +92,7 @@ export default function Edit() {
               >
                 <option disabled>-- Choose Member --</option>
                 {members
-                  .filter((m) => m.id === authenticatedUser.memberId)
+                  .filter(m => m.id === authenticatedUser.memberId)
                   .map((m, i) => (
                     <option value={m.id} key={i}>
                       {m.firstName} {m.lastName}
@@ -108,7 +108,7 @@ export default function Edit() {
               <span className='p-0'>Member:</span>
               <select
                 name='memberId'
-                defaultValue={members.find((m) => m.id === booking.memberId).id}
+                defaultValue={members.find(m => m.id === booking.memberId).id}
                 required
                 className='text-base font-normal select select-bordered select-sm'
               >
@@ -135,7 +135,7 @@ export default function Edit() {
               >
                 <option disabled>-- Choose Trainer --</option>
                 {trainers
-                  .filter((t) => t.id === authenticatedUser.trainerId)
+                  .filter(t => t.id === authenticatedUser.trainerId)
                   .map((t, i) => (
                     <option value={t.id} key={i}>
                       {t.firstName} {t.lastName}
@@ -151,7 +151,7 @@ export default function Edit() {
               <span className='p-0'>Trainer:</span>
               <select
                 name='trainerId'
-                defaultValue={trainers.find((t) => t.id === booking.trainerId).id}
+                defaultValue={trainers.find(t => t.id === booking.trainerId).id}
                 required
                 className='text-base font-normal select select-bordered select-sm'
               >

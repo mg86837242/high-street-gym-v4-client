@@ -16,7 +16,7 @@ export default function DetailsIndex() {
         <Form
           method='post'
           action='destroy'
-          onSubmit={(e) => {
+          onSubmit={e => {
             if (!confirm('Please confirm you want to delete this activity.')) {
               e.preventDefault();
             }

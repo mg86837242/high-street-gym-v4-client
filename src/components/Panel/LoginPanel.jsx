@@ -150,7 +150,7 @@ function LoginForm() {
           type='email'
           placeholder='Enter your email here'
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={e => setEmail(e.target.value)}
           className='w-full text-white input input-bordered input-primary'
         />
         <label htmlFor='email' className='label'>
@@ -171,7 +171,7 @@ function LoginForm() {
           type={inputType}
           placeholder='Enter your password here'
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={e => setPassword(e.target.value)}
           className='w-full text-white input input-bordered input-primary'
         />
         {/* NB `type=`button'`, which implies no default behavior, is a must have in order for this button to work */}

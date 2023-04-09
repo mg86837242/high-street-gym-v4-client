@@ -103,7 +103,7 @@ function TitleForm({ register, issue, handleSubmit, setEditable }) {
   return (
     <form
       id='edit-blog'
-      onSubmit={handleSubmit((data) => {
+      onSubmit={handleSubmit(data => {
         setEditable(false);
         submit({ body: JSON.stringify(data) }, { method: 'post' });
       })}

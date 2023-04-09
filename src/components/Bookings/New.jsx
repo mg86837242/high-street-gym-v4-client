@@ -94,7 +94,7 @@ export default function New() {
               >
                 <option disabled>-- Choose Member --</option>
                 {members
-                  .filter((m) => m.id === authenticatedUser.memberId)
+                  .filter(m => m.id === authenticatedUser.memberId)
                   .map((m, i) => (
                     <option value={m.id} key={i}>
                       {m.firstName} {m.lastName}
@@ -137,7 +137,7 @@ export default function New() {
               >
                 <option disabled>-- Choose Trainer --</option>
                 {trainers
-                  .filter((t) => t.id === authenticatedUser.trainerId)
+                  .filter(t => t.id === authenticatedUser.trainerId)
                   .map((t, i) => (
                     <option value={t.id} key={i}>
                       {t.firstName} {t.lastName}

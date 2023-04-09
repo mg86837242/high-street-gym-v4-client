@@ -29,42 +29,42 @@ export default function ProfileEditAccount() {
       case 'updateAdminById':
         (async () => {
           setTopStatusText(`✅ ${actionData.message}`);
-          await new Promise((r) => setTimeout(r, 5_000));
+          await new Promise(r => setTimeout(r, 5_000));
           setTopStatusText('');
         })();
         break;
       case 'updateAddressByAdminId':
         (async () => {
           setBotStatusText(`✅ ${actionData.message}`);
-          await new Promise((r) => setTimeout(r, 5_000));
+          await new Promise(r => setTimeout(r, 5_000));
           setBotStatusText('');
         })();
         break;
       case 'updateTrainerById':
         (async () => {
           setTopStatusText(`✅ ${actionData.message}`);
-          await new Promise((r) => setTimeout(r, 5_000));
+          await new Promise(r => setTimeout(r, 5_000));
           setTopStatusText('');
         })();
         break;
       case 'updateAddressByTrainerId':
         (async () => {
           setBotStatusText(`✅ ${actionData.message}`);
-          await new Promise((r) => setTimeout(r, 5_000));
+          await new Promise(r => setTimeout(r, 5_000));
           setBotStatusText('');
         })();
         break;
       case 'updateMemberById':
         (async () => {
           setTopStatusText(`✅ ${actionData.message}`);
-          await new Promise((r) => setTimeout(r, 5_000));
+          await new Promise(r => setTimeout(r, 5_000));
           setTopStatusText('');
         })();
         break;
       case 'updateAddressByMemberId':
         (async () => {
           setBotStatusText(`✅ ${actionData.message}`);
-          await new Promise((r) => setTimeout(r, 5_000));
+          await new Promise(r => setTimeout(r, 5_000));
           setBotStatusText('');
         })();
         break;
@@ -152,9 +152,11 @@ function UpdateAdminForm({ topStatusText, user, emails, authenticatedUser }) {
 
   useEffect(() => reset(user), [reset, user]);
 
+  console.log(emails);
+
   return (
     <form
-      onSubmit={handleSubmit((data) => {
+      onSubmit={handleSubmit(data => {
         const sanitizedData = sanitize(data);
         submit({ body: JSON.stringify(sanitizedData) }, { method: 'post' });
       })}
@@ -162,7 +164,12 @@ function UpdateAdminForm({ topStatusText, user, emails, authenticatedUser }) {
       className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'
     >
       <FCRHFSm label='Email' issue={errors.email?.message} isRequired={false}>
-        <input {...register('email')} className='input input-bordered input-sm' />
+        <input
+          {...register('email', {
+            validate: val => emails.find(e => val === e.email) === false || 'Email has already been used',
+          })}
+          className='input input-bordered input-sm'
+        />
       </FCRHFSm>
       <FCRHFSm label='Password' issue={errors.password?.message} isRequired={false}>
         <input {...register('password')} className='input input-bordered input-sm' />
@@ -201,7 +208,7 @@ function UpdateAdminAddrForm({ botStatusText, user, authenticatedUser }) {
 
   return (
     <form
-      onSubmit={handleSubmit((data) => {
+      onSubmit={handleSubmit(data => {
         const sanitizedData = sanitize(data);
         submit({ body: JSON.stringify(sanitizedData) }, { method: 'post' });
       })}
@@ -248,7 +255,7 @@ function UpdateTrainerForm({ topStatusText, user, emails, authenticatedUser }) {
 
   return (
     <form
-      onSubmit={handleSubmit((data) => {
+      onSubmit={handleSubmit(data => {
         const sanitizedData = sanitize(data);
         submit({ body: JSON.stringify(sanitizedData) }, { method: 'post' });
       })}
@@ -295,7 +302,7 @@ function UpdateTrainerAddrForm({ botStatusText, user, authenticatedUser }) {
 
   return (
     <form
-      onSubmit={handleSubmit((data) => {
+      onSubmit={handleSubmit(data => {
         const sanitizedData = sanitize(data);
         submit({ body: JSON.stringify(sanitizedData) }, { method: 'post' });
       })}
@@ -342,7 +349,7 @@ function UpdateMemberForm({ topStatusText, user, emails, authenticatedUser }) {
 
   return (
     <form
-      onSubmit={handleSubmit((data) => {
+      onSubmit={handleSubmit(data => {
         const sanitizedData = sanitize(data);
         submit({ body: JSON.stringify(sanitizedData) }, { method: 'post' });
       })}
@@ -389,7 +396,7 @@ function UpdateMemberAddrForm({ botStatusText, user }) {
 
   return (
     <form
-      onSubmit={handleSubmit((data) => {
+      onSubmit={handleSubmit(data => {
         const sanitizedData = sanitize(data);
         submit({ body: JSON.stringify(sanitizedData) }, { method: 'post' });
       })}
