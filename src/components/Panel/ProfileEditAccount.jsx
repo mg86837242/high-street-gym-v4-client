@@ -148,16 +148,20 @@ function UpdateAdminForm({ topStatusText, user, emails, authenticatedUser }) {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({ resolver: zodResolver(adminSchema), defaultValues: useMemo(() => user, [user]) });
+  } = useForm({
+    resolver: zodResolver(adminSchema),
+    defaultValues: useMemo(() => {
+      return { ...user, id: authenticatedUser?.adminId, _action: 'updateAdminById' };
+    }, [user]),
+  });
 
   useEffect(() => reset(user), [reset, user]);
-
-  console.log(emails);
 
   return (
     <form
       onSubmit={handleSubmit(data => {
         const sanitizedData = sanitize(data);
+        console.log(sanitizedData);
         submit({ body: JSON.stringify(sanitizedData) }, { method: 'post' });
       })}
       noValidate
@@ -166,7 +170,7 @@ function UpdateAdminForm({ topStatusText, user, emails, authenticatedUser }) {
       <FCRHFSm label='Email' issue={errors.email?.message} isRequired={false}>
         <input
           {...register('email', {
-            validate: val => emails.find(e => val === e.email) === false || 'Email has already been used',
+            validate: val => !emails.find(e => val === e.email) || 'Email has already been used',
           })}
           className='input input-bordered input-sm'
         />
@@ -186,7 +190,8 @@ function UpdateAdminForm({ topStatusText, user, emails, authenticatedUser }) {
       <FCRHFSm label='Phone' issue={errors.phone?.message} isRequired={false}>
         <input {...register('phone')} className='input input-bordered input-sm' />
       </FCRHFSm>
-      <input type='hidden' name='id' value={authenticatedUser.adminId} />
+      <input type='text' {...register('id', { valueAsNumber: true })} />
+      <input type='text' {...register('_action')} />
       <button type='submit' name='_action' value='updateAdminById' className='btn btn-primary btn-sm mt-4'>
         Save
       </button>

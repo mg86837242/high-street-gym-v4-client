@@ -22,7 +22,7 @@ const profileRoutes = [
     },
     async action({ request }) {
       const formData = await request.formData();
-      const { _action, ...values } = Object.fromEntries(formData);
+      const { _action, ...values } = formData.get('body');
 
       switch (_action) {
         case 'updateAdminById':

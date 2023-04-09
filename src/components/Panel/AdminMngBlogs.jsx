@@ -138,11 +138,7 @@ export function AdminEditBlog() {
             className='textarea textarea-bordered'
           />
         </FCRHFSmTextarea>
-        <input
-          type='hidden'
-          {...register('loginId', { valueAsNumber: true })}
-          className='input input-bordered input-sm'
-        />
+        <input type='hidden' {...register('loginId', { valueAsNumber: true })} />
         <div className='flex justify-end w-full col-span-2 gap-10 py-6 xl:col-span-3'>
           <button type='submit' className='w-20 btn btn-outline btn-primary btn-sm'>
             Save
