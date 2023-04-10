@@ -1,5 +1,5 @@
-import MainWrapper from '../components/layouts/MainWrapper';
-import { ProfilePanel } from '../components/panels/ProfilePanel';
+import MainWrapper from '../../components/layouts/MainWrapper';
+import { ProfilePanel } from './ProfilePanel';
 
 export default function Profile() {
   return (

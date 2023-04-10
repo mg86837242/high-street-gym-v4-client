@@ -6,14 +6,14 @@ const profileRoutes = [
   {
     index: true,
     async lazy() {
-      let { ProfileIndex } = await import('../components/panels/ProfilePanel');
+      let { ProfileIndex } = await import('../pages/Profile/ProfilePanel');
       return { Component: ProfileIndex };
     },
   },
   {
     path: 'account',
     async lazy() {
-      let { default: ProfileEditAccount } = await import('../components/panels/ProfileEditAccount');
+      let { default: ProfileEditAccount } = await import('../pages/Profile/ProfileEditAccount');
       return { Component: ProfileEditAccount };
     },
     ErrorBoundary: ErrorInfoRefresh,

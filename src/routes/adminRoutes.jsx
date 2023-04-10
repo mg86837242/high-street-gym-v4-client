@@ -6,7 +6,7 @@ const adminRoutes = [
   {
     index: true,
     async lazy() {
-      let { AdminIndex } = await import('../components/panels/AdminPanel');
+      let { AdminIndex } = await import('../pages/Admin/AdminPanel');
       return { Component: AdminIndex };
     },
     ErrorBoundary: ErrorInfoBack,
@@ -14,7 +14,7 @@ const adminRoutes = [
   {
     path: 'activities',
     async lazy() {
-      let { AdminMngActivities } = await import('../components/panels/AdminMngActivities');
+      let { AdminMngActivities } = await import('../pages/Admin/AdminMngActivities');
       return { Component: AdminMngActivities };
     },
     ErrorBoundary: ErrorInfoBack,
@@ -26,7 +26,7 @@ const adminRoutes = [
       {
         index: true,
         async lazy() {
-          let { AdminNewActivity } = await import('../components/panels/AdminMngActivities');
+          let { AdminNewActivity } = await import('../pages/Admin/AdminMngActivities');
           return { Component: AdminNewActivity };
         },
         ErrorBoundary: ErrorInfoBack,
@@ -42,7 +42,7 @@ const adminRoutes = [
       {
         path: ':id/edit',
         async lazy() {
-          let { AdminEditActivity } = await import('../components/panels/AdminMngActivities');
+          let { AdminEditActivity } = await import('../pages/Admin/AdminMngActivities');
           return { Component: AdminEditActivity };
         },
         ErrorBoundary: ErrorInfoRefresh,
@@ -71,7 +71,7 @@ const adminRoutes = [
       {
         path: 'blogs',
         async lazy() {
-          let { AdminMngBlogs } = await import('../components/panels/AdminMngBlogs');
+          let { AdminMngBlogs } = await import('../pages/Admin/AdminMngBlogs');
           return { Component: AdminMngBlogs };
         },
         ErrorBoundary: ErrorInfoBack,
@@ -83,7 +83,7 @@ const adminRoutes = [
           {
             index: true,
             async lazy() {
-              let { AdminNewBlog } = await import('../components/panels/AdminMngBlogs');
+              let { AdminNewBlog } = await import('../pages/Admin/AdminMngBlogs');
               return { Component: AdminNewBlog };
             },
             ErrorBoundary: ErrorInfoBack,
@@ -99,7 +99,7 @@ const adminRoutes = [
           {
             path: ':id/edit',
             async lazy() {
-              let { AdminEditBlog } = await import('../components/panels/AdminMngBlogs');
+              let { AdminEditBlog } = await import('../pages/Admin/AdminMngBlogs');
               return { Component: AdminEditBlog };
             },
             ErrorBoundary: ErrorInfoRefresh,

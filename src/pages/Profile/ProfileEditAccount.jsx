@@ -13,9 +13,9 @@ import {
 } from '../../schemas';
 import { default as countries } from '../../data/countries.json';
 import { convertEmptyStrToNull, convertNullToEmptyStr } from '../../helpers/sanitize';
-import FCRHFSm from '../formCtrlRHF/FCRHFSm';
-import FCRHFSmPass from '../formCtrlRHF/FCRHFSmPass';
-import SpinnerNoNav from '../ui/SpinnerNoNav';
+import FCRHFSm from '../../components/formCtrlRHF/FCRHFSm';
+import FCRHFSmPass from '../../components/formCtrlRHF/FCRHFSmPass';
+import SpinnerNoNav from '../../components/ui/SpinnerNoNav';
 
 export default function ProfileEditAccount() {
   const { authenticatedUser } = useContext(AuthContext);

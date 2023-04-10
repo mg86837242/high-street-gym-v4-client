@@ -3,7 +3,7 @@ import FCInput from '../formCtrl';
 import FCInputEmail from '../formCtrl';
 import FCInputPass from '../formCtrl';
 import FCSelectGender from '../formCtrl';
-import { Btn2 } from '../ui/Btn2';
+import { Btn2 } from '../../components/ui/Btn2';
 
 export default function SignupPanel({ emails }) {
   return (

@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { activitySchema } from '../../schemas';
 import { convertEmptyStrToNull } from '../../helpers/sanitize';
-import FCRHFSm from '../formCtrlRHF/FCRHFSm';
+import FCRHFSm from '../../components/formCtrlRHF/FCRHFSm';
 
 export function AdminMngActivities() {
   const { activities } = useLoaderData();

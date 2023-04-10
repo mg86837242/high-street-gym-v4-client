@@ -4,9 +4,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { emailSchema, passwordSchema } from '../../schemas/logins';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { Btn2 } from '../ui/Btn2';
-import { Btn5 } from '../ui/Btn5';
-import { LinkBtn2 } from '../ui/LinkBtn2';
+import { Btn2 } from '../../components/ui/Btn2';
+import { Btn5 } from '../../components/ui/Btn5';
+import { LinkBtn2 } from '../../components/ui/LinkBtn2';
 
 export default function LoginPanel() {
   const { authenticatedUser } = useContext(AuthContext);
