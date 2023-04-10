@@ -37,7 +37,7 @@ function Directions() {
 function SignupForm({ emails }) {
   const issues = useActionData();
   const navigation = useNavigation();
-  const statusText = navigation.state === 'submitting' ? 'Signing up...' : 'Signup';
+  const message = navigation.state === 'submitting' ? 'Signing up...' : 'Signup';
 
   return (
     <Form method='post' noValidate className='grid w-full grid-cols-1 md:grid-cols-2 gap-x-5'>
@@ -50,7 +50,7 @@ function SignupForm({ emails }) {
       <InputGrp name='age' type='text' issue={issues?.age} isRequired={false} />
       <SelectGrpGender issue={issues?.gender} isRequired={false} />
       <div className='col-span-1 pt-4 md:col-span-2'>
-        <Btn2 w='w-full'>{statusText}</Btn2>
+        <Btn2 w='w-full'>{message}</Btn2>
       </div>
     </Form>
   );

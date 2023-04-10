@@ -19,8 +19,8 @@ import { default as countries } from '../../data/countries.json';
 
 export default function ProfileEditAccount() {
   const { authenticatedUser } = useContext(AuthContext);
-  const [topStatusText, setTopStatusText] = useState('');
-  const [botStatusText, setBotStatusText] = useState('');
+  const [topMessage, setTopMessage] = useState('');
+  const [botMessage, setBotMessage] = useState('');
   const { user, emails } = useLoaderData();
   const actionData = useActionData();
 
@@ -35,44 +35,44 @@ export default function ProfileEditAccount() {
     switch (actionData._action) {
       case 'updateAdminById':
         (async () => {
-          setTopStatusText(`✅ ${actionData.message}`);
+          setTopMessage(`✅ ${actionData.message}`);
           await new Promise(r => setTimeout(r, 5_000));
-          setTopStatusText('');
+          setTopMessage('');
         })();
         break;
       case 'updateAddressByAdminId':
         (async () => {
-          setBotStatusText(`✅ ${actionData.message}`);
+          setBotMessage(`✅ ${actionData.message}`);
           await new Promise(r => setTimeout(r, 5_000));
-          setBotStatusText('');
+          setBotMessage('');
         })();
         break;
       case 'updateTrainerById':
         (async () => {
-          setTopStatusText(`✅ ${actionData.message}`);
+          setTopMessage(`✅ ${actionData.message}`);
           await new Promise(r => setTimeout(r, 5_000));
-          setTopStatusText('');
+          setTopMessage('');
         })();
         break;
       case 'updateAddressByTrainerId':
         (async () => {
-          setBotStatusText(`✅ ${actionData.message}`);
+          setBotMessage(`✅ ${actionData.message}`);
           await new Promise(r => setTimeout(r, 5_000));
-          setBotStatusText('');
+          setBotMessage('');
         })();
         break;
       case 'updateMemberById':
         (async () => {
-          setTopStatusText(`✅ ${actionData.message}`);
+          setTopMessage(`✅ ${actionData.message}`);
           await new Promise(r => setTimeout(r, 5_000));
-          setTopStatusText('');
+          setTopMessage('');
         })();
         break;
       case 'updateAddressByMemberId':
         (async () => {
-          setBotStatusText(`✅ ${actionData.message}`);
+          setBotMessage(`✅ ${actionData.message}`);
           await new Promise(r => setTimeout(r, 5_000));
-          setBotStatusText('');
+          setBotMessage('');
         })();
         break;
       default:
@@ -80,8 +80,8 @@ export default function ProfileEditAccount() {
     }
 
     return () => {
-      setTopStatusText('');
-      setBotStatusText('');
+      setTopMessage('');
+      setBotMessage('');
     };
   }, [actionData]);
 
@@ -89,17 +89,12 @@ export default function ProfileEditAccount() {
     switch (role) {
       case 'Admin':
         return (
-          <UpdateAdminForm
-            topStatusText={topStatusText}
-            user={user}
-            emails={emails}
-            authenticatedUser={authenticatedUser}
-          />
+          <UpdateAdminForm topMessage={topMessage} user={user} emails={emails} authenticatedUser={authenticatedUser} />
         );
       case 'Trainer':
         return (
           <UpdateTrainerForm
-            topStatusText={topStatusText}
+            topMessage={topMessage}
             user={user}
             emails={emails}
             authenticatedUser={authenticatedUser}
@@ -107,12 +102,7 @@ export default function ProfileEditAccount() {
         );
       case 'Member':
         return (
-          <UpdateMemberForm
-            topStatusText={topStatusText}
-            user={user}
-            emails={emails}
-            authenticatedUser={authenticatedUser}
-          />
+          <UpdateMemberForm topMessage={topMessage} user={user} emails={emails} authenticatedUser={authenticatedUser} />
         );
       default:
         return <></>;
@@ -122,13 +112,11 @@ export default function ProfileEditAccount() {
   function renderSwitchUpdateUserAddrForm(role) {
     switch (role) {
       case 'Admin':
-        return <UpdateAdminAddrForm botStatusText={botStatusText} user={user} authenticatedUser={authenticatedUser} />;
+        return <UpdateAdminAddrForm botMessage={botMessage} user={user} authenticatedUser={authenticatedUser} />;
       case 'Trainer':
-        return (
-          <UpdateTrainerAddrForm botStatusText={botStatusText} user={user} authenticatedUser={authenticatedUser} />
-        );
+        return <UpdateTrainerAddrForm botMessage={botMessage} user={user} authenticatedUser={authenticatedUser} />;
       case 'Member':
-        return <UpdateMemberAddrForm botStatusText={botStatusText} user={user} authenticatedUser={authenticatedUser} />;
+        return <UpdateMemberAddrForm botMessage={botMessage} user={user} authenticatedUser={authenticatedUser} />;
       default:
         return <></>;
     }
@@ -147,8 +135,8 @@ export default function ProfileEditAccount() {
   );
 }
 
-function UpdateAdminForm({ topStatusText, user, emails, authenticatedUser }) {
-  const [duplicateEmailStatusText, setDuplicateEmailStatusText] = useState('');
+function UpdateAdminForm({ topMessage, user, emails, authenticatedUser }) {
+  const [duplicateEmailMsg, setDuplicateEmailMsg] = useState('');
   const submit = useSubmit();
   const {
     register,
@@ -171,9 +159,9 @@ function UpdateAdminForm({ topStatusText, user, emails, authenticatedUser }) {
   return (
     <form
       onSubmit={handleSubmit(data => {
-        setDuplicateEmailStatusText('');
+        setDuplicateEmailMsg('');
         if (data.email !== user.email && emails.find(e => e.email === data.email)) {
-          setDuplicateEmailStatusText('Email has already been used');
+          setDuplicateEmailMsg('Email has already been used');
           return;
         }
         const sanitizedData = convertEmptyStrToNull(data);
@@ -182,7 +170,7 @@ function UpdateAdminForm({ topStatusText, user, emails, authenticatedUser }) {
       noValidate
       className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'
     >
-      <FCRHFSm label='Email' register={register('email')} issue={duplicateEmailStatusText || errors.email?.message} />
+      <FCRHFSm label='Email' register={register('email')} issue={duplicateEmailMsg || errors.email?.message} />
       <FCRHFSmPass label='Password' register={register('password')} issue={errors.password?.message} />
       <FCRHFSm label='Username' register={register('username')} issue={errors.username?.message} />
       <FCRHFSm label='First Name' register={register('firstName')} issue={errors.firstName?.message} />
@@ -193,12 +181,12 @@ function UpdateAdminForm({ topStatusText, user, emails, authenticatedUser }) {
       <button type='submit' className='btn btn-primary btn-sm mt-4'>
         Save
       </button>
-      <p className='text-success self-center mt-4'>{topStatusText}</p>
+      <p className='text-success self-center mt-4'>{topMessage}</p>
     </form>
   );
 }
 
-function UpdateAdminAddrForm({ botStatusText, user, authenticatedUser }) {
+function UpdateAdminAddrForm({ botMessage, user, authenticatedUser }) {
   const submit = useSubmit();
   const {
     register,
@@ -249,13 +237,13 @@ function UpdateAdminAddrForm({ botStatusText, user, authenticatedUser }) {
       <button type='submit' className='btn btn-primary btn-sm mt-5'>
         Save
       </button>
-      <p className='text-success self-center mt-4'>{botStatusText}</p>
+      <p className='text-success self-center mt-4'>{botMessage}</p>
     </form>
   );
 }
 
-function UpdateTrainerForm({ topStatusText, user, emails, authenticatedUser }) {
-  const [duplicateEmailStatusText, setDuplicateEmailStatusText] = useState('');
+function UpdateTrainerForm({ topMessage, user, emails, authenticatedUser }) {
+  const [duplicateEmailMsg, setDuplicateEmailMsg] = useState('');
   const submit = useSubmit();
   const {
     register,
@@ -278,9 +266,9 @@ function UpdateTrainerForm({ topStatusText, user, emails, authenticatedUser }) {
   return (
     <form
       onSubmit={handleSubmit(data => {
-        setDuplicateEmailStatusText('');
+        setDuplicateEmailMsg('');
         if (data.email !== user.email && emails.find(e => e.email === data.email)) {
-          setDuplicateEmailStatusText('Email has already been used');
+          setDuplicateEmailMsg('Email has already been used');
           return;
         }
         const sanitizedData = convertEmptyStrToNull(data);
@@ -289,7 +277,7 @@ function UpdateTrainerForm({ topStatusText, user, emails, authenticatedUser }) {
       noValidate
       className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'
     >
-      <FCRHFSm label='Email' register={register('email')} issue={duplicateEmailStatusText || errors.email?.message} />
+      <FCRHFSm label='Email' register={register('email')} issue={duplicateEmailMsg || errors.email?.message} />
       <FCRHFSmPass label='Password' register={register('password')} issue={errors.password?.message} />
       <FCRHFSm label='Username' register={register('username')} issue={errors.username?.message} />
       <FCRHFSm label='First Name' register={register('firstName')} issue={errors.firstName?.message} />
@@ -304,12 +292,12 @@ function UpdateTrainerForm({ topStatusText, user, emails, authenticatedUser }) {
       <button type='submit' className='btn btn-primary btn-sm mt-4'>
         Save
       </button>
-      <p className='text-success self-center mt-4'>{topStatusText}</p>
+      <p className='text-success self-center mt-4'>{topMessage}</p>
     </form>
   );
 }
 
-function UpdateTrainerAddrForm({ botStatusText, user, authenticatedUser }) {
+function UpdateTrainerAddrForm({ botMessage, user, authenticatedUser }) {
   const submit = useSubmit();
   const {
     register,
@@ -360,13 +348,13 @@ function UpdateTrainerAddrForm({ botStatusText, user, authenticatedUser }) {
       <button type='submit' className='btn btn-primary btn-sm mt-5'>
         Save
       </button>
-      <p className='text-success self-center mt-4'>{botStatusText}</p>
+      <p className='text-success self-center mt-4'>{botMessage}</p>
     </form>
   );
 }
 
-function UpdateMemberForm({ topStatusText, user, emails, authenticatedUser }) {
-  const [duplicateEmailStatusText, setDuplicateEmailStatusText] = useState('');
+function UpdateMemberForm({ topMessage, user, emails, authenticatedUser }) {
+  const [duplicateEmailMsg, setDuplicateEmailMsg] = useState('');
   const submit = useSubmit();
   const {
     register,
@@ -389,9 +377,9 @@ function UpdateMemberForm({ topStatusText, user, emails, authenticatedUser }) {
   return (
     <form
       onSubmit={handleSubmit(data => {
-        setDuplicateEmailStatusText('');
+        setDuplicateEmailMsg('');
         if (data.email !== user.email && emails.find(e => e.email === data.email)) {
-          setDuplicateEmailStatusText('Email has already been used');
+          setDuplicateEmailMsg('Email has already been used');
           return;
         }
         const sanitizedData = convertEmptyStrToNull(data);
@@ -400,7 +388,7 @@ function UpdateMemberForm({ topStatusText, user, emails, authenticatedUser }) {
       noValidate
       className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'
     >
-      <FCRHFSm label='Email' register={register('email')} issue={duplicateEmailStatusText || errors.email?.message} />
+      <FCRHFSm label='Email' register={register('email')} issue={duplicateEmailMsg || errors.email?.message} />
       <FCRHFSmPass label='Password' register={register('password')} issue={errors.password?.message} />
       <FCRHFSm label='Username' register={register('username')} issue={errors.username?.message} />
       <FCRHFSm label='First Name' register={register('firstName')} issue={errors.firstName?.message} />
@@ -420,12 +408,12 @@ function UpdateMemberForm({ topStatusText, user, emails, authenticatedUser }) {
       <button type='submit' className='btn btn-primary btn-sm mt-4'>
         Save
       </button>
-      <p className='text-success self-center mt-4'>{topStatusText}</p>
+      <p className='text-success self-center mt-4'>{topMessage}</p>
     </form>
   );
 }
 
-function UpdateMemberAddrForm({ botStatusText, user, authenticatedUser }) {
+function UpdateMemberAddrForm({ botMessage, user, authenticatedUser }) {
   const submit = useSubmit();
   const {
     register,
@@ -476,7 +464,7 @@ function UpdateMemberAddrForm({ botStatusText, user, authenticatedUser }) {
       <button type='submit' className='btn btn-primary btn-sm mt-5'>
         Save
       </button>
-      <p className='text-success self-center mt-4'>{botStatusText}</p>
+      <p className='text-success self-center mt-4'>{botMessage}</p>
     </form>
   );
 }

@@ -102,14 +102,14 @@ function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [issues, setIssues] = useState({});
-  const [statusText, setStatusText] = useState('Login');
+  const [message, setMessage] = useState('Login');
   const [inputType, setInputType] = useState('password');
   const [icon, setIcon] = useState(faEyeSlash);
   const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
-    setStatusText('Logging in...');
+    setMessage('Logging in...');
 
     const messages = {};
     if (!emailSchema.safeParse(email).success) {
@@ -120,7 +120,7 @@ function LoginForm() {
     }
     if (Object.keys(messages).length) {
       setIssues(messages);
-      setStatusText('Login');
+      setMessage('Login');
       return;
     }
 
@@ -187,7 +187,7 @@ function LoginForm() {
         </label>
       </div>
       <div className='pt-4'>
-        <Btn2 w='w-full'>{statusText}</Btn2>
+        <Btn2 w='w-full'>{message}</Btn2>
       </div>
     </form>
   );
