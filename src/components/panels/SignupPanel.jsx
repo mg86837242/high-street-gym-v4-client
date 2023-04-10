@@ -1,8 +1,8 @@
 import { Link, Form, useActionData, useNavigation } from 'react-router-dom';
-import InputGrpEmail from '../FormControl/InputGrpEmail';
-import InputGrpPass from '../FormControl/InputGrpPass';
-import InputGrp from '../FormControl/InputGrp';
-import SelectGrpGender from '../FormControl/SelectGrpGender';
+import InputGrpEmail from '../formCtrl/InputGrpEmail';
+import InputGrpPass from '../formCtrl/InputGrpPass';
+import InputGrp from '../formCtrl/InputGrp';
+import SelectGrpGender from '../formCtrl/SelectGrpGender';
 import { Btn2 } from '../UI/Btn2';
 
 export default function SignupPanel({ emails }) {

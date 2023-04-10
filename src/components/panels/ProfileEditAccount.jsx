@@ -11,11 +11,10 @@ import {
   addressTrainerSchema,
   addressMemberSchema,
 } from '../../schemas';
-import FCRHFSm from '../FormControlRHF/FCRHFSm';
-import FCRHFSmPass from '../FormControlRHF/FCRHFSmPass';
-import SpinnerNoNav from '../UI/SpinnerNoNav';
-import { convertEmptyStrToNull, convertNullToEmptyStr } from '../../helpers/sanitize';
 import { default as countries } from '../../data/countries.json';
+import { convertEmptyStrToNull, convertNullToEmptyStr } from '../../helpers/sanitize';
+import { FCRHFSm, FCRHFSmPass } from '../formCtrlRHF';
+import SpinnerNoNav from '../UI/SpinnerNoNav';
 
 export default function ProfileEditAccount() {
   const { authenticatedUser } = useContext(AuthContext);

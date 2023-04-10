@@ -1,6 +1,6 @@
 import { createBrowserRouter, Link } from 'react-router-dom';
 import ErrorInfoBack from '../components/UI/ErrorInfoBack';
-import RequireAuth from '../components/Layout/RequireAuth';
+import RequireAuth from '../components/layouts/RequireAuth';
 import Home from '../pages/Home';
 import PageLayout from '../pages/PageLayout';
 import Login from '../pages/Login';

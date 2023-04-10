@@ -1,4 +1,4 @@
-import MainWrapper from '../components/Layout/MainWrapper';
+import MainWrapper from '../components/layouts/MainWrapper';
 import Breadcrumbs from '../components/UI/Breadcrumbs';
 import Content from '../components/Bookings/Content';
 

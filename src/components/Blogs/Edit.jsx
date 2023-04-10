@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { blogSchema } from '../../schemas';
 import { Btn2SmOutline } from '../UI/Btn2';
 import { Btn1SmOutline } from '../UI/Btn1';
-import FCRHFSm from '../FormControlRHF/FCRHFSm';
+import { FCRHFSm } from '../formCtrlRHF';
 import {
   BoldIcon,
   ItalicIcon,
