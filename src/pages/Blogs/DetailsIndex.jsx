@@ -1,7 +1,7 @@
 import { useOutletContext, Form } from 'react-router-dom';
 import { EditorContent } from '@tiptap/react';
-import { Btn2SmOutline } from '../ui/Btn2';
-import { Btn1SmOutline } from '../ui/Btn1';
+import { Btn2SmOutline } from '../../components/ui/Btn2';
+import { Btn1SmOutline } from '../../components/ui/Btn1';
 
 export default function DetailsIndex() {
   const { setEditable, editor } = useOutletContext();

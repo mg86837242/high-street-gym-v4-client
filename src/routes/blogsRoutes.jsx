@@ -50,6 +50,14 @@ const blogsRoutes = [
           return updateBlogById({ params, request });
         },
       },
+      {
+        path: 'destroy',
+        ErrorBoundary: ErrorInfoBack,
+        async action({ params }) {
+          let { deleteBlogById } = await import('../api/blogs');
+          return deleteBlogById({ params });
+        },
+      },
     ],
   },
   {
@@ -65,14 +73,6 @@ const blogsRoutes = [
         handle: { crumb: () => <Link to='/blogs/new'>New Blog</Link> },
       },
     ],
-  },
-  {
-    path: ':id/destroy',
-    ErrorBoundary: ErrorInfoBack,
-    async action({ params }) {
-      let { deleteBlogById } = await import('../api/blogs');
-      return deleteBlogById({ params });
-    },
   },
 ];
 

@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import NavBarMinimal from '../Layout/NavBarMinimal';
+import NavBarMinimal from '../layouts/NavBarMinimal';
 import { Btn2 } from './Btn2';
 
 export default function NotFound() {

@@ -4,9 +4,9 @@ import { EditorContent } from '@tiptap/react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { blogSchema } from '../../schemas';
-import { Btn2SmOutline } from '../ui/Btn2';
-import { Btn1SmOutline } from '../ui/Btn1';
-import FCRHFSm from '../formCtrlRHF/FCRHFSm';
+import { Btn2SmOutline } from '../../components/ui/Btn2';
+import { Btn1SmOutline } from '../../components/ui/Btn1';
+import FCRHFSm from '../../components/formCtrlRHF/FCRHFSm';
 import {
   BoldIcon,
   ItalicIcon,

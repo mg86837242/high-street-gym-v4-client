@@ -1,6 +1,6 @@
 import MainWrapper from '../../components/layouts/MainWrapper';
 import Breadcrumbs from '../../components/ui/Breadcrumbs';
-import Content from '../components/Bookings/Content';
+import Content from './Content';
 
 export default function Bookings() {
   return (

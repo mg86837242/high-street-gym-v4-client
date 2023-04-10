@@ -1,5 +1,4 @@
-const defaultBlogBody = `
-<h2>
+const defaultBlogBody = `<h2>
   Hi there,
 </h2>
 <p>
@@ -24,7 +23,6 @@ const defaultBlogBody = `
 </p>
 <blockquote>
   Wow, that’s amazing. Good work, boy!
-</blockquote>
-`;
+</blockquote>`;
 
 export default defaultBlogBody;
