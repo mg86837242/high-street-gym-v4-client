@@ -86,16 +86,27 @@
     z-index: 0;
   }
 
+  .file-input {
+    border: 1px solid hsl(var(--ac));
+  }
+
   .file-input::file-selector-button {
     text-transform: none;
-    --tw-border-opacity: 0.2;
     background-color: transparent;
-    color: hsl(var(--p) / var(--tw-bg-opacity));
+    color: hsl(var(--ac) / var(--tw-text-opacity));
+    border-top: 0;
+    border-bottom: 0;
+    border-left: 0;
+    border-right: 1px solid hsl(var(--bc) / var(--tw-border-opacity));
   }
 
   .file-input::file-selector-button:hover {
-    background-color: hsl(var(--p) / var(--tw-bg-opacity));
-    color: hsl(var(--pc) / var(--tw-text-opacity));
+    background-color: hsl(var(--bc, var(--n)) / var(--tw-bg-opacity));
+    color: hsl(var(--b1) / var(--tw-text-opacity));
+    border-top: 0;
+    border-bottom: 0;
+    border-left: 0;
+    border-right: 1px solid hsl(var(--bc) / var(--tw-border-opacity));
   }
 }
 

@@ -40,6 +40,14 @@ const adminRoutes = [
         },
       },
       {
+        path: 'new-by-xml',
+        ErrorBoundary: ErrorInfoBack,
+        async action() {
+          let { createActivity } = await import('../api/activities');
+          return createActivity();
+        },
+      },
+      {
         path: ':id/edit',
         async lazy() {
           let { EditActivity } = await import('../pages/Admin/MngActivities');

@@ -97,7 +97,9 @@ export function NewActivity() {
   return (
     <>
       <div className='flex flex-col items-start justify-start gap-5 py-6 lg:flex-row lg:justify-between'>
-        <input type='file' className='w-full max-w-xs file-input file-input-primary file-input-sm' />
+        <Form method='post' action='new-by-xml'>
+          <input type='file' className='w-full max-w-xs file-input file-input-bordered file-input-sm' />
+        </Form>
         <Form method='post' action='new'>
           <button type='submit' className='btn btn-outline btn-primary btn-sm'>
             Create New
