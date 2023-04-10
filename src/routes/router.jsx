@@ -1,8 +1,8 @@
 import { createBrowserRouter, Link } from 'react-router-dom';
 import ErrorInfoBack from '../components/ui/ErrorInfoBack';
+import PageLayout from '../components/layouts/PageLayout';
 import RequireAuth from '../components/layouts/RequireAuth';
 import Home from '../pages/Home';
-import PageLayout from '../pages/PageLayout';
 import Login from '../pages/Login';
 import blogsRoutes from './blogsRoutes';
 import bookingsRoutes from './bookingsRoutes';

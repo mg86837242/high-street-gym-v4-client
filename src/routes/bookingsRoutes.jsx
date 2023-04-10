@@ -6,14 +6,14 @@ const bookingsRoutes = [
   {
     index: true,
     async lazy() {
-      let { default: ListIndex } = await import('../components/Bookings/ListIndex');
+      let { default: ListIndex } = await import('../pages/Bookings/ListIndex');
       return { Component: ListIndex };
     },
   },
   {
     path: ':date',
     async lazy() {
-      let { default: List } = await import('../components/Bookings/List');
+      let { default: List } = await import('../pages/Bookings/List');
       return { Component: List };
     },
     ErrorBoundary: ErrorInfoBack,
@@ -41,14 +41,14 @@ const bookingsRoutes = [
       {
         index: true,
         async lazy() {
-          let { default: DetailsIndex } = await import('../components/Bookings/DetailsIndex');
+          let { default: DetailsIndex } = await import('../pages/Bookings/DetailsIndex');
           return { Component: DetailsIndex };
         },
       },
       {
         path: ':id',
         async lazy() {
-          let { default: Details } = await import('../components/Bookings/Details');
+          let { default: Details } = await import('../pages/Bookings/Details');
           return { Component: Details };
         },
         ErrorBoundary: ErrorInfoBack,
@@ -68,7 +68,7 @@ const bookingsRoutes = [
       {
         path: ':id/edit',
         async lazy() {
-          let { default: Edit } = await import('../components/Bookings/Edit');
+          let { default: Edit } = await import('../pages/Bookings/Edit');
           return { Component: Edit };
         },
         ErrorBoundary: ErrorInfoBack,
@@ -105,7 +105,7 @@ const bookingsRoutes = [
       {
         path: 'new',
         async lazy() {
-          let { default: New } = await import('../components/Bookings/New');
+          let { default: New } = await import('../pages/Bookings/New');
           return { Component: New };
         },
         ErrorBoundary: ErrorInfoBack,

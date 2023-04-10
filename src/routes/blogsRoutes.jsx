@@ -6,7 +6,7 @@ const blogsRoutes = [
   {
     index: true,
     async lazy() {
-      let { default: List } = await import('../components/Blogs/List');
+      let { default: List } = await import('../pages/Blogs/List');
       return { Component: List };
     },
     ErrorBoundary: ErrorInfoBack,
@@ -18,7 +18,7 @@ const blogsRoutes = [
   {
     path: ':id',
     async lazy() {
-      let { default: Details } = await import('../components/Blogs/Details');
+      let { default: Details } = await import('../pages/Blogs/Details');
       return { Component: Details };
     },
     ErrorBoundary: ErrorInfoBack,
@@ -33,7 +33,7 @@ const blogsRoutes = [
       {
         index: true,
         async lazy() {
-          let { default: DetailsIndex } = await import('../components/Blogs/DetailsIndex');
+          let { default: DetailsIndex } = await import('../pages/Blogs/DetailsIndex');
           return { Component: DetailsIndex };
         },
         ErrorBoundary: ErrorInfoBack,
@@ -41,7 +41,7 @@ const blogsRoutes = [
       {
         path: 'edit',
         async lazy() {
-          let { default: Edit } = await import('../components/Blogs/Edit');
+          let { default: Edit } = await import('../pages/Blogs/Edit');
           return { Component: Edit };
         },
         ErrorBoundary: ErrorInfoBack,
