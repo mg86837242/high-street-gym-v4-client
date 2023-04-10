@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { blogSchema } from '../../schemas';
 import { convertEmptyStrToNull } from '../../helpers/sanitize';
-import { FCRHFSm, FCRHFSmTextarea } from '../formCtrlRHF';
+import { FCRHFSm, FCRHFSmBlogBody } from '../formCtrlRHF';
 
 export function AdminMngBlogs() {
   const { blogs } = useLoaderData();
@@ -124,14 +124,14 @@ export function AdminEditBlog() {
           isRequired={false}
         />
         <FCRHFSm label='Author Role' register={register('role')} issue={errors.role?.message} isRequired={false} />
-        <FCRHFSmTextarea label='Blog Post Body' issue={errors.body?.message}>
+        <FCRHFSmBlogBody label='Blog Post Body' issue={errors.body?.message}>
           <textarea
             {...register('body')}
             rows={10}
             placeholder='Enter blog post body here ...'
             className='textarea textarea-bordered'
           />
-        </FCRHFSmTextarea>
+        </FCRHFSmBlogBody>
         <input type='hidden' {...register('loginId', { valueAsNumber: true })} />
         <div className='flex justify-end w-full col-span-2 gap-10 py-6 xl:col-span-3'>
           <button type='submit' className='w-20 btn btn-outline btn-primary btn-sm'>

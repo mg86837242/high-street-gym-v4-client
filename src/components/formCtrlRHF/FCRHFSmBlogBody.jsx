@@ -1,4 +1,4 @@
-export default function FCRHFSmTextarea({ children, label, issue, isRequired }) {
+export default function FCRHFSmBlogBody({ children, label, issue, isRequired }) {
   return (
     <div className='w-full form-control col-span-2 xl:col-span-3'>
       <label className='py-1 3xl:py-2 label'>

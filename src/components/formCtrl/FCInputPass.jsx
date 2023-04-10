@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
 
-export default function InputGrpSmPass({ issue, initialValue }) {
+export default function FCInputPass({ issue, initialValue }) {
   const [type, setType] = useState('password');
   const [icon, setIcon] = useState(faEyeSlash);
 
@@ -24,9 +24,9 @@ export default function InputGrpSmPass({ issue, initialValue }) {
         type={type}
         placeholder='Enter your password here'
         defaultValue={initialValue}
-        className='text-accent input input-primary input-sm'
+        className='w-full h-10 text-accent input input-primary 3xl:h-12'
       />
-      <button type='button' onClick={handleToggle} className='absolute right-0 mr-3 cursor-pointer mt-8 3xl:mt-10'>
+      <button type='button' onClick={handleToggle} className='absolute right-0 mr-3 cursor-pointer mt-9 3xl:mt-12'>
         <FontAwesomeIcon icon={icon} className='w-4 h-4' />
       </button>
       <label htmlFor='password' className='py-1 label'>

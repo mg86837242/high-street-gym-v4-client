@@ -1,8 +1,5 @@
 import { Link, Form, useActionData, useNavigation } from 'react-router-dom';
-import InputGrpEmail from '../formCtrl/InputGrpEmail';
-import InputGrpPass from '../formCtrl/InputGrpPass';
-import InputGrp from '../formCtrl/InputGrp';
-import SelectGrpGender from '../formCtrl/SelectGrpGender';
+import { FCInput, FCInputEmail, FCInputPass, FCSelectGender } from '../formCtrl';
 import { Btn2 } from '../UI/Btn2';
 
 export default function SignupPanel({ emails }) {
@@ -41,14 +38,14 @@ function SignupForm({ emails }) {
 
   return (
     <Form method='post' noValidate className='grid w-full grid-cols-1 md:grid-cols-2 gap-x-5'>
-      <InputGrpEmail issue={issues?.email} initialValue='demomember@gmail.com' emails={emails} />
-      <InputGrpPass issue={issues?.password} initialValue='abcd1234' />
-      <InputGrp name='username' type='text' issue={issues?.username} initialValue='demomember' />
-      <InputGrp name='firstName' type='text' issue={issues?.firstName} initialValue='Demo' />
-      <InputGrp name='lastName' type='text' issue={issues?.lastName} initialValue='Member' />
-      <InputGrp name='phone' type='tel' issue={issues?.phone} initialValue='0123456789' />
-      <InputGrp name='age' type='text' issue={issues?.age} isRequired={false} />
-      <SelectGrpGender issue={issues?.gender} isRequired={false} />
+      <FCInputEmail issue={issues?.email} initialValue='demomember@gmail.com' emails={emails} />
+      <FCInputPass issue={issues?.password} initialValue='abcd1234' />
+      <FCInput name='username' type='text' issue={issues?.username} initialValue='demomember' />
+      <FCInput name='firstName' type='text' issue={issues?.firstName} initialValue='Demo' />
+      <FCInput name='lastName' type='text' issue={issues?.lastName} initialValue='Member' />
+      <FCInput name='phone' type='tel' issue={issues?.phone} initialValue='0123456789' />
+      <FCInput name='age' type='text' issue={issues?.age} isRequired={false} />
+      <FCSelectGender issue={issues?.gender} isRequired={false} />
       <div className='col-span-1 pt-4 md:col-span-2'>
         <Btn2 w='w-full'>{message}</Btn2>
       </div>
