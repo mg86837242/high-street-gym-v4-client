@@ -11,10 +11,11 @@ import {
   addressTrainerSchema,
   addressMemberSchema,
 } from '../../schemas';
-import SpinnerNoNav from '../UI/SpinnerNoNav';
 import FCRHFSm from '../FormControlRHF/FCRHFSm';
 import FCRHFSmPass from '../FormControlRHF/FCRHFSmPass';
+import SpinnerNoNav from '../UI/SpinnerNoNav';
 import { convertEmptyStrToNull, convertNullToEmptyStr } from '../../helpers/sanitize';
+import { default as countries } from '../../data/countries.json';
 
 export default function ProfileEditAccount() {
   const { authenticatedUser } = useContext(AuthContext);
@@ -231,7 +232,18 @@ function UpdateAdminAddrForm({ botStatusText, user, authenticatedUser }) {
       <FCRHFSm label='Suburb' register={register('suburb')} issue={errors.suburb?.message} />
       <FCRHFSm label='Postcode' register={register('postcode')} issue={errors.postcode?.message} />
       <FCRHFSm label='State' register={register('state')} issue={errors.state?.message} />
-      <FCRHFSm label='Country' register={register('country')} issue={errors.country?.message} />
+      <FCRHFSm label='Country' issue={errors.country?.message}>
+        <select {...register('country')} className='font-normal select select-bordered select-sm'>
+          <option value='' disabled>
+            -- Choose Country --
+          </option>
+          {countries.map((c, i) => (
+            <option value={c.name} key={i}>
+              {c.name}
+            </option>
+          ))}
+        </select>
+      </FCRHFSm>
       <input type='hidden' {...register('adminId', { valueAsNumber: true })} />
       <input type='hidden' {...register('_action')} />
       <button type='submit' className='btn btn-primary btn-sm mt-5'>
@@ -331,7 +343,18 @@ function UpdateTrainerAddrForm({ botStatusText, user, authenticatedUser }) {
       <FCRHFSm label='Suburb' register={register('suburb')} issue={errors.suburb?.message} />
       <FCRHFSm label='Postcode' register={register('postcode')} issue={errors.postcode?.message} />
       <FCRHFSm label='State' register={register('state')} issue={errors.state?.message} />
-      <FCRHFSm label='Country' register={register('country')} issue={errors.country?.message} />
+      <FCRHFSm label='Country' issue={errors.country?.message}>
+        <select {...register('country')} className='font-normal select select-bordered select-sm'>
+          <option value='' disabled>
+            -- Choose Country --
+          </option>
+          {countries.map((c, i) => (
+            <option value={c.name} key={i}>
+              {c.name}
+            </option>
+          ))}
+        </select>
+      </FCRHFSm>
       <input type='hidden' {...register('trainerId', { valueAsNumber: true })} />
       <input type='hidden' {...register('_action')} />
       <button type='submit' className='btn btn-primary btn-sm mt-5'>
@@ -401,7 +424,7 @@ function UpdateMemberForm({ topStatusText, user, emails, authenticatedUser }) {
     </form>
   );
 }
-// FIX Country select
+
 function UpdateMemberAddrForm({ botStatusText, user, authenticatedUser }) {
   const submit = useSubmit();
   const {
@@ -436,7 +459,18 @@ function UpdateMemberAddrForm({ botStatusText, user, authenticatedUser }) {
       <FCRHFSm label='Suburb' register={register('suburb')} issue={errors.suburb?.message} />
       <FCRHFSm label='Postcode' register={register('postcode')} issue={errors.postcode?.message} />
       <FCRHFSm label='State' register={register('state')} issue={errors.state?.message} />
-      <FCRHFSm label='Country' register={register('country')} issue={errors.country?.message} />
+      <FCRHFSm label='Country' issue={errors.country?.message}>
+        <select {...register('country')} className='font-normal select select-bordered select-sm'>
+          <option value='' disabled>
+            -- Choose Country --
+          </option>
+          {countries.map((c, i) => (
+            <option value={c.name} key={i}>
+              {c.name}
+            </option>
+          ))}
+        </select>
+      </FCRHFSm>
       <input type='hidden' {...register('memberId', { valueAsNumber: true })} />
       <input type='hidden' {...register('_action')} />
       <button type='submit' className='btn btn-primary btn-sm mt-5'>

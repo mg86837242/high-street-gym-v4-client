@@ -1,8 +1,6 @@
-import * as data from '../../data/countries.json';
+import { default as countries } from '../../data/countries.json';
 
 export default function SelectGrpSmCountry({ issue, initialValue, isRequired }) {
-  const countries = data.default;
-
   return (
     <div id='country-select-group' className='w-full form-control'>
       <label htmlFor='country' className='py-1 3xl:py-2 label'>
