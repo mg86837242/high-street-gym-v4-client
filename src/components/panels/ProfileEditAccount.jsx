@@ -14,7 +14,7 @@ import {
 import { default as countries } from '../../data/countries.json';
 import { convertEmptyStrToNull, convertNullToEmptyStr } from '../../helpers/sanitize';
 import { FCRHFSm, FCRHFSmPass } from '../formCtrlRHF';
-import SpinnerNoNav from '../UI/SpinnerNoNav';
+import SpinnerNoNav from '../ui/SpinnerNoNav';
 
 export default function ProfileEditAccount() {
   const { authenticatedUser } = useContext(AuthContext);

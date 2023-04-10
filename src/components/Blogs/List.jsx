@@ -3,8 +3,8 @@ import AuthContext from '../../context/AuthContext';
 import { useLoaderData, Link, Form } from 'react-router-dom';
 import removeTags from '../../helpers/removeTags';
 import { getDateNotation } from '../../helpers/mapDates';
-import { Btn2SmOutline } from '../UI/Btn2';
-import { LinkBtn2SmOutline } from '../UI/LinkBtn2';
+import { Btn2SmOutline } from '../ui/Btn2';
+import { LinkBtn2SmOutline } from '../ui/LinkBtn2';
 
 export default function List() {
   const { authenticatedUser } = useContext(AuthContext);

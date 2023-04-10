@@ -1,6 +1,6 @@
 import { Link, Form, useActionData, useNavigation } from 'react-router-dom';
 import { FCInput, FCInputEmail, FCInputPass, FCSelectGender } from '../formCtrl';
-import { Btn2 } from '../UI/Btn2';
+import { Btn2 } from '../ui/Btn2';
 
 export default function SignupPanel({ emails }) {
   return (

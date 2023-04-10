@@ -1,5 +1,5 @@
 import { createBrowserRouter, Link } from 'react-router-dom';
-import ErrorInfoBack from '../components/UI/ErrorInfoBack';
+import ErrorInfoBack from '../components/ui/ErrorInfoBack';
 import RequireAuth from '../components/layouts/RequireAuth';
 import Home from '../pages/Home';
 import PageLayout from '../pages/PageLayout';
@@ -92,7 +92,7 @@ const router = createBrowserRouter([
   {
     path: '*',
     async lazy() {
-      let { default: NotFound } = await import('../components/UI/NotFound');
+      let { default: NotFound } = await import('../components/ui/NotFound');
       return { Component: NotFound };
     },
   },

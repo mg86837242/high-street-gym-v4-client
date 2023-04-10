@@ -1,5 +1,5 @@
 import MainWrapper from '../components/layouts/MainWrapper';
-import Breadcrumbs from '../components/UI/Breadcrumbs';
+import Breadcrumbs from '../components/ui/Breadcrumbs';
 import Content from '../components/Bookings/Content';
 
 export default function Bookings() {

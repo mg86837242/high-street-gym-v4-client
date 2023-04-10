@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import ErrorInfoBack from '../components/UI/ErrorInfoBack';
+import ErrorInfoBack from '../components/ui/ErrorInfoBack';
 import RequireAuth from '../components/layouts/RequireAuth';
 
 const blogsRoutes = [
