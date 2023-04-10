@@ -21,6 +21,14 @@ export async function createActivity() {
   return redirect(`../${json.insertId}/edit`);
 }
 
+export async function createActivityXML({ request }) {
+  const formData = await request.formData();
+  const xml = formData.get('xml');
+  // const json = await fetchJSON(`${API_URL}/activities/upload/xml`, 'post', xml);
+  // TODO Cleanup fetch() helpers, and write a customized fetch for this action
+  return redirect(`..`) || redirect(`../${json.insertId}/edit`);
+}
+
 export async function updateActivityById({ params, request }) {
   const updates = await getSubmittedData(request);
   await fetchRes(`${API_URL}/activities/${params.id}`, 'patch', updates);

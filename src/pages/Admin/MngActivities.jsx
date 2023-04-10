@@ -98,12 +98,12 @@ export function NewActivity() {
     <>
       <div className='flex flex-col-reverse items-end gap-5 py-6 lg:flex-row lg:justify-between lg:items-center'>
         <Form method='post' action='new-xml' className='flex items-center gap-5'>
-          <label htmlFor='create-activity-xml' className='flex-shrink-0'>
+          <label htmlFor='create-activity-upload-xml' className='flex-shrink-0'>
             <span className='flex-shrink-0'>Import New Activity by XML: </span>
           </label>
           <input
             name='xml'
-            id='create-activity-xml'
+            id='create-activity-upload-xml'
             type='file'
             accept='.xml'
             onChange={e => setFile(e.target.files[0])}

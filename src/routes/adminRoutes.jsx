@@ -44,9 +44,8 @@ const adminRoutes = [
         path: 'new-xml',
         ErrorBoundary: ErrorInfoBack,
         async action({ request }) {
-          const formData = await request.formData();
-          console.log(formData.get('xml'));
-          return redirect(`..`);
+          let { createActivityXML } = await import('../api/activities');
+          return createActivityXML({ request });
         },
       },
       {
