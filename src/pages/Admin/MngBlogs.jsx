@@ -3,23 +3,23 @@ import AuthContext from '../../context/AuthContext.jsx';
 import { useLoaderData, Outlet, Form, useSubmit, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { blogSchema } from '../../schemas';
-import { convertEmptyStrToNull } from '../../helpers/sanitize';
-import FCRHFSm from '../../components/formCtrlRHF/FCRHFSm';
-import FCRHFSmBlogBody from '../../components/formCtrlRHF/FCRHFSmBlogBody';
+import { blogSchema } from '../../schemas/index.js';
+import { convertEmptyStrToNull } from '../../helpers/sanitize.js';
+import FCRHFSm from '../../components/formCtrlRHF/FCRHFSm.jsx';
+import FCRHFSmBlogBody from '../../components/formCtrlRHF/FCRHFSmBlogBody.jsx';
 
-export function AdminMngBlogs() {
+export function MngBlogs() {
   const { blogs } = useLoaderData();
 
   return (
     <div className='flex flex-col w-full gap-0 overflow-x-auto'>
-      <AdminListBlogs blogs={blogs} />
+      <ListBlogs blogs={blogs} />
       <Outlet />
     </div>
   );
 }
 
-function AdminListBlogs({ blogs }) {
+function ListBlogs({ blogs }) {
   return (
     <div className='py-6 overflow-x-auto'>
       <table className='table w-full table-compact'>
@@ -76,7 +76,7 @@ function AdminListBlogs({ blogs }) {
   );
 }
 
-export function AdminNewBlog() {
+export function NewBlog() {
   const { authenticatedUser } = useContext(AuthContext);
 
   return (
@@ -91,7 +91,7 @@ export function AdminNewBlog() {
   );
 }
 
-export function AdminEditBlog() {
+export function EditBlog() {
   const { blog } = useLoaderData();
   const submit = useSubmit();
   const navigate = useNavigate();

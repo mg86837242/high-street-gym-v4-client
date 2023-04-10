@@ -6,18 +6,18 @@ import { activitySchema } from '../../schemas';
 import { convertEmptyStrToNull } from '../../helpers/sanitize';
 import FCRHFSm from '../../components/formCtrlRHF/FCRHFSm';
 
-export function AdminMngActivities() {
+export function MngActivities() {
   const { activities } = useLoaderData();
 
   return (
     <div className='flex flex-col w-full gap-0 overflow-x-auto'>
-      <AdminListActivities activities={activities} />
+      <ListActivities activities={activities} />
       <Outlet />
     </div>
   );
 }
 
-function AdminListActivities({ activities }) {
+function ListActivities({ activities }) {
   return (
     <div className='py-6 overflow-x-auto'>
       <table className='table w-full table-compact'>
@@ -93,7 +93,7 @@ function AdminListActivities({ activities }) {
   );
 }
 
-export function AdminNewActivity() {
+export function NewActivity() {
   return (
     <div className='flex justify-end py-6'>
       <Form method='post' action='new'>
@@ -105,7 +105,7 @@ export function AdminNewActivity() {
   );
 }
 
-export function AdminEditActivity() {
+export function EditActivity() {
   const { activity } = useLoaderData();
   const submit = useSubmit();
   const navigate = useNavigate();

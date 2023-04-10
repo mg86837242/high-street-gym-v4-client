@@ -17,7 +17,7 @@ import FCRHFSm from '../../components/formCtrlRHF/FCRHFSm';
 import FCRHFSmPass from '../../components/formCtrlRHF/FCRHFSmPass';
 import SpinnerNoNav from '../../components/ui/SpinnerNoNav';
 
-export default function ProfileEditAccount() {
+export default function EditAccount() {
   const { authenticatedUser } = useContext(AuthContext);
   const [topMsg, setTopMsg] = useState('');
   const [botMsg, setBotMsg] = useState('');
