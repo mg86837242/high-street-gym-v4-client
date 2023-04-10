@@ -1,4 +1,4 @@
-import { useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useLoaderData, Outlet, Form, useSubmit, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -92,6 +92,8 @@ function ListActivities({ activities }) {
 }
 
 export function NewActivity() {
+  const [file, setFile] = useState(null);
+
   return (
     <>
       <div className='flex flex-col-reverse items-end gap-5 py-6 lg:flex-row lg:justify-between lg:items-center'>
@@ -104,6 +106,7 @@ export function NewActivity() {
             id='create-activity-xml'
             type='file'
             accept='.xml'
+            onChange={e => setFile(e.target.files[0])}
             className='w-full max-w-xs shadow file-input file-input-bordered file-input-sm shadow-black/50'
           />
           <Btn2SmOutline>Submit</Btn2SmOutline>
@@ -217,4 +220,4 @@ export function EditActivity() {
 
 // References:
 // -- https://codesandbox.io/s/react-file-upload-lj1zn?from-embed: React file upload exemplar (src: "file upload react
-//  codesandbox")
+//  codesandbox"), esp. for controlled <input type='file'>
