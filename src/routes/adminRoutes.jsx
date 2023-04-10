@@ -1,6 +1,7 @@
 import ErrorInfoRefresh from '../components/ui/ErrorInfoRefresh';
 import ErrorInfoBack from '../components/ui/ErrorInfoBack';
 import RequireAuth from '../components/layouts/RequireAuth';
+import { redirect } from 'react-router-dom';
 
 const adminRoutes = [
   {
@@ -40,11 +41,12 @@ const adminRoutes = [
         },
       },
       {
-        path: 'new-by-xml',
+        path: 'new-xml',
         ErrorBoundary: ErrorInfoBack,
-        async action() {
-          let { createActivity } = await import('../api/activities');
-          return createActivity();
+        async action({ request }) {
+          const formData = await request.formData();
+          console.log(formData.get('xml'));
+          return redirect(`..`);
         },
       },
       {

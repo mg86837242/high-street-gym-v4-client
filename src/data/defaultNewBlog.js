@@ -1,4 +1,6 @@
-const defaultBlogBody = `<h2>
+const defaultNewBlog = {
+  title: 'New Blog',
+  body: `<h2>
   Hi there,
 </h2>
 <p>
@@ -23,6 +25,7 @@ const defaultBlogBody = `<h2>
 </p>
 <blockquote>
   Wow, that’s amazing. Good work, boy!
-</blockquote>`;
+</blockquote>`,
+};
 
-export default defaultBlogBody;
+export default defaultNewBlog;

@@ -3,6 +3,7 @@ import { API_URL } from '../data/constants';
 import fetchJSON from '../helpers/fetchJSON';
 import fetchRes from '../helpers/fetchRes';
 import getSubmittedData from '../helpers/getSubmittedData';
+import defaultNewActivity from '../data/defaultNewActivity';
 
 export async function getAllActivities() {
   const response = await fetchRes(`${API_URL}/activities`);
@@ -15,17 +16,7 @@ export async function getActivityById({ params }) {
 }
 
 export async function createActivity() {
-  const creations = {
-    name: 'New Activity',
-    category: null,
-    description: null,
-    intensityLevel: null,
-    maxPeopleAllowed: null,
-    requirementOne: null,
-    requirementTwo: null,
-    durationMinutes: 45,
-    price: null,
-  };
+  const creations = defaultNewActivity;
   const json = await fetchJSON(`${API_URL}/activities`, 'post', creations);
   return redirect(`../${json.insertId}/edit`);
 }

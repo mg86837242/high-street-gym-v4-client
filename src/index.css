@@ -87,13 +87,13 @@
   }
 
   .file-input {
-    border: 1px solid hsl(var(--ac));
+    border: 1px solid hsl(var(--bc));
   }
 
   .file-input::file-selector-button {
     text-transform: none;
     background-color: transparent;
-    color: hsl(var(--ac) / var(--tw-text-opacity));
+    color: hsl(var(--bc) / var(--tw-text-opacity));
     border-top: 0;
     border-bottom: 0;
     border-left: 0;

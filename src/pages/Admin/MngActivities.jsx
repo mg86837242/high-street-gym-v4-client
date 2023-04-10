@@ -94,18 +94,24 @@ function ListActivities({ activities }) {
 export function NewActivity() {
   return (
     <>
-      <div className='flex flex-col items-start justify-start gap-5 py-6 lg:flex-row lg:justify-between'>
-        <Form method='post' action='new-by-xml'>
+      <div className='flex flex-col-reverse items-end gap-5 py-6 lg:flex-row lg:justify-between lg:items-center'>
+        <Form method='post' action='new-xml' className='flex items-center gap-5'>
+          <label htmlFor='create-activity-xml' className='flex-shrink-0'>
+            <span className='flex-shrink-0'>Import New Activity by XML: </span>
+          </label>
           <input
+            name='xml'
+            id='create-activity-xml'
             type='file'
+            accept='.xml'
             className='w-full max-w-xs shadow file-input file-input-bordered file-input-sm shadow-black/50'
           />
+          <Btn2SmOutline>Submit</Btn2SmOutline>
         </Form>
         <Form method='post' action='new'>
           <Btn2SmOutline>Create New</Btn2SmOutline>
         </Form>
       </div>
-      <div className='flex justify-end gap-10 py-6'></div>
     </>
   );
 }
@@ -208,3 +214,7 @@ export function EditActivity() {
     </div>
   );
 }
+
+// References:
+// -- https://codesandbox.io/s/react-file-upload-lj1zn?from-embed: React file upload exemplar (src: "file upload react
+//  codesandbox")

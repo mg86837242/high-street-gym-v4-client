@@ -3,7 +3,7 @@ import { API_URL } from '../data/constants';
 import fetchJSON from '../helpers/fetchJSON';
 import fetchRes from '../helpers/fetchRes';
 import getSubmittedData from '../helpers/getSubmittedData';
-import defaultBlogBody from '../data/defaultBlogBody';
+import defaultNewBlog from '../data/defaultNewBlog';
 
 export async function getAllBlogs() {
   const response = await fetchRes(`${API_URL}/blogs`);
@@ -17,12 +17,7 @@ export async function getBlogById({ params }) {
 
 export async function createBlog({ request }) {
   const formData = await request.formData();
-  const loginId = formData.get('loginId');
-  const creations = {
-    title: 'New Blog',
-    body: defaultBlogBody,
-    loginId: parseInt(loginId, 10),
-  };
+  const creations = { ...defaultNewBlog, loginId: parseInt(formData.get('loginId'), 10) };
   const json = await fetchJSON(`${API_URL}/blogs`, 'post', creations);
   return redirect(`../${json.insertId}/edit`);
 }

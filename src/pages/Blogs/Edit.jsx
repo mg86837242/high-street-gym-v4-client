@@ -442,3 +442,4 @@ function WordCount({ editor, issue, limit }) {
 // -- https://stackoverflow.com/questions/39463134: How to store emoji in MySQL db
 // -- https://react-hook-form.com/api/useform/#values: "The `values` props will react to changes and update the form
 //  values, which is useful when your form needs to be updated by external state or server data."
+// -- https://codesandbox.io/s/tiptap-0sqm3i: Tiptap toolbar/menubar exemplar
