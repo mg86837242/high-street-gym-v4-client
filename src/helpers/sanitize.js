@@ -1,6 +1,6 @@
 export function convertEmptyStrToNull(obj) {
   return Object.keys(obj).reduce((acc, cur) => {
-    if (obj[cur] === 'string') {
+    if (typeof obj[cur] === 'string') {
       const trimmed = obj[cur].trim();
       if (trimmed === '') {
         acc[cur] = null;
@@ -18,7 +18,7 @@ export function convertEmptyStrToNull(obj) {
 //  in the model won't identify a duplicate addr row, thus the type conversion of falsy `lineTwo` to empty string
 export function convertNullToEmptyStr(obj) {
   return Object.keys(obj).reduce((acc, cur) => {
-    if (obj[cur] === 'string') {
+    if (typeof obj[cur] === 'string') {
       const trimmed = obj[cur].trim();
       acc[cur] = trimmed;
     } else if (obj[cur] === null) {

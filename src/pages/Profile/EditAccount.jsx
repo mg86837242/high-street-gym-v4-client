@@ -272,10 +272,25 @@ function UpdateTrainerForm({ topMsg, user, emails, authenticatedUser }) {
       <FCRHFSm label='First Name' register={register('firstName')} issue={errors.firstName?.message} />
       <FCRHFSm label='Last Name' register={register('lastName')} issue={errors.lastName?.message} />
       <FCRHFSm label='Phone' register={register('phone')} issue={errors.phone?.message} />
-      <FCRHFSm label='Description' register={register('description')} issue={errors.description?.message} />
-      <FCRHFSm label='Specialty' register={register('specialty')} issue={errors.specialty?.message} />
-      <FCRHFSm label='Certificate' register={register('certificate')} issue={errors.certificate?.message} />
-      <FCRHFSm label='Image URL' register={register('imageUrl')} issue={errors.imageUrl?.message} />
+      <FCRHFSm
+        label='Description'
+        register={register('description')}
+        issue={errors.description?.message}
+        isRequired={false}
+      />
+      <FCRHFSm
+        label='Specialty'
+        register={register('specialty')}
+        issue={errors.specialty?.message}
+        isRequired={false}
+      />
+      <FCRHFSm
+        label='Certificate'
+        register={register('certificate')}
+        issue={errors.certificate?.message}
+        isRequired={false}
+      />
+      <FCRHFSm label='Image URL' register={register('imageUrl')} issue={errors.imageUrl?.message} isRequired={false} />
       <input type='hidden' {...register('id', { valueAsNumber: true })} />
       <input type='hidden' {...register('_action')} />
       <button type='submit' className='btn btn-primary btn-sm mt-4'>
@@ -383,8 +398,8 @@ function UpdateMemberForm({ topMsg, user, emails, authenticatedUser }) {
       <FCRHFSm label='First Name' register={register('firstName')} issue={errors.firstName?.message} />
       <FCRHFSm label='Last Name' register={register('lastName')} issue={errors.lastName?.message} />
       <FCRHFSm label='Phone' register={register('phone')} issue={errors.phone?.message} />
-      <FCRHFSm label='Age' register={register('age')} issue={errors.age?.message} />
-      <FCRHFSm label='Gender' issue={errors.gender?.message}>
+      <FCRHFSm label='Age' register={register('age')} issue={errors.age?.message} isRequired={false} />
+      <FCRHFSm label='Gender' issue={errors.gender?.message} isRequired={false}>
         <select {...register('gender')} className='font-normal select select-bordered select-sm'>
           <option value=''>-- Choose Gender --</option>
           <option value='Female'>Female</option>
