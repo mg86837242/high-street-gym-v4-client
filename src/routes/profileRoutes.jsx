@@ -13,8 +13,8 @@ const profileRoutes = [
   {
     path: 'account',
     async lazy() {
-      let { default: ProfileEditAccount } = await import('../pages/Profile/ProfileEditAccount');
-      return { Component: ProfileEditAccount };
+      let { default: ProfileEditAcct } = await import('../pages/Profile/ProfileEditAcct');
+      return { Component: ProfileEditAcct };
     },
     ErrorBoundary: ErrorInfoRefresh,
     async loader() {

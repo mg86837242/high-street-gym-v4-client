@@ -118,21 +118,9 @@ export function AdminEditBlog() {
         className='grid w-full grid-cols-2 justify-items-center xl:grid-cols-3 gap-x-5'
       >
         <FCRHFSm label='Blog Post Title' register={register('title')} issue={errors.title?.message} />
-        <FCRHFSm
-          label='Author Username'
-          register={register('username')}
-          issue={errors.username?.message}
-          isRequired={false}
-        />
-        <FCRHFSm label='Author Role' register={register('role')} issue={errors.role?.message} isRequired={false} />
-        <FCRHFSmBlogBody label='Blog Post Body' issue={errors.body?.message}>
-          <textarea
-            {...register('body')}
-            rows={10}
-            placeholder='Enter blog post body here ...'
-            className='textarea textarea-bordered'
-          />
-        </FCRHFSmBlogBody>
+        <FCRHFSm label='Author Username' register={register('username')} issue={errors.username?.message} />
+        <FCRHFSm label='Author Role' register={register('role')} issue={errors.role?.message} />
+        <FCRHFSmBlogBody label='Blog Post Body' register={register('body')} issue={errors.body?.message} />
         <input type='hidden' {...register('loginId', { valueAsNumber: true })} />
         <div className='flex justify-end w-full col-span-2 gap-10 py-6 xl:col-span-3'>
           <button type='submit' className='w-20 btn btn-outline btn-primary btn-sm'>
