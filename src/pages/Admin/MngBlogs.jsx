@@ -5,6 +5,8 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { blogSchema } from '../../schemas/index.js';
 import { convertEmptyStrToNull } from '../../helpers/sanitize.js';
+import { Btn1XsOutline } from '../../components/ui/Btn1';
+import { Btn2XsOutline } from '../../components/ui/Btn2';
 import FCRHFSm from '../../components/formCtrlRHF/FCRHFSm.jsx';
 import FCRHFSmBlogBody from '../../components/formCtrlRHF/FCRHFSmBlogBody.jsx';
 
@@ -48,9 +50,7 @@ function ListBlogs({ blogs }) {
               <td>{updatedAt}</td>
               <td>
                 <Form action={`${id}/edit`}>
-                  <button className='shadow btn btn-outline btn-primary btn-xs text-primary-content shadow-black/50'>
-                    Edit
-                  </button>
+                  <Btn2XsOutline>Edit</Btn2XsOutline>
                 </Form>
               </td>
               <td>
@@ -63,9 +63,7 @@ function ListBlogs({ blogs }) {
                     }
                   }}
                 >
-                  <button type='submit' className='shadow btn btn-outline btn-xs text-accent-content shadow-black/50'>
-                    Delete
-                  </button>
+                  <Btn1XsOutline>Delete</Btn1XsOutline>
                 </Form>
               </td>
             </tr>

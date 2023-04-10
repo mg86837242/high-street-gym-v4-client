@@ -4,6 +4,8 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { activitySchema } from '../../schemas';
 import { convertEmptyStrToNull } from '../../helpers/sanitize';
+import { Btn1XsOutline } from '../../components/ui/Btn1';
+import { Btn2SmOutline, Btn2XsOutline } from '../../components/ui/Btn2';
 import FCRHFSm from '../../components/formCtrlRHF/FCRHFSm';
 
 export function MngActivities() {
@@ -64,9 +66,7 @@ function ListActivities({ activities }) {
                 <td>{price}</td>
                 <td>
                   <Form action={`${id}/edit`}>
-                    <button className='shadow btn btn-outline btn-primary btn-xs text-primary-content shadow-black/50'>
-                      Edit
-                    </button>
+                    <Btn2XsOutline>Edit</Btn2XsOutline>
                   </Form>
                 </td>
                 <td>
@@ -79,9 +79,7 @@ function ListActivities({ activities }) {
                       }
                     }}
                   >
-                    <button type='submit' className='shadow btn btn-outline btn-xs text-accent-content shadow-black/50'>
-                      Delete
-                    </button>
+                    <Btn1XsOutline>Delete</Btn1XsOutline>
                   </Form>
                 </td>
               </tr>
@@ -98,12 +96,13 @@ export function NewActivity() {
     <>
       <div className='flex flex-col items-start justify-start gap-5 py-6 lg:flex-row lg:justify-between'>
         <Form method='post' action='new-by-xml'>
-          <input type='file' className='w-full max-w-xs file-input file-input-bordered file-input-sm' />
+          <input
+            type='file'
+            className='w-full max-w-xs shadow file-input file-input-bordered file-input-sm shadow-black/50'
+          />
         </Form>
         <Form method='post' action='new'>
-          <button type='submit' className='btn btn-outline btn-primary btn-sm'>
-            Create New
-          </button>
+          <Btn2SmOutline>Create New</Btn2SmOutline>
         </Form>
       </div>
       <div className='flex justify-end gap-10 py-6'></div>
