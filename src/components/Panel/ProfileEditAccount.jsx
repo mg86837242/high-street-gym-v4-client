@@ -19,8 +19,8 @@ import { default as countries } from '../../data/countries.json';
 
 export default function ProfileEditAccount() {
   const { authenticatedUser } = useContext(AuthContext);
-  const [topMessage, setTopMessage] = useState('');
-  const [botMessage, setBotMessage] = useState('');
+  const [topMsg, setTopMsg] = useState('');
+  const [botMsg, setBotMsg] = useState('');
   const { user, emails } = useLoaderData();
   const actionData = useActionData();
 
@@ -35,44 +35,44 @@ export default function ProfileEditAccount() {
     switch (actionData._action) {
       case 'updateAdminById':
         (async () => {
-          setTopMessage(`✅ ${actionData.message}`);
+          setTopMsg(`✅ ${actionData.message}`);
           await new Promise(r => setTimeout(r, 5_000));
-          setTopMessage('');
+          setTopMsg('');
         })();
         break;
       case 'updateAddressByAdminId':
         (async () => {
-          setBotMessage(`✅ ${actionData.message}`);
+          setBotMsg(`✅ ${actionData.message}`);
           await new Promise(r => setTimeout(r, 5_000));
-          setBotMessage('');
+          setBotMsg('');
         })();
         break;
       case 'updateTrainerById':
         (async () => {
-          setTopMessage(`✅ ${actionData.message}`);
+          setTopMsg(`✅ ${actionData.message}`);
           await new Promise(r => setTimeout(r, 5_000));
-          setTopMessage('');
+          setTopMsg('');
         })();
         break;
       case 'updateAddressByTrainerId':
         (async () => {
-          setBotMessage(`✅ ${actionData.message}`);
+          setBotMsg(`✅ ${actionData.message}`);
           await new Promise(r => setTimeout(r, 5_000));
-          setBotMessage('');
+          setBotMsg('');
         })();
         break;
       case 'updateMemberById':
         (async () => {
-          setTopMessage(`✅ ${actionData.message}`);
+          setTopMsg(`✅ ${actionData.message}`);
           await new Promise(r => setTimeout(r, 5_000));
-          setTopMessage('');
+          setTopMsg('');
         })();
         break;
       case 'updateAddressByMemberId':
         (async () => {
-          setBotMessage(`✅ ${actionData.message}`);
+          setBotMsg(`✅ ${actionData.message}`);
           await new Promise(r => setTimeout(r, 5_000));
-          setBotMessage('');
+          setBotMsg('');
         })();
         break;
       default:
@@ -80,30 +80,19 @@ export default function ProfileEditAccount() {
     }
 
     return () => {
-      setTopMessage('');
-      setBotMessage('');
+      setTopMsg('');
+      setBotMsg('');
     };
   }, [actionData]);
 
   function renderSwitchUpdateUserForm(role) {
     switch (role) {
       case 'Admin':
-        return (
-          <UpdateAdminForm topMessage={topMessage} user={user} emails={emails} authenticatedUser={authenticatedUser} />
-        );
+        return <UpdateAdminForm topMsg={topMsg} user={user} emails={emails} authenticatedUser={authenticatedUser} />;
       case 'Trainer':
-        return (
-          <UpdateTrainerForm
-            topMessage={topMessage}
-            user={user}
-            emails={emails}
-            authenticatedUser={authenticatedUser}
-          />
-        );
+        return <UpdateTrainerForm topMsg={topMsg} user={user} emails={emails} authenticatedUser={authenticatedUser} />;
       case 'Member':
-        return (
-          <UpdateMemberForm topMessage={topMessage} user={user} emails={emails} authenticatedUser={authenticatedUser} />
-        );
+        return <UpdateMemberForm topMsg={topMsg} user={user} emails={emails} authenticatedUser={authenticatedUser} />;
       default:
         return <></>;
     }
@@ -112,11 +101,11 @@ export default function ProfileEditAccount() {
   function renderSwitchUpdateUserAddrForm(role) {
     switch (role) {
       case 'Admin':
-        return <UpdateAdminAddrForm botMessage={botMessage} user={user} authenticatedUser={authenticatedUser} />;
+        return <UpdateAdminAddrForm botMsg={botMsg} user={user} authenticatedUser={authenticatedUser} />;
       case 'Trainer':
-        return <UpdateTrainerAddrForm botMessage={botMessage} user={user} authenticatedUser={authenticatedUser} />;
+        return <UpdateTrainerAddrForm botMsg={botMsg} user={user} authenticatedUser={authenticatedUser} />;
       case 'Member':
-        return <UpdateMemberAddrForm botMessage={botMessage} user={user} authenticatedUser={authenticatedUser} />;
+        return <UpdateMemberAddrForm botMsg={botMsg} user={user} authenticatedUser={authenticatedUser} />;
       default:
         return <></>;
     }
@@ -135,7 +124,7 @@ export default function ProfileEditAccount() {
   );
 }
 
-function UpdateAdminForm({ topMessage, user, emails, authenticatedUser }) {
+function UpdateAdminForm({ topMsg, user, emails, authenticatedUser }) {
   const [duplicateEmailMsg, setDuplicateEmailMsg] = useState('');
   const submit = useSubmit();
   const {
@@ -181,12 +170,12 @@ function UpdateAdminForm({ topMessage, user, emails, authenticatedUser }) {
       <button type='submit' className='btn btn-primary btn-sm mt-4'>
         Save
       </button>
-      <p className='text-success self-center mt-4'>{topMessage}</p>
+      <p className='text-success self-center mt-4'>{topMsg}</p>
     </form>
   );
 }
 
-function UpdateAdminAddrForm({ botMessage, user, authenticatedUser }) {
+function UpdateAdminAddrForm({ botMsg, user, authenticatedUser }) {
   const submit = useSubmit();
   const {
     register,
@@ -237,12 +226,12 @@ function UpdateAdminAddrForm({ botMessage, user, authenticatedUser }) {
       <button type='submit' className='btn btn-primary btn-sm mt-5'>
         Save
       </button>
-      <p className='text-success self-center mt-4'>{botMessage}</p>
+      <p className='text-success self-center mt-4'>{botMsg}</p>
     </form>
   );
 }
 
-function UpdateTrainerForm({ topMessage, user, emails, authenticatedUser }) {
+function UpdateTrainerForm({ topMsg, user, emails, authenticatedUser }) {
   const [duplicateEmailMsg, setDuplicateEmailMsg] = useState('');
   const submit = useSubmit();
   const {
@@ -292,12 +281,12 @@ function UpdateTrainerForm({ topMessage, user, emails, authenticatedUser }) {
       <button type='submit' className='btn btn-primary btn-sm mt-4'>
         Save
       </button>
-      <p className='text-success self-center mt-4'>{topMessage}</p>
+      <p className='text-success self-center mt-4'>{topMsg}</p>
     </form>
   );
 }
 
-function UpdateTrainerAddrForm({ botMessage, user, authenticatedUser }) {
+function UpdateTrainerAddrForm({ botMsg, user, authenticatedUser }) {
   const submit = useSubmit();
   const {
     register,
@@ -348,12 +337,12 @@ function UpdateTrainerAddrForm({ botMessage, user, authenticatedUser }) {
       <button type='submit' className='btn btn-primary btn-sm mt-5'>
         Save
       </button>
-      <p className='text-success self-center mt-4'>{botMessage}</p>
+      <p className='text-success self-center mt-4'>{botMsg}</p>
     </form>
   );
 }
 
-function UpdateMemberForm({ topMessage, user, emails, authenticatedUser }) {
+function UpdateMemberForm({ topMsg, user, emails, authenticatedUser }) {
   const [duplicateEmailMsg, setDuplicateEmailMsg] = useState('');
   const submit = useSubmit();
   const {
@@ -408,12 +397,12 @@ function UpdateMemberForm({ topMessage, user, emails, authenticatedUser }) {
       <button type='submit' className='btn btn-primary btn-sm mt-4'>
         Save
       </button>
-      <p className='text-success self-center mt-4'>{topMessage}</p>
+      <p className='text-success self-center mt-4'>{topMsg}</p>
     </form>
   );
 }
 
-function UpdateMemberAddrForm({ botMessage, user, authenticatedUser }) {
+function UpdateMemberAddrForm({ botMsg, user, authenticatedUser }) {
   const submit = useSubmit();
   const {
     register,
@@ -464,7 +453,7 @@ function UpdateMemberAddrForm({ botMessage, user, authenticatedUser }) {
       <button type='submit' className='btn btn-primary btn-sm mt-5'>
         Save
       </button>
-      <p className='text-success self-center mt-4'>{botMessage}</p>
+      <p className='text-success self-center mt-4'>{botMsg}</p>
     </form>
   );
 }
