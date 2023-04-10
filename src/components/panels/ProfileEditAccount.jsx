@@ -13,7 +13,8 @@ import {
 } from '../../schemas';
 import { default as countries } from '../../data/countries.json';
 import { convertEmptyStrToNull, convertNullToEmptyStr } from '../../helpers/sanitize';
-import { FCRHFSm, FCRHFSmPass } from '../formCtrlRHF';
+import FCRHFSm from '../formCtrlRHF/FCRHFSm';
+import FCRHFSmPass from '../formCtrlRHF/FCRHFSmPass';
 import SpinnerNoNav from '../ui/SpinnerNoNav';
 
 export default function ProfileEditAccount() {

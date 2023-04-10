@@ -1,9 +1,0 @@
-export { default as FCInput } from './FCInput.jsx';
-export { default as FCInput } from './FCInput.jsx';
-export { default as FCInputEmail } from './FCInputEmail.jsx';
-export { default as FCInputPass } from './FCInputPass.jsx';
-export { default as FCInputSm } from './FCInputSm.jsx';
-export { default as FCInputSmEmail } from './FCInputSmEmail.jsx';
-export { default as FCInputSmPass } from './FCInputSmPass.jsx';
-export { default as FCSelectGender } from './FCSelectGender.jsx';
-export { default as FCSelectSmGender } from './FCSelectSmGender.jsx';

@@ -5,7 +5,8 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { blogSchema } from '../../schemas';
 import { convertEmptyStrToNull } from '../../helpers/sanitize';
-import { FCRHFSm, FCRHFSmBlogBody } from '../formCtrlRHF';
+import FCRHFSm from '../formCtrlRHF/FCRHFSm';
+import FCRHFSmBlogBody from '../formCtrlRHF/FCRHFSmBlogBody';
 
 export function AdminMngBlogs() {
   const { blogs } = useLoaderData();
