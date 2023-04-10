@@ -24,7 +24,7 @@ export default function InputGrpPass({ issue, initialValue }) {
         type={type}
         placeholder='Enter your password here'
         defaultValue={initialValue}
-        className='w-full h-10 text-accent input input-bordered input-primary 3xl:h-12'
+        className='w-full h-10 text-accent input input-primary 3xl:h-12'
       />
       <button type='button' onClick={handleToggle} className='absolute right-0 mr-3 cursor-pointer mt-9 3xl:mt-12'>
         <FontAwesomeIcon icon={icon} className='w-4 h-4' />

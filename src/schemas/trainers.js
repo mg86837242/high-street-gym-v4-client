@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const trainerSchema = z.object({
+const trainerSchema = z.object({
   email: z
     .string()
     .min(1, { message: 'Email must have at least 1 character(s)' })
@@ -44,10 +44,5 @@ export const trainerSchema = z.object({
   id: z.number(),
   _action: z.string(),
 });
-export const descriptionSchema = z.string().max(255).nullable();
-export const specialtySchema = z.string().max(45).nullable();
-export const certificateSchema = z.string().max(45).nullable();
-export const imageUrlSchema = z.union([
-  z.string().length(0, { message: 'Image url must be empty or a valid url' }),
-  z.string().url(),
-]);
+
+export default trainerSchema;

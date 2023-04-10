@@ -3,4 +3,4 @@ export { addressAdminSchema, addressTrainerSchema, addressMemberSchema } from '.
 export { default as adminSchema } from './admin';
 export { default as blogSchema } from './blogs';
 export { memberSchema } from './members';
-export { trainerSchema } from './trainers';
+export { default as trainerSchema } from './trainers';

@@ -24,7 +24,7 @@ export default function InputGrpSmPass({ issue, initialValue }) {
         type={type}
         placeholder='Enter your password here'
         defaultValue={initialValue}
-        className='text-accent input input-bordered input-primary input-sm'
+        className='text-accent input input-primary input-sm'
       />
       <button type='button' onClick={handleToggle} className='absolute right-0 mr-3 cursor-pointer mt-8 3xl:mt-10'>
         <FontAwesomeIcon icon={icon} className='w-4 h-4' />

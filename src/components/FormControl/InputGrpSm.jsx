@@ -19,7 +19,7 @@ export default function InputGrpSm({ name, type, issue, initialValue, isRequired
         type={type}
         placeholder={`Enter your ${name.replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase()} here`}
         defaultValue={initialValue}
-        className='text-accent input input-bordered input-primary input-sm'
+        className='text-accent input input-primary input-sm'
       />
       <label htmlFor={id} className='py-1 3xl:py-2 label'>
         {issue ? (

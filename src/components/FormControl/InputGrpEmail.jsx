@@ -17,7 +17,7 @@ export default function InputGrpEmail({ issue, emails, initialValue, isRequired 
         placeholder='Enter your email here'
         value={input}
         onChange={e => setInput(e.target.value)}
-        className='w-full h-10 text-accent input input-bordered input-primary 3xl:h-12'
+        className='w-full h-10 text-accent input input-primary 3xl:h-12'
       />
       <label htmlFor='email' className='py-1 3xl:py-2label'>
         {isDuplicate ? (

@@ -27,8 +27,6 @@ export default function ProfileEditAccount() {
   useEffect(() => {
     if (!actionData) {
       return;
-      // PS If this Effect doesn't have this short-circuit, Effect will goes into `else` block and causes
-      //  `actionData` to fire twice again)
     }
     if (actionData?.status !== 200) {
       return;
@@ -244,7 +242,6 @@ function UpdateAdminAddrForm({ botStatusText, user, authenticatedUser }) {
   );
 }
 
-// TODO role specific inputs (also check if it's NOT required & if it's number) && select dropdowns
 function UpdateTrainerForm({ topStatusText, user, emails, authenticatedUser }) {
   const [duplicateEmailStatusText, setDuplicateEmailStatusText] = useState('');
   const submit = useSubmit();
@@ -286,6 +283,10 @@ function UpdateTrainerForm({ topStatusText, user, emails, authenticatedUser }) {
       <FCRHFSm label='First Name' register={register('firstName')} issue={errors.firstName?.message} />
       <FCRHFSm label='Last Name' register={register('lastName')} issue={errors.lastName?.message} />
       <FCRHFSm label='Phone' register={register('phone')} issue={errors.phone?.message} />
+      <FCRHFSm label='Description' register={register('description')} issue={errors.description?.message} />
+      <FCRHFSm label='Specialty' register={register('specialty')} issue={errors.specialty?.message} />
+      <FCRHFSm label='Certificate' register={register('certificate')} issue={errors.certificate?.message} />
+      <FCRHFSm label='Image URL' register={register('imageUrl')} issue={errors.imageUrl?.message} />
       <input type='hidden' {...register('id', { valueAsNumber: true })} />
       <input type='hidden' {...register('_action')} />
       <button type='submit' className='btn btn-primary btn-sm mt-4'>
@@ -382,6 +383,15 @@ function UpdateMemberForm({ topStatusText, user, emails, authenticatedUser }) {
       <FCRHFSm label='First Name' register={register('firstName')} issue={errors.firstName?.message} />
       <FCRHFSm label='Last Name' register={register('lastName')} issue={errors.lastName?.message} />
       <FCRHFSm label='Phone' register={register('phone')} issue={errors.phone?.message} />
+      <FCRHFSm label='Age' register={register('age')} issue={errors.age?.message} />
+      <FCRHFSm label='Gender' issue={errors.gender?.message}>
+        <select {...register('gender')} className='font-normal select select-bordered select-sm'>
+          <option value=''>-- Choose Gender --</option>
+          <option value='Female'>Female</option>
+          <option value='Male'>Male</option>
+          <option value='Other'>Other</option>
+        </select>
+      </FCRHFSm>
       <input type='hidden' {...register('id', { valueAsNumber: true })} />
       <input type='hidden' {...register('_action')} />
       <button type='submit' className='btn btn-primary btn-sm mt-4'>
@@ -391,7 +401,7 @@ function UpdateMemberForm({ topStatusText, user, emails, authenticatedUser }) {
     </form>
   );
 }
-
+// FIX Country select
 function UpdateMemberAddrForm({ botStatusText, user, authenticatedUser }) {
   const submit = useSubmit();
   const {
