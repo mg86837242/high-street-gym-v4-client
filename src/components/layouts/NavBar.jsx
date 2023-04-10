@@ -106,7 +106,7 @@ function NavLeftButton({ children, to, text, hasDropdown }) {
         )}
       </Link>
       {hasDropdown && (
-        <ul id='nav-center-button-submenu' className='w-56 p-2 ml-1 menu bg-neutral rounded-box'>
+        <ul id='nav-center-button-submenu' className='w-56 p-2 ml-[-1px] menu bg-neutral rounded-box'>
           {/* TODO How to use arrow keys to navigate between these submenu buttons, extending to <NavBarCenter> submenu */}
           {children}
         </ul>

@@ -12,10 +12,10 @@
 
 /* 3. Tailwind Utilities Layer */
 @tailwind utilities;
-/* 3.1 Based on experimentation, theme defined in `tailwind.config.cjs` has LOWER precedence than what's defined in */
-/* the utilities layer, (however, higher precedence than components layer) e.g.: */
-/* .font-heading {
-    font-family: Arial;
+/* 3.1 Based on experimentation, theme defined in `tailwind.config.cjs` has (higher precedence than components layer) */
+/* LOWER precedence than what's defined in the utilities layer,  e.g.: */
+/* .font-headline {
+  font-family: Arial;
 } */
 
 @layer base {
@@ -84,6 +84,18 @@
     position: -webkit-static;
     left: auto;
     z-index: 0;
+  }
+
+  .file-input::file-selector-button {
+    text-transform: none;
+    --tw-border-opacity: 0.2;
+    background-color: transparent;
+    color: hsl(var(--p) / var(--tw-bg-opacity));
+  }
+
+  .file-input::file-selector-button:hover {
+    background-color: hsl(var(--p) / var(--tw-bg-opacity));
+    color: hsl(var(--pc) / var(--tw-text-opacity));
   }
 }
 
