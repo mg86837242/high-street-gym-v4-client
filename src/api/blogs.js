@@ -21,7 +21,7 @@ export async function createBlog({ request }) {
   const creations = {
     title: 'New Blog',
     body: defaultBlogBody,
-    loginId: parseInt(loginId),
+    loginId: parseInt(loginId, 10),
   };
   const json = await fetchJSON(`${API_URL}/blogs`, 'post', creations);
   return redirect(`../${json.insertId}/edit`);
