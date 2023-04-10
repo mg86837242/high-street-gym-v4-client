@@ -15,7 +15,17 @@ export async function getActivityById({ params }) {
 }
 
 export async function createActivity() {
-  const creations = { name: 'New Activity', durationMinutes: 45 };
+  const creations = {
+    name: 'New Activity',
+    category: null,
+    description: null,
+    intensityLevel: null,
+    maxPeopleAllowed: null,
+    requirementOne: null,
+    requirementTwo: null,
+    durationMinutes: 45,
+    price: null,
+  };
   const json = await fetchJSON(`${API_URL}/activities`, 'post', creations);
   return redirect(`../${json.insertId}/edit`);
 }

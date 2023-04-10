@@ -74,7 +74,7 @@
 }
 
 @layer components {
-  /* 2.1 Customize or override daisyUI components, see: https://github.com/saadeghi/daisyui/discussions/893 */
+  /* 2.1 Customize or override daisyUI comp styles, see: https://github.com/saadeghi/daisyui/discussions/893 */
   .btn {
     text-transform: none;
   }
