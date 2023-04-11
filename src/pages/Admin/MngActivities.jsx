@@ -256,6 +256,8 @@ export function EditActivity() {
 // -- https://codesandbox.io/s/react-file-upload-lj1zn?from-embed: React file upload exemplar (source: "file upload
 //  react codesandbox"), esp. for controlled <input type='file'>
 // -- https://stackoverflow.com/questions/64803772: (source: "multer or express-fileupload" )
+// ---- https://www.npmjs.com/package/express-fileupload
+// ---- https://www.npmjs.com/package/multer
 // -- https://www.sammeechward.com/uploading-images-express-and-react: (source: "multer with react")
 // -- https://stackoverflow.com/questions/39280438/fetch-missing-boundary-in-multipart-form-data-post: Debug missing
 //  boundary in fetch headers option (source: "content type multipart/form-data boundary missing")
