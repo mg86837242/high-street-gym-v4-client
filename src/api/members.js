@@ -2,8 +2,7 @@ import { redirect } from 'react-router-dom';
 import { API_URL } from '../data/constants';
 import { emailSchema, passwordSchema, usernameSchema } from '../schemas/logins';
 import { firstNameSchema, lastNameSchema, phoneSchema, ageSchema, genderSchema } from '../schemas/members';
-import post from '../helpers/post';
-import patch from '../helpers/patch';
+import fetchRaw from '../helpers/fetchRaw';
 
 export async function signupMembers({ request }) {
   const formData = await request.formData();
@@ -51,7 +50,7 @@ export async function signupMembers({ request }) {
   creations.age = parseInt(age, 10) || null;
   creations.gender ||= null;
 
-  const response = await post(`${API_URL}/members/signup`, creations);
+  const response = await fetchRaw.post(`${API_URL}/members/signup`, creations);
   // Special error handling to let 409 pass to NOT trigger error boundary, since it's already handled the in component
   if (response.status === 409) {
     return redirect('/signup');
@@ -65,8 +64,8 @@ export async function signupMembers({ request }) {
 }
 
 export async function updateMemberById(values) {
-  const { id, ...updates } = values;
-  const response = await patch(`${API_URL}/members/${id}`, updates);
+  const { _action, id, ...updates } = values;
+  const response = await fetchRaw.patch(`${API_URL}/members/${id}`, updates);
   const json = await response.json();
   // Special error handling to let 409 pass to NOT trigger error boundary, since it's already handled the in component
   if (response.status === 409) {
@@ -76,5 +75,5 @@ export async function updateMemberById(values) {
     const message = `${json.status} ${typeof json.message === 'string' ? json.message : json.message[0].message}`;
     throw new Response(message);
   }
-  return { ...json, _action: 'updateMemberById' };
+  return { ...json, _action };
 }

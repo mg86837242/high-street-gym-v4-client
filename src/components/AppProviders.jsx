@@ -10,12 +10,12 @@ export default function AppProviders() {
   //  case `authenticatedUser` state/context is missing after page reload, opening a new tab, etc.
   useEffect(() => {
     if (authenticatedUser) {
-      console.log('🔃 Effect runs - user state present, exit');
+      // Effect runs - user state present, exit
       return;
     }
     const accessKey = localStorage.getItem('accessKey');
     if (!accessKey) {
-      console.log('🔃 Effect runs - key removed or missing from local storage, exit');
+      // Effect runs - key removed or missing from local storage, exit
       return;
     }
     let ignore = false;
@@ -23,11 +23,11 @@ export default function AppProviders() {
       try {
         const json = await getUserByKey(accessKey);
         if (!ignore) {
-          console.log('🔃 Effect runs - user state synchronizing');
+          // Effect runs - user state synchronizing
           setAuthenticatedUser(json.user);
         }
       } catch (error) {
-        console.log('🔃 Effect runs - synchronization fetch failed');
+        // Effect runs - synchronization failed
         router.navigate('/');
       }
     })();

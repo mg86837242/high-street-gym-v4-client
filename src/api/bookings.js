@@ -1,21 +1,21 @@
 import { redirect } from 'react-router-dom';
 import { API_URL } from '../data/constants';
-import fetchRes from '../helpers/fetchRes';
+import fetchResp from '../helpers/fetchResp';
+import fetchRaw from '../helpers/fetchRaw';
 import fetchJSON from '../helpers/fetchJSON';
-import get from '../helpers/get';
 
 export async function getAllBookings() {
-  const response = await fetchRes(`${API_URL}/bookings`, 'get');
+  const response = await fetchResp.get(`${API_URL}/bookings`);
   return response;
 }
 
 export async function getAllBookingOptions() {
-  const response = await fetchRes(`${API_URL}/bookings/options-only`, 'get');
+  const response = await fetchResp.get(`${API_URL}/bookings/options-only`);
   return response;
 }
 
 export async function getBookingsByDate({ params }) {
-  const response = await get(`${API_URL}/bookings/bookings-with-details/${params.date}`);
+  const response = await fetchRaw.get(`${API_URL}/bookings/bookings-with-details/${params.date}`);
   // Special error handling to let 404 pass
   if (response?.status !== 200 && response?.status !== 404) {
     const json = await response.json();
@@ -28,7 +28,7 @@ export async function getBookingsByDate({ params }) {
 }
 
 export async function getBookingById({ params }) {
-  const response = await fetchRes(`${API_URL}/bookings/booking-with-all-details/${params.id}`, 'get');
+  const response = await fetchResp.get(`${API_URL}/bookings/booking-with-all-details/${params.id}`);
   return response;
 }
 
@@ -36,7 +36,7 @@ export async function getBookingAndOptionsById({ params }) {
   // Prefer to build customized API endpoint (1) is much simpler to code loader, (2) has one less nesting layer/level
   //  to DA loader data, e.g., in `Bookings/Edit.jsx`, `bookingJSON:` can be rid of – easier to code component, same
   //  applies to breadcrumbs/`useMatches`.
-  const response = await fetchRes(`${API_URL}/bookings/booking-with-options/${params.id}`);
+  const response = await fetchResp.get(`${API_URL}/bookings/booking-with-options/${params.id}`);
   return response;
   // Alternatively, fetch multiple endpoints with `Promise.all([])`, example: https://stackoverflow.com/questions/74719956/can-i-handle-multiple-loaders-for-a-single-url-in-remix
 }
@@ -44,7 +44,7 @@ export async function getBookingAndOptionsById({ params }) {
 export async function createBooking({ request }) {
   const formData = await request.formData();
   const creations = Object.fromEntries(formData);
-  const json = await fetchJSON(`${API_URL}/bookings`, 'post', creations);
+  const json = await fetchJSON.post(`${API_URL}/bookings`, creations);
   return redirect(`../${creations.date}/${json.insertId}`);
 }
 
@@ -55,11 +55,11 @@ export async function updateBookingById({ params, request }) {
   //  STRING", see: https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects
   const formData = await request.formData();
   const updates = Object.fromEntries(formData);
-  await fetchRes(`${API_URL}/bookings/${params.id}`, 'patch', updates);
+  await fetchResp.patch(`${API_URL}/bookings/${params.id}`, updates);
   return redirect(`../../${updates.date}/${params.id}`);
 }
 
 export async function deleteBookingById({ params }) {
-  await fetchRes(`${API_URL}/bookings/${params.id}`, 'delete');
+  await fetchResp.delete(`${API_URL}/bookings/${params.id}`);
   return redirect(`..`);
 }

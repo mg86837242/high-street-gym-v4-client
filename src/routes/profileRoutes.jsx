@@ -22,9 +22,9 @@ const profileRoutes = [
       return getUserWithAllDetailsAndAllEmails();
     },
     async action({ request }) {
-      const { _action, ...values } = await getSubmittedData(request);
+      const values = await getSubmittedData(request);
 
-      switch (_action) {
+      switch (values._action) {
         case 'updateAdminById':
           let { default: updateAdminById } = await import('../api/admins');
           return updateAdminById(values);

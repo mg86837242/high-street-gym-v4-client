@@ -1,5 +1,5 @@
 // Use case: fetch and error handling in loader and action
-const fetchRes = {
+const fetchResp = {
   async get(url) {
     const requestOptions = {
       method: 'GET',
@@ -74,7 +74,7 @@ const fetchRes = {
   },
 };
 
-export default fetchRes;
+export default fetchResp;
 
 // References for fetch API:
 // -- https://jasonwatmore.com/post/2021/09/05/fetch-http-post-request-examples: Fetch - HTTP POST/PUT/PATCH/DELETE
@@ -128,7 +128,7 @@ export default fetchRes;
 
 // NB "React Router will automatically call `response.json()` (within the loader) so components don't need to
 //  parse it while rendering", see: https://reactrouter.com/en/main/route/loader,
-//  (2) however, `Response` obj returned by this helper function `fetchRes.js` fails to be parsed in the loader,
+//  (2) however, `Response` obj returned by this helper function `fetchResp.js` fails to be parsed in the loader,
 // PS5 `Uncaught (in promise) TypeError: Response.json: Body has already been consumed.` => Google error =>
 //  https://stackoverflow.com/questions/34786358/what-does-this-error-mean-uncaught-typeerror-already-read => Log and
 //  observe the `response` constant right before it's returned at the end of this helper => `Response.bodyUsed` is
