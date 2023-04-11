@@ -219,5 +219,6 @@ export function EditActivity() {
 }
 
 // References:
-// -- https://codesandbox.io/s/react-file-upload-lj1zn?from-embed: React file upload exemplar (src: "file upload react
-//  codesandbox"), esp. for controlled <input type='file'>
+// -- https://codesandbox.io/s/react-file-upload-lj1zn?from-embed: React file upload exemplar (source: "file upload
+//  react codesandbox"), esp. for controlled <input type='file'>
+// -- https://stackoverflow.com/questions/64803772: (source: multer or express-fileupload )

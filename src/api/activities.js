@@ -24,8 +24,9 @@ export async function createActivity() {
 export async function createActivityXML({ request }) {
   const formData = await request.formData();
   const xml = formData.get('xml');
+  console.log(xml);
   // const json = await fetchJSON(`${API_URL}/activities/upload/xml`, 'post', xml);
-  // TODO Cleanup fetch() helpers, and write a customized fetch for this action
+  // TODO (1) Cleanup fetch() helpers, and write a customized fetch for this action (2) api design
   return redirect(`..`) || redirect(`../${json.insertId}/edit`);
 }
 
