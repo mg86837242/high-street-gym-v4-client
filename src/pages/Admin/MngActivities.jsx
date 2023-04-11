@@ -7,6 +7,7 @@ import { convertEmptyStrToNull } from '../../helpers/sanitize';
 import { Btn1XsOutline } from '../../components/ui/Btn1';
 import { Btn2SmOutline, Btn2XsOutline } from '../../components/ui/Btn2';
 import FCRHFSm from '../../components/formCtrlRHF/FCRHFSm';
+import { API_URL } from '../../data/constants';
 
 export function MngActivities() {
   const { activities } = useLoaderData();
@@ -94,10 +95,29 @@ function ListActivities({ activities }) {
 export function NewActivity() {
   const [file, setFile] = useState(null);
 
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const response = await uploadFile(file);
+    console.log(await response.json());
+  }
+
+  async function uploadFile(file) {
+    const formData = new FormData();
+    formData.append('xml', file);
+
+    const requestOptions = {
+      method: 'POST',
+      body: formData,
+      credentials: 'include',
+    };
+    const response = await fetch(`${API_URL}/activities/upload/xml`, requestOptions);
+    return response;
+  }
+
   return (
     <>
       <div className='flex flex-col-reverse items-end gap-5 py-6 lg:flex-row lg:justify-between lg:items-center'>
-        <Form method='post' action='new-xml' className='flex items-center gap-5'>
+        <form method='post' encType='multipart/form-data' onSubmit={handleSubmit} className='flex items-center gap-5'>
           <label htmlFor='create-activity-xml' className='flex-shrink-0'>
             <span className='flex-shrink-0'>Import New Activity by XML: </span>
           </label>
@@ -110,7 +130,21 @@ export function NewActivity() {
             className='w-full max-w-xs shadow file-input file-input-bordered file-input-sm shadow-black/50'
           />
           <Btn2SmOutline>Submit</Btn2SmOutline>
-        </Form>
+        </form>
+        {/* <Form method='post' action='new-xml' className='flex items-center gap-5'>
+          <label htmlFor='create-activity-xml' className='flex-shrink-0'>
+            <span className='flex-shrink-0'>Import New Activity by XML: </span>
+          </label>
+          <input
+            name='xml'
+            id='create-activity-xml'
+            type='file'
+            accept='.xml'
+            onChange={e => setFile(e.target.files[0])}
+            className='w-full max-w-xs shadow file-input file-input-bordered file-input-sm shadow-black/50'
+          />
+          <Btn2SmOutline>Submit</Btn2SmOutline>
+        </Form> */}
         <Form method='post' action='new'>
           <Btn2SmOutline>Create New</Btn2SmOutline>
         </Form>
@@ -221,4 +255,7 @@ export function EditActivity() {
 // References:
 // -- https://codesandbox.io/s/react-file-upload-lj1zn?from-embed: React file upload exemplar (source: "file upload
 //  react codesandbox"), esp. for controlled <input type='file'>
-// -- https://stackoverflow.com/questions/64803772: (source: multer or express-fileupload )
+// -- https://stackoverflow.com/questions/64803772: (source: "multer or express-fileupload" )
+// -- https://www.sammeechward.com/uploading-images-express-and-react: (source: "multer with react")
+// -- https://stackoverflow.com/questions/39280438/fetch-missing-boundary-in-multipart-form-data-post: Debug missing
+//  boundary in fetch headers option (source: "content type multipart/form-data boundary missing")

@@ -23,10 +23,16 @@ export async function createActivity() {
 
 export async function createActivityXML({ request }) {
   const formData = await request.formData();
-  const xml = formData.get('xml');
-  console.log(xml);
-  // const json = await fetchJSON.post(`${API_URL}/activities/upload/xml`, xml);
-  // TODO (1) api design (2) revisit this redirect
+  const requestOptions = {
+    method: 'POST',
+    body: formData,
+    credentials: 'include',
+  };
+  const response = await fetch(`${API_URL}/activities/upload/xml`, requestOptions);
+  if (!response?.ok) {
+    // FIX This action might not be needed, if it can really work, revisit these redirects
+    return redirect(`..`);
+  }
   return redirect(`..`) || redirect(`../${json.insertId}/edit`);
 }
 
