@@ -21,7 +21,7 @@ export async function createActivity() {
   return redirect(`../${json.insertId}/edit`);
 }
 
-export async function createActivityXML({ request }) {
+export async function createActivityByUploadXML({ request }) {
   const formData = await request.formData();
   const requestOptions = {
     method: 'POST',

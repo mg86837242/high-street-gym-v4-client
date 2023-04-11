@@ -97,14 +97,13 @@ export function NewActivity() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const response = await uploadFile(file);
+    const response = await createActivityByUploadXML(file);
     console.log(await response.json());
   }
 
-  async function uploadFile(file) {
+  async function createActivityByUploadXML(file) {
     const formData = new FormData();
     formData.append('xml', file);
-
     const requestOptions = {
       method: 'POST',
       body: formData,
@@ -255,9 +254,9 @@ export function EditActivity() {
 // References:
 // -- https://codesandbox.io/s/react-file-upload-lj1zn?from-embed: React file upload exemplar (source: "file upload
 //  react codesandbox"), esp. for controlled <input type='file'>
+// ---- https://stackoverflow.com/questions/39280438/fetch-missing-boundary-in-multipart-form-data-post: Debug missing
+//  boundary in fetch headers option (source: "content type multipart/form-data boundary missing")
 // -- https://stackoverflow.com/questions/64803772: (source: "multer or express-fileupload" )
 // ---- https://www.npmjs.com/package/express-fileupload
 // ---- https://www.npmjs.com/package/multer
 // -- https://www.sammeechward.com/uploading-images-express-and-react: (source: "multer with react")
-// -- https://stackoverflow.com/questions/39280438/fetch-missing-boundary-in-multipart-form-data-post: Debug missing
-//  boundary in fetch headers option (source: "content type multipart/form-data boundary missing")
