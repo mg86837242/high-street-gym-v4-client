@@ -1,14 +1,14 @@
 export function convertEmptyStrToNull(obj) {
-  return Object.keys(obj).reduce((acc, cur) => {
-    if (typeof obj[cur] === 'string') {
-      const trimmed = obj[cur].trim();
+  return Object.keys(obj).reduce((acc, curr) => {
+    if (typeof obj[curr] === 'string') {
+      const trimmed = obj[curr].trim();
       if (trimmed === '') {
-        acc[cur] = null;
+        acc[curr] = null;
       } else {
-        acc[cur] = trimmed;
+        acc[curr] = trimmed;
       }
     } else {
-      acc[cur] = obj[cur];
+      acc[curr] = obj[curr];
     }
     return acc;
   }, {});
@@ -17,14 +17,14 @@ export function convertEmptyStrToNull(obj) {
 // NB If `lineTwo` input is null, `WHERE lineTwo = null` returns false i/o true so that `getAddressesByDetails()`
 //  in the model won't identify a duplicate addr row, thus the type conversion of falsy `lineTwo` to empty string
 export function convertNullToEmptyStr(obj) {
-  return Object.keys(obj).reduce((acc, cur) => {
-    if (typeof obj[cur] === 'string') {
-      const trimmed = obj[cur].trim();
-      acc[cur] = trimmed;
-    } else if (obj[cur] === null) {
-      acc[cur] = '';
+  return Object.keys(obj).reduce((acc, curr) => {
+    if (typeof obj[curr] === 'string') {
+      const trimmed = obj[curr].trim();
+      acc[curr] = trimmed;
+    } else if (obj[curr] === null) {
+      acc[curr] = '';
     } else {
-      acc[cur] = obj[cur];
+      acc[curr] = obj[curr];
     }
     return acc;
   }, {});

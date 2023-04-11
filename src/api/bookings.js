@@ -38,7 +38,7 @@ export async function getBookingAndOptionsById({ params }) {
   //  applies to breadcrumbs/`useMatches`.
   const response = await fetchResp.get(`${API_URL}/bookings/booking-with-options/${params.id}`);
   return response;
-  // Alternatively, fetch multiple endpoints with `Promise.all([])`, example: https://stackoverflow.com/questions/74719956/can-i-handle-multiple-loaders-for-a-single-url-in-remix
+  // Alternatively, fetch multiple endpoints with `Promise.all([])`, example: https://stackoverflow.com/questions/74719956
 }
 
 export async function createBooking({ request }) {
