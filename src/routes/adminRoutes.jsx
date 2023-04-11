@@ -29,11 +29,11 @@ const adminRoutes = [
           let { NewActivity } = await import('../pages/Admin/MngActivities');
           return { Component: NewActivity };
         },
-        ErrorBoundary: ErrorInfoBack,
+        ErrorBoundary: ErrorInfoRefresh,
       },
       {
         path: 'new',
-        ErrorBoundary: ErrorInfoBack,
+        ErrorBoundary: ErrorInfoRefresh,
         async action() {
           let { createActivity } = await import('../api/activities');
           return createActivity();
@@ -41,10 +41,10 @@ const adminRoutes = [
       },
       {
         path: 'new-xml',
-        ErrorBoundary: ErrorInfoBack,
+        ErrorBoundary: ErrorInfoRefresh,
         async action({ request }) {
-          let { createActivityXML } = await import('../api/activities');
-          return createActivityXML({ request });
+          let { createActivityByXML } = await import('../api/activities');
+          return createActivityByXML({ request });
         },
       },
       {
