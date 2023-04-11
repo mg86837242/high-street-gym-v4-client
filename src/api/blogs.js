@@ -1,6 +1,6 @@
 import { redirect } from 'react-router-dom';
 import { API_URL } from '../data/constants';
-import fetchJSON from '../helpers/fetchJSON';
+import fetchJSON from '../__unusedFiles__/fetchJSONWithSwitch';
 import fetchRes from '../helpers/fetchRes';
 import getSubmittedData from '../helpers/getSubmittedData';
 import defaultNewBlog from '../data/defaultNewBlog';

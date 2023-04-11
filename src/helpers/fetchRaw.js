@@ -1,0 +1,45 @@
+// Use case: fetch with customized error handling in loader and action
+const fetchRaw = {
+  async get(url) {
+    const requestOptions = {
+      method: 'GET',
+      credentials: 'include',
+    };
+    const response = await fetch(url, requestOptions);
+    return response;
+  },
+  async post(url, body) {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+      credentials: 'include',
+    };
+    const response = await fetch(url, requestOptions);
+    return response;
+  },
+  async patch(url, body) {
+    const requestOptions = {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+      credentials: 'include',
+    };
+    const response = await fetch(url, requestOptions);
+    return response;
+  },
+  async delete(url) {
+    const requestOptions = {
+      method: 'DELETE',
+      credentials: 'include',
+    };
+    const response = await fetch(url, requestOptions);
+    return response;
+  },
+};
+
+export default fetchRaw;
+
+// References: (source: javascript switch or object literal site:stackoverflow.com)
+// -- https://stackoverflow.com/questions/13383798/using-object-literal-rather-than-switch-statement
+// -- https://stackoverflow.com/questions/37730199/switch-vs-object-lookup-performance-since-jsperf-is-down
