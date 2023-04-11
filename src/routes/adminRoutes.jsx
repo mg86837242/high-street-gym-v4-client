@@ -17,7 +17,7 @@ const adminRoutes = [
       let { MngActivities } = await import('../pages/Admin/MngActivities');
       return { Component: MngActivities };
     },
-    ErrorBoundary: ErrorInfoBack,
+    ErrorBoundary: ErrorInfoRefresh,
     async loader() {
       let { getAllActivities } = await import('../api/activities');
       return getAllActivities();
@@ -82,7 +82,7 @@ const adminRoutes = [
           let { MngBlogs } = await import('../pages/Admin/MngBlogs');
           return { Component: MngBlogs };
         },
-        ErrorBoundary: ErrorInfoBack,
+        ErrorBoundary: ErrorInfoRefresh,
         async loader() {
           let { getAllBlogs } = await import('../api/blogs.js');
           return getAllBlogs();
@@ -94,11 +94,11 @@ const adminRoutes = [
               let { NewBlog } = await import('../pages/Admin/MngBlogs');
               return { Component: NewBlog };
             },
-            ErrorBoundary: ErrorInfoBack,
+            ErrorBoundary: ErrorInfoRefresh,
           },
           {
             path: 'new',
-            ErrorBoundary: ErrorInfoBack,
+            ErrorBoundary: ErrorInfoRefresh,
             async action({ request }) {
               let { createBlog } = await import('../api/blogs');
               return createBlog({ request });

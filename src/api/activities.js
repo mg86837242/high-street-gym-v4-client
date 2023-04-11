@@ -24,7 +24,7 @@ export async function createActivity() {
 export async function createActivityByXML({ request }) {
   const formData = await request.formData();
   const json = fetchJSON.postFile(`${API_URL}/activities/upload/xml`, formData);
-  // FIX This action might not be needed, if it can really work, revisit these redirects
+  // FIX (1) This action might not be needed, if it can really work, revisit these redirects (2) branching actions to share the same 'new' route ?
   return redirect(`..`) || redirect(`../${json.insertId}/edit`);
 }
 
