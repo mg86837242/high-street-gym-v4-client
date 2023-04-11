@@ -97,11 +97,11 @@ export function NewActivity() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const response = await createActivityByUploadXML(file);
+    const response = await createActivityByXML(file);
     console.log(await response.json());
   }
 
-  async function createActivityByUploadXML(file) {
+  async function createActivityByXML(file) {
     const formData = new FormData();
     formData.append('xml', file);
     const requestOptions = {
