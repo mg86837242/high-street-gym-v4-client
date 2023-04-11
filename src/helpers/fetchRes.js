@@ -82,6 +82,21 @@ export default fetchRes;
 // -- https://developer.mozilla.org/en-US/docs/Web/API/Response: `Response` interface, esp. its instance properties and
 //  instance methods
 
+// References for error handling (esp. in loader and action):
+// -- https://javascript.info/async-await#error-handling: Fundamentals of error handling in `async` functions
+// -- https://reactrouter.com/en/main/route/loader: Official recommended way of (1) parsing response, or lack thereof,
+//  and (2) handling fetch errors in the loader, which leverages the `throw` statement (see:
+//   https://javascript.info/async-await#error-handling)
+// -- https://dmitripavlutin.com/javascript-fetch-async-await/#:~:text=3.-,Handling%20fetch%20errors,-When%20I%20was:
+//  "Handling fetch errors" part, this guide (1) is in line with React Router's official recommended way of error
+//  handling in that it leverages the `throw` statement (see: https://javascript.info/async-await#error-handling),
+//  however, (2) use `throw new Error()` i/o `throw new Response()`, which is less ideal (see spec for
+//  `isRouteErrorResponse` for reasons)
+// -- https://web.dev/fetch-api-error-handling/: (1) Classification of fetch errors, (2) more detailed guide to
+//  handling fetch errors, esp. the "When the network status code represents an error" part; (3) standardized naming
+//  convention for parameters used during fetch error handling, which is in line with "React Docs – Reusing Logic
+//  with Custom Hooks"
+
 // PS1 Verbose error handling using the response body constructed in the API endpoint; alternatively, simply throw
 //  `response.status` and/or `response.statusText` without parsing the response
 // PS2 Only handle errors represented by the network status code b/c they've been defined in the backend API and
@@ -101,29 +116,6 @@ export default fetchRes;
 // TODO `AbortController` for fetch with cancel button UI in individual component (currently conflict w/ global
 //  pending UI)
 
-// References for error handling (esp. in loader and action):
-// -- https://javascript.info/async-await#error-handling: Fundamentals of error handling in `async` functions
-// -- https://reactrouter.com/en/main/route/loader: Official recommended way of (1) parsing response, or lack thereof,
-//  and (2) handling fetch errors in the loader, which leverages the `throw` statement (see:
-//   https://javascript.info/async-await#error-handling)
-// -- https://dmitripavlutin.com/javascript-fetch-async-await/#:~:text=3.-,Handling%20fetch%20errors,-When%20I%20was:
-//  "Handling fetch errors" part, this guide (1) is in line with React Router's official recommended way of error
-//  handling in that it leverages the `throw` statement (see: https://javascript.info/async-await#error-handling),
-//  however, (2) use `throw new Error()` i/o `throw new Response()`, which is less ideal (see spec for
-//  `isRouteErrorResponse` for reasons)
-// -- https://web.dev/fetch-api-error-handling/: (1) Classification of fetch errors, (2) more detailed guide to
-//  handling fetch errors, esp. the "When the network status code represents an error" part; (3) standardized naming
-//  convention for parameters used during fetch error handling, which is in line with "React Docs – Reusing Logic
-//  with Custom Hooks"
-
-// NB (1) "React Router will automatically call `response.json()` (within the loader) so components don't need to
-//  parse it while rendering", see: https://reactrouter.com/en/main/route/loader,
-//  (2) however, `Response` obj returned by this utility function `fetchRes.js` fails to be parsed in the loader,
-//  Error: `Uncaught (in promise) TypeError: Response.json: Body has already been consumed.` => Google error =>
-//  https://stackoverflow.com/questions/34786358/what-does-this-error-mean-uncaught-typeerror-already-read => Log and
-//  observe the `response` constant right before it's returned at the end of this utility => `Response.bodyUsed` is
-//  true => Solution: don't parse `Response` obj outside the scope of error handling (the if statement).
-
 // References for React Router:
 // -- https://reactrouter.com/en/main/route/error-element#throwing-responses: Spec for `errorElement`, specifically
 //  throwing responses, covering everything mentioned the 2 links below
@@ -133,3 +125,15 @@ export default fetchRes;
 //  is thrown from an action or loader, it will be unwrapped into an `ErrorResponse` (constructor) so that your
 //  component doesn't have to deal with the complexity of unwrapping it (which would require React state and effects to
 //  deal with the promise returned from `res.json()`)"
+
+// NB "React Router will automatically call `response.json()` (within the loader) so components don't need to
+//  parse it while rendering", see: https://reactrouter.com/en/main/route/loader,
+//  (2) however, `Response` obj returned by this helper function `fetchRes.js` fails to be parsed in the loader,
+// PS5 `Uncaught (in promise) TypeError: Response.json: Body has already been consumed.` => Google error =>
+//  https://stackoverflow.com/questions/34786358/what-does-this-error-mean-uncaught-typeerror-already-read => Log and
+//  observe the `response` constant right before it's returned at the end of this helper => `Response.bodyUsed` is
+//  true => Solution: don't parse `Response` obj outside the scope of error handling (the if statement).
+
+// References for switch vs. object literal: (source: javascript switch or object literal site:stackoverflow.com)
+// -- https://stackoverflow.com/questions/13383798/using-object-literal-rather-than-switch-statement
+// -- https://stackoverflow.com/questions/37730199/switch-vs-object-lookup-performance-since-jsperf-is-down

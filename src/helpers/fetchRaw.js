@@ -39,7 +39,3 @@ const fetchRaw = {
 };
 
 export default fetchRaw;
-
-// References: (source: javascript switch or object literal site:stackoverflow.com)
-// -- https://stackoverflow.com/questions/13383798/using-object-literal-rather-than-switch-statement
-// -- https://stackoverflow.com/questions/37730199/switch-vs-object-lookup-performance-since-jsperf-is-down
