@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
-import { useLoaderData, Outlet, Form, useSubmit, useNavigate } from 'react-router-dom';
+import { useLoaderData, Outlet, Form, useSubmit, useNavigate, Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { activitySchema } from '../../schemas';
@@ -92,10 +92,10 @@ function ListActivities({ activities }) {
 }
 
 export function NewActivity() {
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState('');
 
   return (
-    <>
+    <div className='flex flex-col gap-5'>
       <div className='flex flex-col-reverse items-end gap-5 py-6 lg:flex-row lg:justify-between lg:items-start'>
         <div className='flex flex-col gap-5'>
           <Form
@@ -119,21 +119,27 @@ export function NewActivity() {
             <Btn2SmOutline>Submit</Btn2SmOutline>
           </Form>
         </div>
-        <div className='divider lg:hidden' />
+        <div className='m-0 divider lg:hidden' />
         <Form method='post' action='new'>
           <Btn2SmOutline>Create New</Btn2SmOutline>
         </Form>
       </div>
-      <p>
+      <p className='text-right lg:text-left'>
         <em>
-          Note: For XML upload (1) accepted text content for &lt;catetories&gt; include: Aerobic, Strength, Aerobic
-          &amp; Strength, Flexibility, (2) accepted text content for &lt;intensityLevel&gt; include: Low, Medium, High,
-          Very High, Varies with Type, (3) element names need to be in camel case in order to comply with API and
+          Note: For XML upload, (1) accepted text content for &lt;categories&gt; include: Aerobic, Strength, Aerobic
+          &amp; Strength, Flexibility; (2) accepted text content for &lt;intensityLevel&gt; include: Low, Medium, High,
+          Very High, Varies with Type; (3) element names need to be in camel case in order to comply with API and
           database design.
         </em>
       </p>
-      {/* FIX (1) Upload UI with example XML (2) Extend to Admin Member */}
-    </>
+      <p className='text-right lg:text-left'>
+        👉 You can try upload the{' '}
+        <Link to='/exampleNewActivities.xml' target='_blank' download className='link link-primary'>
+          sample XML
+        </Link>{' '}
+        to create new activities:
+      </p>
+    </div>
   );
 }
 
@@ -250,3 +256,10 @@ export function EditActivity() {
 // References for XML:
 // -- https://www.convertcsv.com/csv-to-xml.htm: CSV to XML converter
 // -- https://www.wikiwand.com/en/List_of_XML_and_HTML_character_entity_references
+
+// References for download file in React (source: "react download static file site:stackoverflow.com"):
+// -- https://stackoverflow.com/questions/50694881: (1) fetch backend method, (2) native HTML method, (3) React Router
+//  method
+// ---- https://www.geeksforgeeks.org/how-to-download-pdf-file-in-reactjs/: expand on the fetch backend method
+// ---- https://stackoverflow.com/questions/57374561: this prompts me to check Vite's specs
+// ---- https://vitejs.dev/guide/assets.html#the-public-directory: Vite's spec for the public dir

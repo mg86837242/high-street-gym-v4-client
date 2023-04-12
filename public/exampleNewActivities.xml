@@ -13,7 +13,7 @@
 <!ELEMENT durationMinutes (#PCDATA)>
 ]>
 <activityList>
-  <activity>
+  <!-- <activity>
     <name>Cardio Blitz</name>
     <category>Aerobic</category>
     <description>Lorem ipsum</description>
@@ -34,8 +34,8 @@
     <requirementTwo></requirementTwo>
     <durationMinutes>45</durationMinutes>
     <price>90</price>
-  </activity>
-  <!-- <activity>
+  </activity> -->
+  <activity>
     <name>Strength and Conditioning Circuit</name>
     <category>Aerobic &amp; Strength</category>
     <description>Lorem ipsum</description>
@@ -57,7 +57,7 @@
     <durationMinutes>45</durationMinutes>
     <price>90</price>
   </activity>
-  <activity>
+  <!-- <activity>
     <name>Mobility Fit</name>
     <category>Flexibility</category>
     <description>Lorem ipsum</description>

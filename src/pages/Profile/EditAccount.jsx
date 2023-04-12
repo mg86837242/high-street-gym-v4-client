@@ -11,7 +11,7 @@ import {
   addressTrainerSchema,
   addressMemberSchema,
 } from '../../schemas';
-import { default as countries } from '../../data/countries.json';
+import countries from '../../data/countries.json'; // Vite's feature
 import { convertEmptyStrToNull, convertNullToEmptyStr } from '../../helpers/sanitize';
 import FCRHFSm from '../../components/formCtrlRHF/FCRHFSm';
 import FCRHFSmPass from '../../components/formCtrlRHF/FCRHFSmPass';
