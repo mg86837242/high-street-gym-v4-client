@@ -93,24 +93,39 @@ function ListActivities({ activities }) {
 
 export function NewActivity() {
   return (
-    <div className='flex flex-col-reverse items-end gap-5 py-6 lg:flex-row lg:justify-between lg:items-center'>
-      <Form method='post' action='new-xml' encType='multipart/form-data' className='flex items-center gap-5'>
-        <label htmlFor='create-activity-xml' className='flex-shrink-0'>
-          <span className='flex-shrink-0'>Import New Activity by XML: </span>
-        </label>
-        <input
-          name='xml'
-          id='create-activity-xml'
-          type='file'
-          accept='.xml'
-          className='w-full max-w-xs shadow file-input file-input-bordered file-input-sm shadow-black/50'
-        />
-        <Btn2SmOutline>Submit</Btn2SmOutline>
-      </Form>
-      <Form method='post' action='new'>
-        <Btn2SmOutline>Create New</Btn2SmOutline>
-      </Form>
-    </div>
+    <>
+      <div className='flex flex-col-reverse items-end gap-5 py-6 lg:flex-row lg:justify-between lg:items-start'>
+        <div className='flex flex-col gap-5'>
+          <Form
+            method='post'
+            action='new-xml'
+            encType='multipart/form-data'
+            className='flex flex-col items-end gap-5 lg:items-center lg:flex-row'
+          >
+            <label htmlFor='create-activity-xml' className='flex-shrink-0'>
+              <span className='flex-shrink-0'>Import New Activity by XML: </span>
+            </label>
+            <input
+              name='xml'
+              id='create-activity-xml'
+              type='file'
+              accept='.xml'
+              className='w-full max-w-xs shadow file-input file-input-bordered file-input-sm shadow-black/50'
+            />
+            <Btn2SmOutline>Submit</Btn2SmOutline>
+          </Form>
+        </div>
+        <Form method='post' action='new'>
+          <Btn2SmOutline>Create New</Btn2SmOutline>
+        </Form>
+      </div>
+      <p>
+        Note: For XML upload (1) accepted text content for &lt;catetories&gt; include: Aerobic, Strength, Aerobic &amp;
+        Strength, Flexibility, (2) accepted text content for &lt;intensityLevel&gt; include: Low, Medium, High, Very
+        High, Varies with Type, (3) element names need to be in camel case in order to comply with API and database
+        design.
+      </p>
+    </>
   );
 }
 
@@ -223,3 +238,7 @@ export function EditActivity() {
 // ---- https://www.npmjs.com/package/express-fileupload
 // ---- https://www.npmjs.com/package/multer
 // -- https://www.sammeechward.com/uploading-images-express-and-react: (source: "multer with react")
+
+// References for XML:
+// -- https://www.convertcsv.com/csv-to-xml.htm: CSV to XML converter
+// -- https://www.wikiwand.com/en/List_of_XML_and_HTML_character_entity_references
