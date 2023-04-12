@@ -17,7 +17,7 @@ export async function getBlogById({ params }) {
 
 export async function createBlog({ request }) {
   const formData = await request.formData();
-  const creations = { ...defaultNewBlog, loginId: parseInt(formData.get('loginId'), 10) };
+  const creations = defaultNewBlog(parseInt(formData.get('loginId'), 10));
   const json = await fetchJSON.post(`${API_URL}/blogs`, creations);
   return redirect(`../${json.insertId}/edit`);
 }
