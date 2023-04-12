@@ -2,6 +2,7 @@ import { redirect } from 'react-router-dom';
 import { API_URL } from '../data/constants';
 import fetchResp from '../helpers/fetchResp';
 import fetchJSON from '../helpers/fetchJSON';
+import fetchRaw from '../helpers/fetchRaw';
 import getSubmittedData from '../helpers/getSubmittedData';
 import defaultNewActivity from '../data/defaultNewActivity';
 
@@ -23,9 +24,11 @@ export async function createActivity() {
 
 export async function createActivityByXML({ request }) {
   const formData = await request.formData();
-  const json = fetchJSON.postFile(`${API_URL}/activities/upload/xml`, formData);
-  // FIX (1) This action might not be needed, if it can really work, revisit these redirects (2) branching actions to share the same 'new' route ?
-  return redirect(`..`) || redirect(`../${json.insertId}/edit`);
+  const response = await fetchRaw.postFile(`${API_URL}/activities/upload/xml`, formData);
+  if (!response.ok) {
+    return redirect(`..`);
+  }
+  return redirect(`..`);
 }
 
 export async function updateActivityById({ params, request }) {

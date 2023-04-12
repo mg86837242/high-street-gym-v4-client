@@ -18,6 +18,15 @@ const fetchRaw = {
     const response = await fetch(url, requestOptions);
     return response;
   },
+  async postFile(url, body) {
+    const requestOptions = {
+      method: 'POST',
+      body,
+      credentials: 'include',
+    };
+    const response = await fetch(url, requestOptions);
+    return response;
+  },
   async patch(url, body) {
     const requestOptions = {
       method: 'PATCH',
