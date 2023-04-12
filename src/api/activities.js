@@ -1,7 +1,6 @@
 import { redirect } from 'react-router-dom';
 import { API_URL } from '../data/constants';
 import fetchResp from '../helpers/fetchResp';
-import fetchJSON from '../helpers/fetchJSON';
 import fetchRaw from '../helpers/fetchRaw';
 import getSubmittedData from '../helpers/getSubmittedData';
 import defaultNewActivity from '../data/defaultNewActivity';
@@ -18,7 +17,10 @@ export async function getActivityById({ params }) {
 
 export async function createActivity() {
   const creations = defaultNewActivity;
-  const json = await fetchJSON.post(`${API_URL}/activities`, creations);
+  const response = await fetchRaw.post(`${API_URL}/activities`, creations);
+  if (!response.ok) {
+    return redirect(`..`);
+  }
   return redirect(`../${json.insertId}/edit`);
 }
 
