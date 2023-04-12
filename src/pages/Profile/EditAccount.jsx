@@ -149,7 +149,8 @@ function UpdateAdminForm({ topMsg, user, emails, authenticatedUser }) {
     <form
       onSubmit={handleSubmit(data => {
         setDuplicateEmailMsg('');
-        if (data.email !== user.email && emails.find(e => e.email === data.email)) {
+        const isDuplicate = data.email !== user.email && emails.some(e => e.email === data.email);
+        if (isDuplicate) {
           setDuplicateEmailMsg('Email has already been used');
           return;
         }
@@ -256,7 +257,8 @@ function UpdateTrainerForm({ topMsg, user, emails, authenticatedUser }) {
     <form
       onSubmit={handleSubmit(data => {
         setDuplicateEmailMsg('');
-        if (data.email !== user.email && emails.find(e => e.email === data.email)) {
+        const isDuplicate = data.email !== user.email && emails.some(e => e.email === data.email);
+        if (isDuplicate) {
           setDuplicateEmailMsg('Email has already been used');
           return;
         }
@@ -382,7 +384,8 @@ function UpdateMemberForm({ topMsg, user, emails, authenticatedUser }) {
     <form
       onSubmit={handleSubmit(data => {
         setDuplicateEmailMsg('');
-        if (data.email !== user.email && emails.find(e => e.email === data.email)) {
+        const isDuplicate = data.email !== user.email && emails.some(e => e.email === data.email);
+        if (isDuplicate) {
           setDuplicateEmailMsg('Email has already been used');
           return;
         }

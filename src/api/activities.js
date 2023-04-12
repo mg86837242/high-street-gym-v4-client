@@ -1,9 +1,9 @@
 import { redirect } from 'react-router-dom';
 import { API_URL } from '../data/constants';
 import fetchResp from '../helpers/fetchResp';
-import fetchRaw from '../helpers/fetchRaw';
-import getSubmittedData from '../helpers/getSubmittedData';
+import fetchJSON from '../helpers/fetchJSON';
 import defaultNewActivity from '../data/defaultNewActivity';
+import getSubmittedData from '../helpers/getSubmittedData';
 
 export async function getAllActivities() {
   const response = await fetchResp.get(`${API_URL}/activities`);
@@ -17,19 +17,13 @@ export async function getActivityById({ params }) {
 
 export async function createActivity() {
   const creations = defaultNewActivity;
-  const response = await fetchRaw.post(`${API_URL}/activities`, creations);
-  if (!response.ok) {
-    return redirect(`..`);
-  }
+  const json = await fetchJSON.post(`${API_URL}/activities`, creations);
   return redirect(`../${json.insertId}/edit`);
 }
 
 export async function createActivityByXML({ request }) {
   const formData = await request.formData();
-  const response = await fetchRaw.postFile(`${API_URL}/activities/upload/xml`, formData);
-  if (!response.ok) {
-    return redirect(`..`);
-  }
+  await fetchResp.postFile(`${API_URL}/activities/upload/xml`, formData);
   return redirect(`..`);
 }
 

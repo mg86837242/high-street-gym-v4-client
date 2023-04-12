@@ -47,7 +47,7 @@ export default function List() {
     [blogs]
   );
   const myBlogList = useMemo(() => {
-    const hasMyBlog = blogs.find(({ loginId }) => loginId === authenticatedUser?.id);
+    const hasMyBlog = blogs.some(({ loginId }) => loginId === authenticatedUser?.id);
     return hasMyBlog ? (
       <>
         {blogs.map(

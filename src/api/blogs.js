@@ -1,7 +1,7 @@
 import { redirect } from 'react-router-dom';
 import { API_URL } from '../data/constants';
 import fetchResp from '../helpers/fetchResp';
-import fetchRaw from '../helpers/fetchRaw';
+import fetchJSON from '../helpers/fetchJSON';
 import defaultNewBlog from '../data/defaultNewBlog';
 import getSubmittedData from '../helpers/getSubmittedData';
 
@@ -18,10 +18,7 @@ export async function getBlogById({ params }) {
 export async function createBlog({ request }) {
   const formData = await request.formData();
   const creations = { ...defaultNewBlog, loginId: parseInt(formData.get('loginId'), 10) };
-  const response = await fetchRaw.post(`${API_URL}/blogs`, creations);
-  if (!response.ok) {
-    return redirect(`..`);
-  }
+  const json = await fetchJSON.post(`${API_URL}/blogs`, creations);
   return redirect(`../${json.insertId}/edit`);
 }
 

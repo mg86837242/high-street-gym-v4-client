@@ -36,6 +36,24 @@ const fetchResp = {
     }
     return response;
   },
+  async postFile(url, body) {
+    const requestOptions = {
+      method: 'POST',
+      body,
+      credentials: 'include',
+    };
+    const response = await fetch(url, requestOptions);
+    if (!response?.ok) {
+      const json = await response.json();
+      const message = `${json.status} ${
+        typeof json.message === 'string'
+          ? json.message
+          : json.message?.map(issue => `${issue.path[0]}: ${issue.message}`).join('; ')
+      }`;
+      throw new Response(message);
+    }
+    return response;
+  },
   async patch(url, body) {
     const requestOptions = {
       method: 'PATCH',

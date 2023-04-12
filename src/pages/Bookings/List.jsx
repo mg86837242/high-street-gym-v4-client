@@ -108,7 +108,7 @@ function BookingListMemberView({ bookings, userMemberId }) {
     [bookings, userMemberId]
   );
   const myBookingList = useMemo(() => {
-    const hasMyBooking = bookings.find(({ memberId }) => memberId === userMemberId);
+    const hasMyBooking = bookings.some(({ memberId }) => memberId === userMemberId);
     return hasMyBooking ? (
       <ul className='grid justify-items-center content-start w-full gap-4'>
         {bookings.map(
@@ -263,7 +263,7 @@ function BookingListTrainerView({ bookings, userTrainerId }) {
     [bookings, userTrainerId]
   );
   const myBookingList = useMemo(() => {
-    const hasMyBooking = bookings.find(({ trainerId }) => trainerId === userTrainerId);
+    const hasMyBooking = bookings.some(({ trainerId }) => trainerId === userTrainerId);
     return hasMyBooking ? (
       <ul className='grid justify-items-center content-start w-full gap-4'>
         {bookings.map(

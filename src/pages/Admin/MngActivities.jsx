@@ -92,6 +92,8 @@ function ListActivities({ activities }) {
 }
 
 export function NewActivity() {
+  const [file, setFile] = useState(null);
+
   return (
     <>
       <div className='flex flex-col-reverse items-end gap-5 py-6 lg:flex-row lg:justify-between lg:items-start'>
@@ -103,13 +105,15 @@ export function NewActivity() {
             className='flex flex-col items-end gap-5 lg:items-center lg:flex-row'
           >
             <label htmlFor='create-activity-xml' className='flex-shrink-0'>
-              <span className='flex-shrink-0'>Import New Activity by XML: </span>
+              <span className='flex-shrink-0 label-text'>Import New Activity by XML: </span>
             </label>
             <input
               name='xml'
               id='create-activity-xml'
               type='file'
               accept='.xml'
+              value={file}
+              onChange={() => setFile(e.target.files[0])}
               className='w-full max-w-xs shadow file-input file-input-bordered file-input-sm shadow-black/50'
             />
             <Btn2SmOutline>Submit</Btn2SmOutline>
@@ -128,6 +132,7 @@ export function NewActivity() {
           database design.
         </em>
       </p>
+      {/* FIX (1) Upload UI with example XML (2) Extend to Admin Member */}
     </>
   );
 }

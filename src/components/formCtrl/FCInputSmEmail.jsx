@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 export default function FCInputSmEmail({ issue, emails, initialValue, isRequired }) {
   const [value, setValue] = useState(initialValue);
-  const isDuplicate = value !== initialValue && emails.find(e => value === e.email);
+  const isDuplicate = value !== initialValue && emails.some(e => value === e.email);
 
   return (
     <div id='email-input-group' className='w-full form-control'>

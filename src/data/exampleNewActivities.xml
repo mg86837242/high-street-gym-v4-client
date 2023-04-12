@@ -21,8 +21,8 @@
     <maxPeopleAllowed>26</maxPeopleAllowed>
     <requirementOne>Large towels are compulsory for Group Exercise and Gym.</requirementOne>
     <requirementTwo></requirementTwo>
-    <price>60</price>
     <durationMinutes>45</durationMinutes>
+    <price>90</price>
   </activity>
   <activity>
     <name>Super Circuit</name>
@@ -32,10 +32,10 @@
     <maxPeopleAllowed>26</maxPeopleAllowed>
     <requirementOne>Large towels are compulsory for Group Exercise and Gym.</requirementOne>
     <requirementTwo></requirementTwo>
-    <price>60</price>
     <durationMinutes>45</durationMinutes>
+    <price>90</price>
   </activity>
-  <activity>
+  <!-- <activity>
     <name>Strength and Conditioning Circuit</name>
     <category>Aerobic &amp; Strength</category>
     <description>Lorem ipsum</description>
@@ -43,19 +43,8 @@
     <maxPeopleAllowed>26</maxPeopleAllowed>
     <requirementOne>Large towels are compulsory for Group Exercise and Gym.</requirementOne>
     <requirementTwo></requirementTwo>
-    <price>60</price>
     <durationMinutes>45</durationMinutes>
-  </activity>
-  <activity>
-    <name>Boxing Circuit</name>
-    <category>Aerobic &amp; Strength</category>
-    <description>Lorem ipsum</description>
-    <intensityLevel>Medium</intensityLevel>
-    <maxPeopleAllowed>26</maxPeopleAllowed>
-    <requirementOne>Large towels are compulsory for Group Exercise and Gym.</requirementOne>
-    <requirementTwo>BYO boxing gloves, wraps and inner liners.</requirementTwo>
-    <price>60</price>
-    <durationMinutes>45</durationMinutes>
+    <price>90</price>
   </activity>
   <activity>
     <name>Stength</name>
@@ -65,8 +54,8 @@
     <maxPeopleAllowed>26</maxPeopleAllowed>
     <requirementOne>Large towels are compulsory for Group Exercise and Gym.</requirementOne>
     <requirementTwo></requirementTwo>
-    <price>60</price>
     <durationMinutes>45</durationMinutes>
+    <price>90</price>
   </activity>
   <activity>
     <name>Mobility Fit</name>
@@ -76,8 +65,8 @@
     <maxPeopleAllowed>26</maxPeopleAllowed>
     <requirementOne>Large towels are compulsory for Group Exercise and Gym.</requirementOne>
     <requirementTwo>BYO mat</requirementTwo>
-    <price>60</price>
     <durationMinutes>45</durationMinutes>
+    <price>90</price>
   </activity>
   <activity>
     <name>Tabata</name>
@@ -87,8 +76,8 @@
     <maxPeopleAllowed>26</maxPeopleAllowed>
     <requirementOne>Large towels are compulsory for Group Exercise and Gym.</requirementOne>
     <requirementTwo></requirementTwo>
-    <price>60</price>
     <durationMinutes>45</durationMinutes>
+    <price>90</price>
   </activity>
   <activity>
     <name>Restorative Stretch</name>
@@ -98,8 +87,8 @@
     <maxPeopleAllowed>26</maxPeopleAllowed>
     <requirementOne>Large towels are compulsory for Group Exercise and Gym.</requirementOne>
     <requirementTwo>BYO mat</requirementTwo>
-    <price>60</price>
     <durationMinutes>45</durationMinutes>
+    <price>90</price>
   </activity>
   <activity>
     <name>TRX HIIT</name>
@@ -109,8 +98,8 @@
     <maxPeopleAllowed>14</maxPeopleAllowed>
     <requirementOne>Large towels are compulsory for Group Exercise and Gym.</requirementOne>
     <requirementTwo></requirementTwo>
-    <price>60</price>
     <durationMinutes>45</durationMinutes>
+    <price>90</price>
   </activity>
   <activity>
     <name>TRX</name>
@@ -120,7 +109,7 @@
     <maxPeopleAllowed>14</maxPeopleAllowed>
     <requirementOne>Large towels are compulsory for Group Exercise and Gym.</requirementOne>
     <requirementTwo></requirementTwo>
-    <price>60</price>
     <durationMinutes>45</durationMinutes>
-  </activity>
+    <price>90</price>
+  </activity> -->
 </activityList>
