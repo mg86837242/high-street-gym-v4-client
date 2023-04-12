@@ -132,6 +132,65 @@ const adminRoutes = [
       },
     ],
   },
+  {
+    Component: () => <RequireAuth roles={['Admin']} />,
+    children: [
+      {
+        path: 'members',
+        async lazy() {
+          let { MngMembers } = await import('../pages/Admin/MngMembers');
+          return { Component: MngMembers };
+        },
+        ErrorBoundary: ErrorInfoRefresh,
+        async loader() {
+          let { getAllMembers } = await import('../api/members.js');
+          return getAllMembers();
+        },
+        children: [
+          {
+            index: true,
+            async lazy() {
+              let { NewMember } = await import('../pages/Admin/MngMembers');
+              return { Component: NewMember };
+            },
+            ErrorBoundary: ErrorInfoRefresh,
+          },
+          {
+            path: 'new',
+            ErrorBoundary: ErrorInfoRefresh,
+            async action({ request }) {
+              let { createMember } = await import('../api/members');
+              return createMember({ request });
+            },
+          },
+          {
+            path: ':id/edit',
+            async lazy() {
+              let { EditMember } = await import('../pages/Admin/MngMembers');
+              return { Component: EditMember };
+            },
+            ErrorBoundary: ErrorInfoRefresh,
+            async loader({ params }) {
+              let { getMemberById } = await import('../api/members');
+              return getMemberById({ params });
+            },
+            async action({ params, request }) {
+              let { updateMemberById } = await import('../api/members');
+              return updateMemberById({ params, request });
+            },
+          },
+          {
+            path: ':id/destroy',
+            ErrorBoundary: ErrorInfoBack,
+            async action({ params }) {
+              let { deleteMemberById } = await import('../api/members');
+              return deleteMemberById({ params });
+            },
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 export default adminRoutes;
