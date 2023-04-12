@@ -115,6 +115,7 @@ export function NewActivity() {
             <Btn2SmOutline>Submit</Btn2SmOutline>
           </Form>
         </div>
+        <div className='divider lg:hidden' />
         <Form method='post' action='new'>
           <Btn2SmOutline>Create New</Btn2SmOutline>
         </Form>
