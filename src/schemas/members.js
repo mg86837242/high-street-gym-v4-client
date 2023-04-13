@@ -1,8 +1,8 @@
 import { z } from 'zod';
 import { emailSchema, passwordSchema, usernameSchema, firstNameSchema, lastNameSchema, phoneSchema } from './users';
 
-// TODO Clean up `Signup` page by using RHF
 // NB This ageSchema is for the `Signup` page only, where RHF is not used and `FormData` is used so its input is collected as string
+// TODO Clean up `Signup` page by using RHF
 export const ageSchema = z
   .string()
   .regex(/^\d*$/, { message: 'Age only accepts numbers' })

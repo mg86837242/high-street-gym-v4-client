@@ -92,7 +92,7 @@ function ListMembers({ members }) {
 }
 
 export function NewMember() {
-  const [file, setFile] = useState('');
+  const [file, setFile] = useState(null);
 
   return (
     <div className='flex flex-col gap-5'>
@@ -112,8 +112,8 @@ export function NewMember() {
               id='create-member-xml'
               type='file'
               accept='.xml'
-              value={file}
-              onChange={() => setFile(e.target.files[0])}
+              // value={file}
+              onChange={e => setFile(e.target.files[0])}
               className='w-full max-w-xs shadow file-input file-input-bordered file-input-sm shadow-black/50'
             />
             <Btn2SmOutline>Submit</Btn2SmOutline>

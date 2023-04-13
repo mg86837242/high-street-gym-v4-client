@@ -6,6 +6,8 @@ export const emailSchema = z
   .email()
   .max(45, { message: 'Email must have at most 45 character(s)' });
 export const passwordSchema = z
+  // NB Max length of password is set to 100 for server-side validation b/c encrypting password results in longer
+  //  password
   .string()
   .min(8, { message: 'Password must have at least 8 character(s)' })
   .max(100, { message: 'Password exceeds maximum character requirement' });
