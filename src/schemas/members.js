@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { emailSchema, passwordSchema, usernameSchema, firstNameSchema, lastNameSchema, phoneSchema } from '.';
+import { emailSchema, passwordSchema, usernameSchema, firstNameSchema, lastNameSchema, phoneSchema } from './users';
 
 // NB This ageSchema is for the `Signup` page only, where RHF is not used and `FormData` is used so its input is collected as string
 export const ageSchema = z
@@ -16,10 +16,14 @@ export const memberSchema = z.object({
   firstName: firstNameSchema,
   lastName: lastNameSchema,
   phone: phoneSchema,
-  age: z
-    .number({ message: 'Age only accepts numbers' })
-    .max(999, { message: 'Age must have at most 3 digits' })
-    .nullable(),
+  age: z.union([
+    z
+      .number({ message: 'Age only accepts numbers' })
+      .nonnegative()
+      .max(999, { message: 'Age must have at most 3 digits' })
+      .nullable(),
+    z.nan(),
+  ]),
   gender: z.enum(['Female', 'Male', 'Other', '']).nullable(),
   id: z.number(),
   _action: z.string(),
