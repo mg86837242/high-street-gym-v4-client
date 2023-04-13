@@ -1,8 +1,8 @@
 import { Link, Form, useActionData, useNavigation } from 'react-router-dom';
-import FCInput from '../formCtrl';
-import FCInputEmail from '../formCtrl';
-import FCInputPass from '../formCtrl';
-import FCSelectGender from '../formCtrl';
+import FCInput from '../../components/formCtrl/FCInput';
+import FCInputEmail from '../../components/formCtrl/FCInputEmail';
+import FCInputPass from '../../components/formCtrl/FCInputPass';
+import FCSelectGender from '../../components/formCtrl/FCSelectGender';
 import { Btn2 } from '../../components/ui/Btn2';
 
 export default function SignupPanel({ emails }) {
@@ -47,7 +47,7 @@ function SignupForm({ emails }) {
       <FCInput name='firstName' type='text' issue={issues?.firstName} initialValue='Demo' />
       <FCInput name='lastName' type='text' issue={issues?.lastName} initialValue='Member' />
       <FCInput name='phone' type='tel' issue={issues?.phone} initialValue='0123456789' />
-      <FCInput name='age' type='text' issue={issues?.age} isRequired={false} />
+      <FCInput name='age' type='number' issue={issues?.age} isRequired={false} />
       <FCSelectGender issue={issues?.gender} isRequired={false} />
       <div className='col-span-1 pt-4 md:col-span-2'>
         <Btn2 w='w-full'>{message}</Btn2>

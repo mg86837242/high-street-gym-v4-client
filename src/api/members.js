@@ -7,7 +7,7 @@ import {
   firstNameSchema,
   lastNameSchema,
   phoneSchema,
-  ageSchema,
+  ageSchemaNoRHF,
   genderSchema,
 } from '../schemas';
 import fetchRaw from '../helpers/fetchRaw';
@@ -36,11 +36,8 @@ export async function signupMembers({ request }) {
   if (!phoneSchema.safeParse(phone).success) {
     messages.phone = phoneSchema.safeParse(phone).error.issues[0].message;
   }
-  // NB Age input with `type="number"` will convert invalid input (such as letters) value to empty string, which will
-  ///  be let pass by zod's `nullable()` rather than caught by `regex(/^\d*$/)`, i.e., age input type should be of
-  //  `type="text"`
-  if (!ageSchema.safeParse(age).success) {
-    messages.age = ageSchema.safeParse(age).error.issues[0].message;
+  if (!ageSchemaNoRHF.safeParse(age).success) {
+    messages.age = ageSchemaNoRHF.safeParse(age).error.issues[0].message;
   }
   if (!genderSchema.safeParse(gender).success) {
     messages.gender = genderSchema.safeParse(gender).error.issues[0].message;
@@ -48,11 +45,11 @@ export async function signupMembers({ request }) {
   if (Object.keys(messages).length) {
     return messages;
   }
-  // NB Convert these inputs' values from empty string to null, so (1) the backend and frontend can share a same
-  //  zod schema – using `nullable()`, (2) it reflects that these attributes are nullable in DB; for whether to
+  // NB Convert these inputs' values from empty string to null, so (1) the backend and frontend can share almost the
+  //  same zod schema that uses `nullable()`, (2) it reflects that these attributes are nullable in DB (for whether to
   //  use NULL or undefined as the falsy value in the SQL query => "recommend only setting variables to null",
-  //  see: https://stackoverflow.com/questions/5076944/what-is-the-difference-between-null-and-undefined-in-javascript/5076989#5076989,
-  // (3) there is an only 1 exception, which is `lineTwo` in `Addresses` table
+  //  see: https://stackoverflow.com/questions/5076944/5076989#5076989), (3) there is only 1 exception to this rule,
+  //  which is the `lineTwo` column in the `Addresses` table
   // #endregion
   // Type conversion for db constraint
   creations.age = parseInt(age, 10) || null;
