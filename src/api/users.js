@@ -9,12 +9,12 @@ export async function getAllEmails() {
 
 export async function getUserWithAllDetailsAndAllEmails() {
   const accessKey = localStorage.getItem('accessKey');
-  const response = await fetchResp.get(`${API_URL}/users/user-with-all-details-and-all-emails/key/${accessKey}`);
+  const response = await fetchResp.get(`${API_URL}/users/user-with-all-details-and-all-emails/by-key/${accessKey}`);
   return response;
 }
 
 export async function getUserByKey(accessKey) {
-  const response = await fetchRaw.get(`${API_URL}/users/key/${accessKey}`);
+  const response = await fetchRaw.get(`${API_URL}/users/by-key/${accessKey}`);
   const json = await response.json();
   return json;
 }
