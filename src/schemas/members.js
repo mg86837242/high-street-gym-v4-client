@@ -9,7 +9,7 @@ export const ageSchemaNoRHF = z.union([
     .nonnegative()
     .max(999, { message: 'Age must have at most 3 digits' })
     .nullable(),
-  z.string().length(0).nullable(),
+  z.string().length(0, { message: 'Age must be empty or a valid number' }),
 ]);
 export const ageSchema = z.union([
   z
