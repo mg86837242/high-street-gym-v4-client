@@ -12,8 +12,8 @@ const trainerSchema = z.object({
   specialty: z.string().max(45).nullable(),
   certificate: z.string().max(45).nullable(),
   imageUrl: z.union([
-    z.string().length(0, { message: 'Image url must be empty or a valid url' }).nullable(),
-    z.string().url(),
+    z.string().url().nullable(),
+    z.string().length(0, { message: 'Image url must be empty or a valid url' }),
   ]),
   id: z.number(),
   _action: z.string(),
