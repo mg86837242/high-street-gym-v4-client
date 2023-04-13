@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { emailSchema, passwordSchema, usernameSchema, firstNameSchema, lastNameSchema, phoneSchema } from './users';
+import { emailSchema, passwordSchema, usernameSchema, firstNameSchema, lastNameSchema, phoneSchema } from '.';
 
 const trainerSchema = z.object({
   email: emailSchema,
@@ -11,7 +11,10 @@ const trainerSchema = z.object({
   description: z.string().max(255).nullable(),
   specialty: z.string().max(45).nullable(),
   certificate: z.string().max(45).nullable(),
-  imageUrl: z.union([z.string().length(0, { message: 'Image url must be empty or a valid url' }), z.string().url()]),
+  imageUrl: z.union([
+    z.string().length(0, { message: 'Image url must be empty or a valid url' }).nullable(),
+    z.string().url(),
+  ]),
   id: z.number(),
   _action: z.string(),
 });

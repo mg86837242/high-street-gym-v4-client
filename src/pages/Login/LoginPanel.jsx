@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import AuthContext from '../../context/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
-import { emailSchema, passwordSchema } from '../../schemas/users';
+import { emailSchema, passwordSchema } from '../../schemas';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { Btn2 } from '../../components/ui/Btn2';

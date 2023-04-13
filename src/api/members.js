@@ -1,7 +1,15 @@
 import { redirect } from 'react-router-dom';
 import { API_URL } from '../data/constants';
-import { emailSchema, passwordSchema, usernameSchema } from '../schemas/users';
-import { firstNameSchema, lastNameSchema, phoneSchema, ageSchema, genderSchema } from '../schemas/members';
+import {
+  emailSchema,
+  passwordSchema,
+  usernameSchema,
+  firstNameSchema,
+  lastNameSchema,
+  phoneSchema,
+  ageSchema,
+  genderSchema,
+} from '../schemas';
 import fetchRaw from '../helpers/fetchRaw';
 
 export async function signupMembers({ request }) {

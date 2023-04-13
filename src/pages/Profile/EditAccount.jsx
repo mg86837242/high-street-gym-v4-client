@@ -401,7 +401,13 @@ function UpdateMemberForm({ topMsg, user, emails, authenticatedUser }) {
       <FCRHFSm label='First Name' register={register('firstName')} issue={errors.firstName?.message} />
       <FCRHFSm label='Last Name' register={register('lastName')} issue={errors.lastName?.message} />
       <FCRHFSm label='Phone' register={register('phone')} issue={errors.phone?.message} />
-      <FCRHFSm label='Age' register={register('age')} issue={errors.age?.message} isRequired={false} />
+      <FCRHFSm
+        label='Age'
+        type='number'
+        register={register('age', { valueAsNumber: true })}
+        issue={errors.age?.message}
+        isRequired={false}
+      />
       <FCRHFSm label='Gender' issue={errors.gender?.message} isRequired={false}>
         <select {...register('gender')} className='font-normal select select-bordered select-sm'>
           <option value=''>-- Choose Gender --</option>
