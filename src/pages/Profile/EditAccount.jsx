@@ -125,7 +125,7 @@ export default function EditAccount() {
 }
 
 function UpdateAdminForm({ topMsg, user, emails, authenticatedUser }) {
-  const [duplicateEmailMsg, setDuplicateEmailMsg] = useState('');
+  const [inputEmailMsg, setInputEmailMsg] = useState('');
   const submit = useSubmit();
   const {
     register,
@@ -148,10 +148,10 @@ function UpdateAdminForm({ topMsg, user, emails, authenticatedUser }) {
   return (
     <form
       onSubmit={handleSubmit(data => {
-        setDuplicateEmailMsg('');
-        const isDuplicate = data.email !== user.email && emails.some(e => e.email === data.email);
-        if (isDuplicate) {
-          setDuplicateEmailMsg('Email has already been used');
+        setInputEmailMsg('');
+        const emailExists = data.email !== user.email && emails.some(e => e.email === data.email);
+        if (emailExists) {
+          setInputEmailMsg('Email has already been used');
           return;
         }
         const sanitizedData = convertEmptyStrToNull(data);
@@ -160,7 +160,7 @@ function UpdateAdminForm({ topMsg, user, emails, authenticatedUser }) {
       noValidate
       className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'
     >
-      <FCRHFSm label='Email' register={register('email')} issue={duplicateEmailMsg || errors.email?.message} />
+      <FCRHFSm label='Email' register={register('email')} issue={inputEmailMsg || errors.email?.message} />
       <FCRHFSmPass label='Password' register={register('password')} issue={errors.password?.message} />
       <FCRHFSm label='Username' register={register('username')} issue={errors.username?.message} />
       <FCRHFSm label='First Name' register={register('firstName')} issue={errors.firstName?.message} />
@@ -233,7 +233,7 @@ function UpdateAdminAddrForm({ botMsg, user, authenticatedUser }) {
 }
 
 function UpdateTrainerForm({ topMsg, user, emails, authenticatedUser }) {
-  const [duplicateEmailMsg, setDuplicateEmailMsg] = useState('');
+  const [inputEmailMsg, setInputEmailMsg] = useState('');
   const submit = useSubmit();
   const {
     register,
@@ -256,10 +256,10 @@ function UpdateTrainerForm({ topMsg, user, emails, authenticatedUser }) {
   return (
     <form
       onSubmit={handleSubmit(data => {
-        setDuplicateEmailMsg('');
-        const isDuplicate = data.email !== user.email && emails.some(e => e.email === data.email);
-        if (isDuplicate) {
-          setDuplicateEmailMsg('Email has already been used');
+        setInputEmailMsg('');
+        const emailExists = data.email !== user.email && emails.some(e => e.email === data.email);
+        if (emailExists) {
+          setInputEmailMsg('Email has already been used');
           return;
         }
         const sanitizedData = convertEmptyStrToNull(data);
@@ -268,7 +268,7 @@ function UpdateTrainerForm({ topMsg, user, emails, authenticatedUser }) {
       noValidate
       className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'
     >
-      <FCRHFSm label='Email' register={register('email')} issue={duplicateEmailMsg || errors.email?.message} />
+      <FCRHFSm label='Email' register={register('email')} issue={inputEmailMsg || errors.email?.message} />
       <FCRHFSmPass label='Password' register={register('password')} issue={errors.password?.message} />
       <FCRHFSm label='Username' register={register('username')} issue={errors.username?.message} />
       <FCRHFSm label='First Name' register={register('firstName')} issue={errors.firstName?.message} />
@@ -360,7 +360,7 @@ function UpdateTrainerAddrForm({ botMsg, user, authenticatedUser }) {
 }
 
 function UpdateMemberForm({ topMsg, user, emails, authenticatedUser }) {
-  const [duplicateEmailMsg, setDuplicateEmailMsg] = useState('');
+  const [inputEmailMsg, setInputEmailMsg] = useState('');
   const submit = useSubmit();
   const {
     register,
@@ -383,10 +383,10 @@ function UpdateMemberForm({ topMsg, user, emails, authenticatedUser }) {
   return (
     <form
       onSubmit={handleSubmit(data => {
-        setDuplicateEmailMsg('');
-        const isDuplicate = data.email !== user.email && emails.some(e => e.email === data.email);
-        if (isDuplicate) {
-          setDuplicateEmailMsg('Email has already been used');
+        setInputEmailMsg('');
+        const emailExists = data.email !== user.email && emails.some(e => e.email === data.email);
+        if (emailExists) {
+          setInputEmailMsg('Email has already been used');
           return;
         }
         const sanitizedData = convertEmptyStrToNull(data);
@@ -395,7 +395,7 @@ function UpdateMemberForm({ topMsg, user, emails, authenticatedUser }) {
       noValidate
       className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'
     >
-      <FCRHFSm label='Email' register={register('email')} issue={duplicateEmailMsg || errors.email?.message} />
+      <FCRHFSm label='Email' register={register('email')} issue={inputEmailMsg || errors.email?.message} />
       <FCRHFSmPass label='Password' register={register('password')} issue={errors.password?.message} />
       <FCRHFSm label='Username' register={register('username')} issue={errors.username?.message} />
       <FCRHFSm label='First Name' register={register('firstName')} issue={errors.firstName?.message} />

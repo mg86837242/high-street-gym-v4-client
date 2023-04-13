@@ -100,7 +100,7 @@ export function NewActivity() {
         <div className='flex flex-col gap-5'>
           <Form
             method='post'
-            action='new-xml'
+            action='new-upload-xml'
             encType='multipart/form-data'
             className='flex flex-col items-end gap-5 lg:items-center lg:flex-row'
           >

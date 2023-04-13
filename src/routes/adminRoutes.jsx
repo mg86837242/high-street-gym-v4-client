@@ -40,7 +40,7 @@ const adminRoutes = [
         },
       },
       {
-        path: 'new-xml',
+        path: 'new-upload-xml',
         ErrorBoundary: ErrorInfoRefresh,
         async action({ request }) {
           let { createActivityByXML } = await import('../api/activities');
@@ -161,6 +161,14 @@ const adminRoutes = [
             async action({ request }) {
               let { createMember } = await import('../api/members');
               return createMember({ request });
+            },
+          },
+          {
+            path: 'new-upload-xml',
+            ErrorBoundary: ErrorInfoRefresh,
+            async action({ request }) {
+              let { createMemberByXML } = await import('../api/members');
+              return createMemberByXML({ request });
             },
           },
           {

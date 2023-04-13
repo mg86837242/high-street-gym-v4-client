@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 export default function FCInputEmail({ issue, emails, initialValue, isRequired }) {
   const [input, setInput] = useState(initialValue);
-  const isDuplicate = emails.some(e => input === e.email);
+  const emailExists = emails.some(e => input === e.email);
 
   return (
     <div id='email-input-group' className='w-full form-control'>
@@ -20,7 +20,7 @@ export default function FCInputEmail({ issue, emails, initialValue, isRequired }
         className='w-full h-10 text-accent input input-primary 3xl:h-12'
       />
       <label htmlFor='email' className='py-1 3xl:py-2label'>
-        {isDuplicate ? (
+        {emailExists ? (
           <span className='text-rose-500 label-text-alt'>Email has already been used</span>
         ) : issue ? (
           <span className='text-rose-500 label-text-alt'>{issue}</span>
