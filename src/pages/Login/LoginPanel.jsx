@@ -103,7 +103,7 @@ function LoginForm() {
   const [password, setPassword] = useState('');
   const [issues, setIssues] = useState({});
   const [message, setMessage] = useState('Login');
-  const [inputType, setInputType] = useState('password');
+  const [type, setType] = useState('password');
   const [icon, setIcon] = useState(faEyeSlash);
   const navigate = useNavigate();
 
@@ -131,7 +131,7 @@ function LoginForm() {
 
   function handleToggle(e) {
     e.stopPropagation();
-    setInputType(inputType === 'password' ? 'text' : 'password');
+    setType(type === 'password' ? 'text' : 'password');
     setIcon(icon === faEyeSlash ? faEye : faEyeSlash);
   }
 
@@ -168,7 +168,7 @@ function LoginForm() {
         </label>
         <input
           id='password'
-          type={inputType}
+          type={type}
           placeholder='Enter your password here'
           value={password}
           onChange={e => setPassword(e.target.value)}

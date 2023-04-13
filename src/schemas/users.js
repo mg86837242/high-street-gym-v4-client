@@ -15,3 +15,24 @@ export const usernameSchema = z
     message: 'Username only accepts English letters and numbers, and must include at least 1 letter',
   })
   .max(45, { message: 'Username must have at most 45 character(s)' });
+export const firstNameSchema = z
+  .string()
+  .min(1, { message: 'Name must have at least 1 character(s)' })
+  .regex(/^[a-zA-Z]+$/, {
+    message: 'Name only accepts English letters at the moment',
+  })
+  .max(45);
+export const lastNameSchema = z
+  .string()
+  .min(1, { message: 'Name must have at least 1 character(s)' })
+  .regex(/^[a-zA-Z]+$/, {
+    message: 'Name only accepts English letters at the moment',
+  })
+  .max(45);
+export const phoneSchema = z
+  .string()
+  .min(1, { message: 'Phone must have at least 1 character(s)' })
+  .regex(/\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/, {
+    message: 'Invalid phone number format',
+  })
+  .max(45);

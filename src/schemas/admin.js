@@ -1,42 +1,13 @@
 import { z } from 'zod';
+import { emailSchema, passwordSchema, usernameSchema, firstNameSchema, lastNameSchema, phoneSchema } from './users';
 
 const adminSchema = z.object({
-  email: z
-    .string()
-    .min(1, { message: 'Email must have at least 1 character(s)' })
-    .email()
-    .max(45, { message: 'Email must have at most 45 character(s)' }),
-  password: z
-    .string()
-    .min(8, { message: 'Password must have at least 8 character(s)' })
-    .max(100, { message: 'Password exceeds maximum character requirement' }),
-  username: z
-    .string()
-    .regex(/^(?=.*[a-zA-Z]{1,})(?=.*[\d]{0,})[a-zA-Z0-9]+$/, {
-      message: 'Username only accepts English letters and numbers, and must include at least 1 letter',
-    })
-    .max(45, { message: 'Username must have at most 45 character(s)' }),
-  firstName: z
-    .string()
-    .min(1, { message: 'Name must have at least 1 character(s)' })
-    .regex(/^[a-zA-Z]+$/, {
-      message: 'Name only accepts English letters at the moment',
-    })
-    .max(45),
-  lastName: z
-    .string()
-    .min(1, { message: 'Name must have at least 1 character(s)' })
-    .regex(/^[a-zA-Z]+$/, {
-      message: 'Name only accepts English letters at the moment',
-    })
-    .max(45),
-  phone: z
-    .string()
-    .min(1, { message: 'Phone must have at least 1 character(s)' })
-    .regex(/\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/, {
-      message: 'Invalid phone number format',
-    })
-    .max(45),
+  email: emailSchema,
+  password: passwordSchema,
+  username: usernameSchema,
+  firstName: firstNameSchema,
+  lastName: lastNameSchema,
+  phone: phoneSchema,
   id: z.number(),
   _action: z.string(),
 });
