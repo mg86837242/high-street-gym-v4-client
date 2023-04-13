@@ -15,7 +15,7 @@ export async function getAllBookingOptions() {
 }
 
 export async function getBookingsByDate({ params }) {
-  const response = await fetchRaw.get(`${API_URL}/bookings/bookings-with-details/${params.date}`);
+  const response = await fetchRaw.get(`${API_URL}/bookings/bookings-with-details/by-date/${params.date}`);
   // Special error handling to let 404 pass
   if (response?.status !== 200 && response?.status !== 404) {
     const json = await response.json();
