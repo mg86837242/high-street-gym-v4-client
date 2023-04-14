@@ -127,23 +127,21 @@ export default function EditAccount() {
 function UpdateAdminForm({ topMsg, user, emails, authenticatedUser }) {
   const [inputEmailMsg, setInputEmailMsg] = useState('');
   const submit = useSubmit();
+  const userDefaultValues = useMemo(() => {
+    const { password, ...values } = user;
+    return { ...values, password: '', id: authenticatedUser?.adminId, _action: 'updateAdminById' };
+  }, [user, authenticatedUser]);
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isDirty },
     reset,
   } = useForm({
     resolver: zodResolver(adminSchema),
-    defaultValues: useMemo(
-      () => ({ ...user, id: authenticatedUser?.adminId, _action: 'updateAdminById' }),
-      [user, authenticatedUser]
-    ),
+    defaultValues: userDefaultValues,
   });
 
-  useEffect(
-    () => reset({ ...user, id: authenticatedUser?.adminId, _action: 'updateAdminById' }),
-    [reset, user, authenticatedUser]
-  );
+  useEffect(() => reset(userDefaultValues), [reset, user, authenticatedUser]);
 
   return (
     <form
@@ -161,7 +159,12 @@ function UpdateAdminForm({ topMsg, user, emails, authenticatedUser }) {
       className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'
     >
       <FCRHFSm label='Email' register={register('email')} issue={inputEmailMsg || errors.email?.message} />
-      <FCRHFSmPass label='Password' register={register('password')} issue={errors.password?.message} />
+      <FCRHFSmPass
+        label='Password'
+        placeholder='●●●●●●●●●●'
+        register={register('password', { setValueAs: val => (isDirty ? val : user.password) })}
+        issue={errors.password?.message}
+      />
       <FCRHFSm label='Username' register={register('username')} issue={errors.username?.message} />
       <FCRHFSm label='First Name' register={register('firstName')} issue={errors.firstName?.message} />
       <FCRHFSm label='Last Name' register={register('lastName')} issue={errors.lastName?.message} />
@@ -235,23 +238,21 @@ function UpdateAdminAddrForm({ botMsg, user, authenticatedUser }) {
 function UpdateTrainerForm({ topMsg, user, emails, authenticatedUser }) {
   const [inputEmailMsg, setInputEmailMsg] = useState('');
   const submit = useSubmit();
+  const userDefaultValues = useMemo(() => {
+    const { password, ...values } = user;
+    return { ...values, password: '', id: authenticatedUser?.adminId, _action: 'updateAdminById' };
+  }, [user, authenticatedUser]);
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isDirty },
     reset,
   } = useForm({
     resolver: zodResolver(trainerSchema),
-    defaultValues: useMemo(
-      () => ({ ...user, id: authenticatedUser?.trainerId, _action: 'updateTrainerById' }),
-      [user, authenticatedUser]
-    ),
+    defaultValues: userDefaultValues,
   });
 
-  useEffect(
-    () => reset({ ...user, id: authenticatedUser?.trainerId, _action: 'updateTrainerById' }),
-    [reset, user, authenticatedUser]
-  );
+  useEffect(() => reset(userDefaultValues), [reset, user, authenticatedUser]);
 
   return (
     <form
@@ -269,7 +270,12 @@ function UpdateTrainerForm({ topMsg, user, emails, authenticatedUser }) {
       className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'
     >
       <FCRHFSm label='Email' register={register('email')} issue={inputEmailMsg || errors.email?.message} />
-      <FCRHFSmPass label='Password' register={register('password')} issue={errors.password?.message} />
+      <FCRHFSmPass
+        label='Password'
+        placeholder='●●●●●●●●●●'
+        register={register('password', { setValueAs: val => (isDirty ? val : user.password) })}
+        issue={errors.password?.message}
+      />
       <FCRHFSm label='Username' register={register('username')} issue={errors.username?.message} />
       <FCRHFSm label='First Name' register={register('firstName')} issue={errors.firstName?.message} />
       <FCRHFSm label='Last Name' register={register('lastName')} issue={errors.lastName?.message} />
@@ -362,23 +368,21 @@ function UpdateTrainerAddrForm({ botMsg, user, authenticatedUser }) {
 function UpdateMemberForm({ topMsg, user, emails, authenticatedUser }) {
   const [inputEmailMsg, setInputEmailMsg] = useState('');
   const submit = useSubmit();
+  const userDefaultValues = useMemo(() => {
+    const { password, ...values } = user;
+    return { ...values, password: '', id: authenticatedUser?.adminId, _action: 'updateAdminById' };
+  }, [user, authenticatedUser]);
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isDirty },
     reset,
   } = useForm({
     resolver: zodResolver(memberSchema),
-    defaultValues: useMemo(
-      () => ({ ...user, id: authenticatedUser?.memberId, _action: 'updateMemberById' }),
-      [user, authenticatedUser]
-    ),
+    defaultValues: userDefaultValues,
   });
 
-  useEffect(
-    () => reset({ ...user, id: authenticatedUser?.memberId, _action: 'updateMemberById' }),
-    [reset, user, authenticatedUser]
-  );
+  useEffect(() => reset(userDefaultValues), [reset, user, authenticatedUser]);
 
   return (
     <form
@@ -396,7 +400,12 @@ function UpdateMemberForm({ topMsg, user, emails, authenticatedUser }) {
       className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'
     >
       <FCRHFSm label='Email' register={register('email')} issue={inputEmailMsg || errors.email?.message} />
-      <FCRHFSmPass label='Password' register={register('password')} issue={errors.password?.message} />
+      <FCRHFSmPass
+        label='Password'
+        placeholder='●●●●●●●●●●'
+        register={register('password', { setValueAs: val => (isDirty ? val : user.password) })}
+        issue={errors.password?.message}
+      />
       <FCRHFSm label='Username' register={register('username')} issue={errors.username?.message} />
       <FCRHFSm label='First Name' register={register('firstName')} issue={errors.firstName?.message} />
       <FCRHFSm label='Last Name' register={register('lastName')} issue={errors.lastName?.message} />
