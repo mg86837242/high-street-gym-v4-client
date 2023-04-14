@@ -79,6 +79,7 @@ function ListMembers({ members }) {
                 <td>{state}</td>
                 <td>{country}</td>
                 <td>
+                  {/* TODO Admin u members UI */}
                   {/* <Form action={`${id}/edit`}> */}
                   <Btn2XsOutline type='button'>Edit</Btn2XsOutline>
                   {/* </Form> */}
