@@ -104,12 +104,12 @@ export function NewActivity() {
             encType='multipart/form-data'
             className='flex flex-col items-end gap-5 lg:items-center lg:flex-row'
           >
-            <label htmlFor='create-activity-xml' className='flex-shrink-0'>
+            <label htmlFor='new-activity-xml' className='flex-shrink-0'>
               <span className='flex-shrink-0 label-text'>Import New Activity by XML: </span>
             </label>
             <input
               name='new-activity-xml'
-              id='create-activity-xml'
+              id='new-activity-xml'
               type='file'
               accept='.xml'
               // value={file}

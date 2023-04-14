@@ -100,16 +100,16 @@ export function NewMember() {
         <div className='flex flex-col gap-5'>
           <Form
             method='post'
-            action='new-xml'
+            action='new-upload-xml'
             encType='multipart/form-data'
             className='flex flex-col items-end gap-5 lg:items-center lg:flex-row'
           >
-            <label htmlFor='create-member-xml' className='flex-shrink-0'>
+            <label htmlFor='new-member-xml' className='flex-shrink-0'>
               <span className='flex-shrink-0 label-text'>Import New Member by XML: </span>
             </label>
             <input
-              name='xml'
-              id='create-member-xml'
+              name='new-member-xml'
+              id='new-member-xml'
               type='file'
               accept='.xml'
               // value={file}

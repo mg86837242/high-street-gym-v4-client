@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import AuthContext from '../../context/AuthContext';
 import { Outlet, NavLink, Navigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDumbbell, faBlog } from '@fortawesome/free-solid-svg-icons';
+import { faDumbbell, faBlog, faUsers } from '@fortawesome/free-solid-svg-icons';
 
 export function AdminPanel() {
   return (
@@ -52,21 +52,38 @@ function LeftSidePanel() {
             </NavLink>
           </li>
           {authenticatedUser?.role === 'Admin' && (
-            <li>
-              <NavLink
-                to='blogs'
-                className={({ isActive }) =>
-                  `flex items-center justify-start w-full h-full gap-2 px-2 font-normal btn btn-sm btn-ghost py-1.5 ${
-                    isActive && 'btn-active'
-                  }`
-                }
-              >
-                <span>
-                  <FontAwesomeIcon icon={faBlog} className='w-4 h-4' />
-                </span>
-                <span className='flex items-center justify-start text-sm'>Manage Blog Posts</span>
-              </NavLink>
-            </li>
+            <>
+              <li>
+                <NavLink
+                  to='blogs'
+                  className={({ isActive }) =>
+                    `flex items-center justify-start w-full h-full gap-2 px-2 font-normal btn btn-sm btn-ghost py-1.5 ${
+                      isActive && 'btn-active'
+                    }`
+                  }
+                >
+                  <span>
+                    <FontAwesomeIcon icon={faBlog} className='w-4 h-4' />
+                  </span>
+                  <span className='flex items-center justify-start text-sm'>Manage Blog Posts</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to='members'
+                  className={({ isActive }) =>
+                    `flex items-center justify-start w-full h-full gap-2 px-2 font-normal btn btn-sm btn-ghost py-1.5 ${
+                      isActive && 'btn-active'
+                    }`
+                  }
+                >
+                  <span>
+                    <FontAwesomeIcon icon={faUsers} className='w-4 h-4' />
+                  </span>
+                  <span className='flex items-center justify-start text-sm'>Manage Members</span>
+                </NavLink>
+              </li>
+            </>
           )}
         </ul>
       </nav>
