@@ -79,9 +79,9 @@ function ListMembers({ members }) {
                 <td>{state}</td>
                 <td>{country}</td>
                 <td>
-                  <Form action={`${id}/edit`}>
-                    <Btn2XsOutline>Edit</Btn2XsOutline>
-                  </Form>
+                  {/* <Form action={`${id}/edit`}> */}
+                  <Btn2XsOutline type='button'>Edit</Btn2XsOutline>
+                  {/* </Form> */}
                 </td>
                 <td>
                   <Form
