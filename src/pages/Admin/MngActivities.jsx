@@ -126,10 +126,10 @@ export function NewActivity() {
       </div>
       <p className='text-right lg:text-left'>
         <em>
-          Note: For XML upload, (1) accepted text content for &lt;categories&gt; include: Aerobic, Strength, Aerobic
-          &amp; Strength, Flexibility; (2) accepted text content for &lt;intensityLevel&gt; include: Low, Medium, High,
-          Very High, Varies with Type; (3) element names need to be in camel case in order to comply with API and
-          database design.
+          Note: For XML upload, (1) accepted text content for &lt;categories&gt;, if not left blank, include: Aerobic,
+          Strength, Aerobic &amp; Strength, Flexibility; (2) accepted text content for &lt;intensityLevel&gt;, if not
+          left blank, include: Low, Medium, High, Very High, Varies with Type; (3) element names need to be in camel
+          case in order to comply with API and database design.
         </em>
       </p>
       <p className='text-right lg:text-left'>
