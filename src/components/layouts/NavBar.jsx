@@ -14,12 +14,13 @@ export default function NavBar({ isHome }) {
   }
 
   useEffect(() => {
-    if (isHome) {
-      window.addEventListener('scroll', handleScrollEvent);
-      return () => {
-        window.removeEventListener('scroll', handleScrollEvent);
-      };
+    if (!isHome) {
+      return;
     }
+    window.addEventListener('scroll', handleScrollEvent);
+    return () => {
+      window.removeEventListener('scroll', handleScrollEvent);
+    };
   }, [isHome]);
 
   return (
@@ -62,6 +63,7 @@ function NavBarLeft({ authenticatedUser }) {
                 <NavLeftDropdownCategory text={'Manage Records'} />
                 <NavLeftDropdownButton to={'admin/activities'} text={'Manage Activities'} />
                 <NavLeftDropdownButton to={'admin/blogs'} text={'Manage Blogs'} />
+                <NavLeftDropdownButton to={'admin/members'} text={'Manage Members'} />
               </NavLeftButton>
             </>
           ) : authenticatedUser?.role === 'Trainer' ? (
@@ -146,6 +148,7 @@ function NavBarCenter({ authenticatedUser }) {
               <NavCenterDropdownCategory text={'Manage Records'} />
               <NavCenterDropdownButton to={'admin/activities'} text={'Manage Activities'} />
               <NavCenterDropdownButton to={'admin/blogs'} text={'Manage Blogs'} />
+              <NavCenterDropdownButton to={'admin/members'} text={'Manage Members'} />
             </NavCenterButton>
           </>
         ) : authenticatedUser?.role === 'Trainer' ? (
