@@ -33,7 +33,7 @@ const adminRoutes = [
       },
       {
         path: 'new',
-        ErrorBoundary: ErrorInfoRefresh,
+        ErrorBoundary: ErrorInfoBack,
         async action() {
           let { createActivity } = await import('../api/activities');
           return createActivity();
@@ -41,7 +41,7 @@ const adminRoutes = [
       },
       {
         path: 'new-upload-xml',
-        ErrorBoundary: ErrorInfoRefresh,
+        ErrorBoundary: ErrorInfoBack,
         async action({ request }) {
           let { createActivityByXML } = await import('../api/activities');
           return createActivityByXML({ request });
@@ -98,7 +98,7 @@ const adminRoutes = [
           },
           {
             path: 'new',
-            ErrorBoundary: ErrorInfoRefresh,
+            ErrorBoundary: ErrorInfoBack,
             async action({ request }) {
               let { createBlog } = await import('../api/blogs');
               return createBlog({ request });
@@ -110,7 +110,7 @@ const adminRoutes = [
               let { EditBlog } = await import('../pages/Admin/MngBlogs');
               return { Component: EditBlog };
             },
-            ErrorBoundary: ErrorInfoRefresh,
+            ErrorBoundary: ErrorInfoBack,
             async loader({ params }) {
               let { getBlogById } = await import('../api/blogs');
               return getBlogById({ params });
@@ -152,7 +152,7 @@ const adminRoutes = [
           },
           {
             path: 'new',
-            ErrorBoundary: ErrorInfoRefresh,
+            ErrorBoundary: ErrorInfoBack,
             async action({ request }) {
               let { createMember } = await import('../api/members');
               return createMember({ request });
@@ -160,7 +160,7 @@ const adminRoutes = [
           },
           {
             path: 'new-upload-xml',
-            ErrorBoundary: ErrorInfoRefresh,
+            ErrorBoundary: ErrorInfoBack,
             // async action({ request }) {
             //   let { createMemberByXML } = await import('../api/members');
             //   return createMemberByXML({ request });
