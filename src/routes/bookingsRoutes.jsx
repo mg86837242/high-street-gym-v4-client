@@ -73,8 +73,8 @@ const bookingsRoutes = [
         },
         ErrorBoundary: ErrorInfoBack,
         async loader({ params }) {
-          let { getBookingAndOptionsById } = await import('../api/bookings');
-          return getBookingAndOptionsById({ params });
+          let { getBookingWithOptionsById } = await import('../api/bookings');
+          return getBookingWithOptionsById({ params });
         },
         async action({ params, request }) {
           let { updateBookingById } = await import('../api/bookings');

@@ -10,12 +10,12 @@ export async function getAllBookings() {
 }
 
 export async function getAllBookingOptions() {
-  const response = await fetchResp.get(`${API_URL}/bookings/options-only`);
+  const response = await fetchResp.get(`${API_URL}/bookings/options`);
   return response;
 }
 
 export async function getBookingsByDate({ params }) {
-  const response = await fetchRaw.get(`${API_URL}/bookings/bookings-with-details/by-date/${params.date}`);
+  const response = await fetchRaw.get(`${API_URL}/bookings/by/date/${params.date}`);
   // Special error handling to let 404 pass
   if (response?.status !== 200 && response?.status !== 404) {
     const json = await response.json();
@@ -28,15 +28,15 @@ export async function getBookingsByDate({ params }) {
 }
 
 export async function getBookingById({ params }) {
-  const response = await fetchResp.get(`${API_URL}/bookings/booking-with-all-details/${params.id}`);
+  const response = await fetchResp.get(`${API_URL}/bookings/${params.id}`);
   return response;
 }
 
-export async function getBookingAndOptionsById({ params }) {
+export async function getBookingWithOptionsById({ params }) {
   // Prefer to build customized API endpoint (1) is much simpler to code loader, (2) has one less nesting layer/level
   //  to DA loader data, e.g., in `Bookings/Edit.jsx`, `bookingJSON:` can be rid of – easier to code component, same
   //  applies to breadcrumbs/`useMatches`.
-  const response = await fetchResp.get(`${API_URL}/bookings/booking-with-options/${params.id}`);
+  const response = await fetchResp.get(`${API_URL}/bookings/${params.id}/with_options`);
   return response;
   // Alternatively, fetch multiple endpoints with `Promise.all([])`, example: https://stackoverflow.com/questions/74719956
 }
