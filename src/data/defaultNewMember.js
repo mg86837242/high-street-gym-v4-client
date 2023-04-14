@@ -1,7 +1,6 @@
 import { nanoid } from 'nanoid';
 
-const defaultNewMember = {
-  // FIX Bug creating 2 new consecutively would result in identical nanoid
+const defaultNewMember = () => ({
   email: `${nanoid()}@server.com`,
   password: 'abcd1234',
   username: 'newmember',
@@ -16,6 +15,6 @@ const defaultNewMember = {
   postcode: '4000',
   state: 'QLD',
   country: 'Australia',
-};
+});
 
 export default defaultNewMember;
