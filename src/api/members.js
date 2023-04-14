@@ -12,6 +12,8 @@ import {
   genderSchema,
 } from '../schemas';
 import fetchRaw from '../helpers/fetchRaw';
+import fetchJSON from '../helpers/fetchJSON';
+import defaultNewMember from '../data/defaultNewMember';
 
 export async function getAllMembersWithDetails() {
   const response = await fetchResp.get(`${API_URL}/members/detailed`);
@@ -74,6 +76,12 @@ export async function signupMembers({ request }) {
   return redirect('/login');
 }
 
+export async function createMember() {
+  const creations = defaultNewMember;
+  const json = await fetchJSON.post(`${API_URL}/members`, creations);
+  return redirect(`..`);
+}
+
 export async function updateMemberById(values) {
   const { _action, id, ...updates } = values;
   const response = await fetchRaw.patch(`${API_URL}/members/${id}`, updates);
@@ -87,4 +95,9 @@ export async function updateMemberById(values) {
     throw new Response(message);
   }
   return { ...json, _action };
+}
+
+export async function deleteMemberById({ params }) {
+  await fetchResp.delete(`${API_URL}/members/${params.id}`);
+  return redirect(`..`);
 }
