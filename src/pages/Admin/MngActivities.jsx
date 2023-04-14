@@ -108,7 +108,7 @@ export function NewActivity() {
               <span className='flex-shrink-0 label-text'>Import New Activity by XML: </span>
             </label>
             <input
-              name='xml'
+              name='new-activity-xml'
               id='create-activity-xml'
               type='file'
               accept='.xml'
