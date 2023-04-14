@@ -161,10 +161,10 @@ const adminRoutes = [
           {
             path: 'new-upload-xml',
             ErrorBoundary: ErrorInfoBack,
-            // async action({ request }) {
-            //   let { createMemberByXML } = await import('../api/members');
-            //   return createMemberByXML({ request });
-            // },
+            async action({ request }) {
+              let { createMemberByXML } = await import('../api/members');
+              return createMemberByXML({ request });
+            },
           },
           {
             path: ':id/edit',
