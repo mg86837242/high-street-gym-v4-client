@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE memberList[
+<!ELEMENT memberList (member+)>
+<!ELEMENT member ( name, category?, description?, intensityLevel?, maxPeopleAllowed?, requirementOne?, requirementTwo?, price?, durationMinutes)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT category (#PCDATA)>
+<!ELEMENT description (#PCDATA)>
+<!ELEMENT intensityLevel (#PCDATA)>
+<!ELEMENT maxPeopleAllowed (#PCDATA)>
+<!ELEMENT requirementOne (#PCDATA)>
+<!ELEMENT requirementTwo (#PCDATA)>
+<!ELEMENT price (#PCDATA)>
+<!ELEMENT durationMinutes (#PCDATA)>
+]>
+<memberList>
+  <!-- <member>
+    <name>Cardio Blitz</name>
+    <category>Aerobic</category>
+    <description>Lorem ipsum</description>
+    <intensityLevel>Medium</intensityLevel>
+    <maxPeopleAllowed>26</maxPeopleAllowed>
+    <requirementOne>Large towels are compulsory for Group Exercise and Gym.</requirementOne>
+    <requirementTwo></requirementTwo>
+    <durationMinutes>45</durationMinutes>
+    <price>90</price>
+  </member>
+  <member>
+    <name>Super Circuit</name>
+    <category>Aerobic &amp; Strength</category>
+    <description>Lorem ipsum</description>
+    <intensityLevel>Medium</intensityLevel>
+    <maxPeopleAllowed>26</maxPeopleAllowed>
+    <requirementOne>Large towels are compulsory for Group Exercise and Gym.</requirementOne>
+    <requirementTwo></requirementTwo>
+    <durationMinutes>45</durationMinutes>
+    <price>90</price>
+  </member> -->
+  <member>
+    <name>Strength &amp; Conditioning Circuit</name>
+    <category>Aerobic &amp; Strength</category>
+    <description>Lorem ipsum</description>
+    <intensityLevel>Medium</intensityLevel>
+    <maxPeopleAllowed>26</maxPeopleAllowed>
+    <requirementOne>Large towels are compulsory for Group Exercise and Gym.</requirementOne>
+    <requirementTwo></requirementTwo>
+    <durationMinutes>45</durationMinutes>
+    <price>90</price>
+  </member>
+  <member>
+    <name>Stength</name>
+    <category>Strength</category>
+    <description>Lorem ipsum</description>
+    <intensityLevel>Very High</intensityLevel>
+    <maxPeopleAllowed>26</maxPeopleAllowed>
+    <requirementOne>Large towels are compulsory for Group Exercise and Gym.</requirementOne>
+    <requirementTwo></requirementTwo>
+    <durationMinutes>45</durationMinutes>
+    <price>90</price>
+  </member>
+  <!-- <member>
+    <name>Mobility Fit</name>
+    <category>Flexibility</category>
+    <description>Lorem ipsum</description>
+    <intensityLevel>Medium</intensityLevel>
+    <maxPeopleAllowed>26</maxPeopleAllowed>
+    <requirementOne>Large towels are compulsory for Group Exercise and Gym.</requirementOne>
+    <requirementTwo>BYO mat</requirementTwo>
+    <durationMinutes>45</durationMinutes>
+    <price>90</price>
+  </member>
+  <member>
+    <name>Tabata</name>
+    <category>Aerobic</category>
+    <description>Lorem ipsum</description>
+    <intensityLevel>High</intensityLevel>
+    <maxPeopleAllowed>26</maxPeopleAllowed>
+    <requirementOne>Large towels are compulsory for Group Exercise and Gym.</requirementOne>
+    <requirementTwo></requirementTwo>
+    <durationMinutes>45</durationMinutes>
+    <price>90</price>
+  </member>
+  <member>
+    <name>Restorative Stretch</name>
+    <category>Flexibility</category>
+    <description>Lorem ipsum</description>
+    <intensityLevel>Low</intensityLevel>
+    <maxPeopleAllowed>26</maxPeopleAllowed>
+    <requirementOne>Large towels are compulsory for Group Exercise and Gym.</requirementOne>
+    <requirementTwo>BYO mat</requirementTwo>
+    <durationMinutes>45</durationMinutes>
+    <price>90</price>
+  </member>
+  <member>
+    <name>TRX HIIT</name>
+    <category>Aerobic &amp; Strength</category>
+    <description>Lorem ipsum</description>
+    <intensityLevel>High</intensityLevel>
+    <maxPeopleAllowed>14</maxPeopleAllowed>
+    <requirementOne>Large towels are compulsory for Group Exercise and Gym.</requirementOne>
+    <requirementTwo></requirementTwo>
+    <durationMinutes>45</durationMinutes>
+    <price>90</price>
+  </member>
+  <member>
+    <name>TRX</name>
+    <category>Strength</category>
+    <description>Lorem ipsum</description>
+    <intensityLevel>Medium</intensityLevel>
+    <maxPeopleAllowed>14</maxPeopleAllowed>
+    <requirementOne>Large towels are compulsory for Group Exercise and Gym.</requirementOne>
+    <requirementTwo></requirementTwo>
+    <durationMinutes>45</durationMinutes>
+    <price>90</price>
+  </member> -->
+</memberList>
