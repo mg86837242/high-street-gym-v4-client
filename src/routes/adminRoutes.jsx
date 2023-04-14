@@ -74,7 +74,7 @@ const adminRoutes = [
     ],
   },
   {
-    Component: () => <RequireAuth roles={['Admin']} />,
+    Component: () => <RequireAuth permittedRoles={['Admin']} />,
     children: [
       {
         path: 'blogs',
@@ -133,7 +133,7 @@ const adminRoutes = [
     ],
   },
   {
-    Component: () => <RequireAuth roles={['Admin']} />,
+    Component: () => <RequireAuth permittedRoles={['Admin']} />,
     children: [
       {
         path: 'members',

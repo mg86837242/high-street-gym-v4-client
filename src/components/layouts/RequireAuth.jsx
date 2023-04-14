@@ -2,10 +2,10 @@ import { useContext } from 'react';
 import AuthContext from '../../context/AuthContext';
 import { Outlet, Navigate, useLocation } from 'react-router-dom';
 
-export default function RequireAuth({ roles }) {
+export default function RequireAuth({ permittedRoles }) {
   const { authenticatedUser } = useContext(AuthContext);
   const location = useLocation();
-  const canAccess = roles?.includes(authenticatedUser?.role);
+  const canAccess = permittedRoles?.includes(authenticatedUser?.role);
 
   return canAccess ? <Outlet /> : <Navigate to='/404' state={{ from: location }} />;
 }

@@ -39,7 +39,7 @@ const router = createBrowserRouter([
         children: [...bookingsRoutes],
       },
       {
-        Component: () => <RequireAuth roles={['Admin', 'Trainer', 'Member']} />,
+        Component: () => <RequireAuth permittedRoles={['Admin', 'Trainer', 'Member']} />,
         children: [
           {
             path: 'profile',
@@ -53,7 +53,7 @@ const router = createBrowserRouter([
         ],
       },
       {
-        Component: () => <RequireAuth roles={['Admin', 'Trainer']} />,
+        Component: () => <RequireAuth permittedRoles={['Admin', 'Trainer']} />,
         children: [
           {
             path: 'admin',

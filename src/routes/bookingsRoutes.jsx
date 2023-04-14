@@ -100,7 +100,7 @@ const bookingsRoutes = [
     ],
   },
   {
-    Component: () => <RequireAuth roles={['Admin', 'Trainer', 'Member']} />,
+    Component: () => <RequireAuth permittedRoles={['Admin', 'Trainer', 'Member']} />,
     children: [
       {
         path: 'new',
