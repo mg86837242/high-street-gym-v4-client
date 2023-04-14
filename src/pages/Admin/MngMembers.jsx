@@ -26,14 +26,14 @@ function ListMembers({ members }) {
         <thead>
           <tr>
             <th>id</th>
+            <th>email</th>
+            <th>password</th>
+            <th>username</th>
             <th>first name</th>
             <th>last name</th>
             <th>phone</th>
             <th>age</th>
             <th>gender</th>
-            <th>email</th>
-            <th>password</th>
-            <th>username</th>
             <th>line 1</th>
             <th>line 2</th>
             <th>suburb</th>
@@ -48,13 +48,13 @@ function ListMembers({ members }) {
           {members.map(
             ({
               id,
+              email,
+              username,
               firstName,
               lastName,
               phone,
               age,
               gender,
-              email,
-              username,
               lineOne,
               lineTwo,
               suburb,
@@ -64,14 +64,14 @@ function ListMembers({ members }) {
             }) => (
               <tr key={`r${id}`} className='hover'>
                 <th>{id}</th>
+                <td>{email}</td>
+                <td>●●●●●●●●●</td>
+                <td>{username}</td>
                 <td>{firstName}</td>
                 <td>{lastName}</td>
                 <td>{phone}</td>
                 <td>{age}</td>
                 <td>{gender}</td>
-                <td>{email}</td>
-                <td>●●●●●●●●●</td>
-                <td>{username}</td>
                 <td>{lineOne}</td>
                 <td>{lineTwo}</td>
                 <td>{suburb}</td>
