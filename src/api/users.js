@@ -2,19 +2,19 @@ import { API_URL } from '../data/constants';
 import fetchResp from '../helpers/fetchResp';
 import fetchRaw from '../helpers/fetchRaw';
 
-export async function getAllEmails() {
-  const response = await fetchResp.get(`${API_URL}/users/all-emails`);
+export async function getEmailList() {
+  const response = await fetchResp.get(`${API_URL}/users/all_emails`);
   return response;
 }
 
-export async function getUserWithAllDetailsAndAllEmails() {
+export async function getUserWithAllDetailsAndEmailList() {
   const accessKey = localStorage.getItem('accessKey');
-  const response = await fetchResp.get(`${API_URL}/users/user-with-all-details-and-all-emails/by-key/${accessKey}`);
+  const response = await fetchResp.get(`${API_URL}/users/by_key/${accessKey}/detailed/with_all_emails`);
   return response;
 }
 
 export async function getUserByKey(accessKey) {
-  const response = await fetchRaw.get(`${API_URL}/users/by-key/${accessKey}`);
+  const response = await fetchRaw.get(`${API_URL}/users/by_key/${accessKey}`);
   const json = await response.json();
   return json;
 }

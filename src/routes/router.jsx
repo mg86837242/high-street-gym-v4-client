@@ -81,8 +81,8 @@ const router = createBrowserRouter([
     },
     ErrorBoundary: ErrorInfoBack,
     async loader() {
-      let { getAllEmails } = await import('../api/users');
-      return getAllEmails();
+      let { getEmailList } = await import('../api/users');
+      return getEmailList();
     },
     async action({ request }) {
       let { signupMembers } = await import('../api/members');
