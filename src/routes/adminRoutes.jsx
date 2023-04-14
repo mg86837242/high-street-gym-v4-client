@@ -138,8 +138,8 @@ const adminRoutes = [
         },
         ErrorBoundary: ErrorInfoRefresh,
         async loader() {
-          let { getAllMembers } = await import('../api/members.js');
-          return getAllMembers();
+          let { getAllMembersWithDetails } = await import('../api/members.js');
+          return getAllMembersWithDetails();
         },
         children: [
           {

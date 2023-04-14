@@ -1,8 +1,8 @@
 import { z } from 'zod';
 import { emailSchema, passwordSchema, usernameSchema, firstNameSchema, lastNameSchema, phoneSchema } from './users';
 
-export const ageSchemaNoRHF = z.union([
-  // NB This `ageSchemaNoRHF` is for the `Signup` page only, where RHF is not used and `FormData` is used so its input
+export const ageNoRHFSchema = z.union([
+  // NB This `ageNoRHFSchema` is for the `Signup` page only, where RHF is not used and `FormData` is used so its input
   //  is collected as empty string if left blank
   z
     .number({ message: 'Age only accepts numbers' })

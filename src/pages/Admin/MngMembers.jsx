@@ -26,15 +26,20 @@ function ListMembers({ members }) {
         <thead>
           <tr>
             <th>id</th>
-            <th>name</th>
-            <th>category</th>
-            <th>description</th>
-            <th>intensity level</th>
-            <th>max people allowed</th>
-            <th>requirement 1</th>
-            <th>requirement 2</th>
-            <th>duration (minutes)</th>
-            <th>price</th>
+            <th>first name</th>
+            <th>last name</th>
+            <th>phone</th>
+            <th>age</th>
+            <th>gender</th>
+            <th>email</th>
+            <th>password</th>
+            <th>username</th>
+            <th>line 1</th>
+            <th>line 2</th>
+            <th>suburb</th>
+            <th>postcode</th>
+            <th>state</th>
+            <th>country</th>
             <th>Edit</th>
             <th>Delete</th>
           </tr>
@@ -43,27 +48,36 @@ function ListMembers({ members }) {
           {members.map(
             ({
               id,
-              name,
-              category,
-              description,
-              intensityLevel,
-              maxPeopleAllowed,
-              requirementOne,
-              requirementTwo,
-              durationMinutes,
-              price,
+              firstName,
+              lastName,
+              phone,
+              age,
+              gender,
+              email,
+              username,
+              lineOne,
+              lineTwo,
+              suburb,
+              postcode,
+              state,
+              country,
             }) => (
               <tr key={`r${id}`} className='hover'>
                 <th>{id}</th>
-                <td>{name}</td>
-                <td>{category}</td>
-                <td>{description}</td>
-                <td>{intensityLevel}</td>
-                <td>{maxPeopleAllowed}</td>
-                <td>{requirementOne}</td>
-                <td>{requirementTwo}</td>
-                <td>{durationMinutes}</td>
-                <td>{price}</td>
+                <td>{firstName}</td>
+                <td>{lastName}</td>
+                <td>{phone}</td>
+                <td>{age}</td>
+                <td>{gender}</td>
+                <td>{email}</td>
+                <td>●●●●●●●●●</td>
+                <td>{username}</td>
+                <td>{lineOne}</td>
+                <td>{lineTwo}</td>
+                <td>{suburb}</td>
+                <td>{postcode}</td>
+                <td>{state}</td>
+                <td>{country}</td>
                 <td>
                   <Form action={`${id}/edit`}>
                     <Btn2XsOutline>Edit</Btn2XsOutline>
@@ -126,10 +140,8 @@ export function NewMember() {
       </div>
       <p className='text-right lg:text-left'>
         <em>
-          Note: For XML upload, (1) accepted text content for &lt;categories&gt; include: Aerobic, Strength, Aerobic
-          &amp; Strength, Flexibility; (2) accepted text content for &lt;intensityLevel&gt; include: Low, Medium, High,
-          Very High, Varies with Type; (3) element names need to be in camel case in order to comply with API and
-          database design.
+          Note: For XML upload, (1) accepted text content for &lt;gender&gt;, if not left blank, include: Female, Male,
+          Other; (2) element names need to be in camel case in order to comply with API and database design.
         </em>
       </p>
       <p className='text-right lg:text-left'>
@@ -156,9 +168,7 @@ export function EditMember() {
     resolver: zodResolver(memberSchema),
     defaultValues: useMemo(() => member, [member]),
   });
-  // NB Subscribe to the change of `member` returned by loader:
-  //  -- https://stackoverflow.com/questions/62242657/how-to-change-react-hook-form-defaultvalue-with-useeffect
-  //  -- API ref: https://react-hook-form.com/api/useform/reset/
+
   useEffect(() => reset(member), [reset, member]);
 
   return (

@@ -1,5 +1,6 @@
 import { redirect } from 'react-router-dom';
 import { API_URL } from '../data/constants';
+import fetchResp from '../helpers/fetchResp';
 import {
   emailSchema,
   passwordSchema,
@@ -7,10 +8,15 @@ import {
   firstNameSchema,
   lastNameSchema,
   phoneSchema,
-  ageSchemaNoRHF,
+  ageNoRHFSchema,
   genderSchema,
 } from '../schemas';
 import fetchRaw from '../helpers/fetchRaw';
+
+export async function getAllMembersWithDetails() {
+  const response = await fetchResp.get(`${API_URL}/members/detailed`);
+  return response;
+}
 
 export async function signupMembers({ request }) {
   const formData = await request.formData();
@@ -36,8 +42,8 @@ export async function signupMembers({ request }) {
   if (!phoneSchema.safeParse(phone).success) {
     messages.phone = phoneSchema.safeParse(phone).error.issues[0].message;
   }
-  if (!ageSchemaNoRHF.safeParse(age).success) {
-    messages.age = ageSchemaNoRHF.safeParse(age).error.issues[0].message;
+  if (!ageNoRHFSchema.safeParse(age).success) {
+    messages.age = ageNoRHFSchema.safeParse(age).error.issues[0].message;
   }
   if (!genderSchema.safeParse(gender).success) {
     messages.gender = genderSchema.safeParse(gender).error.issues[0].message;

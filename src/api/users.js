@@ -2,12 +2,13 @@ import { API_URL } from '../data/constants';
 import fetchResp from '../helpers/fetchResp';
 import fetchRaw from '../helpers/fetchRaw';
 
-export async function getEmailList() {
+// TODO Move the logic of checking identical email to the backend, thru a func in model, and handle it by special error handling of letting 409 pass
+export async function getAllEmails() {
   const response = await fetchResp.get(`${API_URL}/users/all_emails`);
   return response;
 }
 
-export async function getUserWithAllDetailsAndEmailList() {
+export async function getUserWithAllDetailsAndAllEmails() {
   const accessKey = localStorage.getItem('accessKey');
   const response = await fetchResp.get(`${API_URL}/users/by_key/${accessKey}/detailed/with_all_emails`);
   return response;
