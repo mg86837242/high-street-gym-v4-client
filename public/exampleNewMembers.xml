@@ -1,115 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE memberList[
 <!ELEMENT memberList (member+)>
-<!ELEMENT member ( name, category?, description?, intensityLevel?, maxPeopleAllowed?, requirementOne?, requirementTwo?, price?, durationMinutes)>
-<!ELEMENT name (#PCDATA)>
-<!ELEMENT category (#PCDATA)>
-<!ELEMENT description (#PCDATA)>
-<!ELEMENT intensityLevel (#PCDATA)>
-<!ELEMENT maxPeopleAllowed (#PCDATA)>
-<!ELEMENT requirementOne (#PCDATA)>
-<!ELEMENT requirementTwo (#PCDATA)>
-<!ELEMENT price (#PCDATA)>
-<!ELEMENT durationMinutes (#PCDATA)>
+<!ELEMENT member ( email, password, username, firstName, lastName, phone, age?, gender?, lineOne, lineTwo, suburb, postcode, state)>
+<!ELEMENT email (#PCDATA)>
+<!ELEMENT password (#PCDATA)>
+<!ELEMENT username (#PCDATA)>
+<!ELEMENT firstName (#PCDATA)>
+<!ELEMENT lastName (#PCDATA)>
+<!ELEMENT phone (#PCDATA)>
+<!ELEMENT age (#PCDATA)>
+<!ELEMENT gender (#PCDATA)>
+<!ELEMENT lineOne (#PCDATA)>
+<!ELEMENT lineTwo (#PCDATA)>
+<!ELEMENT suburb (#PCDATA)>
+<!ELEMENT postcode (#PCDATA)>
+<!ELEMENT state (#PCDATA)>
+<!ELEMENT country (#PCDATA)>
 ]>
 <memberList>
-  <!-- <member>
-    <name>Cardio Blitz</name>
-    <category>Aerobic</category>
-    <description>Lorem ipsum</description>
-    <intensityLevel>Medium</intensityLevel>
-    <maxPeopleAllowed>26</maxPeopleAllowed>
-    <requirementOne>Large towels are compulsory for Group Exercise and Gym.</requirementOne>
-    <requirementTwo></requirementTwo>
-    <durationMinutes>45</durationMinutes>
-    <price>90</price>
+  <member>
+    <email>johndoe@server.com</email>
+    <password>abcd1234</password>
+    <username>johndoe</username>
+    <firstName>John</firstName>
+    <lastName>Doe</lastName>
+    <phone>0123456789</phone>
+    <lineOne>1 Ashley St</lineOne>
+    <lineTwo></lineTwo>
+    <suburb>Brisbane City</suburb>
+    <postcode>4000</postcode>
+    <state>QLD</state>
+    <country>Australia</country>
   </member>
   <member>
-    <name>Super Circuit</name>
-    <category>Aerobic &amp; Strength</category>
-    <description>Lorem ipsum</description>
-    <intensityLevel>Medium</intensityLevel>
-    <maxPeopleAllowed>26</maxPeopleAllowed>
-    <requirementOne>Large towels are compulsory for Group Exercise and Gym.</requirementOne>
-    <requirementTwo></requirementTwo>
-    <durationMinutes>45</durationMinutes>
-    <price>90</price>
-  </member> -->
-  <member>
-    <name>Strength &amp; Conditioning Circuit</name>
-    <category>Aerobic &amp; Strength</category>
-    <description>Lorem ipsum</description>
-    <intensityLevel>Medium</intensityLevel>
-    <maxPeopleAllowed>26</maxPeopleAllowed>
-    <requirementOne>Large towels are compulsory for Group Exercise and Gym.</requirementOne>
-    <requirementTwo></requirementTwo>
-    <durationMinutes>45</durationMinutes>
-    <price>90</price>
+    <email>janedoe@server.com</email>
+    <password>abcd1234</password>
+    <username>janedoe</username>
+    <firstName>Jane</firstName>
+    <lastName>Doe</lastName>
+    <phone>0123456789</phone>
+    <lineOne>1 Ashley St</lineOne>
+    <lineTwo></lineTwo>
+    <suburb>Brisbane City</suburb>
+    <postcode>4000</postcode>
+    <state>QLD</state>
+    <country>Australia</country>
   </member>
-  <member>
-    <name>Stength</name>
-    <category>Strength</category>
-    <description>Lorem ipsum</description>
-    <intensityLevel>Very High</intensityLevel>
-    <maxPeopleAllowed>26</maxPeopleAllowed>
-    <requirementOne>Large towels are compulsory for Group Exercise and Gym.</requirementOne>
-    <requirementTwo></requirementTwo>
-    <durationMinutes>45</durationMinutes>
-    <price>90</price>
-  </member>
-  <!-- <member>
-    <name>Mobility Fit</name>
-    <category>Flexibility</category>
-    <description>Lorem ipsum</description>
-    <intensityLevel>Medium</intensityLevel>
-    <maxPeopleAllowed>26</maxPeopleAllowed>
-    <requirementOne>Large towels are compulsory for Group Exercise and Gym.</requirementOne>
-    <requirementTwo>BYO mat</requirementTwo>
-    <durationMinutes>45</durationMinutes>
-    <price>90</price>
-  </member>
-  <member>
-    <name>Tabata</name>
-    <category>Aerobic</category>
-    <description>Lorem ipsum</description>
-    <intensityLevel>High</intensityLevel>
-    <maxPeopleAllowed>26</maxPeopleAllowed>
-    <requirementOne>Large towels are compulsory for Group Exercise and Gym.</requirementOne>
-    <requirementTwo></requirementTwo>
-    <durationMinutes>45</durationMinutes>
-    <price>90</price>
-  </member>
-  <member>
-    <name>Restorative Stretch</name>
-    <category>Flexibility</category>
-    <description>Lorem ipsum</description>
-    <intensityLevel>Low</intensityLevel>
-    <maxPeopleAllowed>26</maxPeopleAllowed>
-    <requirementOne>Large towels are compulsory for Group Exercise and Gym.</requirementOne>
-    <requirementTwo>BYO mat</requirementTwo>
-    <durationMinutes>45</durationMinutes>
-    <price>90</price>
-  </member>
-  <member>
-    <name>TRX HIIT</name>
-    <category>Aerobic &amp; Strength</category>
-    <description>Lorem ipsum</description>
-    <intensityLevel>High</intensityLevel>
-    <maxPeopleAllowed>14</maxPeopleAllowed>
-    <requirementOne>Large towels are compulsory for Group Exercise and Gym.</requirementOne>
-    <requirementTwo></requirementTwo>
-    <durationMinutes>45</durationMinutes>
-    <price>90</price>
-  </member>
-  <member>
-    <name>TRX</name>
-    <category>Strength</category>
-    <description>Lorem ipsum</description>
-    <intensityLevel>Medium</intensityLevel>
-    <maxPeopleAllowed>14</maxPeopleAllowed>
-    <requirementOne>Large towels are compulsory for Group Exercise and Gym.</requirementOne>
-    <requirementTwo></requirementTwo>
-    <durationMinutes>45</durationMinutes>
-    <price>90</price>
-  </member> -->
 </memberList>
