@@ -84,7 +84,7 @@ const adminRoutes = [
         },
         ErrorBoundary: ErrorInfoRefresh,
         async loader() {
-          let { getAllBlogs } = await import('../api/blogs.js');
+          let { getAllBlogs } = await import('../api/blogs');
           return getAllBlogs();
         },
         children: [
@@ -138,7 +138,7 @@ const adminRoutes = [
         },
         ErrorBoundary: ErrorInfoRefresh,
         async loader() {
-          let { getAllMembersWithDetails } = await import('../api/members.js');
+          let { getAllMembersWithDetails } = await import('../api/members');
           return getAllMembersWithDetails();
         },
         children: [
