@@ -130,11 +130,6 @@ const adminRoutes = [
           },
         ],
       },
-    ],
-  },
-  {
-    Component: () => <RequireAuth permittedRoles={['Admin']} />,
-    children: [
       {
         path: 'members',
         async lazy() {
