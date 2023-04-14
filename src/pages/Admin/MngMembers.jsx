@@ -115,7 +115,7 @@ export function NewMember() {
 
   return (
     <div className='flex flex-col gap-5 py-6'>
-      <div className='flex flex-col-reverse items-end gap-5 lg:flex-row lg:justify-between lg:items-start'>
+      <div className='flex flex-col-reverse items-end gap-5 lg:flex-row lg:justify-between lg:items-start lg:gap-0'>
         <div className='flex flex-col gap-5'>
           <Form
             method='post'
@@ -151,7 +151,7 @@ export function NewMember() {
       </p>
       <p className='text-right lg:text-left'>
         👉 You can try upload the{' '}
-        <Link to='/exampleNewMembers.xml' target='_blank' download className='link link-primary'>
+        <Link to='/sampleNewMembers.xml' target='_blank' download className='link link-primary'>
           sample XML
         </Link>{' '}
         to create new members:

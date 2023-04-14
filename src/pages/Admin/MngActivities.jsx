@@ -134,7 +134,7 @@ export function NewActivity() {
       </p>
       <p className='text-right lg:text-left'>
         👉 You can try upload the{' '}
-        <Link to='/exampleNewActivities.xml' target='_blank' download className='link link-primary'>
+        <Link to='/sampleNewActivities.xml' target='_blank' download className='link link-primary'>
           sample XML
         </Link>{' '}
         to create new activities:

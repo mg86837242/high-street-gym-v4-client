@@ -82,6 +82,12 @@ export async function createMember() {
   return redirect(`..`);
 }
 
+export async function createMemberByXML({ request }) {
+  const formData = await request.formData();
+  await fetchResp.postFile(`${API_URL}/members/upload/xml`, formData);
+  return redirect(`..`);
+}
+
 export async function updateMemberById(values) {
   const { _action, id, ...updates } = values;
   const response = await fetchRaw.patch(`${API_URL}/members/${id}`, updates);
