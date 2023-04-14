@@ -161,10 +161,10 @@ const adminRoutes = [
           {
             path: 'new-upload-xml',
             ErrorBoundary: ErrorInfoRefresh,
-            async action({ request }) {
-              let { createMemberByXML } = await import('../api/members');
-              return createMemberByXML({ request });
-            },
+            // async action({ request }) {
+            //   let { createMemberByXML } = await import('../api/members');
+            //   return createMemberByXML({ request });
+            // },
           },
           {
             path: ':id/edit',
@@ -173,10 +173,10 @@ const adminRoutes = [
               return { Component: EditMember };
             },
             ErrorBoundary: ErrorInfoRefresh,
-            async loader({ params }) {
-              let { getMemberById } = await import('../api/members');
-              return getMemberById({ params });
-            },
+            // async loader({ params }) {
+            //   let { getMemberById } = await import('../api/members');
+            //   return getMemberById({ params });
+            // },
             async action({ params, request }) {
               let { updateMemberById } = await import('../api/members');
               return updateMemberById({ params, request });
