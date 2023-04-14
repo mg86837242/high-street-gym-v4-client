@@ -13,7 +13,6 @@
     "lint-w": "eslint ."
   },
   "author": "BY",
-  "license": "ISC",
   "dependencies": {
     "@fontsource/inter": "^4.5.15",
     "@fontsource/permanent-marker": "^4.5.7",
