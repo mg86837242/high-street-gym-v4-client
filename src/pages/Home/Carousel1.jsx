@@ -18,9 +18,13 @@ export default function Carousel() {
     <>
       <nav className='flex justify-center gap-10 py-2 bg-base-100 w-full'>
         {carouselItems.map(
-          ({ activityName }, i) =>
-            i > 3 && (
-              <button key={i} onClick={() => scrollToIndex(i - 4)} className='btn btn-secondary shadow shadow-black/50'>
+          ({ id, activityName }) =>
+            id > 3 && (
+              <button
+                key={id}
+                onClick={() => scrollToIndex(id - 4)}
+                className='btn btn-secondary shadow shadow-black/50'
+              >
                 {activityName.replace('-', ' ')}
               </button>
             )
@@ -29,10 +33,10 @@ export default function Carousel() {
       {/* NB Bug: `<li>` elements not sitting in one line => Google "no wrap element" => Solution: https://stackoverflow.com/questions/718891/how-to-make-a-div-not-wrap */}
       <ul ref={listRef} className='whitespace-nowrap w-full overflow-x-hidden'>
         {carouselItems.map(
-          ({ activityName, imageUrl }, i) =>
-            i > 3 && (
-              <li id={`slide-${i + 1}`} key={i} className='inline-block'>
-                <div id={`slide-${i + 1}-content-wrapper`} className='grid grid-cols-2 place-items-center'>
+          ({ id, activityName, imageUrl }) =>
+            id > 3 && (
+              <li id={`slide-${id + 1}`} key={id} className='inline-block'>
+                <div id={`slide-${id + 1}-content-wrapper`} className='grid grid-cols-2 place-items-center'>
                   <img
                     src={imageUrl}
                     alt={`${activityName} activities`}

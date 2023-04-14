@@ -16,9 +16,9 @@ export default function Carousel() {
 
   return (
     <ul ref={listRef} className='carousel w-full h-[80vh]'>
-      {carouselItems.map(({ imageUrl, activityName }, i) => (
-        <li id={`slide-${i + 1}`} key={i} className='carousel-item relative w-full'>
-          <div id={`slide-${i + 1}-content-wrapper`} className='grid grid-cols-2 place-items-center'>
+      {carouselItems.map(({ id, imageUrl, activityName }) => (
+        <li id={`slide-${id + 1}`} key={id} className='carousel-item relative w-full'>
+          <div id={`slide-${id + 1}-content-wrapper`} className='grid grid-cols-2 place-items-center'>
             <img
               src={imageUrl}
               alt={`${activityName.toLowerCase()} activities`}
@@ -33,16 +33,19 @@ export default function Carousel() {
             </div>
           </div>
           <div
-            id={`slide-${i + 1}-nav-buttons`}
+            id={`slide-${id + 1}-nav-buttons`}
             className='absolute flex justify-between -translate-y-1/2 left-5 right-5 top-1/2'
           >
             <button
-              onClick={() => scrollToIndex(i - 1 < 0 ? carouselItems.length - 1 : i - 1)}
+              onClick={() => scrollToIndex(id - 1 < 0 ? carouselItems.length - 1 : id - 1)}
               className='btn btn-circle'
             >
               ❮
             </button>
-            <button onClick={() => scrollToIndex(i + 2 > carouselItems.length ? 0 : i + 1)} className='btn btn-circle'>
+            <button
+              onClick={() => scrollToIndex(id + 2 > carouselItems.length ? 0 : id + 1)}
+              className='btn btn-circle'
+            >
               ❯
             </button>
           </div>
