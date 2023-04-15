@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
-import { useLoaderData, Outlet, Form, useSubmit, useNavigate, Link } from 'react-router-dom';
+import { useLoaderData, Outlet, Form, useSubmit, useNavigate, Link, useActionData } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { memberDetailedSchema } from '../../schemas';
@@ -156,7 +156,9 @@ export function NewMember() {
 }
 
 export function EditMember() {
+  const [inputEmailMsg, setInputEmailMsg] = useState('');
   const { member } = useLoaderData();
+  const actionData = useActionData();
   const submit = useSubmit();
   const navigate = useNavigate();
   const memberDefaultValues = useMemo(() => {
@@ -175,17 +177,29 @@ export function EditMember() {
 
   useEffect(() => reset(memberDefaultValues), [reset, member]);
 
+  useEffect(() => {
+    if (!actionData) {
+      return;
+    }
+    if (actionData.status === 409) {
+      setInputEmailMsg(actionData.message);
+    }
+
+    return (cleanUp = () => setInputEmailMsg(''));
+  }, []);
+
   return (
     <div className='grid py-6 place-items-center'>
       <form
         onSubmit={handleSubmit(data => {
+          // [ ] Sanitize, special case for lineTwo && test 409
           const sanitizedData = convertEmptyStrToNull(data);
           submit({ body: JSON.stringify(sanitizedData) }, { method: 'post' });
         })}
         noValidate
         className='grid w-full grid-cols-2 justify-items-center xl:grid-cols-3 gap-x-5'
       >
-        <FCRHFSm label='Email' register={register('email')} issue={errors.email?.message} />
+        <FCRHFSm label='Email' register={register('email')} issue={inputEmailMsg || errors.email?.message} />
         <FCRHFSmPass
           label='Password'
           register={register('password', { setValueAs: val => (isDirty ? val : member.password) })}

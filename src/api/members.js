@@ -14,6 +14,7 @@ import {
 import fetchRaw from '../helpers/fetchRaw';
 import fetchJSON from '../helpers/fetchJSON';
 import defaultNewMember from '../data/defaultNewMember';
+import getSubmittedData from '../helpers/getSubmittedData';
 
 export async function getAllMembersWithDetails() {
   const response = await fetchResp.get(`${API_URL}/members/detailed`);
@@ -116,15 +117,13 @@ export async function updateMemberById(values) {
   return { ...json, _action };
 }
 
-// [ ] Admin edit members action (1) useActionData to handle 409 in the component
 export async function updateMemberWithDetailsById({ params, request }) {
-  const formData = await request.formData();
-  const updates = Object.fromEntries(formData);
+  const updates = await getSubmittedData(request);
   const response = await fetchRaw.patch(`${API_URL}/members/${params.id}/detailed`, updates);
   const json = await response.json();
   // Special error handling to let 409 pass to NOT trigger error boundary, since it's already handled the in component
   if (response.status === 409) {
-    return json.message;
+    return json;
   }
   if (response.status !== 200) {
     const message = `${json.status} ${

@@ -178,8 +178,8 @@ const adminRoutes = [
               return getMemberWithDetailsById({ params });
             },
             async action({ params, request }) {
-              let { updateMemberById } = await import('../api/members');
-              return updateMemberById({ params, request });
+              let { updateMemberWithDetailsById } = await import('../api/members');
+              return updateMemberWithDetailsById({ params, request });
             },
           },
           {
