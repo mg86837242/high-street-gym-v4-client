@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect } from 'react';
 import AuthContext from '../../context/AuthContext';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { Btn1 } from '../ui/Btn1';
 
 // This component has the duality of different appearances and behaviors based on the `isHome` props
 export default function NavBar({ isHome }) {
@@ -228,15 +229,14 @@ function NavBarRight({ authenticatedUser, handleLogout }) {
           >
             Profile
           </Link>
-          <button
-            className='shadow btn glass bg-base-100 shadow-black/50 text-primary-content'
+          <Btn1
             onClick={() => {
               handleLogout();
               navigate('/');
             }}
           >
             Logout
-          </button>
+          </Btn1>
         </>
       ) : (
         <>

@@ -14,6 +14,14 @@ export function Btn1Sm({ children, type, onClick, w }) {
   );
 }
 
+export function Btn1Xs({ children, type, onClick, w }) {
+  return (
+    <button type={type} onClick={onClick} className={`${w} shadow btn btn-xs text-primary-content shadow-black/50`}>
+      {children}
+    </button>
+  );
+}
+
 export function Btn1SmOutline({ children, type, onClick, w }) {
   return (
     <button

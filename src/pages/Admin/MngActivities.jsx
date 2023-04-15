@@ -4,8 +4,8 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { activitySchema } from '../../schemas';
 import { convertEmptyStrToNull } from '../../helpers/sanitize';
-import { Btn1XsOutline } from '../../components/ui/Btn1';
-import { Btn2XsOutline, Btn2SmOutline } from '../../components/ui/Btn2';
+import { Btn1Xs, Btn1Sm } from '../../components/ui/Btn1';
+import { Btn2Xs, Btn2Sm } from '../../components/ui/Btn2';
 import FCRHFSm from '../../components/formCtrlRHF/FCRHFSm';
 
 export function MngActivities() {
@@ -66,7 +66,7 @@ function ListActivities({ activities }) {
                 <td>{price}</td>
                 <td>
                   <Form action={`${id}/edit`}>
-                    <Btn2XsOutline>Edit</Btn2XsOutline>
+                    <Btn2Xs>Edit</Btn2Xs>
                   </Form>
                 </td>
                 <td>
@@ -79,7 +79,7 @@ function ListActivities({ activities }) {
                       }
                     }}
                   >
-                    <Btn1XsOutline>Delete</Btn1XsOutline>
+                    <Btn1Xs>Delete</Btn1Xs>
                   </Form>
                 </td>
               </tr>
@@ -115,12 +115,12 @@ export function NewActivity() {
               onChange={e => setFile(e.target.files[0])}
               className='w-full max-w-xs shadow file-input file-input-bordered file-input-sm shadow-black/50'
             />
-            <Btn2SmOutline>Submit</Btn2SmOutline>
+            <Btn2Sm>Submit</Btn2Sm>
           </Form>
         </div>
         <div className='m-0 divider lg:hidden' />
         <Form method='post' action='new'>
-          <Btn2SmOutline>Create New</Btn2SmOutline>
+          <Btn2Sm>Create New</Btn2Sm>
         </Form>
       </div>
       <p className='text-right lg:text-left'>
@@ -229,13 +229,10 @@ export function EditActivity() {
           isRequired={false}
         />
         <div className='flex justify-end w-full col-span-2 gap-10 py-6 xl:col-span-3'>
-          {/* [ ] Cleanup these btns, extending to <MngBlogs> and <MngMembers>, etc. */}
-          <button type='submit' className='w-20 btn btn-outline btn-primary btn-sm'>
-            Save
-          </button>
-          <button type='button' onClick={() => navigate(-1)} className='w-20 btn btn-outline btn-sm'>
+          <Btn2Sm w='w-20'>Save</Btn2Sm>
+          <Btn1Sm type='button' onClick={() => navigate(-1)} w='w-20'>
             Cancel
-          </button>
+          </Btn1Sm>
         </div>
       </form>
     </div>

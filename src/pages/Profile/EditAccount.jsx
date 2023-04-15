@@ -13,6 +13,7 @@ import {
 } from '../../schemas';
 import countries from '../../data/countries.json'; // Vite's feature
 import { convertEmptyStrToNull, convertNullToEmptyStr } from '../../helpers/sanitize';
+import { Btn2Sm } from '../../components/ui/Btn2';
 import FCRHFSm from '../../components/formCtrlRHF/FCRHFSm';
 import FCRHFSmPass from '../../components/formCtrlRHF/FCRHFSmPass';
 import SpinnerNoNav from '../../components/ui/SpinnerNoNav';
@@ -124,6 +125,7 @@ export default function EditAccount() {
   );
 }
 
+// [ ] Don't fetch all emails into the component to check identical email, instead, useActionData (see <MngMembers>), this applies to <EditAccount> & <SignupForm>
 function UpdateAdminForm({ topMsg, user, emails, authenticatedUser }) {
   const [inputEmailMsg, setInputEmailMsg] = useState('');
   const submit = useSubmit();
@@ -170,9 +172,9 @@ function UpdateAdminForm({ topMsg, user, emails, authenticatedUser }) {
       <FCRHFSm label='Phone' register={register('phone')} issue={errors.phone?.message} />
       <input type='hidden' {...register('id', { valueAsNumber: true })} />
       <input type='hidden' {...register('_action')} />
-      <button type='submit' className='btn btn-primary btn-sm mt-4'>
-        Save
-      </button>
+      <div className='mt-4'>
+        <Btn2Sm w='w-full'>Save</Btn2Sm>
+      </div>
       <p className='text-success self-center mt-4'>{topMsg}</p>
     </form>
   );
@@ -226,9 +228,9 @@ function UpdateAdminAddrForm({ botMsg, user, authenticatedUser }) {
       </FCRHFSm>
       <input type='hidden' {...register('adminId', { valueAsNumber: true })} />
       <input type='hidden' {...register('_action')} />
-      <button type='submit' className='btn btn-primary btn-sm mt-5'>
-        Save
-      </button>
+      <div className='mt-4'>
+        <Btn2Sm w='w-full'>Save</Btn2Sm>
+      </div>
       <p className='text-success self-center mt-4'>{botMsg}</p>
     </form>
   );
@@ -299,9 +301,9 @@ function UpdateTrainerForm({ topMsg, user, emails, authenticatedUser }) {
       <FCRHFSm label='Image URL' register={register('imageUrl')} issue={errors.imageUrl?.message} isRequired={false} />
       <input type='hidden' {...register('id', { valueAsNumber: true })} />
       <input type='hidden' {...register('_action')} />
-      <button type='submit' className='btn btn-primary btn-sm mt-4'>
-        Save
-      </button>
+      <div className='mt-4'>
+        <Btn2Sm w='w-full'>Save</Btn2Sm>
+      </div>
       <p className='text-success self-center mt-4'>{topMsg}</p>
     </form>
   );
@@ -355,9 +357,9 @@ function UpdateTrainerAddrForm({ botMsg, user, authenticatedUser }) {
       </FCRHFSm>
       <input type='hidden' {...register('trainerId', { valueAsNumber: true })} />
       <input type='hidden' {...register('_action')} />
-      <button type='submit' className='btn btn-primary btn-sm mt-5'>
-        Save
-      </button>
+      <div className='mt-4'>
+        <Btn2Sm w='w-full'>Save</Btn2Sm>
+      </div>
       <p className='text-success self-center mt-4'>{botMsg}</p>
     </form>
   );
@@ -424,9 +426,9 @@ function UpdateMemberForm({ topMsg, user, emails, authenticatedUser }) {
       </FCRHFSm>
       <input type='hidden' {...register('id', { valueAsNumber: true })} />
       <input type='hidden' {...register('_action')} />
-      <button type='submit' className='btn btn-primary btn-sm mt-4'>
-        Save
-      </button>
+      <div className='mt-4'>
+        <Btn2Sm w='w-full'>Save</Btn2Sm>
+      </div>
       <p className='text-success self-center mt-4'>{topMsg}</p>
     </form>
   );
@@ -480,9 +482,9 @@ function UpdateMemberAddrForm({ botMsg, user, authenticatedUser }) {
       </FCRHFSm>
       <input type='hidden' {...register('memberId', { valueAsNumber: true })} />
       <input type='hidden' {...register('_action')} />
-      <button type='submit' className='btn btn-primary btn-sm mt-5'>
-        Save
-      </button>
+      <div className='mt-4'>
+        <Btn2Sm w='w-full'>Save</Btn2Sm>
+      </div>
       <p className='text-success self-center mt-4'>{botMsg}</p>
     </form>
   );

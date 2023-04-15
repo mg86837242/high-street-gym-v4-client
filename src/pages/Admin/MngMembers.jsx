@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { memberDetailedSchema } from '../../schemas';
 import { convertEmptyStrToNull } from '../../helpers/sanitize';
-import { Btn1XsOutline } from '../../components/ui/Btn1';
+import { Btn1XsOutline, Btn1SmOutline } from '../../components/ui/Btn1';
 import { Btn2XsOutline, Btn2SmOutline } from '../../components/ui/Btn2';
 import FCRHFSm from '../../components/formCtrlRHF/FCRHFSm';
 import FCRHFSmPass from '../../components/formCtrlRHF/FCRHFSmPass';
@@ -230,16 +230,12 @@ export function EditMember() {
         <FCRHFSm label='State' register={register('state')} issue={errors.state?.message} />
         <FCRHFSm label='Country' register={register('country')} issue={errors.country?.message} />
         <div className='flex justify-end w-full col-span-2 gap-10 py-6 xl:col-span-3'>
-          <button
-            type='submit'
-            onClick={() => setInputEmailMsg('')}
-            className='w-20 btn btn-outline btn-primary btn-sm'
-          >
+          <Btn2SmOutline onClick={() => setInputEmailMsg('')} w='w-20'>
             Save
-          </button>
-          <button type='button' onClick={() => navigate(-1)} className='w-20 btn btn-outline btn-sm'>
+          </Btn2SmOutline>
+          <Btn1SmOutline type='button' onClick={() => navigate(-1)} w='w-20'>
             Cancel
-          </button>
+          </Btn1SmOutline>
         </div>
       </form>
     </div>

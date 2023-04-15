@@ -5,8 +5,8 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { blogSchema } from '../../schemas/index.js';
 import { convertEmptyStrToNull } from '../../helpers/sanitize.js';
-import { Btn1XsOutline } from '../../components/ui/Btn1';
-import { Btn2XsOutline } from '../../components/ui/Btn2';
+import { Btn1XsOutline, Btn1SmOutline } from '../../components/ui/Btn1';
+import { Btn2XsOutline, Btn2SmOutline } from '../../components/ui/Btn2';
 import FCRHFSm from '../../components/formCtrlRHF/FCRHFSm.jsx';
 import FCRHFSmBlogBody from '../../components/formCtrlRHF/FCRHFSmBlogBody.jsx';
 
@@ -81,9 +81,7 @@ export function NewBlog() {
     <div className='flex justify-end py-6'>
       <Form method='post' action='new'>
         <input type='hidden' name='loginId' value={authenticatedUser.id} />
-        <button type='submit' className='btn btn-outline btn-primary btn-sm'>
-          Create New
-        </button>
+        <Btn2SmOutline>Create New</Btn2SmOutline>
       </Form>
     </div>
   );
@@ -121,12 +119,10 @@ export function EditBlog() {
         <FCRHFSmBlogBody label='Blog Post Body' register={register('body')} issue={errors.body?.message} />
         <input type='hidden' {...register('loginId', { valueAsNumber: true })} />
         <div className='flex justify-end w-full col-span-2 gap-10 py-6 xl:col-span-3'>
-          <button type='submit' className='w-20 btn btn-outline btn-primary btn-sm'>
-            Save
-          </button>
-          <button type='button' onClick={() => navigate(-1)} className='w-20 btn btn-outline btn-sm'>
+          <Btn2SmOutline w='w-20'>Save</Btn2SmOutline>
+          <Btn1SmOutline type='button' onClick={() => navigate(-1)} w='w-20'>
             Cancel
-          </button>
+          </Btn1SmOutline>
         </div>
       </form>
     </div>

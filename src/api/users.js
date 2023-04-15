@@ -2,7 +2,6 @@ import { API_URL } from '../data/constants';
 import fetchResp from '../helpers/fetchResp';
 import fetchRaw from '../helpers/fetchRaw';
 
-// [ ] Don't fetch all emails to the component to check identical email, instead, useActionData, this applies to <EditAccount> & <SignupForm>
 export async function getAllEmails() {
   const response = await fetchResp.get(`${API_URL}/users/all_emails`);
   return response;
