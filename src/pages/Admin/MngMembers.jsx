@@ -175,7 +175,6 @@ export function EditMember() {
 
   useEffect(() => reset(memberDefaultValues), [reset, member]);
 
-  // [ ] Admin edit members UI
   return (
     <div className='grid py-6 place-items-center'>
       <form

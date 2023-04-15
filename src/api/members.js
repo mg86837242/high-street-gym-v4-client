@@ -108,6 +108,23 @@ export async function updateMemberById(values) {
   return { ...json, _action };
 }
 
+// [ ] Admin edit members action (1) useActionData to handle 409 in the compoennt
+export async function updateMemberWithDetailsById({ params, request }) {
+  const formData = await request.formData();
+  const updates = Object.fromEntries(formData);
+  const response = await fetchRaw.patch(`${API_URL}/members/${params.id}/detailed`, updates);
+  const json = await response.json();
+  // Special error handling to let 409 pass to NOT trigger error boundary, since it's already handled the in component
+  if (response.status === 409) {
+    return json.message;
+  }
+  if (response.status !== 200) {
+    const message = `${json.status} ${typeof json.message === 'string' ? json.message : json.message[0].message}`;
+    throw new Response(message);
+  }
+  return redirect(`..`);
+}
+
 export async function deleteMemberById({ params }) {
   await fetchResp.delete(`${API_URL}/members/${params.id}`);
   return redirect(`..`);

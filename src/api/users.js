@@ -2,7 +2,7 @@ import { API_URL } from '../data/constants';
 import fetchResp from '../helpers/fetchResp';
 import fetchRaw from '../helpers/fetchRaw';
 
-// TODO Move the logic of checking identical email to the backend, thru a func in model, and handle it by special error handling of letting 409 pass
+// [ ] Don't fetch all emails to the component to check 409, this applies to <EditAccount> & <SignupForm>
 export async function getAllEmails() {
   const response = await fetchResp.get(`${API_URL}/users/all_emails`);
   return response;
