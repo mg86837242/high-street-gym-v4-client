@@ -129,7 +129,7 @@ function UpdateAdminForm({ topMsg, user, emails, authenticatedUser }) {
   const submit = useSubmit();
   const userDefaultValues = useMemo(() => {
     const { password, ...values } = user;
-    return { ...values, password: '', id: authenticatedUser?.adminId, _action: 'updateAdminById' };
+    return { ...values, password: '●●●●●●●●●●', id: authenticatedUser?.adminId, _action: 'updateAdminById' };
   }, [user, authenticatedUser]);
   const {
     register,
@@ -161,7 +161,6 @@ function UpdateAdminForm({ topMsg, user, emails, authenticatedUser }) {
       <FCRHFSm label='Email' register={register('email')} issue={inputEmailMsg || errors.email?.message} />
       <FCRHFSmPass
         label='Password'
-        placeholder='●●●●●●●●●●'
         register={register('password', { setValueAs: val => (isDirty ? val : user.password) })}
         issue={errors.password?.message}
       />
@@ -240,7 +239,7 @@ function UpdateTrainerForm({ topMsg, user, emails, authenticatedUser }) {
   const submit = useSubmit();
   const userDefaultValues = useMemo(() => {
     const { password, ...values } = user;
-    return { ...values, password: '', id: authenticatedUser?.adminId, _action: 'updateAdminById' };
+    return { ...values, password: '●●●●●●●●●●', id: authenticatedUser?.adminId, _action: 'updateAdminById' };
   }, [user, authenticatedUser]);
   const {
     register,
@@ -272,7 +271,6 @@ function UpdateTrainerForm({ topMsg, user, emails, authenticatedUser }) {
       <FCRHFSm label='Email' register={register('email')} issue={inputEmailMsg || errors.email?.message} />
       <FCRHFSmPass
         label='Password'
-        placeholder='●●●●●●●●●●'
         register={register('password', { setValueAs: val => (isDirty ? val : user.password) })}
         issue={errors.password?.message}
       />
@@ -370,7 +368,7 @@ function UpdateMemberForm({ topMsg, user, emails, authenticatedUser }) {
   const submit = useSubmit();
   const userDefaultValues = useMemo(() => {
     const { password, ...values } = user;
-    return { ...values, password: '', id: authenticatedUser?.adminId, _action: 'updateAdminById' };
+    return { ...values, password: '●●●●●●●●●●', id: authenticatedUser?.adminId, _action: 'updateAdminById' };
   }, [user, authenticatedUser]);
   const {
     register,
@@ -402,7 +400,6 @@ function UpdateMemberForm({ topMsg, user, emails, authenticatedUser }) {
       <FCRHFSm label='Email' register={register('email')} issue={inputEmailMsg || errors.email?.message} />
       <FCRHFSmPass
         label='Password'
-        placeholder='●●●●●●●●●●'
         register={register('password', { setValueAs: val => (isDirty ? val : user.password) })}
         issue={errors.password?.message}
       />

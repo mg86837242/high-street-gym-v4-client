@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
 
-export default function FCRHFSmPass({ children, label, placeholder, register, issue, isRequired }) {
+export default function FCRHFSmPass({ children, label, register, issue, isRequired }) {
   const [type, setType] = useState('password');
   const [icon, setIcon] = useState(faEyeSlash);
 
@@ -18,7 +18,7 @@ export default function FCRHFSmPass({ children, label, placeholder, register, is
         <span className='label-text'>{label}:</span>
         {isRequired === false || <span className='label-text-alt'>Required</span>}
       </label>
-      <input type={type} placeholder={placeholder} {...register} className='input input-bordered input-sm' />
+      <input type={type} {...register} className='input input-bordered input-sm' />
       <button type='button' onClick={handleToggle} className='absolute right-0 mr-3 cursor-pointer mt-8 3xl:mt-10'>
         <FontAwesomeIcon icon={icon} className='w-4 h-4' />
       </button>
