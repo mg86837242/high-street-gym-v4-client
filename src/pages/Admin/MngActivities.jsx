@@ -112,7 +112,6 @@ export function NewActivity() {
               id='new-activity-xml'
               type='file'
               accept='.xml'
-              // value={file}
               onChange={e => setFile(e.target.files[0])}
               className='w-full max-w-xs shadow file-input file-input-bordered file-input-sm shadow-black/50'
             />

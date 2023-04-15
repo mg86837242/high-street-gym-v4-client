@@ -108,10 +108,9 @@ function ListMembers({ members }) {
 
 export function NewMember() {
   const [file, setFile] = useState(null);
-  // [ ] 1. Fix this controlled input (initial state had some issues)
-  // [ ] 2. Figure out how to make a field to be null (left out the tag in XML?)
-  // [ ] 3. XML Upload API: transaction loop
-  // [ ] 4. XML Upload API: validation loop
+  // [ ] 1. Figure out how to make a field to be null (left out the tag in XML?)
+  // [ ] 2. XML Upload API: transaction loop
+  // [ ] 3. XML Upload API: validation loop
 
   return (
     <div className='flex flex-col gap-5 py-6'>
@@ -131,7 +130,6 @@ export function NewMember() {
               id='new-member-xml'
               type='file'
               accept='.xml'
-              // value={file}
               onChange={e => setFile(e.target.files[0])}
               className='w-full max-w-xs shadow file-input file-input-bordered file-input-sm shadow-black/50'
             />
