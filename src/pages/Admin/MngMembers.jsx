@@ -7,6 +7,7 @@ import { convertEmptyStrToNull } from '../../helpers/sanitize';
 import { Btn1XsOutline } from '../../components/ui/Btn1';
 import { Btn2SmOutline, Btn2XsOutline } from '../../components/ui/Btn2';
 import FCRHFSm from '../../components/formCtrlRHF/FCRHFSm';
+import FCRHFSmPass from '../../components/formCtrlRHF/FCRHFSmPass';
 
 export function MngMembers() {
   const { members } = useLoaderData();
@@ -185,29 +186,37 @@ export function EditMember() {
         noValidate
         className='grid w-full grid-cols-2 justify-items-center xl:grid-cols-3 gap-x-5'
       >
-        <FCRHFSm label='Name' register={register('name')} issue={errors.name?.message} />
-        <FCRHFSm label='Name' register={register('name')} issue={errors.name?.message} />
-        <FCRHFSm label='Name' register={register('name')} issue={errors.name?.message} />
-        <FCRHFSm label='Name' register={register('name')} issue={errors.name?.message} />
-        <FCRHFSm label='Name' register={register('name')} issue={errors.name?.message} />
-        <FCRHFSm label='Name' register={register('name')} issue={errors.name?.message} />
-        <FCRHFSm label='Name' register={register('name')} issue={errors.name?.message} />
-        <FCRHFSm label='Name' register={register('name')} issue={errors.name?.message} />
-        <FCRHFSm label='Name' register={register('name')} issue={errors.name?.message} />
-        <FCRHFSm label='Name' register={register('name')} issue={errors.name?.message} />
-        <FCRHFSm label='Name' register={register('name')} issue={errors.name?.message} />
-        <FCRHFSm label='Name' register={register('name')} issue={errors.name?.message} />
-        <FCRHFSm label='Name' register={register('name')} issue={errors.name?.message} />
-        <FCRHFSm label='Name' register={register('name')} issue={errors.name?.message} />
-        <FCRHFSm label='Category' issue={errors.category?.message} isRequired={false}>
-          <select {...register('category')} className='font-normal select select-bordered select-sm'>
-            <option value=''>-- Choose Category --</option>
-            <option value='Aerobic'>Aerobic</option>
-            <option value='Strength'>Strength</option>
-            <option value='Aerobic & Strength'>Aerobic & Strength</option>
-            <option value='Flexibility'>Flexibility</option>
+        <FCRHFSm label='Email' register={register('email')} issue={errors.email?.message} />
+        <FCRHFSmPass
+          label='Password'
+          register={register('password', { setValueAs: val => (isDirty ? val : member.password) })}
+          issue={errors.password?.message}
+        />
+        <FCRHFSm label='Username' register={register('username')} issue={errors.username?.message} />
+        <FCRHFSm label='First Name' register={register('firstName')} issue={errors.firstName?.message} />
+        <FCRHFSm label='Last Name' register={register('lastName')} issue={errors.lastName?.message} />
+        <FCRHFSm label='Phone' register={register('phone')} issue={errors.phone?.message} />
+        <FCRHFSm
+          label='Age'
+          type='number'
+          register={register('age', { valueAsNumber: true })}
+          issue={errors.age?.message}
+          isRequired={false}
+        />
+        <FCRHFSm label='Gender' issue={errors.gender?.message} isRequired={false}>
+          <select {...register('gender')} className='font-normal select select-bordered select-sm'>
+            <option value=''>-- Choose Gender --</option>
+            <option value='Female'>Female</option>
+            <option value='Male'>Male</option>
+            <option value='Other'>Other</option>
           </select>
         </FCRHFSm>
+        <FCRHFSm label='Line 1' register={register('lineOne')} issue={errors.lineOne?.message} />
+        <FCRHFSm label='Line 2' register={register('lineTwo')} issue={errors.lineTwo?.message} isRequired={false} />
+        <FCRHFSm label='Suburb' register={register('suburb')} issue={errors.suburb?.message} />
+        <FCRHFSm label='Postcode' register={register('postcode')} issue={errors.postcode?.message} />
+        <FCRHFSm label='State' register={register('state')} issue={errors.state?.message} />
+        <FCRHFSm label='Country' register={register('country')} issue={errors.country?.message} />
         <div className='flex justify-end w-full col-span-2 gap-10 py-6 xl:col-span-3'>
           <button type='submit' className='w-20 btn btn-outline btn-primary btn-sm'>
             Save
