@@ -25,6 +25,8 @@
     <firstName>John</firstName>
     <lastName>Doe</lastName>
     <phone>0123456789</phone>
+    <!-- <age></age>
+    <gender></gender> -->
     <lineOne>1 Ashley St</lineOne>
     <lineTwo></lineTwo>
     <suburb>Brisbane City</suburb>
@@ -39,6 +41,8 @@
     <firstName>Jane</firstName>
     <lastName>Doe</lastName>
     <phone>0123456789</phone>
+    <!-- <age></age>
+    <gender></gender> -->
     <lineOne>1 Ashley St</lineOne>
     <lineTwo></lineTwo>
     <suburb>Brisbane City</suburb>

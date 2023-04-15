@@ -92,7 +92,7 @@ function ListActivities({ activities }) {
 }
 
 export function NewActivity() {
-  const [file, setFile] = useState(undefined);
+  const [file, setFile] = useState(null);
 
   return (
     <div className='flex flex-col gap-5 py-6'>
