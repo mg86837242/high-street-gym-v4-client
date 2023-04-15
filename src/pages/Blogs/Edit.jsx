@@ -76,7 +76,7 @@ export default function Edit() {
         </div>
       </div>
       <div className='flex justify-end gap-10 px-4 py-6'>
-        <Btn2SmOutline type='submit' form='edit-blog'>
+        <Btn2SmOutline type='submit' form={'edit-blog'}>
           Save
         </Btn2SmOutline>
         <Btn1SmOutline

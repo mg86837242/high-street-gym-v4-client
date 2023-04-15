@@ -229,6 +229,7 @@ export function EditActivity() {
           isRequired={false}
         />
         <div className='flex justify-end w-full col-span-2 gap-10 py-6 xl:col-span-3'>
+          {/* [ ] Cleanup these btns, extending to <MngBlogs> and <MngMembers>, etc. */}
           <button type='submit' className='w-20 btn btn-outline btn-primary btn-sm'>
             Save
           </button>
