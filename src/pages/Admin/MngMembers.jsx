@@ -108,9 +108,6 @@ function ListMembers({ members }) {
 
 export function NewMember() {
   const [file, setFile] = useState(null);
-  // [ ] 1. Figure out how to make a field to be null (left out the tag in XML?)
-  // [ ] 2. XML Upload API: transaction loop
-  // [ ] 3. XML Upload API: validation loop
 
   return (
     <div className='flex flex-col gap-5 py-6'>
