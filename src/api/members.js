@@ -20,6 +20,11 @@ export async function getAllMembersWithDetails() {
   return response;
 }
 
+export async function getMemberWithDetailsById({ params }) {
+  const response = await fetchResp.get(`${API_URL}/members/${params.id}/detailed`);
+  return response;
+}
+
 export async function signupMembers({ request }) {
   const formData = await request.formData();
   const creations = Object.fromEntries(formData);

@@ -174,7 +174,7 @@ export function EditMember() {
 
   useEffect(() => reset(memberDefaultValues), [reset, member]);
 
-  // [ ] Admin edit members UI: (1) loader data (2) form inputs
+  // [ ] Admin edit members UI
   return (
     <div className='grid py-6 place-items-center'>
       <form
@@ -185,7 +185,20 @@ export function EditMember() {
         noValidate
         className='grid w-full grid-cols-2 justify-items-center xl:grid-cols-3 gap-x-5'
       >
-        <FCRHFSm label='Member Name' register={register('name')} issue={errors.name?.message} />
+        <FCRHFSm label='Name' register={register('name')} issue={errors.name?.message} />
+        <FCRHFSm label='Name' register={register('name')} issue={errors.name?.message} />
+        <FCRHFSm label='Name' register={register('name')} issue={errors.name?.message} />
+        <FCRHFSm label='Name' register={register('name')} issue={errors.name?.message} />
+        <FCRHFSm label='Name' register={register('name')} issue={errors.name?.message} />
+        <FCRHFSm label='Name' register={register('name')} issue={errors.name?.message} />
+        <FCRHFSm label='Name' register={register('name')} issue={errors.name?.message} />
+        <FCRHFSm label='Name' register={register('name')} issue={errors.name?.message} />
+        <FCRHFSm label='Name' register={register('name')} issue={errors.name?.message} />
+        <FCRHFSm label='Name' register={register('name')} issue={errors.name?.message} />
+        <FCRHFSm label='Name' register={register('name')} issue={errors.name?.message} />
+        <FCRHFSm label='Name' register={register('name')} issue={errors.name?.message} />
+        <FCRHFSm label='Name' register={register('name')} issue={errors.name?.message} />
+        <FCRHFSm label='Name' register={register('name')} issue={errors.name?.message} />
         <FCRHFSm label='Category' issue={errors.category?.message} isRequired={false}>
           <select {...register('category')} className='font-normal select select-bordered select-sm'>
             <option value=''>-- Choose Category --</option>
@@ -195,54 +208,6 @@ export function EditMember() {
             <option value='Flexibility'>Flexibility</option>
           </select>
         </FCRHFSm>
-        <FCRHFSm
-          label='Description'
-          register={register('description')}
-          issue={errors.description?.message}
-          isRequired={false}
-        />
-        <FCRHFSm label='Intensity Level' issue={errors.intensityLevel?.message} isRequired={false}>
-          <select {...register('intensityLevel')} className='font-normal select select-bordered select-sm'>
-            <option value=''>-- Choose Intensity Level --</option>
-            <option value='Low'>Low</option>
-            <option value='Medium'>Medium</option>
-            <option value='High'>High</option>
-            <option value='Very High'>Very High</option>
-            <option value='Varies with Type'>Varies with Type</option>
-          </select>
-        </FCRHFSm>
-        <FCRHFSm
-          label='Max People Allowed'
-          type='number'
-          register={register('maxPeopleAllowed', { valueAsNumber: true })}
-          issue={errors.maxPeopleAllowed?.message}
-          isRequired={false}
-        />
-        <FCRHFSm
-          label='Requirement 1'
-          register={register('requirementOne')}
-          issue={errors.requirementOne?.message}
-          isRequired={false}
-        />
-        <FCRHFSm
-          label='Requirement 2'
-          register={register('requirementTwo')}
-          issue={errors.requirementTwo?.message}
-          isRequired={false}
-        />
-        <FCRHFSm
-          label='Duration (minutes)'
-          type='number'
-          register={register('durationMinutes', { valueAsNumber: true })}
-          issue={errors.durationMinutes?.message}
-        />
-        <FCRHFSm
-          label='Price'
-          type='number'
-          register={register('price', { valueAsNumber: true })}
-          issue={errors.price?.message}
-          isRequired={false}
-        />
         <div className='flex justify-end w-full col-span-2 gap-10 py-6 xl:col-span-3'>
           <button type='submit' className='w-20 btn btn-outline btn-primary btn-sm'>
             Save
