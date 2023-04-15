@@ -201,7 +201,7 @@ function DemoLogins() {
     <div className='flex justify-between gap-2'>
       <button
         onClick={() =>
-          handleLogin('demomember@gmail.com', 'abcd1234')
+          handleLogin('demomember@server.com', 'abcd1234')
             .then(() => navigate('/'))
             .catch(() => navigate('/login'))
         }
@@ -211,7 +211,7 @@ function DemoLogins() {
       </button>
       <button
         onClick={() =>
-          handleLogin('demotrainer@gmail.com', 'abcd1234')
+          handleLogin('demotrainer@server.com', 'abcd1234')
             .then(() => navigate('/'))
             .catch(() => navigate('/login'))
         }
@@ -221,7 +221,7 @@ function DemoLogins() {
       </button>
       <button
         onClick={() =>
-          handleLogin('demoadmin@gmail.com', 'abcd1234')
+          handleLogin('demoadmin@server.com', 'abcd1234')
             .then(() => navigate('/'))
             .catch(() => navigate('/login'))
         }
