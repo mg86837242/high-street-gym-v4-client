@@ -6,7 +6,7 @@ export function Btn2({ children, type, onClick, w }) {
   );
 }
 
-export function Btn2Sm({ children, type, onClick, w, form }) {
+export function Btn2Sm({ children, type, onClick, w }) {
   return (
     <button type={type} form={form} onClick={onClick} className={`${w} shadow btn btn-primary btn-sm shadow-black/50`}>
       {children}
@@ -27,7 +27,7 @@ export function Btn2SmOutline({ children, type, form, onClick, w }) {
   );
 }
 
-export function Btn2XsOutline({ children, type, form, onClick, w }) {
+export function Btn2XsOutline({ children, type, onClick, w }) {
   return (
     <button
       type={type}
