@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { memberDetailedSchema } from '../../schemas';
 import { convertEmptyStrToNull } from '../../helpers/sanitize';
 import { Btn1XsOutline } from '../../components/ui/Btn1';
-import { Btn2SmOutline, Btn2XsOutline } from '../../components/ui/Btn2';
+import { Btn2XsOutline, Btn2SmOutline } from '../../components/ui/Btn2';
 import FCRHFSm from '../../components/formCtrlRHF/FCRHFSm';
 import FCRHFSmPass from '../../components/formCtrlRHF/FCRHFSmPass';
 
@@ -177,7 +177,6 @@ export function EditMember() {
 
   useEffect(() => reset(memberDefaultValues), [reset, member]);
 
-  // [ ] test 409
   useEffect(() => {
     if (!actionData) {
       return;
@@ -186,8 +185,8 @@ export function EditMember() {
       setInputEmailMsg(actionData.message);
     }
 
-    return (cleanUp = () => setInputEmailMsg(''));
-  }, []);
+    return () => setInputEmailMsg('');
+  }, [actionData]);
 
   return (
     <div className='grid py-6 place-items-center'>
@@ -199,7 +198,7 @@ export function EditMember() {
         noValidate
         className='grid w-full grid-cols-2 justify-items-center xl:grid-cols-3 gap-x-5'
       >
-        <FCRHFSm label='Email' register={register('email')} issue={inputEmailMsg || errors.email?.message} />
+        <FCRHFSm label='Email' register={register('email')} issue={errors.email?.message || inputEmailMsg} />
         <FCRHFSmPass
           label='Password'
           register={register('password', { setValueAs: val => (isDirty ? val : member.password) })}
@@ -231,7 +230,11 @@ export function EditMember() {
         <FCRHFSm label='State' register={register('state')} issue={errors.state?.message} />
         <FCRHFSm label='Country' register={register('country')} issue={errors.country?.message} />
         <div className='flex justify-end w-full col-span-2 gap-10 py-6 xl:col-span-3'>
-          <button type='submit' className='w-20 btn btn-outline btn-primary btn-sm'>
+          <button
+            type='submit'
+            onClick={() => setInputEmailMsg('')}
+            className='w-20 btn btn-outline btn-primary btn-sm'
+          >
             Save
           </button>
           <button type='button' onClick={() => navigate(-1)} className='w-20 btn btn-outline btn-sm'>

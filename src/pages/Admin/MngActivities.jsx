@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { activitySchema } from '../../schemas';
 import { convertEmptyStrToNull } from '../../helpers/sanitize';
 import { Btn1XsOutline } from '../../components/ui/Btn1';
-import { Btn2SmOutline, Btn2XsOutline } from '../../components/ui/Btn2';
+import { Btn2XsOutline, Btn2SmOutline } from '../../components/ui/Btn2';
 import FCRHFSm from '../../components/formCtrlRHF/FCRHFSm';
 
 export function MngActivities() {
