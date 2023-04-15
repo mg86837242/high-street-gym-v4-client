@@ -5,7 +5,7 @@ import { lineOneSchema, lineTwoSchema, suburbSchema, postcodeSchema, stateSchema
 export const ageNoRHFSchema = z.union([
   // NB This `ageNoRHFSchema` is for the `Signup` page only, where RHF is not used and `FormData` is used so its input
   //  is collected as empty string if left blank
-  // TODO [High Priority] Rewrite <Signup> page by using RHF
+  // [ ] Rewrite <Signup> page by using RHF
   z
     .number({ message: 'Age only accepts numbers' })
     .nonnegative()

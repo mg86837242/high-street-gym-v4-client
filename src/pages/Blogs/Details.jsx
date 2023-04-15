@@ -12,7 +12,6 @@ export default function Details() {
   const { authenticatedUser } = useContext(AuthContext);
   const { blog } = useLoaderData();
   const { title, body, loginId, createdAt, updatedAt, username } = blog;
-  const canEdit = authenticatedUser?.id === loginId || authenticatedUser?.role === 'Admin';
   const [editable, setEditable] = useState(false);
   const limit = 6_000;
   const editor = useEditor({
@@ -31,6 +30,7 @@ export default function Details() {
       CharacterCount.configure({ limit }),
     ],
   });
+  const canEdit = authenticatedUser?.id === loginId || authenticatedUser?.role === 'Admin';
 
   useEffect(() => {
     if (!editor) {
