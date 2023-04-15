@@ -11,7 +11,11 @@ export default async function updateTrainerById(values) {
     return redirect('.');
   }
   if (response.status !== 200) {
-    const message = `${json.status} ${typeof json.message === 'string' ? json.message : json.message[0].message}`;
+    const message = `${json.status} ${
+      typeof json.message === 'string'
+        ? json.message
+        : json.message?.map(issue => `${issue.path[0]}: ${issue.message}`).join('; ')
+    }`;
     throw new Response(message);
   }
   return { ...json, _action };

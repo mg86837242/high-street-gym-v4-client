@@ -75,7 +75,11 @@ export async function signupMembers({ request }) {
   }
   if (response.status !== 200) {
     const json = await response.json();
-    const message = `${json.status} ${typeof json.message === 'string' ? json.message : json.message[0].message}`;
+    const message = `${json.status} ${
+      typeof json.message === 'string'
+        ? json.message
+        : json.message?.map(issue => `${issue.path[0]}: ${issue.message}`).join('; ')
+    }`;
     throw new Response(message);
   }
   return redirect('/login');
@@ -102,13 +106,17 @@ export async function updateMemberById(values) {
     return redirect('.');
   }
   if (response.status !== 200) {
-    const message = `${json.status} ${typeof json.message === 'string' ? json.message : json.message[0].message}`;
+    const message = `${json.status} ${
+      typeof json.message === 'string'
+        ? json.message
+        : json.message?.map(issue => `${issue.path[0]}: ${issue.message}`).join('; ')
+    }`;
     throw new Response(message);
   }
   return { ...json, _action };
 }
 
-// [ ] Admin edit members action (1) useActionData to handle 409 in the compoennt
+// [ ] Admin edit members action (1) useActionData to handle 409 in the component
 export async function updateMemberWithDetailsById({ params, request }) {
   const formData = await request.formData();
   const updates = Object.fromEntries(formData);
@@ -119,7 +127,11 @@ export async function updateMemberWithDetailsById({ params, request }) {
     return json.message;
   }
   if (response.status !== 200) {
-    const message = `${json.status} ${typeof json.message === 'string' ? json.message : json.message[0].message}`;
+    const message = `${json.status} ${
+      typeof json.message === 'string'
+        ? json.message
+        : json.message?.map(issue => `${issue.path[0]}: ${issue.message}`).join('; ')
+    }`;
     throw new Response(message);
   }
   return redirect(`..`);
