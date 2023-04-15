@@ -2,12 +2,12 @@ import { z } from 'zod';
 import { emailSchema, passwordSchema, usernameSchema, firstNameSchema, lastNameSchema, phoneSchema } from './users';
 import { lineOneSchema, lineTwoSchema, suburbSchema, postcodeSchema, stateSchema, countrySchema } from './addresses.js';
 
-const descriptionSchema = z.string().max(255).nullable();
-const specialtySchema = z.string().max(45).nullable();
-const certificateSchema = z.string().max(45).nullable();
+const descriptionSchema = z.string().trim().max(255).nullable();
+const specialtySchema = z.string().trim().max(45).nullable();
+const certificateSchema = z.string().trim().max(45).nullable();
 const imageUrlSchema = z.union([
-  z.string().url().nullable(),
-  z.string().length(0, { message: 'Image url must be empty or a valid url' }),
+  z.string().trim().url().nullable(),
+  z.string().trim().length(0, { message: 'Image url must be empty or a valid url' }),
 ]);
 
 export const trainerSchema = z.object({
@@ -22,7 +22,7 @@ export const trainerSchema = z.object({
   certificate: certificateSchema,
   imageUrl: imageUrlSchema,
   id: z.number(),
-  _action: z.string(),
+  _action: z.string().trim(),
 });
 
 export const trainerDetailedSchema = z.object({

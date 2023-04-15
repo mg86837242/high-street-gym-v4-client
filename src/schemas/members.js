@@ -10,7 +10,7 @@ export const ageNoRHFSchema = z.union([
     .nonnegative()
     .max(999, { message: 'Age only accepts at most 3 digits' })
     .nullable(),
-  z.string().length(0, { message: 'Age must be empty or a valid number' }),
+  z.string().trim().length(0, { message: 'Age must be empty or a valid number' }),
 ]);
 export const ageSchema = z.union([
   z
@@ -32,7 +32,7 @@ export const memberSchema = z.object({
   age: ageSchema,
   gender: genderSchema,
   id: z.number(),
-  _action: z.string(),
+  _action: z.string().trim(),
 });
 
 export const memberDetailedSchema = z.object({

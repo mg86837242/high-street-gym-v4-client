@@ -10,7 +10,7 @@ export const adminSchema = z.object({
   lastName: lastNameSchema,
   phone: phoneSchema,
   id: z.number(),
-  _action: z.string(),
+  _action: z.string().trim(),
 });
 
 export const adminDetailedSchema = z.object({
