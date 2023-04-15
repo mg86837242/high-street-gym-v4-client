@@ -177,6 +177,7 @@ export function EditMember() {
 
   useEffect(() => reset(memberDefaultValues), [reset, member]);
 
+  // [ ] test 409
   useEffect(() => {
     if (!actionData) {
       return;
@@ -192,7 +193,6 @@ export function EditMember() {
     <div className='grid py-6 place-items-center'>
       <form
         onSubmit={handleSubmit(data => {
-          // [ ] Sanitize, special case for lineTwo && test 409
           const sanitizedData = convertEmptyStrToNull(data);
           submit({ body: JSON.stringify(sanitizedData) }, { method: 'post' });
         })}

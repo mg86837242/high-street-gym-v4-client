@@ -1,6 +1,6 @@
 export function convertEmptyStrToNull(obj) {
   return Object.keys(obj).reduce((acc, cv) => {
-    obj[cv] === '' ? (acc[cv] = null) : (acc[cv] = obj[cv]);
+    cv !== 'lineTwo' && obj[cv] === '' ? (acc[cv] = null) : (acc[cv] = obj[cv]);
     return acc;
   }, {});
 }
