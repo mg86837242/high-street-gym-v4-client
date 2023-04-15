@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect } from 'react';
 import { useLoaderData, Outlet, Form, useSubmit, useNavigate, Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { memberSchema } from '../../schemas';
+import { memberDetailedSchema } from '../../schemas';
 import { convertEmptyStrToNull } from '../../helpers/sanitize';
 import { Btn1XsOutline } from '../../components/ui/Btn1';
 import { Btn2SmOutline, Btn2XsOutline } from '../../components/ui/Btn2';
@@ -79,10 +79,9 @@ function ListMembers({ members }) {
                 <td>{state}</td>
                 <td>{country}</td>
                 <td>
-                  {/* [ ] Admin edit members UI */}
-                  {/* <Form action={`${id}/edit`}> */}
-                  <Btn2XsOutline type='button'>Edit</Btn2XsOutline>
-                  {/* </Form> */}
+                  <Form action={`${id}/edit`}>
+                    <Btn2XsOutline>Edit</Btn2XsOutline>
+                  </Form>
                 </td>
                 <td>
                   <Form
@@ -159,18 +158,23 @@ export function EditMember() {
   const { member } = useLoaderData();
   const submit = useSubmit();
   const navigate = useNavigate();
+  const memberDefaultValues = useMemo(() => {
+    const { password, ...values } = member;
+    return { ...values, password: '●●●●●●●●●●' };
+  }, [member]);
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isDirty },
     reset,
   } = useForm({
-    resolver: zodResolver(memberSchema),
-    defaultValues: useMemo(() => member, [member]),
+    resolver: zodResolver(memberDetailedSchema),
+    defaultValues: memberDefaultValues,
   });
 
-  useEffect(() => reset(member), [reset, member]);
+  useEffect(() => reset(memberDefaultValues), [reset, member]);
 
+  // [ ] Admin edit members UI: (1) loader data (2) form inputs
   return (
     <div className='grid py-6 place-items-center'>
       <form
