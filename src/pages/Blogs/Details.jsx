@@ -34,15 +34,12 @@ export default function Details() {
 
   useEffect(() => {
     if (!editor) {
-      return undefined;
+      return null;
     }
     editor.setEditable(editable);
   }, [editor, editable]);
 
-  if (!editor) {
-    return null;
-  }
-  return (
+  return editor ? (
     <div className='flex flex-col'>
       <article className='min-w-full'>
         <h1 className='px-4 font-sans font-bold text-accent'>{title}</h1>
@@ -61,6 +58,8 @@ export default function Details() {
         <EditorContent editor={editor} />
       )}
     </div>
+  ) : (
+    <></>
   );
 }
 
