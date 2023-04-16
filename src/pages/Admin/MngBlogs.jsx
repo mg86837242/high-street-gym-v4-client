@@ -5,8 +5,8 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { blogSchema } from '../../schemas/index.js';
 import { convertEmptyStrToNull } from '../../helpers/sanitize.js';
-import { Btn1XsOutline, Btn1SmOutline } from '../../components/ui/Btn1';
-import { Btn2XsOutline, Btn2SmOutline } from '../../components/ui/Btn2';
+import { Btn1Xs, Btn1Sm } from '../../components/ui/Btn1';
+import { Btn2Xs, Btn2Sm } from '../../components/ui/Btn2';
 import FCRHFSm from '../../components/formCtrlRHF/FCRHFSm.jsx';
 import FCRHFSmBlogBody from '../../components/formCtrlRHF/FCRHFSmBlogBody.jsx';
 
@@ -50,7 +50,7 @@ function ListBlogs({ blogs }) {
               <td>{updatedAt}</td>
               <td>
                 <Form action={`${id}/edit`}>
-                  <Btn2XsOutline>Edit</Btn2XsOutline>
+                  <Btn2Xs>Edit</Btn2Xs>
                 </Form>
               </td>
               <td>
@@ -63,7 +63,7 @@ function ListBlogs({ blogs }) {
                     }
                   }}
                 >
-                  <Btn1XsOutline>Delete</Btn1XsOutline>
+                  <Btn1Xs>Delete</Btn1Xs>
                 </Form>
               </td>
             </tr>
@@ -81,7 +81,7 @@ export function NewBlog() {
     <div className='flex justify-end py-6'>
       <Form method='post' action='new'>
         <input type='hidden' name='loginId' value={authenticatedUser.id} />
-        <Btn2SmOutline>Create New</Btn2SmOutline>
+        <Btn2Sm>Create New</Btn2Sm>
       </Form>
     </div>
   );
@@ -119,10 +119,10 @@ export function EditBlog() {
         <FCRHFSmBlogBody label='Blog Post Body' register={register('body')} issue={errors.body?.message} />
         <input type='hidden' {...register('loginId', { valueAsNumber: true })} />
         <div className='flex justify-end w-full col-span-2 gap-10 py-6 xl:col-span-3'>
-          <Btn2SmOutline w='w-20'>Save</Btn2SmOutline>
-          <Btn1SmOutline type='button' onClick={() => navigate(-1)} w='w-20'>
+          <Btn2Sm w='w-20'>Save</Btn2Sm>
+          <Btn1Sm type='button' onClick={() => navigate(-1)} w='w-20'>
             Cancel
-          </Btn1SmOutline>
+          </Btn1Sm>
         </div>
       </form>
     </div>
