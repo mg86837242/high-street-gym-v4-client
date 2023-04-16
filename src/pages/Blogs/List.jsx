@@ -46,7 +46,6 @@ export default function List() {
       ),
     [blogs]
   );
-  // BUG Filter is not working as intended
   const myBlogList = useMemo(() => {
     const hasMyBlog = blogs.some(({ loginId }) => loginId === authenticatedUser?.id);
     return hasMyBlog ? (
