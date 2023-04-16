@@ -34,7 +34,7 @@ export default function Details() {
 
   useEffect(() => {
     if (!editor) {
-      return null;
+      return;
     }
     editor.setEditable(editable);
   }, [editor, editable]);

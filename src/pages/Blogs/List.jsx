@@ -3,8 +3,8 @@ import AuthContext from '../../context/AuthContext';
 import { useLoaderData, Link, Form } from 'react-router-dom';
 import removeTags from '../../helpers/removeTags';
 import { getDateNotation } from '../../helpers/mapDates';
-import { Btn2SmOutline } from '../../components/ui/Btn2';
-import { LinkBtn2SmOutline } from '../../components/ui/LinkBtn2';
+import { Btn2Sm } from '../../components/ui/Btn2';
+import { LinkBtn2Sm } from '../../components/ui/LinkBtn2';
 
 export default function List() {
   const { authenticatedUser } = useContext(AuthContext);
@@ -20,8 +20,8 @@ export default function List() {
                 <div className='flex-shrink w-full px-4 py-2'>
                   <h4 className='pb-2 font-medium leading-4 text-[13px]'>{username}</h4>
                   <Link to={`${id}`}>
-                    <h2 className='font-bold text-accent text-base leading-5 md:text-[22px] md:leading-7'>{title}</h2>
-                    <h3 className='hidden md:block h-10 pt-1 overflow-hidden text-base leading-5 text-ellipsis'>
+                    <h2 className='text-base font-bold leading-5 text-accent md:text-[22px] md:leading-7'>{title}</h2>
+                    <h3 className='hidden h-10 pt-1 overflow-hidden text-base leading-5 md:block text-ellipsis'>
                       {removeTags(body)}
                     </h3>
                   </Link>
@@ -46,6 +46,7 @@ export default function List() {
       ),
     [blogs]
   );
+  // BUG Filter is not working as intended
   const myBlogList = useMemo(() => {
     const hasMyBlog = blogs.some(({ loginId }) => loginId === authenticatedUser?.id);
     return hasMyBlog ? (
@@ -58,10 +59,10 @@ export default function List() {
                   <div className='flex-shrink w-full px-4 py-2'>
                     <h4 className='pb-2 font-medium leading-4 text-[13px]'>{username}</h4>
                     <Link to={`${id}`}>
-                      <h2 className='font-bold text-primary-content text-base leading-5 md:text-[22px] md:leading-7'>
+                      <h2 className='text-base font-bold leading-5 text-primary-content md:text-[22px] md:leading-7'>
                         {title}
                       </h2>
-                      <h3 className='hidden md:block h-10 pt-1 overflow-hidden text-base leading-5 text-ellipsis'>
+                      <h3 className='hidden h-10 pt-1 overflow-hidden text-base leading-5 md:block text-ellipsis'>
                         {removeTags(body)}
                       </h3>
                     </Link>
@@ -94,9 +95,7 @@ export default function List() {
           <>
             <Form method='post' action='new'>
               <input type='hidden' name='loginId' value={authenticatedUser?.id} />
-              <Btn2SmOutline type='submit' w='w-full'>
-                Create New
-              </Btn2SmOutline>
+              <Btn2Sm w='w-full'>Create New</Btn2Sm>
             </Form>
             <div className='divider'></div>
             <select
@@ -110,9 +109,9 @@ export default function List() {
             </select>
           </>
         ) : (
-          <LinkBtn2SmOutline to='/login' w='w-full'>
+          <LinkBtn2Sm to='/login' w='w-full'>
             Log in to Create Blog
-          </LinkBtn2SmOutline>
+          </LinkBtn2Sm>
         )}
       </section>
       <section className='lg:col-[1_/_8]'>
@@ -132,15 +131,13 @@ export default function List() {
             <div className='divider'></div>
             <Form method='post' action='new'>
               <input type='hidden' name='loginId' value={authenticatedUser?.id} />
-              <Btn2SmOutline type='submit' w='w-full'>
-                Create New
-              </Btn2SmOutline>
+              <Btn2Sm w='w-full'>Create New</Btn2Sm>
             </Form>
           </>
         ) : (
-          <LinkBtn2SmOutline to='/login' w='w-full'>
+          <LinkBtn2Sm to='/login' w='w-full'>
             Log in to Create Blog
-          </LinkBtn2SmOutline>
+          </LinkBtn2Sm>
         )}
       </aside>
     </div>
