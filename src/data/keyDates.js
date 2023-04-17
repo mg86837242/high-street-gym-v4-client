@@ -1,6 +1,6 @@
 export const today = new Date();
 
-// TODO Make `tomorrow` only allows weekdays & date picker's range only allows weekdays (also, google "input type date only weekdays site:stackoverflow.com")
+// TODO Make `tomorrow` only allows weekdays & date picker's range only allows weekdays (also, google "react-datepicker")
 const tomorrow = new Date(today);
 tomorrow.setDate(tomorrow.getDate() + 1);
 export const tomorrowStr = `${tomorrow.getFullYear()}-${
