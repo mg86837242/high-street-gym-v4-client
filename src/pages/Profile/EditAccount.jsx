@@ -125,7 +125,7 @@ export default function EditAccount() {
   );
 }
 
-// [ ] Don't fetch all emails into the component to check identical email, instead, useActionData (see <MngMembers>), this applies to <EditAccount> & <SignupForm>
+// [ ] Don't fetch all emails into the component to check identical email, instead, useActionData (see <MngMembers>) to return 409's json, this applies to <SignupForm> as well after refactoring the page by using RHF
 function UpdateAdminForm({ topMsg, user, emails, authenticatedUser }) {
   const [inputEmailMsg, setInputEmailMsg] = useState('');
   const submit = useSubmit();
