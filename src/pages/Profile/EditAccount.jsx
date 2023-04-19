@@ -25,7 +25,6 @@ export default function EditAccount() {
   const { user, emails } = useLoaderData();
   const actionData = useActionData();
 
-  // ??? In animal app, user edit page, `console.log(formData)` fires 4 times after initial mount & fires 6 times after POST req
   useEffect(() => {
     if (!actionData) {
       return;

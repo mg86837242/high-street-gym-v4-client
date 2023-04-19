@@ -39,4 +39,5 @@ export default function ErrorInfoRefresh() {
 }
 
 // References:
-//  -- https://stackoverflow.com/questions/73048879/how-do-i-reload-my-page-in-remix-run-on-a-button-click-in-an-error-boundary-comp
+//  -- https://stackoverflow.com/questions/73048879/how-do-i-reload-my-page-in-remix-run-on-a-button-click-in-an-error-boundary-comp => wrong way => use `navigate(0)`
+// -- https://stackoverflow.com/questions/46820682/how-do-i-reload-a-page-with-react-router => correct solution
