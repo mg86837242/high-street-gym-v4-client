@@ -1,6 +1,6 @@
 export const today = new Date();
 
-// TODO Make `tomorrow` only allows weekdays & date picker's range only allows weekdays (also, google "react-datepicker")
+// TODO Use react-picker => tried it, couldn't make the form submission work
 const tomorrow = new Date(today);
 tomorrow.setDate(tomorrow.getDate() + 1);
 export const tomorrowStr = `${tomorrow.getFullYear()}-${
