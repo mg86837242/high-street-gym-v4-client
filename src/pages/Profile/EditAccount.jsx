@@ -241,7 +241,7 @@ function UpdateTrainerForm({ topMsg, user, emails, authenticatedUser }) {
   const submit = useSubmit();
   const userDefaultValues = useMemo(() => {
     const { password, ...values } = user;
-    return { ...values, password: '●●●●●●●●●●', id: authenticatedUser?.adminId, _action: 'updateAdminById' };
+    return { ...values, password: '●●●●●●●●●●', id: authenticatedUser?.trainerId, _action: 'updateTrainerById' };
   }, [user, authenticatedUser]);
   const {
     register,
@@ -370,7 +370,7 @@ function UpdateMemberForm({ topMsg, user, emails, authenticatedUser }) {
   const submit = useSubmit();
   const userDefaultValues = useMemo(() => {
     const { password, ...values } = user;
-    return { ...values, password: '●●●●●●●●●●', id: authenticatedUser?.adminId, _action: 'updateAdminById' };
+    return { ...values, password: '●●●●●●●●●●', id: authenticatedUser?.memberId, _action: 'updateMemberById' };
   }, [user, authenticatedUser]);
   const {
     register,
