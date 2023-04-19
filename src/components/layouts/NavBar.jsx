@@ -26,7 +26,7 @@ export default function NavBar({ isHome }) {
 
   return (
     <div id='nav-bg' className={isHome ? navBgClass : 'sticky top-0 z-20 flex justify-center bg-neutral/95 w-full'}>
-      <div id='nav-bar' className='w-full px-4 navbar max-w-screen-2xl 2xl:px-1'>
+      <div id='nav-bar' className='w-full px-4 navbar max-w-screen-2xl 2xl:px-4'>
         <NavBarLeft authenticatedUser={authenticatedUser} />
         <NavBarCenter authenticatedUser={authenticatedUser} />
         <NavBarRight authenticatedUser={authenticatedUser} handleLogout={handleLogout} />
