@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import ErrorInfoBack from '../components/ui/ErrorInfoBack';
+import ErrorInfoRefresh from '../components/ui/ErrorInfoRefresh';
 import RequireAuth from '../components/layouts/RequireAuth';
 
 const bookingsRoutes = [
@@ -16,7 +16,7 @@ const bookingsRoutes = [
       let { default: List } = await import('../pages/Bookings/List');
       return { Component: List };
     },
-    ErrorBoundary: ErrorInfoBack,
+    ErrorBoundary: ErrorInfoRefresh,
     async loader({ params }) {
       let { getBookingsByDate } = await import('../api/bookings');
       return getBookingsByDate({ params });
@@ -51,7 +51,7 @@ const bookingsRoutes = [
           let { default: Details } = await import('../pages/Bookings/Details');
           return { Component: Details };
         },
-        ErrorBoundary: ErrorInfoBack,
+        ErrorBoundary: ErrorInfoRefresh,
         async loader({ params }) {
           let { getBookingById } = await import('../api/bookings');
           return getBookingById({ params });
@@ -71,7 +71,7 @@ const bookingsRoutes = [
           let { default: Edit } = await import('../pages/Bookings/Edit');
           return { Component: Edit };
         },
-        ErrorBoundary: ErrorInfoBack,
+        ErrorBoundary: ErrorInfoRefresh,
         async loader({ params }) {
           let { getBookingWithOptionsById } = await import('../api/bookings');
           return getBookingWithOptionsById({ params });
@@ -91,7 +91,7 @@ const bookingsRoutes = [
       },
       {
         path: ':id/destroy',
-        ErrorBoundary: ErrorInfoBack,
+        ErrorBoundary: ErrorInfoRefresh,
         async action({ params }) {
           let { deleteBookingById } = await import('../api/bookings');
           return deleteBookingById({ params });
@@ -108,7 +108,7 @@ const bookingsRoutes = [
           let { default: New } = await import('../pages/Bookings/New');
           return { Component: New };
         },
-        ErrorBoundary: ErrorInfoBack,
+        ErrorBoundary: ErrorInfoRefresh,
         async loader() {
           let { getAllBookingOptions } = await import('../api/bookings');
           return getAllBookingOptions();

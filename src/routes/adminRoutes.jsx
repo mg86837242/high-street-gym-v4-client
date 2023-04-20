@@ -1,5 +1,4 @@
 import ErrorInfoRefresh from '../components/ui/ErrorInfoRefresh';
-import ErrorInfoBack from '../components/ui/ErrorInfoBack';
 import RequireAuth from '../components/layouts/RequireAuth';
 
 const adminRoutes = [
@@ -9,7 +8,7 @@ const adminRoutes = [
       let { AdminIndex } = await import('../pages/Admin/AdminPanel');
       return { Component: AdminIndex };
     },
-    ErrorBoundary: ErrorInfoBack,
+    ErrorBoundary: ErrorInfoRefresh,
   },
   {
     path: 'activities',
@@ -33,7 +32,7 @@ const adminRoutes = [
       },
       {
         path: 'new',
-        ErrorBoundary: ErrorInfoBack,
+        ErrorBoundary: ErrorInfoRefresh,
         async action() {
           let { createActivity } = await import('../api/activities');
           return createActivity();
@@ -41,7 +40,7 @@ const adminRoutes = [
       },
       {
         path: 'new-upload-xml',
-        ErrorBoundary: ErrorInfoBack,
+        ErrorBoundary: ErrorInfoRefresh,
         async action({ request }) {
           let { createActivityByXML } = await import('../api/activities');
           return createActivityByXML({ request });
@@ -65,7 +64,7 @@ const adminRoutes = [
       },
       {
         path: ':id/destroy',
-        ErrorBoundary: ErrorInfoBack,
+        ErrorBoundary: ErrorInfoRefresh,
         async action({ params }) {
           let { deleteActivityById } = await import('../api/activities');
           return deleteActivityById({ params });
@@ -98,7 +97,7 @@ const adminRoutes = [
           },
           {
             path: 'new',
-            ErrorBoundary: ErrorInfoBack,
+            ErrorBoundary: ErrorInfoRefresh,
             async action({ request }) {
               let { createBlog } = await import('../api/blogs');
               return createBlog({ request });
@@ -110,7 +109,7 @@ const adminRoutes = [
               let { EditBlog } = await import('../pages/Admin/MngBlogs');
               return { Component: EditBlog };
             },
-            ErrorBoundary: ErrorInfoBack,
+            ErrorBoundary: ErrorInfoRefresh,
             async loader({ params }) {
               let { getBlogById } = await import('../api/blogs');
               return getBlogById({ params });
@@ -122,7 +121,7 @@ const adminRoutes = [
           },
           {
             path: ':id/destroy',
-            ErrorBoundary: ErrorInfoBack,
+            ErrorBoundary: ErrorInfoRefresh,
             async action({ params }) {
               let { deleteBlogById } = await import('../api/blogs');
               return deleteBlogById({ params });
@@ -152,7 +151,7 @@ const adminRoutes = [
           },
           {
             path: 'new',
-            ErrorBoundary: ErrorInfoBack,
+            ErrorBoundary: ErrorInfoRefresh,
             async action({ request }) {
               let { createMember } = await import('../api/members');
               return createMember({ request });
@@ -160,7 +159,7 @@ const adminRoutes = [
           },
           {
             path: 'new-upload-xml',
-            ErrorBoundary: ErrorInfoBack,
+            ErrorBoundary: ErrorInfoRefresh,
             async action({ request }) {
               let { createMemberByXML } = await import('../api/members');
               return createMemberByXML({ request });
@@ -184,7 +183,7 @@ const adminRoutes = [
           },
           {
             path: ':id/destroy',
-            ErrorBoundary: ErrorInfoBack,
+            ErrorBoundary: ErrorInfoRefresh,
             async action({ params }) {
               let { deleteMemberById } = await import('../api/members');
               return deleteMemberById({ params });

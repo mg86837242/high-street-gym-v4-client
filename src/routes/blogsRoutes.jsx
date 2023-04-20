@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import ErrorInfoBack from '../components/ui/ErrorInfoBack';
+import ErrorInfoRefresh from '../components/ui/ErrorInfoRefresh';
 import RequireAuth from '../components/layouts/RequireAuth';
 
 const blogsRoutes = [
@@ -9,7 +9,7 @@ const blogsRoutes = [
       let { default: List } = await import('../pages/Blogs/List');
       return { Component: List };
     },
-    ErrorBoundary: ErrorInfoBack,
+    ErrorBoundary: ErrorInfoRefresh,
     async loader() {
       let { getAllBlogs } = await import('../api/blogs');
       return getAllBlogs();
@@ -21,7 +21,7 @@ const blogsRoutes = [
       let { default: Details } = await import('../pages/Blogs/Details');
       return { Component: Details };
     },
-    ErrorBoundary: ErrorInfoBack,
+    ErrorBoundary: ErrorInfoRefresh,
     async loader({ params }) {
       let { getBlogById } = await import('../api/blogs');
       return getBlogById({ params });
@@ -36,7 +36,7 @@ const blogsRoutes = [
           let { default: DetailsIndex } = await import('../pages/Blogs/DetailsIndex');
           return { Component: DetailsIndex };
         },
-        ErrorBoundary: ErrorInfoBack,
+        ErrorBoundary: ErrorInfoRefresh,
       },
       {
         path: 'edit',
@@ -44,7 +44,7 @@ const blogsRoutes = [
           let { default: Edit } = await import('../pages/Blogs/Edit');
           return { Component: Edit };
         },
-        ErrorBoundary: ErrorInfoBack,
+        ErrorBoundary: ErrorInfoRefresh,
         async action({ params, request }) {
           let { updateBlogById } = await import('../api/blogs');
           return updateBlogById({ params, request });
@@ -52,7 +52,7 @@ const blogsRoutes = [
       },
       {
         path: 'destroy',
-        ErrorBoundary: ErrorInfoBack,
+        ErrorBoundary: ErrorInfoRefresh,
         async action({ params }) {
           let { deleteBlogById } = await import('../api/blogs');
           return deleteBlogById({ params });
@@ -65,7 +65,7 @@ const blogsRoutes = [
     children: [
       {
         path: 'new',
-        ErrorBoundary: ErrorInfoBack,
+        ErrorBoundary: ErrorInfoRefresh,
         async action({ request }) {
           let { createBlog } = await import('../api/blogs');
           return createBlog({ request });
