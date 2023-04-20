@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from 'react';
 import AuthContext from '../../context/AuthContext.jsx';
 import { useLoaderData, Outlet } from 'react-router-dom';
-import { useEditor, EditorContent } from '@tiptap/react';
+import { useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Color from '@tiptap/extension-color';
 import TextStyle from '@tiptap/extension-text-style';
