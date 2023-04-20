@@ -30,5 +30,5 @@ export async function updateBlogById({ params, request }) {
 
 export async function deleteBlogById({ params }) {
   await fetchResp.delete(`${API_URL}/blogs/${params.id}`);
-  return redirect(`..`);
+  return redirect(`../..`);
 }
