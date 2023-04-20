@@ -89,7 +89,7 @@ export async function signupMembers({ request }) {
 export async function createMember() {
   const creations = defaultNewMember();
   const json = await fetchJSON.post(`${API_URL}/members/detailed`, creations);
-  return redirect(`..`);
+  return redirect(`../${json.insertId}/edit`);
 }
 
 export async function createMemberByXML({ request }) {
