@@ -39,24 +39,29 @@ const blogsRoutes = [
         ErrorBoundary: ErrorInfoRefresh,
       },
       {
-        path: 'edit',
-        async lazy() {
-          let { default: Edit } = await import('../pages/Blogs/Edit');
-          return { Component: Edit };
-        },
-        ErrorBoundary: ErrorInfoRefresh,
-        async action({ params, request }) {
-          let { updateBlogById } = await import('../api/blogs');
-          return updateBlogById({ params, request });
-        },
-      },
-      {
-        path: 'destroy',
-        ErrorBoundary: ErrorInfoRefresh,
-        async action({ params }) {
-          let { deleteBlogById } = await import('../api/blogs');
-          return deleteBlogById({ params });
-        },
+        Component: () => <RequireAuth permittedRoles={['Admin', 'Trainer', 'Member']} />,
+        children: [
+          {
+            path: 'edit',
+            async lazy() {
+              let { default: Edit } = await import('../pages/Blogs/Edit');
+              return { Component: Edit };
+            },
+            ErrorBoundary: ErrorInfoRefresh,
+            async action({ params, request }) {
+              let { updateBlogById } = await import('../api/blogs');
+              return updateBlogById({ params, request });
+            },
+          },
+          {
+            path: 'destroy',
+            ErrorBoundary: ErrorInfoRefresh,
+            async action({ params }) {
+              let { deleteBlogById } = await import('../api/blogs');
+              return deleteBlogById({ params });
+            },
+          },
+        ],
       },
     ],
   },

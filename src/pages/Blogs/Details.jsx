@@ -52,11 +52,7 @@ export default function Details() {
           )}
         </div>
       </article>
-      {canEdit ? (
-        <Outlet context={{ blog, limit, editable, setEditable, editor }} />
-      ) : (
-        <EditorContent editor={editor} />
-      )}
+      <Outlet context={{ blog, limit, editable, setEditable, editor, canEdit }} />
     </div>
   ) : (
     <></>
