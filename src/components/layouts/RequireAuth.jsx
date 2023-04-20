@@ -15,7 +15,7 @@ export default function RequireAuth({ permittedRoles }) {
 // -- https://github.com/remix-run/react-router/blob/dev/examples/auth/src/App.tsx: simple ver
 // -- https://stackoverflow.com/questions/62384395: full ver – top 2 answers & official example
 // -- https://stackoverflow.com/questions/70743498: roles array & <Suspense> & TS variation
-// (2) Conditional providing routes method => anti-pattern
+// (2) Conditional providing router method => anti-pattern
 // -- https://codesandbox.io/s/5d40ro => anti-pattern, see Discord comments
 // -- Discord: "I would create a single route with all router, then in the loader of the routes I would check the role
 //  of the user and if it doesn’t have access I would either render a 404 (to hide the existence of the route) or
