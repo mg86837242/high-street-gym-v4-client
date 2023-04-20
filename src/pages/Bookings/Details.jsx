@@ -88,7 +88,7 @@ export default function Details() {
             method='post'
             action='destroy'
             onSubmit={e => {
-              // TODO Convert to a modal dialog, see: https://react.dev/reference/react/useEffect#connecting-to-an-external-system
+              // TODO Convert to a modal dialog, see: https://react.dev/reference/react/useEffect#connecting-to-an-external-system, extending to other destroy actions
               if (!confirm('Please confirm you want to delete this booking.')) {
                 e.preventDefault();
               }
