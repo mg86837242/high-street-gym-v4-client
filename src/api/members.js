@@ -87,7 +87,7 @@ export async function signupMembers({ request }) {
 }
 
 export async function createMember() {
-  const creations = defaultNewMember();
+  const creations = await defaultNewMember();
   const json = await fetchJSON.post(`${API_URL}/members/detailed`, creations);
   return redirect(`../${json.insertId}/edit`);
 }
