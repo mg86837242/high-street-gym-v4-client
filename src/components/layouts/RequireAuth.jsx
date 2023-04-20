@@ -1,22 +1,22 @@
 import { useContext } from 'react';
 import AuthContext from '../../context/AuthContext';
-import { Outlet, Navigate, useLocation } from 'react-router-dom';
+import { Outlet, useLocation, Navigate } from 'react-router-dom';
 
 export default function RequireAuth({ permittedRoles }) {
   const { authenticatedUser } = useContext(AuthContext);
   const location = useLocation();
   const canAccess = permittedRoles?.includes(authenticatedUser?.role);
 
-  return canAccess ? <Outlet /> : <Navigate to='/404' state={{ from: location }} />;
+  return canAccess ? <Outlet /> : <Navigate to='/404' state={{ from: location }} replace />;
 }
 
 // References for role-base routing in RRD 6.4+:
 // (1) Wrapper method (emulating protected/private routes):
-// -- https://stackoverflow.com/questions/70564888: simple ver
+// -- https://github.com/remix-run/react-router/blob/dev/examples/auth/src/App.tsx: simple ver
 // -- https://stackoverflow.com/questions/62384395: full ver – top 2 answers & official example
 // -- https://stackoverflow.com/questions/70743498: roles array & <Suspense> & TS variation
-// (2) Conditional providing routes method
-// -- https://codesandbox.io/s/5d40ro: anti-pattern, see Discord comments
+// (2) Conditional providing routes method => anti-pattern
+// -- https://codesandbox.io/s/5d40ro => anti-pattern, see Discord comments
 // -- Discord: "I would create a single route with all router, then in the loader of the routes I would check the role
 //  of the user and if it doesn’t have access I would either render a 404 (to hide the existence of the route) or
 //  redirect (if the user can know that exists but it doesn’t have access)", by Sergio
