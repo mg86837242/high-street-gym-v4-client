@@ -11,12 +11,12 @@ import {
   addressTrainerSchema,
   addressMemberSchema,
 } from '../../schemas';
-import countries from '../../data/countries.json'; // Vite's feature
-import { convertEmptyStrToNull, convertNullToEmptyStr } from '../../helpers/sanitize';
 import { Btn2Sm } from '../../components/ui/Btn2';
 import FCRHFSm from '../../components/formCtrlRHF/FCRHFSm';
 import FCRHFSmPass from '../../components/formCtrlRHF/FCRHFSmPass';
+import countries from '../../data/countries.json'; // Vite's feature
 import SpinnerNoNav from '../../components/ui/SpinnerNoNav';
+import { convertEmptyStrToNull, convertNullToEmptyStr } from '../../helpers/sanitize';
 
 export default function EditAccount() {
   const { authenticatedUser } = useContext(AuthContext);

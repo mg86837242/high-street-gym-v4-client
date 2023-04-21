@@ -3,11 +3,12 @@ import { useLoaderData, Outlet, Form, useSubmit, useNavigate, Link, useActionDat
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { memberDetailedSchema } from '../../schemas';
-import { convertEmptyStrToNull } from '../../helpers/sanitize';
 import { Btn1Xs, Btn1Sm } from '../../components/ui/Btn1';
 import { Btn2Xs, Btn2Sm } from '../../components/ui/Btn2';
 import FCRHFSm from '../../components/formCtrlRHF/FCRHFSm';
 import FCRHFSmPass from '../../components/formCtrlRHF/FCRHFSmPass';
+import countries from '../../data/countries.json'; // Vite's feature
+import { convertEmptyStrToNull } from '../../helpers/sanitize';
 
 export function MngMembers() {
   const { members } = useLoaderData();
@@ -228,7 +229,18 @@ export function EditMember() {
         <FCRHFSm label='Suburb' register={register('suburb')} issue={errors.suburb?.message} />
         <FCRHFSm label='Postcode' register={register('postcode')} issue={errors.postcode?.message} />
         <FCRHFSm label='State' register={register('state')} issue={errors.state?.message} />
-        <FCRHFSm label='Country' register={register('country')} issue={errors.country?.message} />
+        <FCRHFSm label='Country' issue={errors.country?.message}>
+          <select {...register('country')} className='font-normal select select-bordered select-sm'>
+            <option value='' disabled>
+              -- Choose Country --
+            </option>
+            {countries.map((c, i) => (
+              <option value={c.name} key={i}>
+                {c.name}
+              </option>
+            ))}
+          </select>
+        </FCRHFSm>
         <div className='flex justify-end w-full col-span-2 gap-10 py-6 xl:col-span-3'>
           <Btn2Sm onClick={() => setInputEmailMsg('')} w='w-20'>
             Save
