@@ -4,16 +4,16 @@ import { useLoaderData, NavLink, Outlet } from 'react-router-dom';
 import { getDateNotation } from '../../helpers/mapDates';
 
 export default function List() {
-  const { authenticatedUser } = useContext(AuthContext);
+  const auth = useContext(AuthContext);
   const { bookings } = useLoaderData();
 
-  // PS DA `authenticatedUser` to `{ role, memberId, trainerId }` will break the code b/c there's a state in which
-  //  `authenticatedUser` is not populated
-  switch (authenticatedUser?.role) {
+  // PS DA `auth.user` to `{ role, memberId, trainerId }` will break the code b/c there's a state in which
+  //  `auth.user` is not populated
+  switch (auth.user?.role) {
     case 'Member':
-      return <BookingListMemberView bookings={bookings} userMemberId={authenticatedUser?.memberId} />;
+      return <BookingListMemberView bookings={bookings} authUserMemberId={auth.user?.memberId} />;
     case 'Trainer':
-      return <BookingListTrainerView bookings={bookings} userTrainerId={authenticatedUser?.trainerId} />;
+      return <BookingListTrainerView bookings={bookings} authUserTrainerId={auth.user?.trainerId} />;
     case 'Admin':
       if (bookings?.length) {
         return <BookingListAdminView bookings={bookings} />;
@@ -29,7 +29,7 @@ export default function List() {
   }
 }
 
-function BookingListMemberView({ bookings, userMemberId }) {
+function BookingListMemberView({ bookings, authUserMemberId }) {
   const [filter, setFilter] = useState('all');
   const allBookingList = useMemo(
     () =>
@@ -47,7 +47,7 @@ function BookingListMemberView({ bookings, userMemberId }) {
               dateTime,
               durationMinutes,
             }) =>
-              userMemberId === memberId ? (
+              authUserMemberId === memberId ? (
                 <li id='booking-list-card' key={id} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
                   <NavLink
                     to={`${id}`}
@@ -106,10 +106,10 @@ function BookingListMemberView({ bookings, userMemberId }) {
       ) : (
         <p className='text-center mt-4'>No booking found on this date</p>
       ),
-    [bookings, userMemberId]
+    [bookings, authUserMemberId]
   );
   const myBookingList = useMemo(() => {
-    const hasMyBooking = bookings.some(({ memberId }) => memberId === userMemberId);
+    const hasMyBooking = bookings.some(({ memberId }) => memberId === authUserMemberId);
     return hasMyBooking ? (
       <ul className='grid justify-items-center content-start w-full gap-4'>
         {bookings.map(
@@ -124,7 +124,7 @@ function BookingListMemberView({ bookings, userMemberId }) {
             dateTime,
             durationMinutes,
           }) =>
-            memberId === userMemberId && (
+            memberId === authUserMemberId && (
               <li id='booking-list-card' key={id} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
                 <NavLink
                   to={`${id}`}
@@ -160,7 +160,7 @@ function BookingListMemberView({ bookings, userMemberId }) {
     ) : (
       <p className='text-center mt-4'>No booking found on this date</p>
     );
-  }, [bookings, userMemberId]);
+  }, [bookings, authUserMemberId]);
 
   return (
     <>
@@ -184,7 +184,7 @@ function BookingListMemberView({ bookings, userMemberId }) {
   );
 }
 
-function BookingListTrainerView({ bookings, userTrainerId }) {
+function BookingListTrainerView({ bookings, authUserTrainerId }) {
   const [filter, setFilter] = useState('all');
   const allBookingList = useMemo(
     () =>
@@ -202,7 +202,7 @@ function BookingListTrainerView({ bookings, userTrainerId }) {
               dateTime,
               durationMinutes,
             }) =>
-              userTrainerId === trainerId ? (
+              authUserTrainerId === trainerId ? (
                 <li id='booking-list-card' key={id} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
                   <NavLink
                     to={`${id}`}
@@ -261,10 +261,10 @@ function BookingListTrainerView({ bookings, userTrainerId }) {
       ) : (
         <p className='text-center mt-4'>No booking found on this date</p>
       ),
-    [bookings, userTrainerId]
+    [bookings, authUserTrainerId]
   );
   const myBookingList = useMemo(() => {
-    const hasMyBooking = bookings.some(({ trainerId }) => trainerId === userTrainerId);
+    const hasMyBooking = bookings.some(({ trainerId }) => trainerId === authUserTrainerId);
     return hasMyBooking ? (
       <ul className='grid justify-items-center content-start w-full gap-4'>
         {bookings.map(
@@ -279,7 +279,7 @@ function BookingListTrainerView({ bookings, userTrainerId }) {
             dateTime,
             durationMinutes,
           }) =>
-            trainerId === userTrainerId && (
+            trainerId === authUserTrainerId && (
               <li id='booking-list-card' key={id} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
                 <NavLink
                   to={`${id}`}
@@ -315,7 +315,7 @@ function BookingListTrainerView({ bookings, userTrainerId }) {
     ) : (
       <p className='text-center mt-4'>No booking found on this date</p>
     );
-  }, [bookings, userTrainerId]);
+  }, [bookings, authUserTrainerId]);
 
   return (
     <>

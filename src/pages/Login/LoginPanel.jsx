@@ -9,14 +9,14 @@ import { Btn5 } from '../../components/ui/Btn5';
 import { LinkBtn2 } from '../../components/ui/LinkBtn2';
 
 export default function LoginPanel() {
-  const { authenticatedUser } = useContext(AuthContext);
+  const auth = useContext(AuthContext);
 
   return (
     <div
       id='login-panel-wrapper'
       className='flex flex-col w-full max-w-lg gap-8 px-10 pt-12 pb-8 my-auto bg-neutral rounded-3xl shadow-[0_0_30px_15px_rgba(255,255,255,0.2)]'
     >
-      {authenticatedUser ? (
+      {auth.user ? (
         <Greetings />
       ) : (
         <>
@@ -98,7 +98,7 @@ function LoginForm() {
   // NB Can't use React Router's action for this component b/c event handlers provided by the `AuthContext` involve
   //  context/state change after successfully fetching login and users endpoints, the context/state change part can't
   //  be placed in the action function.
-  const { handleLogin } = useContext(AuthContext);
+  const auth = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [issues, setIssues] = useState({});
@@ -124,7 +124,8 @@ function LoginForm() {
       return;
     }
 
-    handleLogin(email, password)
+    auth
+      .handleLogin(email, password)
       .then(() => navigate('/'))
       .catch(() => navigate('/login'));
   }
@@ -194,14 +195,15 @@ function LoginForm() {
 }
 
 function DemoLogins() {
-  const { handleLogin } = useContext(AuthContext);
+  const auth = useContext(AuthContext);
   const navigate = useNavigate();
 
   return (
     <div className='flex justify-between gap-2'>
       <button
         onClick={() =>
-          handleLogin('demomember@server.com', 'abcd1234')
+          auth
+            .handleLogin('demomember@server.com', 'abcd1234')
             .then(() => navigate('/'))
             .catch(() => navigate('/login'))
         }
@@ -211,7 +213,8 @@ function DemoLogins() {
       </button>
       <button
         onClick={() =>
-          handleLogin('demotrainer@server.com', 'abcd1234')
+          auth
+            .handleLogin('demotrainer@server.com', 'abcd1234')
             .then(() => navigate('/'))
             .catch(() => navigate('/login'))
         }
@@ -221,7 +224,8 @@ function DemoLogins() {
       </button>
       <button
         onClick={() =>
-          handleLogin('demoadmin@server.com', 'abcd1234')
+          auth
+            .handleLogin('demoadmin@server.com', 'abcd1234')
             .then(() => navigate('/'))
             .catch(() => navigate('/login'))
         }
@@ -234,17 +238,17 @@ function DemoLogins() {
 }
 
 function Greetings() {
-  const { authenticatedUser, handleLogout } = useContext(AuthContext);
+  const auth = useContext(AuthContext);
   const navigate = useNavigate();
 
   return (
     <div className='flex flex-col gap-10'>
       <p className='text-2xl font-extrabold leading-6 focus:outline-none text-primary-content'>
-        Greetings, <span className='text-primary'>{authenticatedUser?.username}!</span>
+        Greetings, <span className='text-primary'>{auth.user?.username}!</span>
       </p>
       <p className='text-2xl font-extrabold leading-6 focus:outline-none text-primary-content'>
-        You have logged in as {authenticatedUser?.role === 'Admin' ? 'an' : 'a'}{' '}
-        <span className='text-primary'>{authenticatedUser?.role && authenticatedUser.role}!</span>
+        You have logged in as {auth.user?.role === 'Admin' ? 'an' : 'a'}{' '}
+        <span className='text-primary'>{auth.user?.role && auth.user.role}!</span>
       </p>
       <div className='flex flex-col gap-5'>
         <LinkBtn2 to={'/'} w='w-full'>
@@ -252,7 +256,7 @@ function Greetings() {
         </LinkBtn2>
         <Btn5
           onClick={() => {
-            handleLogout();
+            auth.handleLogout();
             navigate('/');
           }}
           w='w-full'

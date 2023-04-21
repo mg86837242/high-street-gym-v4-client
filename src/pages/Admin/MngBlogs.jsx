@@ -75,12 +75,12 @@ function ListBlogs({ blogs }) {
 }
 
 export function NewBlog() {
-  const { authenticatedUser } = useContext(AuthContext);
+  const auth = useContext(AuthContext);
 
   return (
     <div className='flex justify-end py-6'>
       <Form method='post' action='new'>
-        <input type='hidden' name='loginId' value={authenticatedUser.id} />
+        <input type='hidden' name='loginId' value={auth.user?.id} />
         <Btn2Sm>Create New</Btn2Sm>
       </Form>
     </div>

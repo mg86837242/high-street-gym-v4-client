@@ -4,7 +4,7 @@ import { useLoaderData, Form, useNavigate } from 'react-router-dom';
 import { tomorrowStr, threeWeeksLaterStr } from '../../data/keyDates';
 
 export default function Edit() {
-  const { authenticatedUser } = useContext(AuthContext);
+  const auth = useContext(AuthContext);
   const { booking, members, trainers, activities } = useLoaderData();
   const navigate = useNavigate();
 
@@ -78,7 +78,7 @@ export default function Edit() {
               ))}
             </select>
           </label>
-          {authenticatedUser?.memberId ? (
+          {auth.user?.memberId ? (
             <label
               id='member-select-group'
               className='input-group grid grid-cols-1 xl:grid-cols-[minmax(1rem,_1fr)_minmax(3rem,_3fr)]'
@@ -86,13 +86,13 @@ export default function Edit() {
               <span className='p-0'>Member:</span>
               <select
                 name='memberId'
-                defaultValue={authenticatedUser.memberId}
+                defaultValue={auth.user.memberId}
                 required
                 className='text-base font-normal select select-bordered select-sm'
               >
                 <option disabled>-- Choose Member --</option>
                 {members
-                  .filter(m => m.id === authenticatedUser.memberId)
+                  .filter(m => m.id === auth.user.memberId)
                   .map((m, i) => (
                     <option value={m.id} key={i}>
                       {m.firstName} {m.lastName}
@@ -121,7 +121,7 @@ export default function Edit() {
               </select>
             </label>
           )}
-          {authenticatedUser?.trainerId ? (
+          {auth.user?.trainerId ? (
             <label
               id='trainer-select-group'
               className='input-group grid grid-cols-1 xl:grid-cols-[minmax(1rem,_1fr)_minmax(3rem,_3fr)]'
@@ -129,13 +129,13 @@ export default function Edit() {
               <span className='p-0'>Trainer:</span>
               <select
                 name='trainerId'
-                defaultValue={authenticatedUser.trainerId}
+                defaultValue={auth.user.trainerId}
                 required
                 className='text-base font-normal select select-bordered select-sm'
               >
                 <option disabled>-- Choose Trainer --</option>
                 {trainers
-                  .filter(t => t.id === authenticatedUser.trainerId)
+                  .filter(t => t.id === auth.user.trainerId)
                   .map((t, i) => (
                     <option value={t.id} key={i}>
                       {t.firstName} {t.lastName}

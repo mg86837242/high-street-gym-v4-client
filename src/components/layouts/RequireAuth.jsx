@@ -3,8 +3,8 @@ import AuthContext from '../../context/AuthContext';
 import { Navigate, useLocation, Outlet, useOutletContext } from 'react-router-dom';
 
 export default function RequireAuth({ permittedRoles }) {
-  const { authenticatedUser } = useContext(AuthContext);
-  const canAccess = permittedRoles?.includes(authenticatedUser?.role);
+  const auth = useContext(AuthContext);
+  const canAccess = permittedRoles?.includes(auth.user?.role);
   const location = useLocation();
   const outletContext = useOutletContext();
 

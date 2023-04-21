@@ -17,7 +17,7 @@ export function ProfilePanel() {
 }
 
 function LeftSidePanel() {
-  const { authenticatedUser } = useContext(AuthContext);
+  const auth = useContext(AuthContext);
 
   return (
     <div id='profile-sidebar-wrapper' className='flex flex-col gap-5 py-6 pr-6 min-w-[18.5rem]'>
@@ -30,7 +30,7 @@ function LeftSidePanel() {
         <div className='flex flex-col items-end'>
           <p className='text-lg'>My Profile</p>
           <p className='text-base'>
-            Greetings, <span className='text-primary'>{authenticatedUser?.username && authenticatedUser.username}</span>
+            Greetings, <span className='text-primary'>{auth.user?.username && auth.user.username}</span>
           </p>
         </div>
       </div>

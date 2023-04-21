@@ -7,7 +7,7 @@ import { today } from '../../data/keyDates';
 import { monthNames, dayNames } from '../../helpers/mapDates';
 
 export default function Calendar() {
-  const { authenticatedUser } = useContext(AuthContext);
+  const auth = useContext(AuthContext);
   // NB The following 2 states are just snapshots of date when this component is rendered, i.e., can be updated by
   //  setter, however, won't update according to the real time unless with `useEffect`
   const [year, setYear] = useState(today.getFullYear());
@@ -70,7 +70,7 @@ export default function Calendar() {
   );
 
   return (
-    <CalendarWrapper authenticatedUser={authenticatedUser}>
+    <CalendarWrapper>
       <div id='calendar-nav' className='flex items-center gap-10 px-3 rounded-lg lg:gap-20 bg-base-300 py-[.25rem]'>
         <button
           // NB Bug: random texts get selected/highlighted => b/c the `<FontAwesomeIcon>` is a text element =>
@@ -108,13 +108,15 @@ export default function Calendar() {
       >
         {calendarCells}
       </div>
-      {authenticatedUser && <CreateNewBooking />}
+      {auth.user && <CreateNewBooking />}
     </CalendarWrapper>
   );
 }
 
-function CalendarWrapper({ children, authenticatedUser }) {
-  return authenticatedUser ? (
+function CalendarWrapper({ children }) {
+  const auth = useContext(AuthContext);
+
+  return auth.user ? (
     <div
       id='calendar-wrapper'
       className='grid justify-items-center content-start w-full lg:w-fit gap-3 3xl:gap-6 col-[1_/_2] row-[1_/_2] lg:min-h-[80vh] lg:sticky lg:top-28 lg:justify-self-end'

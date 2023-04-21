@@ -9,7 +9,7 @@ import Image from '@tiptap/extension-image';
 import CharacterCount from '@tiptap/extension-character-count';
 
 export default function Details() {
-  const { authenticatedUser } = useContext(AuthContext);
+  const auth = useContext(AuthContext);
   const { blog } = useLoaderData();
   const { title, body, loginId, createdAt, updatedAt, username } = blog;
   const [editable, setEditable] = useState(false);
@@ -30,7 +30,7 @@ export default function Details() {
       CharacterCount.configure({ limit }),
     ],
   });
-  const canEdit = authenticatedUser?.id === loginId || authenticatedUser?.role === 'Admin';
+  const canEdit = auth.user?.id === loginId || auth.user?.role === 'Admin';
 
   useEffect(() => {
     if (!editor) {

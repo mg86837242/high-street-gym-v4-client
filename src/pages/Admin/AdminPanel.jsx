@@ -17,7 +17,7 @@ export function AdminPanel() {
 }
 
 function LeftSidePanel() {
-  const { authenticatedUser } = useContext(AuthContext);
+  const auth = useContext(AuthContext);
 
   return (
     <div id='admin-sidebar-wrapper' className='flex flex-col gap-5 py-6 pr-6 min-w-[18.5rem]'>
@@ -30,7 +30,7 @@ function LeftSidePanel() {
         <div className='flex flex-col items-end'>
           <p className='text-lg'>Admin Panel</p>
           <p className='text-base'>
-            Role: <span className='text-primary'>{authenticatedUser?.role && authenticatedUser.role}</span>
+            Role: <span className='text-primary'>{auth.user?.role && auth.user.role}</span>
           </p>
         </div>
       </div>
@@ -51,7 +51,7 @@ function LeftSidePanel() {
               <span className='flex items-center justify-start text-sm'>Manage Activities</span>
             </NavLink>
           </li>
-          {authenticatedUser?.role === 'Admin' && (
+          {auth.user?.role === 'Admin' && (
             <>
               <li>
                 <NavLink

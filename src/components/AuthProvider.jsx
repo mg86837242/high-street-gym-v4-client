@@ -4,11 +4,11 @@ import { getUserByKey, login, logout } from '../api/users';
 import router from '../routes/router';
 
 export default function AuthProvider({ children }) {
-  const [authenticatedUser, setAuthenticatedUser] = useState(null);
+  const [user, setUser] = useState(null);
   // This `useEffect`'s job is to synchronize with API by using an access key stored in the `localStorage` as a ref in
-  //  case `authenticatedUser` state/context is missing after page reload, opening a new tab, etc.
+  //  case `user` state/context is missing after page reload, opening a new tab, etc.
   useEffect(() => {
-    if (authenticatedUser) {
+    if (user) {
       // Effect runs - user state present, exit
       return;
     }
@@ -23,7 +23,7 @@ export default function AuthProvider({ children }) {
         const json = await getUserByKey(accessKey);
         if (!ignore) {
           // Effect runs - user state synchronizing
-          setAuthenticatedUser(json.user);
+          setUser(json.user);
         }
       } catch (error) {
         // Effect runs - synchronization failed
@@ -33,11 +33,11 @@ export default function AuthProvider({ children }) {
     return () => {
       ignore = true;
     };
-  }, [authenticatedUser]);
+  }, [user]);
 
   const handleLogin = useCallback(
     async (email, password) => {
-      setAuthenticatedUser(null);
+      setUser(null);
       try {
         // Fetch POST /login to attempt to get `accessKey` from the API's json response
         const loginJSON = await login(email, password);
@@ -52,8 +52,8 @@ export default function AuthProvider({ children }) {
           if (userJSON.status !== 200) {
             return typeof userJSON.message === 'string' ? userJSON.message : 'Invalid request to server';
           }
-          setAuthenticatedUser(userJSON.user);
-          // PS After this second setter, console log `authenticatedUser` outputs `null`, which is what's set in the
+          setUser(userJSON.user);
+          // PS After this second setter, console log `user` outputs `null`, which is what's set in the
           //  first setter, this is b/c React batches state updates, see: https://stackoverflow.com/questions/33613728/what-happens-when-using-this-setstate-multiple-times-in-react-component
           return loginJSON.message;
         } catch (error) {
@@ -63,37 +63,37 @@ export default function AuthProvider({ children }) {
         return 'Server failed to login';
       }
     },
-    [authenticatedUser]
+    [user]
   );
 
   const handleLogout = useCallback(async () => {
     try {
       // Remove key from `localStorage`
       localStorage.removeItem('accessKey');
-      if (authenticatedUser) {
+      if (user) {
         // Fetch POST /logout to attempt to remove `accessKey` from its login row
-        const { accessKey } = authenticatedUser;
+        const { accessKey } = user;
         const json = await logout(accessKey);
         if (json.status !== 200) {
           return (message = typeof json.message === 'string' ? json.message : 'Invalid request to server');
         }
-        setAuthenticatedUser(null);
+        setUser(null);
         return json.message;
       }
       return 'No authenticated user recognized';
     } catch (error) {
-      setAuthenticatedUser(null);
+      setUser(null);
       return 'Server failed to logout';
     }
-  }, [authenticatedUser]);
+  }, [user]);
 
   const value = useMemo(
     () => ({
-      authenticatedUser,
+      user,
       handleLogin,
       handleLogout,
     }),
-    [authenticatedUser, handleLogin, handleLogout]
+    [user, handleLogin, handleLogout]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

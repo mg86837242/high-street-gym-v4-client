@@ -7,7 +7,7 @@ import { Btn2Sm } from '../../components/ui/Btn2';
 import { LinkBtn2Sm } from '../../components/ui/LinkBtn2';
 
 export default function List() {
-  const { authenticatedUser } = useContext(AuthContext);
+  const auth = useContext(AuthContext);
   const { blogs } = useLoaderData();
   const [filter, setFilter] = useState('all');
   const allBlogList = useMemo(
@@ -47,12 +47,12 @@ export default function List() {
     [blogs]
   );
   const myBlogList = useMemo(() => {
-    const hasMyBlog = blogs.some(({ loginId }) => loginId === authenticatedUser?.id);
+    const hasMyBlog = blogs.some(({ loginId }) => loginId === auth.user?.id);
     return hasMyBlog ? (
       <>
         {blogs.map(
           ({ id, title, body, loginId, createdAt, updatedAt, username }) =>
-            loginId === authenticatedUser?.id && (
+            loginId === auth.user?.id && (
               <div key={id} className='mb-12 border border-base-content rounded-3xl'>
                 <div className='flex'>
                   <div className='flex-shrink w-full px-4 py-2'>
@@ -85,15 +85,15 @@ export default function List() {
     ) : (
       <p className='my-4 text-center'>No blog has been found</p>
     );
-  }, [blogs, authenticatedUser]);
+  }, [blogs, auth.user]);
 
   return (
     <div className='flex flex-col gap-6 lg:grid lg:grid-cols-12 lg:gap-0'>
       <section className='lg:hidden'>
-        {authenticatedUser ? (
+        {auth.user ? (
           <>
             <Form method='post' action='new'>
-              <input type='hidden' name='loginId' value={authenticatedUser?.id} />
+              <input type='hidden' name='loginId' value={auth.user?.id} />
               <Btn2Sm w='w-full'>Create New</Btn2Sm>
             </Form>
             <div className='divider'></div>
@@ -117,7 +117,7 @@ export default function List() {
         <div>{filter === 'all' ? allBlogList : myBlogList}</div>
       </section>
       <aside className='hidden lg:block lg:col-[9_/_13]'>
-        {authenticatedUser ? (
+        {auth.user ? (
           <>
             <select
               value={filter}
@@ -129,7 +129,7 @@ export default function List() {
             </select>
             <div className='divider'></div>
             <Form method='post' action='new'>
-              <input type='hidden' name='loginId' value={authenticatedUser?.id} />
+              <input type='hidden' name='loginId' value={auth.user?.id} />
               <Btn2Sm w='w-full'>Create New</Btn2Sm>
             </Form>
           </>

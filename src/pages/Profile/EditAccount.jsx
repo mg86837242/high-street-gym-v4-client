@@ -19,7 +19,7 @@ import SpinnerNoNav from '../../components/ui/SpinnerNoNav';
 import { convertEmptyStrToNull, convertNullToEmptyStr } from '../../helpers/sanitize';
 
 export default function EditAccount() {
-  const { authenticatedUser } = useContext(AuthContext);
+  const auth = useContext(AuthContext);
   const [topMsg, setTopMsg] = useState('');
   const [botMsg, setBotMsg] = useState('');
   const { user, emails } = useLoaderData();
@@ -88,11 +88,11 @@ export default function EditAccount() {
   function renderSwitchUpdateUserForm(role) {
     switch (role) {
       case 'Admin':
-        return <UpdateAdminForm topMsg={topMsg} user={user} emails={emails} authenticatedUser={authenticatedUser} />;
+        return <UpdateAdminForm topMsg={topMsg} user={user} emails={emails} />;
       case 'Trainer':
-        return <UpdateTrainerForm topMsg={topMsg} user={user} emails={emails} authenticatedUser={authenticatedUser} />;
+        return <UpdateTrainerForm topMsg={topMsg} user={user} emails={emails} />;
       case 'Member':
-        return <UpdateMemberForm topMsg={topMsg} user={user} emails={emails} authenticatedUser={authenticatedUser} />;
+        return <UpdateMemberForm topMsg={topMsg} user={user} emails={emails} />;
       default:
         return <></>;
     }
@@ -101,11 +101,11 @@ export default function EditAccount() {
   function renderSwitchUpdateUserAddrForm(role) {
     switch (role) {
       case 'Admin':
-        return <UpdateAdminAddrForm botMsg={botMsg} user={user} authenticatedUser={authenticatedUser} />;
+        return <UpdateAdminAddrForm botMsg={botMsg} user={user} />;
       case 'Trainer':
-        return <UpdateTrainerAddrForm botMsg={botMsg} user={user} authenticatedUser={authenticatedUser} />;
+        return <UpdateTrainerAddrForm botMsg={botMsg} user={user} />;
       case 'Member':
-        return <UpdateMemberAddrForm botMsg={botMsg} user={user} authenticatedUser={authenticatedUser} />;
+        return <UpdateMemberAddrForm botMsg={botMsg} user={user} />;
       default:
         return <></>;
     }
@@ -114,10 +114,10 @@ export default function EditAccount() {
   return user && emails ? (
     <div className='flex-grow px-4 py-6'>
       <h1 className='font-sans text-3xl text-accent'>Edit My Account</h1>
-      {renderSwitchUpdateUserForm(authenticatedUser?.role)}
+      {renderSwitchUpdateUserForm(auth.user?.role)}
       <div className='divider'></div>
       <h1 className='font-sans text-3xl text-accent'>Edit My Address</h1>
-      {renderSwitchUpdateUserAddrForm(authenticatedUser?.role)}
+      {renderSwitchUpdateUserAddrForm(auth.user?.role)}
     </div>
   ) : (
     <SpinnerNoNav />
@@ -125,13 +125,14 @@ export default function EditAccount() {
 }
 
 // [ ] Don't fetch all emails into the component to check identical email, instead, useActionData (see <MngMembers>) to return 409's json, this applies to <SignupForm> as well after refactoring the page by using RHF
-function UpdateAdminForm({ topMsg, user, emails, authenticatedUser }) {
+function UpdateAdminForm({ topMsg, user, emails }) {
+  const auth = useContext(AuthContext);
   const [inputEmailMsg, setInputEmailMsg] = useState('');
   const submit = useSubmit();
   const userDefaultValues = useMemo(() => {
     const { password, ...values } = user;
-    return { ...values, password: '●●●●●●●●●●', id: authenticatedUser?.adminId, _action: 'updateAdminById' };
-  }, [user, authenticatedUser]);
+    return { ...values, password: '●●●●●●●●●●', id: auth.user?.adminId, _action: 'updateAdminById' };
+  }, [user, auth.user]);
   const {
     register,
     handleSubmit,
@@ -142,7 +143,7 @@ function UpdateAdminForm({ topMsg, user, emails, authenticatedUser }) {
     defaultValues: userDefaultValues,
   });
 
-  useEffect(() => reset(userDefaultValues), [reset, user, authenticatedUser]);
+  useEffect(() => reset(userDefaultValues), [reset, user, auth.user]);
 
   return (
     <form
@@ -179,7 +180,8 @@ function UpdateAdminForm({ topMsg, user, emails, authenticatedUser }) {
   );
 }
 
-function UpdateAdminAddrForm({ botMsg, user, authenticatedUser }) {
+function UpdateAdminAddrForm({ botMsg, user }) {
+  const auth = useContext(AuthContext);
   const submit = useSubmit();
   const {
     register,
@@ -189,14 +191,14 @@ function UpdateAdminAddrForm({ botMsg, user, authenticatedUser }) {
   } = useForm({
     resolver: zodResolver(addressAdminSchema),
     defaultValues: useMemo(
-      () => ({ ...user, adminId: authenticatedUser?.adminId, _action: 'updateAddressByAdminId' }),
-      [user, authenticatedUser]
+      () => ({ ...user, adminId: auth.user?.adminId, _action: 'updateAddressByAdminId' }),
+      [user, auth.user]
     ),
   });
 
   useEffect(
-    () => reset({ ...user, adminId: authenticatedUser?.adminId, _action: 'updateAddressByAdminId' }),
-    [reset, user, authenticatedUser]
+    () => reset({ ...user, adminId: auth.user?.adminId, _action: 'updateAddressByAdminId' }),
+    [reset, user, auth.user]
   );
 
   return (
@@ -235,13 +237,14 @@ function UpdateAdminAddrForm({ botMsg, user, authenticatedUser }) {
   );
 }
 
-function UpdateTrainerForm({ topMsg, user, emails, authenticatedUser }) {
+function UpdateTrainerForm({ topMsg, user, emails }) {
+  const auth = useContext(AuthContext);
   const [inputEmailMsg, setInputEmailMsg] = useState('');
   const submit = useSubmit();
   const userDefaultValues = useMemo(() => {
     const { password, ...values } = user;
-    return { ...values, password: '●●●●●●●●●●', id: authenticatedUser?.trainerId, _action: 'updateTrainerById' };
-  }, [user, authenticatedUser]);
+    return { ...values, password: '●●●●●●●●●●', id: auth.user?.trainerId, _action: 'updateTrainerById' };
+  }, [user, auth.user]);
   const {
     register,
     handleSubmit,
@@ -252,7 +255,7 @@ function UpdateTrainerForm({ topMsg, user, emails, authenticatedUser }) {
     defaultValues: userDefaultValues,
   });
 
-  useEffect(() => reset(userDefaultValues), [reset, user, authenticatedUser]);
+  useEffect(() => reset(userDefaultValues), [reset, user, auth.user]);
 
   return (
     <form
@@ -308,7 +311,8 @@ function UpdateTrainerForm({ topMsg, user, emails, authenticatedUser }) {
   );
 }
 
-function UpdateTrainerAddrForm({ botMsg, user, authenticatedUser }) {
+function UpdateTrainerAddrForm({ botMsg, user }) {
+  const auth = useContext(AuthContext);
   const submit = useSubmit();
   const {
     register,
@@ -318,14 +322,14 @@ function UpdateTrainerAddrForm({ botMsg, user, authenticatedUser }) {
   } = useForm({
     resolver: zodResolver(addressTrainerSchema),
     defaultValues: useMemo(
-      () => ({ ...user, trainerId: authenticatedUser?.trainerId, _action: 'updateAddressByTrainerId' }),
-      [user, authenticatedUser]
+      () => ({ ...user, trainerId: auth.user?.trainerId, _action: 'updateAddressByTrainerId' }),
+      [user, auth.user]
     ),
   });
 
   useEffect(
-    () => reset({ ...user, trainerId: authenticatedUser?.trainerId, _action: 'updateAddressByTrainerId' }),
-    [reset, user, authenticatedUser]
+    () => reset({ ...user, trainerId: auth.user?.trainerId, _action: 'updateAddressByTrainerId' }),
+    [reset, user, auth.user]
   );
 
   return (
@@ -364,13 +368,13 @@ function UpdateTrainerAddrForm({ botMsg, user, authenticatedUser }) {
   );
 }
 
-function UpdateMemberForm({ topMsg, user, emails, authenticatedUser }) {
+function UpdateMemberForm({ topMsg, user, emails }) {
   const [inputEmailMsg, setInputEmailMsg] = useState('');
   const submit = useSubmit();
   const userDefaultValues = useMemo(() => {
     const { password, ...values } = user;
-    return { ...values, password: '●●●●●●●●●●', id: authenticatedUser?.memberId, _action: 'updateMemberById' };
-  }, [user, authenticatedUser]);
+    return { ...values, password: '●●●●●●●●●●', id: auth.user?.memberId, _action: 'updateMemberById' };
+  }, [user, auth.user]);
   const {
     register,
     handleSubmit,
@@ -381,7 +385,7 @@ function UpdateMemberForm({ topMsg, user, emails, authenticatedUser }) {
     defaultValues: userDefaultValues,
   });
 
-  useEffect(() => reset(userDefaultValues), [reset, user, authenticatedUser]);
+  useEffect(() => reset(userDefaultValues), [reset, user, auth.user]);
 
   return (
     <form
@@ -433,7 +437,7 @@ function UpdateMemberForm({ topMsg, user, emails, authenticatedUser }) {
   );
 }
 
-function UpdateMemberAddrForm({ botMsg, user, authenticatedUser }) {
+function UpdateMemberAddrForm({ botMsg, user }) {
   const submit = useSubmit();
   const {
     register,
@@ -443,14 +447,14 @@ function UpdateMemberAddrForm({ botMsg, user, authenticatedUser }) {
   } = useForm({
     resolver: zodResolver(addressMemberSchema),
     defaultValues: useMemo(
-      () => ({ ...user, memberId: authenticatedUser?.memberId, _action: 'updateAddressByMemberId' }),
-      [user, authenticatedUser]
+      () => ({ ...user, memberId: auth.user?.memberId, _action: 'updateAddressByMemberId' }),
+      [user, auth.user]
     ),
   });
 
   useEffect(
-    () => reset({ ...user, memberId: authenticatedUser?.memberId, _action: 'updateAddressByMemberId' }),
-    [reset, user, authenticatedUser]
+    () => reset({ ...user, memberId: auth.user?.memberId, _action: 'updateAddressByMemberId' }),
+    [reset, user, auth.user]
   );
 
   return (

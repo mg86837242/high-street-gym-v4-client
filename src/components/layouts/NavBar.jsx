@@ -5,7 +5,6 @@ import { Btn1 } from '../ui/Btn1';
 
 // This component has the duality of different appearances and behaviors based on the `isHome` props
 export default function NavBar({ isHome }) {
-  const { authenticatedUser, handleLogout } = useContext(AuthContext);
   const [navBgClass, setNavBgClass] = useState('flex justify-center fixed top-0 bg-transparent w-full z-20');
 
   function handleScrollEvent() {
@@ -27,15 +26,17 @@ export default function NavBar({ isHome }) {
   return (
     <div id='nav-bg' className={isHome ? navBgClass : 'sticky top-0 z-20 flex justify-center bg-neutral/95 w-full'}>
       <div id='nav-bar' className='w-full px-4 navbar max-w-screen-2xl 2xl:px-4'>
-        <NavBarLeft authenticatedUser={authenticatedUser} />
-        <NavBarCenter authenticatedUser={authenticatedUser} />
-        <NavBarRight authenticatedUser={authenticatedUser} handleLogout={handleLogout} />
+        <NavBarLeft />
+        <NavBarCenter />
+        <NavBarRight />
       </div>
     </div>
   );
 }
 
-function NavBarLeft({ authenticatedUser }) {
+function NavBarLeft() {
+  const auth = useContext(AuthContext);
+
   return (
     <div id='nav-left-wrapper' className='navbar-start'>
       <div id='nav-left-dropdown-wrapper' className='dropdown'>
@@ -55,7 +56,7 @@ function NavBarLeft({ authenticatedUser }) {
           tabIndex={0}
           className='p-2 mt-3 shadow menu menu-compact dropdown-content bg-neutral rounded-box w-52'
         >
-          {authenticatedUser?.role === 'Admin' ? (
+          {auth.user?.role === 'Admin' ? (
             <>
               <NavLeftButton to={'/'} text={'Home'} />
               <NavLeftButton to={'blogs'} text={'Blogs'} />
@@ -67,7 +68,7 @@ function NavBarLeft({ authenticatedUser }) {
                 <NavLeftDropdownButton to={'admin/members'} text={'Manage Members'} />
               </NavLeftButton>
             </>
-          ) : authenticatedUser?.role === 'Trainer' ? (
+          ) : auth.user?.role === 'Trainer' ? (
             <>
               <NavLeftButton to={'/'} text={'Home'} />
               <NavLeftButton to={'blogs'} text={'Blogs'} />
@@ -136,11 +137,13 @@ function NavLeftDropdownButton({ to, text }) {
   );
 }
 
-function NavBarCenter({ authenticatedUser }) {
+function NavBarCenter() {
+  const auth = useContext(AuthContext);
+
   return (
     <nav id='nav-center-wrapper' className='hidden navbar-center lg:flex'>
       <ul id='nav-center-menu' className='gap-2 px-1 menu menu-horizontal text-primary-content'>
-        {authenticatedUser?.role === 'Admin' ? (
+        {auth.user?.role === 'Admin' ? (
           <>
             <NavCenterButton to={'/'} text={'Home'} />
             <NavCenterButton to={'blogs'} text={'Blogs'} />
@@ -152,7 +155,7 @@ function NavBarCenter({ authenticatedUser }) {
               <NavCenterDropdownButton to={'admin/members'} text={'Manage Members'} />
             </NavCenterButton>
           </>
-        ) : authenticatedUser?.role === 'Trainer' ? (
+        ) : auth.user?.role === 'Trainer' ? (
           <>
             <NavCenterButton to={'/'} text={'Home'} />
             <NavCenterButton to={'blogs'} text={'Blogs'} />
@@ -215,13 +218,14 @@ function NavCenterDropdownButton({ to, text }) {
   );
 }
 
-function NavBarRight({ authenticatedUser, handleLogout }) {
+function NavBarRight() {
+  const auth = useContext(AuthContext);
   const navigate = useNavigate();
 
   return (
     <div id='nav-right-wrapper' className='flex items-center gap-5 navbar-end'>
       {/* <ThemeSwitch /> */}
-      {authenticatedUser ? (
+      {auth.user ? (
         <>
           <Link
             to='profile/account'
@@ -231,7 +235,7 @@ function NavBarRight({ authenticatedUser, handleLogout }) {
           </Link>
           <Btn1
             onClick={() => {
-              handleLogout();
+              auth.handleLogout();
               navigate('/');
             }}
           >
