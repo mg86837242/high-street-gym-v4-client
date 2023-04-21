@@ -10,11 +10,9 @@ export default function RequireAuth({ permittedRoles }) {
 
   if (!canAccess) {
     return <Navigate to='/404' state={{ from: location }} replace />;
-  } else if (outletContext) {
-    return <Outlet context={outletContext} />;
-  } else {
-    return <Outlet />;
   }
+
+  return outletContext ? <Outlet context={outletContext} /> : <Outlet />;
 }
 
 // References for role-base routing in RRD 6.4+:
