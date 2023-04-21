@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import AuthContext from '../context/AuthContext';
 import { getUserByKey, login, logout } from '../api/users';
-import router from '../routes/router';
+import router from '../App';
 
 export default function AuthProvider({ children }) {
   const [user, setUser] = useState(null);

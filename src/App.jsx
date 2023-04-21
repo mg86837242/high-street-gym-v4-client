@@ -1,13 +1,13 @@
-import { createBrowserRouter, Link } from 'react-router-dom';
-import ErrorInfoRefresh from '../components/ui/ErrorInfoRefresh';
-import PageLayout from '../components/layouts/PageLayout';
-import RequireAuth from '../components/layouts/RequireAuth';
-import Home from '../pages/Home';
-import Login from '../pages/Login';
-import blogsRoutes from './blogsRoutes';
-import bookingsRoutes from './bookingsRoutes';
-import profileRoutes from './profileRoutes';
-import adminRoutes from './adminRoutes';
+import { createBrowserRouter, RouterProvider, Link } from 'react-router-dom';
+import ErrorInfoRefresh from './components/ui/ErrorInfoRefresh';
+import PageLayout from './components/layouts/PageLayout';
+import RequireAuth from './components/layouts/RequireAuth';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import blogsRoutes from './routes/blogsRoutes';
+import bookingsRoutes from './routes/bookingsRoutes';
+import profileRoutes from './routes/profileRoutes';
+import adminRoutes from './routes/adminRoutes';
 
 const router = createBrowserRouter([
   {
@@ -21,7 +21,7 @@ const router = createBrowserRouter([
       {
         path: 'blogs',
         async lazy() {
-          let { default: Blogs } = await import('../pages/Blogs');
+          let { default: Blogs } = await import('./pages/Blogs');
           return { Component: Blogs };
         },
         ErrorBoundary: ErrorInfoRefresh,
@@ -31,7 +31,7 @@ const router = createBrowserRouter([
       {
         path: 'bookings',
         async lazy() {
-          let { default: Bookings } = await import('../pages/Bookings');
+          let { default: Bookings } = await import('./pages/Bookings');
           return { Component: Bookings };
         },
         ErrorBoundary: ErrorInfoRefresh,
@@ -44,7 +44,7 @@ const router = createBrowserRouter([
           {
             path: 'profile',
             async lazy() {
-              let { default: Profile } = await import('../pages/Profile');
+              let { default: Profile } = await import('./pages/Profile');
               return { Component: Profile };
             },
             ErrorBoundary: ErrorInfoRefresh,
@@ -58,7 +58,7 @@ const router = createBrowserRouter([
           {
             path: 'admin',
             async lazy() {
-              let { default: Admin } = await import('../pages/Admin');
+              let { default: Admin } = await import('./pages/Admin');
               return { Component: Admin };
             },
             ErrorBoundary: ErrorInfoRefresh,
@@ -76,29 +76,31 @@ const router = createBrowserRouter([
   {
     path: '/signup',
     async lazy() {
-      let { default: Signup } = await import('../pages/Signup');
+      let { default: Signup } = await import('./pages/Signup');
       return { Component: Signup };
     },
     ErrorBoundary: ErrorInfoRefresh,
     async loader() {
-      let { getAllEmails } = await import('../api/users');
+      let { getAllEmails } = await import('./api/users');
       return getAllEmails();
     },
     async action({ request }) {
-      let { signupMembers } = await import('../api/members');
+      let { signupMembers } = await import('./api/members');
       return signupMembers({ request });
     },
   },
   {
     path: '*',
     async lazy() {
-      let { default: NotFound } = await import('../components/ui/NotFound');
-      return { Component: NotFound };
+      let { default: NoMatch } = await import('./components/ui/NoMatch');
+      return { Component: NoMatch };
     },
   },
 ]);
 
-export default router;
+export default function App() {
+  return <RouterProvider router={router} fallbackElement={<p>Performing initial data load</p>} />;
+}
 
 // References:
 // -- https://reactrouter.com/en/main/start/concepts#defining-routes: Official example of defining routes with React
