@@ -1,10 +1,9 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import AuthContext from '../context/AuthContext';
-import router from '../routes/router';
-import { RouterProvider } from 'react-router-dom';
 import { getUserByKey, login, logout } from '../api/users';
+import router from '../routes/router';
 
-export default function AppProviders() {
+export default function AuthProvider({ children }) {
   const [authenticatedUser, setAuthenticatedUser] = useState(null);
   // This `useEffect`'s job is to synchronize with API by using an access key stored in the `localStorage` as a ref in
   //  case `authenticatedUser` state/context is missing after page reload, opening a new tab, etc.
@@ -88,7 +87,7 @@ export default function AppProviders() {
     }
   }, [authenticatedUser]);
 
-  const authContextValue = useMemo(
+  const value = useMemo(
     () => ({
       authenticatedUser,
       handleLogin,
@@ -97,11 +96,7 @@ export default function AppProviders() {
     [authenticatedUser, handleLogin, handleLogout]
   );
 
-  return (
-    <AuthContext.Provider value={authContextValue}>
-      <RouterProvider router={router} />
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
 // References for `useContext`:

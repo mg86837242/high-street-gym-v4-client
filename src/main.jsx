@@ -5,14 +5,20 @@ import '@fontsource/inter';
 import '@fontsource/righteous';
 import '@fontsource/permanent-marker';
 import { isProd } from './data/constants';
-import AppProviders from './components/AppProviders';
+import AuthProvider from './components/AuthProvider';
+import router from './routes/router';
+import { RouterProvider } from 'react-router-dom';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   isProd ? (
-    <AppProviders />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   ) : (
     <React.StrictMode>
-      <AppProviders />
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </React.StrictMode>
   )
 );

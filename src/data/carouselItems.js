@@ -1,5 +1,5 @@
 const carouselItems = [
-  // TODO Static assets for carousel items, 404 page, and under construction page
+  // TODO Static assets for carousel images, 404 page, and under construction page
   {
     id: 0,
     imageUrl:
