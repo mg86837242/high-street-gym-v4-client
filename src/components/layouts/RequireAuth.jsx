@@ -1,13 +1,22 @@
 import { useContext } from 'react';
 import AuthContext from '../../context/AuthContext';
-import { Outlet, useLocation, Navigate } from 'react-router-dom';
+import { Navigate, useLocation, Outlet, useOutletContext } from 'react-router-dom';
 
 export default function RequireAuth({ permittedRoles }) {
   const { authenticatedUser } = useContext(AuthContext);
   const location = useLocation();
   const canAccess = permittedRoles?.includes(authenticatedUser?.role);
+  const outletContext = useOutletContext();
 
-  return canAccess ? <Outlet /> : <Navigate to='/404' state={{ from: location }} replace />;
+  if (!canAccess) {
+    return <Navigate to='/404' state={{ from: location }} replace />;
+  } else if (outletContext) {
+    return <Outlet context={outletContext} />;
+  } else {
+    return <Outlet />;
+  }
+
+  // return canAccess ? <Outlet /> : <Navigate to='/404' state={{ from: location }} replace />;
 }
 
 // References for role-base routing in RRD 6.4+:
