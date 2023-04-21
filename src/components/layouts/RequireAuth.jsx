@@ -5,8 +5,8 @@ import { Navigate, useLocation, Outlet, useOutletContext } from 'react-router-do
 export default function RequireAuth({ permittedRoles }) {
   const { authenticatedUser } = useContext(AuthContext);
   const location = useLocation();
-  const canAccess = permittedRoles?.includes(authenticatedUser?.role);
   const outletContext = useOutletContext();
+  const canAccess = permittedRoles?.includes(authenticatedUser?.role);
 
   if (!canAccess) {
     return <Navigate to='/404' state={{ from: location }} replace />;
