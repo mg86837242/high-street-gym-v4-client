@@ -218,8 +218,8 @@ function UpdateAdminAddrForm({ botMsg, user, authenticatedUser }) {
           <option value='' disabled>
             -- Choose Country --
           </option>
-          {countries.map((c, i) => (
-            <option value={c.name} key={i}>
+          {countries.map(c => (
+            <option value={c.name} key={c.code}>
               {c.name}
             </option>
           ))}
@@ -347,8 +347,8 @@ function UpdateTrainerAddrForm({ botMsg, user, authenticatedUser }) {
           <option value='' disabled>
             -- Choose Country --
           </option>
-          {countries.map((c, i) => (
-            <option value={c.name} key={i}>
+          {countries.map(c => (
+            <option value={c.name} key={c.code}>
               {c.name}
             </option>
           ))}
@@ -472,8 +472,8 @@ function UpdateMemberAddrForm({ botMsg, user, authenticatedUser }) {
           <option value='' disabled>
             -- Choose Country --
           </option>
-          {countries.map((c, i) => (
-            <option value={c.name} key={i}>
+          {countries.map(c => (
+            <option value={c.name} key={c.code}>
               {c.name}
             </option>
           ))}
