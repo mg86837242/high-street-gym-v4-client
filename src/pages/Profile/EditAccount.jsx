@@ -36,53 +36,51 @@ export default function EditAccount() {
     if (actionData?.status === 409) {
       setInputEmailMsg(actionData.message);
     }
-    if (actionData?.status === 200) {
-      switch (actionData._action) {
-        case 'updateAdminById':
-          (async () => {
-            setTopMsg(`✅ ${actionData.message}`);
-            await new Promise(r => setTimeout(r, 5_000));
-            setTopMsg('');
-          })();
-          break;
-        case 'updateAddressByAdminId':
-          (async () => {
-            setBotMsg(`✅ ${actionData.message}`);
-            await new Promise(r => setTimeout(r, 5_000));
-            setBotMsg('');
-          })();
-          break;
-        case 'updateTrainerById':
-          (async () => {
-            setTopMsg(`✅ ${actionData.message}`);
-            await new Promise(r => setTimeout(r, 5_000));
-            setTopMsg('');
-          })();
-          break;
-        case 'updateAddressByTrainerId':
-          (async () => {
-            setBotMsg(`✅ ${actionData.message}`);
-            await new Promise(r => setTimeout(r, 5_000));
-            setBotMsg('');
-          })();
-          break;
-        case 'updateMemberById':
-          (async () => {
-            setTopMsg(`✅ ${actionData.message}`);
-            await new Promise(r => setTimeout(r, 5_000));
-            setTopMsg('');
-          })();
-          break;
-        case 'updateAddressByMemberId':
-          (async () => {
-            setBotMsg(`✅ ${actionData.message}`);
-            await new Promise(r => setTimeout(r, 5_000));
-            setBotMsg('');
-          })();
-          break;
-        default:
-          break;
-      }
+    switch (actionData._action) {
+      case 'updateAdminById':
+        (async () => {
+          setTopMsg(`✅ ${actionData.message}`);
+          await new Promise(r => setTimeout(r, 5_000));
+          setTopMsg('');
+        })();
+        break;
+      case 'updateAddressByAdminId':
+        (async () => {
+          setBotMsg(`✅ ${actionData.message}`);
+          await new Promise(r => setTimeout(r, 5_000));
+          setBotMsg('');
+        })();
+        break;
+      case 'updateTrainerById':
+        (async () => {
+          setTopMsg(`✅ ${actionData.message}`);
+          await new Promise(r => setTimeout(r, 5_000));
+          setTopMsg('');
+        })();
+        break;
+      case 'updateAddressByTrainerId':
+        (async () => {
+          setBotMsg(`✅ ${actionData.message}`);
+          await new Promise(r => setTimeout(r, 5_000));
+          setBotMsg('');
+        })();
+        break;
+      case 'updateMemberById':
+        (async () => {
+          setTopMsg(`✅ ${actionData.message}`);
+          await new Promise(r => setTimeout(r, 5_000));
+          setTopMsg('');
+        })();
+        break;
+      case 'updateAddressByMemberId':
+        (async () => {
+          setBotMsg(`✅ ${actionData.message}`);
+          await new Promise(r => setTimeout(r, 5_000));
+          setBotMsg('');
+        })();
+        break;
+      default:
+        break;
     }
 
     return () => {
