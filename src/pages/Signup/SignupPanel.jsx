@@ -34,7 +34,7 @@ function Directions() {
   );
 }
 
-// TODO Refactor <Signup> page by using React Hook Form
+// FIXME Refactor <Signup> page by using RHF
 function SignupForm({ emails }) {
   const issues = useActionData();
   const navigation = useNavigation();

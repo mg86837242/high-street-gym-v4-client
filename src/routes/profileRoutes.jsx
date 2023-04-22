@@ -18,8 +18,8 @@ const profileRoutes = [
     },
     ErrorBoundary: ErrorInfoRefresh,
     async loader() {
-      let { getUserWithAllDetailsAndAllEmails } = await import('../api/users');
-      return getUserWithAllDetailsAndAllEmails();
+      let { getUserWithAllDetails } = await import('../api/users');
+      return getUserWithAllDetails();
     },
     async action({ request }) {
       const values = await getSubmittedData(request);

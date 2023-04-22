@@ -8,7 +8,7 @@ export default async function updateAdminById(values) {
   const json = await response.json();
   // Special error handling to let 409 pass to NOT trigger error boundary, since it's already handled in the component
   if (response.status === 409) {
-    return redirect('.');
+    return json;
   }
   if (response.status !== 200) {
     const message = `${json.status} ${

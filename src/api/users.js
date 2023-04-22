@@ -7,9 +7,9 @@ export async function getAllEmails() {
   return response;
 }
 
-export async function getUserWithAllDetailsAndAllEmails() {
+export async function getUserWithAllDetails() {
   const accessKey = localStorage.getItem('accessKey');
-  const response = await fetchResp.get(`${API_URL}/users/by_key/${accessKey}/detailed/with_all_emails`);
+  const response = await fetchResp.get(`${API_URL}/users/by_key/${accessKey}/detailed`);
   return response;
 }
 
