@@ -5,6 +5,7 @@ import router from '../App';
 
 export default function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
+
   // This `useEffect`'s job is to synchronize with API by using an access key stored in the `localStorage` as a ref in
   //  case `user` state/context is missing after page reload, opening a new tab, etc.
   useEffect(() => {
@@ -22,7 +23,7 @@ export default function AuthProvider({ children }) {
       try {
         const json = await getUserByKey(accessKey);
         if (!ignore) {
-          // Effect runs - user state synchronizing
+          // Effect runs - user state synchronized
           setUser(json.user);
         }
       } catch (error) {
@@ -36,56 +37,43 @@ export default function AuthProvider({ children }) {
   }, [user]);
 
   const handleLogin = useCallback(
-    async (email, password) => {
+    async (email, password, callback) => {
       setUser(null);
-      try {
-        // Fetch POST /login to attempt to get `accessKey` from the API's json response
-        const loginJSON = await login(email, password);
-        if (loginJSON.status !== 200) {
-          return typeof loginJSON.message === 'string' ? loginJSON.message : 'Invalid request to server';
-        }
-        try {
-          // Set key in `localStorage` – persistent storage in case page is reloaded, etc.
-          localStorage.setItem('accessKey', loginJSON.accessKey);
-          // Fetch GET /users/by_key/:access_key to attempt to get an obj called `user`
-          const userJSON = await getUserByKey(loginJSON.accessKey);
-          if (userJSON.status !== 200) {
-            return typeof userJSON.message === 'string' ? userJSON.message : 'Invalid request to server';
-          }
-          setUser(userJSON.user);
-          // PS After this second setter, console log `user` outputs `null`, which is what's set in the
-          //  first setter, this is b/c React batches state updates, see: https://stackoverflow.com/questions/33613728/what-happens-when-using-this-setstate-multiple-times-in-react-component
-          return loginJSON.message;
-        } catch (error) {
-          return 'Server failed to load user';
-        }
-      } catch (error) {
-        return 'Server failed to login';
+      // Fetch POST /users/login to attempt to get `accessKey` from the API's json response
+      const loginJSON = await login(email, password);
+      if (loginJSON.status !== 200) {
+        const message = typeof loginJSON.message === 'string' ? loginJSON.message : 'Invalid login credentials';
+        return message;
       }
+      // Set key in `localStorage` – persistent storage in case page is reloaded, etc.
+      localStorage.setItem('accessKey', loginJSON.accessKey);
+      // Fetch GET /users/by_key/:access_key to attempt to get an obj called `user`
+      const userJSON = await getUserByKey(loginJSON.accessKey);
+      if (userJSON.status !== 200) {
+        const message = userJSON.message === 'string' ? userJSON.message : 'Invalid access key';
+        return message;
+      }
+      setUser(userJSON.user);
+      callback();
     },
     [user]
   );
 
-  const handleLogout = useCallback(async () => {
-    try {
+  const handleLogout = useCallback(
+    async callback => {
       // Remove key from `localStorage`
       localStorage.removeItem('accessKey');
-      if (user) {
-        // Fetch POST /logout to attempt to remove `accessKey` from its login row
-        const { accessKey } = user;
-        const json = await logout(accessKey);
-        if (json.status !== 200) {
-          return (message = typeof json.message === 'string' ? json.message : 'Invalid request to server');
-        }
-        setUser(null);
-        return json.message;
+      // Fetch POST /users/logout to attempt to remove `accessKey` from its login row
+      const json = await logout(user.accessKey);
+      if (json.status !== 200) {
+        const message = json.message === 'string' ? json.message : 'Invalid access key';
+        return message;
       }
-      return 'No authenticated user recognized';
-    } catch (error) {
       setUser(null);
-      return 'Server failed to logout';
-    }
-  }, [user]);
+      callback();
+    },
+    [user]
+  );
 
   const value = useMemo(
     () => ({

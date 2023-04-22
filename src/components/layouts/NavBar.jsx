@@ -235,8 +235,7 @@ function NavBarRight() {
           </Link>
           <Btn1
             onClick={() => {
-              auth.handleLogout();
-              navigate('/');
+              auth.handleLogout(() => navigate('/'));
             }}
           >
             Logout

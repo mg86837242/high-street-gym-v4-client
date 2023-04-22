@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import AuthContext from '../../context/AuthContext';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { emailSchema, passwordSchema } from '../../schemas';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
@@ -106,6 +106,8 @@ function LoginForm() {
   const [type, setType] = useState('password');
   const [icon, setIcon] = useState(faEyeSlash);
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || '/';
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -124,10 +126,7 @@ function LoginForm() {
       return;
     }
 
-    auth
-      .handleLogin(email, password)
-      .then(() => navigate('/'))
-      .catch(() => navigate('/login'));
+    auth.handleLogin(email, password, () => navigate(from, { replace: true }));
   }
 
   function handleToggle(e) {
@@ -197,38 +196,25 @@ function LoginForm() {
 function DemoLogins() {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || '/';
 
   return (
     <div className='flex justify-between gap-2'>
       <button
-        onClick={() =>
-          auth
-            .handleLogin('demomember@server.com', 'abcd1234')
-            .then(() => navigate('/'))
-            .catch(() => navigate('/login'))
-        }
+        onClick={() => auth.handleLogin('demomember@server.com', 'abcd1234', () => navigate(from, { replace: true }))}
         className={`flex-shrink shadow btn btn-outline btn-success btn-sm text-primary-content shadow-black/50`}
       >
         Demo Member Login
       </button>
       <button
-        onClick={() =>
-          auth
-            .handleLogin('demotrainer@server.com', 'abcd1234')
-            .then(() => navigate('/'))
-            .catch(() => navigate('/login'))
-        }
+        onClick={() => auth.handleLogin('demotrainer@server.com', 'abcd1234', () => navigate(from, { replace: true }))}
         className={`flex-shrink shadow btn btn-outline btn-warning btn-sm text-primary-content shadow-black/50`}
       >
         Demo Trainer Login
       </button>
       <button
-        onClick={() =>
-          auth
-            .handleLogin('demoadmin@server.com', 'abcd1234')
-            .then(() => navigate('/'))
-            .catch(() => navigate('/login'))
-        }
+        onClick={() => auth.handleLogin('demoadmin@server.com', 'abcd1234', () => navigate(from, { replace: true }))}
         className={`flex-shrink shadow btn btn-outline btn-error btn-sm text-primary-content shadow-black/50`}
       >
         Demo Admin Login
@@ -256,8 +242,7 @@ function Greetings() {
         </LinkBtn2>
         <Btn5
           onClick={() => {
-            auth.handleLogout();
-            navigate('/');
+            auth.handleLogout(() => navigate('/'));
           }}
           w='w-full'
         >

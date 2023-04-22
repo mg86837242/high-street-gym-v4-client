@@ -9,7 +9,7 @@ export default function RequireAuth({ permittedRoles }) {
   const outletContext = useOutletContext();
 
   if (!canAccess) {
-    return <Navigate to='/404' state={{ from: location }} replace />;
+    return <Navigate to='/login' state={{ from: location }} replace />;
   }
 
   return outletContext ? <Outlet context={outletContext} /> : <Outlet />;
