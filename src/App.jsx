@@ -81,7 +81,7 @@ const router = createBrowserRouter([
     },
     ErrorBoundary: ErrorInfoRefresh,
     async loader() {
-      // [ ] Don't fetch all emails into the component to check identical email, instead, useActionData (see <MngMembers>) to return 409's json, this applies to <Signup> page and <Profile> page
+      // TODO Don't fetch all emails into the component to check identical email, instead, use action (see <MngMembers>) to return 409's json message from backend, this applies to <Signup> page and <Profile> page
       let { getAllEmails } = await import('./api/users');
       return getAllEmails();
     },

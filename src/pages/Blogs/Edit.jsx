@@ -106,9 +106,7 @@ function TitleForm({ register, issue, handleSubmit, setEditable }) {
       noValidate
       className='flex flex-col px-4 py-2 border-b-[1px] border-base-content'
     >
-      <FCRHFSm label='Title' issue={issue}>
-        <input {...register('title')} className='input input-bordered input-sm' />
-      </FCRHFSm>
+      <FCRHFSm label='Title' register={register('title')} issue={issue} />
       <input type='hidden' {...register('body')} className='input input-bordered input-sm' />
       <input
         type='hidden'

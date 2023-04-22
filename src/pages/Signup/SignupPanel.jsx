@@ -34,6 +34,7 @@ function Directions() {
   );
 }
 
+// TODO Refactor <Signup> page by using React Hook Form
 function SignupForm({ emails }) {
   const issues = useActionData();
   const navigation = useNavigation();

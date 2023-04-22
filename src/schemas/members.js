@@ -2,10 +2,9 @@ import { z } from 'zod';
 import { emailSchema, passwordSchema, usernameSchema, firstNameSchema, lastNameSchema, phoneSchema } from './users';
 import { lineOneSchema, lineTwoSchema, suburbSchema, postcodeSchema, stateSchema, countrySchema } from './addresses.js';
 
-// [ ] Rewrite <Signup> page by using RHF
 export const ageNoRHFSchema = z.union([
-  // NB This `ageNoRHFSchema` is for the `Signup` page only, where RHF is not used and `FormData` is used so its input
-  //  is collected as empty string if left blank
+  // NB This `ageNoRHFSchema` is for the <Signup> page only, where RHF is NOT used and `FormData` is used so its input
+  //  is collected as empty string if left blank => will be removed after refactoring <Signup> page
   z
     .number({ message: 'Age must be a number' })
     .nonnegative()
