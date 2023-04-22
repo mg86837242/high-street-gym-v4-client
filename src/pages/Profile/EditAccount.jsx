@@ -20,6 +20,7 @@ import { convertEmptyStrToNull, convertNullToEmptyStr } from '../../helpers/sani
 
 export default function EditAccount() {
   const auth = useContext(AuthContext);
+  const [inputEmailMsg, setInputEmailMsg] = useState('');
   const [topMsg, setTopMsg] = useState('');
   const [botMsg, setBotMsg] = useState('');
   const { user } = useLoaderData();
@@ -29,54 +30,59 @@ export default function EditAccount() {
     if (!actionData) {
       return;
     }
-    if (actionData?.status !== 200) {
+    if (actionData?.status !== 409 && actionData?.status !== 200) {
       return;
     }
-    switch (actionData._action) {
-      case 'updateAdminById':
-        (async () => {
-          setTopMsg(`✅ ${actionData.message}`);
-          await new Promise(r => setTimeout(r, 5_000));
-          setTopMsg('');
-        })();
-        break;
-      case 'updateAddressByAdminId':
-        (async () => {
-          setBotMsg(`✅ ${actionData.message}`);
-          await new Promise(r => setTimeout(r, 5_000));
-          setBotMsg('');
-        })();
-        break;
-      case 'updateTrainerById':
-        (async () => {
-          setTopMsg(`✅ ${actionData.message}`);
-          await new Promise(r => setTimeout(r, 5_000));
-          setTopMsg('');
-        })();
-        break;
-      case 'updateAddressByTrainerId':
-        (async () => {
-          setBotMsg(`✅ ${actionData.message}`);
-          await new Promise(r => setTimeout(r, 5_000));
-          setBotMsg('');
-        })();
-        break;
-      case 'updateMemberById':
-        (async () => {
-          setTopMsg(`✅ ${actionData.message}`);
-          await new Promise(r => setTimeout(r, 5_000));
-          setTopMsg('');
-        })();
-        break;
-      case 'updateAddressByMemberId':
-        (async () => {
-          setBotMsg(`✅ ${actionData.message}`);
-          await new Promise(r => setTimeout(r, 5_000));
-          setBotMsg('');
-        })();
-        break;
-      default:
-        break;
+    if (actionData?.status === 409) {
+      setInputEmailMsg(actionData.message);
+    }
+    if (actionData?.status === 200) {
+      switch (actionData._action) {
+        case 'updateAdminById':
+          (async () => {
+            setTopMsg(`✅ ${actionData.message}`);
+            await new Promise(r => setTimeout(r, 5_000));
+            setTopMsg('');
+          })();
+          break;
+        case 'updateAddressByAdminId':
+          (async () => {
+            setBotMsg(`✅ ${actionData.message}`);
+            await new Promise(r => setTimeout(r, 5_000));
+            setBotMsg('');
+          })();
+          break;
+        case 'updateTrainerById':
+          (async () => {
+            setTopMsg(`✅ ${actionData.message}`);
+            await new Promise(r => setTimeout(r, 5_000));
+            setTopMsg('');
+          })();
+          break;
+        case 'updateAddressByTrainerId':
+          (async () => {
+            setBotMsg(`✅ ${actionData.message}`);
+            await new Promise(r => setTimeout(r, 5_000));
+            setBotMsg('');
+          })();
+          break;
+        case 'updateMemberById':
+          (async () => {
+            setTopMsg(`✅ ${actionData.message}`);
+            await new Promise(r => setTimeout(r, 5_000));
+            setTopMsg('');
+          })();
+          break;
+        case 'updateAddressByMemberId':
+          (async () => {
+            setBotMsg(`✅ ${actionData.message}`);
+            await new Promise(r => setTimeout(r, 5_000));
+            setBotMsg('');
+          })();
+          break;
+        default:
+          break;
+      }
     }
 
     return () => {
@@ -88,11 +94,32 @@ export default function EditAccount() {
   function renderSwitchUpdateUserForm(role) {
     switch (role) {
       case 'Admin':
-        return <UpdateAdminForm topMsg={topMsg} user={user} />;
+        return (
+          <UpdateAdminForm
+            inputEmailMsg={inputEmailMsg}
+            setInputEmailMsg={setInputEmailMsg}
+            topMsg={topMsg}
+            user={user}
+          />
+        );
       case 'Trainer':
-        return <UpdateTrainerForm topMsg={topMsg} user={user} />;
+        return (
+          <UpdateTrainerForm
+            inputEmailMsg={inputEmailMsg}
+            setInputEmailMsg={setInputEmailMsg}
+            topMsg={topMsg}
+            user={user}
+          />
+        );
       case 'Member':
-        return <UpdateMemberForm topMsg={topMsg} user={user} />;
+        return (
+          <UpdateMemberForm
+            inputEmailMsg={inputEmailMsg}
+            setInputEmailMsg={setInputEmailMsg}
+            topMsg={topMsg}
+            user={user}
+          />
+        );
       default:
         return <></>;
     }
@@ -124,9 +151,7 @@ export default function EditAccount() {
   );
 }
 
-function UpdateAdminForm({ topMsg, user }) {
-  const [inputEmailMsg, setInputEmailMsg] = useState('');
-  const actionData = useActionData();
+function UpdateAdminForm({ inputEmailMsg, setInputEmailMsg, topMsg, user }) {
   const submit = useSubmit();
   const userDefaultValues = useMemo(() => {
     const { password, ...values } = user;
@@ -143,17 +168,6 @@ function UpdateAdminForm({ topMsg, user }) {
   });
 
   useEffect(() => reset(userDefaultValues), [reset, user]);
-
-  useEffect(() => {
-    if (!actionData) {
-      return;
-    }
-    if (actionData.status === 409) {
-      setInputEmailMsg(actionData.message);
-    }
-
-    return () => setInputEmailMsg('');
-  }, [actionData]);
 
   return (
     <form
@@ -240,9 +254,7 @@ function UpdateAdminAddrForm({ botMsg, user }) {
   );
 }
 
-function UpdateTrainerForm({ topMsg, user }) {
-  const [inputEmailMsg, setInputEmailMsg] = useState('');
-  const actionData = useActionData();
+function UpdateTrainerForm({ inputEmailMsg, setInputEmailMsg, topMsg, user }) {
   const submit = useSubmit();
   const userDefaultValues = useMemo(() => {
     const { password, ...values } = user;
@@ -259,17 +271,6 @@ function UpdateTrainerForm({ topMsg, user }) {
   });
 
   useEffect(() => reset(userDefaultValues), [reset, user]);
-
-  useEffect(() => {
-    if (!actionData) {
-      return;
-    }
-    if (actionData.status === 409) {
-      setInputEmailMsg(actionData.message);
-    }
-
-    return () => setInputEmailMsg('');
-  }, [actionData]);
 
   return (
     <form
@@ -375,9 +376,7 @@ function UpdateTrainerAddrForm({ botMsg, user }) {
   );
 }
 
-function UpdateMemberForm({ topMsg, user }) {
-  const [inputEmailMsg, setInputEmailMsg] = useState('');
-  const actionData = useActionData();
+function UpdateMemberForm({ inputEmailMsg, setInputEmailMsg, topMsg, user }) {
   const submit = useSubmit();
   const userDefaultValues = useMemo(() => {
     const { password, ...values } = user;
@@ -394,17 +393,6 @@ function UpdateMemberForm({ topMsg, user }) {
   });
 
   useEffect(() => reset(userDefaultValues), [reset, user]);
-
-  useEffect(() => {
-    if (!actionData) {
-      return;
-    }
-    if (actionData.status === 409) {
-      setInputEmailMsg(actionData.message);
-    }
-
-    return () => setInputEmailMsg('');
-  }, [actionData]);
 
   return (
     <form
