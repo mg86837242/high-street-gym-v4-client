@@ -61,6 +61,9 @@ export default function AuthProvider({ children }) {
 
   const handleLogout = useCallback(
     async callback => {
+      if (!user) {
+        return;
+      }
       // Remove key from `localStorage`
       localStorage.removeItem('accessKey');
       // Fetch POST /users/logout to attempt to remove `accessKey` from its login row
