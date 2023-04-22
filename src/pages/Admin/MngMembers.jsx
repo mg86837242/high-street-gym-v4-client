@@ -141,7 +141,7 @@ export function NewMember() {
       </div>
       <p className='text-right lg:text-left'>
         <em>
-          Note: For XML upload, (1) accepted text content for &lt;gender&gt;, if not left blank, includes: Female, Male,
+          Note: For XML upload, (1) if not left blank, accepted text content for &lt;gender&gt; includes: Female, Male,
           Other; (2) element names need to be in camel case in order to comply with API and database design.
         </em>
       </p>

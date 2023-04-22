@@ -8,7 +8,7 @@ export default function NotMatch() {
   return (
     <div
       id='canvas'
-      className='flex flex-col items-center w-full h-screen pb-8 md:pb-0 bg-base-300 bg-[url("/src/assets/no-found-view.webp")] bg-cover bg-center'
+      className='flex flex-col items-center w-full h-screen pb-8 md:pb-0 bg-base-300 bg-[url("/src/assets/no-match-view.webp")] bg-cover bg-center'
     >
       <NavBarMinimal />
       <div className='flex items-center justify-center w-full h-full p-6'>
