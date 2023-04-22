@@ -79,7 +79,6 @@ export default function AuthProvider({ children }) {
   );
 
   const value = useMemo(
-    // It would be cached as an interface in TS, so the equivalent in JS is just a plain obj
     () => ({
       user,
       handleLogin,
