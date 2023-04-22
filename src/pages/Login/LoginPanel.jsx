@@ -102,7 +102,7 @@ function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [issues, setIssues] = useState({});
-  const [message, setMessage] = useState('Login');
+  const [btnMsg, setBtnMsg] = useState('Login');
   const [type, setType] = useState('password');
   const [icon, setIcon] = useState(faEyeSlash);
   const navigate = useNavigate();
@@ -111,7 +111,7 @@ function LoginForm() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    setMessage('Logging in...');
+    setBtnMsg('Logging in...');
 
     const messages = {};
     if (!emailSchema.safeParse(email).success) {
@@ -122,7 +122,7 @@ function LoginForm() {
     }
     if (Object.keys(messages).length) {
       setIssues(messages);
-      setMessage('Login');
+      setBtnMsg('Login');
       return;
     }
 
@@ -136,7 +136,7 @@ function LoginForm() {
   }
 
   return (
-    // NB `noValidate` is used to disable default validation message(s)
+    // NB `noValidate` is used to disable default HTML validation message(s)
     // NB These input groups won't be extracted to component since they have special event handlers and states (due to
     //  not using React Router's action)
     <form onSubmit={handleSubmit} noValidate>
@@ -187,7 +187,7 @@ function LoginForm() {
         </label>
       </div>
       <div className='pt-4'>
-        <Btn2 w='w-full'>{message}</Btn2>
+        <Btn2 w='w-full'>{btnMsg}</Btn2>
       </div>
     </form>
   );
