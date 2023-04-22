@@ -24,3 +24,12 @@ export function getDateNotation(dateTime) {
       `
     : '';
 }
+
+export function getDateNotationNoYear(dateTime) {
+  return dateTime
+    ? `
+      ${dateTime.slice(8, 9) === '0' ? dateTime.slice(9, 10) : dateTime.slice(8, 10)}
+      ${monthNames[Number(dateTime.slice(5, 7))]}
+      `
+    : '';
+}

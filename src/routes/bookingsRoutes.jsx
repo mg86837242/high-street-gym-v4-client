@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import ErrorInfoRefresh from '../components/ui/ErrorInfoRefresh';
 import RequireAuth from '../components/layouts/RequireAuth';
+import { getDateNotationNoYear } from '../helpers/mapDates';
 
 const bookingsRoutes = [
   {
@@ -31,7 +32,9 @@ const bookingsRoutes = [
         //  would render 'Error' string although 404 won't trigger an error in the loader (per the programmer's design);
         //  alternatively, in the API endpoint, don't throw 404 when the `bookings` array is empty
         return data?.bookings ? (
-          <Link to={`/bookings/${params.date}`}>No. of Bookings: {data.bookings.length}</Link>
+          <Link to={`/bookings/${params.date}`}>
+            No. of Bookings on {getDateNotationNoYear(params.date)}: {data.bookings.length}
+          </Link>
         ) : (
           'Error'
         );
