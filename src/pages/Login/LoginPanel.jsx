@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import AuthContext from '../../context/AuthContext';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Navigate, Link, useNavigate, useLocation } from 'react-router-dom';
 import { emailSchema, passwordSchema } from '../../schemas';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
@@ -11,20 +11,16 @@ import { LinkBtn2 } from '../../components/ui/LinkBtn2';
 export default function LoginPanel() {
   const auth = useContext(AuthContext);
 
-  return (
+  return auth?.user ? (
+    <Navigate to='/' replace />
+  ) : (
     <div
       id='login-panel-wrapper'
       className='flex flex-col w-full max-w-lg gap-8 px-10 pt-12 pb-8 my-auto bg-neutral rounded-3xl shadow-[0_0_30px_15px_rgba(255,255,255,0.2)]'
     >
-      {auth.user ? (
-        <Greetings />
-      ) : (
-        <>
-          <Directions />
-          <LoginForm />
-          <DemoLogins />
-        </>
-      )}
+      <Directions />
+      <LoginForm />
+      <DemoLogins />
     </div>
   );
 }
@@ -223,35 +219,35 @@ function DemoLogins() {
   );
 }
 
-function Greetings() {
-  const auth = useContext(AuthContext);
-  const navigate = useNavigate();
+// function Greetings() {
+//   const auth = useContext(AuthContext);
+//   const navigate = useNavigate();
 
-  return (
-    <div className='flex flex-col gap-10'>
-      <p className='text-2xl font-extrabold leading-6 focus:outline-none text-primary-content'>
-        Greetings, <span className='text-primary'>{auth.user?.username}!</span>
-      </p>
-      <p className='text-2xl font-extrabold leading-6 focus:outline-none text-primary-content'>
-        You have logged in as {auth.user?.role === 'Admin' ? 'an' : 'a'}{' '}
-        <span className='text-primary'>{auth.user?.role && auth.user.role}!</span>
-      </p>
-      <div className='flex flex-col gap-5'>
-        <LinkBtn2 to={'/'} w='w-full'>
-          Visit Home
-        </LinkBtn2>
-        <Btn5
-          onClick={() => {
-            auth.handleLogout(() => navigate('/'));
-          }}
-          w='w-full'
-        >
-          Logout
-        </Btn5>
-      </div>
-    </div>
-  );
-}
+//   return (
+//     <div className='flex flex-col gap-10'>
+//       <p className='text-2xl font-extrabold leading-6 focus:outline-none text-primary-content'>
+//         Greetings, <span className='text-primary'>{auth.user?.username}!</span>
+//       </p>
+//       <p className='text-2xl font-extrabold leading-6 focus:outline-none text-primary-content'>
+//         You have logged in as {auth.user?.role === 'Admin' ? 'an' : 'a'}{' '}
+//         <span className='text-primary'>{auth.user?.role && auth.user.role}!</span>
+//       </p>
+//       <div className='flex flex-col gap-5'>
+//         <LinkBtn2 to={'/'} w='w-full'>
+//           Visit Home
+//         </LinkBtn2>
+//         <Btn5
+//           onClick={() => {
+//             auth.handleLogout(() => navigate('/'));
+//           }}
+//           w='w-full'
+//         >
+//           Logout
+//         </Btn5>
+//       </div>
+//     </div>
+//   );
+// }
 
 // References:
 // -- https://tailwindcomponents.com/component/free-tailwind-css-sign-in-component

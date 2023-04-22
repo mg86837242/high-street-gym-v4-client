@@ -1,6 +1,6 @@
 import { useContext, useState, useMemo } from 'react';
 import AuthContext from '../../context/AuthContext';
-import { useLoaderData, Link, Form } from 'react-router-dom';
+import { useLoaderData, Link, Form, useLocation } from 'react-router-dom';
 import removeTags from '../../helpers/removeTags';
 import { getDateNotation } from '../../helpers/mapDates';
 import { Btn2Sm } from '../../components/ui/Btn2';
@@ -86,6 +86,7 @@ export default function List() {
       <p className='my-4 text-center'>No blog has been found</p>
     );
   }, [blogs, auth.user]);
+  const location = useLocation();
 
   return (
     <div className='flex flex-col gap-6 lg:grid lg:grid-cols-12 lg:gap-0'>
@@ -108,7 +109,7 @@ export default function List() {
             </select>
           </>
         ) : (
-          <LinkBtn2Sm to='/login' w='w-full'>
+          <LinkBtn2Sm to='/login' state={{ from: location }} replace={true} w='w-full'>
             Log in to Create Blog
           </LinkBtn2Sm>
         )}
@@ -134,7 +135,7 @@ export default function List() {
             </Form>
           </>
         ) : (
-          <LinkBtn2Sm to='/login' w='w-full'>
+          <LinkBtn2Sm to='/login' state={{ from: location }} replace={true} w='w-full'>
             Log in to Create Blog
           </LinkBtn2Sm>
         )}
