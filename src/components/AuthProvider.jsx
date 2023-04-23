@@ -11,9 +11,9 @@ export default function AuthProvider({ children }) {
   //  case `user` state/context is missing after reloading page, opening a new tab, deleting the `accessKey` from the
   //  browser manually, etc. The control flow statement is designed as follows:
   //  (1) Effect runs - user state present, exit
-  //  (2) Effect runs - key removed or missing from local storage
+  //  (2) Effect runs - key removed or missing from local storage, exit
   //  (3) Effect runs - user state synchronized
-  //  (4) Effect runs - synchronization (the fetch) failed
+  //  (4) Effect runs - synchronization (the fetch) failed, navigate to home
   useEffect(() => {
     if (user) {
       return;
