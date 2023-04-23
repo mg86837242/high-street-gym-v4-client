@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import AuthContext from '../context/AuthContext';
+import router from '../App';
 import { getCredentials, storeCredentials, deleteCredentials } from '../helpers/localStorage';
 import { getUserByKey, login, logout } from '../api/users';
-import router from '../App';
 
 export default function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
@@ -37,25 +37,20 @@ export default function AuthProvider({ children }) {
   }, [user]);
 
   const handleLogin = useCallback(
-    async (email, password, callback) => {
-      try {
-        setUser(null);
-        // Fetch POST /users/login to attempt to get `accessKey` from the API's json response
-        const loginJSON = await login(email, password);
-        if (loginJSON?.status !== 200) {
-          return Promise.reject(loginJSON);
-        }
-        storeCredentials(loginJSON.accessKey);
-        // Fetch GET /users/by_key/:access_key to attempt to get an obj called `user`
-        const userJSON = await getUserByKey(loginJSON.accessKey);
-        if (userJSON?.status !== 200) {
-          return Promise.reject(userJSON);
-        }
-        setUser(userJSON.user);
-        callback();
-      } catch (error) {
-        return error;
+    async (email, password) => {
+      setUser(null);
+      // Fetch POST /users/login to attempt to get `accessKey` from the API's json response
+      const loginJSON = await login(email, password);
+      if (loginJSON?.status !== 200) {
+        throw new Error(loginJSON?.message);
       }
+      storeCredentials(loginJSON.accessKey);
+      // Fetch GET /users/by_key/:access_key to attempt to get an obj called `user`
+      const userJSON = await getUserByKey(loginJSON.accessKey);
+      if (userJSON?.status !== 200) {
+        throw new Error(userJSON?.message);
+      }
+      setUser(userJSON.user);
     },
     [user]
   );

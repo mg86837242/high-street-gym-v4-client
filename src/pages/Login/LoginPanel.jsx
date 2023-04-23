@@ -11,7 +11,8 @@ import { LinkBtn2 } from '../../components/ui/LinkBtn2';
 export default function LoginPanel() {
   const auth = useContext(AuthContext);
   const [btnMsg, setBtnMsg] = useState('Login');
-  const [issues, setIssues] = useState({});
+  const [issues, setIssues] = useState({ email: '', password: '' });
+  const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || '/';
 
@@ -21,12 +22,27 @@ export default function LoginPanel() {
       className='flex flex-col w-full max-w-lg gap-8 px-10 pt-12 pb-8 my-auto bg-neutral rounded-3xl shadow-[0_0_30px_15px_rgba(255,255,255,0.2)]'
     >
       {auth.user ? (
-        <Greetings />
+        // FIX (1) Redirect the login page after successfully login (if no bug), still need to make a blank page to hide the login page, cuz after successfully login, there's a brief moment when the login page flashes (2) make it unable to change demo accounts' email and password
+        <Greetings navigate={navigate} />
       ) : (
         <>
           <Directions />
-          <LoginForm btnMsg={btnMsg} setBtnMsg={setBtnMsg} issues={issues} setIssues={setIssues} from={from} />
-          <DemoLogins btnMsg={btnMsg} setBtnMsg={setBtnMsg} issues={issues} setIssues={setIssues} from={from} />
+          <LoginForm
+            btnMsg={btnMsg}
+            setBtnMsg={setBtnMsg}
+            issues={issues}
+            setIssues={setIssues}
+            navigate={navigate}
+            from={from}
+          />
+          <DemoLogins
+            btnMsg={btnMsg}
+            setBtnMsg={setBtnMsg}
+            issues={issues}
+            setIssues={setIssues}
+            navigate={navigate}
+            from={from}
+          />
         </>
       )}
     </div>
@@ -98,18 +114,18 @@ function Directions() {
 //   return <div className={`m-0 text-white divider before:h-[1px] after:h-[1px] before:bg-white after:bg-white`}>OR</div>;
 // }
 
-function LoginForm({ btnMsg, setBtnMsg, issues, setIssues, from }) {
+function LoginForm({ btnMsg, setBtnMsg, issues, setIssues, navigate, from }) {
   // NB Fetch is done in the <AuthProvider> i/o in RRD's action, i.e., RRD's action is not used for login form
   const auth = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [type, setType] = useState('password');
   const [icon, setIcon] = useState(faEyeSlash);
-  const navigate = useNavigate();
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     setBtnMsg('Logging in...');
+    setIssues({ email: '', password: '' });
 
     const collector = {};
     if (!emailSchema.safeParse(email).success) {
@@ -124,16 +140,14 @@ function LoginForm({ btnMsg, setBtnMsg, issues, setIssues, from }) {
       return;
     }
 
-    auth
-      .handleLogin(email, password)
-      .then(() => {
-        setBtnMsg('Login');
-        navigate(from, { replace: true });
-      })
-      .catch(error => {
-        setBtnMsg('Login');
-        setIssues({ email: `Login failed: ${error.message}`, password: `Login failed: ${error.message}` });
-      });
+    try {
+      await auth.handleLogin(email, password);
+      setBtnMsg('Login');
+      navigate(from, { replace: true });
+    } catch (error) {
+      setBtnMsg('Login');
+      setIssues({ email: `Login failed: ${error.message}`, password: `Login failed: ${error.message}` });
+    }
   }
 
   function handleToggle(e) {
@@ -198,59 +212,39 @@ function LoginForm({ btnMsg, setBtnMsg, issues, setIssues, from }) {
   );
 }
 
-function DemoLogins({ setBtnMsg, setIssues, from }) {
+function DemoLogins({ setBtnMsg, setIssues, navigate, from }) {
   const auth = useContext(AuthContext);
-  const navigate = useNavigate();
+
+  async function handleDemoLogin(email, password) {
+    setBtnMsg('Logging in...');
+    setIssues({ email: '', password: '' });
+
+    try {
+      await auth.handleLogin(email, password);
+      setBtnMsg('Login');
+      navigate(from, { replace: true });
+    } catch (error) {
+      setBtnMsg('Login');
+      setIssues({ email: `Login failed: ${error.message}`, password: `Login failed: ${error.message}` });
+    }
+  }
 
   return (
     <div className='flex justify-between gap-2'>
       <button
-        onClick={() =>
-          auth
-            .handleLogin('demomember@server.com', 'abcd1234')
-            .then(() => {
-              setBtnMsg('Login');
-              navigate(from, { replace: true });
-            })
-            .catch(error => {
-              setBtnMsg('Login');
-              setIssues({ email: `Login failed: ${error.message}`, password: `Login failed: ${error.message}` });
-            })
-        }
+        onClick={() => handleDemoLogin('demomember@server.com', 'abcd1234')}
         className={`flex-shrink shadow btn btn-outline btn-success btn-sm text-primary-content shadow-black/50`}
       >
         Demo Member Login
       </button>
       <button
-        onClick={() =>
-          auth
-            .handleLogin('demotrainer@server.com', 'abcd1234')
-            .then(() => {
-              setBtnMsg('Login');
-              navigate(from, { replace: true });
-            })
-            .catch(error => {
-              setBtnMsg('Login');
-              setIssues({ email: `Login failed: ${error.message}`, password: `Login failed: ${error.message}` });
-            })
-        }
+        onClick={() => handleDemoLogin('demotrainer@server.com', 'abcd1234')}
         className={`flex-shrink shadow btn btn-outline btn-warning btn-sm text-primary-content shadow-black/50`}
       >
         Demo Trainer Login
       </button>
       <button
-        onClick={() =>
-          auth
-            .handleLogin('demoadmin@server.com', 'abcd1234')
-            .then(() => {
-              setBtnMsg('Login');
-              navigate(from, { replace: true });
-            })
-            .catch(error => {
-              setBtnMsg('Login');
-              setIssues({ email: `Login failed: ${error.message}`, password: `Login failed: ${error.message}` });
-            })
-        }
+        onClick={() => handleDemoLogin('demoadmin@server.com', 'abcd1234')}
         className={`flex-shrink shadow btn btn-outline btn-error btn-sm text-primary-content shadow-black/50`}
       >
         Demo Admin Login
@@ -259,7 +253,7 @@ function DemoLogins({ setBtnMsg, setIssues, from }) {
   );
 }
 
-function Greetings() {
+function Greetings({ navigate }) {
   const auth = useContext(AuthContext);
 
   return (
