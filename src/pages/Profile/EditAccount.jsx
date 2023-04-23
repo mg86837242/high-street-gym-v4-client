@@ -16,6 +16,7 @@ import FCRHFSm from '../../components/formCtrlRHF/FCRHFSm';
 import FCRHFSmPass from '../../components/formCtrlRHF/FCRHFSmPass';
 import countries from '../../data/countries.json'; // Vite's feature
 import SpinnerNoNav from '../../components/ui/SpinnerNoNav';
+import sleep from '../../helpers/sleep';
 import { convertEmptyStrToNull, convertNullToEmptyStr } from '../../helpers/sanitize';
 
 export default function EditAccount() {
@@ -38,46 +39,28 @@ export default function EditAccount() {
     }
     switch (actionData._action) {
       case 'updateAdminById':
-        (async () => {
-          setTopMsg(`✅ ${actionData.message}`);
-          await new Promise(r => setTimeout(r, 5_000));
-          setTopMsg('');
-        })();
+        setTopMsg(`✅ ${actionData.message}`);
+        sleep().then(() => setTopMsg(''));
         break;
       case 'updateAddressByAdminId':
-        (async () => {
-          setBotMsg(`✅ ${actionData.message}`);
-          await new Promise(r => setTimeout(r, 5_000));
-          setBotMsg('');
-        })();
+        setBotMsg(`✅ ${actionData.message}`);
+        sleep().then(() => setBotMsg(''));
         break;
       case 'updateTrainerById':
-        (async () => {
-          setTopMsg(`✅ ${actionData.message}`);
-          await new Promise(r => setTimeout(r, 5_000));
-          setTopMsg('');
-        })();
+        setTopMsg(`✅ ${actionData.message}`);
+        sleep().then(() => setTopMsg(''));
         break;
       case 'updateAddressByTrainerId':
-        (async () => {
-          setBotMsg(`✅ ${actionData.message}`);
-          await new Promise(r => setTimeout(r, 5_000));
-          setBotMsg('');
-        })();
+        setBotMsg(`✅ ${actionData.message}`);
+        sleep().then(() => setBotMsg(''));
         break;
       case 'updateMemberById':
-        (async () => {
-          setTopMsg(`✅ ${actionData.message}`);
-          await new Promise(r => setTimeout(r, 5_000));
-          setTopMsg('');
-        })();
+        setTopMsg(`✅ ${actionData.message}`);
+        sleep().then(() => setTopMsg(''));
         break;
       case 'updateAddressByMemberId':
-        (async () => {
-          setBotMsg(`✅ ${actionData.message}`);
-          await new Promise(r => setTimeout(r, 5_000));
-          setBotMsg('');
-        })();
+        setBotMsg(`✅ ${actionData.message}`);
+        sleep().then(() => setBotMsg(''));
         break;
       default:
         break;
@@ -211,7 +194,7 @@ function UpdateAdminAddrForm({ botMsg, user }) {
     reset,
   } = useForm({
     resolver: zodResolver(addressAdminSchema),
-    defaultValues: useMemo(() => addressDefaultValue, [user, auth.user]),
+    defaultValues: useMemo(() => addressDefaultValue, [user]),
   });
 
   useEffect(() => reset(addressDefaultValue), [reset, user]);
