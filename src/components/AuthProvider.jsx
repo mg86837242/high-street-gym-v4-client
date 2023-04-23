@@ -6,34 +6,27 @@ import router from '../App';
 export default function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
 
-  // This `useEffect`'s job is to synchronize with API by using an access key stored in the `localStorage` as a ref in
-  //  case `user` state/context is missing after page reload, opening a new tab, etc.
+  // This `useEffect`'s job is to synchronize with API by using an `accessKey` stored in the `localStorage` as a ref in
+  //  case `user` state/context is missing after reloading page, opening a new tab, deleting the `accessKey` from the
+  //  browser manually, etc.
   useEffect(() => {
     if (user) {
-      // Effect runs - user state present, exit
       return;
     }
     const accessKey = localStorage.getItem('accessKey');
     if (!accessKey) {
-      // Effect runs - key removed or missing from local storage, exit
       return;
     }
     let ignore = false;
     (async () => {
       try {
         const json = await getUserByKey(accessKey);
-        if (!ignore) {
-          // Effect runs - user state synchronized
-          setUser(json.user);
-        }
+        if (!ignore) setUser(json.user);
       } catch (error) {
-        // Effect runs - synchronization failed
         router.navigate('/');
       }
     })();
-    return () => {
-      ignore = true;
-    };
+    return () => (ignore = true);
   }, [user]);
 
   const handleLogin = useCallback(
