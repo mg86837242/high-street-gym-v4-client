@@ -104,6 +104,5 @@ export default function AuthProvider({ children }) {
 // -- https://stackoverflow.com/questions/69871987/react-router-v6-navigate-outside-of-components
 // -- https://github.com/remix-run/react-router/issues/9422#issuecomment-1301182219
 // -- `createBrowserRouter` => `RemixRouter` => `Router` interface's `navigate` method
-// TODO (1) Integrate Supabase; (2) when receiving the `user` obj from the Supabase db, a fetch request will be
-//  made to perform CRUD operations with `Members` or `Trainers` or `Admins` table within the backend db, i.e.,
-//  synchronizing the Supabase db with the MySQL db
+
+// TODO (1) Integrate Supabase; (2) when receiving the `user` obj from the Supabase db, a fetch request will be made to perform CRUD operations with `Members` or `Trainers` or `Admins` table within the backend db, i.e., synchronizing the Supabase db with the MySQL db
