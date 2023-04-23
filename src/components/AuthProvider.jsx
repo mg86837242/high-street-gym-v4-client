@@ -38,19 +38,23 @@ export default function AuthProvider({ children }) {
 
   const handleLogin = useCallback(
     async (email, password) => {
-      setUser(null);
-      // Fetch POST /users/login to attempt to get `accessKey` from the API's json response
-      const loginJSON = await login(email, password);
-      if (loginJSON?.status !== 200) {
-        throw new Error(loginJSON?.message);
+      try {
+        setUser(null);
+        // Fetch POST /users/login to attempt to get `accessKey` from the API's json response
+        const loginJSON = await login(email, password);
+        if (loginJSON?.status !== 200) {
+          throw new Error(loginJSON?.message);
+        }
+        storeCredentials(loginJSON.accessKey);
+        // Fetch GET /users/by_key/:access_key to attempt to get an obj called `user`
+        const userJSON = await getUserByKey(loginJSON.accessKey);
+        if (userJSON?.status !== 200) {
+          throw new Error(userJSON?.message);
+        }
+        setUser(userJSON.user);
+      } catch (error) {
+        throw new Error(error);
       }
-      storeCredentials(loginJSON.accessKey);
-      // Fetch GET /users/by_key/:access_key to attempt to get an obj called `user`
-      const userJSON = await getUserByKey(loginJSON.accessKey);
-      if (userJSON?.status !== 200) {
-        throw new Error(userJSON?.message);
-      }
-      setUser(userJSON.user);
     },
     [user]
   );

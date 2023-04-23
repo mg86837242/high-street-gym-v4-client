@@ -207,7 +207,7 @@ function LoginForm({ btnMsg, setBtnMsg, issues, setIssues, navigate, from }) {
 function DemoLogins({ setBtnMsg, setIssues, navigate, from }) {
   const auth = useContext(AuthContext);
 
-  async function handleDemoLogin(email, password) {
+  async function handleClickDemoLogin(email, password) {
     setBtnMsg('Logging in...');
     setIssues({ email: '', password: '' });
 
@@ -224,19 +224,19 @@ function DemoLogins({ setBtnMsg, setIssues, navigate, from }) {
   return (
     <div className='flex justify-between gap-2'>
       <button
-        onClick={() => handleDemoLogin('demomember@server.com', 'abcd1234')}
+        onClick={() => handleClickDemoLogin('demomember@server.com', 'abcd1234')}
         className={`flex-shrink shadow btn btn-outline btn-success btn-sm text-primary-content shadow-black/50`}
       >
         Demo Member Login
       </button>
       <button
-        onClick={() => handleDemoLogin('demotrainer@server.com', 'abcd1234')}
+        onClick={() => handleClickDemoLogin('demotrainer@server.com', 'abcd1234')}
         className={`flex-shrink shadow btn btn-outline btn-warning btn-sm text-primary-content shadow-black/50`}
       >
         Demo Trainer Login
       </button>
       <button
-        onClick={() => handleDemoLogin('demoadmin@server.com', 'abcd1234')}
+        onClick={() => handleClickDemoLogin('demoadmin@server.com', 'abcd1234')}
         className={`flex-shrink shadow btn btn-outline btn-error btn-sm text-primary-content shadow-black/50`}
       >
         Demo Admin Login
