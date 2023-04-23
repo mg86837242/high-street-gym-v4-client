@@ -35,14 +35,7 @@ export default function LoginPanel() {
             navigate={navigate}
             from={from}
           />
-          <DemoLogins
-            btnMsg={btnMsg}
-            setBtnMsg={setBtnMsg}
-            issues={issues}
-            setIssues={setIssues}
-            navigate={navigate}
-            from={from}
-          />
+          <DemoLogins setBtnMsg={setBtnMsg} setIssues={setIssues} navigate={navigate} from={from} />
         </>
       )}
     </div>
