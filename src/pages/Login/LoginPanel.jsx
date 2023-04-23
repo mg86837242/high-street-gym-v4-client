@@ -105,7 +105,7 @@ function LoginForm({ btnMsg, setBtnMsg, issues, setIssues, from }) {
   const [password, setPassword] = useState('');
   const [type, setType] = useState('password');
   const [icon, setIcon] = useState(faEyeSlash);
-  const navigate = useNavigate(); // NB Lift the return of this Hook up to parent comp would cause bug, code after `setUser` would be unable to run
+  const navigate = useNavigate(); // NB Lifting the return of this Hook up to parent comp would cause bug, code after `setUser` would be unable to run
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -199,7 +199,7 @@ function LoginForm({ btnMsg, setBtnMsg, issues, setIssues, from }) {
 
 function DemoLogins({ setBtnMsg, setIssues, from }) {
   const auth = useContext(AuthContext);
-  const navigate = useNavigate(); // NB Lift the return of this Hook up to parent comp would cause bug, code after `setUser` would be unable to run
+  const navigate = useNavigate(); // NB Lifting the return of this Hook up to parent comp would cause bug, code after `setUser` would be unable to run
 
   async function handleClickDemoLogin(email, password) {
     setBtnMsg('Logging in...');
@@ -241,7 +241,7 @@ function DemoLogins({ setBtnMsg, setIssues, from }) {
 
 function Greetings() {
   const auth = useContext(AuthContext);
-  const navigate = useNavigate(); // NB Lift the return of this Hook up to parent comp would cause bug, code after `setUser` would be unable to run
+  const navigate = useNavigate(); // NB Lifting the return of this Hook up to parent comp would cause bug, code after `setUser` would be unable to run
 
   return (
     <div className='flex flex-col gap-10'>
