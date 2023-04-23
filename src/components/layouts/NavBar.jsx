@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from 'react';
 import AuthContext from '../../context/AuthContext';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { Btn1 } from '../ui/Btn1';
 
 // This component has the duality of different appearances and behaviors based on the `isHome` props
@@ -221,6 +221,7 @@ function NavCenterDropdownButton({ to, text }) {
 function NavBarRight() {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
 
   return (
     <div id='nav-right-wrapper' className='flex items-center gap-5 navbar-end'>
@@ -228,7 +229,7 @@ function NavBarRight() {
       {auth.user ? (
         <>
           <Link
-            to='profile/account'
+            to='/profile/account'
             className='shadow btn bg-gradient-to-r from-secondary to-primary shadow-black/50 text-primary-content'
           >
             Profile
@@ -244,13 +245,14 @@ function NavBarRight() {
       ) : (
         <>
           <Link
-            to='login'
+            to='/login'
+            state={{ from: location }}
             className='shadow btn bg-gradient-to-r from-secondary to-primary shadow-black/50 text-primary-content'
           >
             Login
           </Link>
           <Link
-            to='signup'
+            to='/signup'
             className='shadow btn bg-gradient-to-r from-secondary to-primary shadow-black/50 text-primary-content'
           >
             Signup
