@@ -10,6 +10,10 @@ import { LinkBtn2 } from '../../components/ui/LinkBtn2';
 
 export default function LoginPanel() {
   const auth = useContext(AuthContext);
+  const [btnMsg, setBtnMsg] = useState('Login');
+  const [issues, setIssues] = useState({});
+  const location = useLocation();
+  const from = location.state?.from?.pathname || '/';
 
   return (
     <div
@@ -21,8 +25,8 @@ export default function LoginPanel() {
       ) : (
         <>
           <Directions />
-          <LoginForm />
-          <DemoLogins />
+          <LoginForm btnMsg={btnMsg} setBtnMsg={setBtnMsg} issues={issues} setIssues={setIssues} from={from} />
+          <DemoLogins btnMsg={btnMsg} setBtnMsg={setBtnMsg} issues={issues} setIssues={setIssues} from={from} />
         </>
       )}
     </div>
@@ -94,39 +98,42 @@ function Directions() {
 //   return <div className={`m-0 text-white divider before:h-[1px] after:h-[1px] before:bg-white after:bg-white`}>OR</div>;
 // }
 
-function LoginForm() {
-  // NB Can't use React Router's action for this component b/c event handlers provided by the `AuthContext` involve
-  //  context/state change after successfully fetching login and users endpoints, the context/state change part can't
-  //  be placed in the action function.
+function LoginForm({ btnMsg, setBtnMsg, issues, setIssues, from }) {
+  // NB Fetch is done in the <AuthProvider> i/o in RRD's action, i.e., RRD's action is not used for login form
   const auth = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [issues, setIssues] = useState({});
-  const [btnMsg, setBtnMsg] = useState('Login');
   const [type, setType] = useState('password');
   const [icon, setIcon] = useState(faEyeSlash);
   const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || '/';
 
   function handleSubmit(e) {
     e.preventDefault();
     setBtnMsg('Logging in...');
 
-    const messages = {};
+    const collector = {};
     if (!emailSchema.safeParse(email).success) {
-      messages.email = emailSchema.safeParse(email).error.issues[0].message;
+      collector.email = emailSchema.safeParse(email).error.issues[0].message;
     }
     if (!passwordSchema.safeParse(password).success) {
-      messages.password = passwordSchema.safeParse(password).error.issues[0].message;
+      collector.password = passwordSchema.safeParse(password).error.issues[0].message;
     }
-    if (Object.keys(messages).length) {
-      setIssues(messages);
+    if (Object.keys(collector).length) {
+      setIssues(collector);
       setBtnMsg('Login');
       return;
     }
 
-    auth.handleLogin(email, password, () => navigate(from, { replace: true }));
+    auth
+      .handleLogin(email, password)
+      .then(() => {
+        setBtnMsg('Login');
+        navigate(from, { replace: true });
+      })
+      .catch(error => {
+        setBtnMsg('Login');
+        setIssues({ email: `Login failed: ${error.message}`, password: `Login failed: ${error.message}` });
+      });
   }
 
   function handleToggle(e) {
@@ -136,9 +143,7 @@ function LoginForm() {
   }
 
   return (
-    // NB `noValidate` is used to disable default HTML validation message(s)
-    // NB These input groups won't be extracted to component since they have special event handlers and states (due to
-    //  not using React Router's action)
+    // NB `noValidate` is used to disable default HTML validation message(s))
     <form onSubmit={handleSubmit} noValidate>
       <div id='email-input-group' className='w-full form-control'>
         <label htmlFor='email' className='pt-0 label'>
@@ -193,28 +198,59 @@ function LoginForm() {
   );
 }
 
-function DemoLogins() {
+function DemoLogins({ setBtnMsg, setIssues, from }) {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || '/';
 
   return (
     <div className='flex justify-between gap-2'>
       <button
-        onClick={() => auth.handleLogin('demomember@server.com', 'abcd1234', () => navigate(from, { replace: true }))}
+        onClick={() =>
+          auth
+            .handleLogin('demomember@server.com', 'abcd1234')
+            .then(() => {
+              setBtnMsg('Login');
+              navigate(from, { replace: true });
+            })
+            .catch(error => {
+              setBtnMsg('Login');
+              setIssues({ email: `Login failed: ${error.message}`, password: `Login failed: ${error.message}` });
+            })
+        }
         className={`flex-shrink shadow btn btn-outline btn-success btn-sm text-primary-content shadow-black/50`}
       >
         Demo Member Login
       </button>
       <button
-        onClick={() => auth.handleLogin('demotrainer@server.com', 'abcd1234', () => navigate(from, { replace: true }))}
+        onClick={() =>
+          auth
+            .handleLogin('demotrainer@server.com', 'abcd1234')
+            .then(() => {
+              setBtnMsg('Login');
+              navigate(from, { replace: true });
+            })
+            .catch(error => {
+              setBtnMsg('Login');
+              setIssues({ email: `Login failed: ${error.message}`, password: `Login failed: ${error.message}` });
+            })
+        }
         className={`flex-shrink shadow btn btn-outline btn-warning btn-sm text-primary-content shadow-black/50`}
       >
         Demo Trainer Login
       </button>
       <button
-        onClick={() => auth.handleLogin('demoadmin@server.com', 'abcd1234', () => navigate(from, { replace: true }))}
+        onClick={() =>
+          auth
+            .handleLogin('demoadmin@server.com', 'abcd1234')
+            .then(() => {
+              setBtnMsg('Login');
+              navigate(from, { replace: true });
+            })
+            .catch(error => {
+              setBtnMsg('Login');
+              setIssues({ email: `Login failed: ${error.message}`, password: `Login failed: ${error.message}` });
+            })
+        }
         className={`flex-shrink shadow btn btn-outline btn-error btn-sm text-primary-content shadow-black/50`}
       >
         Demo Admin Login
@@ -225,7 +261,6 @@ function DemoLogins() {
 
 function Greetings() {
   const auth = useContext(AuthContext);
-  const navigate = useNavigate();
 
   return (
     <div className='flex flex-col gap-10'>

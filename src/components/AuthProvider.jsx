@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import AuthContext from '../context/AuthContext';
+import { getCredentials, storeCredentials, deleteCredentials } from '../helpers/localStorage';
 import { getUserByKey, login, logout } from '../api/users';
 import router from '../App';
 
@@ -13,58 +14,56 @@ export default function AuthProvider({ children }) {
     if (user) {
       return;
     }
-    const accessKey = localStorage.getItem('accessKey');
+    const accessKey = getCredentials();
     if (!accessKey) {
       return;
     }
     let ignore = false;
-    (async () => {
-      try {
-        const json = await getUserByKey(accessKey);
-        if (!ignore) setUser(json.user);
-      } catch (error) {
+    getUserByKey(accessKey)
+      .then(json => {
+        if (!ignore) {
+          setUser(json.user);
+        }
+      })
+      .catch(() => {
         router.navigate('/');
-      }
-    })();
+      });
+
     return () => (ignore = true);
   }, [user]);
 
   const handleLogin = useCallback(
     async (email, password, callback) => {
-      setUser(null);
-      // Fetch POST /users/login to attempt to get `accessKey` from the API's json response
-      const loginJSON = await login(email, password);
-      if (loginJSON.status !== 200) {
-        const message = typeof loginJSON.message === 'string' ? loginJSON.message : 'Invalid login credentials';
-        return message;
+      try {
+        setUser(null);
+        // Fetch POST /users/login to attempt to get `accessKey` from the API's json response
+        const loginJSON = await login(email, password);
+        if (loginJSON?.status !== 200) {
+          return Promise.reject(loginJSON);
+        }
+        storeCredentials(loginJSON.accessKey);
+        // Fetch GET /users/by_key/:access_key to attempt to get an obj called `user`
+        const userJSON = await getUserByKey(loginJSON.accessKey);
+        if (userJSON?.status !== 200) {
+          return Promise.reject(userJSON);
+        }
+        setUser(userJSON.user);
+        callback();
+      } catch (error) {
+        return error;
       }
-      // Set key in `localStorage` – persistent storage in case page is reloaded, etc.
-      localStorage.setItem('accessKey', loginJSON.accessKey);
-      // Fetch GET /users/by_key/:access_key to attempt to get an obj called `user`
-      const userJSON = await getUserByKey(loginJSON.accessKey);
-      if (userJSON.status !== 200) {
-        const message = userJSON.message === 'string' ? userJSON.message : 'Invalid access key';
-        return message;
-      }
-      setUser(userJSON.user);
-      callback();
     },
     [user]
   );
 
   const handleLogout = useCallback(
     async callback => {
+      deleteCredentials();
       if (!user) {
         return;
       }
-      // Remove key from `localStorage`
-      localStorage.removeItem('accessKey');
       // Fetch POST /users/logout to attempt to remove `accessKey` from its login row
-      const json = await logout(user.accessKey);
-      if (json.status !== 200) {
-        const message = json.message === 'string' ? json.message : 'Invalid access key';
-        return message;
-      }
+      await logout(user.accessKey);
       setUser(null);
       callback();
     },
