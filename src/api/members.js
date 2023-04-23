@@ -71,10 +71,10 @@ export async function signupMembers({ request }) {
 
   const response = await fetchRaw.post(`${API_URL}/members/signup`, creations);
   // Special error handling to let 409 pass to NOT trigger error boundary, since it's already handled the in component
-  if (response.status === 409) {
+  if (response?.status === 409) {
     return redirect('/signup');
   }
-  if (response.status !== 200) {
+  if (response?.status !== 200) {
     const json = await response.json();
     const message = `${json.status} ${
       typeof json.message === 'string'
@@ -103,10 +103,10 @@ export async function updateMemberById(values) {
   const response = await fetchRaw.patch(`${API_URL}/members/${id}`, updates);
   const json = await response.json();
   // Special error handling to let 409 pass to NOT trigger error boundary, since it's already handled the in component
-  if (response.status === 409) {
+  if (response?.status === 409) {
     return json;
   }
-  if (response.status !== 200) {
+  if (response?.status !== 200) {
     const message = `${json.status} ${
       typeof json.message === 'string'
         ? json.message
@@ -122,10 +122,10 @@ export async function updateMemberWithDetailsById({ params, request }) {
   const response = await fetchRaw.patch(`${API_URL}/members/${params.id}/detailed`, updates);
   const json = await response.json();
   // Special error handling to let 409 pass to NOT trigger error boundary, since it's already handled the in component
-  if (response.status === 409) {
+  if (response?.status === 409) {
     return json;
   }
-  if (response.status !== 200) {
+  if (response?.status !== 200) {
     const message = `${json.status} ${
       typeof json.message === 'string'
         ? json.message
