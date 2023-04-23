@@ -12,7 +12,6 @@ export default function LoginPanel() {
   const auth = useContext(AuthContext);
   const [btnMsg, setBtnMsg] = useState('Login');
   const [issues, setIssues] = useState({ email: '', password: '' });
-  const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || '/';
 
@@ -22,19 +21,12 @@ export default function LoginPanel() {
       className='flex flex-col w-full max-w-lg gap-8 px-10 pt-12 pb-8 my-auto bg-neutral rounded-3xl shadow-[0_0_30px_15px_rgba(255,255,255,0.2)]'
     >
       {auth.user ? (
-        <Greetings navigate={navigate} />
+        <Greetings />
       ) : (
         <>
           <Directions />
-          <LoginForm
-            btnMsg={btnMsg}
-            setBtnMsg={setBtnMsg}
-            issues={issues}
-            setIssues={setIssues}
-            navigate={navigate}
-            from={from}
-          />
-          <DemoLogins setBtnMsg={setBtnMsg} setIssues={setIssues} navigate={navigate} from={from} />
+          <LoginForm btnMsg={btnMsg} setBtnMsg={setBtnMsg} issues={issues} setIssues={setIssues} from={from} />
+          <DemoLogins setBtnMsg={setBtnMsg} setIssues={setIssues} from={from} />
         </>
       )}
     </div>
@@ -106,13 +98,14 @@ function Directions() {
 //   return <div className={`m-0 text-white divider before:h-[1px] after:h-[1px] before:bg-white after:bg-white`}>OR</div>;
 // }
 
-function LoginForm({ btnMsg, setBtnMsg, issues, setIssues, navigate, from }) {
+function LoginForm({ btnMsg, setBtnMsg, issues, setIssues, from }) {
   // NB Fetch is done in the <AuthProvider> i/o in RRD's action, i.e., RRD's action is not used for login form
   const auth = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [type, setType] = useState('password');
   const [icon, setIcon] = useState(faEyeSlash);
+  const navigate = useNavigate(); // NB Lift the return of this Hook up to parent comp would cause bug, code after `setUser` would be unable to run
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -204,8 +197,9 @@ function LoginForm({ btnMsg, setBtnMsg, issues, setIssues, navigate, from }) {
   );
 }
 
-function DemoLogins({ setBtnMsg, setIssues, navigate, from }) {
+function DemoLogins({ setBtnMsg, setIssues, from }) {
   const auth = useContext(AuthContext);
+  const navigate = useNavigate(); // NB Lift the return of this Hook up to parent comp would cause bug, code after `setUser` would be unable to run
 
   async function handleClickDemoLogin(email, password) {
     setBtnMsg('Logging in...');
@@ -245,8 +239,9 @@ function DemoLogins({ setBtnMsg, setIssues, navigate, from }) {
   );
 }
 
-function Greetings({ navigate }) {
+function Greetings() {
   const auth = useContext(AuthContext);
+  const navigate = useNavigate(); // NB Lift the return of this Hook up to parent comp would cause bug, code after `setUser` would be unable to run
 
   return (
     <div className='flex flex-col gap-10'>
