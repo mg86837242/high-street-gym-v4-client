@@ -2,11 +2,6 @@ import { API_URL } from '../data/constants';
 import fetchResp from '../helpers/fetchResp';
 import fetchRaw from '../helpers/fetchRaw';
 
-export async function getAllEmails() {
-  const response = await fetchResp.get(`${API_URL}/users/all_emails`);
-  return response;
-}
-
 export async function getUserWithAllDetails() {
   const accessKey = localStorage.getItem('accessKey');
   const response = await fetchResp.get(`${API_URL}/users/by_key/${accessKey}/detailed`);
