@@ -1,5 +1,5 @@
-import { useState, useMemo, useEffect } from 'react';
-import { useLoaderData, Outlet, Form, useSubmit, useNavigate, Link } from 'react-router-dom';
+import { useMemo, useState, useEffect } from 'react';
+import { useLoaderData, Outlet, Form, useFetcher, Link, useSubmit, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { activitySchema } from '../../schemas';
@@ -20,6 +20,57 @@ export function MngActivities() {
 }
 
 function ListActivities({ activities }) {
+  const fetcher = useFetcher();
+  const activityTableBodyCells = useMemo(
+    () =>
+      activities.map(
+        ({
+          id,
+          name,
+          category,
+          description,
+          intensityLevel,
+          maxPeopleAllowed,
+          requirementOne,
+          requirementTwo,
+          durationMinutes,
+          price,
+        }) => (
+          <tr key={`r${id}`} className='hover'>
+            <th>{id}</th>
+            <td>{name}</td>
+            <td>{category}</td>
+            <td>{description}</td>
+            <td>{intensityLevel}</td>
+            <td>{maxPeopleAllowed}</td>
+            <td>{requirementOne}</td>
+            <td>{requirementTwo}</td>
+            <td>{durationMinutes}</td>
+            <td>{price}</td>
+            <td>
+              <Form action={`${id}/edit`}>
+                <Btn2Xs>Edit</Btn2Xs>
+              </Form>
+            </td>
+            <td>
+              <fetcher.Form
+                method='post'
+                action={`${id}/destroy`}
+                onSubmit={e => {
+                  if (!confirm('Please confirm you want to delete this activity.')) {
+                    e.preventDefault();
+                  }
+                }}
+              >
+                <Btn1Xs>Delete</Btn1Xs>
+              </fetcher.Form>
+            </td>
+          </tr>
+        )
+      ),
+    [activities]
+  );
+
   return (
     <div className='py-6 overflow-x-auto'>
       <table className='table w-full table-compact'>
@@ -39,53 +90,7 @@ function ListActivities({ activities }) {
             <th>Delete</th>
           </tr>
         </thead>
-        <tbody>
-          {activities.map(
-            ({
-              id,
-              name,
-              category,
-              description,
-              intensityLevel,
-              maxPeopleAllowed,
-              requirementOne,
-              requirementTwo,
-              durationMinutes,
-              price,
-            }) => (
-              <tr key={`r${id}`} className='hover'>
-                <th>{id}</th>
-                <td>{name}</td>
-                <td>{category}</td>
-                <td>{description}</td>
-                <td>{intensityLevel}</td>
-                <td>{maxPeopleAllowed}</td>
-                <td>{requirementOne}</td>
-                <td>{requirementTwo}</td>
-                <td>{durationMinutes}</td>
-                <td>{price}</td>
-                <td>
-                  <Form action={`${id}/edit`}>
-                    <Btn2Xs>Edit</Btn2Xs>
-                  </Form>
-                </td>
-                <td>
-                  <Form
-                    method='post'
-                    action={`${id}/destroy`}
-                    onSubmit={e => {
-                      if (!confirm('Please confirm you want to delete this activity.')) {
-                        e.preventDefault();
-                      }
-                    }}
-                  >
-                    <Btn1Xs>Delete</Btn1Xs>
-                  </Form>
-                </td>
-              </tr>
-            )
-          )}
-        </tbody>
+        <tbody>{activityTableBodyCells}</tbody>
       </table>
     </div>
   );
@@ -93,12 +98,13 @@ function ListActivities({ activities }) {
 
 export function NewActivity() {
   const [file, setFile] = useState(null);
+  const fetcher = useFetcher();
 
   return (
     <div className='flex flex-col gap-5 py-6'>
       <div className='flex flex-col-reverse items-end gap-5 lg:flex-row lg:justify-between lg:items-start lg:gap-0'>
         <div className='flex flex-col gap-5'>
-          <Form
+          <fetcher.Form
             method='post'
             action='new-upload-xml'
             encType='multipart/form-data'
@@ -116,12 +122,12 @@ export function NewActivity() {
               className='w-full max-w-xs shadow file-input file-input-bordered file-input-sm shadow-black/50'
             />
             <Btn2Sm>Submit</Btn2Sm>
-          </Form>
+          </fetcher.Form>
         </div>
         <div className='m-0 divider lg:hidden' />
-        <Form method='post' action='new'>
+        <fetcher.Form method='post' action='new'>
           <Btn2Sm>Create New</Btn2Sm>
-        </Form>
+        </fetcher.Form>
       </div>
       <p className='text-right lg:text-left'>
         <em>

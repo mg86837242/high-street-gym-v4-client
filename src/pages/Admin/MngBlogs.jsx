@@ -1,6 +1,6 @@
-import { useContext, useMemo, useEffect } from 'react';
+import { useMemo, useContext, useEffect } from 'react';
 import AuthContext from '../../context/AuthContext.jsx';
-import { useLoaderData, Outlet, Form, useSubmit, useNavigate } from 'react-router-dom';
+import { useLoaderData, Outlet, Form, useFetcher, useSubmit, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { blogSchema } from '../../schemas/index.js';
@@ -22,6 +22,41 @@ export function MngBlogs() {
 }
 
 function ListBlogs({ blogs }) {
+  const fetcher = useFetcher();
+  const blogTableBodyCells = useMemo(
+    () =>
+      blogs.map(({ id, title, body, username, role, createdAt, updatedAt }) => (
+        <tr key={`r${id}`} className='hover'>
+          <th>{id}</th>
+          <td>{title}</td>
+          <td className='max-w-xs truncate'>{body}</td>
+          <td>{username}</td>
+          <td>{role}</td>
+          <td>{createdAt}</td>
+          <td>{updatedAt}</td>
+          <td>
+            <Form action={`${id}/edit`}>
+              <Btn2Xs>Edit</Btn2Xs>
+            </Form>
+          </td>
+          <td>
+            <fetcher.Form
+              method='post'
+              action={`${id}/destroy`}
+              onSubmit={e => {
+                if (!confirm('Please confirm you want to delete this blog.')) {
+                  e.preventDefault();
+                }
+              }}
+            >
+              <Btn1Xs>Delete</Btn1Xs>
+            </fetcher.Form>
+          </td>
+        </tr>
+      )),
+    [blogs]
+  );
+
   return (
     <div className='py-6 overflow-x-auto'>
       <table className='table w-full table-compact'>
@@ -38,37 +73,7 @@ function ListBlogs({ blogs }) {
             <th>Delete</th>
           </tr>
         </thead>
-        <tbody>
-          {blogs.map(({ id, title, body, username, role, createdAt, updatedAt }) => (
-            <tr key={`r${id}`} className='hover'>
-              <th>{id}</th>
-              <td>{title}</td>
-              <td className='max-w-xs truncate'>{body}</td>
-              <td>{username}</td>
-              <td>{role}</td>
-              <td>{createdAt}</td>
-              <td>{updatedAt}</td>
-              <td>
-                <Form action={`${id}/edit`}>
-                  <Btn2Xs>Edit</Btn2Xs>
-                </Form>
-              </td>
-              <td>
-                <Form
-                  method='post'
-                  action={`${id}/destroy`}
-                  onSubmit={e => {
-                    if (!confirm('Please confirm you want to delete this blog.')) {
-                      e.preventDefault();
-                    }
-                  }}
-                >
-                  <Btn1Xs>Delete</Btn1Xs>
-                </Form>
-              </td>
-            </tr>
-          ))}
-        </tbody>
+        <tbody>{blogTableBodyCells}</tbody>
       </table>
     </div>
   );
@@ -76,13 +81,14 @@ function ListBlogs({ blogs }) {
 
 export function NewBlog() {
   const auth = useContext(AuthContext);
+  const fetcher = useFetcher();
 
   return (
     <div className='flex justify-end py-6'>
-      <Form method='post' action='new'>
+      <fetcher.Form method='post' action='new'>
         <input type='hidden' name='loginId' value={auth.user?.id} />
         <Btn2Sm>Create New</Btn2Sm>
-      </Form>
+      </fetcher.Form>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import { useContext, useState, useMemo } from 'react';
 import AuthContext from '../../context/AuthContext';
-import { useLoaderData, Link, Form, useLocation } from 'react-router-dom';
+import { useLoaderData, Link, useFetcher, useLocation } from 'react-router-dom';
 import removeTags from '../../helpers/removeTags';
 import { getDateNotation } from '../../helpers/mapDates';
 import { Btn2Sm } from '../../components/ui/Btn2';
@@ -10,6 +10,8 @@ export default function List() {
   const auth = useContext(AuthContext);
   const { blogs } = useLoaderData();
   const [filter, setFilter] = useState('all');
+  const fetcher = useFetcher();
+  const location = useLocation();
   const allBlogList = useMemo(
     () =>
       blogs?.length ? (
@@ -86,17 +88,16 @@ export default function List() {
       <p className='my-4 text-center'>No blog has been found</p>
     );
   }, [blogs, auth.user]);
-  const location = useLocation();
 
   return (
     <div className='flex flex-col gap-6 lg:grid lg:grid-cols-12 lg:gap-0'>
       <section className='lg:hidden'>
         {auth.user ? (
           <>
-            <Form method='post' action='new'>
+            <fetcher.Form method='post' action='new'>
               <input type='hidden' name='loginId' value={auth.user?.id} />
               <Btn2Sm w='w-full'>Create New</Btn2Sm>
-            </Form>
+            </fetcher.Form>
             <div className='divider'></div>
             <select
               value={filter}
@@ -129,10 +130,10 @@ export default function List() {
               <option value='my'>My bookings</option>
             </select>
             <div className='divider'></div>
-            <Form method='post' action='new'>
+            <fetcher.Form method='post' action='new'>
               <input type='hidden' name='loginId' value={auth.user?.id} />
               <Btn2Sm w='w-full'>Create New</Btn2Sm>
-            </Form>
+            </fetcher.Form>
           </>
         ) : (
           <LinkBtn2Sm to='/login' state={{ from: location }} replace={true} w='w-full'>

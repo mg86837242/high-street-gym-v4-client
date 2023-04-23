@@ -19,6 +19,7 @@ import SpinnerNoNav from '../../components/ui/SpinnerNoNav';
 import sleep from '../../helpers/sleep';
 import { convertEmptyStrToNull, convertNullToEmptyStr } from '../../helpers/sanitize';
 
+// TODO Limit the ability to edit demo users' email and pass
 export default function EditAccount() {
   const auth = useContext(AuthContext);
   const [inputEmailMsg, setInputEmailMsg] = useState('');

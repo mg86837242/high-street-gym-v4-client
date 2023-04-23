@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
-import { useLoaderData, Outlet, Form, useSubmit, useNavigate, Link, useActionData } from 'react-router-dom';
+import { useLoaderData, Outlet, Form, useFetcher, Link, useSubmit, useNavigate, useActionData } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { memberDetailedSchema } from '../../schemas';
@@ -10,6 +10,7 @@ import FCRHFSmPass from '../../components/formCtrlRHF/FCRHFSmPass';
 import countries from '../../data/countries.json'; // Vite's feature
 import { convertEmptyStrToNull } from '../../helpers/sanitize';
 
+// TODO Limit the ability to edit demo member's email and pass
 export function MngMembers() {
   const { members } = useLoaderData();
 
@@ -22,6 +23,66 @@ export function MngMembers() {
 }
 
 function ListMembers({ members }) {
+  const fetcher = useFetcher();
+  const memberTableBodyCells = useMemo(
+    () =>
+      members.map(
+        ({
+          id,
+          email,
+          username,
+          firstName,
+          lastName,
+          phone,
+          age,
+          gender,
+          lineOne,
+          lineTwo,
+          suburb,
+          postcode,
+          state,
+          country,
+        }) => (
+          <tr key={`r${id}`} className='hover'>
+            <th>{id}</th>
+            <td>{email}</td>
+            <td>●●●●●●●●●</td>
+            <td>{username}</td>
+            <td>{firstName}</td>
+            <td>{lastName}</td>
+            <td>{phone}</td>
+            <td>{age}</td>
+            <td>{gender}</td>
+            <td>{lineOne}</td>
+            <td>{lineTwo}</td>
+            <td>{suburb}</td>
+            <td>{postcode}</td>
+            <td>{state}</td>
+            <td>{country}</td>
+            <td>
+              <Form action={`${id}/edit`}>
+                <Btn2Xs>Edit</Btn2Xs>
+              </Form>
+            </td>
+            <td>
+              <fetcher.Form
+                method='post'
+                action={`${id}/destroy`}
+                onSubmit={e => {
+                  if (!confirm('Please confirm you want to delete this member.')) {
+                    e.preventDefault();
+                  }
+                }}
+              >
+                <Btn1Xs>Delete</Btn1Xs>
+              </fetcher.Form>
+            </td>
+          </tr>
+        )
+      ),
+    [members]
+  );
+
   return (
     <div className='py-6 overflow-x-auto'>
       <table className='table w-full table-compact'>
@@ -46,62 +107,7 @@ function ListMembers({ members }) {
             <th>Delete</th>
           </tr>
         </thead>
-        <tbody>
-          {members.map(
-            ({
-              id,
-              email,
-              username,
-              firstName,
-              lastName,
-              phone,
-              age,
-              gender,
-              lineOne,
-              lineTwo,
-              suburb,
-              postcode,
-              state,
-              country,
-            }) => (
-              <tr key={`r${id}`} className='hover'>
-                <th>{id}</th>
-                <td>{email}</td>
-                <td>●●●●●●●●●</td>
-                <td>{username}</td>
-                <td>{firstName}</td>
-                <td>{lastName}</td>
-                <td>{phone}</td>
-                <td>{age}</td>
-                <td>{gender}</td>
-                <td>{lineOne}</td>
-                <td>{lineTwo}</td>
-                <td>{suburb}</td>
-                <td>{postcode}</td>
-                <td>{state}</td>
-                <td>{country}</td>
-                <td>
-                  <Form action={`${id}/edit`}>
-                    <Btn2Xs>Edit</Btn2Xs>
-                  </Form>
-                </td>
-                <td>
-                  <Form
-                    method='post'
-                    action={`${id}/destroy`}
-                    onSubmit={e => {
-                      if (!confirm('Please confirm you want to delete this member.')) {
-                        e.preventDefault();
-                      }
-                    }}
-                  >
-                    <Btn1Xs>Delete</Btn1Xs>
-                  </Form>
-                </td>
-              </tr>
-            )
-          )}
-        </tbody>
+        <tbody>{memberTableBodyCells}</tbody>
       </table>
     </div>
   );
@@ -109,12 +115,13 @@ function ListMembers({ members }) {
 
 export function NewMember() {
   const [file, setFile] = useState(null);
+  const fetcher = useFetcher();
 
   return (
     <div className='flex flex-col gap-5 py-6'>
       <div className='flex flex-col-reverse items-end gap-5 lg:flex-row lg:justify-between lg:items-start lg:gap-0'>
         <div className='flex flex-col gap-5'>
-          <Form
+          <fetcher.Form
             method='post'
             action='new-upload-xml'
             encType='multipart/form-data'
@@ -132,12 +139,12 @@ export function NewMember() {
               className='w-full max-w-xs shadow file-input file-input-bordered file-input-sm shadow-black/50'
             />
             <Btn2Sm>Submit</Btn2Sm>
-          </Form>
+          </fetcher.Form>
         </div>
         <div className='m-0 divider lg:hidden' />
-        <Form method='post' action='new'>
+        <fetcher.Form method='post' action='new'>
           <Btn2Sm>Create New</Btn2Sm>
-        </Form>
+        </fetcher.Form>
       </div>
       <p className='text-right lg:text-left'>
         <em>
