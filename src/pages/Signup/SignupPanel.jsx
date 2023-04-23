@@ -33,7 +33,7 @@ function Directions() {
   );
 }
 
-// FIXME Refactor <Signup> page by using RHF and use action data to check 409
+// FIXME Rewrite <Signup> page by using RHF and use action data to check 409
 function SignupForm() {
   const issues = useActionData();
   const navigation = useNavigation();

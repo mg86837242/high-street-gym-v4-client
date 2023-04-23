@@ -9,7 +9,11 @@ export default function AuthProvider({ children }) {
 
   // This `useEffect`'s job is to synchronize with API by using an `accessKey` stored in the `localStorage` as a ref in
   //  case `user` state/context is missing after reloading page, opening a new tab, deleting the `accessKey` from the
-  //  browser manually, etc.
+  //  browser manually, etc. The control flow statement is designed as follows:
+  //  (1) Effect runs - user state present, exit
+  //  (2) Effect runs - key removed or missing from local storage
+  //  (3) Effect runs - user state synchronized
+  //  (4) Effect runs - synchronization (the fetch) failed
   useEffect(() => {
     if (user) {
       return;
