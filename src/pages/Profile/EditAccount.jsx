@@ -196,7 +196,7 @@ function UpdateAdminAddrForm({ botMsg, user }) {
     reset,
   } = useForm({
     resolver: zodResolver(addressAdminSchema),
-    defaultValues: useMemo(() => addressDefaultValue, [user]),
+    defaultValues: addressDefaultValue,
   });
 
   useEffect(() => reset(addressDefaultValue), [reset, user]);
