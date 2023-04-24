@@ -1,10 +1,11 @@
-import { useOutletContext, Form } from 'react-router-dom';
+import { useOutletContext, useFetcher, Form } from 'react-router-dom';
 import { EditorContent } from '@tiptap/react';
 import { Btn2Sm } from '../../components/ui/Btn2';
 import { Btn1Sm } from '../../components/ui/Btn1';
 
 export default function DetailsIndex() {
   const { setEditable, editor, canEdit } = useOutletContext();
+  const fetcher = useFetcher();
 
   return (
     <>
@@ -14,7 +15,7 @@ export default function DetailsIndex() {
           <Form action='edit'>
             <Btn2Sm onClick={() => setEditable(true)}>Edit</Btn2Sm>
           </Form>
-          <Form
+          <fetcher.Form
             method='post'
             action='destroy'
             onSubmit={e => {
@@ -24,7 +25,7 @@ export default function DetailsIndex() {
             }}
           >
             <Btn1Sm type='submit'>Delete</Btn1Sm>
-          </Form>
+          </fetcher.Form>
         </div>
       )}
     </>
