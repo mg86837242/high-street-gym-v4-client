@@ -1,7 +1,9 @@
-import { useLoaderData, Form } from 'react-router-dom';
+import { useLoaderData, useFetcher, Form } from 'react-router-dom';
 import { getDateNotation } from '../../helpers/mapDates';
 
 export default function Details() {
+  const fetcher = useFetcher();
+
   const {
     booking: {
       id,
@@ -84,7 +86,7 @@ export default function Details() {
               Edit
             </button>
           </Form>
-          <Form
+          <fetcher.Form
             method='post'
             action='destroy'
             onSubmit={e => {
@@ -100,7 +102,7 @@ export default function Details() {
             >
               Delete
             </button>
-          </Form>
+          </fetcher.Form>
         </div>
       </div>
     </div>
