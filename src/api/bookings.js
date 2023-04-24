@@ -20,7 +20,9 @@ export async function getBookingsByDate({ params }) {
   if (response?.status !== 200 && response?.status !== 404) {
     const json = await response.json();
     const message = `${json.status} ${
-      typeof json.message === 'string' ? json.message : json.message.map(issue => issue.message).join('; ')
+      typeof json.message === 'string'
+        ? json.message
+        : json.message.map(issue => `${issue.path[0]}: ${issue.message}`).join('; ')
     }`;
     throw new Response(message);
   }
