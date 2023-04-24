@@ -37,6 +37,7 @@ export default function EditAccount() {
     }
     if (actionData?.status === 409) {
       setInputEmailMsg(actionData.message);
+      return;
     }
     switch (actionData._action) {
       case 'updateAdminById':
