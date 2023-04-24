@@ -191,6 +191,7 @@ export function EditMember() {
     }
     if (actionData.status === 409) {
       setInputEmailMsg(actionData.message);
+      return;
     }
 
     return () => setInputEmailMsg('');
