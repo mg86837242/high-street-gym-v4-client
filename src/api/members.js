@@ -27,6 +27,7 @@ export async function getMemberWithDetailsById({ params }) {
   return response;
 }
 
+// FIXME Rewrite <Signup> page by using RHF and use action data to check 409
 export async function signupMembers({ request }) {
   const formData = await request.formData();
   const creations = Object.fromEntries(formData);
