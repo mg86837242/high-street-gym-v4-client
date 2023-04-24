@@ -3,6 +3,7 @@ import { API_URL } from '../data/constants';
 import fetchResp from '../helpers/fetchResp';
 import fetchRaw from '../helpers/fetchRaw';
 import fetchJSON from '../helpers/fetchJSON';
+import getErrorMsg from '../helpers/getErrorMsg';
 
 export async function getAllBookings() {
   const response = await fetchResp.get(`${API_URL}/bookings`);
@@ -19,11 +20,7 @@ export async function getBookingsByDate({ params }) {
   // Special error handling to let 404 pass
   if (response?.status !== 200 && response?.status !== 404) {
     const json = await response.json();
-    const message = `${json.status} ${
-      typeof json.message === 'string'
-        ? json.message
-        : json.message.map(issue => `${issue.path[0]}: ${issue.message}`).join('; ')
-    }`;
+    const message = getErrorMsg(json);
     throw new Response(message);
   }
   return response;

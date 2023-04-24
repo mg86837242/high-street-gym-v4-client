@@ -13,8 +13,9 @@ import {
 import fetchResp from '../helpers/fetchResp';
 import fetchRaw from '../helpers/fetchRaw';
 import fetchJSON from '../helpers/fetchJSON';
-import defaultNewMember from '../data/defaultNewMember';
+import getErrorMsg from '../helpers/getErrorMsg';
 import getSubmittedData from '../helpers/getSubmittedData';
+import defaultNewMember from '../data/defaultNewMember';
 
 export async function getAllMembersWithDetails() {
   const response = await fetchResp.get(`${API_URL}/members/detailed`);
@@ -107,11 +108,7 @@ export async function updateMemberById(values) {
     return json;
   }
   if (response?.status !== 200) {
-    const message = `${json.status} ${
-      typeof json.message === 'string'
-        ? json.message
-        : json.message?.map(issue => `${issue.path[0]}: ${issue.message}`).join('; ')
-    }`;
+    const message = getErrorMsg(json);
     throw new Response(message);
   }
   return { ...json, _action };
@@ -126,11 +123,7 @@ export async function updateMemberWithDetailsById({ params, request }) {
     return json;
   }
   if (response?.status !== 200) {
-    const message = `${json.status} ${
-      typeof json.message === 'string'
-        ? json.message
-        : json.message?.map(issue => `${issue.path[0]}: ${issue.message}`).join('; ')
-    }`;
+    const message = getErrorMsg(json);
     throw new Response(message);
   }
   return redirect(`..`);

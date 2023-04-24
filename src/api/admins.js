@@ -1,5 +1,6 @@
 import { API_URL } from '../data/constants';
 import fetchRaw from '../helpers/fetchRaw';
+import getErrorMsg from '../helpers/getErrorMsg';
 
 export default async function updateAdminById(values) {
   const { _action, id, ...updates } = values;
@@ -10,11 +11,7 @@ export default async function updateAdminById(values) {
     return json;
   }
   if (response?.status !== 200) {
-    const message = `${json.status} ${
-      typeof json.message === 'string'
-        ? json.message
-        : json.message?.map(issue => `${issue.path[0]}: ${issue.message}`).join('; ')
-    }`;
+    const message = getErrorMsg(json);
     throw new Response(message);
   }
   return { ...json, _action };
