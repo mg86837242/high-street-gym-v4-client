@@ -113,11 +113,13 @@ function LoginForm({ btnMsg, setBtnMsg, issues, setIssues, from }) {
     setIssues({ email: '', password: '' });
 
     const collector = {};
-    if (!emailSchema.safeParse(email).success) {
-      collector.email = emailSchema.safeParse(email).error.issues[0].message;
+    const emailResult = await emailSchema.spa(email);
+    const passwordResult = await passwordSchema.spa(password);
+    if (!emailResult.success) {
+      collector.email = emailResult.error.issues[0].message;
     }
-    if (!passwordSchema.safeParse(password).success) {
-      collector.password = passwordSchema.safeParse(password).error.issues[0].message;
+    if (!passwordResult.success) {
+      collector.password = passwordResult.error.issues[0].message;
     }
     if (Object.keys(collector).length) {
       setIssues(collector);
