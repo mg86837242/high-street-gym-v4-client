@@ -1,4 +1,6 @@
 // Use case: fetch and error handling in loader and action
+import getErrorMsg from './getErrorMsg';
+
 const fetchJSON = {
   async get(url) {
     const requestOptions = {
@@ -8,11 +10,7 @@ const fetchJSON = {
     const response = await fetch(url, requestOptions);
     const json = await response.json();
     if (!response?.ok) {
-      const message = `${json.status} ${
-        typeof json.message === 'string'
-          ? json.message
-          : json.message?.map(issue => `${issue.path[0]}: ${issue.message}`).join('; ')
-      }`;
+      const message = getErrorMsg(json);
       throw new Response(message);
     }
     return json;
@@ -27,11 +25,7 @@ const fetchJSON = {
     const response = await fetch(url, requestOptions);
     const json = await response.json();
     if (!response?.ok) {
-      const message = `${json.status} ${
-        typeof json.message === 'string'
-          ? json.message
-          : json.message?.map(issue => `${issue.path[0]}: ${issue.message}`).join('; ')
-      }`;
+      const message = getErrorMsg(json);
       throw new Response(message);
     }
     return json;
@@ -46,11 +40,7 @@ const fetchJSON = {
     const response = await fetch(url, requestOptions);
     const json = await response.json();
     if (!response?.ok) {
-      const message = `${json.status} ${
-        typeof json.message === 'string'
-          ? json.message
-          : json.message?.map(issue => `${issue.path[0]}: ${issue.message}`).join('; ')
-      }`;
+      const message = getErrorMsg(json);
       throw new Response(message);
     }
     return json;
@@ -63,11 +53,7 @@ const fetchJSON = {
     const response = await fetch(url, requestOptions);
     const json = await response.json();
     if (!response?.ok) {
-      const message = `${json.status} ${
-        typeof json.message === 'string'
-          ? json.message
-          : json.message?.map(issue => `${issue.path[0]}: ${issue.message}`).join('; ')
-      }`;
+      const message = getErrorMsg(json);
       throw new Response(message);
     }
     return json;

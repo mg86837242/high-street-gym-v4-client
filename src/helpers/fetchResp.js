@@ -1,4 +1,6 @@
 // Use case: fetch and error handling in loader and action
+import getErrorMsg from './getErrorMsg';
+
 const fetchResp = {
   async get(url) {
     const requestOptions = {
@@ -8,11 +10,7 @@ const fetchResp = {
     const response = await fetch(url, requestOptions);
     if (!response?.ok) {
       const json = await response.json();
-      const message = `${json.status} ${
-        typeof json.message === 'string'
-          ? json.message
-          : json.message?.map(issue => `${issue.path[0]}: ${issue.message}`).join('; ')
-      }`;
+      const message = getErrorMsg(json);
       throw new Response(message);
     }
     return response;
@@ -27,11 +25,7 @@ const fetchResp = {
     const response = await fetch(url, requestOptions);
     if (!response?.ok) {
       const json = await response.json();
-      const message = `${json.status} ${
-        typeof json.message === 'string'
-          ? json.message
-          : json.message?.map(issue => `${issue.path[0]}: ${issue.message}`).join('; ')
-      }`;
+      const message = getErrorMsg(json);
       throw new Response(message);
     }
     return response;
@@ -45,11 +39,7 @@ const fetchResp = {
     const response = await fetch(url, requestOptions);
     if (!response?.ok) {
       const json = await response.json();
-      const message = `${json.status} ${
-        typeof json.message === 'string'
-          ? json.message
-          : json.message?.map(issue => `${issue.path[0]}: ${issue.message}`).join('; ')
-      }`;
+      const message = getErrorMsg(json);
       throw new Response(message);
     }
     return response;
@@ -64,11 +54,7 @@ const fetchResp = {
     const response = await fetch(url, requestOptions);
     if (!response?.ok) {
       const json = await response.json();
-      const message = `${json.status} ${
-        typeof json.message === 'string'
-          ? json.message
-          : json.message?.map(issue => `${issue.path[0]}: ${issue.message}`).join('; ')
-      }`;
+      const message = getErrorMsg(json);
       throw new Response(message);
     }
     return response;
@@ -81,11 +67,7 @@ const fetchResp = {
     const response = await fetch(url, requestOptions);
     if (!response?.ok) {
       const json = await response.json();
-      const message = `${json.status} ${
-        typeof json.message === 'string'
-          ? json.message
-          : json.message?.map(issue => `${issue.path[0]}: ${issue.message}`).join('; ')
-      }`;
+      const message = getErrorMsg(json);
       throw new Response(message);
     }
     return response;
