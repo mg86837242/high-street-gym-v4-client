@@ -18,7 +18,7 @@ export default function LoginPanel() {
   return (
     <div
       id='login-panel-wrapper'
-      className='flex flex-col w-full max-w-lg gap-8 px-10 pt-12 pb-8 my-auto bg-neutral rounded-3xl shadow-[0_0_30px_15px_rgba(255,255,255,0.2)]'
+      className='flex flex-col w-full max-w-lg gap-8 px-5 py-8 lg:px-10 lg:pt-12 lg:pb-8 my-auto bg-neutral rounded-3xl shadow-[0_0_30px_15px_rgba(255,255,255,0.2)]'
     >
       {auth.user ? (
         <Greetings />
@@ -221,19 +221,19 @@ function DemoLogins({ setBtnMsg, setIssues, from }) {
     <div className='flex justify-between gap-2'>
       <button
         onClick={() => handleClickDemoLogin('demomember@server.com', 'abcd1234')}
-        className={`flex-shrink shadow btn btn-outline btn-success btn-sm text-primary-content shadow-black/50`}
+        className={`h-fit flex-shrink shadow btn btn-outline btn-success btn-sm text-primary-content shadow-black/50`}
       >
         Demo Member Login
       </button>
       <button
         onClick={() => handleClickDemoLogin('demotrainer@server.com', 'abcd1234')}
-        className={`flex-shrink shadow btn btn-outline btn-warning btn-sm text-primary-content shadow-black/50`}
+        className={`h-fit flex-shrink shadow btn btn-outline btn-warning btn-sm text-primary-content shadow-black/50`}
       >
         Demo Trainer Login
       </button>
       <button
         onClick={() => handleClickDemoLogin('demoadmin@server.com', 'abcd1234')}
-        className={`flex-shrink shadow btn btn-outline btn-error btn-sm text-primary-content shadow-black/50`}
+        className={`h-fit flex-shrink shadow btn btn-outline btn-error btn-sm text-primary-content shadow-black/50`}
       >
         Demo Admin Login
       </button>
