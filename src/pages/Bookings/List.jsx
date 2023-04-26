@@ -48,7 +48,7 @@ function BookingListMemberView({ bookings, authUserMemberId }) {
               durationMinutes,
             }) =>
               authUserMemberId === memberId ? (
-                <li id='booking-list-card' key={id} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
+                <li id={`booking-list-card-${id}`} key={id} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
                   <NavLink
                     to={`${id}`}
                     className={({ isActive, isPending }) =>
@@ -78,7 +78,7 @@ function BookingListMemberView({ bookings, authUserMemberId }) {
                   </NavLink>
                 </li>
               ) : (
-                <li id='booking-list-card' key={id} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
+                <li id={`booking-list-card-${id}`} key={id} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
                   <NavLink to={``} className={`grid grid-cols-2 px-4 xl:px-6 py-2 cursor-auto`}>
                     <p className='p-1'>Booking ID:</p>
                     <p className='p-1'>{id}</p>
@@ -125,7 +125,7 @@ function BookingListMemberView({ bookings, authUserMemberId }) {
             durationMinutes,
           }) =>
             memberId === authUserMemberId && (
-              <li id='booking-list-card' key={id} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
+              <li id={`booking-list-card-${id}`} key={id} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
                 <NavLink
                   to={`${id}`}
                   className={({ isActive, isPending }) =>
@@ -203,7 +203,7 @@ function BookingListTrainerView({ bookings, authUserTrainerId }) {
               durationMinutes,
             }) =>
               authUserTrainerId === trainerId ? (
-                <li id='booking-list-card' key={id} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
+                <li id={`booking-list-card-${id}`} key={id} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
                   <NavLink
                     to={`${id}`}
                     className={({ isActive, isPending }) =>
@@ -233,7 +233,7 @@ function BookingListTrainerView({ bookings, authUserTrainerId }) {
                   </NavLink>
                 </li>
               ) : (
-                <li id='booking-list-card' key={id} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
+                <li id={`booking-list-card-${id}`} key={id} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
                   <NavLink to={``} className={`grid grid-cols-2 px-4 xl:px-6 py-2 cursor-auto`}>
                     <p className='p-1'>Booking ID:</p>
                     <p className='p-1'>{id}</p>
@@ -280,7 +280,7 @@ function BookingListTrainerView({ bookings, authUserTrainerId }) {
             durationMinutes,
           }) =>
             trainerId === authUserTrainerId && (
-              <li id='booking-list-card' key={id} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
+              <li id={`booking-list-card-${id}`} key={id} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
                 <NavLink
                   to={`${id}`}
                   className={({ isActive, isPending }) =>
@@ -354,7 +354,7 @@ function BookingListAdminView({ bookings }) {
             dateTime,
             durationMinutes,
           }) => (
-            <li id='booking-list-card' key={id} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
+            <li id={`booking-list-card-${id}`} key={id} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
               <NavLink
                 to={`${id}`}
                 className={({ isActive, isPending }) =>
@@ -430,7 +430,7 @@ function BookingListGuestView({ bookings }) {
             dateTime,
             durationMinutes,
           }) => (
-            <li id='booking-list-card' key={id} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
+            <li id={`booking-list-card-${id}`} key={id} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
               <div className='grid grid-cols-2 px-4 xl:px-6 py-2'>
                 <p className='p-1'>Booking ID:</p>
                 <p className='p-1'>{id}</p>

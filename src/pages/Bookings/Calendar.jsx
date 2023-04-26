@@ -25,7 +25,7 @@ export default function Calendar() {
           >
             {[...Array(7)].map((_, j) => (
               <div
-                id='calendar-header-cell'
+                id={`calendar-header-cell-${j}`}
                 key={j}
                 className='grid min-h-0 leading-none place-items-center w-11 h-11 3xl:w-12 3xl:h-12 sm:text-base'
               >
@@ -35,7 +35,7 @@ export default function Calendar() {
           </div>
         ) : (
           <div
-            id='calendar-row'
+            id={`calendar-row-${i}`}
             key={`r${i}`}
             className={`grid grid-cols-7 gap-2 px-2 3xl:gap-4 2xl:px-4 3xl:px-6 ${i > 5 && 'pb-2 3xl:pb-4'}`}
           >
@@ -44,7 +44,7 @@ export default function Calendar() {
               return dayOnCal > 0 && dayOnCal <= daysInMonth ? (
                 <NavLink
                   to={`${year}-${month < 10 ? '0' + month : month}-${dayOnCal < 10 ? '0' + dayOnCal : dayOnCal}`}
-                  id='calendar-cell'
+                  id={`calendar-cell-${7 * i + j + 1}`}
                   tabIndex={0}
                   key={7 * i + j + 1}
                   className={({ isActive, isPending }) =>
@@ -57,7 +57,7 @@ export default function Calendar() {
                 </NavLink>
               ) : (
                 <div
-                  id='calendar-cell-no-date'
+                  id={`calendar-cell-${7 * i + j + 1}`}
                   key={7 * i + j + 1}
                   className='grid min-h-0 leading-none place-items-center w-11 h-11 xl:w-12 xl:h-12 sm:text-base'
                 ></div>
