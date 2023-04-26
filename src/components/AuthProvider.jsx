@@ -86,22 +86,21 @@ export default function AuthProvider({ children }) {
 }
 
 // References for `useContext`:
-// -- https://react.dev/reference/react/useContext#updating-data-passed-via-context: Official recommended way of (1)
+// -- https://react.dev/reference/react/useContext#updating-data-passed-via-context: official recommended way of (1)
 //  how to extract multiple providers to a single component => RELEVANT TO THIS PROJECT, and (2) how to create and
 //  use context
 // -- https://react.dev/reference/react/useContext#optimizing-re-renders-when-passing-objects-and-functions:
-//  Official recommended way of (1) how to provide obj and functions (custom Hook) as the context with caching
+//  official recommended way of (1) how to provide obj and functions (custom Hook) as the context with caching
 //  techniques, (2) how to name context value => BOTH ARE RELEVANT TO THIS PROJECT
-// -- https://stackoverflow.com/questions/74443583/getting-error-with-createbrowserrouter-usenavigate-may-be-used-only-in-the-co:
-//  How to render provider component when using React Router 6.4+ (see comment section's sandbox) => NOT relevant to
-//  this project, b/c auth provider needs to be outside router provider
-// -- https://codesandbox.io/s/react-usecontext-rydy5?file=/src/context/defaults.js: How to modularize files related to
+// -- https://stackoverflow.com/questions/74443583/: how to render provider component when using React Router 6.4+ (see
+//  comment section's sandbox) => NOT relevant to this project, b/c auth provider needs to be outside router provider
+// -- https://codesandbox.io/s/react-usecontext-rydy5?file=/src/context/defaults.js: how to modularize files related to
 //  context (source: Google "use context example codesandbox")
 
 // References for `useEffect`:
 // -- https://react.dev/learn/you-might-not-need-an-effect#sending-a-post-request: POST req w/ event-specific logic
 //  doesn't need `useEffect`
-// -- https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers: Interactions within
+// -- https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers: interactions within
 // `localStorage` within login/logout event handlers do not require `useEffect`
 
 // References for usage of `navigate` outside of `<RouterProvider>`:
