@@ -24,7 +24,7 @@ function LeftSidePanel() {
       <div className='flex items-center justify-between gap-5'>
         <div className='avatar'>
           <div className='w-14 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2'>
-            <img src='https://picsum.photos/200/200?random=1&grayscale' />
+            <img src='https://picsum.photos/200/200?random=1&grayscale' alt='Demo profile picture' />
           </div>
         </div>
         <div className='flex flex-col items-end'>

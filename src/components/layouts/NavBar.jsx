@@ -100,7 +100,7 @@ function NavBarLeft() {
 
 function NavLeftButton({ children, to, text, hasDropdown }) {
   return (
-    <li id='nav-left-button' tabIndex={0}>
+    <li tabIndex={0}>
       <Link to={to} className='justify-between'>
         {text}
         {hasDropdown && (
@@ -110,7 +110,7 @@ function NavLeftButton({ children, to, text, hasDropdown }) {
         )}
       </Link>
       {hasDropdown && (
-        <ul id='nav-center-button-submenu' className='w-56 p-2 ml-[-1px] menu bg-neutral rounded-box'>
+        <ul className='w-56 p-2 ml-[-1px] menu bg-neutral rounded-box'>
           {/* TODO How to use arrow keys to navigate between these submenu buttons, extending to <NavBarCenter> submenu */}
           {children}
         </ul>
@@ -191,11 +191,7 @@ function NavCenterButton({ children, to, text, hasDropdown }) {
           </svg>
         )}
       </NavLink>
-      {hasDropdown && (
-        <ul id='nav-center-button-submenu' className='w-56 p-2 menu bg-neutral rounded-box'>
-          {children}
-        </ul>
-      )}
+      {hasDropdown && <ul className='w-56 p-2 menu bg-neutral rounded-box'>{children}</ul>}
     </li>
   );
 }
