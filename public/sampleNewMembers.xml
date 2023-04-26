@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE memberList[
 <!ELEMENT memberList (member+)>
-<!ELEMENT member ( email, password, username, firstName, lastName, phone, age, gender, lineOne, lineTwo, suburb, postcode, state)>
+<!ELEMENT member ( email, password, username, firstName, lastName, phone, age, gender, lineOne, lineTwo, suburb, postcode, state, country)>
 <!ELEMENT email (#PCDATA)>
 <!ELEMENT password (#PCDATA)>
 <!ELEMENT username (#PCDATA)>

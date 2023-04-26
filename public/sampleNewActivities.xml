@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE activityList[
 <!ELEMENT activityList (activity+)>
-<!ELEMENT activity ( name, category, description, intensityLevel, maxPeopleAllowed, requirementOne, requirementTwo, price, durationMinutes)>
+<!ELEMENT activity (name, category, description, intensityLevel, maxPeopleAllowed, requirementOne, requirementTwo, durationMinutes, price)>
 <!ELEMENT name (#PCDATA)>
 <!ELEMENT category (#PCDATA)>
 <!ELEMENT description (#PCDATA)>
@@ -9,8 +9,8 @@
 <!ELEMENT maxPeopleAllowed (#PCDATA)>
 <!ELEMENT requirementOne (#PCDATA)>
 <!ELEMENT requirementTwo (#PCDATA)>
-<!ELEMENT price (#PCDATA)>
 <!ELEMENT durationMinutes (#PCDATA)>
+<!ELEMENT price (#PCDATA)>
 ]>
 <activityList>
   <activity>
