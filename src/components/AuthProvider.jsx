@@ -23,6 +23,7 @@ export default function AuthProvider({ children }) {
       return;
     }
     let ignore = false;
+    // Fetch GET /users/by_key/:access_key to attempt to get an obj called `user`
     getUserByKey(accessKey)
       .then(json => {
         if (!ignore) {
