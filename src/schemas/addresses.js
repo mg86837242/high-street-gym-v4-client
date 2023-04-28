@@ -17,6 +17,7 @@ export const addressAdminSchema = z.object({
   adminId: z.number(),
   _action: z.string().trim(),
 });
+
 export const addressTrainerSchema = z.object({
   lineOne: lineOneSchema,
   lineTwo: lineTwoSchema,
@@ -27,6 +28,7 @@ export const addressTrainerSchema = z.object({
   trainerId: z.number(),
   _action: z.string().trim(),
 });
+
 export const addressMemberSchema = z.object({
   lineOne: lineOneSchema,
   lineTwo: lineTwoSchema,

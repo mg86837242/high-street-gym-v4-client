@@ -36,58 +36,36 @@ function LeftSidePanel() {
       </div>
       <nav>
         <ul className='flex flex-col'>
-          <li>
-            <NavLink
-              to='activities'
-              className={({ isActive }) =>
-                `btn-ghost btn-sm btn flex h-full w-full items-center justify-start gap-2 px-2 py-1.5 font-normal ${
-                  isActive && 'btn-active'
-                }`
-              }
-            >
-              <span>
-                <FontAwesomeIcon icon={faDumbbell} className='h-4 w-4' />
-              </span>
-              <span className='flex items-center justify-start text-sm'>Manage Activities</span>
-            </NavLink>
-          </li>
+          <SidePanelMenuBtn to='activities' icon={faDumbbell} label='Manage Activities' />
           {auth.user?.role === 'Admin' && (
             <>
-              <li>
-                <NavLink
-                  to='blogs'
-                  className={({ isActive }) =>
-                    `btn-ghost btn-sm btn flex h-full w-full items-center justify-start gap-2 px-2 py-1.5 font-normal ${
-                      isActive && 'btn-active'
-                    }`
-                  }
-                >
-                  <span>
-                    <FontAwesomeIcon icon={faBlog} className='h-4 w-4' />
-                  </span>
-                  <span className='flex items-center justify-start text-sm'>Manage Blog Posts</span>
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to='members'
-                  className={({ isActive }) =>
-                    `btn-ghost btn-sm btn flex h-full w-full items-center justify-start gap-2 px-2 py-1.5 font-normal ${
-                      isActive && 'btn-active'
-                    }`
-                  }
-                >
-                  <span>
-                    <FontAwesomeIcon icon={faUsers} className='h-4 w-4' />
-                  </span>
-                  <span className='flex items-center justify-start text-sm'>Manage Members</span>
-                </NavLink>
-              </li>
+              <SidePanelMenuBtn to='blogs' icon={faBlog} label='Manage Blogs' />
+              <SidePanelMenuBtn to='members' icon={faUsers} label='Manage Members' />
             </>
           )}
         </ul>
       </nav>
     </div>
+  );
+}
+
+function SidePanelMenuBtn({ to, icon, label }) {
+  return (
+    <li>
+      <NavLink
+        to={to}
+        className={({ isActive }) =>
+          `btn-ghost btn-sm btn flex h-full w-full items-center justify-start gap-2 px-2 py-1.5 font-normal ${
+            isActive && 'btn-active'
+          }`
+        }
+      >
+        <span>
+          <FontAwesomeIcon icon={icon} className='h-4 w-4' />
+        </span>
+        <span className='flex items-center justify-start text-sm'>{label}</span>
+      </NavLink>
+    </li>
   );
 }
 
