@@ -18,7 +18,7 @@ export default function LoginPanel() {
   return (
     <div
       id='login-panel-wrapper'
-      className='flex flex-col w-full max-w-lg gap-8 px-5 pt-8 pb-5 sm:px-10 sm:pt-12 sm:pb-8 my-auto bg-neutral rounded-3xl shadow-[0_0_30px_15px_rgba(255,255,255,0.2)]'
+      className='my-auto flex w-full max-w-lg flex-col gap-8 rounded-3xl bg-neutral px-5 pb-5 pt-8 shadow-[0_0_30px_15px_rgba(255,255,255,0.2)] sm:px-10 sm:pb-8 sm:pt-12'
     >
       {auth.user ? (
         <Greetings />
@@ -36,12 +36,12 @@ export default function LoginPanel() {
 function Directions() {
   return (
     <div className='flex flex-col gap-5'>
-      <p className='text-3xl font-extrabold focus:outline-none text-primary-content'>Login to your account</p>
-      <p className='text-sm font-medium leading-none focus:outline-none text-primary-content'>
+      <p className='text-3xl font-extrabold text-primary-content focus:outline-none'>Login to your account</p>
+      <p className='text-sm font-medium leading-none text-primary-content focus:outline-none'>
         Don't have account?{' '}
         <Link
           to='/signup'
-          className={`text-sm font-medium leading-none underline cursor-pointer link link-primary focus:outline-none`}
+          className={`link-primary link cursor-pointer text-sm font-medium leading-none underline focus:outline-none`}
         >
           Sign up here
         </Link>
@@ -146,10 +146,10 @@ function LoginForm({ btnMsg, setBtnMsg, issues, setIssues, from }) {
   return (
     // NB `noValidate` is used to disable default HTML validation message(s))
     <form onSubmit={handleSubmit} noValidate>
-      <div id='email-input-group' className='w-full form-control'>
-        <label htmlFor='email' className='pt-0 label'>
-          <span className='text-white label-text'>Email:</span>
-          <span className='text-gray-500 label-text-alt'>Required</span>
+      <div id='email-input-group' className='form-control w-full'>
+        <label htmlFor='email' className='label pt-0'>
+          <span className='label-text text-white'>Email:</span>
+          <span className='label-text-alt text-gray-500'>Required</span>
         </label>
         <input
           id='email'
@@ -157,20 +157,20 @@ function LoginForm({ btnMsg, setBtnMsg, issues, setIssues, from }) {
           placeholder='Enter your email here'
           value={email}
           onChange={e => setEmail(e.target.value)}
-          className='w-full text-white input input-bordered input-primary'
+          className='input-bordered input-primary input w-full text-white'
         />
         <label htmlFor='email' className='label'>
           {issues?.email ? (
-            <span className='text-rose-500 label-text-alt'>{issues.email}</span>
+            <span className='label-text-alt text-rose-500'>{issues.email}</span>
           ) : (
-            <span className='text-gray-500 label-text-alt'>Validation info will appear here</span>
+            <span className='label-text-alt text-gray-500'>Validation info will appear here</span>
           )}
         </label>
       </div>
-      <div id='password-input-group' className='relative w-full form-control'>
-        <label htmlFor='password' className='pt-0 label'>
-          <span className='text-white label-text'>Password:</span>
-          <span className='text-gray-500 label-text-alt'>Required</span>
+      <div id='password-input-group' className='form-control relative w-full'>
+        <label htmlFor='password' className='label pt-0'>
+          <span className='label-text text-white'>Password:</span>
+          <span className='label-text-alt text-gray-500'>Required</span>
         </label>
         <input
           id='password'
@@ -178,17 +178,17 @@ function LoginForm({ btnMsg, setBtnMsg, issues, setIssues, from }) {
           placeholder='Enter your password here'
           value={password}
           onChange={e => setPassword(e.target.value)}
-          className='w-full text-white input input-bordered input-primary'
+          className='input-bordered input-primary input w-full text-white'
         />
         {/* NB `type=`button'`, which implies no default behavior, is a must have in order for this button to work */}
-        <button type='button' onClick={handleToggle} className='absolute right-0 mt-10 mr-3 cursor-pointer'>
-          <FontAwesomeIcon icon={icon} className='w-4 h-4' />
+        <button type='button' onClick={handleToggle} className='absolute right-0 mr-3 mt-10 cursor-pointer'>
+          <FontAwesomeIcon icon={icon} className='h-4 w-4' />
         </button>
         <label htmlFor='password' className='label'>
           {issues?.password ? (
-            <span className='text-rose-500 label-text-alt'>{issues.password}</span>
+            <span className='label-text-alt text-rose-500'>{issues.password}</span>
           ) : (
-            <span className='text-gray-500 label-text-alt'>Validation info will appear here</span>
+            <span className='label-text-alt text-gray-500'>Validation info will appear here</span>
           )}
         </label>
       </div>
@@ -221,19 +221,19 @@ function DemoLogins({ setBtnMsg, setIssues, from }) {
     <div className='flex justify-between gap-2'>
       <button
         onClick={() => handleClickDemoLogin('demomember@server.com', 'abcd1234')}
-        className={`h-fit flex-shrink shadow btn btn-outline btn-success btn-sm text-primary-content shadow-black/50`}
+        className={`btn-outline btn-success btn-sm btn h-fit flex-shrink text-primary-content shadow shadow-black/50`}
       >
         Demo Member Login
       </button>
       <button
         onClick={() => handleClickDemoLogin('demotrainer@server.com', 'abcd1234')}
-        className={`h-fit flex-shrink shadow btn btn-outline btn-warning btn-sm text-primary-content shadow-black/50`}
+        className={`btn-outline btn-warning btn-sm btn h-fit flex-shrink text-primary-content shadow shadow-black/50`}
       >
         Demo Trainer Login
       </button>
       <button
         onClick={() => handleClickDemoLogin('demoadmin@server.com', 'abcd1234')}
-        className={`h-fit flex-shrink shadow btn btn-outline btn-error btn-sm text-primary-content shadow-black/50`}
+        className={`btn-outline btn-error btn-sm btn h-fit flex-shrink text-primary-content shadow shadow-black/50`}
       >
         Demo Admin Login
       </button>
@@ -247,10 +247,10 @@ function Greetings() {
 
   return (
     <div className='flex flex-col gap-10'>
-      <p className='text-2xl font-extrabold leading-6 focus:outline-none text-primary-content'>
+      <p className='text-2xl font-extrabold leading-6 text-primary-content focus:outline-none'>
         Greetings, <span className='text-primary'>{auth.user?.username}!</span>
       </p>
-      <p className='text-2xl font-extrabold leading-6 focus:outline-none text-primary-content'>
+      <p className='text-2xl font-extrabold leading-6 text-primary-content focus:outline-none'>
         You have logged in as {auth.user?.role === 'Admin' ? 'an' : 'a'}{' '}
         <span className='text-primary'>{auth.user?.role && auth.user.role}!</span>
       </p>

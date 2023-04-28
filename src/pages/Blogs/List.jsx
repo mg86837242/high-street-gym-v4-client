@@ -17,26 +17,26 @@ export default function List() {
       blogs?.length ? (
         <>
           {blogs.map(({ id, title, body, createdAt, updatedAt, username }) => (
-            <div key={id} className='mb-12 border border-base-content rounded-3xl'>
+            <div key={id} className='mb-12 rounded-3xl border border-base-content'>
               <div className='flex'>
-                <div className='flex-shrink w-full px-4 py-2'>
-                  <h4 className='pb-2 font-medium leading-4 text-[13px]'>{username}</h4>
+                <div className='w-full flex-shrink px-4 py-2'>
+                  <h4 className='pb-2 text-[13px] font-medium leading-4'>{username}</h4>
                   <Link to={`${id}`}>
                     <h2 className='text-base font-bold leading-5 text-accent md:text-[22px] md:leading-7'>{title}</h2>
-                    <h3 className='hidden h-10 pt-1 overflow-hidden text-base leading-5 md:block text-ellipsis'>
+                    <h3 className='hidden h-10 overflow-hidden text-ellipsis pt-1 text-base leading-5 md:block'>
                       {removeTags(body)}
                     </h3>
                   </Link>
-                  <p className='pt-2 italic leading-5 text-[13px]'>Created at: {getDateNotation(createdAt)}</p>
+                  <p className='pt-2 text-[13px] italic leading-5'>Created at: {getDateNotation(createdAt)}</p>
                   {updatedAt && (
-                    <p className='italic leading-5 text-[13px]'>Updated at: {getDateNotation(updatedAt)}</p>
+                    <p className='text-[13px] italic leading-5'>Updated at: {getDateNotation(updatedAt)}</p>
                   )}
                 </div>
-                <Link to={`${id}`} className='flex-shrink-0 w-[200px]'>
+                <Link to={`${id}`} className='w-[200px] flex-shrink-0'>
                   <img
                     src={`https://picsum.photos/200/156?random=${id}`}
                     alt='Random blog picture'
-                    className='object-contain rounded-e-3xl'
+                    className='rounded-e-3xl object-contain'
                   />
                 </Link>
               </div>
@@ -46,7 +46,7 @@ export default function List() {
       ) : (
         <p className='my-4 text-center'>No blog has been found</p>
       ),
-    [blogs]
+    [blogs],
   );
   const myBlogList = useMemo(() => {
     const hasMyBlog = blogs.some(({ loginId }) => loginId === auth.user?.id);
@@ -55,33 +55,33 @@ export default function List() {
         {blogs.map(
           ({ id, title, body, loginId, createdAt, updatedAt, username }) =>
             loginId === auth.user?.id && (
-              <div key={id} className='mb-12 border border-base-content rounded-3xl'>
+              <div key={id} className='mb-12 rounded-3xl border border-base-content'>
                 <div className='flex'>
-                  <div className='flex-shrink w-full px-4 py-2'>
-                    <h4 className='pb-2 font-medium leading-4 text-[13px]'>{username}</h4>
+                  <div className='w-full flex-shrink px-4 py-2'>
+                    <h4 className='pb-2 text-[13px] font-medium leading-4'>{username}</h4>
                     <Link to={`${id}`}>
                       <h2 className='text-base font-bold leading-5 text-primary-content md:text-[22px] md:leading-7'>
                         {title}
                       </h2>
-                      <h3 className='hidden h-10 pt-1 overflow-hidden text-base leading-5 md:block text-ellipsis'>
+                      <h3 className='hidden h-10 overflow-hidden text-ellipsis pt-1 text-base leading-5 md:block'>
                         {removeTags(body)}
                       </h3>
                     </Link>
-                    <p className='pt-2 italic leading-5 text-[13px]'>Created at: {getDateNotation(createdAt)}</p>
+                    <p className='pt-2 text-[13px] italic leading-5'>Created at: {getDateNotation(createdAt)}</p>
                     {updatedAt && (
-                      <p className='italic leading-5 text-[13px]'>Updated at: {getDateNotation(updatedAt)}</p>
+                      <p className='text-[13px] italic leading-5'>Updated at: {getDateNotation(updatedAt)}</p>
                     )}
                   </div>
-                  <Link to={`${id}`} className='flex-shrink-0 w-[200px]'>
+                  <Link to={`${id}`} className='w-[200px] flex-shrink-0'>
                     <img
                       src={`https://picsum.photos/200/156?random=${id}`}
                       alt='Random blog picture'
-                      className='object-contain rounded-e-3xl'
+                      className='rounded-e-3xl object-contain'
                     />
                   </Link>
                 </div>
               </div>
-            )
+            ),
         )}
       </>
     ) : (
@@ -103,7 +103,7 @@ export default function List() {
               value={filter}
               onChange={e => setFilter(e.target.value)}
               aria-label='Dropdown list for filtering blogs'
-              className='w-full max-w-xs select select-primary select-sm'
+              className='select-primary select select-sm w-full max-w-xs'
             >
               <option value='all'>All bookings</option>
               <option value='my'>My bookings</option>
@@ -118,13 +118,13 @@ export default function List() {
       <section className='lg:col-[1_/_8]'>
         <div>{filter === 'all' ? allBlogList : myBlogList}</div>
       </section>
-      <aside className='hidden lg:block lg:col-[9_/_13]'>
+      <aside className='hidden lg:col-[9_/_13] lg:block'>
         {auth.user ? (
           <>
             <select
               value={filter}
               onChange={e => setFilter(e.target.value)}
-              className='w-full max-w-xs select select-primary select-sm'
+              className='select-primary select select-sm w-full max-w-xs'
             >
               <option value='all'>All bookings</option>
               <option value='my'>My bookings</option>

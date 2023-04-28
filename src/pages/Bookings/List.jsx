@@ -34,7 +34,7 @@ function BookingListMemberView({ bookings, authUserMemberId }) {
   const allBookingList = useMemo(
     () =>
       bookings?.length ? (
-        <ul className='grid justify-items-center content-start w-full gap-4'>
+        <ul className='grid w-full content-start justify-items-center gap-4'>
           {bookings.map(
             ({
               id,
@@ -48,70 +48,70 @@ function BookingListMemberView({ bookings, authUserMemberId }) {
               durationMinutes,
             }) =>
               authUserMemberId === memberId ? (
-                <li id={`booking-list-card-${id}`} key={id} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
+                <li id={`booking-list-card-${id}`} key={id} className='w-full max-w-[22rem] rounded-lg bg-base-300'>
                   <NavLink
                     to={`${id}`}
                     className={({ isActive, isPending }) =>
-                      `grid grid-cols-2 px-4 xl:px-6 py-2 ${isActive && 'ring ring-secondary-focus rounded-lg'} ${
+                      `grid grid-cols-2 px-4 py-2 xl:px-6 ${isActive && 'rounded-lg ring ring-secondary-focus'} ${
                         isPending && ''
                       }`
                     }
                   >
                     <p className='p-1'>Booking ID:</p>
                     <p className='p-1'>{id}</p>
-                    <p className='p-1 bg-base-100'>Member:</p>
-                    <p className='p-1 bg-base-100'>
+                    <p className='bg-base-100 p-1'>Member:</p>
+                    <p className='bg-base-100 p-1'>
                       {memberFirstName} {memberLastName}
                     </p>
                     <p className='p-1'>Trainer:</p>
                     <p className='p-1'>
                       {trainerFirstName} {trainerLastName}
                     </p>
-                    <p className='p-1 bg-base-100'>Activity:</p>
-                    <p className='p-1 bg-base-100'>{activityName}</p>
+                    <p className='bg-base-100 p-1'>Activity:</p>
+                    <p className='bg-base-100 p-1'>{activityName}</p>
                     <p className='p-1'>Date:</p>
                     <p className='p-1'>{getDateNotation(dateTime)}</p>
-                    <p className='p-1 bg-base-100'>Time:</p>
-                    <p className='p-1 bg-base-100'>{dateTime.slice(-8)}</p>
+                    <p className='bg-base-100 p-1'>Time:</p>
+                    <p className='bg-base-100 p-1'>{dateTime.slice(-8)}</p>
                     <p className='p-1'>Duration:</p>
                     <p className='p-1'>{durationMinutes} minutes</p>
                   </NavLink>
                 </li>
               ) : (
-                <li id={`booking-list-card-${id}`} key={id} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
-                  <NavLink to={``} className={`grid grid-cols-2 px-4 xl:px-6 py-2 cursor-auto`}>
+                <li id={`booking-list-card-${id}`} key={id} className='w-full max-w-[22rem] rounded-lg bg-base-300'>
+                  <NavLink to={``} className={`grid cursor-auto grid-cols-2 px-4 py-2 xl:px-6`}>
                     <p className='p-1'>Booking ID:</p>
                     <p className='p-1'>{id}</p>
-                    <p className='p-1 bg-base-100'>Member:</p>
-                    <p className='p-1 bg-base-100'>
+                    <p className='bg-base-100 p-1'>Member:</p>
+                    <p className='bg-base-100 p-1'>
                       {memberFirstName} {memberLastName}
                     </p>
                     <p className='p-1'>Trainer:</p>
                     <p className='p-1'>
                       {trainerFirstName} {trainerLastName}
                     </p>
-                    <p className='p-1 bg-base-100'>Activity:</p>
-                    <p className='p-1 bg-base-100'>{activityName}</p>
+                    <p className='bg-base-100 p-1'>Activity:</p>
+                    <p className='bg-base-100 p-1'>{activityName}</p>
                     <p className='p-1'>Date:</p>
                     <p className='p-1'>{getDateNotation(dateTime)}</p>
-                    <p className='p-1 bg-base-100'>Time:</p>
-                    <p className='p-1 bg-base-100'>{dateTime.slice(-8)}</p>
+                    <p className='bg-base-100 p-1'>Time:</p>
+                    <p className='bg-base-100 p-1'>{dateTime.slice(-8)}</p>
                     <p className='p-1'>Duration:</p>
                     <p className='p-1'>{durationMinutes} minutes</p>
                   </NavLink>
                 </li>
-              )
+              ),
           )}
         </ul>
       ) : (
-        <p className='text-center mt-4'>No booking found on this date</p>
+        <p className='mt-4 text-center'>No booking found on this date</p>
       ),
-    [bookings, authUserMemberId]
+    [bookings, authUserMemberId],
   );
   const myBookingList = useMemo(() => {
     const hasMyBooking = bookings.some(({ memberId }) => memberId === authUserMemberId);
     return hasMyBooking ? (
-      <ul className='grid justify-items-center content-start w-full gap-4'>
+      <ul className='grid w-full content-start justify-items-center gap-4'>
         {bookings.map(
           ({
             id,
@@ -125,40 +125,40 @@ function BookingListMemberView({ bookings, authUserMemberId }) {
             durationMinutes,
           }) =>
             memberId === authUserMemberId && (
-              <li id={`booking-list-card-${id}`} key={id} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
+              <li id={`booking-list-card-${id}`} key={id} className='w-full max-w-[22rem] rounded-lg bg-base-300'>
                 <NavLink
                   to={`${id}`}
                   className={({ isActive, isPending }) =>
-                    `grid grid-cols-2 px-4 xl:px-6 py-2 ${isActive && 'ring ring-secondary-focus rounded-lg'} ${
+                    `grid grid-cols-2 px-4 py-2 xl:px-6 ${isActive && 'rounded-lg ring ring-secondary-focus'} ${
                       isPending && ''
                     }`
                   }
                 >
                   <p className='p-1'>Booking ID:</p>
                   <p className='p-1'>{id}</p>
-                  <p className='p-1 bg-base-100'>Member:</p>
-                  <p className='p-1 bg-base-100'>
+                  <p className='bg-base-100 p-1'>Member:</p>
+                  <p className='bg-base-100 p-1'>
                     {memberFirstName} {memberLastName}
                   </p>
                   <p className='p-1'>Trainer:</p>
                   <p className='p-1'>
                     {trainerFirstName} {trainerLastName}
                   </p>
-                  <p className='p-1 bg-base-100'>Activity:</p>
-                  <p className='p-1 bg-base-100'>{activityName}</p>
+                  <p className='bg-base-100 p-1'>Activity:</p>
+                  <p className='bg-base-100 p-1'>{activityName}</p>
                   <p className='p-1'>Date:</p>
                   <p className='p-1'>{getDateNotation(dateTime)}</p>
-                  <p className='p-1 bg-base-100'>Time:</p>
-                  <p className='p-1 bg-base-100'>{dateTime.slice(-8)}</p>
+                  <p className='bg-base-100 p-1'>Time:</p>
+                  <p className='bg-base-100 p-1'>{dateTime.slice(-8)}</p>
                   <p className='p-1'>Duration:</p>
                   <p className='p-1'>{durationMinutes} minutes</p>
                 </NavLink>
               </li>
-            )
+            ),
         )}
       </ul>
     ) : (
-      <p className='text-center mt-4'>No booking found on this date</p>
+      <p className='mt-4 text-center'>No booking found on this date</p>
     );
   }, [bookings, authUserMemberId]);
 
@@ -166,13 +166,13 @@ function BookingListMemberView({ bookings, authUserMemberId }) {
     <>
       <div
         id='booking-list-wrapper'
-        className='flex flex-col items-center gap-5 w-full col-[1_/_2] row-[2_/_3] lg:col-[2_/_3] lg:row-[1_/_2]'
+        className='col-[1_/_2] row-[2_/_3] flex w-full flex-col items-center gap-5 lg:col-[2_/_3] lg:row-[1_/_2]'
       >
         <select
           value={filter}
           onChange={e => setFilter(e.target.value)}
           aria-label='Dropdown list for filtering bookings'
-          className='select select-primary select-sm w-full max-w-xs'
+          className='select-primary select select-sm w-full max-w-xs'
         >
           <option value='all'>All bookings</option>
           <option value='my'>My bookings</option>
@@ -189,7 +189,7 @@ function BookingListTrainerView({ bookings, authUserTrainerId }) {
   const allBookingList = useMemo(
     () =>
       bookings?.length ? (
-        <ul className='grid justify-items-center content-start w-full gap-4'>
+        <ul className='grid w-full content-start justify-items-center gap-4'>
           {bookings.map(
             ({
               id,
@@ -203,70 +203,70 @@ function BookingListTrainerView({ bookings, authUserTrainerId }) {
               durationMinutes,
             }) =>
               authUserTrainerId === trainerId ? (
-                <li id={`booking-list-card-${id}`} key={id} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
+                <li id={`booking-list-card-${id}`} key={id} className='w-full max-w-[22rem] rounded-lg bg-base-300'>
                   <NavLink
                     to={`${id}`}
                     className={({ isActive, isPending }) =>
-                      `grid grid-cols-2 px-4 xl:px-6 py-2 ${isActive && 'ring ring-secondary-focus rounded-lg'} ${
+                      `grid grid-cols-2 px-4 py-2 xl:px-6 ${isActive && 'rounded-lg ring ring-secondary-focus'} ${
                         isPending && ''
                       }`
                     }
                   >
                     <p className='p-1'>Booking ID:</p>
                     <p className='p-1'>{id}</p>
-                    <p className='p-1 bg-base-100'>Member:</p>
-                    <p className='p-1 bg-base-100'>
+                    <p className='bg-base-100 p-1'>Member:</p>
+                    <p className='bg-base-100 p-1'>
                       {memberFirstName} {memberLastName}
                     </p>
                     <p className='p-1'>Trainer:</p>
                     <p className='p-1'>
                       {trainerFirstName} {trainerLastName}
                     </p>
-                    <p className='p-1 bg-base-100'>Activity:</p>
-                    <p className='p-1 bg-base-100'>{activityName}</p>
+                    <p className='bg-base-100 p-1'>Activity:</p>
+                    <p className='bg-base-100 p-1'>{activityName}</p>
                     <p className='p-1'>Date:</p>
                     <p className='p-1'>{getDateNotation(dateTime)}</p>
-                    <p className='p-1 bg-base-100'>Time:</p>
-                    <p className='p-1 bg-base-100'>{dateTime.slice(-8)}</p>
+                    <p className='bg-base-100 p-1'>Time:</p>
+                    <p className='bg-base-100 p-1'>{dateTime.slice(-8)}</p>
                     <p className='p-1'>Duration:</p>
                     <p className='p-1'>{durationMinutes} minutes</p>
                   </NavLink>
                 </li>
               ) : (
-                <li id={`booking-list-card-${id}`} key={id} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
-                  <NavLink to={``} className={`grid grid-cols-2 px-4 xl:px-6 py-2 cursor-auto`}>
+                <li id={`booking-list-card-${id}`} key={id} className='w-full max-w-[22rem] rounded-lg bg-base-300'>
+                  <NavLink to={``} className={`grid cursor-auto grid-cols-2 px-4 py-2 xl:px-6`}>
                     <p className='p-1'>Booking ID:</p>
                     <p className='p-1'>{id}</p>
-                    <p className='p-1 bg-base-100'>Member:</p>
-                    <p className='p-1 bg-base-100'>
+                    <p className='bg-base-100 p-1'>Member:</p>
+                    <p className='bg-base-100 p-1'>
                       {memberFirstName} {memberLastName}
                     </p>
                     <p className='p-1'>Trainer:</p>
                     <p className='p-1'>
                       {trainerFirstName} {trainerLastName}
                     </p>
-                    <p className='p-1 bg-base-100'>Activity:</p>
-                    <p className='p-1 bg-base-100'>{activityName}</p>
+                    <p className='bg-base-100 p-1'>Activity:</p>
+                    <p className='bg-base-100 p-1'>{activityName}</p>
                     <p className='p-1'>Date:</p>
                     <p className='p-1'>{getDateNotation(dateTime)}</p>
-                    <p className='p-1 bg-base-100'>Time:</p>
-                    <p className='p-1 bg-base-100'>{dateTime.slice(-8)}</p>
+                    <p className='bg-base-100 p-1'>Time:</p>
+                    <p className='bg-base-100 p-1'>{dateTime.slice(-8)}</p>
                     <p className='p-1'>Duration:</p>
                     <p className='p-1'>{durationMinutes} minutes</p>
                   </NavLink>
                 </li>
-              )
+              ),
           )}
         </ul>
       ) : (
-        <p className='text-center mt-4'>No booking found on this date</p>
+        <p className='mt-4 text-center'>No booking found on this date</p>
       ),
-    [bookings, authUserTrainerId]
+    [bookings, authUserTrainerId],
   );
   const myBookingList = useMemo(() => {
     const hasMyBooking = bookings.some(({ trainerId }) => trainerId === authUserTrainerId);
     return hasMyBooking ? (
-      <ul className='grid justify-items-center content-start w-full gap-4'>
+      <ul className='grid w-full content-start justify-items-center gap-4'>
         {bookings.map(
           ({
             id,
@@ -280,40 +280,40 @@ function BookingListTrainerView({ bookings, authUserTrainerId }) {
             durationMinutes,
           }) =>
             trainerId === authUserTrainerId && (
-              <li id={`booking-list-card-${id}`} key={id} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
+              <li id={`booking-list-card-${id}`} key={id} className='w-full max-w-[22rem] rounded-lg bg-base-300'>
                 <NavLink
                   to={`${id}`}
                   className={({ isActive, isPending }) =>
-                    `grid grid-cols-2 px-4 xl:px-6 py-2 ${isActive && 'ring ring-secondary-focus rounded-lg'} ${
+                    `grid grid-cols-2 px-4 py-2 xl:px-6 ${isActive && 'rounded-lg ring ring-secondary-focus'} ${
                       isPending && ''
                     }`
                   }
                 >
                   <p className='p-1'>Booking ID:</p>
                   <p className='p-1'>{id}</p>
-                  <p className='p-1 bg-base-100'>Member:</p>
-                  <p className='p-1 bg-base-100'>
+                  <p className='bg-base-100 p-1'>Member:</p>
+                  <p className='bg-base-100 p-1'>
                     {memberFirstName} {memberLastName}
                   </p>
                   <p className='p-1'>Trainer:</p>
                   <p className='p-1'>
                     {trainerFirstName} {trainerLastName}
                   </p>
-                  <p className='p-1 bg-base-100'>Activity:</p>
-                  <p className='p-1 bg-base-100'>{activityName}</p>
+                  <p className='bg-base-100 p-1'>Activity:</p>
+                  <p className='bg-base-100 p-1'>{activityName}</p>
                   <p className='p-1'>Date:</p>
                   <p className='p-1'>{getDateNotation(dateTime)}</p>
-                  <p className='p-1 bg-base-100'>Time:</p>
-                  <p className='p-1 bg-base-100'>{dateTime.slice(-8)}</p>
+                  <p className='bg-base-100 p-1'>Time:</p>
+                  <p className='bg-base-100 p-1'>{dateTime.slice(-8)}</p>
                   <p className='p-1'>Duration:</p>
                   <p className='p-1'>{durationMinutes} minutes</p>
                 </NavLink>
               </li>
-            )
+            ),
         )}
       </ul>
     ) : (
-      <p className='text-center mt-4'>No booking found on this date</p>
+      <p className='mt-4 text-center'>No booking found on this date</p>
     );
   }, [bookings, authUserTrainerId]);
 
@@ -321,13 +321,13 @@ function BookingListTrainerView({ bookings, authUserTrainerId }) {
     <>
       <div
         id='booking-list-wrapper'
-        className='flex flex-col items-center gap-5 w-full col-[1_/_2] row-[2_/_3] lg:col-[2_/_3] lg:row-[1_/_2]'
+        className='col-[1_/_2] row-[2_/_3] flex w-full flex-col items-center gap-5 lg:col-[2_/_3] lg:row-[1_/_2]'
       >
         <select
           value={filter}
           onChange={e => setFilter(e.target.value)}
           aria-label='Dropdown list for filtering bookings'
-          className='select select-primary select-sm w-full max-w-xs'
+          className='select-primary select select-sm w-full max-w-xs'
         >
           <option value='all'>All bookings</option>
           <option value='my'>My bookings</option>
@@ -342,7 +342,7 @@ function BookingListTrainerView({ bookings, authUserTrainerId }) {
 function BookingListAdminView({ bookings }) {
   const bookingList = useMemo(
     () => (
-      <ul className='grid justify-items-center content-start w-full gap-4'>
+      <ul className='grid w-full content-start justify-items-center gap-4'>
         {bookings.map(
           ({
             id,
@@ -354,40 +354,40 @@ function BookingListAdminView({ bookings }) {
             dateTime,
             durationMinutes,
           }) => (
-            <li id={`booking-list-card-${id}`} key={id} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
+            <li id={`booking-list-card-${id}`} key={id} className='w-full max-w-[22rem] rounded-lg bg-base-300'>
               <NavLink
                 to={`${id}`}
                 className={({ isActive, isPending }) =>
-                  `grid grid-cols-2 px-4 xl:px-6 py-2 ${isActive && 'ring ring-secondary-focus rounded-lg'} ${
+                  `grid grid-cols-2 px-4 py-2 xl:px-6 ${isActive && 'rounded-lg ring ring-secondary-focus'} ${
                     isPending && ''
                   }`
                 }
               >
                 <p className='p-1'>Booking ID:</p>
                 <p className='p-1'>{id}</p>
-                <p className='p-1 bg-base-100'>Member:</p>
-                <p className='p-1 bg-base-100'>
+                <p className='bg-base-100 p-1'>Member:</p>
+                <p className='bg-base-100 p-1'>
                   {memberFirstName} {memberLastName}
                 </p>
                 <p className='p-1'>Trainer:</p>
                 <p className='p-1'>
                   {trainerFirstName} {trainerLastName}
                 </p>
-                <p className='p-1 bg-base-100'>Activity:</p>
-                <p className='p-1 bg-base-100'>{activityName}</p>
+                <p className='bg-base-100 p-1'>Activity:</p>
+                <p className='bg-base-100 p-1'>{activityName}</p>
                 <p className='p-1'>Date:</p>
                 <p className='p-1'>{getDateNotation(dateTime)}</p>
-                <p className='p-1 bg-base-100'>Time:</p>
-                <p className='p-1 bg-base-100'>{dateTime.slice(-8)}</p>
+                <p className='bg-base-100 p-1'>Time:</p>
+                <p className='bg-base-100 p-1'>{dateTime.slice(-8)}</p>
                 <p className='p-1'>Duration:</p>
                 <p className='p-1'>{durationMinutes} minutes</p>
               </NavLink>
             </li>
-          )
+          ),
         )}
       </ul>
     ),
-    [bookings]
+    [bookings],
   );
 
   return (
@@ -403,7 +403,7 @@ function NoBookingAdminView() {
     <>
       <div
         id='empty-list-wrapper'
-        className='grid w-full place-items-center col-[1_/_2] row-[2_/_3] lg:col-[2_/_3] lg:row-[1_/_2] lg:min-h-[80vh] lg:sticky lg:top-28'
+        className='col-[1_/_2] row-[2_/_3] grid w-full place-items-center lg:sticky lg:top-28 lg:col-[2_/_3] lg:row-[1_/_2] lg:min-h-[80vh]'
       >
         <p className='text-lg'>😢 No booking found on this date.</p>
       </div>
@@ -417,7 +417,7 @@ function BookingListGuestView({ bookings }) {
     () => (
       <ul
         id='booking-list-wrapper'
-        className='grid justify-items-center content-start w-full gap-4 md:grid-cols-2 2xl:grid-cols-3 col-[1_/_2] row-[2_/_4] lg:col-[2_/_4] lg:row-[1_/_2]'
+        className='col-[1_/_2] row-[2_/_4] grid w-full content-start justify-items-center gap-4 md:grid-cols-2 lg:col-[2_/_4] lg:row-[1_/_2] 2xl:grid-cols-3'
       >
         {bookings.map(
           ({
@@ -430,33 +430,33 @@ function BookingListGuestView({ bookings }) {
             dateTime,
             durationMinutes,
           }) => (
-            <li id={`booking-list-card-${id}`} key={id} className='w-full rounded-lg bg-base-300 max-w-[22rem]'>
-              <div className='grid grid-cols-2 px-4 xl:px-6 py-2'>
+            <li id={`booking-list-card-${id}`} key={id} className='w-full max-w-[22rem] rounded-lg bg-base-300'>
+              <div className='grid grid-cols-2 px-4 py-2 xl:px-6'>
                 <p className='p-1'>Booking ID:</p>
                 <p className='p-1'>{id}</p>
-                <p className='p-1 bg-base-100'>Member:</p>
-                <p className='p-1 bg-base-100'>
+                <p className='bg-base-100 p-1'>Member:</p>
+                <p className='bg-base-100 p-1'>
                   {memberFirstName} {memberLastName}
                 </p>
                 <p className='p-1'>Trainer:</p>
                 <p className='p-1'>
                   {trainerFirstName} {trainerLastName}
                 </p>
-                <p className='p-1 bg-base-100'>Activity:</p>
-                <p className='p-1 bg-base-100'>{activityName}</p>
+                <p className='bg-base-100 p-1'>Activity:</p>
+                <p className='bg-base-100 p-1'>{activityName}</p>
                 <p className='p-1'>Date:</p>
                 <p className='p-1'>{getDateNotation(dateTime)}</p>
-                <p className='p-1 bg-base-100'>Time:</p>
-                <p className='p-1 bg-base-100'>{dateTime.slice(-8)}</p>
+                <p className='bg-base-100 p-1'>Time:</p>
+                <p className='bg-base-100 p-1'>{dateTime.slice(-8)}</p>
                 <p className='p-1'>Duration:</p>
                 <p className='p-1'>{durationMinutes} minutes</p>
               </div>
             </li>
-          )
+          ),
         )}
       </ul>
     ),
-    [bookings]
+    [bookings],
   );
 
   return <>{bookingList}</>;
@@ -466,7 +466,7 @@ function NoBookingGuestView() {
   return (
     <div
       id='empty-list-wrapper'
-      className='grid w-full place-items-center col-[1_/_2] row-[2_/_4] lg:col-[2_/_4] lg:row-[1_/_2] lg:min-h-[80vh] lg:sticky lg:top-28'
+      className='col-[1_/_2] row-[2_/_4] grid w-full place-items-center lg:sticky lg:top-28 lg:col-[2_/_4] lg:row-[1_/_2] lg:min-h-[80vh]'
     >
       <p className='text-lg'>😢 No booking found on this date.</p>
     </div>

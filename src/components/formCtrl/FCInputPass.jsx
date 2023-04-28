@@ -13,10 +13,10 @@ export default function FCInputPass({ issue, initialValue }) {
   }
 
   return (
-    <div id='password-group' className='relative w-full form-control'>
-      <label htmlFor='password' className='py-1 3xl:py-2 label'>
-        <span className='text-accent label-text'>Password:</span>
-        <span className='text-gray-500 label-text-alt'>Required</span>
+    <div id='password-group' className='form-control relative w-full'>
+      <label htmlFor='password' className='label py-1 3xl:py-2'>
+        <span className='label-text text-accent'>Password:</span>
+        <span className='label-text-alt text-gray-500'>Required</span>
       </label>
       <input
         name='password'
@@ -24,16 +24,16 @@ export default function FCInputPass({ issue, initialValue }) {
         type={type}
         placeholder='Enter your password here'
         defaultValue={initialValue}
-        className='w-full h-10 text-accent input input-primary 3xl:h-12'
+        className='input-primary input h-10 w-full text-accent 3xl:h-12'
       />
-      <button type='button' onClick={handleToggle} className='absolute right-0 mr-3 cursor-pointer mt-9 3xl:mt-12'>
-        <FontAwesomeIcon icon={icon} className='w-4 h-4' />
+      <button type='button' onClick={handleToggle} className='absolute right-0 mr-3 mt-9 cursor-pointer 3xl:mt-12'>
+        <FontAwesomeIcon icon={icon} className='h-4 w-4' />
       </button>
-      <label htmlFor='password' className='py-1 label'>
+      <label htmlFor='password' className='label py-1'>
         {issue ? (
-          <span className='text-rose-500 label-text-alt'>{issue}</span>
+          <span className='label-text-alt text-rose-500'>{issue}</span>
         ) : (
-          <span className='text-gray-500 label-text-alt'>Validation information will appear here</span>
+          <span className='label-text-alt text-gray-500'>Validation information will appear here</span>
         )}
       </label>
     </div>

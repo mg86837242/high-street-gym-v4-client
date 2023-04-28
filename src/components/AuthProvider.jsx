@@ -57,7 +57,7 @@ export default function AuthProvider({ children }) {
         throw new Error(JSON.stringify(error));
       }
     },
-    [user]
+    [user],
   );
 
   const handleLogout = useCallback(
@@ -71,7 +71,7 @@ export default function AuthProvider({ children }) {
       setUser(null);
       callback();
     },
-    [user]
+    [user],
   );
 
   const value = useMemo(
@@ -80,7 +80,7 @@ export default function AuthProvider({ children }) {
       handleLogin,
       handleLogout,
     }),
-    [user, handleLogin, handleLogout]
+    [user, handleLogin, handleLogout],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

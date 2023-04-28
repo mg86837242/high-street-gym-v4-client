@@ -12,7 +12,7 @@ export function MngActivities() {
   const { activities } = useLoaderData();
 
   return (
-    <div className='flex flex-col w-full gap-0 overflow-x-auto'>
+    <div className='flex w-full flex-col gap-0 overflow-x-auto'>
       <ListActivities activities={activities} />
       <Outlet />
     </div>
@@ -66,14 +66,14 @@ function ListActivities({ activities }) {
               </fetcher.Form>
             </td>
           </tr>
-        )
+        ),
       ),
-    [activities]
+    [activities],
   );
 
   return (
-    <div className='py-6 overflow-x-auto'>
-      <table className='table w-full table-compact'>
+    <div className='overflow-x-auto py-6'>
+      <table className='table-compact table w-full'>
         <thead>
           <tr>
             <th>id</th>
@@ -102,16 +102,16 @@ export function NewActivity() {
 
   return (
     <div className='flex flex-col gap-5 py-6'>
-      <div className='flex flex-col-reverse items-end gap-5 lg:flex-row lg:justify-between lg:items-start lg:gap-0'>
+      <div className='flex flex-col-reverse items-end gap-5 lg:flex-row lg:items-start lg:justify-between lg:gap-0'>
         <div className='flex flex-col gap-5'>
           <fetcher.Form
             method='post'
             action='new-upload-xml'
             encType='multipart/form-data'
-            className='flex flex-col items-end gap-5 lg:items-center lg:flex-row'
+            className='flex flex-col items-end gap-5 lg:flex-row lg:items-center'
           >
             <label htmlFor='new-activity-xml' className='flex-shrink-0'>
-              <span className='flex-shrink-0 label-text'>Import New Activity by XML: </span>
+              <span className='label-text flex-shrink-0'>Import New Activity by XML: </span>
             </label>
             <input
               name='new-activity-xml'
@@ -119,12 +119,12 @@ export function NewActivity() {
               type='file'
               accept='.xml'
               onChange={e => setFile(e.target.files[0])}
-              className='w-full max-w-xs shadow file-input file-input-bordered file-input-sm shadow-black/50'
+              className='file-input-bordered file-input file-input-sm w-full max-w-xs shadow shadow-black/50'
             />
             <Btn2Sm>Submit</Btn2Sm>
           </fetcher.Form>
         </div>
-        <div className='m-0 divider lg:hidden' />
+        <div className='divider m-0 lg:hidden' />
         <fetcher.Form method='post' action='new'>
           <Btn2Sm>Create New</Btn2Sm>
         </fetcher.Form>
@@ -139,7 +139,7 @@ export function NewActivity() {
       </p>
       <p className='text-right lg:text-left'>
         👉 You can try upload the{' '}
-        <Link to='/sampleNewActivities.xml' target='_blank' download className='link link-primary'>
+        <Link to='/sampleNewActivities.xml' target='_blank' download className='link-primary link'>
           sample XML
         </Link>{' '}
         to create new activities:
@@ -167,18 +167,18 @@ export function EditActivity() {
   useEffect(() => reset(activity), [reset, activity]);
 
   return (
-    <div className='grid py-6 place-items-center'>
+    <div className='grid place-items-center py-6'>
       <form
         onSubmit={handleSubmit(data => {
           const sanitizedData = convertEmptyStrToNull(data);
           submit({ body: JSON.stringify(sanitizedData) }, { method: 'post' });
         })}
         noValidate
-        className='grid w-full grid-cols-2 justify-items-center xl:grid-cols-3 gap-x-5'
+        className='grid w-full grid-cols-2 justify-items-center gap-x-5 xl:grid-cols-3'
       >
         <FCRHFSm label='Activity Name' register={register('name')} issue={errors.name?.message} />
         <FCRHFSm label='Category' issue={errors.category?.message} isRequired={false}>
-          <select {...register('category')} className='font-normal select select-bordered select-sm'>
+          <select {...register('category')} className='select-bordered select select-sm font-normal'>
             <option value=''>-- Choose Category --</option>
             <option value='Aerobic'>Aerobic</option>
             <option value='Strength'>Strength</option>
@@ -193,7 +193,7 @@ export function EditActivity() {
           isRequired={false}
         />
         <FCRHFSm label='Intensity Level' issue={errors.intensityLevel?.message} isRequired={false}>
-          <select {...register('intensityLevel')} className='font-normal select select-bordered select-sm'>
+          <select {...register('intensityLevel')} className='select-bordered select select-sm font-normal'>
             <option value=''>-- Choose Intensity Level --</option>
             <option value='Low'>Low</option>
             <option value='Medium'>Medium</option>
@@ -234,7 +234,7 @@ export function EditActivity() {
           issue={errors.price?.message}
           isRequired={false}
         />
-        <div className='flex justify-end w-full col-span-2 gap-10 py-6 xl:col-span-3'>
+        <div className='col-span-2 flex w-full justify-end gap-10 py-6 xl:col-span-3'>
           <Btn2Sm w='w-20'>Save</Btn2Sm>
           <Btn1Sm type='button' onClick={() => navigate(-1)} w='w-20'>
             Cancel

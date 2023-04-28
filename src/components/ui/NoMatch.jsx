@@ -8,15 +8,15 @@ export default function NotMatch() {
   return (
     <div
       id='canvas'
-      className='flex flex-col items-center w-full h-screen pb-8 md:pb-0 bg-base-300 bg-[url("/src/assets/no-match-view.webp")] bg-cover bg-center'
+      className='flex h-screen w-full flex-col items-center bg-base-300 bg-[url("/src/assets/no-match-view.webp")] bg-cover bg-center pb-8 md:pb-0'
     >
       <NavBarMinimal />
-      <div className='flex items-center justify-center w-full h-full p-6'>
-        <div className='mb-16 ml-0 shadow-xl card w-[500px]] h-[250px] bg-base-300/80 lg:ml-[520px]'>
+      <div className='flex h-full w-full items-center justify-center p-6'>
+        <div className='w-[500px]] card mb-16 ml-0 h-[250px] bg-base-300/80 shadow-xl lg:ml-[520px]'>
           <div className='card-body'>
-            <h1 className='text-4xl card-title'>404 - PAGE NOT FOUND</h1>
+            <h1 className='card-title text-4xl'>404 - PAGE NOT FOUND</h1>
             <p className='text-base'>You have landed in the middle of nowhere.</p>
-            <div className='justify-end card-actions'>
+            <div className='card-actions justify-end'>
               <Btn2 onClick={() => navigate('/', { replace: true })}>Go Home</Btn2>
             </div>
           </div>

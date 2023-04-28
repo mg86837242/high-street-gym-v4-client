@@ -1,10 +1,10 @@
 export default function Feature({ children }) {
   return (
-    <div id='feature-1-wrapper' className='grid w-full gap-10 place-items-center'>
-      <h1 className='w-full text-center text-secondary max-w-screen-2xl'>
+    <div id='feature-1-wrapper' className='grid w-full place-items-center gap-10'>
+      <h1 className='w-full max-w-screen-2xl text-center text-secondary'>
         We offer a variety range of group exercise sessions
       </h1>
-      <p className='w-full text-center max-w-screen-2xl'>
+      <p className='w-full max-w-screen-2xl text-center'>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea minima, veritatis repellendus perspiciatis
         consequuntur impedit eos, sapiente reiciendis unde, corrupti excepturi. Modi quam dignissimos dolor,
         necessitatibus asperiores voluptas quo error, alias expedita voluptatibus iure neque aliquid aut? Quisquam,

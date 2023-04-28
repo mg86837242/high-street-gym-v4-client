@@ -12,7 +12,7 @@ export default function Breadcrumbs() {
   // .map((match) => match.handle.crumb(match.params, match.data));
 
   return (
-    <div className='text-sm breadcrumbs'>
+    <div className='breadcrumbs text-sm'>
       <ul>
         {crumbs.map((crumb, i) => (
           <li key={i}>{crumb}</li>

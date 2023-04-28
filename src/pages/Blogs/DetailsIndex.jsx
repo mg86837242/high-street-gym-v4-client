@@ -11,7 +11,7 @@ export default function DetailsIndex() {
     <>
       <EditorContent editor={editor} />
       {canEdit && (
-        <div className='flex justify-end gap-10 py-6 px-4'>
+        <div className='flex justify-end gap-10 px-4 py-6'>
           <Form action='edit'>
             <Btn2Sm onClick={() => setEditable(true)}>Edit</Btn2Sm>
           </Form>

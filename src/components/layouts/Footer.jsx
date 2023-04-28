@@ -1,8 +1,8 @@
 export default function Footer() {
   return (
-    <div id='footer-bg' className='flex justify-center w-full bg-neutral/95'>
-      <footer className='items-center w-full p-4 px-4 footer text-neutral-content max-w-screen-2xl 2xl:px-1'>
-        <div className='items-center grid-flow-col'>
+    <div id='footer-bg' className='flex w-full justify-center bg-neutral/95'>
+      <footer className='footer w-full max-w-screen-2xl items-center p-4 px-4 text-neutral-content 2xl:px-1'>
+        <div className='grid-flow-col items-center'>
           <p>Copyright © 2023 High Street Gym Inc. - All right reserved</p>
         </div>
         <div className='grid-flow-col gap-4 md:place-self-center md:justify-self-end'>

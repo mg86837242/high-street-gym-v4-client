@@ -14,7 +14,7 @@ export function MngBlogs() {
   const { blogs } = useLoaderData();
 
   return (
-    <div className='flex flex-col w-full gap-0 overflow-x-auto'>
+    <div className='flex w-full flex-col gap-0 overflow-x-auto'>
       <ListBlogs blogs={blogs} />
       <Outlet />
     </div>
@@ -54,12 +54,12 @@ function ListBlogs({ blogs }) {
           </td>
         </tr>
       )),
-    [blogs]
+    [blogs],
   );
 
   return (
-    <div className='py-6 overflow-x-auto'>
-      <table className='table w-full table-compact'>
+    <div className='overflow-x-auto py-6'>
+      <table className='table-compact table w-full'>
         <thead>
           <tr>
             <th>id</th>
@@ -110,21 +110,21 @@ export function EditBlog() {
   useEffect(() => reset(blog), [reset, blog]);
 
   return (
-    <div className='grid py-6 place-items-center'>
+    <div className='grid place-items-center py-6'>
       <form
         onSubmit={handleSubmit(data => {
           const sanitizedData = convertEmptyStrToNull(data);
           submit({ body: JSON.stringify(sanitizedData) }, { method: 'post' });
         })}
         noValidate
-        className='grid w-full grid-cols-2 justify-items-center xl:grid-cols-3 gap-x-5'
+        className='grid w-full grid-cols-2 justify-items-center gap-x-5 xl:grid-cols-3'
       >
         <FCRHFSm label='Blog Post Title' register={register('title')} issue={errors.title?.message} />
         <FCRHFSm label='Author Username' register={register('username')} issue={errors.username?.message} />
         <FCRHFSm label='Author Role' register={register('role')} issue={errors.role?.message} />
         <FCRHFSmBlogBody label='Blog Post Body' register={register('body')} issue={errors.body?.message} />
         <input type='hidden' {...register('loginId', { valueAsNumber: true })} />
-        <div className='flex justify-end w-full col-span-2 gap-10 py-6 xl:col-span-3'>
+        <div className='col-span-2 flex w-full justify-end gap-10 py-6 xl:col-span-3'>
           <Btn2Sm w='w-20'>Save</Btn2Sm>
           <Btn1Sm type='button' onClick={() => navigate(-1)} w='w-20'>
             Cancel

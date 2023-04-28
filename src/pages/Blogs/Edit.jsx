@@ -63,7 +63,7 @@ export default function Edit() {
   return (
     <>
       <div className='pt-6'>
-        <div className='border border-base-content rounded-3xl'>
+        <div className='rounded-3xl border border-base-content'>
           <TitleForm
             register={register}
             issue={errors.title?.message}
@@ -104,14 +104,14 @@ function TitleForm({ register, issue, handleSubmit, setEditable }) {
         submit({ body: JSON.stringify(data) }, { method: 'post' });
       })}
       noValidate
-      className='flex flex-col px-4 py-2 border-b-[1px] border-base-content'
+      className='flex flex-col border-b-[1px] border-base-content px-4 py-2'
     >
       <FCRHFSm label='Title' register={register('title')} issue={issue} />
-      <input type='hidden' {...register('body')} className='input input-bordered input-sm' />
+      <input type='hidden' {...register('body')} className='input-bordered input input-sm' />
       <input
         type='hidden'
         {...register('loginId', { valueAsNumber: true })}
-        className='input input-bordered input-sm'
+        className='input-bordered input input-sm'
       />
     </form>
   );
@@ -127,13 +127,13 @@ function MenuBar({ editor }) {
   }, [editor]);
 
   return (
-    <div className='flex flex-col gap-2 px-4 py-4 border-b border-base-content'>
+    <div className='flex flex-col gap-2 border-b border-base-content px-4 py-4'>
       <div className='flex flex-wrap gap-2'>
         <button
           title='bold'
           onClick={() => editor.chain().focus().toggleBold().run()}
           disabled={!editor.can().chain().focus().toggleBold().run()}
-          className={editor.isActive('bold') ? 'btn btn-outline btn-xs btn-active' : 'btn btn-outline btn-xs'}
+          className={editor.isActive('bold') ? 'btn-outline btn-active btn-xs btn' : 'btn-outline btn-xs btn'}
         >
           <BoldIcon size={16} />
         </button>
@@ -141,7 +141,7 @@ function MenuBar({ editor }) {
           title='italic'
           onClick={() => editor.chain().focus().toggleItalic().run()}
           disabled={!editor.can().chain().focus().toggleItalic().run()}
-          className={editor.isActive('italic') ? 'btn btn-outline btn-xs btn-active' : 'btn btn-outline btn-xs'}
+          className={editor.isActive('italic') ? 'btn-outline btn-active btn-xs btn' : 'btn-outline btn-xs btn'}
         >
           <ItalicIcon size={16} />
         </button>
@@ -149,7 +149,7 @@ function MenuBar({ editor }) {
           title='strikethrough'
           onClick={() => editor.chain().focus().toggleStrike().run()}
           disabled={!editor.can().chain().focus().toggleStrike().run()}
-          className={editor.isActive('strike') ? 'btn btn-outline btn-xs btn-active' : 'btn btn-outline btn-xs'}
+          className={editor.isActive('strike') ? 'btn-outline btn-active btn-xs btn' : 'btn-outline btn-xs btn'}
         >
           <StrikethroughIcon size={16} />
         </button>
@@ -157,25 +157,25 @@ function MenuBar({ editor }) {
           title='code'
           onClick={() => editor.chain().focus().toggleCode().run()}
           disabled={!editor.can().chain().focus().toggleCode().run()}
-          className={editor.isActive('code') ? 'btn btn-outline btn-xs btn-active' : 'btn btn-outline btn-xs'}
+          className={editor.isActive('code') ? 'btn-outline btn-active btn-xs btn' : 'btn-outline btn-xs btn'}
         >
           <CodeViewIcon size={16} />
         </button>
         <button
           title='clear format'
           onClick={() => editor.chain().focus().unsetAllMarks().run()}
-          className='btn btn-outline btn-xs'
+          className='btn-outline btn-xs btn'
         >
           <FormatClearIcon size={16} />
         </button>
-        <div className='h-5 mx-1 my-0.5 border-x border-base-content' />
+        <div className='mx-1 my-0.5 h-5 border-x border-base-content' />
         <button
           title='font color purple'
           onClick={() => editor.chain().focus().setColor('#958DF1').run()}
           className={
             editor.isActive('textStyle', { color: '#958DF1' })
-              ? 'btn btn-outline btn-xs btn-active'
-              : 'btn btn-outline btn-xs'
+              ? 'btn-outline btn-active btn-xs btn'
+              : 'btn-outline btn-xs btn'
           }
         >
           <FontColorIcon size={16} color='#958DF1' />
@@ -185,8 +185,8 @@ function MenuBar({ editor }) {
           onClick={() => editor.chain().focus().setColor('#F98181').run()}
           className={
             editor.isActive('textStyle', { color: '#F98181' })
-              ? 'btn btn-outline btn-xs btn-active'
-              : 'btn btn-outline btn-xs'
+              ? 'btn-outline btn-active btn-xs btn'
+              : 'btn-outline btn-xs btn'
           }
         >
           <FontColorIcon size={16} color='#F98181' />
@@ -196,8 +196,8 @@ function MenuBar({ editor }) {
           onClick={() => editor.chain().focus().setColor('#FBBC88').run()}
           className={
             editor.isActive('textStyle', { color: '#FBBC88' })
-              ? 'btn btn-outline btn-xs btn-active'
-              : 'btn btn-outline btn-xs'
+              ? 'btn-outline btn-active btn-xs btn'
+              : 'btn-outline btn-xs btn'
           }
         >
           <FontColorIcon size={16} color='#FBBC88' />
@@ -207,8 +207,8 @@ function MenuBar({ editor }) {
           onClick={() => editor.chain().focus().setColor('#FAF594').run()}
           className={
             editor.isActive('textStyle', { color: '#FAF594' })
-              ? 'btn btn-outline btn-xs btn-active'
-              : 'btn btn-outline btn-xs'
+              ? 'btn-outline btn-active btn-xs btn'
+              : 'btn-outline btn-xs btn'
           }
         >
           <FontColorIcon size={16} color='#FAF594' />
@@ -218,8 +218,8 @@ function MenuBar({ editor }) {
           onClick={() => editor.chain().focus().setColor('#70CFF8').run()}
           className={
             editor.isActive('textStyle', { color: '#70CFF8' })
-              ? 'btn btn-outline btn-xs btn-active'
-              : 'btn btn-outline btn-xs'
+              ? 'btn-outline btn-active btn-xs btn'
+              : 'btn-outline btn-xs btn'
           }
         >
           <FontColorIcon size={16} color='#70CFF8' />
@@ -229,8 +229,8 @@ function MenuBar({ editor }) {
           onClick={() => editor.chain().focus().setColor('#94FADB').run()}
           className={
             editor.isActive('textStyle', { color: '#94FADB' })
-              ? 'btn btn-outline btn-xs btn-active'
-              : 'btn btn-outline btn-xs'
+              ? 'btn-outline btn-active btn-xs btn'
+              : 'btn-outline btn-xs btn'
           }
         >
           <FontColorIcon size={16} color='#94FADB' />
@@ -240,8 +240,8 @@ function MenuBar({ editor }) {
           onClick={() => editor.chain().focus().setColor('#B9F18D').run()}
           className={
             editor.isActive('textStyle', { color: '#B9F18D' })
-              ? 'btn btn-outline btn-xs btn-active'
-              : 'btn btn-outline btn-xs'
+              ? 'btn-outline btn-active btn-xs btn'
+              : 'btn-outline btn-xs btn'
           }
         >
           <FontColorIcon size={16} color='#B9F18D' />
@@ -249,15 +249,15 @@ function MenuBar({ editor }) {
         <button
           title='clear font color'
           onClick={() => editor.chain().focus().unsetColor().run()}
-          className='btn btn-outline btn-xs'
+          className='btn-outline btn-xs btn'
         >
           <FontColorIcon size={16} />
         </button>
-        <div className='h-5 mx-1 my-0.5 border-x border-base-content' />
+        <div className='mx-1 my-0.5 h-5 border-x border-base-content' />
         <button
           title='paragraph'
           onClick={() => editor.chain().focus().setParagraph().run()}
-          className={editor.isActive('paragraph') ? 'btn btn-outline btn-xs btn-active' : 'btn btn-outline btn-xs'}
+          className={editor.isActive('paragraph') ? 'btn-outline btn-active btn-xs btn' : 'btn-outline btn-xs btn'}
         >
           <ParagraphIcon size={16} />
         </button>
@@ -265,7 +265,7 @@ function MenuBar({ editor }) {
           title='heading level 1'
           onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
           className={
-            editor.isActive('heading', { level: 1 }) ? 'btn btn-outline btn-xs btn-active' : 'btn btn-outline btn-xs'
+            editor.isActive('heading', { level: 1 }) ? 'btn-outline btn-active btn-xs btn' : 'btn-outline btn-xs btn'
           }
         >
           <H1Icon size={16} />
@@ -274,7 +274,7 @@ function MenuBar({ editor }) {
           title='heading level 2'
           onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
           className={
-            editor.isActive('heading', { level: 2 }) ? 'btn btn-outline btn-xs btn-active' : 'btn btn-outline btn-xs'
+            editor.isActive('heading', { level: 2 }) ? 'btn-outline btn-active btn-xs btn' : 'btn-outline btn-xs btn'
           }
         >
           <H2Icon size={16} />
@@ -283,7 +283,7 @@ function MenuBar({ editor }) {
           title='heading level 3'
           onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
           className={
-            editor.isActive('heading', { level: 3 }) ? 'btn btn-outline btn-xs btn-active' : 'btn btn-outline btn-xs'
+            editor.isActive('heading', { level: 3 }) ? 'btn-outline btn-active btn-xs btn' : 'btn-outline btn-xs btn'
           }
         >
           <H3Icon size={16} />
@@ -292,7 +292,7 @@ function MenuBar({ editor }) {
           title='heading level 4'
           onClick={() => editor.chain().focus().toggleHeading({ level: 4 }).run()}
           className={
-            editor.isActive('heading', { level: 4 }) ? 'btn btn-outline btn-xs btn-active' : 'btn btn-outline btn-xs'
+            editor.isActive('heading', { level: 4 }) ? 'btn-outline btn-active btn-xs btn' : 'btn-outline btn-xs btn'
           }
         >
           <H4Icon size={16} />
@@ -301,7 +301,7 @@ function MenuBar({ editor }) {
           title='heading level 5'
           onClick={() => editor.chain().focus().toggleHeading({ level: 5 }).run()}
           className={
-            editor.isActive('heading', { level: 5 }) ? 'btn btn-outline btn-xs btn-active' : 'btn btn-outline btn-xs'
+            editor.isActive('heading', { level: 5 }) ? 'btn-outline btn-active btn-xs btn' : 'btn-outline btn-xs btn'
           }
         >
           <H5Icon size={16} />
@@ -310,23 +310,23 @@ function MenuBar({ editor }) {
           title='heading level 6'
           onClick={() => editor.chain().focus().toggleHeading({ level: 6 }).run()}
           className={
-            editor.isActive('heading', { level: 6 }) ? 'btn btn-outline btn-xs btn-active' : 'btn btn-outline btn-xs'
+            editor.isActive('heading', { level: 6 }) ? 'btn-outline btn-active btn-xs btn' : 'btn-outline btn-xs btn'
           }
         >
           <H6Icon size={16} />
         </button>
-        <div className='h-5 mx-1 my-0.5 border-x border-base-content' />
+        <div className='mx-1 my-0.5 h-5 border-x border-base-content' />
         <button
           title='bullets'
           onClick={() => editor.chain().focus().toggleBulletList().run()}
-          className={editor.isActive('bulletList') ? 'btn btn-outline btn-xs btn-active' : 'btn btn-outline btn-xs'}
+          className={editor.isActive('bulletList') ? 'btn-outline btn-active btn-xs btn' : 'btn-outline btn-xs btn'}
         >
           <ListUnorderedIcon size={16} />
         </button>
         <button
           title='numbering'
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
-          className={editor.isActive('orderedList') ? 'btn btn-outline btn-xs btn-active' : 'btn btn-outline btn-xs'}
+          className={editor.isActive('orderedList') ? 'btn-outline btn-active btn-xs btn' : 'btn-outline btn-xs btn'}
         >
           <ListOrderedIcon size={16} />
         </button>
@@ -334,7 +334,7 @@ function MenuBar({ editor }) {
           title='split list'
           onClick={() => editor.chain().focus().splitListItem('listItem').run()}
           disabled={!editor.can().splitListItem('listItem')}
-          className='btn btn-outline btn-xs'
+          className='btn-outline btn-xs btn'
         >
           <TextWrapIcon size={16} />
         </button>
@@ -342,7 +342,7 @@ function MenuBar({ editor }) {
           title='decrease indent'
           onClick={() => editor.chain().focus().liftListItem('listItem').run()}
           disabled={!editor.can().liftListItem('listItem')}
-          className='btn btn-outline btn-xs'
+          className='btn-outline btn-xs btn'
         >
           <IndentDecreaseIcon size={16} />
         </button>
@@ -350,57 +350,57 @@ function MenuBar({ editor }) {
           title='increase indent'
           onClick={() => editor.chain().focus().sinkListItem('listItem').run()}
           disabled={!editor.can().sinkListItem('listItem')}
-          className='btn btn-outline btn-xs'
+          className='btn-outline btn-xs btn'
         >
           <IndentIncreaseIcon size={16} />
         </button>
-        <div className='h-5 mx-1 my-0.5 border-x border-base-content' />
+        <div className='mx-1 my-0.5 h-5 border-x border-base-content' />
         <button
           title='code block'
           onClick={() => editor.chain().focus().toggleCodeBlock().run()}
-          className={editor.isActive('codeBlock') ? 'btn btn-outline btn-xs btn-active' : 'btn btn-outline btn-xs'}
+          className={editor.isActive('codeBlock') ? 'btn-outline btn-active btn-xs btn' : 'btn-outline btn-xs btn'}
         >
           <CodeBoxLineIcon size={16} />
         </button>
         <button
           title='block quote'
           onClick={() => editor.chain().focus().toggleBlockquote().run()}
-          className={editor.isActive('blockquote') ? 'btn btn-outline btn-xs btn-active' : 'btn btn-outline btn-xs'}
+          className={editor.isActive('blockquote') ? 'btn-outline btn-active btn-xs btn' : 'btn-outline btn-xs btn'}
         >
           <DoubleQuotesLIcon size={16} />
         </button>
         <button
           title='clear markup'
           onClick={() => editor.chain().focus().clearNodes().run()}
-          className='btn btn-outline btn-xs'
+          className='btn-outline btn-xs btn'
         >
           <EraserLineIcon size={16} />
         </button>
-        <div className='h-5 mx-1 my-0.5 border-x border-base-content' />
+        <div className='mx-1 my-0.5 h-5 border-x border-base-content' />
         <button
           title='separator line'
           onClick={() => editor.chain().focus().setHorizontalRule().run()}
-          className='btn btn-outline btn-xs'
+          className='btn-outline btn-xs btn'
         >
           <SeparatorIcon size={16} />
         </button>
         <button
           title='line break'
           onClick={() => editor.chain().focus().setHardBreak().run()}
-          className='btn btn-outline btn-xs'
+          className='btn-outline btn-xs btn'
         >
           <FontAwesomeIcon icon={faArrowTurnDown} className='w-4' rotation={90} />
         </button>
-        <div className='h-5 mx-1 my-0.5 border-x border-base-content' />
-        <button title='add image' onClick={handleAddImage} className='btn btn-outline btn-xs'>
+        <div className='mx-1 my-0.5 h-5 border-x border-base-content' />
+        <button title='add image' onClick={handleAddImage} className='btn-outline btn-xs btn'>
           <ImageAddLineIcon size={16} />
         </button>
-        <div className='h-5 mx-1 my-0.5 border-x border-base-content' />
+        <div className='mx-1 my-0.5 h-5 border-x border-base-content' />
         <button
           title='undo'
           onClick={() => editor.chain().focus().undo().run()}
           disabled={!editor.can().chain().focus().undo().run()}
-          className='btn btn-outline btn-xs'
+          className='btn-outline btn-xs btn'
         >
           <ArrowGoBackLineIcon size={16} />
         </button>
@@ -408,7 +408,7 @@ function MenuBar({ editor }) {
           title='redo'
           onClick={() => editor.chain().focus().redo().run()}
           disabled={!editor.can().chain().focus().redo().run()}
-          className='btn btn-outline btn-xs'
+          className='btn-outline btn-xs btn'
         >
           <ArrowGoForwardLineIcon size={16} />
         </button>
@@ -422,13 +422,13 @@ function MenuBar({ editor }) {
 
 function WordCount({ editor, issue, limit }) {
   return (
-    <div className='flex px-4 py-2 justify-between border-t-[1px] border-base-content'>
+    <div className='flex justify-between border-t-[1px] border-base-content px-4 py-2'>
       {issue ? (
-        <span className='text-rose-500 leading-5 text-[13px]'>{issue}</span>
+        <span className='text-[13px] leading-5 text-rose-500'>{issue}</span>
       ) : (
-        <span className='leading-5 text-[13px]'>Validation info will appear here</span>
+        <span className='text-[13px] leading-5'>Validation info will appear here</span>
       )}
-      <span className='leading-5 text-[13px]'>
+      <span className='text-[13px] leading-5'>
         {editor.storage.characterCount.characters()}/{limit} characters; {editor.storage.characterCount.words()} words
       </span>
     </div>

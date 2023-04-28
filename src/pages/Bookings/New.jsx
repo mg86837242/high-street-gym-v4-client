@@ -11,11 +11,11 @@ export default function New() {
   return (
     <div
       id='booking-new-wrapper'
-      className='grid content-start w-full justify-items-center col-[1_/_2] row-[2_/_3] lg:col-[2_/_3] lg:row-[1_/_2] lg:min-h-[80vh] lg:sticky lg:top-28'
+      className='col-[1_/_2] row-[2_/_3] grid w-full content-start justify-items-center lg:sticky lg:top-28 lg:col-[2_/_3] lg:row-[1_/_2] lg:min-h-[80vh]'
     >
       <div
         id='booking-new-form-wrapper'
-        className='flex flex-col gap-5 px-4 pt-2 pb-4 rounded-lg bg-base-300 w-[22rem] xl:w-[30rem] xl:px-6 3xl:pt-4'
+        className='flex w-[22rem] flex-col gap-5 rounded-lg bg-base-300 px-4 pb-4 pt-2 xl:w-[30rem] xl:px-6 3xl:pt-4'
       >
         <h1 className='text-center text-secondary'>New Booking</h1>
         <p>
@@ -34,7 +34,7 @@ export default function New() {
               name='activityId'
               defaultValue={'-- Choose Activity --'}
               required
-              className='text-base font-normal select select-bordered select-sm'
+              className='select-bordered select select-sm text-base font-normal'
             >
               <option disabled>-- Choose Activity --</option>
               {activities.map((a, i) => {
@@ -58,7 +58,7 @@ export default function New() {
               min={tomorrowStr}
               max={threeWeeksLaterStr}
               required
-              className='text-base input input-bordered input-sm'
+              className='input-bordered input input-sm text-base'
             />
           </label>
           <label
@@ -70,7 +70,7 @@ export default function New() {
               name='time'
               defaultValue={`-- Choose Booking Time --`}
               required
-              className='text-base font-normal select select-bordered select-sm'
+              className='select-bordered select select-sm text-base font-normal'
             >
               <option disabled>-- Choose Booking Time --</option>
               {[...Array(10)].map((_, i) => (
@@ -90,7 +90,7 @@ export default function New() {
                 name='memberId'
                 defaultValue={auth.user.memberId}
                 required
-                className='text-base font-normal select select-bordered select-sm'
+                className='select-bordered select select-sm text-base font-normal'
               >
                 <option disabled>-- Choose Member --</option>
                 {members
@@ -112,7 +112,7 @@ export default function New() {
                 name='memberId'
                 defaultValue={'-- Choose Member --'}
                 required
-                className='text-base font-normal select select-bordered select-sm'
+                className='select-bordered select select-sm text-base font-normal'
               >
                 <option disabled>-- Choose Member --</option>
                 {members.map((m, i) => (
@@ -133,7 +133,7 @@ export default function New() {
                 name='trainerId'
                 defaultValue={auth.user.trainerId}
                 required
-                className='text-base font-normal select select-bordered select-sm'
+                className='select-bordered select select-sm text-base font-normal'
               >
                 <option disabled>-- Choose Trainer --</option>
                 {trainers
@@ -155,7 +155,7 @@ export default function New() {
                 name='trainerId'
                 defaultValue={'-- Choose Trainer --'}
                 required
-                className='text-base font-normal select select-bordered select-sm'
+                className='select-bordered select select-sm text-base font-normal'
               >
                 <option disabled>-- Choose Trainer --</option>
                 {trainers.map((t, i) => (
@@ -169,7 +169,7 @@ export default function New() {
           <div className='flex justify-between gap-5 text-center'>
             <button
               type='submit'
-              className='h-10 min-h-0 shadow btn btn-secondary text-primary-content shadow-black/50 w-36 lg:w-[6.5rem] xl:w-36'
+              className='btn-secondary btn h-10 min-h-0 w-36 text-primary-content shadow shadow-black/50 lg:w-[6.5rem] xl:w-36'
             >
               Submit
             </button>
@@ -178,7 +178,7 @@ export default function New() {
               onClick={() => {
                 navigate(-1);
               }}
-              className='h-10 min-h-0 shadow btn glass bg-base-100 text-accent-content shadow-black/50 w-36 lg:w-[6.5rem] xl:w-36'
+              className='glass btn h-10 min-h-0 w-36 bg-base-100 text-accent-content shadow shadow-black/50 lg:w-[6.5rem] xl:w-36'
             >
               Cancel
             </button>

@@ -21,13 +21,13 @@ export default function Calendar() {
           <div
             id='calendar-header-row'
             key={`r${i}`}
-            className='grid grid-cols-7 gap-2 px-2 pt-2 rounded-t-lg 3xl:gap-4 2xl:px-4 3xl:px-6 3xl:pt-4 text-primary-content bg-primary'
+            className='grid grid-cols-7 gap-2 rounded-t-lg bg-primary px-2 pt-2 text-primary-content 2xl:px-4 3xl:gap-4 3xl:px-6 3xl:pt-4'
           >
             {[...Array(7)].map((_, j) => (
               <div
                 id={`calendar-header-cell-${j}`}
                 key={j}
-                className='grid min-h-0 leading-none place-items-center w-11 h-11 3xl:w-12 3xl:h-12 sm:text-base'
+                className='grid h-11 min-h-0 w-11 place-items-center leading-none sm:text-base 3xl:h-12 3xl:w-12'
               >
                 {dayNames[j]}
               </div>
@@ -37,7 +37,7 @@ export default function Calendar() {
           <div
             id={`calendar-row-${i}`}
             key={`r${i}`}
-            className={`grid grid-cols-7 gap-2 px-2 3xl:gap-4 2xl:px-4 3xl:px-6 ${i > 5 && 'pb-2 3xl:pb-4'}`}
+            className={`grid grid-cols-7 gap-2 px-2 2xl:px-4 3xl:gap-4 3xl:px-6 ${i > 5 && 'pb-2 3xl:pb-4'}`}
           >
             {[...Array(7)].map((_, j) => {
               const dayOnCal = 7 * i + j - 6 - monthStartDay;
@@ -48,7 +48,7 @@ export default function Calendar() {
                   tabIndex={0}
                   key={7 * i + j + 1}
                   className={({ isActive, isPending }) =>
-                    `grid place-items-center w-11 h-11 3xl:w-12 3xl:h-12 min-h-0 sm:text-base leading-none btn btn-circle ${
+                    `btn-circle btn grid h-11 min-h-0 w-11 place-items-center leading-none sm:text-base 3xl:h-12 3xl:w-12 ${
                       isActive && 'btn-primary'
                     } ${isPending && 'loading'}`
                   }
@@ -59,19 +59,19 @@ export default function Calendar() {
                 <div
                   id={`calendar-cell-${7 * i + j + 1}`}
                   key={7 * i + j + 1}
-                  className='grid min-h-0 leading-none place-items-center w-11 h-11 xl:w-12 xl:h-12 sm:text-base'
+                  className='grid h-11 min-h-0 w-11 place-items-center leading-none sm:text-base xl:h-12 xl:w-12'
                 ></div>
               );
             })}
           </div>
-        )
+        ),
       ),
-    [year, month, monthStartDay, daysInMonth]
+    [year, month, monthStartDay, daysInMonth],
   );
 
   return (
     <CalendarWrapper>
-      <div id='calendar-nav' className='flex items-center gap-10 px-3 rounded-lg lg:gap-20 bg-base-300 py-[.25rem]'>
+      <div id='calendar-nav' className='flex items-center gap-10 rounded-lg bg-base-300 px-3 py-[.25rem] lg:gap-20'>
         <button
           // NB Bug: random texts get selected/highlighted => b/c the `<FontAwesomeIcon>` is a text element =>
           //  Solution: wrap up the `<FontAwesomeIcon>` within a button element
@@ -80,7 +80,7 @@ export default function Calendar() {
             month === 1 ? (setYear(year => year - 1), setMonth(12)) : setMonth(month => month - 1);
           }}
         >
-          <FontAwesomeIcon icon={faSquareCaretLeft} className='text-2xl cursor-pointer md:text-3xl' />
+          <FontAwesomeIcon icon={faSquareCaretLeft} className='cursor-pointer text-2xl md:text-3xl' />
         </button>
         <div id='selected-yy-mm-wrapper' className='flex flex-col items-center'>
           <p id='selected-yy' className='sm:text-lg'>
@@ -96,7 +96,7 @@ export default function Calendar() {
             month === 12 ? (setYear(year => year + 1), setMonth(1)) : setMonth(month => month + 1);
           }}
         >
-          <FontAwesomeIcon icon={faSquareCaretRight} className='text-2xl cursor-pointer md:text-3xl' />
+          <FontAwesomeIcon icon={faSquareCaretRight} className='cursor-pointer text-2xl md:text-3xl' />
         </button>
       </div>
       <div
@@ -104,7 +104,7 @@ export default function Calendar() {
         role='table'
         aria-label='Dynamic calendar containing booking information'
         aria-colcount='7'
-        className='flex flex-col gap-2 rounded-lg 3xl:gap-4 bg-base-300'
+        className='flex flex-col gap-2 rounded-lg bg-base-300 3xl:gap-4'
       >
         {calendarCells}
       </div>
@@ -119,14 +119,14 @@ function CalendarWrapper({ children }) {
   return auth.user ? (
     <div
       id='calendar-wrapper'
-      className='grid justify-items-center content-start w-full lg:w-fit gap-3 3xl:gap-6 col-[1_/_2] row-[1_/_2] lg:min-h-[80vh] lg:sticky lg:top-28 lg:justify-self-end'
+      className='col-[1_/_2] row-[1_/_2] grid w-full content-start justify-items-center gap-3 lg:sticky lg:top-28 lg:min-h-[80vh] lg:w-fit lg:justify-self-end 3xl:gap-6'
     >
       {children}
     </div>
   ) : (
     <div
       id='calendar-wrapper'
-      className='grid justify-items-center content-start w-full lg:w-fit gap-3 3xl:gap-6 col-[1_/_2] row-[1_/_2] lg:min-h-[80vh] lg:sticky lg:top-28 lg:justify-self-center'
+      className='col-[1_/_2] row-[1_/_2] grid w-full content-start justify-items-center gap-3 lg:sticky lg:top-28 lg:min-h-[80vh] lg:w-fit lg:justify-self-center 3xl:gap-6'
     >
       {children}
     </div>
@@ -136,7 +136,7 @@ function CalendarWrapper({ children }) {
 function CreateNewBooking() {
   return (
     <section className='flex justify-center gap-5 text-center'>
-      <Link to='new' className='w-48 min-h-0 shadow btn btn-primary text-primary-content shadow-black/50'>
+      <Link to='new' className='btn-primary btn min-h-0 w-48 text-primary-content shadow shadow-black/50'>
         Create New Booking
       </Link>
     </section>

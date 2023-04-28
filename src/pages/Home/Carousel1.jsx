@@ -16,22 +16,22 @@ export default function Carousel() {
 
   return (
     <>
-      <nav className='flex justify-center gap-10 py-2 bg-base-100 w-full'>
+      <nav className='flex w-full justify-center gap-10 bg-base-100 py-2'>
         {carouselItems.map(
           ({ id, activityName }) =>
             id > 3 && (
               <button
                 key={id}
                 onClick={() => scrollToIndex(id - 4)}
-                className='btn btn-secondary shadow shadow-black/50'
+                className='btn-secondary btn shadow shadow-black/50'
               >
                 {activityName.replace('-', ' ')}
               </button>
-            )
+            ),
         )}
       </nav>
       {/* NB Bug: `<li>` elements not sitting in one line => Google "no wrap element" => Solution: https://stackoverflow.com/questions/718891/how-to-make-a-div-not-wrap */}
-      <ul ref={listRef} className='whitespace-nowrap w-full overflow-x-hidden'>
+      <ul ref={listRef} className='w-full overflow-x-hidden whitespace-nowrap'>
         {carouselItems.map(
           ({ id, activityName, imageUrl }) =>
             id > 3 && (
@@ -40,9 +40,9 @@ export default function Carousel() {
                   <img
                     src={imageUrl}
                     alt={`${activityName} activities`}
-                    className='col-span-2 lg:col-span-1 w-full h-full object-cover object-center rounded-3xl transition-all duration-5000 hover:rounded-md grayscale'
+                    className='duration-5000 col-span-2 h-full w-full rounded-3xl object-cover object-center grayscale transition-all hover:rounded-md lg:col-span-1'
                   />
-                  <div className='col-span-2 lg:col-span-1 text-center whitespace-normal p-4 lg:p-6'>
+                  <div className='col-span-2 whitespace-normal p-4 text-center lg:col-span-1 lg:p-6'>
                     <h2 className='mb-6'>{`${activityName.replace('-', ' ')} Activities`}</h2>
                     <p>
                       Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatem est cupiditate suscipit non
@@ -51,7 +51,7 @@ export default function Carousel() {
                   </div>
                 </div>
               </li>
-            )
+            ),
         )}
       </ul>
     </>

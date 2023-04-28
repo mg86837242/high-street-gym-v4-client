@@ -1,9 +1,9 @@
 export default function FCSelectSmGender({ issue, initialValue, isRequired }) {
   return (
-    <div id='gender-select-group' className='w-full form-control'>
-      <label htmlFor='gender' className='py-1 3xl:py-2 label'>
-        <span className='text-accent label-text'>Gender:</span>
-        {isRequired === false || <span className='text-gray-500 label-text-alt'>Required</span>}
+    <div id='gender-select-group' className='form-control w-full'>
+      <label htmlFor='gender' className='label py-1 3xl:py-2'>
+        <span className='label-text text-accent'>Gender:</span>
+        {isRequired === false || <span className='label-text-alt text-gray-500'>Required</span>}
       </label>
       <select
         name='gender'
@@ -13,7 +13,7 @@ export default function FCSelectSmGender({ issue, initialValue, isRequired }) {
         //  -- https://react.dev/reference/react-dom/components/select#reference: "use `<select defaultValue>` for
         //  uncontrolled select boxes and `<select value>` for controlled select boxes."
         defaultValue={initialValue}
-        className='font-normal select select-primary select-sm'
+        className='select-primary select select-sm font-normal'
       >
         {/* NB If this option is disabled and its value (empty string) is used as `defaultValue`, the `<select>`'s value will be null in the `request.formData`, i.e. DON'T disable this option if its value is used as `defaultValue`*/}
         <option value=''>-- Choose Gender --</option>
@@ -21,11 +21,11 @@ export default function FCSelectSmGender({ issue, initialValue, isRequired }) {
         <option value='Male'>Male</option>
         <option value='Other'>Other</option>
       </select>
-      <label htmlFor='gender' className='py-1 3xl:py-2 label'>
+      <label htmlFor='gender' className='label py-1 3xl:py-2'>
         {issue ? (
-          <span className='text-rose-500 label-text-alt'>{issue}</span>
+          <span className='label-text-alt text-rose-500'>{issue}</span>
         ) : (
-          <span className='text-gray-500 label-text-alt'>Validation information will appear here</span>
+          <span className='label-text-alt text-gray-500'>Validation information will appear here</span>
         )}
       </label>
     </div>

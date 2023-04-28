@@ -2,16 +2,16 @@ export default function FCInputSm({ name, type, issue, initialValue, isRequired 
   const id = name.replace(/([a-z])([A-Z])/g, '$1-$2');
 
   return (
-    <div id={`${id}-input-group`} className='w-full form-control'>
-      <label htmlFor={id} className='py-1 3xl:py-2 label'>
-        <span className='text-accent label-text'>
+    <div id={`${id}-input-group`} className='form-control w-full'>
+      <label htmlFor={id} className='label py-1 3xl:py-2'>
+        <span className='label-text text-accent'>
           {name
             .replace(/([a-z])([A-Z])/g, '$1 $2')
             .slice(0, 1)
             .toUpperCase()}
           {name.replace(/([a-z])([A-Z])/g, '$1 $2').slice(1)}:
         </span>
-        {isRequired === false || <span className='text-gray-500 label-text-alt'>Required</span>}
+        {isRequired === false || <span className='label-text-alt text-gray-500'>Required</span>}
       </label>
       <input
         name={name}
@@ -19,13 +19,13 @@ export default function FCInputSm({ name, type, issue, initialValue, isRequired 
         type={type}
         placeholder={`Enter your ${name.replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase()} here`}
         defaultValue={initialValue}
-        className='text-accent input input-primary input-sm'
+        className='input-primary input input-sm text-accent'
       />
-      <label htmlFor={id} className='py-1 3xl:py-2 label'>
+      <label htmlFor={id} className='label py-1 3xl:py-2'>
         {issue ? (
-          <span className='text-rose-500 label-text-alt'>{issue}</span>
+          <span className='label-text-alt text-rose-500'>{issue}</span>
         ) : (
-          <span className='text-gray-500 label-text-alt'>Validation information will appear here</span>
+          <span className='label-text-alt text-gray-500'>Validation information will appear here</span>
         )}
       </label>
     </div>

@@ -24,8 +24,8 @@ export default function NavBar({ isHome }) {
   }, [isHome]);
 
   return (
-    <div id='nav-bg' className={isHome ? navBgClass : 'sticky top-0 z-20 flex justify-center bg-neutral/95 w-full'}>
-      <div id='nav-bar' className='w-full px-4 navbar max-w-screen-2xl 2xl:px-4'>
+    <div id='nav-bg' className={isHome ? navBgClass : 'sticky top-0 z-20 flex w-full justify-center bg-neutral/95'}>
+      <div id='nav-bar' className='navbar w-full max-w-screen-2xl px-4 2xl:px-4'>
         <NavBarLeft />
         <NavBarCenter />
         <NavBarRight />
@@ -40,7 +40,7 @@ function NavBarLeft() {
   return (
     <div id='nav-left-wrapper' className='navbar-start'>
       <div id='nav-left-dropdown-wrapper' className='dropdown'>
-        <label id='nav-left-hamburger' tabIndex={0} className='px-1 btn btn-ghost lg:hidden'>
+        <label id='nav-left-hamburger' tabIndex={0} className='btn-ghost btn px-1 lg:hidden'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             className='h-9 w-9'
@@ -54,7 +54,7 @@ function NavBarLeft() {
         <ul
           id='nav-left-dropdown-menu'
           tabIndex={0}
-          className='p-2 mt-3 shadow menu menu-compact dropdown-content bg-neutral rounded-box w-52'
+          className='dropdown-content menu rounded-box menu-compact mt-3 w-52 bg-neutral p-2 shadow'
         >
           {auth.user?.role === 'Admin' ? (
             <>
@@ -90,7 +90,7 @@ function NavBarLeft() {
       <Link
         to='/'
         id='nav-left-logo'
-        className='px-4 text-3xl text-primary font-logo hidden md:flex lg:text-4xl lg:px-1'
+        className='hidden px-4 font-logo text-3xl text-primary md:flex lg:px-1 lg:text-4xl'
       >
         HS GYM
       </Link>
@@ -110,7 +110,7 @@ function NavLeftButton({ children, to, text, hasDropdown }) {
         )}
       </Link>
       {hasDropdown && (
-        <ul className='w-56 p-2 ml-[-1px] menu bg-neutral rounded-box'>
+        <ul className='menu rounded-box ml-[-1px] w-56 bg-neutral p-2'>
           {/* TODO How to use arrow keys to navigate between these submenu buttons, extending to <NavBarCenter> submenu */}
           {children}
         </ul>
@@ -141,8 +141,8 @@ function NavBarCenter() {
   const auth = useContext(AuthContext);
 
   return (
-    <nav id='nav-center-wrapper' className='hidden navbar-center lg:flex'>
-      <ul id='nav-center-menu' className='gap-2 px-1 menu menu-horizontal text-primary-content'>
+    <nav id='nav-center-wrapper' className='navbar-center hidden lg:flex'>
+      <ul id='nav-center-menu' className='menu menu-horizontal gap-2 px-1 text-primary-content'>
         {auth.user?.role === 'Admin' ? (
           <>
             <NavCenterButton to={'/'} text={'Home'} />
@@ -182,7 +182,7 @@ function NavCenterButton({ children, to, text, hasDropdown }) {
     <li>
       <NavLink
         to={to}
-        className={({ isActive }) => `${isActive && 'btn-active underline underline-offset-8 decoration-2'}`}
+        className={({ isActive }) => `${isActive && 'btn-active underline decoration-2 underline-offset-8'}`}
       >
         {text}
         {hasDropdown && (
@@ -191,7 +191,7 @@ function NavCenterButton({ children, to, text, hasDropdown }) {
           </svg>
         )}
       </NavLink>
-      {hasDropdown && <ul className='w-56 p-2 menu bg-neutral rounded-box'>{children}</ul>}
+      {hasDropdown && <ul className='menu rounded-box w-56 bg-neutral p-2'>{children}</ul>}
     </li>
   );
 }
@@ -220,13 +220,13 @@ function NavBarRight() {
   const location = useLocation();
 
   return (
-    <div id='nav-right-wrapper' className='flex items-center gap-5 navbar-end'>
+    <div id='nav-right-wrapper' className='navbar-end flex items-center gap-5'>
       {/* <ThemeSwitch /> */}
       {auth.user ? (
         <>
           <Link
             to='/profile/account'
-            className='shadow btn bg-gradient-to-r from-secondary to-primary shadow-black/50 text-primary-content'
+            className='btn bg-gradient-to-r from-secondary to-primary text-primary-content shadow shadow-black/50'
           >
             Profile
           </Link>
@@ -243,13 +243,13 @@ function NavBarRight() {
           <Link
             to='/login'
             state={{ from: location }}
-            className='shadow btn bg-gradient-to-r from-secondary to-primary shadow-black/50 text-primary-content'
+            className='btn bg-gradient-to-r from-secondary to-primary text-primary-content shadow shadow-black/50'
           >
             Login
           </Link>
           <Link
             to='/signup'
-            className='shadow btn bg-gradient-to-r from-secondary to-primary shadow-black/50 text-primary-content'
+            className='btn bg-gradient-to-r from-secondary to-primary text-primary-content shadow shadow-black/50'
           >
             Signup
           </Link>

@@ -5,7 +5,7 @@ export default function Content() {
   return (
     <div
       id='bookings-content-wrapper'
-      className='grid items-start w-full h-full grid-cols-1 gap-10 px-4 lg:grid-cols-3 lg:grid-rows-1 lg:gap-2'
+      className='grid h-full w-full grid-cols-1 items-start gap-10 px-4 lg:grid-cols-3 lg:grid-rows-1 lg:gap-2'
     >
       <Calendar />
       <Outlet />

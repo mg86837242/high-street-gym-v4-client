@@ -159,7 +159,7 @@ function UpdateAdminForm({ inputEmailMsg, setInputEmailMsg, topMsg, user }) {
         submit({ body: JSON.stringify(sanitizedData) }, { method: 'post' });
       })}
       noValidate
-      className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'
+      className='grid w-full grid-cols-1 gap-x-5 lg:grid-cols-2'
     >
       <FCRHFSm label='Email' register={register('email')} issue={errors.email?.message || inputEmailMsg} />
       <FCRHFSmPass
@@ -178,7 +178,7 @@ function UpdateAdminForm({ inputEmailMsg, setInputEmailMsg, topMsg, user }) {
           Save
         </Btn2Sm>
       </div>
-      <p className='text-success self-center mt-4'>{topMsg}</p>
+      <p className='mt-4 self-center text-success'>{topMsg}</p>
     </form>
   );
 }
@@ -208,7 +208,7 @@ function UpdateAdminAddrForm({ botMsg, user }) {
         submit({ body: JSON.stringify(sanitizedData) }, { method: 'post' });
       })}
       noValidate
-      className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'
+      className='grid w-full grid-cols-1 gap-x-5 lg:grid-cols-2'
     >
       <FCRHFSm label='Line 1' register={register('lineOne')} issue={errors.lineOne?.message} />
       <FCRHFSm label='Line 2' register={register('lineTwo')} issue={errors.lineTwo?.message} isRequired={false} />
@@ -216,7 +216,7 @@ function UpdateAdminAddrForm({ botMsg, user }) {
       <FCRHFSm label='Postcode' register={register('postcode')} issue={errors.postcode?.message} />
       <FCRHFSm label='State' register={register('state')} issue={errors.state?.message} />
       <FCRHFSm label='Country' issue={errors.country?.message}>
-        <select {...register('country')} className='font-normal select select-bordered select-sm'>
+        <select {...register('country')} className='select-bordered select select-sm font-normal'>
           <option value='' disabled>
             -- Choose Country --
           </option>
@@ -232,7 +232,7 @@ function UpdateAdminAddrForm({ botMsg, user }) {
       <div className='mt-4'>
         <Btn2Sm w='w-full'>Save</Btn2Sm>
       </div>
-      <p className='text-success self-center mt-4'>{botMsg}</p>
+      <p className='mt-4 self-center text-success'>{botMsg}</p>
     </form>
   );
 }
@@ -262,7 +262,7 @@ function UpdateTrainerForm({ inputEmailMsg, setInputEmailMsg, topMsg, user }) {
         submit({ body: JSON.stringify(sanitizedData) }, { method: 'post' });
       })}
       noValidate
-      className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'
+      className='grid w-full grid-cols-1 gap-x-5 lg:grid-cols-2'
     >
       <FCRHFSm label='Email' register={register('email')} issue={errors.email?.message || inputEmailMsg} />
       <FCRHFSmPass
@@ -300,7 +300,7 @@ function UpdateTrainerForm({ inputEmailMsg, setInputEmailMsg, topMsg, user }) {
           Save
         </Btn2Sm>
       </div>
-      <p className='text-success self-center mt-4'>{topMsg}</p>
+      <p className='mt-4 self-center text-success'>{topMsg}</p>
     </form>
   );
 }
@@ -330,7 +330,7 @@ function UpdateTrainerAddrForm({ botMsg, user }) {
         submit({ body: JSON.stringify(sanitizedData) }, { method: 'post' });
       })}
       noValidate
-      className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'
+      className='grid w-full grid-cols-1 gap-x-5 lg:grid-cols-2'
     >
       <FCRHFSm label='Line 1' register={register('lineOne')} issue={errors.lineOne?.message} />
       <FCRHFSm label='Line 2' register={register('lineTwo')} issue={errors.lineTwo?.message} isRequired={false} />
@@ -338,7 +338,7 @@ function UpdateTrainerAddrForm({ botMsg, user }) {
       <FCRHFSm label='Postcode' register={register('postcode')} issue={errors.postcode?.message} />
       <FCRHFSm label='State' register={register('state')} issue={errors.state?.message} />
       <FCRHFSm label='Country' issue={errors.country?.message}>
-        <select {...register('country')} className='font-normal select select-bordered select-sm'>
+        <select {...register('country')} className='select-bordered select select-sm font-normal'>
           <option value='' disabled>
             -- Choose Country --
           </option>
@@ -354,7 +354,7 @@ function UpdateTrainerAddrForm({ botMsg, user }) {
       <div className='mt-4'>
         <Btn2Sm w='w-full'>Save</Btn2Sm>
       </div>
-      <p className='text-success self-center mt-4'>{botMsg}</p>
+      <p className='mt-4 self-center text-success'>{botMsg}</p>
     </form>
   );
 }
@@ -384,7 +384,7 @@ function UpdateMemberForm({ inputEmailMsg, setInputEmailMsg, topMsg, user }) {
         submit({ body: JSON.stringify(sanitizedData) }, { method: 'post' });
       })}
       noValidate
-      className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'
+      className='grid w-full grid-cols-1 gap-x-5 lg:grid-cols-2'
     >
       <FCRHFSm label='Email' register={register('email')} issue={errors.email?.message || inputEmailMsg} />
       <FCRHFSmPass
@@ -404,7 +404,7 @@ function UpdateMemberForm({ inputEmailMsg, setInputEmailMsg, topMsg, user }) {
         isRequired={false}
       />
       <FCRHFSm label='Gender' issue={errors.gender?.message} isRequired={false}>
-        <select {...register('gender')} className='font-normal select select-bordered select-sm'>
+        <select {...register('gender')} className='select-bordered select select-sm font-normal'>
           <option value=''>-- Choose Gender --</option>
           <option value='Female'>Female</option>
           <option value='Male'>Male</option>
@@ -418,7 +418,7 @@ function UpdateMemberForm({ inputEmailMsg, setInputEmailMsg, topMsg, user }) {
           Save
         </Btn2Sm>
       </div>
-      <p className='text-success self-center mt-4'>{topMsg}</p>
+      <p className='mt-4 self-center text-success'>{topMsg}</p>
     </form>
   );
 }
@@ -448,7 +448,7 @@ function UpdateMemberAddrForm({ botMsg, user }) {
         submit({ body: JSON.stringify(sanitizedData) }, { method: 'post' });
       })}
       noValidate
-      className='grid w-full grid-cols-1 lg:grid-cols-2 gap-x-5'
+      className='grid w-full grid-cols-1 gap-x-5 lg:grid-cols-2'
     >
       <FCRHFSm label='Line 1' register={register('lineOne')} issue={errors.lineOne?.message} />
       <FCRHFSm label='Line 2' register={register('lineTwo')} issue={errors.lineTwo?.message} isRequired={false} />
@@ -456,7 +456,7 @@ function UpdateMemberAddrForm({ botMsg, user }) {
       <FCRHFSm label='Postcode' register={register('postcode')} issue={errors.postcode?.message} />
       <FCRHFSm label='State' register={register('state')} issue={errors.state?.message} />
       <FCRHFSm label='Country' issue={errors.country?.message}>
-        <select {...register('country')} className='font-normal select select-bordered select-sm'>
+        <select {...register('country')} className='select-bordered select select-sm font-normal'>
           <option value='' disabled>
             -- Choose Country --
           </option>
@@ -472,7 +472,7 @@ function UpdateMemberAddrForm({ botMsg, user }) {
       <div className='mt-4'>
         <Btn2Sm w='w-full'>Save</Btn2Sm>
       </div>
-      <p className='text-success self-center mt-4'>{botMsg}</p>
+      <p className='mt-4 self-center text-success'>{botMsg}</p>
     </form>
   );
 }

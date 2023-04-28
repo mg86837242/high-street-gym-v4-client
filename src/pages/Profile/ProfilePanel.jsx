@@ -8,7 +8,7 @@ export function ProfilePanel() {
   return (
     <div
       id='profile-panel-wrapper'
-      className='flex flex-col w-full h-full px-4 py-6 lg:flex-row max-w-screen-2xl min-h-[calc(100vh-7.5rem)]'
+      className='flex h-full min-h-[calc(100vh-7.5rem)] w-full max-w-screen-2xl flex-col px-4 py-6 lg:flex-row'
     >
       <LeftSidePanel />
       <Outlet />
@@ -20,10 +20,10 @@ function LeftSidePanel() {
   const auth = useContext(AuthContext);
 
   return (
-    <div id='profile-sidebar-wrapper' className='flex flex-col gap-5 py-6 pr-6 min-w-[18.5rem]'>
+    <div id='profile-sidebar-wrapper' className='flex min-w-[18.5rem] flex-col gap-5 py-6 pr-6'>
       <div className='flex items-center justify-between gap-5'>
         <div className='avatar'>
-          <div className='w-14 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2'>
+          <div className='w-14 rounded-full ring ring-primary ring-offset-2 ring-offset-base-100'>
             <img src='https://picsum.photos/200/200?random=1&grayscale' alt='Demo profile picture' />
           </div>
         </div>
@@ -40,13 +40,13 @@ function LeftSidePanel() {
             <NavLink
               to='account'
               className={({ isActive }) =>
-                `flex items-center justify-start w-full h-full gap-2 px-2 font-normal btn btn-sm btn-ghost py-1.5 ${
+                `btn-ghost btn-sm btn flex h-full w-full items-center justify-start gap-2 px-2 py-1.5 font-normal ${
                   isActive && 'btn-active'
                 }`
               }
             >
               <span>
-                <FontAwesomeIcon icon={faUserGear} title='decorative' className='w-4 h-4' />
+                <FontAwesomeIcon icon={faUserGear} title='decorative' className='h-4 w-4' />
               </span>
               <span className='flex items-center justify-start text-sm'>Edit My Account</span>
             </NavLink>

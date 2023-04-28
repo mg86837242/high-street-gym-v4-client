@@ -15,7 +15,7 @@ export function MngMembers() {
   const { members } = useLoaderData();
 
   return (
-    <div className='flex flex-col w-full gap-0 overflow-x-auto'>
+    <div className='flex w-full flex-col gap-0 overflow-x-auto'>
       <ListMembers members={members} />
       <Outlet />
     </div>
@@ -78,14 +78,14 @@ function ListMembers({ members }) {
               </fetcher.Form>
             </td>
           </tr>
-        )
+        ),
       ),
-    [members]
+    [members],
   );
 
   return (
-    <div className='py-6 overflow-x-auto'>
-      <table className='table w-full table-compact'>
+    <div className='overflow-x-auto py-6'>
+      <table className='table-compact table w-full'>
         <thead>
           <tr>
             <th>id</th>
@@ -119,16 +119,16 @@ export function NewMember() {
 
   return (
     <div className='flex flex-col gap-5 py-6'>
-      <div className='flex flex-col-reverse items-end gap-5 lg:flex-row lg:justify-between lg:items-start lg:gap-0'>
+      <div className='flex flex-col-reverse items-end gap-5 lg:flex-row lg:items-start lg:justify-between lg:gap-0'>
         <div className='flex flex-col gap-5'>
           <fetcher.Form
             method='post'
             action='new-upload-xml'
             encType='multipart/form-data'
-            className='flex flex-col items-end gap-5 lg:items-center lg:flex-row'
+            className='flex flex-col items-end gap-5 lg:flex-row lg:items-center'
           >
             <label htmlFor='new-member-xml' className='flex-shrink-0'>
-              <span className='flex-shrink-0 label-text'>Import New Member by XML: </span>
+              <span className='label-text flex-shrink-0'>Import New Member by XML: </span>
             </label>
             <input
               name='new-member-xml'
@@ -136,12 +136,12 @@ export function NewMember() {
               type='file'
               accept='.xml'
               onChange={e => setFile(e.target.files[0])}
-              className='w-full max-w-xs shadow file-input file-input-bordered file-input-sm shadow-black/50'
+              className='file-input-bordered file-input file-input-sm w-full max-w-xs shadow shadow-black/50'
             />
             <Btn2Sm>Submit</Btn2Sm>
           </fetcher.Form>
         </div>
-        <div className='m-0 divider lg:hidden' />
+        <div className='divider m-0 lg:hidden' />
         <fetcher.Form method='post' action='new'>
           <Btn2Sm>Create New</Btn2Sm>
         </fetcher.Form>
@@ -154,7 +154,7 @@ export function NewMember() {
       </p>
       <p className='text-right lg:text-left'>
         👉 You can try upload the{' '}
-        <Link to='/sampleNewMembers.xml' target='_blank' download className='link link-primary'>
+        <Link to='/sampleNewMembers.xml' target='_blank' download className='link-primary link'>
           sample XML
         </Link>{' '}
         to create new members:
@@ -198,14 +198,14 @@ export function EditMember() {
   }, [actionData]);
 
   return (
-    <div className='grid py-6 place-items-center'>
+    <div className='grid place-items-center py-6'>
       <form
         onSubmit={handleSubmit(data => {
           const sanitizedData = convertEmptyStrToNull(data);
           submit({ body: JSON.stringify(sanitizedData) }, { method: 'post' });
         })}
         noValidate
-        className='grid w-full grid-cols-2 justify-items-center xl:grid-cols-3 gap-x-5'
+        className='grid w-full grid-cols-2 justify-items-center gap-x-5 xl:grid-cols-3'
       >
         <FCRHFSm label='Email' register={register('email')} issue={errors.email?.message || inputEmailMsg} />
         <FCRHFSmPass
@@ -225,7 +225,7 @@ export function EditMember() {
           isRequired={false}
         />
         <FCRHFSm label='Gender' issue={errors.gender?.message} isRequired={false}>
-          <select {...register('gender')} className='font-normal select select-bordered select-sm'>
+          <select {...register('gender')} className='select-bordered select select-sm font-normal'>
             <option value=''>-- Choose Gender --</option>
             <option value='Female'>Female</option>
             <option value='Male'>Male</option>
@@ -238,7 +238,7 @@ export function EditMember() {
         <FCRHFSm label='Postcode' register={register('postcode')} issue={errors.postcode?.message} />
         <FCRHFSm label='State' register={register('state')} issue={errors.state?.message} />
         <FCRHFSm label='Country' issue={errors.country?.message}>
-          <select {...register('country')} className='font-normal select select-bordered select-sm'>
+          <select {...register('country')} className='select-bordered select select-sm font-normal'>
             <option value='' disabled>
               -- Choose Country --
             </option>
@@ -249,7 +249,7 @@ export function EditMember() {
             ))}
           </select>
         </FCRHFSm>
-        <div className='flex justify-end w-full col-span-2 gap-10 py-6 xl:col-span-3'>
+        <div className='col-span-2 flex w-full justify-end gap-10 py-6 xl:col-span-3'>
           <Btn2Sm onClick={() => setInputEmailMsg('')} w='w-20'>
             Save
           </Btn2Sm>

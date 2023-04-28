@@ -45,10 +45,10 @@ export default function Details() {
         <h1 className='px-4 font-sans font-bold text-accent'>{title}</h1>
         <div className='flex flex-col px-4'>
           <span>by {username}</span>
-          <span className='leading-5 text-[13px] italic'>Created at: {createdAt}</span>
-          {updatedAt && <span className='leading-5 text-[13px] italic'>Updated at: {updatedAt}</span>}
+          <span className='text-[13px] italic leading-5'>Created at: {createdAt}</span>
+          {updatedAt && <span className='text-[13px] italic leading-5'>Updated at: {updatedAt}</span>}
           {canEdit && (
-            <span className='leading-5 text-[13px]'>{editable ? '📝 Edit mode on' : '📖 Edit mode off'}</span>
+            <span className='text-[13px] leading-5'>{editable ? '📝 Edit mode on' : '📖 Edit mode off'}</span>
           )}
         </div>
       </article>

@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 // Use case: auth forms
 export default function NavBarMinimal() {
   return (
-    <div id='nav-bg' className='flex justify-center w-full bg-transparent'>
-      <div id='nav-bar' className='w-full px-4 navbar max-w-screen-2xl 2xl:px-1'>
+    <div id='nav-bg' className='flex w-full justify-center bg-transparent'>
+      <div id='nav-bar' className='navbar w-full max-w-screen-2xl px-4 2xl:px-1'>
         <NavBarLeft />
       </div>
     </div>
@@ -14,7 +14,7 @@ export default function NavBarMinimal() {
 function NavBarLeft() {
   return (
     <div id='nav-left-wrapper' className='navbar-start'>
-      <Link to='/' id='nav-left-logo' className='px-4 text-3xl text-primary font-logo lg:text-4xl lg:px-1'>
+      <Link to='/' id='nav-left-logo' className='px-4 font-logo text-3xl text-primary lg:px-1 lg:text-4xl'>
         HS GYM
       </Link>
     </div>
