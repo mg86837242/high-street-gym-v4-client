@@ -53,7 +53,7 @@ export default function AuthProvider({ children }) {
         }
         setUser(userJSON.user);
       } catch (error) {
-        throw new Error(error);
+        throw new Error(JSON.stringify(error));
       }
     },
     [user]
