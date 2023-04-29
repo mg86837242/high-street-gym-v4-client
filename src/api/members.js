@@ -1,15 +1,6 @@
 import { redirect } from 'react-router-dom';
 import { API_URL } from '../data/constants';
-import {
-  emailSchema,
-  passwordSchema,
-  usernameSchema,
-  firstNameSchema,
-  lastNameSchema,
-  phoneSchema,
-  ageNoRHFSchema,
-  genderSchema,
-} from '../schemas';
+import { emailSchema, passwordSchema, usernameSchema, firstNameSchema, lastNameSchema, phoneSchema } from '../schemas';
 import fetchResp from '../helpers/fetchResp';
 import fetchRaw from '../helpers/fetchRaw';
 import fetchJSON from '../helpers/fetchJSON';
