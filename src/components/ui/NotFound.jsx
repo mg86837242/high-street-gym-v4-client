@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import NavBarMinimal from '../layouts/NavBarMinimal';
 import { Btn2 } from './Btn2';
 
-export default function NotMatch() {
+export default function NotFound() {
   const navigate = useNavigate();
 
   return (

@@ -13,14 +13,13 @@ export default function FCInputPass({ issue, initialValue }) {
   }
 
   return (
-    <div id='password-group' className='form-control relative w-full'>
+    <div className='form-control relative w-full'>
       <label htmlFor='password' className='label py-1 3xl:py-2'>
         <span className='label-text text-accent'>Password:</span>
         <span className='label-text-alt text-gray-500'>Required</span>
       </label>
       <input
         name='password'
-        id='password'
         type={type}
         placeholder='Enter your password here'
         defaultValue={initialValue}

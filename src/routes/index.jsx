@@ -88,8 +88,8 @@ const routes = [
   {
     path: '*',
     async lazy() {
-      let { default: NoMatch } = await import('../components/ui/NoMatch');
-      return { Component: NoMatch };
+      let { default: NotFound } = await import('../components/ui/NotFound');
+      return { Component: NotFound };
     },
   },
 ];

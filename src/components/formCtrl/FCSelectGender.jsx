@@ -1,13 +1,12 @@
 export default function FCSelectGender({ issue, isRequired }) {
   return (
-    <div id='gender-select-group' className='form-control w-full'>
+    <div className='form-control w-full'>
       <label htmlFor='gender' className='label py-1 3xl:py-2'>
         <span className='label-text text-accent'>Gender:</span>
         {isRequired === false || <span className='label-text-alt text-gray-500'>Required</span>}
       </label>
       <select
         name='gender'
-        id='gender'
         defaultValue=''
         className='select-primary select h-10 min-h-0 text-base font-normal 3xl:h-12'
       >

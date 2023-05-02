@@ -1,8 +1,6 @@
 export default function FCInput({ name, type, issue, initialValue, isRequired }) {
-  const id = name.replace(/([a-z])([A-Z])/g, '$1-$2');
-
   return (
-    <div id={`${id}-input-group`} className='form-control w-full'>
+    <div className='form-control w-full'>
       <label htmlFor={id} className='label py-1 3xl:py-2'>
         <span className='label-text text-accent'>
           {name
@@ -15,7 +13,6 @@ export default function FCInput({ name, type, issue, initialValue, isRequired })
       </label>
       <input
         name={name}
-        id={id}
         type={type}
         placeholder={`Enter your ${name.replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase()} here`}
         defaultValue={initialValue}

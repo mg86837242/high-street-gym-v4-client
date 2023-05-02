@@ -26,4 +26,6 @@ dist-ssr
 # Customized
 .env
 .vscode
+*.pem
 **/__*
+prisma
