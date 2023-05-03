@@ -8,7 +8,7 @@ export default function ErrorInfoRefresh() {
   const navigate = useNavigate();
   // console.error(error); // only for debugging
 
-  // Refresh page i/o go back, specifically for session loss after encountering server errors (e.g. 400),
+  // Refresh page i/o go back, specifically for session loss after encountering server errors (e.g. backend 400)
   function handleClick() {
     navigate(0);
   }

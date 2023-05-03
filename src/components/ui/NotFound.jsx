@@ -8,7 +8,7 @@ export default function NotFound() {
   return (
     <div
       id='canvas'
-      className='flex h-screen w-full flex-col items-center bg-base-300 bg-[url("/src/assets/no-match-view.webp")] bg-cover bg-center pb-8 md:pb-0'
+      className='flex h-screen w-full flex-col items-center bg-base-300 bg-[url("/src/assets/not-found.webp")] bg-cover bg-center pb-8 md:pb-0'
     >
       <NavBarMinimal />
       <div className='flex h-full w-full items-center justify-center p-6'>
