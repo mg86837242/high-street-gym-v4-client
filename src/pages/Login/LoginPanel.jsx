@@ -133,7 +133,7 @@ function LoginForm({ btnMsg, setBtnMsg, issues, setIssues, from }) {
       navigate(from, { replace: true });
     } catch (error) {
       setBtnMsg('Login');
-      setIssues({ email: `Login failed: ${error?.message}`, password: `Login failed: ${error?.message}` });
+      setIssues({ email: `Login failed: ` + JSON.stringify(error), password: `Login failed: ` + JSON.stringify(error)});
     }
   }
 
