@@ -134,8 +134,8 @@ function LoginForm({ btnMsg, setBtnMsg, issues, setIssues, from }) {
     } catch (error) {
       setBtnMsg('Login');
       setIssues({
-        email: `Login failed: ${error?.message || 'Network error'}`,
-        password: `Login failed: ${error?.message || 'Network error'}`,
+        email: `Login Failed: ${error?.message}`,
+        password: `Login Failed: ${error?.message}`,
       });
     }
   }
@@ -217,8 +217,8 @@ function DemoLogins({ setBtnMsg, setIssues, from }) {
     } catch (error) {
       setBtnMsg('Login');
       setIssues({
-        email: `Login failed: ${error?.message || 'Network error'}`,
-        password: `Login failed: ${error?.message || 'Network error'}`,
+        email: `Login Failed: ${error?.message}`,
+        password: `Login Failed: ${error?.message}`,
       });
     }
   }
