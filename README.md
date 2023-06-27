@@ -51,3 +51,8 @@ Navigate to [`http://localhost:5173`](http://localhost:5173).
 - Photo by <a href="https://unsplash.com/@d_mccullough?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Daniel McCullough</a> on <a href="https://unsplash.com/photos/-FPFq_trr2Y?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 <!-- Blog's images -->
 - Photo by <a href="https://unsplash.com/@r3dmax?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Jonatan Pie</a> on <a href="https://unsplash.com/photos/xgTMSz6kegE?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+
+<!-- 
+The following items are changed for deployment:
+- `.env` file
+-->
