@@ -85,13 +85,15 @@ const routes = [
       return signupMembers({ request });
     },
   },
-  {
-    path: '*',
-    async lazy() {
-      let { default: NotFound } = await import('../components/ui/NotFound');
-      return { Component: NotFound };
-    },
-  },
+  // Temporarily disabled for production since both client and server are using the same ip addr, `<ip addr>/api/*`
+  //  won't work with this route; better solution is needed
+  // {
+  //   path: '*',
+  //   async lazy() {
+  //     let { default: NotFound } = await import('../components/ui/NotFound');
+  //     return { Component: NotFound };
+  //   },
+  // },
 ];
 
 export default routes;

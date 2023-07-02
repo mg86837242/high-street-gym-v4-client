@@ -8,7 +8,8 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [react(), svgr()],
     server: {
-      port: env.VITE_PORT || 5173,
+      host: env.VITE_SERVER_HOST || 'localhost',
+      port: env.VITE_SERVER_PORT || 5173,
     },
   };
 });
