@@ -14,9 +14,9 @@
   },
   "author": "BY",
   "dependencies": {
-    "@fontsource/inter": "^4.5.15",
-    "@fontsource/permanent-marker": "^4.5.7",
-    "@fontsource/righteous": "^4.5.7",
+    "@fontsource/inter": "^5.0.4",
+    "@fontsource/permanent-marker": "^5.0.4",
+    "@fontsource/righteous": "^5.0.4",
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-regular-svg-icons": "^6.4.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
@@ -39,7 +39,7 @@
     "react-router-dom": "^6.14.1",
     "remixicon-react": "^1.0.0",
     "vite": "^4.3.9",
-    "vite-plugin-svgr": "^2.4.0",
+    "vite-plugin-svgr": "^3.2.0",
     "zod": "^3.21.4"
   },
   "devDependencies": {
@@ -49,16 +49,16 @@
     "autoprefixer": "^10.4.14",
     "concurrently": "^8.2.0",
     "eslint": "^8.44.0",
-    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.8.0",
-    "eslint-config-react-app": "^7.0.1",
-    "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-jsx-a11y": "^6.7.1",
-    "eslint-plugin-react": "^7.32.2",
+    "eslint-config-react-app": "^6.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.25.3",
     "eslint-plugin-react-hooks": "^4.6.0",
     "postcss": "^8.4.24",
     "prettier": "2.8.1",
-    "prettier-plugin-tailwindcss": "^0.2.8",
+    "prettier-plugin-tailwindcss": "^0.3.0",
     "tailwindcss": "^3.3.2"
   }
 }
