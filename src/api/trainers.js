@@ -1,4 +1,4 @@
-import { API_URL } from '../data/constants';
+import API_URL from '../data/constants';
 import fetchRaw from '../helpers/fetchRaw';
 import getErrorMsg from '../helpers/getErrorMsg';
 
