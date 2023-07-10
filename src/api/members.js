@@ -1,5 +1,4 @@
 import { redirect } from 'react-router-dom';
-import API_URL from '../data/constants';
 import { emailSchema, passwordSchema, usernameSchema, firstNameSchema, lastNameSchema, phoneSchema } from '../schemas';
 import fetchResp from '../helpers/fetchResp';
 import fetchRaw from '../helpers/fetchRaw';
@@ -9,12 +8,12 @@ import getSubmittedData from '../helpers/getSubmittedData';
 import defaultNewMember from '../data/defaultNewMember';
 
 export async function getAllMembersWithDetails() {
-  const response = await fetchResp.get(`${API_URL}/members/detailed`);
+  const response = await fetchResp.get(`${__API_URL__}/members/detailed`);
   return response;
 }
 
 export async function getMemberWithDetailsById({ params }) {
-  const response = await fetchResp.get(`${API_URL}/members/${params.id}/detailed`);
+  const response = await fetchResp.get(`${__API_URL__}/members/${params.id}/detailed`);
   return response;
 }
 
@@ -56,7 +55,7 @@ export async function signupMembers({ request }) {
   }
 
   const creations = { email, password, username, firstName, lastName, phone, age, gender };
-  const response = await fetchRaw.post(`${API_URL}/members/signup`, creations);
+  const response = await fetchRaw.post(`${__API_URL__}/members/signup`, creations);
   // Special error handling to let 409 pass to NOT trigger error boundary, since it's already handled the in component
   if (response?.status === 409) {
     const json = await response.json();
@@ -72,19 +71,19 @@ export async function signupMembers({ request }) {
 
 export async function createMember() {
   const creations = await defaultNewMember();
-  const json = await fetchJSON.post(`${API_URL}/members/detailed`, creations);
+  const json = await fetchJSON.post(`${__API_URL__}/members/detailed`, creations);
   return redirect(`../${json.insertId}/edit`);
 }
 
 export async function createMemberByXML({ request }) {
   const formData = await request.formData();
-  await fetchResp.postFile(`${API_URL}/members/upload/xml`, formData);
+  await fetchResp.postFile(`${__API_URL__}/members/upload/xml`, formData);
   return redirect(`..`);
 }
 
 export async function updateMemberById(values) {
   const { _action, id, ...updates } = values;
-  const response = await fetchRaw.patch(`${API_URL}/members/${id}`, updates);
+  const response = await fetchRaw.patch(`${__API_URL__}/members/${id}`, updates);
   const json = await response.json();
   // Special error handling to let 409 pass to NOT trigger error boundary, since it's already handled the in component
   if (response?.status === 409) {
@@ -99,7 +98,7 @@ export async function updateMemberById(values) {
 
 export async function updateMemberWithDetailsById({ params, request }) {
   const updates = await getSubmittedData(request);
-  const response = await fetchRaw.patch(`${API_URL}/members/${params.id}/detailed`, updates);
+  const response = await fetchRaw.patch(`${__API_URL__}/members/${params.id}/detailed`, updates);
   const json = await response.json();
   // Special error handling to let 409 pass to NOT trigger error boundary, since it's already handled the in component
   if (response?.status === 409) {
@@ -113,6 +112,6 @@ export async function updateMemberWithDetailsById({ params, request }) {
 }
 
 export async function deleteMemberById({ params }) {
-  await fetchResp.delete(`${API_URL}/members/${params.id}`);
+  await fetchResp.delete(`${__API_URL__}/members/${params.id}`);
   return redirect(`..`);
 }
