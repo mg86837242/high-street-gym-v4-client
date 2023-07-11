@@ -1,4 +1,9 @@
-import { Link, Form, useActionData, useNavigation } from 'react-router-dom';
+import { useState, useMemo, useEffect } from 'react';
+import { Link, Form, useSubmit, useNavigate, useActionData } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { memberSchema } from '../../schemas';
+import defaultSignup from '../../data/defaultSignup';
 import FCInput from '../../components/formCtrl/FCInput';
 import FCInputPass from '../../components/formCtrl/FCInputPass';
 import { Btn2 } from '../../components/ui/Btn2';
@@ -34,21 +39,37 @@ function Directions() {
 
 // FIXME Rewrite <Signup> page by using RHF and use action data to check 409
 function SignupForm() {
-  const issues = useActionData();
-  const navigation = useNavigation();
-  const message = navigation.state === 'submitting' ? 'Signing up...' : 'Signup';
+  // const issues = useActionData();
+  // const navigation = useNavigation();
+  // const message = navigation.state === 'submitting' ? 'Signing up...' : 'Signup';
 
-  return (
-    <Form method='post' noValidate className='grid w-full grid-cols-1 gap-x-5 md:grid-cols-2'>
-      <FCInput name='email' type='text' issue={issues?.email} initialValue='demomember@gmail.com' />
-      <FCInputPass issue={issues?.password} initialValue='abcd1234' />
-      <FCInput name='username' type='text' issue={issues?.username} initialValue='demomember' />
-      <FCInput name='firstName' type='text' issue={issues?.firstName} initialValue='Demo' />
-      <FCInput name='lastName' type='text' issue={issues?.lastName} initialValue='Member' />
-      <FCInput name='phone' type='tel' issue={issues?.phone} initialValue='0123456789' />
-      <div className='col-span-1 pt-4 md:col-span-2'>
-        <Btn2 w='w-full'>{message}</Btn2>
-      </div>
-    </Form>
-  );
+  // return (
+  //   <Form method='post' noValidate className='grid w-full grid-cols-1 gap-x-5 md:grid-cols-2'>
+  //     <FCInput name='email' type='text' issue={issues?.email} initialValue='demomember@gmail.com' />
+  //     <FCInputPass issue={issues?.password} initialValue='abcd1234' />
+  //     <FCInput name='username' type='text' issue={issues?.username} initialValue='demomember' />
+  //     <FCInput name='firstName' type='text' issue={issues?.firstName} initialValue='Demo' />
+  //     <FCInput name='lastName' type='text' issue={issues?.lastName} initialValue='Member' />
+  //     <FCInput name='phone' type='tel' issue={issues?.phone} initialValue='0123456789' />
+  //     <div className='col-span-1 pt-4 md:col-span-2'>
+  //       <Btn2 w='w-full'>{message}</Btn2>
+  //     </div>
+  //   </Form>
+  // );
+  const [inputEmailMsg, setInputEmailMsg] = useState('');
+  const actionData = useActionData();
+  const submit = useSubmit();
+  const navigate = useNavigate();
+  const signupDefaultValues = defaultSignup();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isDirty },
+    reset,
+  } = useForm({
+    resolver: zodResolver(memberSchema),
+    defaultValues: signupDefaultValues,
+  });
+
+  // <form> element here
 }
