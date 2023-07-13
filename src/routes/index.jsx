@@ -85,8 +85,7 @@ const routes = [
       return signupMembers({ request });
     },
   },
-  // TODO Temporarily disabled for prod since both client and server are using the same ip addr, `<ip addr>/api/*`
-  //  won't work with this route definition => potential solution, a path with '/api' value
+  // TODO Temporarily disabled for prod since both client and server are using the same ip addr, `<ip addr>/api/*` won't work with this route definition => potential solution, a path with '/api' value
   // {
   //   path: '*',
   //   async lazy() {
