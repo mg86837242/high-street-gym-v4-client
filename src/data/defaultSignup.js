@@ -4,7 +4,7 @@ const defaultSignup = () => {
   const username = nanoid(10);
   return {
     email: `${username}@server.com`,
-    password: 'abcd1234',
+    password: '',
     username,
     firstName: 'New',
     lastName: 'Member',

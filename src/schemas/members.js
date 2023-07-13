@@ -2,16 +2,6 @@ import { z } from 'zod';
 import { emailSchema, passwordSchema, usernameSchema, firstNameSchema, lastNameSchema, phoneSchema } from './users';
 import { lineOneSchema, lineTwoSchema, suburbSchema, postcodeSchema, stateSchema, countrySchema } from './addresses.js';
 
-export const ageNoRHFSchema = z.union([
-  // NB This `ageNoRHFSchema` is for the <Signup> page only, where RHF is NOT used and `FormData` is used so its input
-  //  is collected as empty string if left blank => will be removed after refactoring <Signup> page
-  z
-    .number({ message: 'Age must be a number' })
-    .nonnegative()
-    .max(999, { message: 'Age must have at most 3 digits' })
-    .nullable(),
-  z.string().trim().length(0, { message: 'Age must be empty or a valid number' }),
-]);
 export const ageSchema = z.union([
   z
     .number({ message: 'Age must be a number' })
@@ -21,6 +11,17 @@ export const ageSchema = z.union([
   z.nan(),
 ]);
 export const genderSchema = z.enum(['Female', 'Male', 'Other', '']).nullable();
+
+export const signupSchema = z.object({
+  email: emailSchema,
+  password: passwordSchema,
+  username: usernameSchema,
+  firstName: firstNameSchema,
+  lastName: lastNameSchema,
+  phone: phoneSchema,
+  age: ageSchema,
+  gender: genderSchema,
+});
 
 export const memberSchema = z.object({
   email: emailSchema,

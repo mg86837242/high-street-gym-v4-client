@@ -1,12 +1,13 @@
-import { useState, useMemo, useEffect } from 'react';
-import { Link, Form, useSubmit, useNavigate, useActionData } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useSubmit, useActionData, useNavigation } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { memberSchema } from '../../schemas';
+import { signupSchema } from '../../schemas';
 import defaultSignup from '../../data/defaultSignup';
-import FCInput from '../../components/formCtrl/FCInput';
-import FCInputPass from '../../components/formCtrl/FCInputPass';
-import { Btn2 } from '../../components/ui/Btn2';
+import FCRHF2Sm from '../../components/formCtrlRHF/FCRHF2';
+import FCRHFPass2Sm from '../../components/formCtrlRHF/FCRHFPass2';
+import { Btn2Sm } from '../../components/ui/Btn2';
+import { convertEmptyStrToNull } from '../../helpers/sanitize';
 
 export default function SignupPanel() {
   return (
@@ -37,39 +38,74 @@ function Directions() {
   );
 }
 
-// FIXME Rewrite <Signup> page by using RHF and use action data to check 409
 function SignupForm() {
-  // const issues = useActionData();
-  // const navigation = useNavigation();
-  // const message = navigation.state === 'submitting' ? 'Signing up...' : 'Signup';
-
-  // return (
-  //   <Form method='post' noValidate className='grid w-full grid-cols-1 gap-x-5 md:grid-cols-2'>
-  //     <FCInput name='email' type='text' issue={issues?.email} initialValue='demomember@gmail.com' />
-  //     <FCInputPass issue={issues?.password} initialValue='abcd1234' />
-  //     <FCInput name='username' type='text' issue={issues?.username} initialValue='demomember' />
-  //     <FCInput name='firstName' type='text' issue={issues?.firstName} initialValue='Demo' />
-  //     <FCInput name='lastName' type='text' issue={issues?.lastName} initialValue='Member' />
-  //     <FCInput name='phone' type='tel' issue={issues?.phone} initialValue='0123456789' />
-  //     <div className='col-span-1 pt-4 md:col-span-2'>
-  //       <Btn2 w='w-full'>{message}</Btn2>
-  //     </div>
-  //   </Form>
-  // );
   const [inputEmailMsg, setInputEmailMsg] = useState('');
   const actionData = useActionData();
   const submit = useSubmit();
-  const navigate = useNavigate();
   const signupDefaultValues = defaultSignup();
   const {
     register,
     handleSubmit,
-    formState: { errors, isDirty },
+    formState: { errors },
     reset,
   } = useForm({
-    resolver: zodResolver(memberSchema),
+    resolver: zodResolver(signupSchema),
     defaultValues: signupDefaultValues,
   });
+  const navigation = useNavigation();
+  const btnMsg =
+    navigation.state === 'submitting' ? 'Submitting...' : navigation.state === 'loading' ? 'Submitted!' : 'Submit';
 
-  // <form> element here
+  useEffect(() => {
+    if (!actionData) {
+      return;
+    }
+    if (actionData.status === 409) {
+      setInputEmailMsg(actionData.message);
+      return;
+    }
+
+    return () => setInputEmailMsg('');
+  }, [actionData]);
+
+  // TODO CSS fine-tuning, e.g. gaps, responsive, and style variation for placeholder texts
+  return (
+    <form
+      onSubmit={handleSubmit(data => {
+        const sanitizedData = convertEmptyStrToNull(data);
+        submit({ body: JSON.stringify(sanitizedData) }, { method: 'post' });
+      })}
+      noValidate
+      className='grid w-full grid-cols-1 gap-x-5 lg:grid-cols-2'
+    >
+      <FCRHF2Sm label='Email' register={register('email')} issue={errors.email?.message || inputEmailMsg} />
+      <FCRHFPass2Sm label='Password' register={register('password')} issue={errors.password?.message} />
+      <FCRHF2Sm label='Username' register={register('username')} issue={errors.username?.message} />
+      <FCRHF2Sm label='First Name' register={register('firstName')} issue={errors.firstName?.message} />
+      <FCRHF2Sm label='Last Name' register={register('lastName')} issue={errors.lastName?.message} />
+      <FCRHF2Sm label='Phone' register={register('phone')} issue={errors.phone?.message} />
+      <FCRHF2Sm
+        label='Age'
+        type='number'
+        register={register('age', { valueAsNumber: true })}
+        issue={errors.age?.message}
+        isRequired={false}
+      />
+      <FCRHF2Sm label='Gender' issue={errors.gender?.message} isRequired={false}>
+        <select {...register('gender')} className='select-primary select select-sm font-normal'>
+          <option value=''>-- Choose Gender --</option>
+          <option value='Female'>Female</option>
+          <option value='Male'>Male</option>
+          <option value='Other'>Other</option>
+        </select>
+      </FCRHF2Sm>
+      <input type='hidden' {...register('id', { valueAsNumber: true })} />
+      <input type='hidden' {...register('_action')} />
+      <div className='col-span-1 mt-4 md:col-span-2'>
+        <Btn2Sm onClick={() => setInputEmailMsg('')} w='w-full'>
+          {btnMsg}
+        </Btn2Sm>
+      </div>
+    </form>
+  );
 }
