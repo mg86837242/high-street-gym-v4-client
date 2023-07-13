@@ -85,7 +85,7 @@ const routes = [
       return signupMembers({ request });
     },
   },
-  // Temporarily disabled for production since both client and server are using the same ip addr, `<ip addr>/api/*`
+  // FIXME Temporarily disabled for prod since both client and server are using the same ip addr, `<ip addr>/api/*`
   //  won't work with this route; better solution is needed
   // {
   //   path: '*',
