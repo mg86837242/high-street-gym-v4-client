@@ -6,7 +6,7 @@ import { activitySchema } from '../../schemas';
 import { convertEmptyStrToNull } from '../../helpers/sanitize';
 import { Btn1Xs, Btn1Sm } from '../../components/ui/Btn1';
 import { Btn2Xs, Btn2Sm } from '../../components/ui/Btn2';
-import FCRHFSm from '../../components/formCtrlRHF/FCRHFSm';
+import FCRHF1Sm from '../../components/formCtrlRHF/FCRHF1';
 
 export function MngActivities() {
   const { activities } = useLoaderData();
@@ -66,9 +66,9 @@ function ListActivities({ activities }) {
               </fetcher.Form>
             </td>
           </tr>
-        ),
+        )
       ),
-    [activities],
+    [activities]
   );
 
   return (
@@ -176,8 +176,8 @@ export function EditActivity() {
         noValidate
         className='grid w-full grid-cols-2 justify-items-center gap-x-5 xl:grid-cols-3'
       >
-        <FCRHFSm label='Activity Name' register={register('name')} issue={errors.name?.message} />
-        <FCRHFSm label='Category' issue={errors.category?.message} isRequired={false}>
+        <FCRHF1Sm label='Activity Name' register={register('name')} issue={errors.name?.message} />
+        <FCRHF1Sm label='Category' issue={errors.category?.message} isRequired={false}>
           <select {...register('category')} className='select-bordered select select-sm font-normal'>
             <option value=''>-- Choose Category --</option>
             <option value='Aerobic'>Aerobic</option>
@@ -185,14 +185,14 @@ export function EditActivity() {
             <option value='Aerobic & Strength'>Aerobic & Strength</option>
             <option value='Flexibility'>Flexibility</option>
           </select>
-        </FCRHFSm>
-        <FCRHFSm
+        </FCRHF1Sm>
+        <FCRHF1Sm
           label='Description'
           register={register('description')}
           issue={errors.description?.message}
           isRequired={false}
         />
-        <FCRHFSm label='Intensity Level' issue={errors.intensityLevel?.message} isRequired={false}>
+        <FCRHF1Sm label='Intensity Level' issue={errors.intensityLevel?.message} isRequired={false}>
           <select {...register('intensityLevel')} className='select-bordered select select-sm font-normal'>
             <option value=''>-- Choose Intensity Level --</option>
             <option value='Low'>Low</option>
@@ -201,33 +201,33 @@ export function EditActivity() {
             <option value='Very High'>Very High</option>
             <option value='Varies with Type'>Varies with Type</option>
           </select>
-        </FCRHFSm>
-        <FCRHFSm
+        </FCRHF1Sm>
+        <FCRHF1Sm
           label='Max People Allowed'
           type='number'
           register={register('maxPeopleAllowed', { valueAsNumber: true })}
           issue={errors.maxPeopleAllowed?.message}
           isRequired={false}
         />
-        <FCRHFSm
+        <FCRHF1Sm
           label='Requirement 1'
           register={register('requirementOne')}
           issue={errors.requirementOne?.message}
           isRequired={false}
         />
-        <FCRHFSm
+        <FCRHF1Sm
           label='Requirement 2'
           register={register('requirementTwo')}
           issue={errors.requirementTwo?.message}
           isRequired={false}
         />
-        <FCRHFSm
+        <FCRHF1Sm
           label='Duration (minutes)'
           type='number'
           register={register('durationMinutes', { valueAsNumber: true })}
           issue={errors.durationMinutes?.message}
         />
-        <FCRHFSm
+        <FCRHF1Sm
           label='Price'
           type='number'
           register={register('price', { valueAsNumber: true })}

@@ -1,11 +1,16 @@
-export default function FCRHFSm({ children, label, type, register, issue, isRequired }) {
+export default function FCRHFBlogBody1Sm({ children, label, register, issue, isRequired }) {
   return (
-    <div className='form-control w-full'>
+    <div className='form-control col-span-2 w-full xl:col-span-3'>
       <label className='label py-1 3xl:py-2'>
         <span className='label-text'>{label}:</span>
         {isRequired === false || <span className='label-text-alt'>Required</span>}
       </label>
-      {children ? children : <input type={type || 'text'} {...register} className='input-bordered input input-sm' />}
+      <textarea
+        {...register}
+        rows={10}
+        placeholder='Enter blog post body here ...'
+        className='textarea-bordered textarea'
+      />
       <label className='label py-1 3xl:py-2'>
         {issue ? (
           <span className='label-text-alt text-rose-500'>{issue}</span>

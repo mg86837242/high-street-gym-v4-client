@@ -5,8 +5,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { memberDetailedSchema } from '../../schemas';
 import { Btn1Xs, Btn1Sm } from '../../components/ui/Btn1';
 import { Btn2Xs, Btn2Sm } from '../../components/ui/Btn2';
-import FCRHFSm from '../../components/formCtrlRHF/FCRHFSm';
-import FCRHFSmPass from '../../components/formCtrlRHF/FCRHFSmPass';
+import FCRHF1Sm from '../../components/formCtrlRHF/FCRHF1';
+import FCRHFPass1Sm from '../../components/formCtrlRHF/FCRHFPass1';
 import countries from '../../data/countries.json'; // Vite's feature
 import { convertEmptyStrToNull } from '../../helpers/sanitize';
 
@@ -78,9 +78,9 @@ function ListMembers({ members }) {
               </fetcher.Form>
             </td>
           </tr>
-        ),
+        )
       ),
-    [members],
+    [members]
   );
 
   return (
@@ -207,37 +207,37 @@ export function EditMember() {
         noValidate
         className='grid w-full grid-cols-2 justify-items-center gap-x-5 xl:grid-cols-3'
       >
-        <FCRHFSm label='Email' register={register('email')} issue={errors.email?.message || inputEmailMsg} />
-        <FCRHFSmPass
+        <FCRHF1Sm label='Email' register={register('email')} issue={errors.email?.message || inputEmailMsg} />
+        <FCRHFPass1Sm
           label='Password'
           register={register('password', { setValueAs: val => (isDirty ? val : member.password) })}
           issue={errors.password?.message}
         />
-        <FCRHFSm label='Username' register={register('username')} issue={errors.username?.message} />
-        <FCRHFSm label='First Name' register={register('firstName')} issue={errors.firstName?.message} />
-        <FCRHFSm label='Last Name' register={register('lastName')} issue={errors.lastName?.message} />
-        <FCRHFSm label='Phone' register={register('phone')} issue={errors.phone?.message} />
-        <FCRHFSm
+        <FCRHF1Sm label='Username' register={register('username')} issue={errors.username?.message} />
+        <FCRHF1Sm label='First Name' register={register('firstName')} issue={errors.firstName?.message} />
+        <FCRHF1Sm label='Last Name' register={register('lastName')} issue={errors.lastName?.message} />
+        <FCRHF1Sm label='Phone' register={register('phone')} issue={errors.phone?.message} />
+        <FCRHF1Sm
           label='Age'
           type='number'
           register={register('age', { valueAsNumber: true })}
           issue={errors.age?.message}
           isRequired={false}
         />
-        <FCRHFSm label='Gender' issue={errors.gender?.message} isRequired={false}>
+        <FCRHF1Sm label='Gender' issue={errors.gender?.message} isRequired={false}>
           <select {...register('gender')} className='select-bordered select select-sm font-normal'>
             <option value=''>-- Choose Gender --</option>
             <option value='Female'>Female</option>
             <option value='Male'>Male</option>
             <option value='Other'>Other</option>
           </select>
-        </FCRHFSm>
-        <FCRHFSm label='Line 1' register={register('lineOne')} issue={errors.lineOne?.message} />
-        <FCRHFSm label='Line 2' register={register('lineTwo')} issue={errors.lineTwo?.message} isRequired={false} />
-        <FCRHFSm label='Suburb' register={register('suburb')} issue={errors.suburb?.message} />
-        <FCRHFSm label='Postcode' register={register('postcode')} issue={errors.postcode?.message} />
-        <FCRHFSm label='State' register={register('state')} issue={errors.state?.message} />
-        <FCRHFSm label='Country' issue={errors.country?.message}>
+        </FCRHF1Sm>
+        <FCRHF1Sm label='Line 1' register={register('lineOne')} issue={errors.lineOne?.message} />
+        <FCRHF1Sm label='Line 2' register={register('lineTwo')} issue={errors.lineTwo?.message} isRequired={false} />
+        <FCRHF1Sm label='Suburb' register={register('suburb')} issue={errors.suburb?.message} />
+        <FCRHF1Sm label='Postcode' register={register('postcode')} issue={errors.postcode?.message} />
+        <FCRHF1Sm label='State' register={register('state')} issue={errors.state?.message} />
+        <FCRHF1Sm label='Country' issue={errors.country?.message}>
           <select {...register('country')} className='select-bordered select select-sm font-normal'>
             <option value='' disabled>
               -- Choose Country --
@@ -248,7 +248,7 @@ export function EditMember() {
               </option>
             ))}
           </select>
-        </FCRHFSm>
+        </FCRHF1Sm>
         <div className='col-span-2 flex w-full justify-end gap-10 py-6 xl:col-span-3'>
           <Btn2Sm onClick={() => setInputEmailMsg('')} w='w-20'>
             Save

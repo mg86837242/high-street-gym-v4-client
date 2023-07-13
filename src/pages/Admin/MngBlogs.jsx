@@ -7,8 +7,8 @@ import { blogSchema } from '../../schemas/index.js';
 import { convertEmptyStrToNull } from '../../helpers/sanitize.js';
 import { Btn1Xs, Btn1Sm } from '../../components/ui/Btn1';
 import { Btn2Xs, Btn2Sm } from '../../components/ui/Btn2';
-import FCRHFSm from '../../components/formCtrlRHF/FCRHFSm.jsx';
-import FCRHFSmBlogBody from '../../components/formCtrlRHF/FCRHFSmBlogBody.jsx';
+import FCRHF1Sm from '../../components/formCtrlRHF/FCRHF1.jsx';
+import FCRHFBlogBody1Sm from '../../components/formCtrlRHF/FCRHFBlogBody1.jsx';
 
 export function MngBlogs() {
   const { blogs } = useLoaderData();
@@ -54,7 +54,7 @@ function ListBlogs({ blogs }) {
           </td>
         </tr>
       )),
-    [blogs],
+    [blogs]
   );
 
   return (
@@ -119,10 +119,10 @@ export function EditBlog() {
         noValidate
         className='grid w-full grid-cols-2 justify-items-center gap-x-5 xl:grid-cols-3'
       >
-        <FCRHFSm label='Blog Post Title' register={register('title')} issue={errors.title?.message} />
-        <FCRHFSm label='Author Username' register={register('username')} issue={errors.username?.message} />
-        <FCRHFSm label='Author Role' register={register('role')} issue={errors.role?.message} />
-        <FCRHFSmBlogBody label='Blog Post Body' register={register('body')} issue={errors.body?.message} />
+        <FCRHF1Sm label='Blog Post Title' register={register('title')} issue={errors.title?.message} />
+        <FCRHF1Sm label='Author Username' register={register('username')} issue={errors.username?.message} />
+        <FCRHF1Sm label='Author Role' register={register('role')} issue={errors.role?.message} />
+        <FCRHFBlogBody1Sm label='Blog Post Body' register={register('body')} issue={errors.body?.message} />
         <input type='hidden' {...register('loginId', { valueAsNumber: true })} />
         <div className='col-span-2 flex w-full justify-end gap-10 py-6 xl:col-span-3'>
           <Btn2Sm w='w-20'>Save</Btn2Sm>
