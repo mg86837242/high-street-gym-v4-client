@@ -8,8 +8,8 @@ export default function FCRHFBlogBody1Sm({ children, label, register, issue, isR
       <textarea
         {...register}
         rows={10}
-        placeholder='Enter blog post body here ...'
-        className='textarea-bordered textarea'
+        placeholder={`Enter your ${label.toLowerCase()} ...`}
+        className='textarea-bordered textarea placeholder:italic placeholder:text-gray-500'
       />
       <label className='label py-1 3xl:py-2'>
         {issue ? (

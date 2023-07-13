@@ -68,7 +68,6 @@ function SignupForm() {
     return () => setInputEmailMsg('');
   }, [actionData]);
 
-  // TODO CSS fine-tuning, e.g. gaps, responsive, and style variation for placeholder texts
   return (
     <form
       onSubmit={handleSubmit(data => {
