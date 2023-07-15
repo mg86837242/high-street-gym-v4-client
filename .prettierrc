@@ -4,5 +4,6 @@
   "jsxSingleQuote": true,
   "arrowParens": "avoid",
   "htmlWhitespaceSensitivity": "strict",
-  "endOfLine": "lf"
+  "endOfLine": "lf",
+  "plugins": ["prettier-plugin-tailwindcss"]
 }
