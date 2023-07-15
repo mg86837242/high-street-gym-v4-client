@@ -26,12 +26,13 @@ module.exports = {
     },
   },
   plugins: [require('daisyui'), require('@tailwindcss/typography')],
+  darkMode: ['class', '[data-theme="dark"]'],
   daisyui: {
-    // Daisy UI themes – How to customize an existing theme: https://daisyui.com/docs/themes/
+    // Daisy UI themes – How to customize an existing theme: https://daisyui.com/docs/themes/#-7
     themes: [
       {
         light: {
-          ...require('daisyui/src/theming/themes')['[data-theme=light]'],
+          ...require('daisyui/src/colors/themes')['[data-theme=light]'],
           primary: '#6366F1', // indigo-500
           'primary-focus': '#4338CA', // indigo-700
           secondary: '#8b5cf6', // violet-500
@@ -42,7 +43,7 @@ module.exports = {
       },
       {
         dark: {
-          ...require('daisyui/src/theming/themes')['[data-theme=dark]'],
+          ...require('daisyui/src/colors/themes')['[data-theme=dark]'],
           primary: '#8b5cf6', // violet-500
           'primary-focus': '#6d28d9', // violet-700
           secondary: '#6366F1', // indigo-500
