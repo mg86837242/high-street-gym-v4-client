@@ -29,19 +29,19 @@ const profileRoutes = [
           let { default: updateAdminById } = await import('../api/admins');
           return updateAdminById(values);
         case 'updateAddressByAdminId':
-          let { updateAddressByAdminId } = await import('../api/address');
+          let { updateAddressByAdminId } = await import('../api/addresses');
           return updateAddressByAdminId(values);
         case 'updateTrainerById':
           let { default: updateTrainerById } = await import('../api/trainers');
           return updateTrainerById(values);
         case 'updateAddressByTrainerId':
-          let { updateAddressByTrainerId } = await import('../api/address');
+          let { updateAddressByTrainerId } = await import('../api/addresses');
           return updateAddressByTrainerId(values);
         case 'updateMemberById':
           let { updateMemberById } = await import('../api/members');
           return updateMemberById(values);
         case 'updateAddressByMemberId':
-          let { updateAddressByMemberId } = await import('../api/address');
+          let { updateAddressByMemberId } = await import('../api/addresses');
           return updateAddressByMemberId(values);
         default:
           throw json('Unknown form action', { status: 404 });
