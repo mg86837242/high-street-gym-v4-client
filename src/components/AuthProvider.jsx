@@ -23,7 +23,7 @@ export default function AuthProvider({ children }) {
       return;
     }
     let ignore = false;
-    // Fetch GET /users/by_key/:access_key to attempt to get an obj called `user`
+    // Fetch GET /users/key/:accessKey to attempt to get an obj called `user`
     getUserByKey(accessKey)
       .then(json => {
         if (!ignore) {
@@ -47,7 +47,7 @@ export default function AuthProvider({ children }) {
           throw new Error(loginJSON?.message);
         }
         storeCredentials(loginJSON.accessKey);
-        // Fetch GET /users/by_key/:access_key to attempt to get an obj called `user`
+        // Fetch GET /users/key/:accessKey to attempt to get an obj called `user`
         const userJSON = await getUserByKey(loginJSON.accessKey);
         if (userJSON?.status !== 200) {
           throw new Error(userJSON?.message);

@@ -3,12 +3,12 @@ import fetchRaw from '../helpers/fetchRaw';
 
 export async function getUserWithAllDetails() {
   const accessKey = localStorage.getItem('accessKey');
-  const response = await fetchResp.get(`${__API_URL__}/users/by_key/${accessKey}/detailed`);
+  const response = await fetchResp.get(`${__API_URL__}/users/keys/${accessKey}/detailed`);
   return response;
 }
 
 export async function getUserByKey(accessKey) {
-  const response = await fetchRaw.get(`${__API_URL__}/users/by_key/${accessKey}`);
+  const response = await fetchRaw.get(`${__API_URL__}/users/keys/${accessKey}`);
   const json = await response.json();
   return json;
 }
