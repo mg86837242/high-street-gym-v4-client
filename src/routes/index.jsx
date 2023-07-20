@@ -85,7 +85,9 @@ const routes = [
       return signupMembers({ request });
     },
   },
-  // TODO Temporarily disabled for prod since both client and server are using the same ip addr, `<ip addr>/api/*` won't work with this route definition => potential solution, a path with '/api' value
+  // TODO Temporarily disabled for prod since both client and server are using the same ip addr, and `<ip addr>/api/*`
+  //  won't work with this route definition => in real production, reverse proxy is needed to solve this issue, see:
+  //  https://medium.com/geekculture/deploying-a-react-app-and-a-node-js-server-on-a-single-machine-with-pm2-and-nginx-15f17251ee74
   // {
   //   path: '*',
   //   async lazy() {
