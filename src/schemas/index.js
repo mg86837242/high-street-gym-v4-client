@@ -1,4 +1,8 @@
-export { addressAdminSchema, addressTrainerSchema, addressMemberSchema } from './addresses';
+export {
+  updateAddressByAdminIdSchema,
+  updateAddressByTrainerIdSchema,
+  updateAddressByMemberIdSchema,
+} from './addresses';
 export { emailSchema, passwordSchema, usernameSchema, firstNameSchema, lastNameSchema, phoneSchema } from './users';
 export { ageSchema, genderSchema, signupSchema, memberSchema, memberDetailedSchema } from './members';
 export { trainerSchema } from './trainers';

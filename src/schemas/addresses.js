@@ -7,7 +7,7 @@ export const postcodeSchema = z.string().trim().max(45);
 export const stateSchema = z.string().trim().max(45);
 export const countrySchema = z.string().trim().max(45);
 
-export const addressAdminSchema = z.object({
+export const updateAddressByAdminIdSchema = z.object({
   lineOne: lineOneSchema,
   lineTwo: lineTwoSchema,
   suburb: suburbSchema,
@@ -18,7 +18,7 @@ export const addressAdminSchema = z.object({
   _action: z.string().trim(),
 });
 
-export const addressTrainerSchema = z.object({
+export const updateAddressByTrainerIdSchema = z.object({
   lineOne: lineOneSchema,
   lineTwo: lineTwoSchema,
   suburb: suburbSchema,
@@ -29,7 +29,7 @@ export const addressTrainerSchema = z.object({
   _action: z.string().trim(),
 });
 
-export const addressMemberSchema = z.object({
+export const updateAddressByMemberIdSchema = z.object({
   lineOne: lineOneSchema,
   lineTwo: lineTwoSchema,
   suburb: suburbSchema,

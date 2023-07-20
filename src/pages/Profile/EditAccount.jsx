@@ -7,9 +7,9 @@ import {
   adminSchema,
   trainerSchema,
   memberSchema,
-  addressAdminSchema,
-  addressTrainerSchema,
-  addressMemberSchema,
+  updateAddressByAdminIdSchema,
+  updateAddressByTrainerIdSchema,
+  updateAddressByMemberIdSchema,
 } from '../../schemas';
 import { Btn2Sm } from '../../components/ui/Btn2';
 import FCRHF1Sm from '../../components/formCtrlRHF/FCRHF1';
@@ -195,7 +195,7 @@ function UpdateAdminAddrForm({ botMsg, user }) {
     formState: { errors },
     reset,
   } = useForm({
-    resolver: zodResolver(addressAdminSchema),
+    resolver: zodResolver(updateAddressByAdminIdSchema),
     defaultValues: addressDefaultValue,
   });
 
@@ -216,7 +216,7 @@ function UpdateAdminAddrForm({ botMsg, user }) {
       <FCRHF1Sm label='Postcode' register={register('postcode')} issue={errors.postcode?.message} />
       <FCRHF1Sm label='State' register={register('state')} issue={errors.state?.message} />
       <FCRHF1Sm label='Country' issue={errors.country?.message}>
-        <select {...register('country')} className='select-bordered select select-sm font-normal'>
+        <select {...register('country')} className='select select-bordered select-sm font-normal'>
           <option value='' disabled>
             -- Choose Country --
           </option>
@@ -317,7 +317,7 @@ function UpdateTrainerAddrForm({ botMsg, user }) {
     formState: { errors },
     reset,
   } = useForm({
-    resolver: zodResolver(addressTrainerSchema),
+    resolver: zodResolver(updateAddressByTrainerIdSchema),
     defaultValues: addressDefaultValue,
   });
 
@@ -338,7 +338,7 @@ function UpdateTrainerAddrForm({ botMsg, user }) {
       <FCRHF1Sm label='Postcode' register={register('postcode')} issue={errors.postcode?.message} />
       <FCRHF1Sm label='State' register={register('state')} issue={errors.state?.message} />
       <FCRHF1Sm label='Country' issue={errors.country?.message}>
-        <select {...register('country')} className='select-bordered select select-sm font-normal'>
+        <select {...register('country')} className='select select-bordered select-sm font-normal'>
           <option value='' disabled>
             -- Choose Country --
           </option>
@@ -404,7 +404,7 @@ function UpdateMemberForm({ inputEmailMsg, setInputEmailMsg, topMsg, user }) {
         isRequired={false}
       />
       <FCRHF1Sm label='Gender' issue={errors.gender?.message} isRequired={false}>
-        <select {...register('gender')} className='select-bordered select select-sm font-normal'>
+        <select {...register('gender')} className='select select-bordered select-sm font-normal'>
           <option value=''>-- Choose Gender --</option>
           <option value='Female'>Female</option>
           <option value='Male'>Male</option>
@@ -435,7 +435,7 @@ function UpdateMemberAddrForm({ botMsg, user }) {
     formState: { errors },
     reset,
   } = useForm({
-    resolver: zodResolver(addressMemberSchema),
+    resolver: zodResolver(updateAddressByMemberIdSchema),
     defaultValues: addressDefaultValue,
   });
 
@@ -456,7 +456,7 @@ function UpdateMemberAddrForm({ botMsg, user }) {
       <FCRHF1Sm label='Postcode' register={register('postcode')} issue={errors.postcode?.message} />
       <FCRHF1Sm label='State' register={register('state')} issue={errors.state?.message} />
       <FCRHF1Sm label='Country' issue={errors.country?.message}>
-        <select {...register('country')} className='select-bordered select select-sm font-normal'>
+        <select {...register('country')} className='select select-bordered select-sm font-normal'>
           <option value='' disabled>
             -- Choose Country --
           </option>

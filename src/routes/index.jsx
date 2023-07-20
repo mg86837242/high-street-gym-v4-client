@@ -85,16 +85,17 @@ const routes = [
       return signupMembers({ request });
     },
   },
-  // TODO Temporarily disabled for prod since both client and server are using the same ip addr, and `<ip addr>/api/*`
-  //  won't work with this route definition => in real production, reverse proxy is needed to solve this issue, see:
-  //  https://medium.com/geekculture/deploying-a-react-app-and-a-node-js-server-on-a-single-machine-with-pm2-and-nginx-15f17251ee74
-  // {
-  //   path: '*',
-  //   async lazy() {
-  //     let { default: NotFound } = await import('../components/ui/NotFound');
-  //     return { Component: NotFound };
-  //   },
-  // },
+  // TODO Check if it's working after deployment => best practice is probably to use reverse proxy here,
+  //  see: https://medium.com/geekculture/deploying-a-react-app-and-a-node-js-server-on-a-single-machine-with-pm2-and-nginx-15f17251ee74
+  //  (since both client and server are using the same ip addr, and `<ip addr>/api/*` might not work with
+  //  this route definition
+  {
+    path: '*',
+    async lazy() {
+      let { default: NotFound } = await import('../components/ui/NotFound');
+      return { Component: NotFound };
+    },
+  },
 ];
 
 export default routes;
