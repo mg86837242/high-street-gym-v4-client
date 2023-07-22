@@ -2,7 +2,7 @@
 
 A gym web application (web app) created for schoolwork. This website is of dynamic nature, with database and API integration, interactive forms with proper validation, conditional rendering based on user roles and user inputs, content editing functionalities for authenticated users, etc.
 
-For the deployed version of this web app, check the [deployment section](#2-deployment).
+For deployed version of this web app, check the [deployment section](#2-deployment).
 
 For more details about the project requirements, check the [project requirement section](#3-project-requirement).
 
@@ -71,7 +71,7 @@ Navigate to [`http://localhost:5173`](http://localhost:5173) in the browser to o
 
 ## 2. Deployment
 
-For the deployed version of this web app, visit: http://www.highstreetgymdemo.space/
+For deployed version of this web app, visit: http://www.highstreetgymdemo.space/
 
 Technologies used for deployment includes but not limited to:
 
@@ -95,9 +95,9 @@ This school project calls for a dynamic website with a database integration. In 
 The technologies to be used for implementing this project is left to the discretion of the programmer/developer. The extensive list of packages used in the backend and the frontend can be found in their respective `package.json` files. Essential technologies used for this project are listed below:
 
 - Git – for version controlling (also used during deployment)
-- Prettier & ESLint – for code formatting and cod quality
+- Prettier & ESLint – for code formatting and code quality
 - Zod – for data validation in both backend and frontend
-- MySQL – database management system with mysql2 adapter (which has built-in methods for database transactions)
+- MySQL – database management system with mysql2 adapter (which has built-in methods for database transaction)
 - Express.js – for building RESTful APIs
 - React
 - React Router 6.4+
