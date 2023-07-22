@@ -41,7 +41,7 @@ function Directions() {
         Don't have account?{' '}
         <Link
           to='/signup'
-          className={`link-primary link cursor-pointer text-sm font-medium leading-none underline focus:outline-none`}
+          className={`link link-primary cursor-pointer text-sm font-medium leading-none underline focus:outline-none`}
         >
           Sign up here
         </Link>
@@ -128,9 +128,8 @@ function LoginForm({ btnMsg, setBtnMsg, issues, setIssues, from }) {
     }
 
     try {
-      await auth.handleLogin(email, password);
+      await auth.handleLogin(email, password, navigate(from, { replace: true }));
       setBtnMsg('Login');
-      navigate(from, { replace: true });
     } catch (error) {
       setBtnMsg('Login');
       setIssues({
@@ -160,7 +159,7 @@ function LoginForm({ btnMsg, setBtnMsg, issues, setIssues, from }) {
           placeholder='Enter your email here'
           value={email}
           onChange={e => setEmail(e.target.value)}
-          className='input-bordered input-primary input w-full text-white'
+          className='input input-bordered input-primary w-full text-white'
         />
         <label htmlFor='email' className='label'>
           {issues?.email ? (
@@ -181,7 +180,7 @@ function LoginForm({ btnMsg, setBtnMsg, issues, setIssues, from }) {
           placeholder='Enter your password here'
           value={password}
           onChange={e => setPassword(e.target.value)}
-          className='input-bordered input-primary input w-full text-white'
+          className='input input-bordered input-primary w-full text-white'
         />
         {/* NB `type=`button'`, which implies no default behavior, is a must have in order for this button to work */}
         <button type='button' onClick={handleToggle} className='absolute right-0 mr-3 mt-10 cursor-pointer'>
@@ -211,9 +210,8 @@ function DemoLogins({ setBtnMsg, setIssues, from }) {
     setIssues({ email: '', password: '' });
 
     try {
-      await auth.handleLogin(email, password);
+      await auth.handleLogin(email, password, navigate(from, { replace: true }));
       setBtnMsg('Login');
-      navigate(from, { replace: true });
     } catch (error) {
       setBtnMsg('Login');
       setIssues({
@@ -227,19 +225,19 @@ function DemoLogins({ setBtnMsg, setIssues, from }) {
     <div className='flex justify-between gap-2'>
       <button
         onClick={() => handleClickDemoLogin('demomember@server.com', 'abcd1234')}
-        className={`btn-outline btn-success btn-sm btn h-fit flex-shrink text-primary-content shadow shadow-black/50`}
+        className={`btn btn-outline btn-success btn-sm h-fit flex-shrink text-primary-content shadow shadow-black/50`}
       >
         Demo Member Login
       </button>
       <button
         onClick={() => handleClickDemoLogin('demotrainer@server.com', 'abcd1234')}
-        className={`btn-outline btn-warning btn-sm btn h-fit flex-shrink text-primary-content shadow shadow-black/50`}
+        className={`btn btn-outline btn-warning btn-sm h-fit flex-shrink text-primary-content shadow shadow-black/50`}
       >
         Demo Trainer Login
       </button>
       <button
         onClick={() => handleClickDemoLogin('demoadmin@server.com', 'abcd1234')}
-        className={`btn-outline btn-error btn-sm btn h-fit flex-shrink text-primary-content shadow shadow-black/50`}
+        className={`btn btn-outline btn-error btn-sm h-fit flex-shrink text-primary-content shadow shadow-black/50`}
       >
         Demo Admin Login
       </button>

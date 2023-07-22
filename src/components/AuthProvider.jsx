@@ -38,7 +38,7 @@ export default function AuthProvider({ children }) {
   }, [user]);
 
   const handleLogin = useCallback(
-    async (email, password) => {
+    async (email, password, callback) => {
       try {
         setUser(null);
         // Fetch POST /users/login to attempt to get `accessKey` from the API's json response
@@ -53,6 +53,7 @@ export default function AuthProvider({ children }) {
           throw new Error(userJSON?.message);
         }
         setUser(userJSON.user);
+        callback();
       } catch (error) {
         throw new Error('Server Error');
       }
