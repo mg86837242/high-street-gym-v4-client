@@ -85,10 +85,7 @@ const routes = [
       return signupMembers({ request });
     },
   },
-  // TODO Check if it's working after deployment => best practice is probably to use reverse proxy here,
-  //  see: https://medium.com/geekculture/deploying-a-react-app-and-a-node-js-server-on-a-single-machine-with-pm2-and-nginx-15f17251ee74
-  //  (since both client and server are using the same ip addr, and `<ip addr>/api/*` might not work with
-  //  this route definition
+  // NB `/api/*` calls are handled by NGINX's reverse proxy, see: https://www.youtube.com/watch?v=NjYsXuSBZ5U
   {
     path: '*',
     async lazy() {
