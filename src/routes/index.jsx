@@ -85,7 +85,8 @@ const routes = [
       return signupMembers({ request });
     },
   },
-  // NB `/api/*` calls are handled by NGINX's reverse proxy, see: https://www.youtube.com/watch?v=NjYsXuSBZ5U
+  // NB `/api/*` calls are handled by NGINX's reverse proxy, see: https://www.youtube.com/watch?v=NjYsXuSBZ5U &&
+  //  https://github.com/Sanjeev-Thiyagarajan/PERN-STACK-DEPLOYMENT#7-install-and-configure-nginx
   {
     path: '*',
     async lazy() {
