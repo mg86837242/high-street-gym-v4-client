@@ -1,6 +1,7 @@
 // Use case: fetch and error handling in loader and action
 import getErrorMsg from './getErrorMsg';
 
+// TODO Use axios so that fetch base url can be a relative path, which is useful when deploying with a public IP and a domain (or several domains)
 const fetchJSON = {
   async get(url) {
     const requestOptions = {

@@ -40,7 +40,7 @@ function NavBarLeft() {
   return (
     <div id='nav-left-wrapper' className='navbar-start'>
       <div id='nav-left-dropdown-wrapper' className='dropdown'>
-        <label id='nav-left-hamburger' tabIndex={0} className='btn-ghost btn px-1 lg:hidden'>
+        <label id='nav-left-hamburger' tabIndex={0} className='btn btn-ghost px-1 lg:hidden'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             className='h-9 w-9'
@@ -214,6 +214,7 @@ function NavCenterDropdownButton({ to, text }) {
   );
 }
 
+// TODO Theme switcher: https://daisyui.com/components/swap/
 function NavBarRight() {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();

@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import carouselItems from '../../data/carouselItems';
 
+// TODO Fix mobile view
 export default function Carousel() {
   const listRef = useRef(null);
 
@@ -23,7 +24,7 @@ export default function Carousel() {
               <button
                 key={id}
                 onClick={() => scrollToIndex(id - 4)}
-                className='btn-secondary btn shadow shadow-black/50'
+                className='btn btn-secondary shadow shadow-black/50'
               >
                 {activityName.replace('-', ' ')}
               </button>
