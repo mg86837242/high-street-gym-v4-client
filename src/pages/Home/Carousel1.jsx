@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import carouselItems from '../../data/carouselItems';
 
-// TODO Fix mobile view
+// FIX Mobile view
 export default function Carousel() {
   const listRef = useRef(null);
 
