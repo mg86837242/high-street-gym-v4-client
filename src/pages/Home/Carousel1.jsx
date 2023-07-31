@@ -15,19 +15,19 @@ export default function Carousel1() {
   }
 
   return (
-    <ul ref={slideListRef} className='carousel h-[80vh] w-full'>
+    <ul ref={slideListRef} className='carousel w-full'>
       {carouselItems.map(({ id, imageUrl, activityName }) => (
         <li id={`slide-${id + 1}`} key={id} className='carousel-item relative w-full'>
           <div
             id={`slide-${id + 1}-content-wrapper`}
-            className='grid grid-cols-1 grid-rows-2 place-items-center lg:grid-cols-2 lg:grid-rows-1'
+            className='flex flex-col items-center justify-center gap-10 lg:flex-row lg:gap-0'
           >
             <img
               src={imageUrl}
               alt={`${activityName.toLowerCase()} activities`}
-              className='duration-5000 row-[2_/_3] h-full w-full rounded-md object-cover object-center transition-all lg:col-[1_/_2] lg:row-[1_/_2] lg:rounded-3xl'
+              className='duration-5000 h-full w-full rounded-md object-cover object-center transition-all  lg:w-1/2 lg:rounded-3xl'
             />
-            <div className='row-[1_/_2] p-4 text-center lg:col-[2_/_3] lg:row-[1_/_2] lg:p-6'>
+            <div className='text-center lg:w-1/2 lg:p-6'>
               <h2 className='mb-6'>{`${activityName.replace('-', ' ')} Activities`}</h2>
               <p>
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatem est cupiditate suscipit non ipsa
@@ -36,7 +36,7 @@ export default function Carousel1() {
             </div>
           </div>
           <div
-            id={`slide-${id + 1}-nav-button-pair`}
+            id={`slide-${id + 1}-nav-button-group`}
             className='absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between'
           >
             <button
