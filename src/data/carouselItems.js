@@ -1,45 +1,45 @@
+import carouselImgUrl0 from '../assets/home-carousel-img-0.webp';
+import carouselImgUrl1 from '../assets/home-carousel-img-1.webp';
+import carouselImgUrl2 from '../assets/home-carousel-img-2.webp';
+import carouselImgUrl3 from '../assets/home-carousel-img-3.webp';
+import carouselImgUrl4 from '../assets/home-carousel-img-4.webp';
+import carouselImgUrl5 from '../assets/home-carousel-img-5.webp';
+import carouselImgUrl6 from '../assets/home-carousel-img-6.webp';
+
 const carouselItems = [
-  // TODO Static assets for carousel images, 404 page, and under construction page
   {
     id: 0,
-    imageUrl:
-      'https://images.pexels.com/photos/4056723/pexels-photo-4056723.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    imageUrl: carouselImgUrl0,
     activityName: 'Yoga',
   },
   {
     id: 1,
-    imageUrl:
-      'https://images.pexels.com/photos/3984353/pexels-photo-3984353.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    imageUrl: carouselImgUrl1,
     activityName: 'Pilates',
   },
   {
     id: 2,
-    imageUrl:
-      'https://images.pexels.com/photos/6392828/pexels-photo-6392828.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    imageUrl: carouselImgUrl2,
     activityName: 'Abs',
   },
   {
     id: 3,
-    imageUrl:
-      'https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    imageUrl: carouselImgUrl3,
     activityName: 'HIIT',
   },
   {
     id: 4,
-    imageUrl:
-      'https://images.unsplash.com/photo-1593234270323-0414ec1574e1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+    imageUrl: carouselImgUrl4,
     activityName: 'Indoor-Cycling',
   },
   {
     id: 5,
-    imageUrl:
-      'https://images.unsplash.com/photo-1517438322307-e67111335449?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80',
+    imageUrl: carouselImgUrl5,
     activityName: 'Boxing',
   },
   {
     id: 6,
-    imageUrl:
-      'https://images.pexels.com/photos/8436587/pexels-photo-8436587.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    imageUrl: carouselImgUrl6,
     activityName: 'Zumba',
   },
 ];
