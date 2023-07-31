@@ -18,13 +18,16 @@ export default function Carousel1() {
     <ul ref={slideListRef} className='carousel h-[80vh] w-full'>
       {carouselItems.map(({ id, imageUrl, activityName }) => (
         <li id={`slide-${id + 1}`} key={id} className='carousel-item relative w-full'>
-          <div id={`slide-${id + 1}-content-wrapper`} className='grid grid-cols-2 place-items-center'>
+          <div
+            id={`slide-${id + 1}-content-wrapper`}
+            className='grid grid-cols-1 grid-rows-2 place-items-center lg:grid-cols-2 lg:grid-rows-1'
+          >
             <img
               src={imageUrl}
               alt={`${activityName.toLowerCase()} activities`}
-              className='duration-5000 col-span-2 h-full w-full rounded-md object-cover object-center transition-all lg:col-span-1 lg:rounded-3xl'
+              className='duration-5000 row-[2_/_3] h-full w-full rounded-md object-cover object-center transition-all lg:col-[1_/_2] lg:row-[1_/_2] lg:rounded-3xl'
             />
-            <div className='col-span-2 p-4 text-center lg:col-span-1 lg:p-6'>
+            <div className='row-[1_/_2] p-4 text-center lg:col-[2_/_3] lg:row-[1_/_2] lg:p-6'>
               <h2 className='mb-6'>{`${activityName.replace('-', ' ')} Activities`}</h2>
               <p>
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatem est cupiditate suscipit non ipsa
