@@ -20,13 +20,12 @@ export default async function getSubmittedData(request) {
 // References:
 // -- https://github.com/remix-run/remix/discussions/3680 (source: google "remix action request json")
 
-// Alternatively, submit a `FormData` obj to the route action, which implies conversion from plain obj
-//  (`data` returned by React Hook Form's `handleSubmit`) to `FormData` obj, which entails a util like this:
-//  https://stackoverflow.com/questions/22783108/convert-js-object-to-form-data; this method has a huge
-//  downside since `FormData` can only hold strings in most cases, which implies extra type conversions from
-//  empty string to null in the route action in order to bypass the db constraint (i.e., db only accepts null)
+// Alternatively, submit a `FormData` obj to the route action, which implies conversion from plain obj (`data`
+//  returned by React Hook Form's `handleSubmit`) to `FormData` obj, which entails a util like this:
+//  https://stackoverflow.com/questions/22783108/convert-js-object-to-form-data; be careful if there's any need of
+//  extra type conversions (e.g. empty string to null) in the route action in order to bypass the db constraint (i.e.,
+//  db only accepts null but not accepts empty string as falsy value)
 //
-// Example in <EditActivity> component (see: https://stackoverflow.com/questions/22783108/ (source: google
-//  "lodash convert specific object values" for `getFormData()` util)
+// For example, in <EditActivity> component:
 //   const formData = getFormData(data);
 //   submit(formData, { method: 'post' });

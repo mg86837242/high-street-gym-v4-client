@@ -1,6 +1,6 @@
 export const today = new Date();
 
-// TODO Use react-picker => tried it, UI works as intended, but couldn't serialize the form data, future test is needed
+// TODO Use react-datepicker => tried it, UI works as intended, but couldn't serialize the form data, future test is needed
 const tomorrow = new Date(today);
 tomorrow.setDate(tomorrow.getDate() + 1);
 export const tomorrowStr = `${tomorrow.getFullYear()}-${
