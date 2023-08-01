@@ -30,7 +30,7 @@ Skip this step if MySQL Server and MySQL Workbench are already installed
 
 1.  Administration tab –> data import/restore
 2.  Import from self-contained file
-3.  Select the dump file located at `./high-street-gym-v4-api/sqldump`
+3.  Select the dump file located at `./high-street-gym-v4-api/dump`
 4.  Start import
 
 **Step 4:** Configure database adapter's options, then start the API server (backend):
