@@ -16,7 +16,7 @@ export default function FCInputSm({ name, type, issue, initialValue, isRequired 
         type={type}
         placeholder={`Enter your ${name.replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase()} here`}
         defaultValue={initialValue}
-        className='input-primary input input-sm text-accent'
+        className='input input-primary input-sm text-accent'
       />
       <label htmlFor={id} className='label py-1 3xl:py-2'>
         {issue ? (

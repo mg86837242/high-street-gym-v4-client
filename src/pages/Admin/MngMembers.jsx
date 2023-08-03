@@ -78,14 +78,14 @@ function ListMembers({ members }) {
               </fetcher.Form>
             </td>
           </tr>
-        )
+        ),
       ),
-    [members]
+    [members],
   );
 
   return (
     <div className='overflow-x-auto py-6'>
-      <table className='table-compact table w-full'>
+      <table className='table table-compact w-full'>
         <thead>
           <tr>
             <th>id</th>
@@ -136,7 +136,7 @@ export function NewMember() {
               type='file'
               accept='.xml'
               onChange={e => setFile(e.target.files[0])}
-              className='file-input-bordered file-input file-input-sm w-full max-w-xs shadow shadow-black/50'
+              className='file-input file-input-bordered file-input-sm w-full max-w-xs shadow shadow-black/50'
             />
             <Btn2Sm>Submit</Btn2Sm>
           </fetcher.Form>
@@ -154,7 +154,7 @@ export function NewMember() {
       </p>
       <p className='text-right lg:text-left'>
         👉 You can try upload the{' '}
-        <Link to='/sampleNewMembers.xml' target='_blank' download className='link-primary link'>
+        <Link to='/sampleNewMembers.xml' target='_blank' download className='link link-primary'>
           sample XML
         </Link>{' '}
         to create new members:
@@ -225,7 +225,7 @@ export function EditMember() {
           isRequired={false}
         />
         <FCRHF1Sm label='Gender' issue={errors.gender?.message} isRequired={false}>
-          <select {...register('gender')} className='select-bordered select select-sm font-normal'>
+          <select {...register('gender')} className='select select-bordered select-sm font-normal'>
             <option value=''>-- Choose Gender --</option>
             <option value='Female'>Female</option>
             <option value='Male'>Male</option>
@@ -238,7 +238,7 @@ export function EditMember() {
         <FCRHF1Sm label='Postcode' register={register('postcode')} issue={errors.postcode?.message} />
         <FCRHF1Sm label='State' register={register('state')} issue={errors.state?.message} />
         <FCRHF1Sm label='Country' issue={errors.country?.message}>
-          <select {...register('country')} className='select-bordered select select-sm font-normal'>
+          <select {...register('country')} className='select select-bordered select-sm font-normal'>
             <option value='' disabled>
               -- Choose Country --
             </option>

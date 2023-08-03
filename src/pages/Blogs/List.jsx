@@ -103,7 +103,7 @@ export default function List() {
               value={filter}
               onChange={e => setFilter(e.target.value)}
               aria-label='Dropdown list for filtering blogs'
-              className='select-primary select select-sm w-full max-w-xs'
+              className='select select-primary select-sm w-full max-w-xs'
             >
               <option value='all'>All bookings</option>
               <option value='my'>My bookings</option>
@@ -124,7 +124,7 @@ export default function List() {
             <select
               value={filter}
               onChange={e => setFilter(e.target.value)}
-              className='select-primary select select-sm w-full max-w-xs'
+              className='select select-primary select-sm w-full max-w-xs'
             >
               <option value='all'>All bookings</option>
               <option value='my'>My bookings</option>

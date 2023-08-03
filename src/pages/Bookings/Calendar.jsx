@@ -48,7 +48,7 @@ export default function Calendar() {
                   tabIndex={0}
                   key={7 * i + j + 1}
                   className={({ isActive, isPending }) =>
-                    `btn-circle btn grid h-11 min-h-0 w-11 place-items-center leading-none sm:text-base 3xl:h-12 3xl:w-12 ${
+                    `btn btn-circle grid h-11 min-h-0 w-11 place-items-center leading-none sm:text-base 3xl:h-12 3xl:w-12 ${
                       isActive && 'btn-primary'
                     } ${isPending && 'loading'}`
                   }
@@ -136,7 +136,7 @@ function CalendarWrapper({ children }) {
 function CreateNewBooking() {
   return (
     <section className='flex justify-center gap-5 text-center'>
-      <Link to='new' className='btn-primary btn min-h-0 w-48 text-primary-content shadow shadow-black/50'>
+      <Link to='new' className='btn btn-primary min-h-0 w-48 text-primary-content shadow shadow-black/50'>
         Create New Booking
       </Link>
     </section>

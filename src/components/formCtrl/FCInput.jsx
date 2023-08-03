@@ -16,7 +16,7 @@ export default function FCInput({ name, type, issue, initialValue, isRequired })
         type={type}
         placeholder={`Enter your ${name.replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase()} here`}
         defaultValue={initialValue}
-        className='input-primary input h-10 w-full text-accent 3xl:h-12'
+        className='input input-primary h-10 w-full text-accent 3xl:h-12'
       />
       <label htmlFor={id} className='label py-1 3xl:py-2'>
         {issue ? (

@@ -12,7 +12,7 @@ export default function FCRHF1Sm({ children, label, type, register, issue, isReq
           type={type || 'text'}
           {...register}
           placeholder={`Enter your ${label.toLowerCase()} ...`}
-          className='input-bordered input input-sm placeholder:italic placeholder:text-gray-500'
+          className='input input-bordered input-sm placeholder:italic placeholder:text-gray-500'
         />
       )}
       <label className='label py-1 3xl:py-2'>

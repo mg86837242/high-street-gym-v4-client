@@ -34,7 +34,7 @@ export default function New() {
               name='activityId'
               defaultValue={'-- Choose Activity --'}
               required
-              className='select-bordered select select-sm text-base font-normal'
+              className='select select-bordered select-sm text-base font-normal'
             >
               <option disabled>-- Choose Activity --</option>
               {activities.map((a, i) => {
@@ -58,7 +58,7 @@ export default function New() {
               min={tomorrowStr}
               max={threeWeeksLaterStr}
               required
-              className='input-bordered input input-sm text-base'
+              className='input input-bordered input-sm text-base'
             />
           </label>
           <label
@@ -70,7 +70,7 @@ export default function New() {
               name='time'
               defaultValue={`-- Choose Booking Time --`}
               required
-              className='select-bordered select select-sm text-base font-normal'
+              className='select select-bordered select-sm text-base font-normal'
             >
               <option disabled>-- Choose Booking Time --</option>
               {[...Array(10)].map((_, i) => (
@@ -90,7 +90,7 @@ export default function New() {
                 name='memberId'
                 defaultValue={auth.user.memberId}
                 required
-                className='select-bordered select select-sm text-base font-normal'
+                className='select select-bordered select-sm text-base font-normal'
               >
                 <option disabled>-- Choose Member --</option>
                 {members
@@ -112,7 +112,7 @@ export default function New() {
                 name='memberId'
                 defaultValue={'-- Choose Member --'}
                 required
-                className='select-bordered select select-sm text-base font-normal'
+                className='select select-bordered select-sm text-base font-normal'
               >
                 <option disabled>-- Choose Member --</option>
                 {members.map((m, i) => (
@@ -133,7 +133,7 @@ export default function New() {
                 name='trainerId'
                 defaultValue={auth.user.trainerId}
                 required
-                className='select-bordered select select-sm text-base font-normal'
+                className='select select-bordered select-sm text-base font-normal'
               >
                 <option disabled>-- Choose Trainer --</option>
                 {trainers
@@ -155,7 +155,7 @@ export default function New() {
                 name='trainerId'
                 defaultValue={'-- Choose Trainer --'}
                 required
-                className='select-bordered select select-sm text-base font-normal'
+                className='select select-bordered select-sm text-base font-normal'
               >
                 <option disabled>-- Choose Trainer --</option>
                 {trainers.map((t, i) => (
@@ -169,7 +169,7 @@ export default function New() {
           <div className='flex justify-between gap-5 text-center'>
             <button
               type='submit'
-              className='btn-secondary btn h-10 min-h-0 w-36 text-primary-content shadow shadow-black/50 lg:w-[6.5rem] xl:w-36'
+              className='btn btn-secondary h-10 min-h-0 w-36 text-primary-content shadow shadow-black/50 lg:w-[6.5rem] xl:w-36'
             >
               Submit
             </button>
@@ -178,7 +178,7 @@ export default function New() {
               onClick={() => {
                 navigate(-1);
               }}
-              className='glass btn h-10 min-h-0 w-36 bg-base-100 text-accent-content shadow shadow-black/50 lg:w-[6.5rem] xl:w-36'
+              className='btn glass h-10 min-h-0 w-36 bg-base-100 text-accent-content shadow shadow-black/50 lg:w-[6.5rem] xl:w-36'
             >
               Cancel
             </button>

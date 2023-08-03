@@ -23,7 +23,7 @@ export default function FCInputSmPass({ issue, initialValue }) {
         type={type}
         placeholder='Enter your password here'
         defaultValue={initialValue}
-        className='input-primary input input-sm text-accent'
+        className='input input-primary input-sm text-accent'
       />
       <button type='button' onClick={handleToggle} className='absolute right-0 mr-3 mt-8 cursor-pointer 3xl:mt-10'>
         <FontAwesomeIcon icon={icon} className='h-4 w-4' />

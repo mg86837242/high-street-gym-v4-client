@@ -22,7 +22,7 @@ export default function FCRHFPass1Sm({ children, label, register, issue, isRequi
         type={type}
         {...register}
         placeholder={`Enter your ${label.toLowerCase()} ...`}
-        className='input-bordered input input-sm placeholder:italic placeholder:text-gray-500'
+        className='input input-bordered input-sm placeholder:italic placeholder:text-gray-500'
       />
       <button type='button' onClick={handleToggle} className='absolute right-0 mr-3 mt-8 cursor-pointer 3xl:mt-10'>
         <FontAwesomeIcon icon={icon} className='h-4 w-4' />

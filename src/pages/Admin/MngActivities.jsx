@@ -66,14 +66,14 @@ function ListActivities({ activities }) {
               </fetcher.Form>
             </td>
           </tr>
-        )
+        ),
       ),
-    [activities]
+    [activities],
   );
 
   return (
     <div className='overflow-x-auto py-6'>
-      <table className='table-compact table w-full'>
+      <table className='table table-compact w-full'>
         <thead>
           <tr>
             <th>id</th>
@@ -119,7 +119,7 @@ export function NewActivity() {
               type='file'
               accept='.xml'
               onChange={e => setFile(e.target.files[0])}
-              className='file-input-bordered file-input file-input-sm w-full max-w-xs shadow shadow-black/50'
+              className='file-input file-input-bordered file-input-sm w-full max-w-xs shadow shadow-black/50'
             />
             <Btn2Sm>Submit</Btn2Sm>
           </fetcher.Form>
@@ -139,7 +139,7 @@ export function NewActivity() {
       </p>
       <p className='text-right lg:text-left'>
         👉 You can try upload the{' '}
-        <Link to='/sampleNewActivities.xml' target='_blank' download className='link-primary link'>
+        <Link to='/sampleNewActivities.xml' target='_blank' download className='link link-primary'>
           sample XML
         </Link>{' '}
         to create new activities:
@@ -178,7 +178,7 @@ export function EditActivity() {
       >
         <FCRHF1Sm label='Activity Name' register={register('name')} issue={errors.name?.message} />
         <FCRHF1Sm label='Category' issue={errors.category?.message} isRequired={false}>
-          <select {...register('category')} className='select-bordered select select-sm font-normal'>
+          <select {...register('category')} className='select select-bordered select-sm font-normal'>
             <option value=''>-- Choose Category --</option>
             <option value='Aerobic'>Aerobic</option>
             <option value='Strength'>Strength</option>
@@ -193,7 +193,7 @@ export function EditActivity() {
           isRequired={false}
         />
         <FCRHF1Sm label='Intensity Level' issue={errors.intensityLevel?.message} isRequired={false}>
-          <select {...register('intensityLevel')} className='select-bordered select select-sm font-normal'>
+          <select {...register('intensityLevel')} className='select select-bordered select-sm font-normal'>
             <option value=''>-- Choose Intensity Level --</option>
             <option value='Low'>Low</option>
             <option value='Medium'>Medium</option>

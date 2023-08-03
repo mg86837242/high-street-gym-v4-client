@@ -194,35 +194,40 @@
   .loading-spinner #square1 {
     left: calc(0 * var(--offset));
     top: calc(0 * var(--offset));
-    animation: square1 var(--duration) var(--delay) var(--timing-function) infinite,
+    animation:
+      square1 var(--duration) var(--delay) var(--timing-function) infinite,
       squarefadein var(--in-duration) calc(1 * var(--in-delay)) var(--in-timing-function) both;
   }
 
   .loading-spinner #square2 {
     left: calc(0 * var(--offset));
     top: calc(1 * var(--offset));
-    animation: square2 var(--duration) var(--delay) var(--timing-function) infinite,
+    animation:
+      square2 var(--duration) var(--delay) var(--timing-function) infinite,
       squarefadein var(--in-duration) calc(1 * var(--in-delay)) var(--in-timing-function) both;
   }
 
   .loading-spinner #square3 {
     left: calc(1 * var(--offset));
     top: calc(1 * var(--offset));
-    animation: square3 var(--duration) var(--delay) var(--timing-function) infinite,
+    animation:
+      square3 var(--duration) var(--delay) var(--timing-function) infinite,
       squarefadein var(--in-duration) calc(2 * var(--in-delay)) var(--in-timing-function) both;
   }
 
   .loading-spinner #square4 {
     left: calc(2 * var(--offset));
     top: calc(1 * var(--offset));
-    animation: square4 var(--duration) var(--delay) var(--timing-function) infinite,
+    animation:
+      square4 var(--duration) var(--delay) var(--timing-function) infinite,
       squarefadein var(--in-duration) calc(3 * var(--in-delay)) var(--in-timing-function) both;
   }
 
   .loading-spinner #square5 {
     left: calc(3 * var(--offset));
     top: calc(1 * var(--offset));
-    animation: square5 var(--duration) var(--delay) var(--timing-function) infinite,
+    animation:
+      square5 var(--duration) var(--delay) var(--timing-function) infinite,
       squarefadein var(--in-duration) calc(4 * var(--in-delay)) var(--in-timing-function) both;
   }
 

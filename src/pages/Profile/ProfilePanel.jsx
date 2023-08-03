@@ -40,7 +40,7 @@ function LeftSidePanel() {
             <NavLink
               to='account'
               className={({ isActive }) =>
-                `btn-ghost btn-sm btn flex h-full w-full items-center justify-start gap-2 px-2 py-1.5 font-normal ${
+                `btn btn-ghost btn-sm flex h-full w-full items-center justify-start gap-2 px-2 py-1.5 font-normal ${
                   isActive && 'btn-active'
                 }`
               }

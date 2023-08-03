@@ -54,12 +54,12 @@ function ListBlogs({ blogs }) {
           </td>
         </tr>
       )),
-    [blogs]
+    [blogs],
   );
 
   return (
     <div className='overflow-x-auto py-6'>
-      <table className='table-compact table w-full'>
+      <table className='table table-compact w-full'>
         <thead>
           <tr>
             <th>id</th>

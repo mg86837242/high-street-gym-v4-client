@@ -18,6 +18,7 @@ module.exports = {
   plugins: ['react-hooks'],
   ignorePatterns: [
     // Unused folders && files
+    'dist',
     '**/__*',
     // Temporarily ignored
   ],

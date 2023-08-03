@@ -8,7 +8,7 @@ export default function FCSelectGender({ issue, isRequired }) {
       <select
         name='gender'
         defaultValue=''
-        className='select-primary select h-10 min-h-0 text-base font-normal 3xl:h-12'
+        className='select select-primary h-10 min-h-0 text-base font-normal 3xl:h-12'
       >
         {/* NB If this option is disabled and its value (empty string) is used as `defaultValue`, the `<select>`'s value will be null in the `request.formData`, i.e. DON'T disable this option if its value is used as `defaultValue` */}
         <option value=''>-- Choose Gender --</option>

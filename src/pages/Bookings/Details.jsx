@@ -82,7 +82,7 @@ export default function Details() {
         </div>
         <div className='flex justify-between gap-5 text-center'>
           <Form action='edit'>
-            <button className='btn-secondary btn h-10 min-h-0 w-36 text-primary-content shadow shadow-black/50 lg:w-[6.5rem] xl:w-36'>
+            <button className='btn btn-secondary h-10 min-h-0 w-36 text-primary-content shadow shadow-black/50 lg:w-[6.5rem] xl:w-36'>
               Edit
             </button>
           </Form>
@@ -98,7 +98,7 @@ export default function Details() {
           >
             <button
               type='submit'
-              className='glass btn h-10 min-h-0 w-36 bg-base-100 text-accent-content shadow shadow-black/50 lg:w-[6.5rem] xl:w-36'
+              className='btn glass h-10 min-h-0 w-36 bg-base-100 text-accent-content shadow shadow-black/50 lg:w-[6.5rem] xl:w-36'
             >
               Delete
             </button>

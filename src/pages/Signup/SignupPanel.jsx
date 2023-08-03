@@ -29,7 +29,7 @@ function Directions() {
         Already have account?{' '}
         <Link
           to='/login'
-          className={`link-primary link cursor-pointer text-sm font-medium leading-none underline focus:outline-none`}
+          className={`link link-primary cursor-pointer text-sm font-medium leading-none underline focus:outline-none`}
         >
           Log in here
         </Link>
@@ -91,7 +91,7 @@ function SignupForm() {
         isRequired={false}
       />
       <FCRHF2Sm label='Gender' issue={errors.gender?.message} isRequired={false}>
-        <select {...register('gender')} className='select-primary select select-sm font-normal'>
+        <select {...register('gender')} className='select select-primary select-sm font-normal'>
           <option value=''>-- Choose Gender --</option>
           <option value='Female'>Female</option>
           <option value='Male'>Male</option>

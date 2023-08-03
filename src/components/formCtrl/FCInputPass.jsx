@@ -23,7 +23,7 @@ export default function FCInputPass({ issue, initialValue }) {
         type={type}
         placeholder='Enter your password here'
         defaultValue={initialValue}
-        className='input-primary input h-10 w-full text-accent 3xl:h-12'
+        className='input input-primary h-10 w-full text-accent 3xl:h-12'
       />
       <button type='button' onClick={handleToggle} className='absolute right-0 mr-3 mt-9 cursor-pointer 3xl:mt-12'>
         <FontAwesomeIcon icon={icon} className='h-4 w-4' />
