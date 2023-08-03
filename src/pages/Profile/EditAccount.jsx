@@ -8,7 +8,7 @@ import UpdateAdminAddrForm from './UpdateAdminAddrForm';
 import UpdateTrainerForm from './UpdateTrainerForm';
 import UpdateTrainerAddrForm from './UpdateTrainerAddrForm';
 import UpdateMemberForm from './UpdateMemberForm';
-import UpdateTrainerAddrForm from './UpdateTrainerAddrForm';
+import UpdateMemberAddrForm from './UpdateMemberAddrForm';
 
 // TODO Limit the ability to edit demo users' email and pass
 export default function EditAccount() {

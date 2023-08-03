@@ -7,9 +7,6 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
   return {
     plugins: [react(), svgr()],
-    define: {
-      __API_URL__: JSON.stringify(env.VITE_API_URL) || 'http://localhost:3000/api',
-    },
     server: {
       host: env.VITE_SERVER_HOST || 'localhost',
       port: env.VITE_SERVER_PORT || 5173,
@@ -22,5 +19,5 @@ export default defineConfig(({ mode }) => {
 // -- https://vitejs.dev/guide/env-and-mode.html#env-files
 // -- https://vitejs.dev/config/#using-environment-variables-in-config
 // -- https://vitejs.dev/config/shared-options.html#envprefix
-// -- https://vitejs.dev/config/shared-options.html#define
+// -- https://vitejs.dev/config/shared-options.html#define: NB Bug: this will cause linting error
 // -- https://dev.to/whchi/how-to-use-processenv-in-vite-ho9
