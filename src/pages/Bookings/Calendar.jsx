@@ -49,7 +49,11 @@ export default function Calendar() {
                   key={7 * i + j + 1}
                   className={({ isActive, isPending }) =>
                     `btn btn-circle grid h-11 min-h-0 w-11 place-items-center leading-none sm:text-base 3xl:h-12 3xl:w-12 ${
-                      isActive && 'btn-primary'
+                      isActive ? 'btn-primary' : 'bg-base-100'
+                      // NB 'loading` can still be a modifier class for 'btn' although it's deprecated in daisyUI 3.0+
+                      //  @see: https://daisyui.com/docs/changelog/#breaking-changes:~:text=loading%20is%20no%20longer%20a%20modifier%20class%20for%20btn;
+                      //  the old way (daisyUI 2.0) is better to work with RRD's <NavLink> to dynamic style loading
+                      //  button style
                     } ${isPending && 'loading'}`
                   }
                 >

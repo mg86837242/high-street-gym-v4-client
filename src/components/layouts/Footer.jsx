@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <div id='footer-bg' className='flex w-full justify-center bg-neutral/95'>
+    <div id='footer-bg' className='flex w-full justify-center bg-base-300'>
       <footer className='footer w-full max-w-screen-2xl items-center p-4 px-4 text-neutral-content 2xl:px-1'>
         <div className='grid-flow-col items-center'>
           <p>Copyright © 2023 High Street Gym Inc. - All right reserved</p>

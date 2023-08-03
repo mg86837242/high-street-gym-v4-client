@@ -9,7 +9,7 @@ export default function NavBar({ isHome }) {
 
   function handleScrollEvent() {
     window.scrollY > document.documentElement.clientHeight
-      ? setNavBgClass('flex justify-center fixed top-0 bg-neutral/95 w-full z-20')
+      ? setNavBgClass('flex justify-center fixed top-0 bg-base-300 w-full z-20')
       : setNavBgClass('flex justify-center fixed top-0 bg-transparent w-full z-20');
   }
 
@@ -24,7 +24,7 @@ export default function NavBar({ isHome }) {
   }, [isHome]);
 
   return (
-    <div id='nav-bg' className={isHome ? navBgClass : 'sticky top-0 z-20 flex w-full justify-center bg-neutral/95'}>
+    <div id='nav-bg' className={isHome ? navBgClass : 'sticky top-0 z-20 flex w-full justify-center bg-base-300'}>
       <div id='nav-bar' className='navbar w-full max-w-screen-2xl px-4 2xl:px-4'>
         <NavBarLeft />
         <NavBarCenter />
@@ -54,7 +54,7 @@ function NavBarLeft() {
         <ul
           id='nav-left-dropdown-menu'
           tabIndex={0}
-          className='dropdown-content menu rounded-box menu-compact mt-3 w-52 bg-neutral p-2 shadow'
+          className='menu-compact menu dropdown-content rounded-box mt-3 w-52 bg-base-300 p-2 shadow'
         >
           {auth.user?.role === 'Admin' ? (
             <>
@@ -110,7 +110,7 @@ function NavLeftButton({ children, to, text, hasDropdown }) {
         )}
       </Link>
       {hasDropdown && (
-        <ul className='menu rounded-box ml-[-1px] w-56 bg-neutral p-2'>
+        <ul className='menu rounded-box ml-[-1px] w-56 bg-base-300 p-2'>
           {/* TODO How to use arrow keys to navigate between these submenu buttons, extending to <NavBarCenter> submenu */}
           {children}
         </ul>
@@ -178,38 +178,40 @@ function NavBarCenter() {
 }
 
 function NavCenterButton({ children, to, text, hasDropdown }) {
-  return (
+  return hasDropdown ? (
+    <li tabIndex={0}>
+      <details>
+        <summary>
+          <NavLink
+            to={to}
+            className={({ isActive }) => `${isActive && 'active underline decoration-2 underline-offset-[6px]'}`}
+          >
+            {text}
+          </NavLink>
+        </summary>
+        <ul className='p-2'>{children}</ul>
+      </details>
+    </li>
+  ) : (
     <li>
       <NavLink
         to={to}
-        className={({ isActive }) => `${isActive && 'btn-active underline decoration-2 underline-offset-8'}`}
+        className={({ isActive }) => `${isActive && 'active underline decoration-2 underline-offset-[6px]'}`}
       >
         {text}
-        {hasDropdown && (
-          <svg className='fill-current' xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24'>
-            <path d='M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z' />
-          </svg>
-        )}
       </NavLink>
-      {hasDropdown && <ul className='menu rounded-box w-56 bg-neutral p-2'>{children}</ul>}
     </li>
   );
 }
 
 function NavCenterDropdownCategory({ text }) {
-  return (
-    <li className='menu-title'>
-      <span className='text-sm'>{text}</span>
-    </li>
-  );
+  return <li className='menu-title'>{text}</li>;
 }
 
 function NavCenterDropdownButton({ to, text }) {
   return (
     <li>
-      <Link to={to} className='text-sm'>
-        {text}
-      </Link>
+      <Link to={to}>{text}</Link>
     </li>
   );
 }
