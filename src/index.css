@@ -157,7 +157,7 @@
     animation-delay: 0.8s;
   }
 
-  .loading-spinner {
+  .sliding-squares {
     --square: 26px;
     --offset: 30px;
 
@@ -177,7 +177,7 @@
     position: relative;
   }
 
-  .loading-spinner div {
+  .sliding-squares div {
     @apply bg-secondary;
     display: inline-block;
     border: none;
@@ -191,7 +191,7 @@
     color: black;
   }
 
-  .loading-spinner #square1 {
+  .sliding-squares #square1 {
     left: calc(0 * var(--offset));
     top: calc(0 * var(--offset));
     animation:
@@ -199,7 +199,7 @@
       squarefadein var(--in-duration) calc(1 * var(--in-delay)) var(--in-timing-function) both;
   }
 
-  .loading-spinner #square2 {
+  .sliding-squares #square2 {
     left: calc(0 * var(--offset));
     top: calc(1 * var(--offset));
     animation:
@@ -207,7 +207,7 @@
       squarefadein var(--in-duration) calc(1 * var(--in-delay)) var(--in-timing-function) both;
   }
 
-  .loading-spinner #square3 {
+  .sliding-squares #square3 {
     left: calc(1 * var(--offset));
     top: calc(1 * var(--offset));
     animation:
@@ -215,7 +215,7 @@
       squarefadein var(--in-duration) calc(2 * var(--in-delay)) var(--in-timing-function) both;
   }
 
-  .loading-spinner #square4 {
+  .sliding-squares #square4 {
     left: calc(2 * var(--offset));
     top: calc(1 * var(--offset));
     animation:
@@ -223,7 +223,7 @@
       squarefadein var(--in-duration) calc(3 * var(--in-delay)) var(--in-timing-function) both;
   }
 
-  .loading-spinner #square5 {
+  .sliding-squares #square5 {
     left: calc(3 * var(--offset));
     top: calc(1 * var(--offset));
     animation:
