@@ -85,7 +85,7 @@ function ListMembers({ members }) {
 
   return (
     <div className='overflow-x-auto py-6'>
-      <table className='table table-compact w-full'>
+      <table className='table table-sm w-max min-w-full'>
         <thead>
           <tr>
             <th>id</th>

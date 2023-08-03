@@ -73,7 +73,7 @@ function ListActivities({ activities }) {
 
   return (
     <div className='overflow-x-auto py-6'>
-      <table className='table table-compact w-full'>
+      <table className='table table-sm w-max min-w-full'>
         <thead>
           <tr>
             <th>id</th>
@@ -139,7 +139,7 @@ export function NewActivity() {
       </p>
       <p className='text-right lg:text-left'>
         👉 You can try upload the{' '}
-        <Link to='/sampleNewActivities.xml' target='_blank' download className='link link-primary'>
+        <Link to='/sampleNewActivities.xml' target='_blank' download className='link-primary link'>
           sample XML
         </Link>{' '}
         to create new activities:
