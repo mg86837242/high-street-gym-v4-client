@@ -54,7 +54,7 @@ function NavBarLeft() {
         <ul
           id='nav-left-dropdown-menu'
           tabIndex={0}
-          className='menu-compact menu dropdown-content rounded-box mt-3 w-52 bg-base-300 p-2 shadow'
+          className='menu dropdown-content rounded-box menu-sm z-[1] mt-3 w-52 bg-base-300 p-2 shadow'
         >
           {auth.user?.role === 'Admin' ? (
             <>
@@ -99,38 +99,28 @@ function NavBarLeft() {
 }
 
 function NavLeftButton({ children, to, text, hasDropdown }) {
-  return (
+  // TODO How to use arrow keys to navigate between these submenu buttons, extending to <NavBarCenter> submenu
+
+  return hasDropdown ? (
     <li tabIndex={0}>
-      <Link to={to} className='justify-between'>
-        {text}
-        {hasDropdown && (
-          <svg className='fill-current' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'>
-            <path d='M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z' />
-          </svg>
-        )}
-      </Link>
-      {hasDropdown && (
-        <ul className='menu rounded-box ml-[-1px] w-56 bg-base-300 p-2'>
-          {/* TODO How to use arrow keys to navigate between these submenu buttons, extending to <NavBarCenter> submenu */}
-          {children}
-        </ul>
-      )}
+      <Link to={to}>{text}</Link>
+      <ul className='p-2'>{children}</ul>
+    </li>
+  ) : (
+    <li tabIndex={0}>
+      <Link to={to}>{text}</Link>
     </li>
   );
 }
 
 function NavLeftDropdownCategory({ text }) {
-  return (
-    <li className='menu-title'>
-      <span className='text-sm'>{text}</span>
-    </li>
-  );
+  return <li className='menu-title'>{text}</li>;
 }
 
 function NavLeftDropdownButton({ to, text }) {
   return (
     <li>
-      <Link to={to} className='text-sm'>
+      <Link to={to} className=''>
         {text}
       </Link>
     </li>
@@ -189,7 +179,7 @@ function NavCenterButton({ children, to, text, hasDropdown }) {
             {text}
           </NavLink>
         </summary>
-        <ul className='p-2'>{children}</ul>
+        <ul className='bg-base-300 p-2'>{children}</ul>
       </details>
     </li>
   ) : (
@@ -211,7 +201,9 @@ function NavCenterDropdownCategory({ text }) {
 function NavCenterDropdownButton({ to, text }) {
   return (
     <li>
-      <Link to={to}>{text}</Link>
+      <Link to={to} className='whitespace-nowrap'>
+        {text}
+      </Link>
     </li>
   );
 }
