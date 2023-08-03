@@ -82,6 +82,10 @@ export default fetchResp;
 // -- https://developer.mozilla.org/en-US/docs/Web/API/Response: `Response` interface, esp. its instance properties and
 //  instance methods
 
+// References for switch vs. object literal: (source: javascript switch or object literal site:stackoverflow.com)
+// -- https://stackoverflow.com/questions/13383798/using-object-literal-rather-than-switch-statement
+// -- https://stackoverflow.com/questions/37730199/switch-vs-object-lookup-performance-since-jsperf-is-down
+
 // References for error handling (esp. in loader and action):
 // -- https://javascript.info/async-await#error-handling: Fundamentals of error handling in `async` functions
 // -- https://reactrouter.com/en/main/route/loader: Official recommended way of (1) parsing response, or lack thereof,
@@ -132,7 +136,3 @@ export default fetchResp;
 //  https://stackoverflow.com/questions/34786358/what-does-this-error-mean-uncaught-typeerror-already-read => Log and
 //  observe the `response` constant right before it's returned at the end of this helper => `Response.bodyUsed` is
 //  true => Solution: don't parse `Response` obj outside the scope of error handling (the if statement).
-
-// References for switch vs. object literal: (source: javascript switch or object literal site:stackoverflow.com)
-// -- https://stackoverflow.com/questions/13383798/using-object-literal-rather-than-switch-statement
-// -- https://stackoverflow.com/questions/37730199/switch-vs-object-lookup-performance-since-jsperf-is-down
