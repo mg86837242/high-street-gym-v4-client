@@ -19,5 +19,6 @@ export default defineConfig(({ mode }) => {
 // -- https://vitejs.dev/guide/env-and-mode.html#env-files
 // -- https://vitejs.dev/config/#using-environment-variables-in-config
 // -- https://vitejs.dev/config/shared-options.html#envprefix
-// -- https://vitejs.dev/config/shared-options.html#define: NB Bug: this will cause linting error
+// -- https://vitejs.dev/config/shared-options.html#define: this will cause linting error as the linter can't resolve
+//  the constants/variables defined in Vite's `define` option
 // -- https://dev.to/whchi/how-to-use-processenv-in-vite-ho9
