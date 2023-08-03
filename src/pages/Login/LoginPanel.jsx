@@ -18,7 +18,7 @@ export default function LoginPanel() {
   return (
     <div
       id='login-panel-wrapper'
-      className='my-auto flex w-full max-w-lg flex-col gap-8 rounded-3xl bg-neutral px-5 pb-5 pt-8 shadow-[0_0_30px_15px_rgba(255,255,255,0.2)] sm:px-10 sm:pb-8 sm:pt-12'
+      className='my-auto flex w-full max-w-lg flex-col gap-8 rounded-3xl bg-base-300 px-5 pb-5 pt-8 shadow-[0_0_30px_15px_rgba(255,255,255,0.2)] sm:px-10 sm:pb-8 sm:pt-12'
     >
       {auth.user ? (
         <Greetings />
@@ -41,7 +41,7 @@ function Directions() {
         Don't have account?{' '}
         <Link
           to='/signup'
-          className={`link link-primary cursor-pointer text-sm font-medium leading-none underline focus:outline-none`}
+          className={`link-primary link cursor-pointer text-sm font-medium leading-none underline focus:outline-none`}
         >
           Sign up here
         </Link>
@@ -177,19 +177,19 @@ function DemoLogins({ setBtnMsg, setIssues, from }) {
     <div className='flex justify-between gap-2'>
       <button
         onClick={() => handleClickDemoLogin('demomember@server.com', 'abcd1234')}
-        className={`btn btn-outline btn-success btn-sm h-fit flex-shrink text-primary-content shadow shadow-black/50`}
+        className={`btn btn-success btn-outline btn-sm h-fit flex-shrink text-primary-content shadow shadow-black/50`}
       >
         Demo Member Login
       </button>
       <button
         onClick={() => handleClickDemoLogin('demotrainer@server.com', 'abcd1234')}
-        className={`btn btn-outline btn-warning btn-sm h-fit flex-shrink text-primary-content shadow shadow-black/50`}
+        className={`btn btn-warning btn-outline btn-sm h-fit flex-shrink text-primary-content shadow shadow-black/50`}
       >
         Demo Trainer Login
       </button>
       <button
         onClick={() => handleClickDemoLogin('demoadmin@server.com', 'abcd1234')}
-        className={`btn btn-outline btn-error btn-sm h-fit flex-shrink text-primary-content shadow shadow-black/50`}
+        className={`btn btn-error btn-outline btn-sm h-fit flex-shrink text-primary-content shadow shadow-black/50`}
       >
         Demo Admin Login
       </button>

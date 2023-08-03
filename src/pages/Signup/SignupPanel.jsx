@@ -13,7 +13,7 @@ export default function SignupPanel() {
   return (
     <div
       id='signup-panel-wrapper'
-      className='my-auto flex w-full max-w-lg flex-col gap-6 rounded-3xl bg-neutral px-5 pb-5 pt-8 shadow-[0_0_30px_15px_rgba(255,255,255,0.2)] sm:px-10 sm:pb-8 sm:pt-12 md:max-w-2xl'
+      className='my-auto flex w-full max-w-lg flex-col gap-6 rounded-3xl bg-base-300 px-5 pb-5 pt-8 shadow-[0_0_30px_15px_rgba(255,255,255,0.2)] sm:px-10 sm:pb-8 sm:pt-12 md:max-w-2xl'
     >
       <Directions />
       <SignupForm />
@@ -29,7 +29,7 @@ function Directions() {
         Already have account?{' '}
         <Link
           to='/login'
-          className={`link link-primary cursor-pointer text-sm font-medium leading-none underline focus:outline-none`}
+          className={`link-primary link cursor-pointer text-sm font-medium leading-none underline focus:outline-none`}
         >
           Log in here
         </Link>
