@@ -2,6 +2,7 @@ import { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { Btn1 } from '../ui/Btn1';
+import { LinkBtn2 } from './../ui/LinkBtn2';
 
 // This component has the duality of different appearances and behaviors based on the `isHome` props
 export default function NavBar({ isHome }) {
@@ -208,7 +209,6 @@ function NavCenterDropdownButton({ to, text }) {
   );
 }
 
-// TODO Theme switcher: https://daisyui.com/components/swap/
 function NavBarRight() {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
@@ -219,12 +219,7 @@ function NavBarRight() {
       {/* <ThemeSwitch /> */}
       {auth.user ? (
         <>
-          <Link
-            to='/profile/account'
-            className='btn bg-gradient-to-r from-secondary to-primary text-primary-content shadow shadow-black/50'
-          >
-            Profile
-          </Link>
+          <LinkBtn2 to='/profile/account'>Profile</LinkBtn2>
           <Btn1
             onClick={() => {
               auth.handleLogout(() => navigate('/'));
@@ -235,19 +230,19 @@ function NavBarRight() {
         </>
       ) : (
         <>
-          <Link
+          <LinkBtn2
             to='/login'
             state={{ from: location }}
             className='btn bg-gradient-to-r from-secondary to-primary text-primary-content shadow shadow-black/50'
           >
             Login
-          </Link>
-          <Link
+          </LinkBtn2>
+          <LinkBtn2
             to='/signup'
             className='btn bg-gradient-to-r from-secondary to-primary text-primary-content shadow shadow-black/50'
           >
             Signup
-          </Link>
+          </LinkBtn2>
         </>
       )}
     </div>
