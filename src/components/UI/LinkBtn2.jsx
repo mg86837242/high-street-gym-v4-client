@@ -32,7 +32,7 @@ export function LinkBtn2SmOutline({ children, to, state, replace, w }) {
       to={to}
       state={state}
       replace={replace}
-      className={`${w} btn btn-outline btn-primary btn-sm text-primary-content shadow shadow-black/50`}
+      className={`${w} btn btn-primary btn-outline btn-sm text-primary-content shadow shadow-black/50`}
     >
       {children}
     </Link>

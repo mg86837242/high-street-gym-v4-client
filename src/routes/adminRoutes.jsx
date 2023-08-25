@@ -5,7 +5,7 @@ const adminRoutes = [
   {
     index: true,
     async lazy() {
-      let { AdminIndex } = await import('../pages/Admin/AdminPanel');
+      const { AdminIndex } = await import('../pages/Admin/AdminPanel');
       return { Component: AdminIndex };
     },
     ErrorBoundary: ErrorInfoRefresh,
@@ -13,19 +13,19 @@ const adminRoutes = [
   {
     path: 'activities',
     async lazy() {
-      let { MngActivities } = await import('../pages/Admin/MngActivities');
+      const { MngActivities } = await import('../pages/Admin/MngActivities');
       return { Component: MngActivities };
     },
     ErrorBoundary: ErrorInfoRefresh,
     async loader() {
-      let { getAllActivities } = await import('../api/activities');
+      const { getAllActivities } = await import('../api/activities');
       return getAllActivities();
     },
     children: [
       {
         index: true,
         async lazy() {
-          let { NewActivity } = await import('../pages/Admin/MngActivities');
+          const { NewActivity } = await import('../pages/Admin/MngActivities');
           return { Component: NewActivity };
         },
         ErrorBoundary: ErrorInfoRefresh,
@@ -34,7 +34,7 @@ const adminRoutes = [
         path: 'new',
         ErrorBoundary: ErrorInfoRefresh,
         async action() {
-          let { createActivity } = await import('../api/activities');
+          const { createActivity } = await import('../api/activities');
           return createActivity();
         },
       },
@@ -42,23 +42,23 @@ const adminRoutes = [
         path: 'new-upload-xml',
         ErrorBoundary: ErrorInfoRefresh,
         async action({ request }) {
-          let { createActivityByXML } = await import('../api/activities');
+          const { createActivityByXML } = await import('../api/activities');
           return createActivityByXML({ request });
         },
       },
       {
         path: ':id/edit',
         async lazy() {
-          let { EditActivity } = await import('../pages/Admin/MngActivities');
+          const { EditActivity } = await import('../pages/Admin/MngActivities');
           return { Component: EditActivity };
         },
         ErrorBoundary: ErrorInfoRefresh,
         async loader({ params }) {
-          let { getActivityById } = await import('../api/activities');
+          const { getActivityById } = await import('../api/activities');
           return getActivityById({ params });
         },
         async action({ params, request }) {
-          let { updateActivityById } = await import('../api/activities');
+          const { updateActivityById } = await import('../api/activities');
           return updateActivityById({ params, request });
         },
       },
@@ -66,7 +66,7 @@ const adminRoutes = [
         path: ':id/destroy',
         ErrorBoundary: ErrorInfoRefresh,
         async action({ params }) {
-          let { deleteActivityById } = await import('../api/activities');
+          const { deleteActivityById } = await import('../api/activities');
           return deleteActivityById({ params });
         },
       },
@@ -78,19 +78,19 @@ const adminRoutes = [
       {
         path: 'blogs',
         async lazy() {
-          let { MngBlogs } = await import('../pages/Admin/MngBlogs');
+          const { MngBlogs } = await import('../pages/Admin/MngBlogs');
           return { Component: MngBlogs };
         },
         ErrorBoundary: ErrorInfoRefresh,
         async loader() {
-          let { getAllBlogs } = await import('../api/blogs');
+          const { getAllBlogs } = await import('../api/blogs');
           return getAllBlogs();
         },
         children: [
           {
             index: true,
             async lazy() {
-              let { NewBlog } = await import('../pages/Admin/MngBlogs');
+              const { NewBlog } = await import('../pages/Admin/MngBlogs');
               return { Component: NewBlog };
             },
             ErrorBoundary: ErrorInfoRefresh,
@@ -99,23 +99,23 @@ const adminRoutes = [
             path: 'new',
             ErrorBoundary: ErrorInfoRefresh,
             async action({ request }) {
-              let { createBlog } = await import('../api/blogs');
+              const { createBlog } = await import('../api/blogs');
               return createBlog({ request });
             },
           },
           {
             path: ':id/edit',
             async lazy() {
-              let { EditBlog } = await import('../pages/Admin/MngBlogs');
+              const { EditBlog } = await import('../pages/Admin/MngBlogs');
               return { Component: EditBlog };
             },
             ErrorBoundary: ErrorInfoRefresh,
             async loader({ params }) {
-              let { getBlogById } = await import('../api/blogs');
+              const { getBlogById } = await import('../api/blogs');
               return getBlogById({ params });
             },
             async action({ params, request }) {
-              let { updateBlogById } = await import('../api/blogs');
+              const { updateBlogById } = await import('../api/blogs');
               return updateBlogById({ params, request });
             },
           },
@@ -123,7 +123,7 @@ const adminRoutes = [
             path: ':id/destroy',
             ErrorBoundary: ErrorInfoRefresh,
             async action({ params }) {
-              let { deleteBlogById } = await import('../api/blogs');
+              const { deleteBlogById } = await import('../api/blogs');
               return deleteBlogById({ params });
             },
           },
@@ -132,19 +132,19 @@ const adminRoutes = [
       {
         path: 'members',
         async lazy() {
-          let { MngMembers } = await import('../pages/Admin/MngMembers');
+          const { MngMembers } = await import('../pages/Admin/MngMembers');
           return { Component: MngMembers };
         },
         ErrorBoundary: ErrorInfoRefresh,
         async loader() {
-          let { getAllMembersWithDetails } = await import('../api/members');
+          const { getAllMembersWithDetails } = await import('../api/members');
           return getAllMembersWithDetails();
         },
         children: [
           {
             index: true,
             async lazy() {
-              let { NewMember } = await import('../pages/Admin/MngMembers');
+              const { NewMember } = await import('../pages/Admin/MngMembers');
               return { Component: NewMember };
             },
             ErrorBoundary: ErrorInfoRefresh,
@@ -153,7 +153,7 @@ const adminRoutes = [
             path: 'new',
             ErrorBoundary: ErrorInfoRefresh,
             async action({ request }) {
-              let { createMember } = await import('../api/members');
+              const { createMember } = await import('../api/members');
               return createMember({ request });
             },
           },
@@ -161,23 +161,23 @@ const adminRoutes = [
             path: 'new-upload-xml',
             ErrorBoundary: ErrorInfoRefresh,
             async action({ request }) {
-              let { createMemberByXML } = await import('../api/members');
+              const { createMemberByXML } = await import('../api/members');
               return createMemberByXML({ request });
             },
           },
           {
             path: ':id/edit',
             async lazy() {
-              let { EditMember } = await import('../pages/Admin/MngMembers');
+              const { EditMember } = await import('../pages/Admin/MngMembers');
               return { Component: EditMember };
             },
             ErrorBoundary: ErrorInfoRefresh,
             async loader({ params }) {
-              let { getMemberWithDetailsById } = await import('../api/members');
+              const { getMemberWithDetailsById } = await import('../api/members');
               return getMemberWithDetailsById({ params });
             },
             async action({ params, request }) {
-              let { updateMemberWithDetailsById } = await import('../api/members');
+              const { updateMemberWithDetailsById } = await import('../api/members');
               return updateMemberWithDetailsById({ params, request });
             },
           },
@@ -185,7 +185,7 @@ const adminRoutes = [
             path: ':id/destroy',
             ErrorBoundary: ErrorInfoRefresh,
             async action({ params }) {
-              let { deleteMemberById } = await import('../api/members');
+              const { deleteMemberById } = await import('../api/members');
               return deleteMemberById({ params });
             },
           },

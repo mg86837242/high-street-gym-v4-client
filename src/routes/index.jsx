@@ -21,7 +21,7 @@ const routes = [
       {
         path: 'blogs',
         async lazy() {
-          let { default: Blogs } = await import('../pages/Blogs');
+          const { default: Blogs } = await import('../pages/Blogs');
           return { Component: Blogs };
         },
         ErrorBoundary: ErrorInfoRefresh,
@@ -31,7 +31,7 @@ const routes = [
       {
         path: 'bookings',
         async lazy() {
-          let { default: Bookings } = await import('../pages/Bookings');
+          const { default: Bookings } = await import('../pages/Bookings');
           return { Component: Bookings };
         },
         ErrorBoundary: ErrorInfoRefresh,
@@ -44,7 +44,7 @@ const routes = [
           {
             path: 'profile',
             async lazy() {
-              let { default: Profile } = await import('../pages/Profile');
+              const { default: Profile } = await import('../pages/Profile');
               return { Component: Profile };
             },
             ErrorBoundary: ErrorInfoRefresh,
@@ -58,7 +58,7 @@ const routes = [
           {
             path: 'admin',
             async lazy() {
-              let { default: Admin } = await import('../pages/Admin');
+              const { default: Admin } = await import('../pages/Admin');
               return { Component: Admin };
             },
             ErrorBoundary: ErrorInfoRefresh,
@@ -76,12 +76,12 @@ const routes = [
   {
     path: '/signup',
     async lazy() {
-      let { default: Signup } = await import('../pages/Signup');
+      const { default: Signup } = await import('../pages/Signup');
       return { Component: Signup };
     },
     ErrorBoundary: ErrorInfoRefresh,
     async action({ request }) {
-      let { signupMembers } = await import('../api/members');
+      const { signupMembers } = await import('../api/members');
       return signupMembers({ request });
     },
   },
@@ -90,7 +90,7 @@ const routes = [
   {
     path: '*',
     async lazy() {
-      let { default: NotFound } = await import('../components/ui/NotFound');
+      const { default: NotFound } = await import('../components/ui/NotFound');
       return { Component: NotFound };
     },
   },

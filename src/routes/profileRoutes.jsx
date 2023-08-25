@@ -6,19 +6,19 @@ const profileRoutes = [
   {
     index: true,
     async lazy() {
-      let { ProfileIndex } = await import('../pages/Profile/ProfilePanel');
+      const { ProfileIndex } = await import('../pages/Profile/ProfilePanel');
       return { Component: ProfileIndex };
     },
   },
   {
     path: 'account',
     async lazy() {
-      let { default: EditAccount } = await import('../pages/Profile/EditAccount');
+      const { default: EditAccount } = await import('../pages/Profile/EditAccount');
       return { Component: EditAccount };
     },
     ErrorBoundary: ErrorInfoRefresh,
     async loader() {
-      let { getUserWithAllDetails } = await import('../api/users');
+      const { getUserWithAllDetails } = await import('../api/users');
       return getUserWithAllDetails();
     },
     async action({ request }) {
@@ -26,22 +26,22 @@ const profileRoutes = [
 
       switch (values._action) {
         case 'updateAdminById':
-          let { default: updateAdminById } = await import('../api/admins');
+          const { default: updateAdminById } = await import('../api/admins');
           return updateAdminById(values);
         case 'updateAddressByAdminId':
-          let { updateAddressByAdminId } = await import('../api/addresses');
+          const { updateAddressByAdminId } = await import('../api/addresses');
           return updateAddressByAdminId(values);
         case 'updateTrainerById':
-          let { default: updateTrainerById } = await import('../api/trainers');
+          const { default: updateTrainerById } = await import('../api/trainers');
           return updateTrainerById(values);
         case 'updateAddressByTrainerId':
-          let { updateAddressByTrainerId } = await import('../api/addresses');
+          const { updateAddressByTrainerId } = await import('../api/addresses');
           return updateAddressByTrainerId(values);
         case 'updateMemberById':
-          let { updateMemberById } = await import('../api/members');
+          const { updateMemberById } = await import('../api/members');
           return updateMemberById(values);
         case 'updateAddressByMemberId':
-          let { updateAddressByMemberId } = await import('../api/addresses');
+          const { updateAddressByMemberId } = await import('../api/addresses');
           return updateAddressByMemberId(values);
         default:
           throw json('Unknown form action', { status: 404 });

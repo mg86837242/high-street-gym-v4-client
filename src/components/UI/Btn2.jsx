@@ -27,7 +27,7 @@ export function Btn2SmOutline({ children, type, onClick, w, form }) {
     <button
       type={type}
       onClick={onClick}
-      className={`${w} btn btn-outline btn-primary btn-sm shadow shadow-black/50`}
+      className={`${w} btn btn-primary btn-outline btn-sm shadow shadow-black/50`}
       form={form}
     >
       {children}
@@ -37,7 +37,7 @@ export function Btn2SmOutline({ children, type, onClick, w, form }) {
 
 export function Btn2XsOutline({ children, type, onClick, w }) {
   return (
-    <button type={type} onClick={onClick} className={`${w} btn btn-outline btn-primary btn-xs shadow shadow-black/50`}>
+    <button type={type} onClick={onClick} className={`${w} btn btn-primary btn-outline btn-xs shadow shadow-black/50`}>
       {children}
     </button>
   );

@@ -154,7 +154,7 @@ export function NewMember() {
       </p>
       <p className='text-right lg:text-left'>
         👉 You can try upload the{' '}
-        <Link to='/sampleNewMembers.xml' target='_blank' download className='link link-primary'>
+        <Link to='/sampleNewMembers.xml' target='_blank' download className='link-primary link'>
           sample XML
         </Link>{' '}
         to create new members:
