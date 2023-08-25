@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from 'react';
-import AuthContext from '../../context/AuthContext.jsx';
+import { AuthContext } from '../../context/AuthContext.jsx';
 import { useLoaderData, Outlet } from 'react-router-dom';
 import { useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';

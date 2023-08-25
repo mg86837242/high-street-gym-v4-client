@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import AuthContext from '../../context/AuthContext';
+import { AuthContext } from '../../context/AuthContext';
 import { useLoaderData } from 'react-router-dom';
 import BookingListMemberView from './BookingListMemberView';
 import BookingListTrainerView from './BookingListTrainerView';

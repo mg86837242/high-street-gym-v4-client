@@ -1,5 +1,5 @@
 import { useMemo, useContext, useEffect } from 'react';
-import AuthContext from '../../context/AuthContext.jsx';
+import { AuthContext } from '../../context/AuthContext.jsx';
 import { useLoaderData, Outlet, Form, useFetcher, useSubmit, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';

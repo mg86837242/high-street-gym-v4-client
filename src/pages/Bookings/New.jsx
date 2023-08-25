@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import AuthContext from '../../context/AuthContext';
+import { AuthContext } from '../../context/AuthContext';
 import { useLoaderData, Form, useNavigate } from 'react-router-dom';
 import { tomorrowStr, threeWeeksLaterStr } from '../../data/keyDates';
 

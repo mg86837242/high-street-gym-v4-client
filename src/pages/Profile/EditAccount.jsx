@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from 'react';
-import AuthContext from '../../context/AuthContext';
+import { AuthContext } from '../../context/AuthContext';
 import { useLoaderData, useActionData } from 'react-router-dom';
 import SpinnerNoNav from '../../components/ui/SpinnerNoNav';
 import sleep from '../../helpers/sleep';

@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import AuthContext from '../../context/AuthContext';
+import { AuthContext } from '../../context/AuthContext';
 import { Outlet, NavLink, Navigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserGear } from '@fortawesome/free-solid-svg-icons';

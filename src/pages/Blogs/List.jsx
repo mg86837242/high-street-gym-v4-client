@@ -1,5 +1,5 @@
 import { useContext, useState, useMemo } from 'react';
-import AuthContext from '../../context/AuthContext';
+import { AuthContext } from '../../context/AuthContext';
 import { useLoaderData, Link, useFetcher, useLocation } from 'react-router-dom';
 import removeTags from '../../helpers/removeTags';
 import { getDateNotation } from '../../helpers/mapDates';
