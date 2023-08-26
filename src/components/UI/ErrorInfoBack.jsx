@@ -1,6 +1,6 @@
 import { useRouteError, useNavigation, isRouteErrorResponse, useNavigate } from 'react-router-dom';
 import { ReactComponent as BoxIcon } from '../../assets/error-box.svg';
-import { Btn2 } from './Btn2';
+import { Btn1 } from './Btn1';
 
 export default function ErrorInfoBack() {
   const error = useRouteError();
@@ -18,7 +18,9 @@ export default function ErrorInfoBack() {
         <h1 className='text-center text-rose-500'>{error.data.match(/^\d{3}/)}</h1>
         <p className='text-center text-rose-500'>{error.data.match(/(?<=^\d{3}\s).*/) || error.data}</p>
       </div>
-      <Btn2 onClick={() => navigate(-1)}>Go Back</Btn2>
+      <Btn1 type='button' onClick={() => navigate(-1)}>
+        Go Back
+      </Btn1>
     </div>
   ) : (
     <div className='flex h-full max-h-[calc(100vh-7.5rem)] w-full flex-col items-center justify-center gap-6'>
@@ -28,7 +30,9 @@ export default function ErrorInfoBack() {
         <p className='text-center text-rose-500'>Sorry, an unexpected error has occurred.</p>
         <p className='text-center text-rose-500'>{error.statusText || error.message}</p>
       </div>
-      <Btn2 onClick={() => navigate(-1)}>Go Back</Btn2>
+      <Btn1 type='button' onClick={() => navigate(-1)}>
+        Go Back
+      </Btn1>
     </div>
   );
 }

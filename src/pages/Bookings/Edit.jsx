@@ -2,6 +2,8 @@ import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { useLoaderData, Form, useNavigate } from 'react-router-dom';
 import { tomorrowStr, threeWeeksLaterStr } from '../../data/keyDates';
+import { Btn2 } from './../../components/ui/Btn2';
+import { Btn } from '../../components/ui/Btn';
 
 export default function Edit() {
   const auth = useContext(AuthContext);
@@ -165,19 +167,10 @@ export default function Edit() {
             </label>
           )}
           <div className='flex justify-between gap-5 text-center'>
-            <button
-              type='submit'
-              className='btn btn-secondary h-10 min-h-0 w-36 text-primary-content shadow shadow-black/50 lg:w-[6.5rem] xl:w-36'
-            >
-              Submit
-            </button>
-            <button
-              type='button'
-              onClick={() => navigate(-1)}
-              className='btn glass h-10 min-h-0 w-36 bg-base-100 text-accent-content shadow shadow-black/50 lg:w-[6.5rem] xl:w-36'
-            >
+            <Btn2 w='w-20'>Submit</Btn2>
+            <Btn type='button' onClick={() => navigate(-1)} w='w-20'>
               Cancel
-            </button>
+            </Btn>
           </div>
         </Form>
       </div>

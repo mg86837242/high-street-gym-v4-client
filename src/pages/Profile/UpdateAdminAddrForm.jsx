@@ -3,7 +3,7 @@ import { useSubmit } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { updateAddressByAdminIdSchema } from '../../schemas';
-import { Btn2Sm } from '../../components/ui/Btn2';
+import { Btn1Sm } from '../../components/ui/Btn1';
 import FCRHF1Sm from '../../components/formCtrlRHF/FCRHF1';
 import countries from '../../data/countries.json'; // Vite's feature
 import { convertNullToEmptyStr } from '../../helpers/sanitize';
@@ -55,7 +55,7 @@ export default function UpdateAdminAddrForm({ botMsg, user }) {
       <input type='hidden' {...register('adminId', { valueAsNumber: true })} />
       <input type='hidden' {...register('_action')} />
       <div className='mt-4'>
-        <Btn2Sm w='w-full'>Save</Btn2Sm>
+        <Btn1Sm w='w-full'>Save</Btn1Sm>
       </div>
       <p className='mt-4 self-center text-success'>{botMsg}</p>
     </form>

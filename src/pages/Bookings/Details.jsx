@@ -1,5 +1,7 @@
 import { useLoaderData, useFetcher, Form } from 'react-router-dom';
 import { getDateNotation } from '../../helpers/mapDates';
+import { Btn2 } from '../../components/ui/Btn2';
+import { Btn } from '../../components/ui/Btn';
 
 export default function Details() {
   const fetcher = useFetcher();
@@ -82,9 +84,7 @@ export default function Details() {
         </div>
         <div className='flex justify-between gap-5 text-center'>
           <Form action='edit'>
-            <button className='btn btn-secondary h-10 min-h-0 w-36 text-primary-content shadow shadow-black/50 lg:w-[6.5rem] xl:w-36'>
-              Edit
-            </button>
+            <Btn2 w='w-20'>Edit</Btn2>
           </Form>
           <fetcher.Form
             method='post'
@@ -96,12 +96,7 @@ export default function Details() {
               }
             }}
           >
-            <button
-              type='submit'
-              className='btn glass h-10 min-h-0 w-36 bg-base-100 text-accent-content shadow shadow-black/50 lg:w-[6.5rem] xl:w-36'
-            >
-              Delete
-            </button>
+            <Btn w='w-20'>Delete</Btn>
           </fetcher.Form>
         </div>
       </div>

@@ -1,4 +1,4 @@
-export function Btn5({ children, type = 'button', onClick, w }) {
+export function Btn5({ children, type = 'submit', onClick, w }) {
   return (
     <button
       type={type}
@@ -10,7 +10,7 @@ export function Btn5({ children, type = 'button', onClick, w }) {
   );
 }
 
-export function Btn5Sm({ children, type = 'button', onClick, w }) {
+export function Btn5Sm({ children, type = 'submit', onClick, w }) {
   return (
     <button
       type={type}

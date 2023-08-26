@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-export function LinkBtn2({ children, to, state, replace, w }) {
+export function LinkBtn1({ children, to, state, replace, w }) {
   return (
     <Link
       to={to}
@@ -13,7 +13,7 @@ export function LinkBtn2({ children, to, state, replace, w }) {
   );
 }
 
-export function LinkBtn2Sm({ children, to, state, replace, w }) {
+export function LinkBtn1Sm({ children, to, state, replace, w }) {
   return (
     <Link
       to={to}
@@ -26,7 +26,7 @@ export function LinkBtn2Sm({ children, to, state, replace, w }) {
   );
 }
 
-export function LinkBtn2SmOutline({ children, to, state, replace, w }) {
+export function LinkBtn1SmOutline({ children, to, state, replace, w }) {
   return (
     <Link
       to={to}

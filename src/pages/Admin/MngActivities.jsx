@@ -4,8 +4,8 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { activitySchema } from '../../schemas';
 import { convertEmptyStrToNull } from '../../helpers/sanitize';
+import { BtnXs, BtnSm } from '../../components/ui/Btn';
 import { Btn1Xs, Btn1Sm } from '../../components/ui/Btn1';
-import { Btn2Xs, Btn2Sm } from '../../components/ui/Btn2';
 import FCRHF1Sm from '../../components/formCtrlRHF/FCRHF1';
 
 export function MngActivities() {
@@ -49,7 +49,7 @@ function ListActivities({ activities }) {
             <td>{price}</td>
             <td>
               <Form action={`${id}/edit`}>
-                <Btn2Xs>Edit</Btn2Xs>
+                <Btn1Xs>Edit</Btn1Xs>
               </Form>
             </td>
             <td>
@@ -62,7 +62,7 @@ function ListActivities({ activities }) {
                   }
                 }}
               >
-                <Btn1Xs>Delete</Btn1Xs>
+                <BtnXs>Delete</BtnXs>
               </fetcher.Form>
             </td>
           </tr>
@@ -121,12 +121,12 @@ export function NewActivity() {
               onChange={e => setFile(e.target.files[0])}
               className='file-input file-input-bordered file-input-sm w-full max-w-xs shadow shadow-black/50'
             />
-            <Btn2Sm>Submit</Btn2Sm>
+            <Btn1Sm>Submit</Btn1Sm>
           </fetcher.Form>
         </div>
         <div className='divider m-0 lg:hidden' />
         <fetcher.Form method='post' action='new'>
-          <Btn2Sm>Create New</Btn2Sm>
+          <Btn1Sm>Create New</Btn1Sm>
         </fetcher.Form>
       </div>
       <p className='text-right lg:text-left'>
@@ -235,10 +235,10 @@ export function EditActivity() {
           isRequired={false}
         />
         <div className='col-span-2 flex w-full justify-end gap-10 py-6 xl:col-span-3'>
-          <Btn2Sm w='w-20'>Save</Btn2Sm>
-          <Btn1Sm type='button' onClick={() => navigate(-1)} w='w-20'>
+          <Btn1Sm w='w-20'>Save</Btn1Sm>
+          <BtnSm type='button' onClick={() => navigate(-1)} w='w-20'>
             Cancel
-          </Btn1Sm>
+          </BtnSm>
         </div>
       </form>
     </div>

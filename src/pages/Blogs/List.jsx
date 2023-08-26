@@ -3,8 +3,8 @@ import { AuthContext } from '../../context/AuthContext';
 import { useLoaderData, Link, useFetcher, useLocation } from 'react-router-dom';
 import removeTags from '../../helpers/removeTags';
 import { getDateNotation } from '../../helpers/mapDates';
-import { Btn2Sm } from '../../components/ui/Btn2';
-import { LinkBtn2Sm } from '../../components/ui/LinkBtn2';
+import { Btn1Sm } from '../../components/ui/Btn1';
+import { LinkBtn1Sm } from '../../components/ui/LinkBtn1';
 
 export default function List() {
   const auth = useContext(AuthContext);
@@ -96,7 +96,7 @@ export default function List() {
           <>
             <fetcher.Form method='post' action='new'>
               <input type='hidden' name='loginId' value={auth.user?.id} />
-              <Btn2Sm w='w-full'>Create New</Btn2Sm>
+              <Btn1Sm w='w-full'>Create New</Btn1Sm>
             </fetcher.Form>
             <div className='divider'></div>
             <select
@@ -110,9 +110,9 @@ export default function List() {
             </select>
           </>
         ) : (
-          <LinkBtn2Sm to='/login' state={{ from: location }} replace={true} w='w-full'>
+          <LinkBtn1Sm to='/login' state={{ from: location }} replace={true} w='w-full'>
             Log in to Create Blog
-          </LinkBtn2Sm>
+          </LinkBtn1Sm>
         )}
       </section>
       <section className='lg:col-[1_/_8]'>
@@ -132,13 +132,13 @@ export default function List() {
             <div className='divider'></div>
             <fetcher.Form method='post' action='new'>
               <input type='hidden' name='loginId' value={auth.user?.id} />
-              <Btn2Sm w='w-full'>Create New</Btn2Sm>
+              <Btn1Sm w='w-full'>Create New</Btn1Sm>
             </fetcher.Form>
           </>
         ) : (
-          <LinkBtn2Sm to='/login' state={{ from: location }} replace={true} w='w-full'>
+          <LinkBtn1Sm to='/login' state={{ from: location }} replace={true} w='w-full'>
             Log in to Create Blog
-          </LinkBtn2Sm>
+          </LinkBtn1Sm>
         )}
       </aside>
     </div>

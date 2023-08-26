@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import NavBarMinimal from '../layouts/NavBarMinimal';
-import { Btn2 } from './Btn2';
+import { Btn1 } from './Btn1';
 
 export default function NotFound() {
   const navigate = useNavigate();
@@ -17,7 +17,9 @@ export default function NotFound() {
             <h1 className='card-title text-4xl'>404 - PAGE NOT FOUND</h1>
             <p className='text-base'>You have landed in the middle of nowhere.</p>
             <div className='card-actions justify-end'>
-              <Btn2 onClick={() => navigate('/', { replace: true })}>Go Home</Btn2>
+              <Btn1 type='button' onClick={() => navigate('/', { replace: true })}>
+                Go Home
+              </Btn1>
             </div>
           </div>
         </div>

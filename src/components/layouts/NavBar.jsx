@@ -1,8 +1,8 @@
 import { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
-import { Btn1 } from '../ui/Btn1';
-import { LinkBtn2 } from './../ui/LinkBtn2';
+import { Btn } from '../ui/Btn';
+import { LinkBtn1 } from './../ui/LinkBtn1';
 
 // This component has the duality of different appearances and behaviors based on the `isHome` props
 export default function NavBar({ isHome }) {
@@ -55,7 +55,7 @@ function NavBarLeft() {
         <ul
           id='nav-left-dropdown-menu'
           tabIndex={0}
-          className='menu dropdown-content rounded-box menu-sm z-[1] mt-3 w-52 bg-base-300 p-2 shadow'
+          className='dropdown-content menu rounded-box menu-sm z-[1] mt-3 w-52 bg-base-300 p-2 shadow'
         >
           {auth.user?.role === 'Admin' ? (
             <>
@@ -219,30 +219,31 @@ function NavBarRight() {
       {/* <ThemeSwitch /> */}
       {auth.user ? (
         <>
-          <LinkBtn2 to='/profile/account'>Profile</LinkBtn2>
-          <Btn1
+          <LinkBtn1 to='/profile/account'>Profile</LinkBtn1>
+          <Btn
+            type='button'
             onClick={() => {
               auth.handleLogout(() => navigate('/'));
             }}
           >
             Logout
-          </Btn1>
+          </Btn>
         </>
       ) : (
         <>
-          <LinkBtn2
+          <LinkBtn1
             to='/login'
             state={{ from: location }}
             className='btn bg-gradient-to-r from-secondary to-primary text-primary-content shadow shadow-black/50'
           >
             Login
-          </LinkBtn2>
-          <LinkBtn2
+          </LinkBtn1>
+          <LinkBtn1
             to='/signup'
             className='btn bg-gradient-to-r from-secondary to-primary text-primary-content shadow shadow-black/50'
           >
             Signup
-          </LinkBtn2>
+          </LinkBtn1>
         </>
       )}
     </div>

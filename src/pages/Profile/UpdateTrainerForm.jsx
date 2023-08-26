@@ -3,7 +3,7 @@ import { useSubmit } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { trainerSchema } from '../../schemas';
-import { Btn2Sm } from '../../components/ui/Btn2';
+import { Btn1Sm } from '../../components/ui/Btn1';
 import FCRHF1Sm from '../../components/formCtrlRHF/FCRHF1';
 import FCRHFPass1Sm from '../../components/formCtrlRHF/FCRHFPass1';
 import { convertEmptyStrToNull } from '../../helpers/sanitize';
@@ -67,9 +67,9 @@ export default function UpdateTrainerForm({ inputEmailMsg, setInputEmailMsg, top
       <input type='hidden' {...register('id', { valueAsNumber: true })} />
       <input type='hidden' {...register('_action')} />
       <div className='mt-4'>
-        <Btn2Sm onClick={() => setInputEmailMsg('')} w='w-full'>
+        <Btn1Sm onClick={() => setInputEmailMsg('')} w='w-full'>
           Save
-        </Btn2Sm>
+        </Btn1Sm>
       </div>
       <p className='mt-4 self-center text-success'>{topMsg}</p>
     </form>

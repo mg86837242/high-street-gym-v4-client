@@ -6,7 +6,7 @@ import { signupSchema } from '../../schemas';
 import defaultSignup from '../../data/defaultSignup';
 import FCRHF2Sm from '../../components/formCtrlRHF/FCRHF2';
 import FCRHFPass2Sm from '../../components/formCtrlRHF/FCRHFPass2';
-import { Btn2Sm } from '../../components/ui/Btn2';
+import { Btn1Sm } from '../../components/ui/Btn1';
 import { convertEmptyStrToNull } from '../../helpers/sanitize';
 
 export default function SignupPanel() {
@@ -101,9 +101,9 @@ function SignupForm() {
       <input type='hidden' {...register('id', { valueAsNumber: true })} />
       <input type='hidden' {...register('_action')} />
       <div className='col-span-1 mt-4 md:col-span-2'>
-        <Btn2Sm onClick={() => setInputEmailMsg('')} w='w-full'>
+        <Btn1Sm onClick={() => setInputEmailMsg('')} w='w-full'>
           {btnMsg}
-        </Btn2Sm>
+        </Btn1Sm>
       </div>
     </form>
   );

@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSquareCaretLeft, faSquareCaretRight } from '@fortawesome/free-solid-svg-icons';
 import { today } from '../../data/keyDates';
 import { monthNames, dayNames } from '../../helpers/mapDates';
+import { LinkBtn1 } from './../../components/ui/LinkBtn1';
 
 export default function Calendar() {
   const auth = useContext(AuthContext);
@@ -140,9 +141,7 @@ function CalendarWrapper({ children }) {
 function CreateNewBooking() {
   return (
     <section className='flex justify-center gap-5 text-center'>
-      <Link to='new' className='btn btn-primary min-h-0 w-48 text-primary-content shadow shadow-black/50'>
-        Create New Booking
-      </Link>
+      <LinkBtn1 to='new'>Create New Booking</LinkBtn1>
     </section>
   );
 }

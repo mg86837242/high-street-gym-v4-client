@@ -5,8 +5,8 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { blogSchema } from '../../schemas/index.js';
 import { convertEmptyStrToNull } from '../../helpers/sanitize.js';
+import { BtnXs, BtnSm } from '../../components/ui/Btn';
 import { Btn1Xs, Btn1Sm } from '../../components/ui/Btn1';
-import { Btn2Xs, Btn2Sm } from '../../components/ui/Btn2';
 import FCRHF1Sm from '../../components/formCtrlRHF/FCRHF1.jsx';
 import FCRHFBlogBody1Sm from '../../components/formCtrlRHF/FCRHFBlogBody1.jsx';
 
@@ -36,7 +36,7 @@ function ListBlogs({ blogs }) {
           <td>{updatedAt}</td>
           <td>
             <Form action={`${id}/edit`}>
-              <Btn2Xs>Edit</Btn2Xs>
+              <Btn1Xs>Edit</Btn1Xs>
             </Form>
           </td>
           <td>
@@ -49,7 +49,7 @@ function ListBlogs({ blogs }) {
                 }
               }}
             >
-              <Btn1Xs>Delete</Btn1Xs>
+              <BtnXs>Delete</BtnXs>
             </fetcher.Form>
           </td>
         </tr>
@@ -87,7 +87,7 @@ export function NewBlog() {
     <div className='flex justify-end py-6'>
       <fetcher.Form method='post' action='new'>
         <input type='hidden' name='loginId' value={auth.user?.id} />
-        <Btn2Sm>Create New</Btn2Sm>
+        <Btn1Sm>Create New</Btn1Sm>
       </fetcher.Form>
     </div>
   );
@@ -125,10 +125,10 @@ export function EditBlog() {
         <FCRHFBlogBody1Sm label='Blog Post Body' register={register('body')} issue={errors.body?.message} />
         <input type='hidden' {...register('loginId', { valueAsNumber: true })} />
         <div className='col-span-2 flex w-full justify-end gap-10 py-6 xl:col-span-3'>
-          <Btn2Sm w='w-20'>Save</Btn2Sm>
-          <Btn1Sm type='button' onClick={() => navigate(-1)} w='w-20'>
+          <Btn1Sm w='w-20'>Save</Btn1Sm>
+          <BtnSm type='button' onClick={() => navigate(-1)} w='w-20'>
             Cancel
-          </Btn1Sm>
+          </BtnSm>
         </div>
       </form>
     </div>

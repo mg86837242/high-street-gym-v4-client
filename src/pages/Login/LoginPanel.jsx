@@ -4,9 +4,9 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { emailSchema, passwordSchema } from '../../schemas';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { Btn2 } from '../../components/ui/Btn2';
+import { Btn1 } from '../../components/ui/Btn1';
 import { Btn5 } from '../../components/ui/Btn5';
-import { LinkBtn2 } from '../../components/ui/LinkBtn2';
+import { LinkBtn1 } from '../../components/ui/LinkBtn1';
 
 export default function LoginPanel() {
   const auth = useContext(AuthContext);
@@ -147,7 +147,7 @@ function LoginForm({ btnMsg, setBtnMsg, issues, setIssues, from }) {
         </label>
       </div>
       <div className='pt-4'>
-        <Btn2 w='w-full'>{btnMsg}</Btn2>
+        <Btn1 w='w-full'>{btnMsg}</Btn1>
       </div>
     </form>
   );
@@ -211,10 +211,11 @@ function Greetings() {
         <span className='text-primary'>{auth.user?.role && auth.user.role}!</span>
       </p>
       <div className='flex flex-col gap-5'>
-        <LinkBtn2 to={'/'} w='w-full'>
+        <LinkBtn1 to={'/'} w='w-full'>
           Visit Home
-        </LinkBtn2>
+        </LinkBtn1>
         <Btn5
+          type='button'
           onClick={() => {
             auth.handleLogout(() => navigate('/'));
           }}
