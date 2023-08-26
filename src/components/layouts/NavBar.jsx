@@ -3,8 +3,8 @@ import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 
 import { AuthContext } from '../../context/AuthContext';
 import { Btn } from '../ui/Btn';
-
-import { LinkBtn1 } from './../ui/LinkBtn1';
+import ColorModeSwitch from '../ui/ColorModeSwitch';
+import { LinkBtn1 } from '../ui/LinkBtn1';
 
 // This component has the duality of different appearances and behaviors based on the `isHome` props
 export default function NavBar({ isHome }) {
@@ -31,7 +31,7 @@ export default function NavBar({ isHome }) {
       <div id='nav-bar' className='navbar w-full max-w-screen-2xl px-4 2xl:px-4'>
         <NavBarLeft />
         <NavBarCenter />
-        <NavBarRight />
+        <NavBarRight isHome={isHome} />
       </div>
     </div>
   );
@@ -57,7 +57,7 @@ function NavBarLeft() {
         <ul
           id='nav-left-dropdown-menu'
           tabIndex={0}
-          className='dropdown-content menu rounded-box menu-sm z-[1] mt-3 w-52 bg-base-300 p-2 shadow'
+          className='menu dropdown-content rounded-box menu-sm z-[1] mt-3 w-52 bg-base-300 p-2 shadow'
         >
           {auth.user?.role === 'Admin' ? (
             <>
@@ -133,6 +133,7 @@ function NavLeftDropdownButton({ to, text }) {
 function NavBarCenter() {
   const auth = useContext(AuthContext);
 
+  // FIX fix the nav center button style, esp. in light theme/color mode
   return (
     <nav id='nav-center-wrapper' className='navbar-center hidden lg:flex'>
       <ul id='nav-center-menu' className='menu menu-horizontal gap-2 px-1 text-primary-content'>
@@ -211,7 +212,7 @@ function NavCenterDropdownButton({ to, text }) {
   );
 }
 
-function NavBarRight() {
+function NavBarRight({ isHome }) {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
@@ -221,6 +222,7 @@ function NavBarRight() {
       {/* <ThemeSwitch /> */}
       {auth.user ? (
         <>
+          <ColorModeSwitch isHome={isHome} />
           <LinkBtn1 to='/profile/account'>Profile</LinkBtn1>
           <Btn
             type='button'
@@ -233,6 +235,7 @@ function NavBarRight() {
         </>
       ) : (
         <>
+          <ColorModeSwitch isHome={isHome} />
           <LinkBtn1
             to='/login'
             state={{ from: location }}
