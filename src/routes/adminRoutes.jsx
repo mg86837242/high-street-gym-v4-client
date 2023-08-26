@@ -1,5 +1,5 @@
-import ErrorInfoRefresh from '../components/ui/ErrorInfoRefresh';
 import RequireAuth from '../components/layouts/RequireAuth';
+import ErrorInfoRefresh from '../components/ui/ErrorInfoRefresh';
 
 const adminRoutes = [
   {

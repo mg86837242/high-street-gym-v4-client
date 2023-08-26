@@ -1,13 +1,14 @@
-import { useState, useEffect } from 'react';
-import { Link, useSubmit, useActionData, useNavigation } from 'react-router-dom';
+import { useEffect,useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { Link, useActionData, useNavigation,useSubmit } from 'react-router-dom';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { signupSchema } from '../../schemas';
-import defaultSignup from '../../data/defaultSignup';
+
 import FCRHF2Sm from '../../components/formCtrlRHF/FCRHF2';
 import FCRHFPass2Sm from '../../components/formCtrlRHF/FCRHFPass2';
 import { Btn1Sm } from '../../components/ui/Btn1';
+import defaultSignup from '../../data/defaultSignup';
 import { convertEmptyStrToNull } from '../../helpers/sanitize';
+import { signupSchema } from '../../schemas';
 
 export default function SignupPanel() {
   return (

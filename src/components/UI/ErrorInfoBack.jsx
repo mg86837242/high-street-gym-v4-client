@@ -1,5 +1,7 @@
-import { useRouteError, useNavigation, isRouteErrorResponse, useNavigate } from 'react-router-dom';
+import { isRouteErrorResponse, useNavigate,useNavigation, useRouteError } from 'react-router-dom';
+
 import { ReactComponent as BoxIcon } from '../../assets/error-box.svg';
+
 import { Btn1 } from './Btn1';
 
 export default function ErrorInfoBack() {

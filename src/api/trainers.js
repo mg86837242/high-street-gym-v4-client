@@ -1,6 +1,6 @@
+import API_URL from '../data/constants';
 import fetchRaw from '../helpers/fetchRaw';
 import getErrorMsg from '../helpers/getErrorMsg';
-import API_URL from '../data/constants';
 
 export default async function updateTrainerById(values) {
   const { _action, id, ...updates } = values;

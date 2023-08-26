@@ -1,7 +1,8 @@
-import { useLoaderData, useFetcher, Form } from 'react-router-dom';
-import { getDateNotation } from '../../helpers/mapDates';
-import { Btn2 } from '../../components/ui/Btn2';
+import { Form,useFetcher, useLoaderData } from 'react-router-dom';
+
 import { Btn } from '../../components/ui/Btn';
+import { Btn2 } from '../../components/ui/Btn2';
+import { getDateNotation } from '../../helpers/mapDates';
 
 export default function Details() {
   const fetcher = useFetcher();

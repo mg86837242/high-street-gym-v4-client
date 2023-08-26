@@ -1,5 +1,5 @@
-import fetchJSON from '../helpers/fetchJSON';
 import API_URL from '../data/constants';
+import fetchJSON from '../helpers/fetchJSON';
 
 export async function updateAddressByAdminId(values) {
   const { _action, adminId, ...updates } = values;

@@ -1,13 +1,15 @@
 import { Link } from 'react-router-dom';
-import ErrorInfoRefresh from '../components/ui/ErrorInfoRefresh';
+
 import PageLayout from '../components/layouts/PageLayout';
 import RequireAuth from '../components/layouts/RequireAuth';
+import ErrorInfoRefresh from '../components/ui/ErrorInfoRefresh';
 import Home from '../pages/Home';
 import Login from '../pages/Login';
+
+import adminRoutes from './adminRoutes';
 import blogsRoutes from './blogsRoutes';
 import bookingsRoutes from './bookingsRoutes';
 import profileRoutes from './profileRoutes';
-import adminRoutes from './adminRoutes';
 
 const routes = [
   {

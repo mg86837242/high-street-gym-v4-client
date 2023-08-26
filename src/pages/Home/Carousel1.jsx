@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+
 import carouselItems from '../../data/carouselItems';
 
 export default function Carousel1() {

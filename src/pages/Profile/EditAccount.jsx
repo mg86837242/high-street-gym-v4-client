@@ -1,14 +1,16 @@
-import { useContext, useState, useEffect } from 'react';
-import { AuthContext } from '../../context/AuthContext';
-import { useLoaderData, useActionData } from 'react-router-dom';
+import { useContext, useEffect,useState } from 'react';
+import { useActionData,useLoaderData } from 'react-router-dom';
+
 import SpinnerNoNav from '../../components/ui/SpinnerNoNav';
+import { AuthContext } from '../../context/AuthContext';
 import sleep from '../../helpers/sleep';
-import UpdateAdminForm from './UpdateAdminForm';
+
 import UpdateAdminAddrForm from './UpdateAdminAddrForm';
-import UpdateTrainerForm from './UpdateTrainerForm';
-import UpdateTrainerAddrForm from './UpdateTrainerAddrForm';
-import UpdateMemberForm from './UpdateMemberForm';
+import UpdateAdminForm from './UpdateAdminForm';
 import UpdateMemberAddrForm from './UpdateMemberAddrForm';
+import UpdateMemberForm from './UpdateMemberForm';
+import UpdateTrainerAddrForm from './UpdateTrainerAddrForm';
+import UpdateTrainerForm from './UpdateTrainerForm';
 
 // TODO Limit the ability to edit demo users' email and pass
 export default function EditAccount() {

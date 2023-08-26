@@ -1,7 +1,8 @@
-import { useOutletContext, useFetcher, Form } from 'react-router-dom';
+import { Form,useFetcher, useOutletContext } from 'react-router-dom';
 import { EditorContent } from '@tiptap/react';
-import { Btn1Sm } from '../../components/ui/Btn1';
+
 import { BtnSm } from '../../components/ui/Btn';
+import { Btn1Sm } from '../../components/ui/Btn1';
 
 export default function DetailsIndex() {
   const { setEditable, editor, canEdit } = useOutletContext();

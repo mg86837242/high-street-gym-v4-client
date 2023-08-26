@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
+
 import { getDateNotation } from '../../helpers/mapDates';
 
 export default function BookingListAdminView({ bookings }) {

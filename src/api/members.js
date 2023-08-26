@@ -1,11 +1,12 @@
 import { redirect } from 'react-router-dom';
-import fetchResp from '../helpers/fetchResp';
-import fetchRaw from '../helpers/fetchRaw';
+
+import API_URL from '../data/constants';
+import defaultNewMember from '../data/defaultNewMember';
 import fetchJSON from '../helpers/fetchJSON';
+import fetchRaw from '../helpers/fetchRaw';
+import fetchResp from '../helpers/fetchResp';
 import getErrorMsg from '../helpers/getErrorMsg';
 import getSubmittedData from '../helpers/getSubmittedData';
-import defaultNewMember from '../data/defaultNewMember';
-import API_URL from '../data/constants';
 
 export async function getAllMembersWithDetails() {
   const response = await fetchResp.get(`${API_URL}/members/detailed`);

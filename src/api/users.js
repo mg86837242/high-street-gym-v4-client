@@ -1,6 +1,6 @@
-import fetchResp from '../helpers/fetchResp';
-import fetchRaw from '../helpers/fetchRaw';
 import API_URL from '../data/constants';
+import fetchRaw from '../helpers/fetchRaw';
+import fetchResp from '../helpers/fetchResp';
 
 export async function getUserWithAllDetails() {
   const accessKey = localStorage.getItem('accessKey');

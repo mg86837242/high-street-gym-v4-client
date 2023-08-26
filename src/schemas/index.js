@@ -1,11 +1,11 @@
+export { default as activitySchema } from './activities';
 export {
   updateAddressByAdminIdSchema,
-  updateAddressByTrainerIdSchema,
   updateAddressByMemberIdSchema,
+  updateAddressByTrainerIdSchema,
 } from './addresses';
-export { emailSchema, passwordSchema, usernameSchema, firstNameSchema, lastNameSchema, phoneSchema } from './users';
-export { ageSchema, genderSchema, signupSchema, memberSchema, memberDetailedSchema } from './members';
-export { trainerSchema } from './trainers';
 export { adminSchema } from './admin';
-export { default as activitySchema } from './activities';
 export { default as blogSchema } from './blogs';
+export { ageSchema, genderSchema, memberDetailedSchema,memberSchema, signupSchema } from './members';
+export { trainerSchema } from './trainers';
+export { emailSchema, firstNameSchema, lastNameSchema, passwordSchema, phoneSchema,usernameSchema } from './users';

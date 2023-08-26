@@ -1,8 +1,9 @@
 import { useContext } from 'react';
-import { AuthContext } from '../../context/AuthContext';
-import { Outlet, NavLink, Navigate } from 'react-router-dom';
+import { Navigate,NavLink, Outlet } from 'react-router-dom';
+import { faBlog, faDumbbell, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDumbbell, faBlog, faUsers } from '@fortawesome/free-solid-svg-icons';
+
+import { AuthContext } from '../../context/AuthContext';
 
 export function AdminPanel() {
   return (

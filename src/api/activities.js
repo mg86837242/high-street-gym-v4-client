@@ -1,9 +1,10 @@
 import { redirect } from 'react-router-dom';
-import fetchResp from '../helpers/fetchResp';
-import fetchJSON from '../helpers/fetchJSON';
-import defaultNewActivity from '../data/defaultNewActivity';
-import getSubmittedData from '../helpers/getSubmittedData';
+
 import API_URL from '../data/constants';
+import defaultNewActivity from '../data/defaultNewActivity';
+import fetchJSON from '../helpers/fetchJSON';
+import fetchResp from '../helpers/fetchResp';
+import getSubmittedData from '../helpers/getSubmittedData';
 
 export async function getAllActivities() {
   const response = await fetchResp.get(`${API_URL}/activities`);

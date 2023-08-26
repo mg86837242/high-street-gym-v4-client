@@ -1,8 +1,8 @@
 import { useState } from 'react';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
 
-export default function FCRHFPass2Sm({ children, label, register, issue, isRequired }) {
+export default function FCRHFPass2Sm({ label, register, issue, isRequired }) {
   const [type, setType] = useState('password');
   const [icon, setIcon] = useState(faEyeSlash);
 

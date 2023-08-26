@@ -1,12 +1,13 @@
 import { useContext, useState } from 'react';
-import { AuthContext } from '../../context/AuthContext';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { emailSchema, passwordSchema } from '../../schemas';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link, useLocation,useNavigate } from 'react-router-dom';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import { Btn1 } from '../../components/ui/Btn1';
 import { Btn5 } from '../../components/ui/Btn5';
 import { LinkBtn1 } from '../../components/ui/LinkBtn1';
+import { AuthContext } from '../../context/AuthContext';
+import { emailSchema, passwordSchema } from '../../schemas';
 
 export default function LoginPanel() {
   const auth = useContext(AuthContext);

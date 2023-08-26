@@ -1,4 +1,4 @@
-export default function FCRHFBlogBody1Sm({ children, label, register, issue, isRequired }) {
+export default function FCRHFBlogBody1Sm({ label, register, issue, isRequired }) {
   return (
     <div className='form-control col-span-2 w-full xl:col-span-3'>
       <label className='label py-1 3xl:py-2'>

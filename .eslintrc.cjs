@@ -1,40 +1,67 @@
 module.exports = {
   env: {
-    // @see https://stackoverflow.com/questions/49250221/fetch-is-undefined-and-localstorage-is-undefined-on-using-eslint-config-ai
+    /* @see https://stackoverflow.com/questions/49250221/fetch-is-undefined-and-localstorage-is-undefined-on-using-eslint-config-ai */
     browser: true,
   },
   parserOptions: {
-    // @see https://stackoverflow.com/questions/61628947/eslint-optional-chaining-error-with-vscode
-    //  & https://eslint.org/docs/latest/use/configure/language-options#specifying-parser-options
+    /* @see https://stackoverflow.com/questions/61628947/eslint-optional-chaining-error-with-vscode & https://eslint.org/docs/latest/use/configure/language-options#specifying-parser-options */
     ecmaVersion: 'latest',
     sourceType: 'module',
     ecmaFeatures: {
       jsx: true,
     },
   },
-  // @see https://react.dev/learn/editor-setup#linting
-  // & airbnb config's peer dependencies: https://www.npmjs.com/package/eslint-config-airbnb
-  // & 'plugin:react/jsx-runtime' for React 17+: https://github.com/jsx-eslint/eslint-plugin-react#configuration-legacy-eslintrc-
-  // & https://prettier.io/docs/en/integrating-with-linters.html
-  extends: ['react-app', 'airbnb', 'plugin:react/jsx-runtime', 'prettier'],
+  /* @see https://react.dev/learn/editor-setup#linting & 'plugin:react/jsx-runtime' for React 17+: https://github.com/jsx-eslint/eslint-plugin-react#configuration-legacy-eslintrc- & https://prettier.io/docs/en/integrating-with-linters.html */
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:react/jsx-runtime',
+    'plugin:react-hooks/recommended',
+    'prettier',
+  ],
   ignorePatterns: [
-    // Unused folders && files
     'dist',
+    '.eslintrc.cjs',
+    '.tailwind.config.cjs',
     '**/__*',
     // Temporarily ignored
   ],
+  plugins: ['simple-import-sort'],
   rules: {
-    // Band-aid solution to lack of resolver in the backend:
-    // @see: https://stackoverflow.com/questions/46208367/how-to-remove-eslint-error-no-unresolved-from-importing-react
-    // & https://stackoverflow.com/questions/67316153/facing-problem-while-importing-files-in-nodejs
-    'import/no-unresolved': ['warn', { caseSensitive: false }],
-    'import/extensions': [
-      'error',
-      {
-        js: 'ignorePackages',
-      },
-    ],
+    /* This rule is working correctly when running script `npm run lint`, but not when using VSCode's ESLint extension, thus disabled */
+    'react/prop-types': 'off',
+    // `simple-import-sort`: https://dev.to/julioxavierr/sorting-your-imports-with-eslint-3ped
+    'simple-import-sort/imports': 'warn',
+    'simple-import-sort/exports': 'warn',
+    // Personal preference:
+    camelcase: ['error', { properties: 'always' }],
   },
+  overrides: [
+    {
+      files: ['*.js', '*.jsx', '*.ts', '*.tsx'],
+      rules: {
+        'simple-import-sort/imports': [
+          'error',
+          {
+            groups: [
+              // Packages `react` related packages come first.
+              ['^react', '^@?\\w'],
+              // Internal packages.
+              ['^(@|components)(/.*|$)'],
+              // Side effect imports.
+              ['^\\u0000'],
+              // Parent imports. Put `..` last.
+              ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
+              // Other relative imports. Put same-folder imports and `.` last.
+              ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
+              // Style imports.
+              ['^.+\\.?(css)$'],
+            ],
+          },
+        ],
+      },
+    },
+  ],
   settings: {
     react: {
       version: 'detect', // React version. "detect" automatically picks the version you have installed.

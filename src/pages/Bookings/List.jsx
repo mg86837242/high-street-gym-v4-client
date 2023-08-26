@@ -1,10 +1,12 @@
 import { useContext } from 'react';
-import { AuthContext } from '../../context/AuthContext';
 import { useLoaderData } from 'react-router-dom';
-import BookingListMemberView from './BookingListMemberView';
-import BookingListTrainerView from './BookingListTrainerView';
+
+import { AuthContext } from '../../context/AuthContext';
+
 import BookingListAdminView from './BookingListAdminView';
 import BookingListGuestView from './BookingListGuestView';
+import BookingListMemberView from './BookingListMemberView';
+import BookingListTrainerView from './BookingListTrainerView';
 import NoBookingAdminView from './NoBookingAdminView';
 import NoBookingGuestView from './NoBookingGuestView';
 
