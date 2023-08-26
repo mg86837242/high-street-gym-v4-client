@@ -1,11 +1,11 @@
-import { useContext, useMemo,useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { useContext, useMemo, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import { faSquareCaretLeft, faSquareCaretRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { AuthContext } from '../../context/AuthContext';
 import { today } from '../../data/keyDates';
-import { dayNames,monthNames } from '../../helpers/mapDates';
+import { dayNames, monthNames } from '../../helpers/mapDates';
 
 import { LinkBtn1 } from './../../components/ui/LinkBtn1';
 

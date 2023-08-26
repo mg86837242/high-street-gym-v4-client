@@ -12,8 +12,8 @@ import { adminSchema } from '../../schemas';
 export default function UpdateAdminForm({ inputEmailMsg, setInputEmailMsg, topMsg, user }) {
   const submit = useSubmit();
   const userDefaultValues = useMemo(() => {
-    const { password, ...values } = user;
-    return { ...values, password: '●●●●●●●●●●', _action: 'updateAdminById' };
+    const { email, username, firstName, lastName, phone, id } = user;
+    return { email, password: '●●●●●●●●●●', username, firstName, lastName, phone, id, _action: 'updateAdminById' };
   }, [user]);
   const {
     register,
@@ -25,7 +25,7 @@ export default function UpdateAdminForm({ inputEmailMsg, setInputEmailMsg, topMs
     defaultValues: userDefaultValues,
   });
 
-  useEffect(() => reset(userDefaultValues), [reset, user]);
+  useEffect(() => reset(userDefaultValues), [reset, userDefaultValues]);
 
   return (
     <form

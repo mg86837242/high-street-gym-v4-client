@@ -1,11 +1,11 @@
-import { createContext, useCallback, useEffect, useMemo,useState } from 'react';
+import { createContext, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { getUserByKey, login, logout } from '../api/users';
-import { deleteCredentials,getCredentials, storeCredentials } from '../helpers/localStorage';
+import { deleteCredentials, getCredentials, storeCredentials } from '../helpers/localStorage';
 
 export const AuthContext = createContext(null);
 
-export function AuthProvider({ children }) {
+export function AuthProvider({ children, router }) {
   const [user, setUser] = useState(null);
 
   // This `useEffect`'s job is to synchronize with API by using an `accessKey` stored in the `localStorage` as a ref in
@@ -38,7 +38,7 @@ export function AuthProvider({ children }) {
     return () => {
       ignore = true;
     };
-  }, [user]);
+  }, [user, router]);
 
   const handleLogin = useCallback(async (email, password, callback) => {
     try {

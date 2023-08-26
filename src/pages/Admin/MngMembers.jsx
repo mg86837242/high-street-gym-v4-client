@@ -1,12 +1,12 @@
-import { useEffect,useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Form, Link, Outlet, useActionData,useFetcher, useLoaderData, useNavigate, useSubmit } from 'react-router-dom';
+import { Form, Link, Outlet, useActionData, useFetcher, useLoaderData, useNavigate, useSubmit } from 'react-router-dom';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import FCRHF1Sm from '../../components/formCtrlRHF/FCRHF1';
 import FCRHFPass1Sm from '../../components/formCtrlRHF/FCRHFPass1';
-import { BtnSm,BtnXs } from '../../components/ui/Btn';
-import { Btn1Sm,Btn1Xs } from '../../components/ui/Btn1';
+import { BtnSm, BtnXs } from '../../components/ui/Btn';
+import { Btn1Sm, Btn1Xs } from '../../components/ui/Btn1';
 import countries from '../../data/countries.json'; // Vite's feature
 import { convertEmptyStrToNull } from '../../helpers/sanitize';
 import { memberDetailedSchema } from '../../schemas';
@@ -171,8 +171,37 @@ export function EditMember() {
   const submit = useSubmit();
   const navigate = useNavigate();
   const memberDefaultValues = useMemo(() => {
-    const { password, ...values } = member;
-    return { ...values, password: '●●●●●●●●●●' };
+    const {
+      email,
+      username,
+      firstName,
+      lastName,
+      phone,
+      age,
+      gender,
+      lineOne,
+      lineTwo,
+      suburb,
+      postcode,
+      state,
+      country,
+    } = member;
+    return {
+      email,
+      password: '●●●●●●●●●●',
+      username,
+      firstName,
+      lastName,
+      phone,
+      age,
+      gender,
+      lineOne,
+      lineTwo,
+      suburb,
+      postcode,
+      state,
+      country,
+    };
   }, [member]);
   const {
     register,
@@ -184,7 +213,7 @@ export function EditMember() {
     defaultValues: memberDefaultValues,
   });
 
-  useEffect(() => reset(memberDefaultValues), [reset, member]);
+  useEffect(() => reset(memberDefaultValues), [reset, memberDefaultValues]);
 
   useEffect(() => {
     if (!actionData) {

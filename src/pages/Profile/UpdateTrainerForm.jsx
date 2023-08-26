@@ -12,8 +12,21 @@ import { trainerSchema } from '../../schemas';
 export default function UpdateTrainerForm({ inputEmailMsg, setInputEmailMsg, topMsg, user }) {
   const submit = useSubmit();
   const userDefaultValues = useMemo(() => {
-    const { password, ...values } = user;
-    return { ...values, password: '●●●●●●●●●●', _action: 'updateTrainerById' };
+    const { email, username, firstName, lastName, phone, description, specialty, certificate, imageUrl, id } = user;
+    return {
+      email,
+      password: '●●●●●●●●●●',
+      username,
+      firstName,
+      lastName,
+      phone,
+      description,
+      specialty,
+      certificate,
+      imageUrl,
+      id,
+      _action: 'updateTrainerById',
+    };
   }, [user]);
   const {
     register,
@@ -25,7 +38,7 @@ export default function UpdateTrainerForm({ inputEmailMsg, setInputEmailMsg, top
     defaultValues: userDefaultValues,
   });
 
-  useEffect(() => reset(userDefaultValues), [reset, user]);
+  useEffect(() => reset(userDefaultValues), [reset, userDefaultValues]);
 
   return (
     <form

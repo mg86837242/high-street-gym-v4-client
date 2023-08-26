@@ -12,8 +12,19 @@ import { memberSchema } from '../../schemas';
 export default function UpdateMemberForm({ inputEmailMsg, setInputEmailMsg, topMsg, user }) {
   const submit = useSubmit();
   const userDefaultValues = useMemo(() => {
-    const { password, ...values } = user;
-    return { ...values, password: '●●●●●●●●●●', _action: 'updateMemberById' };
+    const { email, username, firstName, lastName, phone, age, gender, id } = user;
+    return {
+      email,
+      password: '●●●●●●●●●●',
+      username,
+      firstName,
+      lastName,
+      phone,
+      age,
+      gender,
+      id,
+      _action: 'updateMemberById',
+    };
   }, [user]);
   const {
     register,
@@ -25,7 +36,7 @@ export default function UpdateMemberForm({ inputEmailMsg, setInputEmailMsg, topM
     defaultValues: userDefaultValues,
   });
 
-  useEffect(() => reset(userDefaultValues), [reset, user]);
+  useEffect(() => reset(userDefaultValues), [reset, userDefaultValues]);
 
   return (
     <form

@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { Link, useLocation,useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -39,7 +39,7 @@ function Directions() {
     <div className='flex flex-col gap-5'>
       <p className='text-3xl font-extrabold text-primary-content focus:outline-none'>Login to your account</p>
       <p className='text-sm font-medium leading-none text-primary-content focus:outline-none'>
-        Don't have account?{' '}
+        Don&apos;t have account?{' '}
         <Link
           to='/signup'
           className={`link-primary link cursor-pointer text-sm font-medium leading-none underline focus:outline-none`}

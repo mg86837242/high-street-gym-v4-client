@@ -12,8 +12,8 @@ import { updateAddressByMemberIdSchema } from '../../schemas';
 export default function UpdateMemberAddrForm({ botMsg, user }) {
   const submit = useSubmit();
   const addressDefaultValue = useMemo(() => {
-    const { id, ...values } = user;
-    return { ...values, memberId: id, _action: 'updateAddressByMemberId' };
+    const { lineOne, lineTwo, suburb, postcode, state, country, id: memberId } = user;
+    return { lineOne, lineTwo, suburb, postcode, state, country, memberId, _action: 'updateAddressByMemberId' };
   }, [user]);
   const {
     register,
@@ -25,7 +25,7 @@ export default function UpdateMemberAddrForm({ botMsg, user }) {
     defaultValues: addressDefaultValue,
   });
 
-  useEffect(() => reset(addressDefaultValue), [reset, user]);
+  useEffect(() => reset(addressDefaultValue), [reset, addressDefaultValue]);
 
   return (
     <form

@@ -1,6 +1,6 @@
-import { useCallback,useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate,useOutletContext, useSubmit } from 'react-router-dom';
+import { useNavigate, useOutletContext, useSubmit } from 'react-router-dom';
 import { faArrowTurnDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -57,7 +57,7 @@ export default function Edit() {
       return;
     }
     setEditable(true);
-  }, []);
+  }, [editable, setEditable]);
 
   return (
     <>

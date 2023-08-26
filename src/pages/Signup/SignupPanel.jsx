@@ -1,6 +1,6 @@
-import { useEffect,useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, useActionData, useNavigation,useSubmit } from 'react-router-dom';
+import { Link, useActionData, useNavigation, useSubmit } from 'react-router-dom';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import FCRHF2Sm from '../../components/formCtrlRHF/FCRHF2';
@@ -56,6 +56,8 @@ function SignupForm() {
   const navigation = useNavigation();
   const btnMsg =
     navigation.state === 'submitting' ? 'Submitting...' : navigation.state === 'loading' ? 'Submitted!' : 'Submit';
+
+  useEffect(() => reset(signupDefaultValues), [reset, signupDefaultValues]);
 
   useEffect(() => {
     if (!actionData) {

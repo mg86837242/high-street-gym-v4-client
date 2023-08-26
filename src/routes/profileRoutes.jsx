@@ -26,24 +26,30 @@ const profileRoutes = [
       const values = await getSubmittedData(request);
 
       switch (values._action) {
-        case 'updateAdminById':
+        case 'updateAdminById': {
           const { default: updateAdminById } = await import('../api/admins');
           return updateAdminById(values);
-        case 'updateAddressByAdminId':
+        }
+        case 'updateAddressByAdminId': {
           const { updateAddressByAdminId } = await import('../api/addresses');
           return updateAddressByAdminId(values);
-        case 'updateTrainerById':
+        }
+        case 'updateTrainerById': {
           const { default: updateTrainerById } = await import('../api/trainers');
           return updateTrainerById(values);
-        case 'updateAddressByTrainerId':
+        }
+        case 'updateAddressByTrainerId': {
           const { updateAddressByTrainerId } = await import('../api/addresses');
           return updateAddressByTrainerId(values);
-        case 'updateMemberById':
+        }
+        case 'updateMemberById': {
           const { updateMemberById } = await import('../api/members');
           return updateMemberById(values);
-        case 'updateAddressByMemberId':
+        }
+        case 'updateAddressByMemberId': {
           const { updateAddressByMemberId } = await import('../api/addresses');
           return updateAddressByMemberId(values);
+        }
         default:
           throw json('Unknown form action', { status: 404 });
       }
