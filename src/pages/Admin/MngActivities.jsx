@@ -1,11 +1,11 @@
-import { useEffect,useMemo, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
-import { Form, Link, Outlet, useFetcher, useLoaderData, useNavigate,useSubmit } from 'react-router-dom';
+import { Form, Link, Outlet, useFetcher, useLoaderData, useNavigate, useSubmit } from 'react-router-dom';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import FCRHF1Sm from '../../components/formCtrlRHF/FCRHF1';
-import { BtnSm,BtnXs } from '../../components/ui/Btn';
-import { Btn1Sm,Btn1Xs } from '../../components/ui/Btn1';
+import { BtnSm, BtnXs } from '../../components/ui/Btn';
+import { Btn1Sm, Btn1Xs } from '../../components/ui/Btn1';
 import { convertEmptyStrToNull } from '../../helpers/sanitize';
 import { activitySchema } from '../../schemas';
 
@@ -98,7 +98,6 @@ function ListActivities({ activities }) {
 }
 
 export function NewActivity() {
-  const [file, setFile] = useState(null);
   const fetcher = useFetcher();
 
   return (
@@ -119,7 +118,6 @@ export function NewActivity() {
               id='new-activity-xml'
               type='file'
               accept='.xml'
-              onChange={e => setFile(e.target.files[0])}
               className='file-input file-input-bordered file-input-sm w-full max-w-xs shadow shadow-black/50'
             />
             <Btn1Sm>Submit</Btn1Sm>

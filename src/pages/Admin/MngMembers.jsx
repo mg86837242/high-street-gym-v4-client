@@ -115,7 +115,6 @@ function ListMembers({ members }) {
 }
 
 export function NewMember() {
-  const [file, setFile] = useState(null);
   const fetcher = useFetcher();
 
   return (
@@ -136,7 +135,7 @@ export function NewMember() {
               id='new-member-xml'
               type='file'
               accept='.xml'
-              onChange={e => setFile(e.target.files[0])}
+              // onChange={e => setFile(e.target.files[0])}
               className='file-input file-input-bordered file-input-sm w-full max-w-xs shadow shadow-black/50'
             />
             <Btn1Sm>Submit</Btn1Sm>
