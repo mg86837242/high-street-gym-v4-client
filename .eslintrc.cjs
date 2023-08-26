@@ -21,7 +21,7 @@ module.exports = {
     'plugin:react-hooks/recommended',
     'prettier',
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs', 'vite.config.js', '.tailwind.config.cjs', '**/__*'],
+  ignorePatterns: ['dist', '.eslintrc.cjs', 'vite.config.js', 'tailwind.config.cjs', '**/__*'],
   plugins: ['simple-import-sort'],
   rules: {
     // This rule is working correctly when running script `eslint .`, but not when using VSCode's ESLint extension, thus turned off
