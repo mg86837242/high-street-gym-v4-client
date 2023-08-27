@@ -133,7 +133,6 @@ function NavLeftDropdownButton({ to, text }) {
 function NavBarCenter() {
   const auth = useContext(AuthContext);
 
-  // FIX fix the nav center button style, esp. in light theme/color mode
   return (
     <nav id='nav-center-wrapper' className='navbar-center hidden lg:flex'>
       <ul id='nav-center-menu' className='menu menu-horizontal gap-2 px-1 text-primary-content'>
