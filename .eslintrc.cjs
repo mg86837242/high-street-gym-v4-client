@@ -4,6 +4,8 @@ module.exports = {
     browser: true,
     // @see https://github.com/eslint/eslint/issues/9812
     es2020: true,
+    // @see https://stackoverflow.com/questions/50894000/eslint-process-is-not-defined
+    node: true,
   },
   parserOptions: {
     // @see https://stackoverflow.com/questions/61628947/eslint-optional-chaining-error-with-vscode & https://eslint.org/docs/latest/use/configure/language-options#specifying-parser-options
@@ -21,7 +23,7 @@ module.exports = {
     'plugin:react-hooks/recommended',
     'prettier',
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs', 'vite.config.js', 'tailwind.config.cjs', '**/__*'],
+  ignorePatterns: ['dist', '.eslintrc.cjs', 'tailwind.config.cjs', '**/__*'],
   plugins: ['simple-import-sort'],
   rules: {
     // This rule is working correctly when running script `eslint .`, but not when using VSCode's ESLint extension, thus turned off
