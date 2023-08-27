@@ -5,6 +5,7 @@ import NavBar from '../../components/layouts/NavBar';
 import Carousel1 from './Carousel1';
 import Feature1 from './Feature1';
 import Hero from './Hero1';
+import Section1 from './Section1';
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
           <Carousel1 />
         </Feature1>
       </MainWrapper>
+      <Section1 />
       <Footer />
     </>
   );
