@@ -135,7 +135,7 @@ function NavBarCenter() {
 
   return (
     <nav id='nav-center-wrapper' className='navbar-center hidden lg:flex'>
-      <ul id='nav-center-menu' className='menu menu-horizontal gap-2 px-1 text-primary-content'>
+      <ul id='nav-center-menu' className='menu menu-horizontal gap-2 px-1'>
         {auth.user?.role === 'Admin' ? (
           <>
             <NavCenterButton to={'/'} text={'Home'} />
@@ -235,19 +235,10 @@ function NavBarRight({ isHome }) {
       ) : (
         <>
           <ColorModeSwitch isHome={isHome} />
-          <LinkBtn1
-            to='/login'
-            state={{ from: location }}
-            className='btn bg-gradient-to-r from-secondary to-primary text-primary-content shadow shadow-black/50'
-          >
+          <LinkBtn1 to='/login' state={{ from: location }}>
             Login
           </LinkBtn1>
-          <LinkBtn1
-            to='/signup'
-            className='btn bg-gradient-to-r from-secondary to-primary text-primary-content shadow shadow-black/50'
-          >
-            Signup
-          </LinkBtn1>
+          <LinkBtn1 to='/signup'>Signup</LinkBtn1>
         </>
       )}
     </div>
