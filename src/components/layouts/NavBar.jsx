@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import { AuthContext } from '../../context/AuthContext';
 import { Btn } from '../ui/Btn';
@@ -8,12 +8,23 @@ import { LinkBtn1 } from '../ui/LinkBtn1';
 
 // This component has the duality of different appearances and behaviors based on the `isHome` props
 export default function NavBar({ isHome }) {
-  const [navBgClass, setNavBgClass] = useState('flex justify-center fixed top-0 bg-transparent w-full z-20');
+  const [homeNavBgClass, setHomeNavBgClass] = useState('flex justify-center fixed top-0 bg-transparent w-full z-20');
+  const [homeNavCenterBgClass, setHomeNavCenterBgClass] = useState('bg-transparent');
+  const [homeNavCenterDataTheme, setHomeNavCenterDataTheme] = useState('dark');
+  const [homeNavTextClass, setHomeNavTextClass] = useState('text-neutral-content');
 
   function handleScrollEvent() {
-    window.scrollY > document.documentElement.clientHeight
-      ? setNavBgClass('flex justify-center fixed top-0 bg-base-300 w-full z-20')
-      : setNavBgClass('flex justify-center fixed top-0 bg-transparent w-full z-20');
+    if (window.scrollY > document.documentElement.clientHeight) {
+      setHomeNavBgClass('flex justify-center fixed top-0 bg-base-300 w-full z-20');
+      setHomeNavCenterBgClass('');
+      setHomeNavCenterDataTheme('');
+      setHomeNavTextClass('text-base-content');
+    } else {
+      setHomeNavBgClass('flex justify-center fixed top-0 bg-transparent w-full z-20');
+      setHomeNavCenterBgClass('transparent');
+      setHomeNavCenterDataTheme('dark');
+      setHomeNavTextClass('text-neutral-content');
+    }
   }
 
   useEffect(() => {
@@ -27,12 +38,16 @@ export default function NavBar({ isHome }) {
   }, [isHome]);
 
   return (
-    <div id='nav-bg' className={isHome ? navBgClass : 'sticky top-0 z-20 flex w-full justify-center bg-base-300'}>
-      <div id='nav-bar' className='navbar w-full max-w-screen-2xl px-4 2xl:px-4'>
+    <div id='nav-bg' className={isHome ? homeNavBgClass : 'sticky top-0 z-20 flex w-full justify-center bg-base-300'}>
+      <nav id='nav-bar' className='navbar w-full max-w-screen-2xl px-4 2xl:px-4'>
         <NavBarLeft />
-        <NavBarCenter />
-        <NavBarRight isHome={isHome} />
-      </div>
+        <NavBarCenter
+          isHome={isHome}
+          homeNavCenterBgClass={homeNavCenterBgClass}
+          homeNavCenterDataTheme={homeNavCenterDataTheme}
+        />
+        <NavBarRight isHome={isHome} homeNavTextClass={homeNavTextClass} />
+      </nav>
     </div>
   );
 }
@@ -105,12 +120,12 @@ function NavLeftButton({ children, to, text, hasDropdown }) {
   // TODO How to use arrow keys to navigate between these submenu buttons, extending to <NavBarCenter> submenu
 
   return hasDropdown ? (
-    <li tabIndex={0}>
+    <li>
       <Link to={to}>{text}</Link>
       <ul className='p-2'>{children}</ul>
     </li>
   ) : (
-    <li tabIndex={0}>
+    <li>
       <Link to={to}>{text}</Link>
     </li>
   );
@@ -130,11 +145,15 @@ function NavLeftDropdownButton({ to, text }) {
   );
 }
 
-function NavBarCenter() {
+function NavBarCenter({ isHome, homeNavCenterBgClass, homeNavCenterDataTheme }) {
   const auth = useContext(AuthContext);
 
   return (
-    <nav id='nav-center-wrapper' className='navbar-center hidden lg:flex'>
+    <div
+      id='nav-center-wrapper'
+      className={`navbar-center hidden bg-transparent lg:flex ${isHome && homeNavCenterBgClass}`}
+      data-theme={isHome ? homeNavCenterDataTheme : ''}
+    >
       <ul id='nav-center-menu' className='menu menu-horizontal gap-2 px-1'>
         {auth.user?.role === 'Admin' ? (
           <>
@@ -166,7 +185,7 @@ function NavBarCenter() {
           </>
         )}
       </ul>
-    </nav>
+    </div>
   );
 }
 
@@ -175,24 +194,14 @@ function NavCenterButton({ children, to, text, hasDropdown }) {
     <li tabIndex={0}>
       <details>
         <summary>
-          <NavLink
-            to={to}
-            className={({ isActive }) => `${isActive && 'active underline decoration-2 underline-offset-[6px]'}`}
-          >
-            {text}
-          </NavLink>
+          <Link to={to}>{text}</Link>
         </summary>
         <ul className='bg-base-300 p-2'>{children}</ul>
       </details>
     </li>
   ) : (
     <li>
-      <NavLink
-        to={to}
-        className={({ isActive }) => `${isActive && 'active underline decoration-2 underline-offset-[6px]'}`}
-      >
-        {text}
-      </NavLink>
+      <Link to={to}>{text}</Link>
     </li>
   );
 }
@@ -211,17 +220,16 @@ function NavCenterDropdownButton({ to, text }) {
   );
 }
 
-function NavBarRight({ isHome }) {
+function NavBarRight({ isHome, homeNavTextClass }) {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
 
   return (
     <div id='nav-right-wrapper' className='navbar-end flex items-center gap-5'>
-      {/* <ThemeSwitch /> */}
+      <ColorModeSwitch isHome={isHome} homeNavTextClass={homeNavTextClass} />
       {auth.user ? (
         <>
-          <ColorModeSwitch isHome={isHome} />
           <LinkBtn1 to='/profile/account'>Profile</LinkBtn1>
           <Btn
             type='button'
@@ -234,7 +242,6 @@ function NavBarRight({ isHome }) {
         </>
       ) : (
         <>
-          <ColorModeSwitch isHome={isHome} />
           <LinkBtn1 to='/login' state={{ from: location }}>
             Login
           </LinkBtn1>
