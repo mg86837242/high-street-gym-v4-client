@@ -8,8 +8,8 @@ export default function ListIndex() {
     >
       <p className='text-center text-lg'>
         👈 Click a date (for example,{' '}
-        <Link to='2023-08-28' className='link-primary link'>
-          28th Aug 2023
+        <Link to='2023-09-28' className='link-primary link'>
+          28th Sep 2023
         </Link>
         ) to see a list of bookings, if any, on that date, or{' '}
         <Link to='new' className='link-primary link'>
